@@ -1,0 +1,20 @@
+## Core latex/pdflatex aux files:
+*.aux
+*.lof
+*.log
+*.out
+*.toc
+*.fmt
+*.fot
+
+## Bib aux files
+*.bbl
+*.bcf
+*.blg
+
+# WinEdt
+*.bak
+*.sav
+
+# Texpad
+.texpadtmp
