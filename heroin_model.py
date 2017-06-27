@@ -26,7 +26,7 @@ params['beta'] = .1 #E->S
 #delta1&2 exist in [0,1) d2>d1
 params['delta1'] = .05 #S->I due to E
 params['delta2'] = .25 #S->I due to I
-# Heroin adoption rates. mu2>mu1
+# Heroin adoption rates. mu2>mu1. Also affects I->H through gamma.
 params['mu1'] = .00075 #S+E->H linear
 params['mu2'] = .1 #Literature? S+E->H due to H
 
@@ -42,7 +42,7 @@ params['sigma'] = .01 #S+E->R background
 
 #4/5 of new heroin users come from prescription opioids 
 #gamma/(mu1+mu2*H_n+gamma) = .8
-params['gamma_0'] = 4 #gamma = GAMMA_0*(mu1+mu2*H_n)
+params['gamma_0'] = 4 #gamma = GAMMA_0*(mu1+mu2*H_n) I->H
 
 #Death rates
 params['de'] = 12305000/1245911000 #.009876 Literature
