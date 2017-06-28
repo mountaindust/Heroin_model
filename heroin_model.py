@@ -83,6 +83,7 @@ def heroinfunc(S,E,I,H,R,tsteps=endt,params=params):
         R.append(R_n + ((E_n+S_n)*(sigma + zeta*(I_n+H_n))) + irate*I_n + hrate*H_n - dr*R_n)
         
     assert np.isclose(1, S[-1]+E[-1]+I[-1]+H[-1]+R[-1]), "Final sum not equal to one."
+    assert min([min(S), min(E), min(I), min(H), min(R)]) >= 0, "Negative population fraction."
 
 
 def plot_solution(S,E,I,H,R,endt):
