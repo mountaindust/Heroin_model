@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import ode
 
 CHILD = 48600000 # number of children to remove from US population
 
@@ -52,7 +53,7 @@ params['dr'] = params['de'] + 1/1000 # add recetivism
 
 endt = 100
 
-def heroinfunc(S,E,I,H,R,tsteps=endt,params=params):
+def heroin_func(S,E,I,H,R,tsteps=endt,params=params):
     '''Append arrays S,E,I,H,R with year time-step solutions'''
     mu1 = params['mu1']
     mu2 = params['mu2']
@@ -86,6 +87,52 @@ def heroinfunc(S,E,I,H,R,tsteps=endt,params=params):
     assert min([min(S), min(E), min(I), min(H), min(R)]) >= 0, "Negative population fraction."
 
 
+
+def heroin_func_ode(S0,E0,I0,H0,R0,tsteps=endt,params=params):
+    '''Solve the heroin model as a system of ODEs'''
+    S = [S0]
+    E = [E0]
+    I = [I0]
+    H = [H0]
+    R = [R0]
+    solver = ode(heroin_odes).set_integrator('dopri5')
+    solver.set_initial_value([S0,E0,I0,H0,R0], 0).set_f_params(params)
+    while solver.successful() and solver.t < endt:
+        solver.integrate(solver.t+1)
+        S.append(solver.y[0])
+        E.append(solver.y[1])
+        I.append(solver.y[2])
+        H.append(solver.y[3])
+        R.append(solver.y[4])
+    return (S,E,I,H,R)
+
+
+
+def heroin_odes(t, X, params):
+    '''Specify the heroin model as a system of ODEs'''
+    Y = []
+    params['gamma'] = params['gamma_0'] *(params['mu1']+params['mu2']*X[3])
+    Y.append((params['beta']*X[1]) - (params['alpha']*X[0]) - 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
+        X[0]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
+        X[0]*(params['mu1']+params['mu2']*X[3]) + params['di']*X[2] + 
+        params['dh']*X[3] + params['de']*X[1] + params['dr']*X[4])
+    Y.append(-(params['beta']*X[1]) + (params['alpha']*X[0]) - 
+        X[1]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
+        X[1]*(params['mu1']+params['mu2']*X[3]) - (params['epsilon']*X[1]) - 
+        params['de']*X[1])
+    Y.append((params['epsilon']*X[1]) - (params['gamma']*X[2]) + 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
+        params['irate']*X[2] - params['di']*X[2])
+    Y.append((params['gamma']*X[2]) + 
+        (X[0]+X[1])*(params['mu1']+params['mu2']*X[3]) - 
+        params['hrate']*X[3] - params['dh']*X[3])
+    Y.append(((X[1]+X[0])*(params['sigma'] + params['xi']*(X[2]+X[3]))) + 
+        params['irate']*X[2] + params['hrate']*X[3] - params['dr']*X[4])
+    return Y
+
+
+
 def plot_solution(S,E,I,H,R,endt):
 
     x  = np.arange(0,endt+1,1)
@@ -96,7 +143,7 @@ def plot_solution(S,E,I,H,R,endt):
     plt.plot(x,H, label = "Heroin Addicts")
     plt.plot(x,R, label = "Recovered")
     plt.legend()
-    plt.title('Population of Heroin Epidemic JUN15')
+    plt.title('Population of Heroin Epidemic')
     plt.xlabel('Time (year)')
     plt.ylabel('Population')
     
@@ -117,6 +164,10 @@ if __name__ == "__main__":
     H = [h0]
     R = [r0]
     
-    heroinfunc(S,E,I,H,R)
+    heroin_func(S,E,I,H,R)
+
+    plot_solution(S,E,I,H,R,endt)
+
+    S,E,I,H,R = heroin_func_ode(s0,e0,i0,h0,r0,endt)
 
     plot_solution(S,E,I,H,R,endt)
