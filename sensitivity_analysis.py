@@ -1,10 +1,13 @@
 '''Use SALib to perform Sobol sensitivity analysis on the model parameters'''
 
-import sys, os, pickle
+import sys, os
+import pickle
 from multiprocessing import Pool
 from SALib.sample import saltelli
 from SALib.analyze import sobol
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 import heroin_model
 
 ### Define a model wrapper based on the parameter space in main() ###
@@ -95,40 +98,79 @@ def main(N, pool=None):
     output = np.array(output)
     std_sum = output[:,5:].sum(1)
 
-    ### Analyze the results ###
-    print("S sensitivity")
-    print("-------------")
+    ### Analyze the results and view using Pandas ###
+    # Conduct the sobol analysis and pop out the S2 results to a dict
+    S2 = {}
     S_sens = sobol.analyze(problem, output[:,0], calc_second_order=True)
-    sobol.print_indices(S_sens, problem, False)
-    print("E sensitivity:")
-    print("-------------")
+    S2['S'] = pd.DataFrame(S_sens.pop('S2'), index=problem['names'],
+                           columns=problem['names'])
+    S2['S_conf'] = pd.DataFrame(S_sens.pop('S2_conf'), index=problem['names'],
+                           columns=problem['names'])
     E_sens = sobol.analyze(problem, output[:,1], calc_second_order=True)
-    sobol.print_indices(E_sens, problem, False)
-    print("I sensitivity:")
-    print("-------------")
+    S2['E'] = pd.DataFrame(E_sens.pop('S2'), index=problem['names'],
+                           columns=problem['names'])
+    S2['E_conf'] = pd.DataFrame(E_sens.pop('S2_conf'), index=problem['names'],
+                           columns=problem['names'])
     I_sens = sobol.analyze(problem, output[:,2], calc_second_order=True)
-    sobol.print_indices(I_sens, problem, False)
-    print("H sensitivity:")
-    print("-------------")
+    S2['I'] = pd.DataFrame(I_sens.pop('S2'), index=problem['names'],
+                           columns=problem['names'])
+    S2['I_conf'] = pd.DataFrame(I_sens.pop('S2_conf'), index=problem['names'],
+                           columns=problem['names'])
     H_sens = sobol.analyze(problem, output[:,3], calc_second_order=True)
-    sobol.print_indices(H_sens, problem, False)
-    print("R sensitivity:")
-    print("-------------")
+    S2['H'] = pd.DataFrame(H_sens.pop('S2'), index=problem['names'],
+                           columns=problem['names'])
+    S2['H_conf'] = pd.DataFrame(H_sens.pop('S2_conf'), index=problem['names'],
+                           columns=problem['names'])
     R_sens = sobol.analyze(problem, output[:,4], calc_second_order=True)
-    sobol.print_indices(R_sens, problem, False)
-    print("Var sensitivity:")
-    print("-------------")
+    S2['R'] = pd.DataFrame(R_sens.pop('S2'), index=problem['names'],
+                           columns=problem['names'])
+    S2['R_conf'] = pd.DataFrame(R_sens.pop('S2_conf'), index=problem['names'],
+                           columns=problem['names'])
     var_sens = sobol.analyze(problem, std_sum, calc_second_order=True)
-    sobol.print_indices(var_sens, problem, False)
+    S2['var'] = pd.DataFrame(var_sens.pop('S2'), index=problem['names'],
+                             columns=problem['names'])
+    S2['var_conf'] = pd.DataFrame(var_sens.pop('S2_conf'), index=problem['names'],
+                                  columns=problem['names'])
+    # Convert the rest to a pandas dataframe
+    S_sens = pd.DataFrame(S_sens,index=problem['names'])
+    E_sens = pd.DataFrame(E_sens,index=problem['names'])
+    I_sens = pd.DataFrame(I_sens,index=problem['names'])
+    H_sens = pd.DataFrame(H_sens,index=problem['names'])
+    R_sens = pd.DataFrame(R_sens,index=problem['names'])
+    var_sens = pd.DataFrame(var_sens,index=problem['names'])
+    # Gather the S1 and ST results
+    S1 = pd.concat({'S':S_sens['S1'], 'E':E_sens['S1'], 'I':I_sens['S1'], 
+                   'H':H_sens['S1'], 'R':R_sens['S1']}, axis=1)
+    ST = pd.concat({'S':S_sens['ST'], 'E':E_sens['ST'], 'I':I_sens['ST'], 
+                   'H':H_sens['ST'], 'R':R_sens['ST']}, axis=1)
+    # Plot
+    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
+    S1.plot.bar(stacked=True, ax=axes[0], title='First-order indices')
+    ST.plot.bar(stacked=True, ax=axes[1], title='Total-order indices')
+    plt.tight_layout()
+    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
+    var_sens['S1'].plot.bar(ax=axes[0], title='First-order variance')
+    var_sens['ST'].plot.bar(ax=axes[1], title='Total-order variance')
+    plt.tight_layout()
+    plt.show()
+
     
     ### Save the analysis ###
-    with open("analysis.pickle", "wb") as f:
-        pickle.dump([S_sens, E_sens, I_sens, H_sens, R_sens, var_sens, problem], f)
-    print("Analysis (including second order) saved as analysis.pickle.")
+    print('Saving...')
+    store = pd.HDFStore('analysis.h5')
+    store['S_sens'] = S_sens
+    store['E_sens'] = E_sens
+    store['I_sens'] = I_sens
+    store['H_sens'] = H_sens
+    store['R_sens'] = R_sens
+    store['var_sens'] = var_sens
+    for key in S2.keys():
+        store['S2/'+key] = S2[key]
+    store.close()
 
 
 
 if __name__ == "__main__":
-    N = 100
+    N = 1000
     with Pool() as pool:
         main(N, pool)
