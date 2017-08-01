@@ -52,7 +52,7 @@ def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
 
 
 
-def main(N, pool=None):
+def main(N, filename, pool=None):
     '''Uses the ODE version of the heroin model and conducts parameter sensitivity'''
 
     ### Define the parameter space ###
@@ -77,11 +77,12 @@ def main(N, pool=None):
     output = pool.starmap(run_model, param_values, chunksize=chunksize)
 
     ### Parse and save the output ###
+    store = pd.HDFStore(filename+'.h5')
     print('Saving the results...')
-    with open("result_data.pickle", "wb") as f:
+    with open("raw_result_data.pickle", "wb") as f:
         pickle.dump(output, f)
-    with open("param_values.pickle", "wb") as f:
-        pickle.dump(param_values, f)
+    param_values_df = pd.DataFrame(param_values, columns=problem['names'])
+    store['param_values'] = param_values_df
     print('Reviewing the results...')
     error_num = 0
     error_places = []
@@ -157,7 +158,6 @@ def main(N, pool=None):
     
     ### Save the analysis ###
     print('Saving...')
-    store = pd.HDFStore('analysis.h5')
     store['S_sens'] = S_sens
     store['E_sens'] = E_sens
     store['I_sens'] = I_sens
@@ -170,7 +170,15 @@ def main(N, pool=None):
 
 
 
+def load_data(filename):
+    '''Load analysis data from previous run, display plots, and return for 
+    further analysis in ipython'''
+
+    pass
+
+
+
 if __name__ == "__main__":
-    N = 1000
+    N = 10
     with Pool() as pool:
-        main(N, pool)
+        main(N, filename='analysis', pool=pool)
