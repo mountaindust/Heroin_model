@@ -88,13 +88,12 @@ def main(N, filename, pool=None):
     output = pool.starmap(run_model, param_values, chunksize=chunksize)
 
     ### Parse and save the output ###
-    store = pd.HDFStore(filename+'.h5')
-    print('Saving the results...')
+    print('Saving and reviewing the results...')
+    param_values = pd.DataFrame(param_values, columns=problem['names'])
+    # write data to temporary location in case of errors
     with open("raw_result_data.pickle", "wb") as f:
-        pickle.dump(output, f)
-    param_values_df = pd.DataFrame(param_values, columns=problem['names'])
-    store['param_values'] = param_values_df
-    print('Reviewing the results...')
+        result = {'output':output, 'param_values':param_values}
+        pickle.dump(result, f)
     error_num = 0
     error_places = []
     for n, result in enumerate(output):
@@ -108,10 +107,17 @@ def main(N, filename, pool=None):
         return
     print('Parsing the results...')
     output = np.array(output)
-    std_sum = output[:,5:].sum(1)
+    # Resave as dataframe in hdf5
+    store = pd.HDFStore(filename+'.h5')
+    store['param_values'] = param_values
+    store['raw_output'] = pd.DataFrame(output, columns=['S', 'E', 'I', 'H', 'R',
+                                       'std_S', 'std_E', 'std_I', 'std_H', 'std_R'])
+    os.remove('raw_result_data.pickle')
+    
 
     ### Analyze the results and view using Pandas ###
     # Conduct the sobol analysis and pop out the S2 results to a dict
+    std_sum = output[:,5:].sum(1)
     S2 = {}
     S_sens = sobol.analyze(problem, output[:,0], calc_second_order=True)
     S2['S'] = pd.DataFrame(S_sens.pop('S2'), index=problem['names'],
