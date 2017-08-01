@@ -139,22 +139,10 @@ def main(N, filename, pool=None):
     H_sens = pd.DataFrame(H_sens,index=problem['names'])
     R_sens = pd.DataFrame(R_sens,index=problem['names'])
     var_sens = pd.DataFrame(var_sens,index=problem['names'])
-    # Gather the S1 and ST results
-    S1 = pd.concat({'S':S_sens['S1'], 'E':E_sens['S1'], 'I':I_sens['S1'], 
-                   'H':H_sens['S1'], 'R':R_sens['S1']}, axis=1)
-    ST = pd.concat({'S':S_sens['ST'], 'E':E_sens['ST'], 'I':I_sens['ST'], 
-                   'H':H_sens['ST'], 'R':R_sens['ST']}, axis=1)
     # Plot
-    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
-    S1.plot.bar(stacked=True, ax=axes[0], title='First-order indices')
-    ST.plot.bar(stacked=True, ax=axes[1], title='Total-order indices')
-    plt.tight_layout()
-    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
-    var_sens['S1'].plot.bar(ax=axes[0], title='First-order variance')
-    var_sens['ST'].plot.bar(ax=axes[1], title='Total-order variance')
-    plt.tight_layout()
+    plot_S1_ST(S_sens, E_sens, I_sens, H_sens, R_sens, False)
+    plot_var(var_sens, False)
     plt.show()
-
     
     ### Save the analysis ###
     print('Saving...')
@@ -171,14 +159,41 @@ def main(N, filename, pool=None):
 
 
 def load_data(filename):
-    '''Load analysis data from previous run, display plots, and return for 
-    further analysis in ipython'''
+    '''Load analysis data from previous run and return for examination'''
 
-    pass
+    return pd.HDFStore(filename)
+
+
+
+def plot_S1_ST(S_sens, E_sens, I_sens, H_sens, R_sens, show=True):
+    # Gather the S1 and ST results
+    S1 = pd.concat({'S':S_sens['S1'], 'E':E_sens['S1'], 'I':I_sens['S1'], 
+                   'H':H_sens['S1'], 'R':R_sens['S1']}, axis=1)
+    ST = pd.concat({'S':S_sens['ST'], 'E':E_sens['ST'], 'I':I_sens['ST'], 
+                   'H':H_sens['ST'], 'R':R_sens['ST']}, axis=1)
+    # Plot
+    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
+    S1.plot.bar(stacked=True, ax=axes[0], title='First-order indices')
+    ST.plot.bar(stacked=True, ax=axes[1], title='Total-order indices')
+    plt.tight_layout()
+    if show:
+        plt.show()
+    return (fig, axes)
+
+
+
+def plot_var(var_sens, show=True):
+    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
+    var_sens['S1'].plot.bar(ax=axes[0], title='First-order variance')
+    var_sens['ST'].plot.bar(ax=axes[1], title='Total-order variance')
+    plt.tight_layout()
+    if show:
+        plt.show()
+    return (fig, axes)
 
 
 
 if __name__ == "__main__":
-    N = 10
+    N = 100
     with Pool() as pool:
         main(N, filename='analysis', pool=pool)
