@@ -2,6 +2,7 @@
 
 import sys, os
 import pickle
+import argparse
 from multiprocessing import Pool
 from SALib.sample import saltelli
 from SALib.analyze import sobol
@@ -9,6 +10,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import heroin_model
+
+default_N = os.cpu_count()
+parser = argparse.ArgumentParser()
+parser.add_argument("-N", type=int, default=1000,
+                    help="obtain N*(2D+2) samples from parameter space")
+parser.add_argument("-n", "--ncores", type=int,
+                    help="number of cores, defaults to {}".format(default_N))
+parser.add_argument("-o", "--filename", type=str, 
+                    help="filename to write output to, no extension",
+                    default='analysis')
 
 ### Define a model wrapper based on the parameter space in main() ###
 def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
@@ -194,6 +205,10 @@ def plot_var(var_sens, show=True):
 
 
 if __name__ == "__main__":
-    N = 100
-    with Pool() as pool:
-        main(N, filename='analysis', pool=pool)
+    args = parser.parse_args()
+    if args.ncores is None:
+        with Pool() as pool:
+            main(args.N, filename=args.filename, pool=pool)
+    else:
+        with Pool(args.ncores) as pool:
+            main(args.N, filename=args.filename, pool=pool)
