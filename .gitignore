@@ -9,6 +9,7 @@ __pycache__/
 *.toc
 *.fmt
 *.fot
+*.gz
 
 ## Bib aux files
 *.bbl

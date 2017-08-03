@@ -8,19 +8,46 @@
 \end{center}
 \vspace{1in}
 
+\subsection*{Original}
+
 \begin{align*}
-	S_{n+1} &= S_n + \beta E - \alpha S - \underbrace{S(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}}\\
+	\frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}}\\
 	&\ \ \ \ + d_I I + d_H H + d_r R + d_e E\\
-	E_{n+1} &= E_n - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_e E\\
-	I_{n+1} &= I_n + \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}} - \underbrace{iI}_{\text{to R}} - d_II\\
-	H_{n+1} &= H_n + \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}} - \underbrace{hH}_{\text{to R}} - d_HH\\
-	R_{n+1} &= R_n + \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} -d_rR\\
+	\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_e E\\
+	\frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}} - \underbrace{iI}_{\text{to R}} - d_II\\
+	\frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}} - \underbrace{hH}_{\text{to R}} - d_HH\\
+	\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} -d_rR\\
 	\gamma(H) &= \gamma_0(\mu_1+\mu_2H)
 \end{align*}
 
 We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ includes both natural death and backsliding from drug resistant to susceptible.
 
+\subsection*{I and H feeds S}
 
+\begin{align*}
+\frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}}\\
+&\ \ \ \ + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} 
++ d_I I + d_H H + d_r R + d_e E\\
+\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_e E\\
+\frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}}\ \ 
+- \underbrace{(i+d_I)I}_{\text{to S, rec. \& death}}\\
+\frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}}\ \ - \underbrace{(h+d_H)H}_{\text{to S, rec. \& death}}\\
+\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} - d_rR\\
+\gamma(H) &= \gamma_0(\mu_1+\mu_2H)
+\end{align*}
+
+\subsection*{No R}
+
+\begin{align*}
+\frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}} 
++ \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} 
++ d_I I + d_H H + d_e E\\
+\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_e E\\
+\frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}}\ \ 
+- \underbrace{(i+d_I)I}_{\text{to S, rec. \& death}}\\
+\frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}}\ \ - \underbrace{(h+d_H)H}_{\text{to S, rec. \& death}}\\
+\gamma(H) &= \gamma_0(\mu_1+\mu_2H)
+\end{align*}
 
 
 \end{document}
