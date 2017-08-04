@@ -10,7 +10,7 @@ TOTAL01 = 317000000 - CHILD
 e01 = 10000000
 i01 = 400000
 h01 = 100000
-r01 = 1000000
+r01 = 60000000
 s01 = TOTAL01 - (e01 + i01 + h01 + r01)
 
 #inital pop. as fractions
@@ -51,9 +51,9 @@ params['di'] = 6.3/100000 * (TOTAL01/i01) # Literature
 params['dh'] = 2.7/100000 * (TOTAL01/h01) # Literature
 params['dr'] = params['de'] + 1/1000 # add recetivism
 
-endt = 100
+endt = 200
 
-def heroin_func(S,E,I,H,R,tsteps=endt,params=params):
+def heroin_dtds(S,E,I,H,R,tsteps=endt,params=params):
     '''Append arrays S,E,I,H,R with year time-step solutions'''
     mu1 = params['mu1']
     mu2 = params['mu2']
@@ -88,28 +88,37 @@ def heroin_func(S,E,I,H,R,tsteps=endt,params=params):
 
 
 
-def heroin_func_ode(S0,E0,I0,H0,R0,tsteps=endt,params=params):
+def heroin_solve_odes(S0,E0,I0,H0,R0,version=1,tsteps=endt,params=params):
     '''Solve the heroin model as a system of ODEs'''
     S = [S0]
     E = [E0]
     I = [I0]
     H = [H0]
     R = [R0]
-    solver = ode(heroin_odes).set_integrator('dopri5')
-    solver.set_initial_value([S0,E0,I0,H0,R0], 0).set_f_params(params)
+    if version == 1:
+        solver = ode(heroin_odes).set_integrator('dopri5')
+        solver.set_initial_value([S0,E0,I0,H0,R0], 0).set_f_params(params)
+    elif version == 2:
+        solver = ode(heroin_odes_v2).set_integrator('dopri5')
+        solver.set_initial_value([S0,E0,I0,H0,R0], 0).set_f_params(params)
+    elif version == 3:
+        solver = ode(heroin_odes_noR).set_integrator('dopri5')
+        solver.set_initial_value([S0,E0,I0,H0], 0).set_f_params(params)
+        R = None
     while solver.successful() and solver.t < endt:
         solver.integrate(solver.t+1)
         S.append(solver.y[0])
         E.append(solver.y[1])
         I.append(solver.y[2])
         H.append(solver.y[3])
-        R.append(solver.y[4])
+        if version != 3:
+            R.append(solver.y[4])
     return (S,E,I,H,R)
 
 
 
 def heroin_odes(t, X, params):
-    '''Specify the heroin model as a system of ODEs'''
+    '''Specify the heroin model as a system of ODEs. version=1'''
     Y = []
     params['gamma'] = params['gamma_0'] *(params['mu1']+params['mu2']*X[3])
     Y.append((params['beta']*X[1]) - (params['alpha']*X[0]) - 
@@ -133,15 +142,66 @@ def heroin_odes(t, X, params):
 
 
 
-def plot_solution(S,E,I,H,R,endt):
+def heroin_odes_v2(t, X, params):
+    '''Send I and H to S instead of R. version=2'''
+    Y = []
+    params['gamma'] = params['gamma_0'] *(params['mu1']+params['mu2']*X[3])
+    Y.append((params['beta']*X[1]) - (params['alpha']*X[0]) - 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
+        X[0]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
+        X[0]*(params['mu1']+params['mu2']*X[3]) + 
+        params['irate']*X[2] + params['hrate']*X[3] + params['di']*X[2] + 
+        params['dh']*X[3] + params['de']*X[1] + params['dr']*X[4])
+    Y.append(-(params['beta']*X[1]) + (params['alpha']*X[0]) - 
+        X[1]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
+        X[1]*(params['mu1']+params['mu2']*X[3]) - (params['epsilon']*X[1]) - 
+        params['de']*X[1])
+    Y.append((params['epsilon']*X[1]) - (params['gamma']*X[2]) + 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
+        params['irate']*X[2] - params['di']*X[2])
+    Y.append((params['gamma']*X[2]) + 
+        (X[0]+X[1])*(params['mu1']+params['mu2']*X[3]) - 
+        params['hrate']*X[3] - params['dh']*X[3])
+    Y.append(((X[1]+X[0])*(params['sigma'] + params['xi']*(X[2]+X[3])))
+        - params['dr']*X[4])
+    return Y
+
+
+
+def heroin_odes_noR(t, X, params):
+    '''Same as v2 but with no R. version=3'''
+    Y = []
+    params['gamma'] = params['gamma_0'] *(params['mu1']+params['mu2']*X[3])
+    Y.append((params['beta']*X[1]) - (params['alpha']*X[0]) - 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) -  
+        X[0]*(params['mu1']+params['mu2']*X[3]) + 
+        params['irate']*X[2] + params['hrate']*X[3] + 
+        params['di']*X[2] + params['dh']*X[3] + params['de']*X[1])
+    Y.append(-(params['beta']*X[1]) + (params['alpha']*X[0]) -  
+        X[1]*(params['mu1']+params['mu2']*X[3]) - (params['epsilon']*X[1]) - 
+        params['de']*X[1])
+    Y.append((params['epsilon']*X[1]) - (params['gamma']*X[2]) + 
+        X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
+        params['irate']*X[2] - params['di']*X[2])
+    Y.append((params['gamma']*X[2]) + 
+        (X[0]+X[1])*(params['mu1']+params['mu2']*X[3]) - 
+        params['hrate']*X[3] - params['dh']*X[3])
+    return Y
+
+
+
+def plot_solution(S,E,I,H,R,endt=endt,show=True):
+    '''Pass R = None if no R'''
 
     x  = np.arange(0,endt+1,1)
     
+    fig = plt.figure(figsize=(8, 4.5))
     plt.plot(x,S, label = "Suscpetible")
     plt.plot(x,E, label = "Prescription Opioid Users")
     plt.plot(x,I, label = "Prescription Opioid Addicts")
     plt.plot(x,H, label = "Heroin Addicts")
-    plt.plot(x,R, label = "Recovered")
+    if R is not None:
+        plt.plot(x,R, label = "Resistant")
     plt.legend()
     plt.title('Population of Heroin Epidemic')
     plt.xlabel('Time (year)')
@@ -151,8 +211,13 @@ def plot_solution(S,E,I,H,R,endt):
     print("exposed equals", np.round(E[-1]*TOTAL01))
     print("infected equals", np.round(I[-1]*TOTAL01))
     print("heroin equals", np.round(H[-1]*TOTAL01)) #Goal: between 60,000 and 1 million
-    print("recovered equals", np.round(R[-1]*TOTAL01))
-    plt.show()
+    if R is not None:
+        print("resistant equals", np.round(R[-1]*TOTAL01))
+    plt.tight_layout()
+    if show:
+        plt.show()
+    else:
+        return fig
     
     
 if __name__ == "__main__":
@@ -164,10 +229,26 @@ if __name__ == "__main__":
     H = [h0]
     R = [r0]
     
-    heroin_func(S,E,I,H,R)
+    # heroin_dtds(S,E,I,H,R)
 
-    plot_solution(S,E,I,H,R,endt)
+    # plot_solution(S,E,I,H,R,endt)
 
-    S,E,I,H,R = heroin_func_ode(s0,e0,i0,h0,r0,endt)
+    S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,tsteps=endt)
+    plot_solution(S,E,I,H,R,endt,False)
+    S = [s0]
+    E = [e0]
+    I = [i0]
+    H = [h0]
+    R = [r0]
+    S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,version=2,tsteps=endt)
+    plot_solution(S,E,I,H,R,endt,False)
+    S = [s0]
+    E = [e0]
+    I = [i0]
+    H = [h0]
+    R = [r0]
+    S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,version=3,tsteps=endt)
+    plot_solution(S,E,I,H,R,endt,False)
+    plt.show()
 
-    plot_solution(S,E,I,H,R,endt)
+    
