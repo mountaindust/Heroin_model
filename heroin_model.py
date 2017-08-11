@@ -45,13 +45,16 @@ params['sigma'] = .01 #S+E->R background
 #gamma/(mu1+mu2*H_n+gamma) = .8
 params['gamma_0'] = 4 #gamma = GAMMA_0*(mu1+mu2*H_n) I->H
 
-#recetivism
+#resistance loss rate
 params['r'] = 1/1000
 
 #Death rates
 params['ds'] = 12305000/1245911000 #.009876 Literature
 params['di'] = 6.3/100000 * (TOTAL01/i01) # Literature
 params['dh'] = 2.7/100000 * (TOTAL01/h01) # Literature
+
+#Fraction of new population starting in R
+params['g'] = 0
 
 endt = 200
 
@@ -72,6 +75,7 @@ def heroin_dtds(S,E,I,H,R,tsteps=endt,params=params):
     DI = params['di']
     DH = params['dh']
     r = params['r']
+    g = params['g']
     for i in range(tsteps):
         S_n = S[-1]
         E_n = E[-1]
@@ -79,11 +83,14 @@ def heroin_dtds(S,E,I,H,R,tsteps=endt,params=params):
         H_n = H[-1]
         R_n = R[-1]
         GAMMA = params['gamma_0'] *(mu1+mu2*H_n)
-        S.append(S_n + (beta*E_n) - (alpha*S_n) - S_n*(delta1*E_n + delta2*I_n) - S_n*(sigma+zeta*(I_n+H_n)) - S_n*(mu1+mu2*H_n) + DI*I_n + DH*H_n + DS*E_n + (DS+r)*R_n)
+        S.append(S_n + (beta*E_n) - (alpha*S_n) - S_n*(delta1*E_n + delta2*I_n) 
+                 - S_n*(sigma+zeta*(I_n+H_n)) - S_n*(mu1+mu2*H_n) - g*DS*S_n 
+                 + (1-g)*(DS*(E_n+R_n) + DI*I_n + DH*H_n) + r*R_n)
         E.append(E_n - (beta*E_n) + (alpha*S_n) - E_n*(sigma+zeta*(I_n+H_n)) - E_n*(mu1+mu2*H_n) - (EPSILON*E_n) - DS*E_n)
         I.append(I_n + (EPSILON*E_n) - (GAMMA*I_n) + S_n*(delta1*E_n + delta2*I_n) - irate*I_n - DI*I_n)
         H.append(H_n + (GAMMA*I_n) + (S_n+E_n)*(mu1+mu2*H_n) - hrate*H_n -DH*H_n)
-        R.append(R_n + ((E_n+S_n)*(sigma + zeta*(I_n+H_n))) + irate*I_n + hrate*H_n - (DS+r)*R_n)
+        R.append(R_n + ((E_n+S_n)*(sigma + zeta*(I_n+H_n))) + irate*I_n + hrate*H_n 
+                 - (1-g)*DS*R_n - r*R_n + g*(DS*(S_n+E_n) + DI*I_n + DH*H_n))
         
     assert np.isclose(1, S[-1]+E[-1]+I[-1]+H[-1]+R[-1]), "Final sum not equal to one."
     assert min([min(S), min(E), min(I), min(H), min(R)]) >= 0, "Negative population fraction."
@@ -126,8 +133,9 @@ def heroin_odes(t, X, params):
     Y.append((params['beta']*X[1]) - (params['alpha']*X[0]) - 
         X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
         X[0]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
-        X[0]*(params['mu1']+params['mu2']*X[3]) + params['di']*X[2] + 
-        params['dh']*X[3] + params['ds']*X[1] + params['ds']*X[4] + params['r']*X[4])
+        X[0]*(params['mu1']+params['mu2']*X[3]) - params['g']*params['ds']*X[0] +
+        (1-params['g'])*(params['ds']*(X[1]+X[4]) + params['di']*X[2] + params['dh']*X[3]) +
+        params['r']*X[4])
     Y.append(-(params['beta']*X[1]) + (params['alpha']*X[0]) - 
         X[1]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
         X[1]*(params['mu1']+params['mu2']*X[3]) - (params['epsilon']*X[1]) - 
@@ -139,7 +147,9 @@ def heroin_odes(t, X, params):
         (X[0]+X[1])*(params['mu1']+params['mu2']*X[3]) - 
         params['hrate']*X[3] - params['dh']*X[3])
     Y.append(((X[1]+X[0])*(params['sigma'] + params['xi']*(X[2]+X[3]))) + 
-        params['irate']*X[2] + params['hrate']*X[3] - params['ds']*X[4] - params['r']*X[4])
+        params['irate']*X[2] + params['hrate']*X[3] - 
+        (1-params['g'])*params['ds']*X[4] - params['r']*X[4] +
+        params['g']*(params['ds']*(X[0]+X[1]) + params['di']*X[2] + params['dh']*X[3]))
     return Y
 
 
@@ -152,8 +162,9 @@ def heroin_odes_v2(t, X, params):
         X[0]*(params['delta1']*X[1] + params['delta2']*X[2]) - 
         X[0]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
         X[0]*(params['mu1']+params['mu2']*X[3]) + 
-        params['irate']*X[2] + params['hrate']*X[3] + params['di']*X[2] + 
-        params['dh']*X[3] + params['ds']*X[1] + params['ds']*X[4] + params['r']*X[4])
+        params['irate']*X[2] + params['hrate']*X[3] - params['g']*params['ds']*X[0] +
+        (1-params['g'])*(params['ds']*(X[1]+X[4]) + params['di']*X[2] + params['dh']*X[3]) +
+        params['r']*X[4])
     Y.append(-(params['beta']*X[1]) + (params['alpha']*X[0]) - 
         X[1]*(params['sigma']+params['xi']*(X[2]+X[3])) - 
         X[1]*(params['mu1']+params['mu2']*X[3]) - (params['epsilon']*X[1]) - 
@@ -164,8 +175,9 @@ def heroin_odes_v2(t, X, params):
     Y.append((params['gamma']*X[2]) + 
         (X[0]+X[1])*(params['mu1']+params['mu2']*X[3]) - 
         params['hrate']*X[3] - params['dh']*X[3])
-    Y.append(((X[1]+X[0])*(params['sigma'] + params['xi']*(X[2]+X[3])))
-        - params['ds']*X[4] - params['r']*X[4])
+    Y.append(((X[1]+X[0])*(params['sigma'] + params['xi']*(X[2]+X[3]))) -
+        (1-params['g'])*params['ds']*X[4] - params['r']*X[4] +
+        params['g']*(params['ds']*(X[0]+X[1]) + params['di']*X[2] + params['dh']*X[3]))
     return Y
 
 

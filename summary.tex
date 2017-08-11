@@ -12,15 +12,17 @@
 
 \begin{align*}
 	\frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}}\\
-	&\ \ \ \ + d_I I + d_H H + (d_s+r) R + d_s E\\
-	\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_s E\\
+	&\ \ \ \ + \underbrace{rR}_{\text{resist loss}} - gd_SS + (1-g)(d_S(E+R) + d_II + d_HH)\\
+	\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_S E\\
 	\frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}} - \underbrace{iI}_{\text{to R}} - d_II\\
 	\frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}} - \underbrace{hH}_{\text{to R}} - d_HH\\
-	\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} - (d_s+r)R\\
+	\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} - 
+	\underbrace{rR}_{\text{resist loss}} - (1-g)d_SR\\ 
+	&\ \ \ \ + g(d_S(S+E) + d_II + d_HH)\\
 	\gamma(H) &= \gamma_0(\mu_1+\mu_2H)
 \end{align*}
 
-We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ includes both natural death and backsliding from drug resistant to susceptible.
+We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ includes both natural death and backsliding from drug resistant to susceptible. If $g=0$ you get back the June version of the discrete-time dynamical system.
 
 \paragraph{Results at equilibrium using the default parameters} put the resistant population quite high, at around 0.77 of the total population. Susceptibles are around 0.2, and the total number of opioid and heroin addicts are 6,827,303 and 410,016 respectively. The opioid number is likely a bit high and the heroin number low, since according to the American Society of Addiction Medicine, of the 20.5 million Americans 12 or older that had a substance use disorder in 2015, 2 million had a substance use disorder involving prescription pain relievers and 591,000 had a substance use disorder involving heroin.
 
@@ -29,12 +31,14 @@ We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ inclu
 \begin{align*}
 \frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}}\\
 &\ \ \ \ + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} 
-+ d_I I + d_H H + (d_s+r) R + d_s E\\
-\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_s E\\
++ \underbrace{rR}_{\text{resist loss}} - gd_SS + (1-g)(d_S(E+R) + d_II + d_HH)\\
+\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\sigma + \xi(I+H))}_{\text{to resistant}} - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_S E\\
 \frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}}\ \ 
 - \underbrace{(i+d_I)I}_{\text{to S, rec. \& death}}\\
 \frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}}\ \ - \underbrace{(h+d_H)H}_{\text{to S, rec. \& death}}\\
-\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} - (d_s+r)R\\
+\frac{dR}{dt} &= \underbrace{(S+E)(\sigma + \xi(I+H))}_{\text{from S and E}} -
+\underbrace{rR}_{\text{resist loss}} - (1-g)d_SR\\ 
+&\ \ \ \ + g(d_S(S+E) + d_II + d_HH)\\
 \gamma(H) &= \gamma_0(\mu_1+\mu_2H)
 \end{align*}
 
@@ -45,8 +49,8 @@ We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ inclu
 \begin{align*}
 \frac{dS}{dt} &= \beta E - \alpha S - \underbrace{S(\delta_1 E + \delta_2 I)}_{\text{to opioid addiction}} - \underbrace{S(\mu_1+\mu_2H)}_{\text{to heroin addiction}} 
 + \underbrace{iI}_{\text{from I}} + \underbrace{hH}_{\text{from H}} 
-+ d_I I + d_H H + d_s E\\
-\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_s E\\
++ d_I I + d_H H + d_S E\\
+\frac{dE}{dt} &= - \beta E + \alpha S - \underbrace{E(\mu_1 + \mu_2H)}_{\text{to heroin addiction}} - \underbrace{\epsilon E}_{\text{to I}} - d_S E\\
 \frac{dI}{dt} &= \underbrace{\epsilon E}_{\text{from E}} + \underbrace{S(\delta_1E+\delta_2I)}_{\text{from S}} - \underbrace{\gamma(H)I}_{\text{to H}}\ \ 
 - \underbrace{(i+d_I)I}_{\text{to S, rec. \& death}}\\
 \frac{dH}{dt} &= \underbrace{\gamma(H)I}_{\text{from I}} + \underbrace{(S+E)(\mu_1+\mu_2H)}_{\text{from S and E}}\ \ - \underbrace{(h+d_H)H}_{\text{to S, rec. \& death}}\\
