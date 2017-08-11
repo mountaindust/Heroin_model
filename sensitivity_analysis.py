@@ -23,7 +23,7 @@ parser.add_argument("-o", "--filename", type=str,
 
 ### Define a model wrapper based on the parameter space in main() ###
 def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
-                epsilon, xi, sigma, gamma_0, dr_add):
+                epsilon, xi, sigma, gamma_0, r):
     # Length to run each model realization
     endt = 200
     # Copy default parameter dict
@@ -41,7 +41,7 @@ def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
     params['xi'] = xi
     params['sigma'] = sigma
     params['gamma_0'] = gamma_0
-    params['dr'] = params['de'] + dr_add
+    params['r'] = r
     # Get initial conditions
     s0 = heroin_model.s0
     e0 = heroin_model.e0
@@ -72,7 +72,7 @@ def main(N, filename, pool=None):
         'num_vars': 13, #number of parameters
         'names': ['alpha', 'beta', 'delta1', 'delta2',
                   'mu1', 'mu2', 'irate', 'hrate', 'epsilon',
-                  'xi', 'sigma', 'gamma_0', 'dr_add'],
+                  'xi', 'sigma', 'gamma_0', 'r'],
         'bounds': [[0.01, 0.5], [0.01, 0.5], [0, 0.2], [0, 0.8],
                    [0, 0.15], [0, 0.3], [0, 1], [0, 1], [0.01, 0.8],
                    [0, 1], [0, 0.95], [0.1, 10], [0.00001, 0.95]]
