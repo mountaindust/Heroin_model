@@ -51,7 +51,8 @@ def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
     r0 = heroin_model.r0
     # Run model
     try:
-        result = heroin_model.heroin_func_ode(s0,e0,i0,h0,r0,endt,params)
+        result = heroin_model.heroin_solve_odes(s0,e0,i0,h0,r0,
+                                                version=1,tsteps=endt,params=params)
     except:
         return (sys.exc_info()[1], 
                 None, None, None, None, None, None, None, None, None)
@@ -70,7 +71,7 @@ def main(N, filename, pool=None):
     ### Define the parameter space ###
 
     problem = {
-        'num_vars': 13, #number of parameters
+        'num_vars': 14, #number of parameters
         'names': ['alpha', 'beta', 'delta1', 'delta2',
                   'mu1', 'mu2', 'irate', 'hrate', 'epsilon',
                   'xi', 'sigma', 'gamma_0', 'r', 'g'],
