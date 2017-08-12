@@ -114,7 +114,7 @@ def heroin_solve_odes(S0,E0,I0,H0,R0,version=1,tsteps=endt,params=params):
         solver = ode(heroin_odes_noR).set_integrator('dopri5')
         solver.set_initial_value([S0,E0,I0,H0], 0).set_f_params(params)
         R = None
-    while solver.successful() and solver.t < endt:
+    while solver.successful() and solver.t < tsteps:
         solver.integrate(solver.t+1)
         S.append(solver.y[0])
         E.append(solver.y[1])
