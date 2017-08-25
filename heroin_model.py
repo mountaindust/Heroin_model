@@ -58,6 +58,15 @@ params['g'] = 0
 
 endt = 200
 
+def update_params(new_params):
+    '''Update the params dict with new values contained in new_params'''
+    global params
+    for key,val in new_params.items():
+        if key in params.keys():
+            params[key] = val
+        else:
+            print('Could not find parameter {}.'.format(key))
+
 def heroin_dtds(S,E,I,H,R,tsteps=endt,params=params):
     '''Append arrays S,E,I,H,R with year time-step solutions'''
     mu1 = params['mu1']
@@ -97,7 +106,7 @@ def heroin_dtds(S,E,I,H,R,tsteps=endt,params=params):
 
 
 
-def heroin_solve_odes(S0,E0,I0,H0,R0,version=1,tsteps=endt,params=params):
+def heroin_solve_odes(S0=s0,E0=e0,I0=i0,H0=h0,R0=r0,version=1,tsteps=endt,params=params):
     '''Solve the heroin model as a system of ODEs'''
     S = [S0]
     E = [E0]
@@ -237,11 +246,11 @@ def plot_solution(S,E,I,H,R,endt=endt,show=True):
 if __name__ == "__main__":
     
     #establish the list incluDIng initial pops in orDEr to be appeneDEd in the function
-    S = [s0]
-    E = [e0]
-    I = [i0]
-    H = [h0]
-    R = [r0]
+    # S = [s0]
+    # E = [e0]
+    # I = [i0]
+    # H = [h0]
+    # R = [r0]
     
     # heroin_dtds(S,E,I,H,R)
 
@@ -249,18 +258,10 @@ if __name__ == "__main__":
 
     S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,tsteps=endt)
     plot_solution(S,E,I,H,R,endt,False)
-    S = [s0]
-    E = [e0]
-    I = [i0]
-    H = [h0]
-    R = [r0]
+
     S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,version=2,tsteps=endt)
     plot_solution(S,E,I,H,R,endt,False)
-    S = [s0]
-    E = [e0]
-    I = [i0]
-    H = [h0]
-    R = [r0]
+
     S,E,I,H,R = heroin_solve_odes(s0,e0,i0,h0,r0,version=3,tsteps=endt)
     plot_solution(S,E,I,H,R,endt,False)
     plt.show()

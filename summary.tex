@@ -59,4 +59,10 @@ We assume that $0\leq\delta_1\leq\delta_2\leq 1$, $\mu_1<\mu_2$, and $d_r$ inclu
 
 \paragraph{Leaving off a resistant population} does not force everyone to heroin. As might be expected, the numbers of both opioid addicts and heroin addicts do increase (37,428,464 and 4,344,805), but this could likely be controlled for using different parameter values.
 
+\subsection*{Sensitivity analysis notes}
+
+Information about parameter sensitivity for each of these models was obtained using the Sobol method and omitted the death rates $d_S$, $d_I$, and $d_H$, holding them constant (see heroin\_model.py for the values). Sensitivity was measured with respect to the model steady state as measured by the value of $S$, $E$, $I$, $H$, and $R$ at the end of a 1000 year long simulation. Variance of the model of the last 50 years of the 1000 year simulation was also calculated for use as a possible indication of oscillations. Sensitivity to second-order interactions among the parameters was also calculated.
+
+Saltelli's extension of the Sobol sequence was used to generate $N(2D+2)$ model inputs for sampling, where $D$ is the dimension of the parameter space (14 in our case) and $N$ was chosen to be 10000 and 50000 in separate trials. Parameter sensitivity with respect to independent variable steady states did not vary between these trials, suggesting a sufficient number of samples. Sensitivity with respect to variance did vary, but in all cases the maximum variance recorded in any model was on the order of $10^-5$, suggesting that oscillations likely do not play a significant role in the parameter space of interest, if they are present at all.
+
 \end{document}
