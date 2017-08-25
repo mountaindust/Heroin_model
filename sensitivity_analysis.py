@@ -52,7 +52,7 @@ def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
     # Run model
     try:
         result = heroin_model.heroin_solve_odes(s0,e0,i0,h0,r0,
-                                                version=3,tsteps=endt,params=params)
+                                                version=1,tsteps=endt,params=params)
     except:
         return (sys.exc_info()[1], 
                 None, None, None, None, None, None, None, None, None)
