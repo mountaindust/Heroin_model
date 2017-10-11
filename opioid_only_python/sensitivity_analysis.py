@@ -105,8 +105,7 @@ def main(N, filename, pool=None):
     # Resave as dataframe in hdf5
     store = pd.HDFStore(filename+'.h5')
     store['param_values'] = param_values
-    store['raw_output'] = pd.DataFrame(output, columns=['S', 'E', 'I', 'H', 'R',
-                                       'std_S', 'std_E', 'std_I', 'std_H', 'std_R'])
+    store['raw_output'] = pd.DataFrame(output, columns=['S', 'P', 'A', 'R'])
     os.remove('raw_result_data.pickle')
 
     ### Analyze the results and view using Pandas ###
