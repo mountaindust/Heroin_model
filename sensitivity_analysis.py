@@ -58,14 +58,14 @@ def run_model(alpha, beta, delta1, delta2, mu1, mu2, irate, hrate,
                 None, None, None, None, None, None, None, None, None)
     # Return just the end value and std of each variable
     if result[4] is not None:
-        return (np.mean(result[0][-1]), np.mean(result[1][-1]), 
-                np.mean(result[2][-1]), np.mean(result[3][-1]), 
-                np.mean(result[4][-1]), np.std(result[0][-50:]),
+        return (np.mean(result[0][-50:]), np.mean(result[1][-50:]), 
+                np.mean(result[2][-50:]), np.mean(result[3][-50:]), 
+                np.mean(result[4][-50:]), np.std(result[0][-50:]),
                 np.std(result[1][-50:]), np.std(result[2][-50:]),
                 np.std(result[3][-50:]), np.std(result[4][-50:]))
     else:
-        return (np.mean(result[0][-1]), np.mean(result[1][-1]), 
-                np.mean(result[2][-1]), np.mean(result[3][-1]), 
+        return (np.mean(result[0][-50:]), np.mean(result[1][-50:]), 
+                np.mean(result[2][-50:]), np.mean(result[3][-50:]), 
                 0, np.std(result[0][-50:]),
                 np.std(result[1][-50:]), np.std(result[2][-50:]),
                 np.std(result[3][-50:]), 0)
