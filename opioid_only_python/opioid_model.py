@@ -57,15 +57,17 @@ def opioid_odes(t, X, params):
 
 
 
-def solve_odes(S0=S_0,P0=P_0,A0=A_0,R0=R_0,tstart=tstart,tstop=tstop,params=params):
+def solve_odes(S0=S_0,P0=P_0,A0=A_0,R0=R_0,tstart=tstart,tstop=tstop,p=None):
     '''Solve opioid_odes with given initial conditions, time, and params.'''
+    if p is None:
+        p = params
     S = [S0]
     P = [P0]
     A = [A0]
     R = [R0]
     # setup solver
     solver = ode(opioid_odes).set_integrator('dopri5')
-    solver.set_initial_value([S0,P0,A0,R0], tstart).set_f_params(params)
+    solver.set_initial_value([S0,P0,A0,R0], tstart).set_f_params(p)
     # solve
     while solver.successful() and solver.t < tstop:
         solver.integrate(solver.t+1) #integrate up to next integer time
@@ -78,14 +80,16 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,R0=R_0,tstart=tstart,tstop=tstop,params=para
 
 
 
-def compute_R0(params=params):
+def compute_R0(p=None):
     '''Check that AFE exists. If so, compute and return R0'''
-    if params['gamma'] != 0 or params['xi'] != 0:
+    if p is None:
+        p = params
+    if p['gamma'] != 0 or p['xi'] != 0:
         raise ValueError('AFE does not exist with these parameters.')
     else:
-        Lambda = 1 - params['sigma']/(params['delta']+params['mu']+params['sigma'])
-        S_star = 1 - params['alpha']/(params['alpha']+params['epsilon']+params['mu'])
-        return (params['beta']*S_star)/(params['mu']+params['zeta']*Lambda)
+        Lambda = 1 - p['sigma']/(p['delta']+p['mu']+p['sigma'])
+        S_star = 1 - p['alpha']/(p['alpha']+p['epsilon']+p['mu'])
+        return (p['beta']*S_star)/(p['mu']+p['zeta']*Lambda)
 
 
 
