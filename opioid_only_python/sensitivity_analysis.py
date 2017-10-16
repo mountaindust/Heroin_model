@@ -76,7 +76,10 @@ def main(N, filename, pool=None):
 
     ### Run model ###
     print('Examining the parameter space.')
-    poolsize = os.cpu_count()
+    if args.ncores is None:
+        poolsize = os.cpu_count()
+    else:
+        poolsize = args.ncores
     chunksize = param_values.shape[0]//poolsize
     output = pool.starmap(run_reduced_model, param_values, chunksize=chunksize)
 
