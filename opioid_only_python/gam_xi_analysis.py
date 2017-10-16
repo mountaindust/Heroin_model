@@ -29,6 +29,7 @@ R_0 = 0.001
 tstart = 0
 tstop = 10000
 
+model.params['alpha'] = 0.3
 model.params['gamma'] = 0
 model.params['xi'] = 0
 
