@@ -29,7 +29,7 @@ R_0 = 0.001
 tstart = 0
 tstop = 10000
 
-model.params['alpha'] = 0.3
+model.params['alpha'] = 0.2
 model.params['gamma'] = 0
 model.params['xi'] = 0
 
@@ -122,12 +122,14 @@ def plot_param_space(A, R, gam_end, gam_step, xi_end, xi_step, show=True):
     gam_grid, xi_grid = np.meshgrid(gam_mesh, xi_mesh)
 
     fig, axes = plt.subplots(ncols=2, figsize=(11, 4.5))
-    A_plot = axes[0].pcolormesh(gam_grid, xi_grid, A.reshape(xi_len, gam_len))
+    A_plot = axes[0].pcolormesh(gam_grid, xi_grid, A.reshape(xi_len, gam_len),
+                                shading="flat")
     axes[0].set_title('Addicted @ equilibrium')
     axes[0].set_xlabel(r'$\gamma$')
     axes[0].set_ylabel(r'$\xi$')
     plt.colorbar(A_plot, ax=axes[0])
-    R_plot = axes[1].pcolormesh(gam_grid, xi_grid, R.reshape(xi_len, gam_len))
+    R_plot = axes[1].pcolormesh(gam_grid, xi_grid, R.reshape(xi_len, gam_len),
+                                shading="flat")
     axes[1].set_title('Rehabilitating @ equilibrium')
     axes[1].set_xlabel(r'$\gamma$')
     axes[1].set_ylabel(r'$\xi$')

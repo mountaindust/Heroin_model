@@ -20,6 +20,8 @@ parser.add_argument("-n", "--ncores", type=int,
 parser.add_argument("-o", "--filename", type=str, 
                     help="filename to write output to, no extension",
                     default='analysis')
+parser.add_argument("--full_model", action="store_true",
+                    help="run over all the parameters")
 
 
 def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
@@ -58,18 +60,61 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def main(N, filename, pool=None):
+def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
+    '''Defines a model wrapper based on the parameter space in main()'''
+    # Length to run each model
+    tstart = 0
+    tstop =10000
+    # Copy default parameter dict
+    params = dict(opioid_model.params)
+    # Replace other parameter values
+    params['alpha'] = alpha
+    params['beta'] = beta
+    params['delta'] = delta
+    params['epsilon'] = epsilon
+    params['gamma'] = gamma
+    params['xi'] = xi
+    params['zeta'] = zeta
+    params['nu'] = nu
+    params['mu'] = mu
+    params['mu_star'] = mu_star
+    params['sigma'] = sigma
+    # Get initial conditions
+    S_0 = opioid_model.S_0
+    P_0 = opioid_model.P_0
+    A_0 = opioid_model.A_0
+    R_0 = opioid_model.R_0
+    # Run model
+    try:
+        result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
+    except:
+        return (sys.exc_info()[1],None,None,None)
+    # Return just the mean end value of each variable
+    return (np.mean(result[0][-100:]), np.mean(result[1][-100:]),
+            np.mean(result[2][-100:]), np.mean(result[3][-100:]))
+
+
+
+def main(N, filename, reduced, pool=None):
     '''Runs parameter sensitivity on the reduced opioid model'''
 
     ### Define the parameter space ###
-
-    problem = {
-        'num_vars': 9, #number of parameters
-        'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
-                    'mu', 'mu_star', 'sigma'],
-        'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,2],
-                    [0,0.1], [0,0.5], [0,2]]
-    }
+    if reduced:
+        problem = {
+            'num_vars': 9, #number of parameters
+            'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
+                        'mu', 'mu_star', 'sigma'],
+            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,2],
+                        [0,0.1], [0,0.5], [0,2]]
+        }
+    else:
+        problem = {
+            'num_vars': 11, #number of parameters
+            'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
+                      'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
+            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,1],
+                       [0,2], [0,2], [0,0.1], [0,0.5], [0,2]]
+        }
 
     ### Create an N by num_var matrix of parameter values ###
     param_values = saltelli.sample(problem, N, calc_second_order=True)
@@ -81,7 +126,10 @@ def main(N, filename, pool=None):
     else:
         poolsize = args.ncores
     chunksize = param_values.shape[0]//poolsize
-    output = pool.starmap(run_reduced_model, param_values, chunksize=chunksize)
+    if reduced:
+        output = pool.starmap(run_reduced_model, param_values, chunksize=chunksize)
+    else:
+        output = pool.starmap(run_full_model, param_values, chunksize=chunksize)
 
     ### Parse and save the output ###
     print('Saving and reviewing the results...')
@@ -180,10 +228,11 @@ def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
 
 if __name__ == "__main__":
     args = parser.parse_args()
+    red = not args.full_model
     if args.ncores is None:
         with Pool() as pool:
-            main(args.N, filename=args.filename, pool=pool)
+            main(args.N, filename=args.filename, reduced=red, pool=pool)
     else:
         with Pool(args.ncores) as pool:
-            main(args.N, filename=args.filename, pool=pool)
+            main(args.N, filename=args.filename, reduced=red, pool=pool)
 
