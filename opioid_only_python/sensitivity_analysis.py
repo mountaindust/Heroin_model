@@ -45,10 +45,10 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = opioid_model.S_0
-    P_0 = opioid_model.P_0
-    A_0 = opioid_model.A_0
-    R_0 = opioid_model.R_0
+    S_0 = 0.897
+    P_0 = 0.1
+    A_0 = 0.002
+    R_0 = 0.001
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
