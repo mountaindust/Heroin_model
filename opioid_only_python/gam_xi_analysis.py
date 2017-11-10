@@ -111,6 +111,13 @@ def main(N, filename, pool=None):
 
 
 
+def load_data(filename):
+    '''Load analysis data from previous run and return for examination'''
+
+    return pd.HDFStore(filename)
+
+
+
 
 def plot_param_space(A, R, gam_end, gam_step, xi_end, xi_step, show=True):
     '''Plot the parameter space of R'''
@@ -124,16 +131,20 @@ def plot_param_space(A, R, gam_end, gam_step, xi_end, xi_step, show=True):
     fig, axes = plt.subplots(ncols=2, figsize=(11, 4.5))
     A_plot = axes[0].pcolormesh(gam_grid, xi_grid, A.reshape(xi_len, gam_len))
     A_plot.set_edgecolor('face')
-    axes[0].set_title('Addicted @ equilibrium')
-    axes[0].set_xlabel(r'$\gamma$')
-    axes[0].set_ylabel(r'$\xi$')
-    plt.colorbar(A_plot, ax=axes[0])
+    axes[0].set_title('Addicted @ equilibrium',fontsize=16)
+    axes[0].set_xlabel(r'$\gamma$', fontsize=14)
+    axes[0].set_ylabel(r'$\xi$', fontsize=14)
+    axes[0].tick_params(labelsize=12)
+    cbar = plt.colorbar(A_plot, ax=axes[0])
+    cbar.ax.tick_params(labelsize=12)
     R_plot = axes[1].pcolormesh(gam_grid, xi_grid, R.reshape(xi_len, gam_len))
     R_plot.set_edgecolor('face')
-    axes[1].set_title('Rehabilitating @ equilibrium')
-    axes[1].set_xlabel(r'$\gamma$')
-    axes[1].set_ylabel(r'$\xi$')
-    plt.colorbar(R_plot, ax=axes[1])
+    axes[1].set_title('Rehabilitating @ equilibrium',fontsize=16)
+    axes[1].set_xlabel(r'$\gamma$', fontsize=14)
+    axes[1].set_ylabel(r'$\xi$', fontsize=14)
+    axes[1].tick_params(labelsize=12)
+    cbar = plt.colorbar(R_plot, ax=axes[1])
+    cbar.ax.tick_params(labelsize=12)
     plt.tight_layout()
     if show:
         plt.show()

@@ -80,10 +80,10 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = opioid_model.S_0
-    P_0 = opioid_model.P_0
-    A_0 = opioid_model.A_0
-    R_0 = opioid_model.R_0
+    S_0 = 0.897
+    P_0 = 0.1
+    A_0 = 0.002
+    R_0 = 0.001
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -104,16 +104,16 @@ def main(N, filename, reduced, pool=None):
             'num_vars': 9, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
                         'mu', 'mu_star', 'sigma'],
-            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,2],
-                        [0,0.1], [0,0.5], [0,2]]
+            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
+                        [0,0.1], [0,0.5], [0,1]]
         }
     else:
         problem = {
             'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
-            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,1],
-                       [0,2], [0,2], [0,0.1], [0,0.5], [0,2]]
+            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
+                       [0,1], [0,1], [0,0.1], [0,0.5], [0,1]] #xi was always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###
@@ -223,6 +223,49 @@ def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
     if show:
         plt.show()
     return (fig, axes)
+
+
+
+def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
+                      S_sens_02, P_sens_02, A_sens_02, R_sens_02, H="x"):
+    '''Plot unit hypercube with double hypercube'''
+    S1_01 = pd.concat({'S':S_sens_01['S1'], 'P':P_sens_01['S1'], 'A':A_sens_01['S1'], 
+                   'R':R_sens_01['S1']}, axis=1)
+    ST_01 = pd.concat({'S':S_sens_01['ST'], 'P':P_sens_01['ST'], 'A':A_sens_01['ST'], 
+                   'R':R_sens_01['ST']}, axis=1)
+    S1_02 = pd.concat({'S':S_sens_02['S1'], 'P':P_sens_02['S1'], 'A':A_sens_02['S1'], 
+                   'R':R_sens_02['S1']}, axis=1)
+    ST_02 = pd.concat({'S':S_sens_02['ST'], 'P':P_sens_02['ST'], 'A':A_sens_02['ST'], 
+                   'R':R_sens_02['ST']}, axis=1)
+    # Plot
+    fig, axes = plt.subplots(ncols=2, figsize=(12, 6))
+    S1_01.plot.bar(stacked=True, ax=axes[0], linewidth=0, legend=False, grid=False)
+    ST_01.plot.bar(stacked=True, ax=axes[1], linewidth=0, legend=False, grid=False)
+    S1_02.plot.bar(stacked=True, ax=axes[0], linewidth=0, legend=False, grid=False)
+    ST_02.plot.bar(stacked=True, ax=axes[1], linewidth=0, legend=False, grid=False)
+    for ax in axes:
+        h,l = ax.get_legend_handles_labels()
+        for i in range(0,8,4):
+            for j, pa in enumerate(h[i:i+4]):
+                for rect in pa.patches:
+                    rect.set_x(rect.get_x()+1/3.*i/4.)
+                    if i==0:
+                        rect.set_hatch(H)
+                    rect.set_width(1/3.)
+        ax.set_xticks((np.arange(0, 2*len(S1_01.index), 2) + 1/ 3.)/ 2.)
+        ax.set_xticklabels(S1_01.index, fontsize=14)
+        ax.tick_params(labelsize=14)
+        # add invisible data to add legend
+        n = []
+        n.append(ax.bar(0, 0, color="gray", hatch=H))
+        n.append(ax.bar(0, 0, color="gray", hatch=""))
+        l1 = ax.legend(h[4:8], l[4:8], loc=[0.85, 0.74], fontsize=12)
+        l2 = ax.legend(n, ["[0,1]","[0,2]"], loc=[0.65, 0.855], fontsize=12)
+        ax.add_artist(l1)
+    axes[0].set_title('First-order indices', fontsize=21)
+    axes[1].set_title('Total-order indices', fontsize=21)
+    plt.tight_layout()
+    plt.show()
 
 
 
