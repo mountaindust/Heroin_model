@@ -1,6 +1,7 @@
 '''Use SALib to perform Sobol sensitivity analysis on the model parameters'''
 
 import sys, os
+from collections import OrderedDict
 import pickle
 import argparse
 from multiprocessing import Pool
@@ -209,6 +210,36 @@ def load_data(filename):
 
 
 
+def plot_sens_data_double():
+    store = load_data("Sensitivity_R0_150000.h5")
+    S_sens_02 = store['S_sens']
+    A_sens_02 = store['A_sens']
+    P_sens_02 = store['P_sens']
+    R_sens_02 = store['R_sens']
+    store01 = load_data("Sens_R0_small0_01_150000.h5")
+    A_sens_01 = store01['A_sens']
+    P_sens_01 = store01['P_sens']
+    S_sens_01 = store01['S_sens']
+    R_sens_01 = store01['R_sens']
+    plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
+                      S_sens_02, P_sens_02, A_sens_02, R_sens_02)
+    store.close()
+    store01.close()
+    store = load_data("Sens_full_150000.h5")
+    S_sens_02 = store['S_sens']
+    A_sens_02 = store['A_sens']
+    P_sens_02 = store['P_sens']
+    R_sens_02 = store['R_sens']
+    store01 = load_data("Sens_full_small0_01_150000.h5")
+    A_sens_01 = store01['A_sens']
+    P_sens_01 = store01['P_sens']
+    S_sens_01 = store01['S_sens']
+    R_sens_01 = store01['R_sens']
+    plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
+                      S_sens_02, P_sens_02, A_sens_02, R_sens_02)
+
+
+
 def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
     # Gather the S1 and ST results
     S1 = pd.concat({'S':S_sens['S1'], 'P':P_sens['S1'], 'A':A_sens['S1'], 
@@ -229,14 +260,16 @@ def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
 def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
                       S_sens_02, P_sens_02, A_sens_02, R_sens_02, H="x"):
     '''Plot unit hypercube with double hypercube'''
-    S1_01 = pd.concat({'S':S_sens_01['S1'], 'P':P_sens_01['S1'], 'A':A_sens_01['S1'], 
-                   'R':R_sens_01['S1']}, axis=1)
-    ST_01 = pd.concat({'S':S_sens_01['ST'], 'P':P_sens_01['ST'], 'A':A_sens_01['ST'], 
-                   'R':R_sens_01['ST']}, axis=1)
-    S1_02 = pd.concat({'S':S_sens_02['S1'], 'P':P_sens_02['S1'], 'A':A_sens_02['S1'], 
-                   'R':R_sens_02['S1']}, axis=1)
-    ST_02 = pd.concat({'S':S_sens_02['ST'], 'P':P_sens_02['ST'], 'A':A_sens_02['ST'], 
-                   'R':R_sens_02['ST']}, axis=1)
+    plt.rc('font',family='Arial')
+    S1_01 = pd.concat([S_sens_01['S1'], P_sens_01['S1'], A_sens_01['S1'],
+                      R_sens_01['S1']], keys=['S','P','A','R'], axis=1)
+    ST_01 = pd.concat([S_sens_01['ST'], P_sens_01['ST'], A_sens_01['ST'],
+                      R_sens_01['ST']], keys=['S','P','A','R'], axis=1)
+    S1_02 = pd.concat([S_sens_02['S1'], P_sens_02['S1'], A_sens_02['S1'],
+                      R_sens_02['S1']], keys=['S','P','A','R'], axis=1)
+    ST_02 = pd.concat([S_sens_02['ST'], P_sens_02['ST'], A_sens_02['ST'],
+                      R_sens_02['ST']], keys=['S','P','A','R'], axis=1)
+    print(S1_01)
     # Plot
     fig, axes = plt.subplots(ncols=2, figsize=(12, 6))
     S1_01.plot.bar(stacked=True, ax=axes[0], linewidth=0, legend=False, grid=False)
@@ -248,22 +281,22 @@ def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
         for i in range(0,8,4):
             for j, pa in enumerate(h[i:i+4]):
                 for rect in pa.patches:
-                    rect.set_x(rect.get_x()+1/3.*i/4.)
+                    rect.set_x(rect.get_x()+5/12.*i/4.)
                     if i==0:
                         rect.set_hatch(H)
-                    rect.set_width(1/3.)
-        ax.set_xticks((np.arange(0, 2*len(S1_01.index), 2) + 1/ 3.)/ 2.)
-        ax.set_xticklabels(S1_01.index, fontsize=14)
-        ax.tick_params(labelsize=14)
+                    rect.set_width(5/12.)
+        ax.set_xticks((np.arange(0, 2*len(S1_01.index), 2) + 5/ 12.)/ 2.)
+        ax.tick_params(labelsize=18)
+        ax.set_xticklabels(S1_01.index, fontsize=21)
         # add invisible data to add legend
         n = []
         n.append(ax.bar(0, 0, color="gray", hatch=H))
         n.append(ax.bar(0, 0, color="gray", hatch=""))
-        l1 = ax.legend(h[4:8], l[4:8], loc=[0.85, 0.74], fontsize=12)
-        l2 = ax.legend(n, ["[0,1]","[0,2]"], loc=[0.65, 0.855], fontsize=12)
+        l1 = ax.legend(h[4:8], l[4:8], loc=[0.8, 0.64], fontsize=16)
+        l2 = ax.legend(n, ["[0,1]","[0,2]"], loc=[0.52, 0.805], fontsize=16)
         ax.add_artist(l1)
-    axes[0].set_title('First-order indices', fontsize=21)
-    axes[1].set_title('Total-order indices', fontsize=21)
+    axes[0].set_title('First-order indices', fontsize=26)
+    axes[1].set_title('Total-order indices', fontsize=26)
     plt.tight_layout()
     plt.show()
 

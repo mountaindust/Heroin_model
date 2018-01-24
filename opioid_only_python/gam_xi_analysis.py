@@ -118,9 +118,16 @@ def load_data(filename):
 
 
 
+def plot_data():
+    store = load_data("gam_xi_alpha02.h5")
+    A = store['output']['A'].as_matrix()
+    R = store['output']['R'].as_matrix()
+    plot_param_space(A, R, gamma_end, gamma_step, xi_end, xi_step)
+
 
 def plot_param_space(A, R, gam_end, gam_step, xi_end, xi_step, show=True):
     '''Plot the parameter space of R'''
+    plt.rc('font',family='Arial')
     # mesh the parameter values
     gam_mesh = np.arange(0, gam_end+gam_step, gam_step)
     gam_len = gam_mesh.size
@@ -131,20 +138,20 @@ def plot_param_space(A, R, gam_end, gam_step, xi_end, xi_step, show=True):
     fig, axes = plt.subplots(ncols=2, figsize=(11, 4.5))
     A_plot = axes[0].pcolormesh(gam_grid, xi_grid, A.reshape(xi_len, gam_len))
     A_plot.set_edgecolor('face')
-    axes[0].set_title('Addicted @ equilibrium',fontsize=16)
-    axes[0].set_xlabel(r'$\gamma$', fontsize=14)
-    axes[0].set_ylabel(r'$\xi$', fontsize=14)
-    axes[0].tick_params(labelsize=12)
+    axes[0].set_title('Addicted @ equilibrium',fontsize=19)
+    axes[0].set_xlabel(r'$\gamma$', fontsize=18)
+    axes[0].set_ylabel(r'$\xi$', fontsize=18)
+    axes[0].tick_params(labelsize=16)
     cbar = plt.colorbar(A_plot, ax=axes[0])
-    cbar.ax.tick_params(labelsize=12)
+    cbar.ax.tick_params(labelsize=16)
     R_plot = axes[1].pcolormesh(gam_grid, xi_grid, R.reshape(xi_len, gam_len))
     R_plot.set_edgecolor('face')
-    axes[1].set_title('Rehabilitating @ equilibrium',fontsize=16)
-    axes[1].set_xlabel(r'$\gamma$', fontsize=14)
-    axes[1].set_ylabel(r'$\xi$', fontsize=14)
-    axes[1].tick_params(labelsize=12)
+    axes[1].set_title('Rehabilitating @ equilibrium',fontsize=19)
+    axes[1].set_xlabel(r'$\gamma$', fontsize=18)
+    axes[1].set_ylabel(r'$\xi$', fontsize=18)
+    axes[1].tick_params(labelsize=16)
     cbar = plt.colorbar(R_plot, ax=axes[1])
-    cbar.ax.tick_params(labelsize=12)
+    cbar.ax.tick_params(labelsize=16)
     plt.tight_layout()
     if show:
         plt.show()
