@@ -1,0 +1,10 @@
+N:5 
+Parameters: all [0,1]
+t: 10,000
+Initial conditions:
+    S_0 = 0.896
+    P_0 = 0.1
+    A_0 = 0.002
+    H_0 = 0.001
+    R_0 = 0.001
+ 
