@@ -232,16 +232,40 @@ def load_data(filename):
 
 
 
+def plot_S1_ST_from_store(store, show=True):
+    '''Extract and plot S1 and ST sensitivity data directly from a store object'''
+
+    plot_S1_ST(store['S_sens'], store['P_sens'], store['A_sens'],
+               store['H_sens'], store['R_sens'], show)
+
+
+
+def print_max_conf(store):
+    '''Print off the max confidence interval for each variable in the store,
+    for both first-order and total-order indices'''
+    for var in ['S_sens', 'P_sens', 'A_sens', 'H_sens', 'R_sens']:
+        print('----------- '+var+' -----------')
+        print('S1_conf_max: {}'.format(store[var]['S1_conf'].max()))
+        print('ST_conf_max: {}'.format(store[var]['ST_conf'].max()))
+        print(' ')
+
+
+
 def plot_S1_ST(S_sens, P_sens, A_sens, H_sens, R_sens, show=True):
     # Gather the S1 and ST results
-    S1 = pd.concat({'S':S_sens['S1'], 'P':P_sens['S1'], 'A':A_sens['S1'], 
-                    'H':H_sens['S1'], 'R':R_sens['S1']}, axis=1)
-    ST = pd.concat({'S':S_sens['ST'], 'P':P_sens['ST'], 'A':A_sens['ST'], 
-                    'H':H_sens['ST'], 'R':R_sens['ST']}, axis=1)
+    S1 = pd.concat([S_sens['S1'], P_sens['S1'], A_sens['S1'], H_sens['S1'],
+                   R_sens['S1']], keys=['S','P','A','H','R'], axis=1)
+    ST = pd.concat([S_sens['ST'], P_sens['ST'], A_sens['ST'], H_sens['ST'],
+                   R_sens['ST']], keys=['S','P','A','H','R'], axis=1)
     # Plot
-    fig, axes = plt.subplots(ncols=2, figsize=(8, 4.5))
-    S1.plot.bar(stacked=True, ax=axes[0], title='First-order indices')
-    ST.plot.bar(stacked=True, ax=axes[1], title='Total-order indices')
+    fig, axes = plt.subplots(ncols=2, figsize=(12, 6))
+    S1.plot.bar(stacked=True, ax=axes[0])
+    ST.plot.bar(stacked=True, ax=axes[1])
+    for ax in axes:
+        ax.tick_params(labelsize=18)
+        ax.legend(fontsize=16)
+    axes[0].set_title('First-order indices', fontsize=26)
+    axes[1].set_title('Total-order indices', fontsize=26)
     plt.tight_layout()
     if show:
         plt.show()
