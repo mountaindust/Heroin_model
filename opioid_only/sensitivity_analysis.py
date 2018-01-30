@@ -188,8 +188,6 @@ def main(N, filename, reduced, pool=None):
     P_sens = pd.DataFrame(P_sens,index=problem['names'])
     A_sens = pd.DataFrame(A_sens,index=problem['names'])
     R_sens = pd.DataFrame(R_sens,index=problem['names'])
-    # Plot
-    plot_S1_ST(S_sens, P_sens, A_sens, R_sens, True)
 
     ### Save the analysis ###
     print('Saving...')
@@ -200,6 +198,9 @@ def main(N, filename, reduced, pool=None):
     for key in S2.keys():
         store['S2/'+key] = S2[key]
     store.close()
+
+    # Plot
+    plot_S1_ST(S_sens, P_sens, A_sens, R_sens, True)
 
 
 
