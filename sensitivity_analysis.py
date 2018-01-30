@@ -23,6 +23,8 @@ parser.add_argument("-o", "--filename", type=str,
                     default='analysis_{}'.format(time.strftime("%m_%d_%H%M")))
 parser.add_argument("--reduced_model", action="store_true",
                     help="run over reduced parameters")
+parser.add_argument("--noplot", action="store_true",
+                    help="do not plot results at the end")
 
 
 # Ignore this for now.
@@ -108,7 +110,7 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
 
 
 
-def main(N, filename, reduced, pool=None):
+def main(N, filename, reduced, pool=None, no_plot=False):
     '''Runs parameter sensitivity on the reduced opioid model'''
 
     ##### Define the parameter space ######
@@ -222,7 +224,8 @@ def main(N, filename, reduced, pool=None):
     store.close()
 
     # Plot
-    plot_S1_ST(S_sens, P_sens, A_sens, H_sens, R_sens, False)
+    if not no_plot:
+        plot_S1_ST(S_sens, P_sens, A_sens, H_sens, R_sens, False)
 
 
 
@@ -356,10 +359,13 @@ def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
 if __name__ == "__main__":
     args = parser.parse_args()
     red = args.reduced_model
+    noplot = args.noplot
     if args.ncores is None:
         with Pool() as pool:
-            main(args.N, filename=args.filename, reduced=red, pool=pool)
+            main(args.N, filename=args.filename, reduced=red, pool=pool,
+                 no_plot=noplot)
     else:
         with Pool(args.ncores) as pool:
-            main(args.N, filename=args.filename, reduced=red, pool=pool)
+            main(args.N, filename=args.filename, reduced=red, pool=pool,
+                 no_plot=noplot)
 
