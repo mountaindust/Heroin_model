@@ -129,7 +129,7 @@ def main(N, filename, reduced, pool=None):
                       'mu_A', 'mu_H', 'sigma_A', 'sigma_H'],
             'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
                        [0,1], [0,1], [0,0.1], [0,1], [0,1], [0,1],
-                       [0,1], [0,1], [0,1], [0,1]] #xi was always 0,1
+                       [0,.1], [0,.1], [0,1], [0,1]] #xi was always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###
