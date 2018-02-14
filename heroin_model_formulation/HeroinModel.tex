@@ -1,0 +1,168 @@
+% ------------------------------------------------------------------------
+%%%%% Start of preamble %%%%%
+% ------------------------------------------------------------------------
+
+%%%%---------What kind of document  and what size--------------------------------------
+\documentclass[12pt]{article}
+
+%%%MY: Other possible document: article, report, amsart, thesis, book,etc.
+
+
+%%%%---------Packages to load which give you useful commands---------------------------------
+\usepackage{graphicx} %to include pictures and figures
+\usepackage{amssymb, amsmath, amsthm} %to include standard Americam Mathematical Society math symbols and fonts
+\usepackage{fontenc} %to be able to inlude more font
+\usepackage{amscd,latexsym,amsfonts,amstext,amsbsy} %more AMS fonts and options
+\usepackage{euscript} %for european script
+\usepackage{enumerate} %for automatic enumeration of equations, items, etc.
+\usepackage{color}  %to change the color of a text.
+\usepackage{physics}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+
+%%%%---------Sets the margins--------------------------------------------------------------
+%As example, the margins are manually chosen below.  You can change the margins if needed.
+%%%In particular: Use default margins first (just insert % the the start of each of
+%the lines below for LaTex to disregard the options, ---------------------
+
+\textwidth = 16 cm
+\textheight = 24 cm
+\oddsidemargin = 0.0 cm
+\evensidemargin = 0.0 cm
+\topmargin = -1 cm
+%\headheight = 0.0 in
+%\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+%%%%------------MY: sets up doublespacing: use 2  inside the {} below---------------------------------
+%This allows me to include feedback between the lines.
+%For singlespace  just use % to disregard the command or use 1 instead.
+%\renewcommand{\baselinestretch}{2}
+
+
+%%%---------------MY: New theorem type environments-------------------------------
+ \newtheorem{theorem}{Theorem}
+  \newtheorem{problem}[theorem]{Problem}
+   \newtheorem{exercise}[theorem]{Exercise}
+ \newtheorem{corollary}[theorem]{Corollary}
+ \newtheorem{lemma}[theorem]{Lemma}
+ \newtheorem{proposition}[theorem]{Proposition}
+ \newtheorem{proporties}[theorem]{Proporties}
+ \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{definitions}[theorem]{Definitions}
+  \newtheorem{example}[theorem]{Example}
+ \newtheorem{remark}[theorem]{Remark}
+ 
+
+
+\begin{document}
+%%%%%%This declares that your document starts here
+
+January 13, 2018 \\
+Heroin Model 
+
+
+S=susceptibles\\
+P=prescribed opioid users,
+A=addicted to opioids, 
+H=heroin users/addicted,
+R=treatment/rehabilitation 
+$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, $R(0)=R_{0}$ \\
+Assume $H_{0}>0$, $\mu_{H} > \mu_{A}$ and $\theta_{1} > \theta_{2}, \theta_{3}$ 
+\[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad\]
+\[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad\]
+\[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta (1- \xi) SA  +\beta \xi SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
+\[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad\]
+\[\dv{R}{t} = \zeta A +\nu H -\delta R -\sigma_{A}R-\sigma_{H}R -\mu R\quad\]
+
+
+The following is a brief description of each parameter in the system: \\
+$\alpha$: the rate at which people are prescribed opioids \\
+$\beta$ : total probability of becoming addicted to opioids other than by prescription \\
+$\beta(1-\xi)$: proportion of which the non-prescribed, susceptible population becomes addicted to opioids by black market drugs and other addicts \\
+$\beta \xi$ : proportion of which the non-prescribed, susceptible population obtains extra prescription opioids and becomes addicted  \\
+$\theta_1$: rate at which the non-prescribed, susceptible population becomes addicted to heroin by black market drugs and other addicts  \\
+$\epsilon$: rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)\\
+$\delta$: rate at which people come back to the susceptible class after successfully finishing treatment \\
+$\mu$: natural death rate \\
+$\mu_A$: enhanced death rate for opioid addicts ($\mu$ + overdose rate) \\
+$\mu_H$: enhanced death rate for heroin addicts ($\mu$ + overdose rate) \\
+$\gamma$: rate at which prescribed opioid users become addicted \\
+$\theta_2$: rate at which opioid prescribed user population becomes addicted to heroin \\
+$\sigma_A$: rate at which people relapse from treatment into the opioid addicted class \\
+$\zeta$: rate at which addicted opioid users enter treatment/rehabilitation \\
+$\theta_3$: rate at which the opioid addicted population becomes addicted to heroin \\
+$\sigma_H$: rate at which people relapse from treatment into the heroin addicted class \\
+$\nu$: rate at which heroin users enter treatment/rehabilitation \\ \\
+
+
+
+\begin{figure}
+\includegraphics[scale=0.66]{heroin_schematic.pdf}
+\end{figure}
+
+
+To find the addiction-free equilibrium (AFE), we set Eqs. (FILL IN) equal to zero and require that $A=H=R=0$. We are left with the system \\
+
+\[0=-\alpha S^* -\beta \xi S^* P^* + \epsilon P^* +\mu P^* \quad\]
+\[0=\alpha S^* - \epsilon P^* -\gamma P^* - \mu P^* \quad\]
+\[0=\gamma P^* + \beta \xi S^* P^*   \quad\]
+
+
+
+If $P=0$, then the only solution is $S^*=P^*=H^*=R^*=0$. Thus, will assume P $\neq 0. $ This forces $\gamma + \beta \xi S^* =0$ and since all of our parameters and variables are non-negative, then it must be $\gamma=0$ and either $\beta=0$ or $\xi=0$. Under the assumption that $\gamma=0=\xi$ to ensure the existence of our AFE and that $1=S+P+A+H+R$, we calculate the AFE to be \\
+
+\[S^*=\frac{\epsilon + \mu}{\alpha + \epsilon +\mu}\quad\]
+\[P^*=\frac{\alpha}{\alpha + \epsilon +\mu}\quad\]
+\[A^*=0\quad\]
+\[H^*=0\quad\]
+\[R^*=0\quad\] \\
+
+
+
+
+Calculating the Basic Reproduction Number, $R_0$
+
+Moving forward, we will assume $\gamma =0$ and $\xi =0$ (thus, $\beta \neq 0$) in order to ensure the existence of the AFE. This results in the infected compartment Eqns. (FILL IN) reducing to:
+
+\[\dv{A}{t} = \sigma_{A} R +\beta SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
+\[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad\]
+\[\dv{R}{t} = \zeta A +\nu H -\delta R -\sigma_{A}R-\sigma_{H}R -\mu R\quad\]
+
+The assumptions of the Next Generation Method are satisfied for the infected compartments A, H, and R and the parameters $\gamma=0$ and $\xi=0$ in order for the AFE exist. Using this method results in the following matrices:
+\begin{center}
+$F=$
+$ \begin{pmatrix}
+
+\beta S^* &  0  & 0 \\
+0 & \theta_1 S^* +\theta_2 P^* & 0\\
+0  &   0 & 0\\
+\end{pmatrix}$
+
+
+
+$V=$
+$ \begin{pmatrix}
+
+\zeta +\mu +\mu_A &  0  & -\sigma_A \\
+0 &  \nu+\mu+\mu_H & -\sigma_H\\
+-\zeta& -\nu  & \delta + \sigma_A + \sigma_H + \mu\\
+
+\end{pmatrix}$
+\end{center}
+
+$R_0$ is the spectral radius of $FV^{-1}$ which we calculated to be:
+\begin{center}
+$R_0$= $\frac{1}{2det(V)}(x+\sqrt{x^2-4(\beta S^* z(bc-\sigma_H \nu)(ac-\zeta \sigma_A)-\beta S^* z \nu \sigma_A \sigma_H \zeta} )$
+\end{center}
+where $ x=\beta S^* (bc-\sigma_H \nu)+z(ac-\zeta\sigma_A)$, $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$ and $det(V)=(\zeta + \mu +\mu_A)(\nu+\mu+\mu_H)(\delta+\sigma_A+\sigma_H+\mu)-\sigma_H\nu-\sigma_A\zeta(\nu+\mu+\mu_H)$.
+
+
+
+
+
+
+ \end{document}
