@@ -71,7 +71,7 @@ def compute_R0(p=None):
 
 # #do "return" without extra ( ) if don't want to print when run 
 #in order to see this value printed in ipython: do "import CheckingR0 as cr" and then "cr.compute_R0()" or if just
-# want to see it when run, do the "if_name) == "__main__":
+# want to see it when run, do the "if_name == "__main__":
 #                                       compute_R0
 #at the bottom of the program 
 

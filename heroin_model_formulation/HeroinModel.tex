@@ -19,6 +19,7 @@
 \usepackage{physics}
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
+\usepackage{mathrsfs}
 \usetikzlibrary{shapes,arrows}
 
 
@@ -126,13 +127,38 @@ If $P=0$, then the only solution is $S^*=P^*=H^*=R^*=0$. Thus, will assume P $\n
 
 Calculating the Basic Reproduction Number, $R_0$
 
-Moving forward, we will assume $\gamma =0$ and $\xi =0$ (thus, $\beta \neq 0$) in order to ensure the existence of the AFE. This results in the infected compartment Eqns. (FILL IN) reducing to:
+From this point on, we will assume $\gamma =0$ and $\xi =0$ (thus, $\beta \neq 0$) in order to ensure the existence of the AFE. This results in the infected compartment Eqns. (FILL IN) reducing to:
 
 \[\dv{A}{t} = \sigma_{A} R +\beta SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad\]
 \[\dv{R}{t} = \zeta A +\nu H -\delta R -\sigma_{A}R-\sigma_{H}R -\mu R\quad\]
 
-The assumptions of the Next Generation Method are satisfied for the infected compartments A, H, and R and the parameters $\gamma=0$ and $\xi=0$ in order for the AFE exist. Using this method results in the following matrices:
+Thus, under the assumption of A, H and R as the infected compartments and parameter restrictions stated above, the assumptions of the Next Generation Method are satisfied for matrices $\mathscr{F}$ and $\mathscr{V}$ shown below. Note that $\mathscr{F}_{i}$ represents the rate that secondary infections enter infected compartment $i$ and $\mathscr{V}_{i}$ represents the difference between the rate of transfer out of compartment $i$ and the rate of transfer into compartment $i$ by means different than a secondary infection. Using this method results in the following matrices:
+
+\begin{center}
+$\mathscr{F}=$
+$ \begin{pmatrix}
+
+0 \\
+0 \\
+\beta SA \\
+\theta_{1}SH+\theta_{2}PH \\
+0
+\end{pmatrix}$
+
+
+
+$\mathscr{V}=$
+$ \begin{pmatrix}
+
+\alpha S + \beta SA+\theta_{1}SH-\epsilon P-\delta R-\mu(P+R+A+H)-\mu_{A}A-\mu_{H}H \\
+-\alpha S+\epsilon P +\theta_{2}PH +\mu P \\
+-\sigma_{A}R+\zeta A+\theta_{3} AH + (\mu +\mu_{A})A \\
+-\theta_{3}AH-\sigma_{H}R+\nu H +(\mu +\mu_{H}) H \\
+-\zeta A -\nu H +\delta R +\sigma_{A}R +\sigma_{H}R +\mu R\\
+\end{pmatrix}$
+\end{center}
+
 \begin{center}
 $F=$
 $ \begin{pmatrix}
@@ -154,12 +180,13 @@ $ \begin{pmatrix}
 \end{pmatrix}$
 \end{center}
 
-$R_0$ is the spectral radius of $FV^{-1}$ which we calculated to be:
+$R_0$ is then calculated as the spectral radius of $FV^{-1}$:
 \begin{center}
-$R_0$= $\frac{1}{2det(V)}(x+\sqrt{x^2-4(\beta S^* z(bc-\sigma_H \nu)(ac-\zeta \sigma_A)-\beta S^* z \nu \sigma_A \sigma_H \zeta} )$
+$R_0$= $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z \nu \sigma_A \sigma_H \zeta}}{2det(V)} $
 \end{center}
-where $ x=\beta S^* (bc-\sigma_H \nu)+z(ac-\zeta\sigma_A)$, $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$ and $det(V)=(\zeta + \mu +\mu_A)(\nu+\mu+\mu_H)(\delta+\sigma_A+\sigma_H+\mu)-\sigma_H\nu-\sigma_A\zeta(\nu+\mu+\mu_H)$.
+where $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\zeta\sigma_A)$, $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$ and $det(V)=(\zeta + \mu +\mu_A)(\nu+\mu+\mu_H)(\delta+\sigma_A+\sigma_H+\mu)-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$.
 
+We note that the radicand $(r-s)^2+4\beta S^* z \nu \sigma_A \sigma_H \zeta$ is positive, since all parameters are positive. 
 
 
 
