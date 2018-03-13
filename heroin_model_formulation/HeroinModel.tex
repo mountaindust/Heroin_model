@@ -32,7 +32,7 @@
 \textheight = 24 cm
 \oddsidemargin = 0.0 cm
 \evensidemargin = 0.0 cm
-\topmargin = -1 cm
+\topmargin = -2 cm
 %\headheight = 0.0 in
 %\headsep = 0.0 in
 \parskip = 0.2in
@@ -180,13 +180,22 @@ $ \begin{pmatrix}
 \end{pmatrix}$
 \end{center}
 
-$R_0$ is then calculated as the spectral radius of $FV^{-1}$:
+The eigenvalues of $FV^{-1}$ are calculated to be: 
 \begin{center}
-$R_0$= $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z \nu \sigma_A \sigma_H \zeta}}{2det(V)} $
+$\sigma (FV^{-1}) = \{0, \frac{(r+s)-\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
+, \frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
+\}$
 \end{center}
-where $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\zeta\sigma_A)$, $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$ and $det(V)=(\zeta + \mu +\mu_A)(\nu+\mu+\mu_H)(\delta+\sigma_A+\sigma_H+\mu)-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$.
 
-We note that the radicand $(r-s)^2+4\beta S^* z \nu \sigma_A \sigma_H \zeta$ is positive, since all parameters are positive. 
+$\mathscr{R}_0=$ may then be determined as the spectral radius of $FV^{-1}$:
+\begin{center}
+$\mathscr{R}_0=$= $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} $
+\end{center}
+where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=abc-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$.
+
+We note that the radicand $(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu$ is positive, since all parameters are positive. In addition, $r$ is positive since $bc$ contains the term that cancels with $-\sigma_{H} \nu$,  $s$ is positive since $ac$ contains the term that cancels with $-\sigma_{A} \zeta$ and finally, $det(V)$ is positive since $abc$ contains terms that cancel with $-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$. 
+
+**wording on this? 
 
 
 
