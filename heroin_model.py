@@ -18,7 +18,7 @@ params = {}
 params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids
 params['beta'] = 0.006                      #S->A total probability of becoming addicted to opioids other than by prescription 
 params['xi'] = 0                           #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
-params['theta_1'] = 0.001                   #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
+params['theta_1'] = 0.001                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
 params['epsilon'] = 0.74                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
 params['delta'] = 0.09                      #R->S rate at which people come back to the susceptible class after successfully finishing treatment 
 params['mu'] = 0.00844                      #P,A,H,R->S natural death rate
@@ -153,8 +153,8 @@ if __name__ == "__main__":
     #run model with default values and plot
 
     #no paramaters because assigned all defaults above; gives tuple 
-    sol = solve_odes()
+   ## sol = solve_odes()
     #need to unpack, use *
-    plot_solution(*sol) 
+  ##  plot_solution(*sol) 
     #compute R_0
     print(compute_R0(p=None))

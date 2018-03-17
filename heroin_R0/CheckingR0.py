@@ -46,7 +46,7 @@ Vinv = inv(np.matrix(V))
 M = np.matmul(F, Vinv)
 
 print(LA.eigvals(M)) #R0 is the spectral radus of F*Vinv; compare to value computed below
-
+# print(det(V))
 
 def compute_R0(p=None):
       '''Check that AFE exists. If so, compute and return R0'''

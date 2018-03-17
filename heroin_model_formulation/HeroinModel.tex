@@ -89,8 +89,8 @@ $\theta_1$: rate at which the non-prescribed, susceptible population becomes add
 $\epsilon$: rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)\\
 $\delta$: rate at which people come back to the susceptible class after successfully finishing treatment \\
 $\mu$: natural death rate \\
-$\mu_A$: enhanced death rate for opioid addicts ($\mu$ + overdose rate) \\
-$\mu_H$: enhanced death rate for heroin addicts ($\mu$ + overdose rate) \\
+$\mu_A$: enhanced death rate for opioid addicts (overdose rate which results in death) \\
+$\mu_H$: enhanced death rate for heroin addicts (overdose rate which results in death) \\
 $\gamma$: rate at which prescribed opioid users become addicted \\
 $\theta_2$: rate at which opioid prescribed user population becomes addicted to heroin \\
 $\sigma_A$: rate at which people relapse from treatment into the opioid addicted class \\
@@ -187,15 +187,15 @@ $\sigma (FV^{-1}) = \{0, \frac{(r+s)-\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta 
 \}$
 \end{center}
 
-$\mathscr{R}_0=$ may then be determined as the spectral radius of $FV^{-1}$:
+$\mathscr{R}_0$ may then be determined as the spectral radius of $FV^{-1}$:
 \begin{center}
-$\mathscr{R}_0=$= $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} $
+$\mathscr{R}_0=$ $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} $
 \end{center}
-where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=abc-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$.
+where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=a(bc-\sigma_H\nu)-\sigma_A\zeta b$.
 
 We note that the radicand $(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu$ is positive, since all parameters are positive. In addition, $r$ is positive since $bc$ contains the term that cancels with $-\sigma_{H} \nu$,  $s$ is positive since $ac$ contains the term that cancels with $-\sigma_{A} \zeta$ and finally, $det(V)$ is positive since $abc$ contains terms that cancel with $-\sigma_A\zeta(\nu+\mu+\mu_H)-\sigma_H\nu$. 
 
-**wording on this? 
+
 
 
 
