@@ -7,7 +7,7 @@ from scipy.integrate import ode
 params = {}
 params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids
 params['beta'] = 0.006                      #S->A total probability of becoming addicted to opioids other than by prescription 
-params['xi'] = 0                            #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
+params['xi'] = 0                           #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
 params['theta_1'] = 0.001                   #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
 params['epsilon'] = 0.74                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
 params['delta'] = 0.09                      #R->S rate at which people come back to the susceptible class after successfully finishing treatment 
