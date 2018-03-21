@@ -121,7 +121,6 @@ def compute_R0(p=None):
          return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
          
 
-
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.arangereturn evenly spaced values within a given interval 
@@ -153,8 +152,8 @@ if __name__ == "__main__":
     #run model with default values and plot
 
     #no paramaters because assigned all defaults above; gives tuple 
-   ## sol = solve_odes()
+    sol = solve_odes()
     #need to unpack, use *
-  ##  plot_solution(*sol) 
+    plot_solution(*sol) 
     #compute R_0
-    print(compute_R0(p=None))
+    #print(compute_R0(p=None))
