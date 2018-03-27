@@ -82,10 +82,15 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.897
-    P_0 = 0.1
-    A_0 = 0.002
-    R_0 = 0.001
+    S_0 = 0.6209
+    P_0 = 0.37
+    A_0 = 0.0078
+    R_0 = 0.0013
+    if 'P_0' in params:
+        P_0 = params['P_0']
+        A_0 = params['A_0']
+        R_0 = params['R_0']
+        S_0 = 1 - P_0 - A_0 - R_0
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -111,11 +116,13 @@ def main(N, filename, reduced, pool=None):
         }
     else:
         problem = {
-            'num_vars': 11, #number of parameters
+            'num_vars': 14, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
-                      'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
+                      'zeta', 'nu', 'mu', 'mu_star', 'sigma',
+                      'P_0', 'A_0', 'R_0'],
             'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
-                       [0,1], [0,1], [0,0.1], [0,0.5], [0,1]] #xi was always 0,1
+                       [0,1], [0,1], [0,0.1], [0,0.5], [0,1],
+                       [0,0.5], [0,0.1], [0,0.1]] #xi is always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###
