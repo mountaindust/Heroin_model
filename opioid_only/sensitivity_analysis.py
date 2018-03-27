@@ -46,8 +46,8 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.8909
-    P_0 = 0.1
+    S_0 = 0.6209
+    P_0 = 0.37
     A_0 = 0.0078
     R_0 = 0.0013
     # Run model

@@ -93,8 +93,8 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     params['sigma_H'] = sigma_H
     
     # Get initial conditions
-    S_0 = 0.8909
-    P_0 = 0.1
+    S_0 = 0.6209
+    P_0 = 0.37
     A_0 = 0.0064
     H_0 = 0.0014
     R_0 = 0.0013
