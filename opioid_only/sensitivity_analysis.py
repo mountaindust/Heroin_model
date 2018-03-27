@@ -111,7 +111,7 @@ def main(N, filename, reduced, pool=None):
         }
     else:
         problem = {
-            'num_vars': 14, #number of parameters
+            'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
             'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
