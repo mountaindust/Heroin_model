@@ -61,7 +61,7 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
+def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma,*argv):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -86,10 +86,10 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     P_0 = 0.37
     A_0 = 0.0078
     R_0 = 0.0013
-    if 'P_0' in params:
-        P_0 = params['P_0']
-        A_0 = params['A_0']
-        R_0 = params['R_0']
+    if argv is not None:
+        P_0 = argv[0]
+        A_0 = argv[1]
+        R_0 = argv[2]
         S_0 = 1 - P_0 - A_0 - R_0
     # Run model
     try:
