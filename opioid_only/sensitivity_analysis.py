@@ -114,8 +114,8 @@ def main(N, filename, reduced, pool=None):
             'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
-            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
-                       [0,1], [0,1], [0,0.1], [0,0.5], [0,1]] #xi is always 0,1
+            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,1],
+                       [0,2], [0,2], [0,0.1], [0,0.5], [0,2]] #xi is always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###
@@ -209,6 +209,34 @@ def load_data(filename):
     '''Load analysis data from previous run and return for examination'''
 
     return pd.HDFStore(filename)
+
+
+
+def plot_S1_ST_from_store(store, show=True):
+    '''Extract and plot S1 and ST sensitivity data directly from a store object'''
+
+    plot_S1_ST(store['S_sens'], store['P_sens'], store['A_sens'],
+               store['R_sens'], show)
+
+
+
+def plot_S1_ST_double_from_stores(store_01, store_02):
+    '''Plot [0,1] and [0,2] from two loaded stores'''
+
+    plot_S1_ST_double(store_01['S_sens'], store_01['P_sens'], store_01['A_sens'],
+                      store_01['R_sens'], store_02['S_sens'], store_02['P_sens'],
+                      store_02['A_sens'], store_02['R_sens'],)
+
+
+
+def print_max_conf(store):
+    '''Print off the max confidence interval for each variable in the store,
+    for both first-order and total-order indices'''
+    for var in ['S_sens', 'P_sens', 'A_sens', 'R_sens']:
+        print('----------- '+var+' -----------')
+        print('S1_conf_max: {}'.format(store[var]['S1_conf'].max()))
+        print('ST_conf_max: {}'.format(store[var]['ST_conf'].max()))
+        print(' ')
 
 
 
