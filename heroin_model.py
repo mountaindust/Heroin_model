@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-S_0 = 0.87
-P_0 = 0.1
-A_0 = 0.01
-H_0 = 0.01
-R_0 = 0.01
+S_0 = 0.8909
+P_0 = 0.1 #guess
+A_0 = 0.0064 #NIH: https://www.drugabuse.gov/about-nida/legislative-activities/testimony-to-congress/2016/americas-addiction-to-opioids-heroin-prescription-drug-abuse
+H_0 = 0.0014 #NIH (same as above)
+R_0 = 0.0013 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2010_Treatment_Episode_Data_Set_National/2010_Treatment_Episode_Data_Set_National.html
 
 #temporal info, assigning default values
 tstart = 0

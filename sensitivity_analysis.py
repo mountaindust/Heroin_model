@@ -93,11 +93,11 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     params['sigma_H'] = sigma_H
     
     # Get initial conditions
-    S_0 = 0.896
+    S_0 = 0.8909
     P_0 = 0.1
-    A_0 = 0.002
-    H_0 = 0.001
-    R_0 = 0.001
+    A_0 = 0.0064
+    H_0 = 0.0014
+    R_0 = 0.0013
     # Run model
     try:
         result = heroin_model.solve_odes(S_0,P_0,A_0,H_0,R_0,tstart,tstop,params)

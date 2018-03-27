@@ -21,8 +21,8 @@ parser.add_argument("-n", "--ncores", type=int,
 parser.add_argument("-o", "--filename", type=str, 
                     help="filename to write output to, no extension",
                     default='analysis')
-parser.add_argument("--full_model", action="store_true",
-                    help="run over all the parameters")
+parser.add_argument("--red_model", action="store_true",
+                    help="run over only R0 parameters")
 
 
 def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
@@ -46,10 +46,10 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.897
+    S_0 = 0.8909
     P_0 = 0.1
-    A_0 = 0.002
-    R_0 = 0.001
+    A_0 = 0.0078
+    R_0 = 0.0013
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -65,7 +65,8 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
-    tstop =10000
+    tstop = 10
+    #tstop =10000
     # Copy default parameter dict
     params = dict(opioid_model.params)
     # Replace other parameter values
@@ -331,7 +332,7 @@ def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    red = not args.full_model
+    red = args.red_model
     if args.ncores is None:
         with Pool() as pool:
             main(args.N, filename=args.filename, reduced=red, pool=pool)
