@@ -62,17 +62,17 @@
 \begin{document}
 %%%%%%This declares that your document starts here
 
-January 13, 2018 \\
+\today \\
 Heroin Model 
 
 
-S=susceptibles\\
-P=prescribed opioid users,
+S=susceptibles,
+P=prescribed opioid users, \\
 A=addicted to opioids, 
 H=heroin users/addicted,
-R=treatment/rehabilitation 
+R=treatment/rehabilitation \\
 $S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, $R(0)=R_{0}$ \\
-Assume $H_{0}>0$, $\mu_{H} > \mu_{A}$ and $\theta_{1} > \theta_{2}, \theta_{3}$ 
+Assume $H_{0}>0$, $\mu_{H} > \mu_{A}$ and $\theta_{3} > \theta_{1}, \theta_{2}$ 
 \[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad\]
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad\]
 \[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta (1- \xi) SA  +\beta \xi SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
@@ -100,10 +100,11 @@ $\sigma_H$: rate at which people relapse from treatment into the heroin addicted
 $\nu$: rate at which heroin users enter treatment/rehabilitation \\ \\
 
 
-
+\begin{center}
 \begin{figure}
-\includegraphics[scale=0.66]{heroin_schematic.pdf}
+\includegraphics[scale=0.56]{heroin_schematic.pdf}
 \end{figure}
+\end{center}
 
 
 To find the addiction-free equilibrium (AFE), we set Eqs. (FILL IN) equal to zero and require that $A=H=R=0$. We are left with the system \\

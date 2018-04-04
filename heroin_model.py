@@ -4,7 +4,7 @@ from scipy.integrate import ode
 
 #initial population values, should add to 1
 S_0 = 0.6209
-P_0 = 0.37 #Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015
+P_0 = 0.37 # [4] Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015
 A_0 = 0.0064 #NIH: https://www.drugabuse.gov/about-nida/legislative-activities/testimony-to-congress/2016/americas-addiction-to-opioids-heroin-prescription-drug-abuse
 H_0 = 0.0014 #NIH (same as above)
 R_0 = 0.0013 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2010_Treatment_Episode_Data_Set_National/2010_Treatment_Episode_Data_Set_National.html
@@ -16,16 +16,16 @@ tstop = 10000
 #parameters
 params = {}
 params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids
-params['beta'] = 0.006                      #S->A total probability of becoming addicted to opioids other than by prescription 
+params['beta'] = 0.02378                     #S->A total probability of becoming addicted to opioids other than by prescription 
 params['xi'] = 0                           #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
-params['theta_1'] = 0.001                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
+params['theta_1'] = 0.01                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
 params['epsilon'] = 0.74                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
 params['delta'] = 0.09                      #R->S rate at which people come back to the susceptible class after successfully finishing treatment 
 params['mu'] = 0.00844                      #P,A,H,R->S natural death rate
 params['mu_A'] = 0.0000393                  #A->S enhanced death rate for opioid addicts ($\mu$ + overdose rate)
 params['mu_H'] = 0.0000430                  #H->S enhanced death rate for heroin addicts ($\mu$ + overdose rate) 
 params['gamma'] = 0                         #MUST BE ZERO FOR AFE:P->A rate at which prescribed opioid users become addicted
-params['theta_2'] = 0.001                    #P->H rate at which opioid prescribed user population becomes addicted to heroin
+params['theta_2'] = 0.4                    #P->H rate at which opioid prescribed user population becomes addicted to heroin
 params['sigma_A'] = 0.707*(1-params['delta'])  #R->A rate at which people relapse from treatment into the opioid addicted class
 params['zeta'] = 0.08                        #A->R rate at which addicted opioid users enter treatment/rehabilitation 
 params['theta_3'] = 0.02                    #A->H rate at which the opioid addicted population becomes addicted to heroin
@@ -118,7 +118,8 @@ def compute_R0(p=None):
          r = params['beta']*S_star*(b*c-params['sigma_H']*params['nu'])
          s = z*(a*c-params['sigma_A']*params['zeta'])
          detV= a*(b*c-params['sigma_H']*params['nu'])-params['sigma_A']*params['zeta']*b
-         return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
+         return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*\
+         params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
          
 
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
@@ -156,4 +157,4 @@ if __name__ == "__main__":
     #need to unpack, use *
     plot_solution(*sol) 
     #compute R_0
-    #print(compute_R0(p=None))
+    print(compute_R0(p=None))
