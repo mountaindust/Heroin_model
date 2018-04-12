@@ -46,10 +46,10 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.6209
-    P_0 = 0.37
-    A_0 = 0.0078
-    R_0 = 0.0013
+    S_0 = 0.6235
+    P_0 = 0.37 #Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015
+    A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
+    R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -82,10 +82,10 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.6209
-    P_0 = 0.37
-    A_0 = 0.0078
-    R_0 = 0.0013
+    S_0 = 0.6235
+    P_0 = 0.37 #Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015
+    A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
+    R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -114,8 +114,8 @@ def main(N, filename, reduced, pool=None):
             'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
-            'bounds': [[0,2], [0,2], [0,2], [0,2], [0,2], [0,1],
-                       [0,2], [0,2], [0,0.1], [0,0.5], [0,2]] #xi is always 0,1
+            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
+                       [0,1], [0,1], [0,0.1], [0,0.5], [0,1]] #xi is always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###

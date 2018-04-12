@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-S_0 = 0.6209
+S_0 = 0.6221
 P_0 = 0.37 # [4] Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015
-A_0 = 0.0064 #NIH: https://www.drugabuse.gov/about-nida/legislative-activities/testimony-to-congress/2016/americas-addiction-to-opioids-heroin-prescription-drug-abuse
-H_0 = 0.0014 #NIH (same as above)
-R_0 = 0.0013 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2010_Treatment_Episode_Data_Set_National/2010_Treatment_Episode_Data_Set_National.html
+A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
+H_0 = 0.0014 #NIH: https://www.drugabuse.gov/about-nida/legislative-activities/testimony-to-congress/2016/americas-addiction-to-opioids-heroin-prescription-drug-abuse
+R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
 
 #temporal info, assigning default values
 tstart = 0
