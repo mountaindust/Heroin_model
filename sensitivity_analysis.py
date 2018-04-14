@@ -71,7 +71,7 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
-    tstop =10
+    tstop = 10
     # Copy default parameter dict
     params = dict(heroin_model.params)
     # Replace other parameter values
@@ -93,11 +93,11 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     params['sigma_H'] = sigma_H
     
     # Get initial conditions
-    S_0 = 0.6209
+    S_0 = 0.6221
     P_0 = 0.37
-    A_0 = 0.0064
+    A_0 = 0.0062
     H_0 = 0.0014
-    R_0 = 0.0013
+    R_0 = 0.0003
     # Run model
     try:
         result = heroin_model.solve_odes(S_0,P_0,A_0,H_0,R_0,tstart,tstop,params)
