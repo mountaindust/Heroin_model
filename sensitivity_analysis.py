@@ -71,7 +71,7 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
-    tstop = 10,000
+    tstop = 10
     # Copy default parameter dict
     params = dict(heroin_model.params)
     # Replace other parameter values
