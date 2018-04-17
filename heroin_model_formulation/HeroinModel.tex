@@ -205,10 +205,19 @@ We note that the radicand $(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu$ is
 
 
 \textbf{Sensitivity Analysis} \\
-Saltelli/sobol sensitivity analysis 
-Finds nice points in the parameter space to test and records S, P, A, H and R at the final time (t=10 years) for the parameter choices. 
+
+Implemented sobol sensitivity analysis 
+Saltelli are the statistically good points chosen in the parameter space to test and records S, P, A, H and R at the final time (t=10 years) for the parameter choices. Samples N points from the problem and returns a matrix of parameter values. \\
+
+Able to retrieve the confidence intervals on the sensitivity of each of the populations to a respective change in the parameter(s) for first order changes, second order changes and total order changes. (Here total order is any combination of parameters changing). Ran for N=140,000 (as long as same as 150,000...check) and D is the dimension of the parameter space, which in our case is 16, which resulted in N(2D+2)$=$4,760,000 parameter sets. \\
+
+Both $\mu_{A}$ and $\mu_{H}$ had domains $[0,0.1]$ with the rest ranging on the entire domain $[0,1]$. 
+For first-order indices, only one parameter is varied and the rest are held constant; second-order indices, two parameters are varied and the rest are held constant; and for total-order indices, every combination of parameters are varied, from a single parameter varying alone and all higher-order interactions between parameters. The length of the colored bars, with each color representing a specific class, measures the contribution of a certain parameter to the variance each of the classes in the model.The longer the colored bar, the higher the effect the parameter has on that class of individuals. \\
 
 
+**Takes the mean from the last 100 time steps. (I thought final time??) 
+**Total --take average of all interactions for plots?? \\
+**Need to scale sensitivities of muA and muH based on their domain $[0,0.1]$??
 
 
 
