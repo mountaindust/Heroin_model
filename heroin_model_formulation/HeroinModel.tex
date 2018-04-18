@@ -54,12 +54,12 @@ Tricia Phillips \\
 \today \\
 
 \textbf{Background} \\ \\
-The misuse of opioids, a drug class including prescription pain relievers and the illegal drug heroin, is rampant in today's society. The opioid crisis was declared a public health emergency in October 2017 by the United States Department of Health and Human Sciences [15]. In 2016, there were 11.8 million opioid misusers 12 years of age or older with 948,000 of these being heroin users [10]. In addition, there was an estimated 13,219 heroin deaths in 2016, a more than six-fold increase from the year 2002 [7]. This, in part, is due to the recent trend of lacing heroin with fentanyl, a surgical-grade opioid that up to fifty times more potent than heroin alone, and therefore, users are unaware of the purity of the heroin they obtain [12, add in another source later]. 
+The misuse of opioids, a drug class including prescription pain relievers and the illegal drug heroin, is rampant in today's society. The opioid crisis was declared a public health emergency in October 2017 by the United States Department of Health and Human Sciences [15]. In 2016, there were 11.8 million opioid misusers 12 years of age or older with 948,000 of these being heroin users [10]. In addition, there was an estimated 13,219 heroin deaths in 2016, a more than six-fold increase from the year 2002 [7]. This, in part, is due to the recent trend of lacing heroin with fentanyl, a surgical-grade opioid that is up to fifty times more potent than heroin alone, and therefore, users are unaware of the purity of the heroin they obtain [12, add in another source later]. 
 %need a source that actually says 50 times for the fentanyl info 
 
-Prescription pain relievers are misused for a variety of reasons with the most prominent being to relieve physical pain, to feel good or get high and to relax or relieve tension [10]. Individuals that misuse prescription opioids mostly obtain them from friends/relatives or from a healthcare provider, with misuse defined as taking the prescription at a higher dose or more frequently than prescribed, or taking someone else's medication [10]. 
+Prescription pain relievers are misused for a variety of reasons with the most prominent being to relieve physical pain, to feel good or get high and to relax or relieve tension. Individuals that misuse prescription opioids mostly obtain them from friends/relatives or from a healthcare provider, with misuse defined as taking the prescription at a higher dose or more frequently than prescribed, or taking someone else's medication [10]. 
 
-To address this apparent problem in today's society, we have formulated a population level model to investigate the dynamics among individuals taking prescription opioids, addicted to opioids, using heroin and recovering from addiction. Opioids are of no shortage in society today. The number of prescriptions that pharmacies distributed in 2011 was almost triple that of 1991 and there is a higher availability of heroin in recent years at a lower cost than alternative opioids which leads individuals to start heroin [14]. We aim to find ways to reduce opioid addiction and heroin use and plan to investigate how to optimally treat pain with prescriptions while reducing the risk of addiction lower than it's current state. This model was motivated by a previous model focusing solely on opioid addicts through prescriptions or via the black market; the purpose of formulating a separate model is to be able to understand the more complicated dynamics that arise among opioid abuse and heroin use [1].  
+To address this apparent problem in today's society, we have formulated a population level model to investigate the dynamics among individuals taking prescription opioids, addicted to opioids, using heroin and recovering from opioid and/or heroin addiction. Opioids are of no shortage in society today. The number of prescriptions that pharmacies distributed in 2011 was almost triple that of 1991 and there is a higher availability of heroin in recent years at a lower cost than alternative opioids. This leads some individuals to start heroin [14]. We aim to find ways to optimally treat pain with prescriptions while reducing opioid addiction and heroin use. This model was motivated by a previous model focusing solely on opioid addicts through prescriptions or via the black market; the purpose of formulating a separate model is to be able to understand the more complicated dynamics that arise among opioid abuse and heroin use [1].  
 
 \textbf{Model Formulation} \\ \\
 Our model consists of five subgroups of the national population: 
@@ -68,11 +68,11 @@ Our model consists of five subgroups of the national population:
 2. Prescription opioid users ($P$): This class of individuals consists of individuals who are prescribed opioids by a health care provider and take the opioids as recommended by their doctor, so they are not considered addicted. \\ \\
 3. Opioid addicts ($A$): This group of individuals are addicted to opioids. Although the opioid class of drug includes heroin, here we will take opioids to mean non-heroin. In addition, opioid misuse, abuse and addiction will be used interchangeably throughout.  \\ \\
 4. Heroin users ($H$): This class is composed of individuals who use heroin, which is implicitly understood to be addictive. \\ \\
-5. Individuals in treatment/rehabilitation ($R$): This class consists of individuals undergoing treatment for their addiction to opioids and heroin. 
+5. Individuals in treatment/rehabilitation ($R$): This class consists of individuals undergoing treatment for their addiction to opioids and/or heroin. 
 
 We denote the initial conditions as
-$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population: $S_{0}=0.6221$, $P_{0}=0.37$, $A_{0}=0.0062$, $H_{0}=0.0014$, and $R_{0}=0.0003$ [4], with all five classes adding up to the entire population.  **Will show that starting with positive initial conditions, will stay positive for all time. \\
-%$\mu_{H} > \mu_{A}$ and $\theta_{3} > \theta_{1}, \theta_{2}$ 
+$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population: $S_{0}=0.6221$, $P_{0}=0.37$, $A_{0}=0.0062$, $H_{0}=0.0014$, and $R_{0}=0.0003$ [4, add in others later].  \\**Will show that starting with positive initial conditions, will stay positive for all time. \\ \\
+Here, we present our ordinary differential equation model: %$\mu_{H} > \mu_{A}$ and $\theta_{3} > \theta_{1}, \theta_{2}$  
 \[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
 \[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta (1- \xi) SA  +\beta \xi SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
@@ -80,27 +80,30 @@ $S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we
 \[\dv{R}{t} = \zeta A +\nu H -\delta R -\sigma_{A}R-\sigma_{H}R -\mu R\quad(5)\]
 
 
-The parameters involved in this model represent transition rates from one class to another; specifically: \\
-$\alpha$: the rate at which people are prescribed opioids \\
-$\beta$ : total probability of becoming addicted to opioids other than by prescription \\
-$\beta(1-\xi)$: proportion of which the non-prescribed, susceptible population becomes addicted to opioids by black market drugs and other addicts \\
-$\beta \xi$ : proportion of which the non-prescribed, susceptible population obtains extra prescription opioids and becomes addicted  \\
-$\theta_1$: rate at which the non-prescribed, susceptible population becomes addicted to heroin by black market drugs and other addicts  \\
-$\epsilon$: rate at which people come back to the susceptible class after being prescribed opioids and did not develop an addiction\\
-$\delta$: rate at which people come back to the susceptible class after successfully finishing treatment \\
-$\mu$: natural death rate \\
-$\mu_A$: enhanced death rate for opioid addicts (overdose rate which results in death) \\
-$\mu_H$: enhanced death rate for heroin addicts (overdose rate which results in death) \\
-$\gamma$: rate at which prescribed opioid users become addicted \\
-$\theta_2$: rate at which opioid prescribed user population becomes addicted to heroin \\
-$\sigma_A$: rate at which people relapse from treatment into the opioid addicted class \\
-$\zeta$: rate at which addicted opioid users enter treatment/rehabilitation \\
-$\theta_3$: rate at which the opioid addicted population becomes addicted to heroin \\
-$\sigma_H$: rate at which people relapse from treatment into the heroin addicted class \\
-$\nu$: rate at which heroin users enter treatment/rehabilitation \\ \\
-This model can be represented by the following flow diagram with each arrow representing the transition rate between one class to another: 
+The parameters involved in this model represent transition rates from one class to another; specifically: 
+\begin{itemize}
+\item $\alpha$: the rate at which individuals are prescribed opioids 
+\item $\beta$ : total probability of becoming addicted to opioids by some means other than prescription 
+\item $\beta(1-\xi)$: proportion of the susceptible population that becomes addicted to opioids by black market drugs or interaction with other addicts 
+\item $\beta \xi$ : proportion of the susceptible population that obtains extra prescription opioids and becomes addicted  
+\item $\theta_1$: rate at which the susceptible population becomes addicted to heroin by black market availability or interaction with other heroin users  
+\item $\epsilon$: rate at which people come back to the susceptible class after being prescribed opioids and did not develop an addiction
+\item $\delta$: rate at which people enter back into the susceptible class after successfully finishing treatment 
+\item $\mu$: natural death rate 
+\item $\mu_A$: enhanced death rate for opioid addicts (overdose rate which results in death) 
+\item $\mu_H$: enhanced death rate for heroin addicts (overdose rate which results in death) 
+\item $\gamma$: rate at which prescribed opioid users become addicted to opioids
+\item $\theta_2$: rate at which prescribed opioid users become addicted to heroin 
+\item $\sigma_A$: rate at which individuals relapse from treatment back into the opioid addicted class 
+\item $\zeta$: rate at which addicted opioid users enter treatment/rehabilitation 
+\item $\theta_3$: rate at which the opioid addicted population becomes addicted to heroin 
+\item$\sigma_H$: rate at which individuals relapse from treatment into the heroin addicted class 
+\item $\nu$: rate at which heroin users enter treatment/rehabilitation 
+\end{itemize}
+This compartmental model can be represented by the following flow diagram with each arrow representing either the transition rate between one class to another or death: 
 
 \includegraphics[scale=0.6]{heroin_schematic.pdf}
+
 
 
 
