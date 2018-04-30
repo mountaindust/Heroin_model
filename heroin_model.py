@@ -17,14 +17,14 @@ tstop = 10000
 params = {}
 params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids
 params['beta'] = 0.006                     #S->A total probability of becoming addicted to opioids other than by prescription
-params['xi'] = 0                           #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
+params['xi'] =  0.505                      #Note: MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted
 params['theta_1'] = 0.0102                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
 params['epsilon'] = 0.74                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
 params['delta'] = 0.09                      #R->S rate at which people come back to the susceptible class after successfully finishing treatment
 params['mu'] = 0.00844                      #P,A,H,R->S natural death rate
 params['mu_A'] = 0.0000393                  #A->S enhanced death rate for opioid addicts ($\mu$ + overdose rate)
 params['mu_H'] = 0.0000430                  #H->S enhanced death rate for heroin addicts ($\mu$ + overdose rate) 
-params['gamma'] = 0                         #MUST BE ZERO FOR AFE:P->A rate at which prescribed opioid users become addicted
+params['gamma'] = 1 - params['epsilon']     #Note: MUST BE ZERO FOR AFE:P->A rate at which prescribed opioid users become addicted
 params['theta_2'] = 0.001                       #P->H rate at which opioid prescribed user population becomes addicted to heroin
 params['sigma_A'] = 0.707*(1-params['delta'])  #R->A rate at which people relapse from treatment into the opioid addicted class
 params['zeta'] = 0.08                        #A->R rate at which addicted opioid users enter treatment/rehabilitation 
@@ -101,25 +101,25 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
 
 
 
-def compute_R0(p=None):
-    '''Check that AFE exists. If so, compute and return R0'''
-    #raise NotImplementedError("Still working on R0 for heroin model!")
-    if p is None:
-         p = params
-    if p['gamma'] != 0 or p['xi'] != 0:
-         raise ValueError('AFE does not exist with these parameters.')
-    else:
-         S_star = (params['epsilon']+params['mu'])/(params['alpha']+params['epsilon']+params['mu'])
-         P_star = params['alpha']/(params['alpha']+params['epsilon']+params['mu'])
-         a= params['zeta']+params['mu']+params['mu_A']
-         b= params['nu']+params['mu']+params['mu_H']
-         c= params['delta']+params['sigma_A']+params['sigma_H']+params['mu']
-         z= params['theta_1']*S_star+params['theta_2']*P_star   
-         r = params['beta']*S_star*(b*c-params['sigma_H']*params['nu'])
-         s = z*(a*c-params['sigma_A']*params['zeta'])
-         detV= a*(b*c-params['sigma_H']*params['nu'])-params['sigma_A']*params['zeta']*b
-         return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*\
-         params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
+# def compute_R0(p=None):
+#     '''Check that AFE exists. If so, compute and return R0'''
+#     #raise NotImplementedError("Still working on R0 for heroin model!")
+#     if p is None:
+#          p = params
+#     if p['gamma'] != 0 or p['xi'] != 0:
+#          raise ValueError('AFE does not exist with these parameters.')
+#     else:
+#          S_star = (params['epsilon']+params['mu'])/(params['alpha']+params['epsilon']+params['mu'])
+#          P_star = params['alpha']/(params['alpha']+params['epsilon']+params['mu'])
+#          a= params['zeta']+params['mu']+params['mu_A']
+#          b= params['nu']+params['mu']+params['mu_H']
+#          c= params['delta']+params['sigma_A']+params['sigma_H']+params['mu']
+#          z= params['theta_1']*S_star+params['theta_2']*P_star   
+#          r = params['beta']*S_star*(b*c-params['sigma_H']*params['nu'])
+#          s = z*(a*c-params['sigma_A']*params['zeta'])
+#          detV= a*(b*c-params['sigma_H']*params['nu'])-params['sigma_A']*params['zeta']*b
+#          return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*\
+#          params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
          
 
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
@@ -157,4 +157,4 @@ if __name__ == "__main__":
     #need to unpack, use *
     plot_solution(*sol) 
     #compute R_0
-    print(compute_R0(p=None))
+   # print(compute_R0(p=None))
