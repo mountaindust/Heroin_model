@@ -71,7 +71,7 @@ Our model consists of five subgroups of the national population:
 5. Individuals in treatment/rehabilitation ($R$): This class consists of individuals undergoing treatment for their addiction to opioids and/or heroin. 
 
 We denote the initial conditions as
-$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population: $S_{0}=0.6968$, $P_{0}=0.29$, $A_{0}=0.0062$, $H_{0}=0.0026$, and $R_{0}=0.0044$, where $R_0$ is calculated to be the sum of opioid addicts entered into treatment (772,000) and heroin users entered into treatment (618,000) in 2014, divided by the total population of 319 million in 2014  [4,21,14,23].  \\ \\
+$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population: $S_{0}=0.6068$, $P_{0}=0.38$, $A_{0}=0.0062$, $H_{0}=0.0026$, and $R_{0}=0.0044$, where $R_0$ is calculated to be the sum of opioid addicts entered into treatment (772,000) and heroin users entered into treatment (618,000) in 2014, divided by the total population of 319 million in 2014  [4,21,14,23].  \\ \\
 Here, we present our ordinary differential equation model: 
 \[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
@@ -88,23 +88,23 @@ The parameters involved in this model represent transition rates from one class 
 \item $\beta \xi$ : proportion of the susceptible population that obtains extra prescription opioids and becomes addicted  
 \item $\theta_1$: rate at which the susceptible population becomes addicted to heroin by black market availability or interaction with other heroin users  
 \item $\epsilon$: rate at which people come back to the susceptible class after being prescribed opioids and did not develop an addiction
-\item $\delta$: rate at which people enter back into the susceptible class after successfully finishing treatment 
+\item $\delta$: rate at which both opioid and heroin addicts enter back into the susceptible class after successfully finishing treatment
 \item $\mu$: natural death rate 
 \item $\mu_A$: enhanced death rate for opioid addicts (overdose rate which results in death) 
 \item $\mu_H$: enhanced death rate for heroin addicts (overdose rate which results in death) 
 \item $\gamma$: rate at which prescribed opioid users become addicted to opioids
 \item $\theta_2$: rate at which prescribed opioid users become addicted to heroin 
-\item $\sigma_A$: rate at which individuals relapse from treatment back into the opioid addicted class 
+\item $\sigma_A$: rate at which individuals transition from treatment into the opioid addicted class (note: not considered relapse because do not know where individuals came from originally) 
 \item $\zeta$: rate at which addicted opioid users enter treatment/rehabilitation 
 \item $\theta_3$: rate at which the opioid addicted population becomes addicted to heroin 
-\item$\sigma_H$: rate at which individuals relapse from treatment into the heroin addicted class 
+\item$\sigma_H$: rate at which individuals transition from treatment into the heroin addicted class (note: not considered relapse because do not know where individuals came from originally) 
 \item $\nu$: rate at which heroin users enter treatment/rehabilitation 
 \end{itemize}
 This compartmental model can be represented by the following flow diagram with each arrow representing either the transition rate between one class to another or death: 
 
 \includegraphics[scale=0.6]{heroin_schematic.pdf}
 
-Initial conditions were estimated from the literature from the year 2015 and 2016. The number of prescribed, non-addicted opioid users in 2015 was estimated to be 91.8 million people, and with an approximate total population of 321 million people, this is 29\% of the population. This number was calculated from the U.S. civilian, non-institutionalized adult population [4]. The number of addicted opioid users was estimated to be 2 million, which is .59\% of the 2016 total population of 324 million [21]. The number of heroin users in 2015 was estimated to be 828,000 people which is .26\% of the population. Finally, 772000 opioid users and 618000 heroin users entered treatment in the year 2014 which is .44\% of the 2014 total population of about 319,000,000 [14]. 
+Initial conditions were estimated from the literature from the year 2015 and 2016. The number of prescribed, non-addicted opioid users in 2015 was estimated to be 91.8 million adults, and this is approximately 38\% of the population [4]. The number of addicted opioid users was estimated to be 2 million, which is .59\% of the 2016 total population of 324 million [21]. The number of heroin users in 2015 was estimated to be 828,000 people which is .26\% of the population. Finally, 772000 opioid users and 618000 heroin users entered treatment in the year 2014 which is .44\% of the 2014 total population of about 319,000,000 [14]. This leaves the remaining 60\% of the population as susceptible. 
 
 The parameters for our model were estimated from the literature on opioids and heroin. 
 
@@ -138,7 +138,6 @@ Will show existence of solution to my ODE system.
  
 \textbf{Addiction-Free Equilibrium} 
 
-%**Find other equilibrium?? 
 To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero and require that $A=H=R=0$. We are left with the system: \\
 \[0=-\alpha S^* -\beta \xi S^* P^* + \epsilon P^* +\mu P^* \quad\]
 \[0=\alpha S^* - \epsilon P^* -\gamma P^* - \mu P^* \quad\]
@@ -158,7 +157,7 @@ Note that enforcing $P^* \neq 0$ implies that $\alpha \neq 0$, as well.
 
 \textbf{Basic Reproduction Number, \textbf{$\mathscr{R}_0$}}
 
-The basic reproduction number, denoted $\mathscr{R}_0$, is a term used in epidemiological models that gives the expected number of secondary disease cases that result from the introduction of a disease to a susceptible population. The value of $\mathscr{R}_0$ represents how successful the spread of the disease is expected to be; if $\mathscr{R}_0 < 1$, then the disease is expected to die out and the disease-free equilibrium will be stable; conversely, if $\mathscr{R}_0 >1$, then the disease is expected to spread and the disease-free equilibrium will be unstable [11]. This idea may be applied to the context of our model since addiction to opioids and use of heroin may be viewed similarly to that of a disease. That is, opioid addiction and heroin use/addiction can "spread," meaning that susceptible individuals who interact with opioid addicts and heroin users have the potential of becoming addicts themselves. The disease compartments are those that contain infected individuals, or in our case, addicts [11]. Our model incorporates three addiction compartments, A, H, and R, since these all consist of opioid and/or heroin addicted individuals and these subpopulations are put into a vector, $x= {[A\quad H\quad R]}^{T}$. Then, in general, the differential equations of the $n$ disease compartments, $x_i'$, may be written as: 
+The basic reproduction number, denoted $\mathscr{R}_0$, is a term used in epidemiological models that gives the expected number of secondary disease cases that result from the introduction of a disease to a susceptible population. The value of $\mathscr{R}_0$ represents how successful the spread of the disease is expected to be; if $\mathscr{R}_0 < 1$, then the disease is expected to die out and the disease-free equilibrium will be locally stable; conversely, if $\mathscr{R}_0 >1$, then the disease is expected to spread and the disease-free equilibrium will be unstable [11]. This idea may be applied to the context of our model since addiction to opioids and use of heroin may be viewed similarly to that of a disease. That is, opioid addiction and heroin use/addiction can "spread," meaning that susceptible individuals who interact with opioid addicts and heroin users have the potential of becoming addicts themselves. The disease compartments are those that contain infected individuals, or in our case, addicts [11]. Our model incorporates three addiction compartments, A, H, and R, since these all consist of opioid and/or heroin addicted individuals and these subpopulations are put into a vector, $x= {[A\quad H\quad R]}^{T}$. Then, in general, the differential equations of the $n$ disease compartments, $x_i'$, may be written as: 
 
 \[{x_i'} = \mathscr{F}_{i} (x,y)-\mathscr{V}_i (x,y),\quad i=1,...,n\] 
 
