@@ -5,22 +5,24 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 params = {}
-params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids
-params['beta'] = 0.006                      #S->A total probability of becoming addicted to opioids other than by prescription 
-params['xi'] = 0                           #MUST BE ZERO FOR AFE: S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted 
-params['theta_1'] = 0.001                   #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts
-params['epsilon'] = 0.74                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
-params['delta'] = 0.09                      #R->S rate at which people come back to the susceptible class after successfully finishing treatment 
-params['mu'] = 0.00844                      #P,A,H,R->S natural death rate
-params['mu_A'] = 0.0000393                  #A->S enhanced death rate for opioid addicts ($\mu$ + overdose rate)
-params['mu_H'] = 0.0000430                  #H->S enhanced death rate for heroin addicts ($\mu$ + overdose rate) 
-params['gamma'] = 0                         #MUST BE ZERO FOR AFE:P->A rate at which prescribed opioid users become addicted
-params['theta_2'] = 0.001                    #P->H rate at which opioid prescribed user population becomes addicted to heroin
-params['sigma_A'] = 0.707*(1-params['delta'])  #R->A rate at which people relapse from treatment into the opioid addicted class
-params['zeta'] = 0.08                        #A->R rate at which addicted opioid users enter treatment/rehabilitation 
-params['theta_3'] = 0.02                    #A->H rate at which the opioid addicted population becomes addicted to heroin
-params['sigma_H'] = 1-params['sigma_A']    #R->H rate at which people relapse from treatment into the heroin addicted class 
-params['nu'] = .15                          #H->R rate at which heroin users enter treatment/rehabilitation
+params['alpha'] = 0.207                       #S->P the rate at which people are prescribed opioids #[20] https://www.cdc.gov/drugoverdose/pdf/pubs/2017-cdc-drug-surveillance-report.pdf (page 39, table 1A)
+params['beta'] = 0.006                     #S->A total probability of becoming addicted to opioids other than by prescription #assume okay for now until find updated/source
+params['xi'] =  0                     # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #assume okay for now until find updated/source
+params['theta_1'] = 0.0003                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['delta'] = 0.15                     #R->S rate at which people come back to the susceptible class after successfully finishing treatment #[19] https://ac.els-cdn.com/S0740547213000779/1-s2.0-S0740547213000779-main.pdf?_tid=0a47e661-2ac3-45fb-a7da-9fa8c43271af&acdnat=1525189437_134c2f5932fa797a0725faa7c950a0f9 (page 1, 10% successfully treated for opioids + ESTIMATED 5% successfully treated for heroin)
+params['mu'] = 0.00844                      #P,A,H,R->S natural death rate  # [24] https://www.cdc.gov/nchs/data/nvsr/nvsr66/nvsr66_05.pdf (page 1)
+params['mu_A'] = 0.00004                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # [25] https://www.cdc.gov/drugoverdose/data/analysis.html (Opioid Data Analysis, figure)
+params['mu_H'] = 0.00004                 #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # [25] https://www.cdc.gov/drugoverdose/data/analysis.html  (Opioid Data Analysis, figure)
+params['gamma'] = 0          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # [28] https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1360-0443.2010.03052.x
+params['epsilon'] = 1-params['gamma']         #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #[28] https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1360-0443.2010.03052.x (1-0.26=0.74)
+params['theta_2'] = 0.0003                       #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['sigma_A'] = 0.9  #R->A rate at which people relapse from treatment into the opioid addicted class #[19] https://ac.els-cdn.com/S0740547213000779/1-s2.0-S0740547213000779-main.pdf?_tid=0a47e661-2ac3-45fb-a7da-9fa8c43271af&acdnat=1525189437_134c2f5932fa797a0725faa7c950a0f9 (page 1, 90% relapse rate by end of one year)
+params['zeta'] = 0.25                        #A->R rate at which addicted opioid users enter treatment/rehabilitation #assume okay for now until find updated/source
+params['theta_3'] = 0.04                    #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
+params['sigma_H'] = 0.95    #R->H rate at which people relapse from treatment back into the heroin addicted class #ESTIMATED for now because cannot find source yet
+params['nu'] = .15                          #H->R rate at which heroin users enter treatment/rehabilitation #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17)
+
+
 
 def update_params(new_params):
     '''Update the params dict with new values contained in new_params'''
@@ -45,7 +47,7 @@ Vinv = inv(np.matrix(V))
 
 M = np.matmul(F, Vinv)
 
-print(LA.eigvals(M)) #R0 is the spectral radus of F*Vinv; compare to value computed below
+#print(LA.eigvals(M)) #R0 is the spectral radus of F*Vinv; compare to value computed below
 # print(det(V))
 
 def compute_R0(p=None):
