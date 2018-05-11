@@ -240,25 +240,6 @@ def print_max_conf(store):
 
 
 
-def plot_S1_ST_from_store(store, show=True):
-    '''Extract and plot S1 and ST sensitivity data directly from a store object'''
-
-    plot_S1_ST(store['S_sens'], store['P_sens'], store['A_sens'],
-               store['R_sens'], show)
-
-
-
-def print_max_conf(store):
-    '''Print off the max confidence interval for each variable in the store,
-    for both first-order and total-order indices'''
-    for var in ['S_sens', 'P_sens', 'A_sens', 'R_sens']:
-        print('----------- '+var+' -----------')
-        print('S1_conf_max: {}'.format(store[var]['S1_conf'].max()))
-        print('ST_conf_max: {}'.format(store[var]['ST_conf'].max()))
-        print(' ')
-
-
-
 def plot_sens_data_double():
     store = load_data("Sensitivity_R0_150000.h5")
     S_sens_02 = store['S_sens']
