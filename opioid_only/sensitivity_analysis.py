@@ -9,6 +9,8 @@ from SALib.sample import saltelli
 from SALib.analyze import sobol
 import numpy as np
 import pandas as pd
+from PIL import Image
+from matplotlib import gridspec
 import matplotlib.pyplot as plt
 import opioid_model
 
@@ -106,8 +108,8 @@ def main(N, filename, reduced, pool=None):
             'num_vars': 9, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
                         'mu', 'mu_star', 'sigma'],
-            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
-                        [0,0.1], [0,0.5], [0,1]]
+            'bounds': [[0.03,0.3], [0.0003,0.03], [0.01,1], [0.8,8], [0.1,2], [0.01,1],
+                       [0.001,0.01], [0.005,0.1], [0.01,1]] #xi is always 0,1
         }
     else:
         problem = {
@@ -277,18 +279,87 @@ def plot_sens_data_double():
 def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
     # Gather the S1 and ST results
     S1 = pd.concat([S_sens['S1'], P_sens['S1'], A_sens['S1'], 
-                   R_sens['S1']], keys=['S','P','A','R'], axis=1)
+                   R_sens['S1']], keys=['S','P','A','R'], axis=1) #produces copy
     ST = pd.concat([S_sens['ST'], P_sens['ST'], A_sens['ST'], 
                    R_sens['ST']], keys=['S','P','A','R'], axis=1)
+    # Change to greek
+    for id in S1.index:
+        if id != 'mu_star':
+            S1.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+        else:
+            S1.rename(index={id: r'$\mu^*$'}, inplace=True)
+    for id in ST.index:
+        if id != 'mu_star':
+            ST.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+        else:
+            ST.rename(index={id: r'$\mu^*$'}, inplace=True)
     # Plot
     fig, axes = plt.subplots(ncols=2, figsize=(12, 6))
-    S1.plot.bar(stacked=True, ax=axes[0])
-    ST.plot.bar(stacked=True, ax=axes[1])
+    S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
+    ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8)
     for ax in axes:
         ax.tick_params(labelsize=18)
         ax.legend(fontsize=16)
     axes[0].set_title('First-order indices', fontsize=26)
     axes[1].set_title('Total-order indices', fontsize=26)
+    plt.tight_layout()
+    if show:
+        plt.show()
+    else:
+        fig.savefig("param_sens_{}.pdf".format(time.strftime("%m_%d_%H%M")))
+    return (fig, axes)
+
+
+
+def plot_S1_ST_tbl_from_store(store, show=True):
+    S_sens = store['S_sens']
+    P_sens = store['P_sens']
+    A_sens = store['A_sens']
+    R_sens = store['R_sens']
+    # Gather the S1 and ST results
+    S1 = pd.concat([S_sens['S1'], P_sens['S1'], A_sens['S1'], 
+                   R_sens['S1']], keys=['S','P','A','R'], axis=1) #produces copy
+    ST = pd.concat([S_sens['ST'], P_sens['ST'], A_sens['ST'], 
+                   R_sens['ST']], keys=['S','P','A','R'], axis=1)
+    # Change to greek
+    for id in S1.index:
+        if id != 'mu_star':
+            S1.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+        else:
+            S1.rename(index={id: r'$\mu^*$'}, inplace=True)
+    for id in ST.index:
+        if id != 'mu_star':
+            ST.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+        else:
+            ST.rename(index={id: r'$\mu^*$'}, inplace=True)
+    # Plot
+    fig = plt.figure(figsize=(12, 6))
+    gs = gridspec.GridSpec(1, 3, width_ratios=[2.2,2.2,0.8])
+    axes = []
+    for ii in range(2):
+        axes.append(plt.subplot(gs[ii]))
+    S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
+    ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8)
+    for ax in axes:
+        ax.tick_params(axis='x', labelsize=18)
+        ax.tick_params(axis='y', labelsize=14)
+        #ax.get_yaxis().set_visible(False)
+        ax.legend(fontsize=16)
+    axes[0].set_title('First-order indices', fontsize=26)
+    axes[1].set_title('Total-order indices', fontsize=26)
+    # Create table
+    columns = ('Value Range',)
+    rows = list(S1.index)
+    # alpha, beta, delta, epsilon, gamma, xi, zeta, nu, mu, mu*, sigma
+    cell_text = [['0.02-0.2'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
+                 ['0-1'], ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
+    tbl_ax = plt.subplot(gs[2])
+    the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
+                 loc='center')
+    the_table.set_fontsize(18)
+    the_table.scale(1,2.3)
+    the_table.auto_set_column_width(0)
+    tbl_ax.axis('off')
     plt.tight_layout()
     if show:
         plt.show()
