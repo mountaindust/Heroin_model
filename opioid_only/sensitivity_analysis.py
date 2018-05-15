@@ -58,8 +58,7 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     except:
         return (sys.exc_info()[1],None,None,None)
     # Return just the mean end value of each variable
-    return (np.mean(result[0][-100:]), np.mean(result[1][-100:]),
-            np.mean(result[2][-100:]), np.mean(result[3][-100:]))
+    return (result[0][-1], result[1][-1], result[2][-1], result[3][-1])
 
 
 
@@ -94,8 +93,7 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,mu_star,sigma):
     except:
         return (sys.exc_info()[1],None,None,None)
     # Return just the mean end value of each variable
-    return (np.mean(result[0][-100:]), np.mean(result[1][-100:]),
-            np.mean(result[2][-100:]), np.mean(result[3][-100:]))
+    return (result[0][-1], result[1][-1], result[2][-1], result[3][-1])
 
 
 
