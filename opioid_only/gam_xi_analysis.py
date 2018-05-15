@@ -13,23 +13,20 @@ import opioid_model as model
 
 default_N = os.cpu_count()
 parser = argparse.ArgumentParser()
-parser.add_argument("-N", type=int, default=1000,
-                    help="obtain N*(2D+2) samples from parameter space")
 parser.add_argument("-n", "--ncores", type=int,
                     help="number of cores, defaults to {}".format(default_N))
 parser.add_argument("-o", "--filename", type=str, 
                     help="filename to write output to, no extension",
                     default='gam_xi_analysis')
 
-S_0 = 0.897
-P_0 = 0.1
-A_0 = 0.002
-R_0 = 0.001
+S_0 = 0.9435
+P_0 = 0.05
+A_0 = 0.0062
+R_0 = 0.0003
 
 tstart = 0
 tstop = 10000
 
-model.params['alpha'] = 0.2
 model.params['gamma'] = 0
 model.params['xi'] = 0
 
@@ -57,7 +54,7 @@ def run_model(gamma, xi):
 
 
 
-def main(N, filename, pool=None):
+def main(filename, pool=None):
     # check R0 value of gamma=xi=0 and print to screen
     print("R0 = {}".format(model.compute_R0()))
 
@@ -163,8 +160,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.ncores is None:
         with Pool() as pool:
-            main(args.N, filename=args.filename, pool=pool)
+            main(filename=args.filename, pool=pool)
     else:
         with Pool(args.ncores) as pool:
-            main(args.N, filename=args.filename, pool=pool)
+            main(filename=args.filename, pool=pool)
 
