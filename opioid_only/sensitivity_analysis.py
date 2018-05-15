@@ -109,17 +109,13 @@ def main(N, filename, reduced, pool=None):
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
                         'mu', 'mu_star', 'sigma'],
             'bounds': [[0.03,0.3], [0.0003,0.03], [0.01,1], [0.8,8], [0.1,2], [0.01,1],
-                       [0.001,0.01], [0.005,0.1], [0.01,1]] #xi is always 0,1
+                       [0.001,0.01], [0.005,0.1], [0.01,1]]
         }
     else:
         problem = {
             'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
-            #'bounds': [[0.02,0.2], [0.001,0.01], [0.01,1], [1,10], [0.001,0.01], [0,1],
-            #           [0.1,2], [0.1,12], [0.001,0.01], [0.005,0.1], [0.1,12]] #xi is always 0,1
-            # 'bounds': [[0.03,0.3], [0.0003,0.03], [0.01,2], [0.1,10], [0.001,0.1], [0,1],
-            #            [0.1,2], [0.1,4], [0.001,0.01], [0.005,0.1], [0.1,12]] #xi is always 0,1
             'bounds': [[0.03,0.3], [0.0003,0.03], [0.01,1], [0.8,8], [0.001,0.1], [0,1],
                        [0.1,2], [0.01,1], [0.001,0.01], [0.005,0.1], [0.01,1]] #xi is always 0,1
         }
@@ -351,8 +347,11 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     columns = ('Value Range',)
     rows = list(S1.index)
     # alpha, beta, delta, epsilon, gamma, xi, zeta, nu, mu, mu*, sigma
-    cell_text = [['0.02-0.2'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
+    cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
                  ['0-1'], ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
+    # alpha, beta, delta, epsilon, zeta, nu, mu, mu*, sigma
+    #cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'],
+    #             ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
     tbl_ax = plt.subplot(gs[2])
     the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
                  loc='center')
