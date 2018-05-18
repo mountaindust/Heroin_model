@@ -14,17 +14,17 @@ tstop = 10000
 
 #parameters
 params = {}
-params['alpha'] = 0.2                   #S->P: prescription rate
-params['beta'] = 0.006                  #total S->A addiction rate
-params['delta'] = 0.09                  #R->S: finish recovery
-params['epsilon'] = 0.74                #P->S rate
-params['gamma'] = 1 - params['epsilon'] #P->A
-params['xi'] = 0.505                    #fraction of beta due to P
+params['alpha'] = 0.15                  #S->P: prescription rate
+params['beta'] = 0.0036                 #total S->A addiction rate
+params['delta'] = 0.1                   #R->S: finish recovery
+params['epsilon'] = 3.0                 #P->S rate
+params['gamma'] = 0.00744               #P->A
+params['xi'] = 0.74                     #fraction of beta due to P
 params['zeta'] = 0.25                   #A->R rate of starting treatment
-params['nu'] = 0.293*(1-params['delta'])#R->A treatment relapse due to A
-params['mu'] = 0.008237                 #nomral death rate
-params['mu_star'] = 0.00834             #addiction death rate
-params['sigma'] = 0.707*(1-params['delta'])  #R->A natural treatment relapse
+params['nu'] = 0.2                      #R->A treatment relapse due to A
+params['mu'] = 0.007288                 #nomral death rate
+params['mu_star'] = 0.01155             #addiction death rate
+params['sigma'] = 0.7                   #R->A natural treatment relapse
 
 def update_params(new_params):
     '''Update the params dict with new values contained in new_params'''
