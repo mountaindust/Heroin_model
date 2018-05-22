@@ -114,8 +114,8 @@ def main(N, filename, reduced, pool=None):
             'num_vars': 11, #number of parameters
             'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
                       'zeta', 'nu', 'mu', 'mu_star', 'sigma'],
-            'bounds': [[0.02,0.2], [0.00114,0.0114], [0,1], [0.8,8], [0.00235,0.0235], [0,1],
-                       [0.2,2], [0,1], [0.002305,0.02305], [0.003652,0.03652], [0,1]] #xi is always 0,1
+            'bounds': [[0.003,0.3], [0.00036,0.036], [0,1], [0.1,10], [0.000744,0.0744], [0,1],
+                       [0.05,5], [0,1], [0.0007288,0.07288], [0.1155,0.001155], [0,1]] #xi is always 0,1
         }
 
     ### Create an N by num_var matrix of parameter values ###
