@@ -293,8 +293,13 @@ def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
             ST.rename(index={id: r'$\mu^*$'}, inplace=True)
     # Plot
     fig, axes = plt.subplots(ncols=2, figsize=(12, 6))
-    S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
-    ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8)
+    # Switch the last two colors so A is red
+    prop_cycle = plt.rcParams['axes.prop_cycle']
+    colors = prop_cycle.by_key()['color']
+    colors = colors[:4]
+    clr = colors[-1]; colors[-1] = colors[-2]; colors[-2] = clr
+    S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8, color=colors)
+    ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8, color=colors)
     for ax in axes:
         ax.tick_params(labelsize=18)
         ax.legend(fontsize=16)
@@ -332,12 +337,17 @@ def plot_S1_ST_tbl_from_store(store, show=True):
             ST.rename(index={id: r'$\mu^*$'}, inplace=True)
     # Plot
     fig = plt.figure(figsize=(12, 6))
-    gs = gridspec.GridSpec(1, 3, width_ratios=[2.2,2.2,0.8])
+    gs = gridspec.GridSpec(1, 3, width_ratios=[2.1,2.1,1.1])
     axes = []
     for ii in range(2):
         axes.append(plt.subplot(gs[ii]))
-    S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
-    ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8)
+    # Switch the last two colors so A is red
+    prop_cycle = plt.rcParams['axes.prop_cycle']
+    colors = prop_cycle.by_key()['color']
+    colors = colors[:4]
+    clr = colors[-1]; colors[-1] = colors[-2]; colors[-2] = clr
+    bar_S1 = S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8, color=colors)
+    bar_S2 = ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8, color=colors)
     for ax in axes:
         ax.tick_params(axis='x', labelsize=18)
         ax.tick_params(axis='y', labelsize=14)
@@ -348,9 +358,12 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     # Create table
     columns = ('Value Range',)
     rows = list(S1.index)
-    # alpha, beta, delta, epsilon, gamma, xi, zeta, nu, mu, mu*, sigma
-    cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
-                 ['0-1'], ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
+    # alpha, beta, delta, epsilon, gamma, 
+    # xi, zeta, nu, mu, mu*, sigma
+    # cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
+    #              ['0-1'], ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
+    cell_text = [['.02-.2'], ['.00114-.0114'], ['0-1'], ['.8-8'], ['.00235-.0235'],
+                 ['0-1'], ['.2-2'], ['0-1'], ['.002305-.02305'], ['.003652-.03652'], ['0-1']]
     # alpha, beta, delta, epsilon, zeta, nu, mu, mu*, sigma
     #cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'],
     #             ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
