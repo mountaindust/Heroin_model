@@ -116,7 +116,7 @@ def load_data(filename):
 
 
 def plot_data():
-    store = load_data("gam_xi_alpha02.h5")
+    store = load_data("gam_xi_analysis_new.h5")
     A = store['output']['A'].as_matrix()
     R = store['output']['R'].as_matrix()
     plot_param_space(A, R, gamma_end, gamma_step, xi_end, xi_step)
