@@ -22,6 +22,7 @@
 \usepackage{mathrsfs}
 \usetikzlibrary{shapes,arrows}
 \usepackage{multicol}
+\usepackage{comment}
 \usepackage{color,soul}
 
 \textwidth = 16 cm
@@ -59,7 +60,9 @@ The misuse of opioids, a drug class including prescription pain relievers and th
 
 Prescription pain relievers include oxycodone, hydrocodone, and morphine products, among others [18]. This drug class is misused for a variety of reasons with the most prominent being to relieve physical pain, to feel good or get high and to relax or relieve tension. Individuals that misuse prescription opioids mostly obtain them from friends/relatives or from a healthcare provider, with misuse defined as taking the prescription at a higher dose or more frequently than prescribed, or taking someone else's medication [10]. \textcolor{red}{Check on how this data was obtained/the survey questions asked, etc.} Opioids are of no shortage in society today and since opioid addiction is driven largely by legal prescription medication availability, this mades a significant proportion of society susceptible to misuse and addiction to opioids. This leads some individuals to start heroin, and in fact, 80\% of heroin users used prescription opioids before their heroin use [32]. 
 
-In the mid-1990's, the American Pain Society aggressively pushed the idea of pain as the fifth vital sign as they believed pain was being undertreated in doctor offices and hospitals.\textcolor{red}{Check on sources, if the APS was supported/funded by drug companies.} In 2000, the Joint Commission required physicians to accept and respect the self-reporting of pain by patients. By the early 2000s, drug manufacturers funded publications and physicians to support opioid use for pain control [31]. \textcolor{red}{Check if this the proof part is true: This is one factor in the near tripling of prescriptions that pharmacies distributed from 1991 to 2011, as doctors could use opioids as a proof of treating pain [14].}  \textcolor{red}{Check if new opioids on the market or more of the same ones.}  In addition, there is a higher availability of heroin in recent years at a lower cost than alternative opioids [14]. In the 1960's, heroin users were composed mainly of young, non-white men in urban areas with their initial opioid being heroin, but in present day, this trend has shifted to older, white, rural and suburban men and women with their initial opioid being a prescription [14]. 
+In the mid-1990's, the American Pain Society aggressively pushed the idea of pain as the fifth vital sign as they believed pain was being undertreated in doctor offices and hospitals.\textcolor{red}{Check on sources, if the APS was supported/funded by drug companies.} In 2000, the Joint Commission required physicians to accept and respect the self-reporting of pain by patients. By the early 2000s, drug manufacturers funded publications and physicians to support opioid use for pain control [31]. \textcolor{red}{Check if this the proof part is true: This is one factor in the near tripling of prescriptions that pharmacies distributed from 1991 to 2011, as doctors could use opioids as a proof of treating pain [14].} This was in part due to a number of new opioids that were approved by the FDA for use, such as OxyContin, Actiq, Fentora, and Onsolis, among others, in addition to other unapproved products [33]. 
+
+Moreover, there is a higher availability of heroin in recent years at a lower cost than alternative opioids [14]. In the 1960's, heroin users were composed mainly of young, non-white men in urban areas with their initial opioid being heroin, but in present day, this trend has shifted to older, white, rural and suburban men and women with their initial opioid being a prescription [14]. 
 
 To address this apparent problem in today's society, we wish to investigate the dynamics behind the opioid and heroin epidemic and identify important conditions relating to the reduction of opioid and heroin addicted individuals. To do that, we have formulated a population level system of ordinary differential equations model consisting of classes of individuals taking prescription opioids, addicted to opioids, using heroin and recovering from opioid addiction, including heroin, and analyzed it. Our overall goal is to explore management strategies for optimally treating pain with prescriptions while reducing opioid addiction and heroin use. 
 
@@ -73,19 +76,16 @@ The purpose of formulating a separate model is to be able to understand the more
 Our model consists of five subgroups of the \textcolor{red}{(national)} population, in which they are all proportions of the entire population: 
 
 1. Susceptibles ($S$): This portion of the population consists of individuals who are not taking prescription opioids of any kind, nor are using heroin. \\ \\
-
 2. Prescription opioid users ($P$): This class of individuals consists of individuals who are prescribed opioids by a health care provider and take the opioids at a level that is not considered addicted. We note that individuals in this class could be misusing opioids, but not at the level of addiction.  \\ \\
-
 3. Opioid addicts ($A$): This group of individuals are addicted to opioids or are dependent on opioids. Although the opioid class of drug includes heroin, here we will take opioids to mean non-heroin. \\ \\
-
 4. Heroin users ($H$): This class is composed of individuals who use heroin, which is implicitly understood to be addictive. We note that individuals in this class could be using other drugs or are addiction to opioids in addition to heroin, but they are at least using heroin. \\ \\
-
 5. Individuals in treatment/rehabilitation ($R$): This class consists of individuals undergoing treatment for their addiction to opioids and/or heroin. 
 
-We assume that our these five compartments sum to one, so that the total death rate is equal to the incoming rate for the susceptible class. Although language is not always clearly defined in the literature, such as opioid misuse, abuse, dependency, addiction and use disorder, we aim to focus on addiction only, where addiction to opioids is defined as: \textcolor{red}{Put in definition of addiction/includes use disorder, references, etc.} We also recognize there is difficultly in modeling to the the variability of the purity of heroin, as overdose deaths could come from the opioid fentynal rather than the actual heroin itself, and in fact, one in five overdose deaths have multiple drugs present so it is difficult to know the actual cause of death [25]. We try to take into account this complexity as best as possible with the information in literature. 
+We assume that our these five compartments sum to one, so that the total death rate is equal to the incoming rate for the susceptible class. Although terminology is not always clearly defined in the literature, such as opioid misuse, abuse, dependency, addiction and use disorder, we aim to focus on addiction only, where addiction to opioids is defined as having a pattern of continued use with the potential for harm [27]. We take opioid use disorder to fall in this categorization of addiction, due to the definition presented in [34] which includes sustained use regardless of interference with life obligations . We also recognize there is difficultly in modeling to the the variability of the purity of heroin, as overdose deaths could come from the opioid fentanyl rather than the actual heroin itself, and in fact, one in five overdose deaths have multiple drugs present so it is difficult to know the actual cause of death [25]. We try to take into account this complexity as best as possible with the information in literature. 
 
 We denote the initial conditions as
-$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population, and therefore are dimension-less: \textcolor{red}{EDIT Initial conditions were estimated from the literature from the year 2015 and 2016. The number of prescribed, non-addicted opioid users in 2015 was estimated to be 91.8 million adults, and this is approximately 38\% of the population [4]. The number of addicted opioid users was estimated to be 2 million, which is .59\% of the 2016 total population of 324 million [21]. The number of heroin users in 2015 was estimated to be 828,000 people which is .26\% of the population. Finally, 772000 opioid users and 618000 heroin users entered treatment in the year 2014 which is .44\% of the 2014 total population of about 319,000,000 [14]. This leaves the remaining 60\% of the population as susceptible.  $S_{0}=0.6068$, $P_{0}=0.38 or 0.33 for TN$, $A_{0}=0.0062$, $H_{0}=0.0026 and same for TN$, and $R_{0}=0.0044$, where $R_0$ is calculated to be the sum of opioid addicts entered into treatment (772,000) and heroin users entered into treatment (618,000) in 2014, divided by the total population of 319 million in 2014  [4,21,14,23].}  \\ \\
+$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population, and therefore are dimension-less: \textcolor{red}{EDIT for local data in Knox County/Tennessee.}% Initial conditions were estimated from the literature from the year 2015 and 2016. The number of prescribed, non-addicted opioid users in 2015 was estimated to be 91.8 million adults, and this is approximately 38\% of the population [4]. The number of addicted opioid users was estimated to be 2 million, which is .59\% of the 2016 total population of 324 million [21]. The number of heroin users in 2015 was estimated to be 828,000 people which is .26\% of the population. Finally, 772000 opioid users and 618000 heroin users entered treatment in the year 2014 which is .44\% of the 2014 total population of about 319,000,000 [14]. This leaves the remaining 60\% of the population as susceptible.  $S_{0}=0.6068$, $P_{0}=0.38 or 0.33 for TN$, $A_{0}=0.0062$, $H_{0}=0.0026 and same for TN$, and $R_{0}=0.0044$, where $R_0$ is calculated to be the sum of opioid addicts entered into treatment (772,000) and heroin users entered into treatment (618,000) in 2014, divided by the total population of 319 million in 2014  [4,21,14,23].}  \\ \\
+ 
 Here, we present our ordinary differential equation model: 
 \[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
@@ -124,17 +124,17 @@ This compartmental model can be represented by the following flow diagram with e
 
  \textbf{Parameter Values} \\
 
-\textcolor{red}{EDIT for TN: May use ordinary least squares or bayseian inference since we are hoping to have data from experts. \\
- The parameters for our model were estimated from the literature on opioids and heroin. 
-In 2015, individuals were prescribed opioids at a rate of 20.7 people out of 100, causing $\alpha=0.207$ [20].
-Need to fix$--$$>$It is estimated that eighty percent of those who use heroin misused prescription opioids in the past; we will make the assumption that individuals were addicted to opioids previously in order to estimate some parameters [30]. In 2015, there were 828,000 heroin users, meaning that 662,400 of them were addicted to prescription opioids [14]. Making the assumption that the chance of becoming a heroin user is equal among susceptible individuals and prescription opioid users, we will split the remaining 165,600 individuals into these two groups. In that case, 82,800 susceptible individuals becoming a heroin user out of a total population of 321,000,000 results in $\theta_{1}=0.0003$, and similarly for prescription opioids users, leading $\theta_{2}$ to be the same value. \\ 
-In 2011, a study was performed that resulted in a 90\% relapse rate to opioid use within one year after treatment ending, so that $\sigma_{A}=0.9$ [19]. \\
-We assume that individuals who go to treatment to deal with their addiction to opioids can only fall back into the opioid addiction class, and those who enter for heroin use only fall back into the heroin class. \\
-Based on $\sigma_{A}=0.9$ and $\sigma_{H}=$, this implied  $\delta=0.1$ + success from heroin , those who successfully ended their addiction to opioids [28, other ]. \\
-The death rate $\mu$ for the total population in 2015 was 2,712,630 people, or 0.84\%, which we make note includes opioid and heroin related deaths, as well [24]. \\
-The opioid overdose rate in 2015 was 4 out of 100,000 individuals, resulting in $\mu_A=.00004$, and similarly for $\mu_H$ [25]. \\
-Prescription opioid users become dependent on opioids at a rate of 26\%, resulting in $\gamma=0.26$ and $\epsilon=0.74$ [28]. \\
-Four percent of prescription opioid users start using heroin, leading to $\theta_3=.04$ and heroin users enter treatment at a rate of 15\% so that $\nu=.15$ [14].}
+\textcolor{red}{EDIT for local data in Knox County/Tennessee: May use ordinary least squares or bayseian inference since we are hoping to have data from experts--think about after NC State Parameter Estimation workshop} \\ 
+%The parameters for our model were estimated from the literature on opioids and heroin. 
+%In 2015, individuals were prescribed opioids at a rate of 20.7 people out of 100, causing $\alpha=0.207$ [20].
+%Need to fix$--$$>$It is estimated that eighty percent of those who use heroin misused prescription opioids in the past; we will make the assumption that individuals were addicted to opioids previously in order to estimate some parameters [30]. In 2015, there were 828,000 heroin users, meaning that 662,400 of them were addicted to prescription opioids [14]. Making the assumption that the chance of becoming a heroin user is equal among susceptible individuals and prescription opioid users, we will split the remaining 165,600 individuals into these two groups. In that case, 82,800 susceptible individuals becoming a heroin user out of a total population of 321,000,000 results in $\theta_{1}=0.0003$, and similarly for prescription opioids users, leading $\theta_{2}$ to be the same value. \\ 
+%In 2011, a study was performed that resulted in a 90\% relapse rate to opioid use within one year after treatment ending, so that $\sigma_{A}=0.9$ [19]. \\
+%We assume that individuals who go to treatment to deal with their addiction to opioids can only fall back into the opioid addiction class, and those who enter for heroin use only fall back into the heroin class. \\
+%Based on $\sigma_{A}=0.9$ and $\sigma_{H}=$, this implied  $\delta=0.1$ + success from heroin , those who successfully ended their addiction to opioids [28, other ]. \\
+%The death rate $\mu$ for the total population in 2015 was 2,712,630 people, or 0.84\%, which we make note includes opioid and heroin related deaths, as well [24]. \\
+%The opioid overdose rate in 2015 was 4 out of 100,000 individuals, resulting in $\mu_A=.00004$, and similarly for $\mu_H$ [25]. \\
+%Prescription opioid users become dependent on opioids at a rate of 26\%, resulting in $\gamma=0.26$ and $\epsilon=0.74$ [28]. \\
+%Four percent of prescription opioid users start using heroin, leading to $\theta_3=.04$ and heroin users enter treatment at a rate of 15\% so that $\nu=.15$ [14].}
 
 
  \textbf{Proof of existence of solution to ODE system} \\
@@ -144,7 +144,10 @@ Will show existence of solution to my ODE system.
 \textbf{Proof of non-negative initial conditions guaranteeing non-negative solutions} \\
 We will now show that starting with non-negative initial conditions, solutions for the system (1)-(5) are guaranteed to be non-negative for all time, using the following theorem which is an adaptation of Theorem 2.1 in [17]: 
  
- \textbf{Theorem 1} ([17]: adapted version of Theorem 2.1, Chapter 5/ Brittany Stephenson's dissertation) \textit{Assume that when $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$ with $\phi_{i}(0)=0$ for some $i$, then $f_i(\phi) \geq 0$. Then, if $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$, the solution of $x'(t)=f(x(t)), x(t_{0})=\phi$ where $f: \mathbb{C}$ $\rightarrow$ $\mathbb{R}^n$ continuous, $\mathbb{C} \subset \mathbb{R}^n$ open and $\phi \in \mathbb{R}^n$, satisfies $x(t) \geq 0$ for all $t \geq t_{0}.$}
+ \textbf{Theorem 1} ([17]: adapted version of Theorem 2.1, Chapter 5) 
+\begin{comment} / Brittany Stephenson's dissertation 
+\end{comment}
+ \textit{Assume that when $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$ with $\phi_{i}(0)=0$ for some $i$, then $f_i(\phi) \geq 0$. Then, if $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$, the solution of $x'(t)=f(x(t)), x(t_{0})=\phi$ where $f: \mathbb{C}$ $\rightarrow$ $\mathbb{R}^n$ continuous, $\mathbb{C} \subset \mathbb{R}^n$ open and $\phi \in \mathbb{R}^n$, satisfies $x(t) \geq 0$ for all $t \geq t_{0}.$}
  
  \textbf{Proof} Consider the vector of initial conditions in $\mathbb{R}^5$, $\phi = (S_0, P_0, A_0, H_0, R_0).$ Since each vector component represents a proportion of a population, $\phi \geq 0.$ \\
  
@@ -178,7 +181,7 @@ $f_5(\phi)=\zeta A_0 +\nu H_0 \geq 0,$
 \end{center}
 since all parameters and variables are non-negative. 
 
-Thus, whenever $\phi \geq 0$ and $\phi_i(0)=0$ for some $i$ $\implies$ $f_i(\phi) \geq 0$. Therefore, since $\phi \geq 0$,  then by Theorem 1, the solution $X(t)=(S(t), P(t), A(t), H(t), R(t)) \geq 0$ for all $t \geq 0$, as desired. \square
+%Thus, whenever $\phi \geq 0$ and $\phi_i(0)=0$ for some $i$ $\implies$ $f_i(\phi) \geq 0$. Therefore, since $\phi \geq 0$,  then by Theorem 1, the solution $X(t)=(S(t), P(t), A(t), H(t), R(t)) \geq 0$ for all $t \geq 0$, as desired. \square
  
 \textbf{Addiction-Free Equilibrium} 
 
@@ -256,9 +259,10 @@ These assumptions include the following:
 \begin{itemize}
 \item $\mathscr{F}_{i} (0,y)=0$ and $\mathscr{V}_{1}(0,y)=0$,  $\forall$$y \geq 0$, $i=1,2,3$, which ensures that new addictions arise only from interacting with those currently addicted, and there is no immigration into the addicted compartments; these guarantee that the population free of addiction remains that way. 
 \item $\mathscr{F}_{i} (x,y) \geq 0$, $\forall$$x,y \geq 0$, $i=1,2,3$ since these represent new addictions. 
-\item $\mathscr{V}_{i}(x,y) \leq 0$ whenever $x_i=0, i=1,2,3$ since there must be inflow only when the repsective compartment is empty. 
-\item $\sum_{n=1}^{3} $\mathscr{V}_{i}(x,y) \geq 0$, $\forall x,y \geq 0$ since this represents the total outflow from all addicted compartments. 
-\item The addiction-free system, $\dv{S}{t}\bigg|_{A,H,R=0}$ and $\dv{P}{t}\bigg|_{A,H,R=0}$ has a unique equilibrium, ($\frac{\epsilon+\mu}{\alpha+\epsilon+\mu}$,$\frac{\alpha}{\alpha+\epsilon+\mu}$ )that is asymptotically stable. 
+\item $\mathscr{V}_{i}(x,y) \leq 0$ whenever $x_i=0, i=1,2,3$ since there must be inflow only when the respective compartment is empty. 
+\item $\sum_{n=1}^{3} \mathscr{V}_{i}(x,y) \geq 0$, $\forall x,y \geq 0$ since this represents the total outflow from all addicted compartments. 
+\item The addiction-free system, $\dv{S}{t}\bigg|_{A,H,R=0}$ and $\dv{P}{t}\bigg|_{A,H,R=0}$ has a unique equilibrium, ($\frac{\epsilon+\mu}{\alpha+\epsilon+\mu}$,$\frac{\alpha}{\alpha+\epsilon+\mu}$) that is asymptotically stable. 
+\end{itemize}
 
 Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\partial \mathscr{V}_i}{\partial x_j} (0, y_0)$, $i, j =1, 2, 3$, where (0, $y_{0}$) $=(\frac{\epsilon + \mu}{\alpha + \epsilon +\mu},\frac{\alpha}{\alpha + \epsilon +\mu},0,0,0)$ is the addiction-free equilibrium, we calculated the following [11]: 
 
@@ -301,9 +305,10 @@ $\mathscr{R}_0=$ $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_
 
 This value is the spectral radius since it is the largest eigenvalue greater than 0. We can see this by first noting that the radicand $(r-s)^2+4\beta S^* z  \sigma_{A} \zeta \sigma_{H} \nu$ is positive, since all parameters are positive. In addition, $r$ is positive because in the multiplication of $bc=\delta \mu + \delta \nu+ \delta \mu_{H}+ \mu^{2} + \mu \nu+ \mu \mu_{H} + \mu \sigma_{A} + \mu \sigma_{H}+ \nu \sigma_{A}+$ \hl{$ \sigma_{H} \nu $} $+ \mu_{H}\sigma_{A}+\mu_{H}\sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{H} \nu$, leaving only a positive sum. Multiplying by $\beta S^*$, the resulting value $r$ is positive. Similarly, $s$ is positive because in the multiplication of $ac=\delta \mu_{A} + \delta \mu + \delta \zeta + \mu_{A} \mu+ \mu_{A} \sigma_{A}+\mu_{A} \sigma_{H} +\mu^{2} +\mu \zeta+ \mu \sigma_{A}+\mu \sigma_{H}+$ \hl{$\sigma_{A} \zeta$} $+ \zeta \sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{A} \zeta$, again resulting in a sum of only positive terms. Multiplied against positive value $z$, this results in $s$ being positive. Finally, the expansion of $det(V)$ is positive. This is because $bc$ is a positive sum containing a term that cancels with $-\sigma_{H} \nu$ as described above and $ac$ shown above contains the term $\sigma_{A} \zeta$ which multiplied with b cancels with $-\sigma_A\zeta b,$ thus resulting in a positive determinant. 
 
-Increasing $\beta$ (the rate of addiction via non-prescription means), $\theta_1$ (the rate of heroin addiction of the susceptible population), and $\theta_2$ (the rate of heroin addiction of the prescribed population), all increase $\mathscr{R}_0$ since these parameters only appear in the numerator of $\mathscr{R}_0$, specifically within the $r$, $z$, and $s$ terms. 
+Increasing $\beta$ (the rate of addiction via non-prescription means), $\theta_1$ (the rate of heroin addiction of the susceptible population), and $\theta_2$ (the rate of heroin addiction of the prescribed population), all increase $\mathscr{R}_0$ since these parameters only appear in the numerator of $\mathscr{R}_0$, specifically within the $r$, $z$, and $s$ terms. \\ 
 
-\textbf{Sensitivity Analysis} 
+\textbf{Sensitivity Analysis} \\
+\textcolor{red}{Argue why using Sobol versus others, such as Latin Hypercube and read more about how it works.} 
 
 In order to explore the sensitivity of each of the population classes to each of the parameters, we implemented Sobol sensitivity analysis in which the Saltelli sampler is utilized to generate N(2D+2) parameter samples where N$=$FILL IN is the number of sample points and D=16, the number of parameters in the model for a total of FILL IN samples [16]. 
 Saltelli are the statistically good points chosen in the parameter space to test and records S, P, A, H and R at the final time (t=10 years) for the parameter choices. Samples N points from the problem and returns a matrix of parameter values. 
@@ -320,7 +325,7 @@ Both $\mu_{A}$ and $\mu_{H}$ were restricted to the domain $[0,0.1]$ with the re
 \textbf{Future Work} 
 
 
--Obtain local data from Knox County/East Tennessee, can calculate $\mathscr{R}_0$ from there (would expect $<$ 1 b/c prescriptions seem to be a huge riving force behind addiction to opioids and individuals switching to heroin use. Contact with Davide Stern (UT hospital), Paul Erwin, Agricola Odoi, Kelly Cooper\\
+-Obtain local data from Knox County/East Tennessee, can calculate $\mathscr{R}_0$ from there (would expect $<$ 1 b/c prescriptions seem to be a huge driving force behind addiction to opioids and individuals switching to heroin use. Contact with Davide Stern (UT hospital), Paul Erwin, Agricola Odoi, Kelly Cooper\\
 -Perform sensitivity analysis to determine the sensitivity of each of the classes to the parameters (i.e. the contribution of each of the parameters to the sizes of the classes). Plan to use Sobol sensitivity analysis in which the saltelli sampler is utilized to generate (statistically good) parameter samples. Will only perform on the fullm odel, not hte AFE b/c that would require $t$ very large and we want to look at shorter term, such as $t=10$ years. Will perform first, second and total indices. \\
 -Fit parameters to data that are difficult to find in literature. \\
 -Explore management strategies for how to best treat pain with prescriptions while reducing opioid addiction and heroin use.  \\
