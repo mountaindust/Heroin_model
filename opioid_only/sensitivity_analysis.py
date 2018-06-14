@@ -360,12 +360,10 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     rows = list(S1.index)
     # alpha, beta, delta, epsilon, gamma, 
     # xi, zeta, nu, mu, mu*, sigma
-    # cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'], ['0.001-0.1'],
-    #              ['0-1'], ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
     cell_text = [['.02-.2'], ['.00114-.0114'], ['0-1'], ['.8-8'], ['.00235-.0235'],
                  ['0-1'], ['.2-2'], ['0-1'], ['.002305-.02305'], ['.003652-.03652'], ['0-1']]
     # alpha, beta, delta, epsilon, zeta, nu, mu, mu*, sigma
-    #cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'],
+    # cell_text = [['0.03-0.3'], ['0.0003-0.03'], ['0.01-1'], ['0.8-8'],
     #             ['0.1-2'], ['0.01-1'], ['0.001-0.01'], ['0.005-0.1'], ['0.01-1']]
     tbl_ax = plt.subplot(gs[2])
     the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
