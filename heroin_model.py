@@ -11,7 +11,7 @@ R_0 = 0.0044 # [14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/197
 
 #temporal info, assigning default values
 tstart = 0
-tstop = 10000
+tstop = 10
 
 #parameters
 params = {}
