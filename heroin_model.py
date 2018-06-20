@@ -128,9 +128,9 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     t = np.arange(tstart,tstop+1,1)
 
     fig = plt.figure(figsize=(8, 4.5))
-    plt.plot(t, S, label='Susceptible')
+    plt.plot(t, S, label='Susceptibles')
     plt.plot(t, P, label="Prescription Users")
-    plt.plot(t, A, label="Addicts")
+    plt.plot(t, A, label="Opioid Addicts")
     plt.plot(t, H, label="Heroin Addicts")
     plt.plot(t, R, label="Recovering Addicts")
     plt.legend()
@@ -145,6 +145,30 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
         return fig
 
 
+def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
+    '''Plot a solution set and either show it or return the plot object'''
+    #np.arangereturn evenly spaced values within a given interval 
+    t = np.arange(tstart,tstop+1,1)
+
+    total = []
+    for i in range(len(A)):
+            total.append(A[i] + H[i])
+
+    fig = plt.figure(figsize=(8, 4.5))
+    plt.plot(t, S, label='Susceptibles')
+    plt.plot(t, P, label="Prescription Users")
+    plt.plot(t, total, label="Total Addicts", color = 'black')
+    plt.plot(t, R, label="Recovering Addicts")
+    plt.legend()
+    plt.xlabel('Time (years)')
+    plt.ylabel('Population fraction')
+    #get rid of white space with tight_layout
+    plt.tight_layout()
+    #in order to get a plot to show 
+    if show:
+        plt.show()
+    else:
+        return fig
 
 
 #comes at end of ODE file (or especially any file you want to run from terminal):
@@ -156,5 +180,6 @@ if __name__ == "__main__":
     sol = solve_odes()
     #need to unpack, use *
     plot_solution(*sol) 
+    plot_addiction_totaled(*sol)
     #compute R_0
-   # print(compute_R0(p=None))
+    #print(compute_R0(p=None))
