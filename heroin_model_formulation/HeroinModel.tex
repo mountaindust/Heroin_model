@@ -65,6 +65,7 @@ A national survey estimated that out of the United States national population of
 Heroin was first formulated in a hospital in 1874, but production on a commercial level did not begin until 1898, when the Bayer Company in Germany marketed and sold the new drug. Prescription heroin was deemed helpful for treating bronchitis, asthma and tuberculosis, but near the turn of the century, the dangers of the drug were starting to be revealed, such as it's potential for addiction. In 1920, the American Medical Association stated that heroin should not be manufactured, sold, or prescribed in the United States, and in combination with the amount of crime resulting from heroin use, a law was passed in 1924 prohibiting crude opium imports with the intention of heroin production. With the start of World War II, traffickers diluted the drug more and more, due to tighter border controls and fewer supplies entering the country \cite{UnitedNations}. \textcolor{red}{More heroin history: find reliable source for smuggling of heroin from China to US in 1930s; motor vehicle vs. drug overdose stats; ~750,000 heroin addicts from 1965-1970; purity level/price of heroin; provide argument for why the problem is so large now that we need data-driven models compared to just a theoretical heroin addiction model as done for decades.} 
 
 %Egan paper made a good point that even though the number of individuals going into treatment has increased, that does not mean more users necessarily, could mean more treatment facilities opened up/spots avaiable 
+\textcolor{red}{Specific info on fentanyl}
 
 \textcolor{green}{Opioid information} \\
 Another large portion of opioids consist of prescription pain relievers which include oxycodone, hydrocodone, and morphine products, among others \cite{CDC3}. \textcolor{red}{Put in examples of natural, semi-synthetic, and synthetic opioids}. From 1991 to 2011, there was a near tripling of prescriptions that pharmacies distributed \cite{NIDA1}. This was in part due to a number of new opioids that were approved by the FDA for use, such as OxyContin, Actiq, Fentora, and Onsolis (fentanyl), in addition to other unapproved opioid products for pain management \cite{FDA1}. Moreover, in the early 2000s, drug manufacturers funded publications and physicians to support opioid use for pain control \cite{Mandell}. A national survey estimated there were 11.5 million individuals 12 years of age or older in the United States that experienced pain reliever misuse in the past year, referring to the year 2016 \cite{CDC2}. In this survey, misuse was defined as taking the prescription at a higher dose, more frequently or longer than prescribed, taking someone else's medication, or any other way not directed by a doctor \cite{SAMSHA3}. This subset of the opioid drug class is misused for a variety of reasons and the same survey asked individuals who reported prescription pain reliever misuse to give the reason and the source for their most recent misuse. The most prominent responses for reasons of misuse were to relieve physical pain, to feel good or get high, and to relax or relieve tension. The largest source was from friends/relatives or from a healthcare provider, followed by given a prescription or stolen from a health care provider \cite{CDC2}. Treatment options for opioid addiction are the same as heroin \cite{SAMSHA1}. In addition, pregnant women who take prescription opioids also put their babies at risk of neonatal abstinence syndrome, similar to heroin \cite{CDC5}. 
@@ -79,6 +80,7 @@ According to the National Survey of Drug Use and Health (NSDUH) survey informati
 
 
 \textcolor{green}{Goal paragraph} \\ 
+\textcolor{red}{Edit to include fentanyl}
 The misuse of opioids, including prescription pain relievers, synthetic opioids and the illegal drug heroin, is rampant in today's society \cite{NIH2}. The opioid crisis was declared a public health emergency in October 2017 by the United States Department of Health and Human Sciences \cite{HHS1}. It was estimated that the total economic cost of prescription opioid dependence, abuse and overdoses in 2013 alone was \$78.5 billion \cite{Florence}. Due to the health risks of the addicted individuals, public health concerns, the number of overdose deaths and the economic burden, this is an issue worth paying attention to.
 To address this apparent problem in today's society, we wish to model the prescription opioid/heroin epidemic in order to understand the dynamics behind the epidemic and predict the trajectory of the epidemic. We also wish to identify important conditions relating to the reduction of opioid and heroin addicted individuals. To do that, we have formulated a population level system of ordinary differential equations model consisting of classes of individuals taking prescription opioids, addicted to opioids, using heroin and recovering from opioid addiction, including heroin, and analyzed it. Our overall goal is to explore how different management strategies may alter the epidemic trajectory; specifically, we would like to investigate management strategies for optimally treating pain with prescriptions while reducing opioid addiction and heroin use. 
 
@@ -117,9 +119,9 @@ In our model we assume homogeneous mixing of the individuals in each of the comp
 
 \textbf{Model Formulation} \\ \\
 To our extent of our knowledge, there have been no mathematical models incorporating both prescription opioid use and heroin use. \textcolor{red}{Write up differences within my model compared to other models.}
-Our model consists of five subgroups of the \textcolor{red}{(national)} population, in which they are all proportions of the entire population: 
+Our model consists of five subgroups of the \textcolor{red}{(Tennessee)} population, in which they are all proportions of the entire population: 
 
-1. Susceptibles ($S$): This portion of the population consists of individuals who are not taking prescription opioids of any kind, nor are using heroin. \\ \\
+1. Susceptibles ($S$): This portion of the population consists of individuals who are not taking prescription opioids of any kind, nor using heroin or fentanyl. \\ \\
 2. Prescription opioid users ($P$): This class of individuals consists of individuals who are prescribed opioids by a health care provider and take the opioids at a level that is not considered addicted. We note that individuals in this class could be misusing prescription opioids, but not at the level of addiction.  \\ \\
 3. Opioid addicts ($A$): This group of individuals are addicted to opioids or are dependent on opioids, but not using heroin or fentanyl. (Although the opioid class of drug includes heroin and fentanyl, here we will take opioids to mean non-heroin and non-fentanyl.) \textcolor{red}{we assume very few, if any, individuals addicted to opioids outside or prescription opioids, but even if they are, they are probably are taking prescription opioids anyways, so this is our reasoning for taking those with pain reliever use disorder as initial condition because already includes those with other non-prescription opioid addiction} \\ \\
 4. Heroin users ($H$): This class is composed of individuals who are addicted to heroin or fentanyl. We note that individuals in this class could be using other drugs or are addicted to opioids in addition to heroin or fentanyl, but they are at least addicted to one of these drugs. \\ \\
@@ -127,7 +129,9 @@ Our model consists of five subgroups of the \textcolor{red}{(national)} populati
 
 %I believe ROSIE study says somewhere that individuals in treatment are mostly still taking drugs, but I don't think it matters for our case: https://www.drugsandalcohol.ie/11542/1/ROSIE3-YearReport.pdf 
 
-We assume that our these five compartments sum to one, so that the population is of constant size, i.e. the total death rate is equal to the incoming rate for the susceptible class. Although terminology is not always clearly defined in the literature, such as opioid misuse, abuse, dependency, addiction and use disorder, we aim to focus on addiction only, where addiction to opioids is defined as having a pattern of continued non-medical use that is already, or could be, harmful \cite{Vowles}. We take opioid use disorder to fall in this categorization of addiction, due to the definition presented in \cite{SAMSHA2} which includes sustained use regardless of interference with life obligations. We also recognize there is difficultly in modeling to the the variability of the purity of heroin, as overdose deaths could come from the opioid fentanyl rather than the actual heroin itself, and in fact, 1 in 5 overdose deaths have multiple drugs present so it is difficult to know the actual cause of death \cite{CDC4}. In addition, overdose deaths include both accidental and non-accidental deaths (i.e. suicide, assault), and therefore, the overdose data encompasses all of those deaths \textcolor{red}{Especially if go with CDC data definition: https://pep-c.rti.org/HERO/KB/Documents/CDCs\%20Opioid\%20Overdose\%20Indicator\%20Support\%20Toolkit.pdf }.Hoewver, we assume that those whose death was from opioid overdose-related death were addicted to begin with and unintentionally overdoses, and that the number of intentional overdoses is negligible. Finally, we remark that use of heroin is implicitly understood to be addictive due to the highly addictive nature of the drug, and we assume no recreational use of the drug. \cite{NIH1}. Similarly, use of fentanyl outside of a short-term, carefully monitored setting by a health provider most likely equates to addiction \textcolor{red}{source for fentanyl addictive nature, length of time of prescription short?}. We try to take into account these complexities as best as possible with the information in literature.
+We assume that our these five compartments sum to one, so that the population is of constant size, i.e. the total death rate is equal to the incoming rate for the susceptible class. Although terminology is not always clearly defined in the literature, such as opioid misuse, abuse, dependency, addiction and use disorder, we aim to focus on addiction only, where addiction to opioids is defined as having a pattern of continued non-medical use that is already, or could be, harmful \cite{Vowles}. We take opioid use disorder to fall in this categorization of addiction, due to the definition presented in \cite{SAMSHA2} which includes sustained use regardless of interference with life obligations. We also recognize there is difficultly in modeling to the the variability of the purity of heroin, as overdose deaths could come from the opioid fentanyl rather than the actual heroin itself, and in fact, 1 in 5 overdose deaths have multiple drugs present so it is difficult to know the actual cause of death \cite{CDC4}. In addition, overdose deaths include both accidental and non-accidental deaths (i.e. suicide, assault), and therefore, the overdose data encompasses all of those deaths \textcolor{red}{Especially if go with CDC data definition}.
+%https://pep-c.rti.org/HERO/KB/Documents/CDCs\%20Opioid\%20Overdose\%20Indicator\%20Support\%20Toolkit.pdf 
+However, we assume that those whose death was from opioid overdose-related death were addicted to begin with and unintentionally overdoses, and that the number of intentional overdoses is negligible. Finally, we remark that use of heroin is implicitly understood to be addictive due to the highly addictive nature of the drug, and we assume no recreational use of the drug. \cite{NIH1}. Similarly, use of fentanyl outside of a short-term, carefully monitored setting by a health provider most likely equates to addiction. \textcolor{red}{Source for fentanyl addictive nature, length of time of prescription short?} We try to take into account these complexities as best as possible with the information in literature.
 
 
 
@@ -135,13 +139,13 @@ We include illicit fentanyl use in the class of heroin users, because of the pot
 
 
 We denote the initial conditions as
-$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population, and therefore are dimension-less: \textcolor{red}{EDIT for local data in Knox County/Tennessee.}
+$S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population, and therefore are dimension-less: \textcolor{red}{Fill in}. 
 
 The following are the \textbf{number of individuals initially in each class} for Tennessee: \\
 Susceptibles: \\
-Prescription opioid users, 2015: 1,819,581 [1] \\
+Prescription opioid users, 2015: 1,819,581 \cite{TNgov1} \\
 \textit{Opioid addicts: need to find}  \\ %NSDUH stat was counting misusers 
-Heroin/fentanyl addicts, 2015/2016 average for ``Past Year Heroin Use": 14,000 [4] \\
+Heroin/fentanyl addicts, 2015/2016 average for ``Past Year Heroin Use": 14,000 \cite{NSDUH2} \\
 \textit{Recovering addicts: won't be able to find because we do not know the total of individuals total that have been in treatment ever in the past for our time frame}  
 
 The number of heroin users do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do heroin and not fentanyl, but we have not been able to find data for fentanyl addicts only currently and we are under the assumption that it would be a negligible population that does fentanyl without heroin. 
@@ -162,25 +166,27 @@ The parameters involved in this model represent transition rates from one class 
 \item $\beta$ : rate at which susceptible individuals become addicted to opioids by some means other than by prescription (1/year)
 \item $\beta(1-\xi) SA$: rate at which susceptible individuals become addicted to opioids by black market drugs or interaction with other addicts (1/year, dimension-less)
 \item $\beta \xi SP$ : rate at which susceptible population obtains extra prescription opioids and becomes addicted  (1/year, dimension-less)
-\item $\theta_1 SH$: rate at which susceptible population becomes addicted to heroin by black market availability or interaction with other heroin users  (1/year)
+\item $\theta_1 SH$: rate at which susceptible population becomes addicted to heroin or fentanyl by black market availability or interaction with other heroin or fentanyl users  (1/year)
 \item $\epsilon P$: rate at which individuals return to the susceptible class after being prescribed opioids and did not develop an addiction (1/year) 
 \item $\mu S, \mu P, \mu A, \mu H, \mu R$: natural death rates (1/year)
 \item $\mu_A A$: enhanced death rate for opioid addicts; overdose rate which results in death (1/year)
-\item $\mu_H H$: enhanced death rate for heroin addicts; overdose rate which results in death (1/year)
+\item $\mu_H H$: enhanced death rate for heroin or fentanyl addicts; overdose rate which results in death (1/year)
 \item $\gamma P$: rate at which prescribed opioid users become addicted to opioids (1/year)
-\item $\theta_2 PH$: rate at which prescribed opioid users become addicted to heroin (1/year)
+\item $\theta_2 PH$: rate at which prescribed opioid users become addicted to heroin or fentanyl (1/year)
 \item $\sigma_A R$: rate at which individuals transition from treatment into the opioid addicted class (note: not considered relapse because do not know where individuals came from originally) (1/year)
 \item $\zeta A$: rate at which addicted opioid users enter treatment/rehabilitation (1/year)
-\item $\theta_3 AH$: rate at which the opioid addicted population becomes addicted to heroin  (1/year)
-\item$\sigma_H H$: rate at which individuals transition from treatment into the heroin addicted class (note: not considered relapse because do not know where individuals came from originally) (1/year)
-\item $\nu H$: rate at which heroin users enter treatment/rehabilitation 
+\item $\theta_3 AH$: rate at which the opioid addicted population becomes addicted to heroin or fentanyl  (1/year)
+\item$\sigma_H H$: rate at which individuals transition from treatment into the heroin or fentanyl addicted class (note: not considered relapse because do not know where individuals came from originally) (1/year)
+\item $\nu H$: rate at which heroin or fentanyl users enter treatment/rehabilitation 
 \end{itemize}
 
-Since susceptible individuals die and give birth at the same rate, $\mu S$, those terms do not appear in the differential equation for susceptibles. Also, we note that although sellers are not directly involved in the model nor have to be addicts themselves, addicted individuals act as a proxy for sellers of the drug and general availability of the drug, whether it is opioids or heroin. This is because the higher number of addicted individuals there are, the more sellers there needs to be which results in an increased exposure to the drug and therefore, increased chance of addiction. Although treatments for addictions are an enormous problem in and of themselves since there is limited success as shown by the parameter values for the recovery rates, we are incorporating treatments at a shallow level as a part of our model. As noted before, we are classifying overdoses to mean opioid overdose-related deaths (i.e. not from secondary factors or long term effects) \textcolor{red}{Use CDC definition potentially since going to use for TN data?: https://pep-c.rti.org/HERO/KB/Documents/CDCs\%20Opioid\%20Overdose\%20Indicator\%20Support\%20Toolkit.pdf}, although we note the fact that Naloxone, an overdose-reversing medication, has saved individuals from overdoses \cite{NIDA2}. 
+Since susceptible individuals die and give birth at the same rate, $\mu S$, those terms do not appear in the differential equation for susceptibles. Also, we note that although sellers are not directly involved in the model nor have to be addicts themselves, addicted individuals act as a proxy for sellers of the drug and general availability of the drug, whether it is opioids or heroin. This is because the higher number of addicted individuals there are, the more sellers there needs to be which results in an increased exposure to the drug and therefore, increased chance of addiction. Although treatments for addictions are an enormous problem in and of themselves since there is limited success as shown by the parameter values for the recovery rates, we are incorporating treatments at a shallow level as a part of our model. As noted before, we are classifying overdoses to mean opioid overdose-related deaths (i.e. not from secondary factors or long term effects) \textcolor{red}{Use CDC definition potentially since going to use for TN data?},
+%https://pep-c.rti.org/HERO/KB/Documents/CDCs\%20Opioid\%20Overdose\%20Indicator\%20Support\%20Toolkit.pdf%
+although we note the fact that Naloxone, an overdose-reversing medication, has saved individuals from overdoses \cite{NIDA2}. 
 
 We omitted an interaction term between prescribed users and addicted individuals moving into the addicted class, under the assumption that since prescribed users have access to their own prescriptions to get addicted, they do not need an illicit source or interaction with addicts to become addicted themselves. Moreover, we did not include an interaction term RA to go from the recovery to addicted class because we assume that individuals in recovery already know the feeling of addiction and do not need the influence of addicts or general availability of the drug to fall into addiction themselves. Previous work that focused on opioids (excluding heroin) concluded that the model was relatively insensitive to this path, and therefore, we have omitted it \cite{Battista}. \textcolor{red}{Find specific info for this.} Similarly, we did not include an RH term from the recovery to heroin class for a very similar reason. We do not have a pathway from R to P; although individuals have the potential of obtaining a legal prescription from a doctor since doctors are not necessarily informed that their patient was in recovery in the past \textcolor{red}{find resource that talks about doctors being "case-history blind"}, it does not seem realistic that an individual recovering from opioid or heroin addiction would be able to successfully take prescription opioids in a non-addictive manner, and therefore would be in the addicted class almost immediately. We omit a pathway from P to R because we make the assumption that if an individual were ``misusing" prescription opioids, they would only enter treatment if it were harmful to or interfering with their life in some way, in which the individual would be considered addicted, given the definition we are using. Therefore, they would first transition to the addicted class, and then to recovery. \\
 
- We omitted the pathway from R to S since individuals who have been in recovery are much more likely to fall into addiction than a susceptible individual, and therefore, must be treated differently than a susceptible individual who has not been to recovery (i.e. cannot be homogeneously mixed in S). We think of individuals in the recovery class as in a permanent state of recovery for the rest of their lives, even if they are not undergoing active recovery, and we think of this class as an absorbing state. \textcolor{red}{Find source talking about addicted individuals who underwent recovery much more likely to fall back into addiction than susceptible individual.} We recognize that there may be additional pathways among the classes, but the ones we have chosen to include in our model are the ones we view as most important/realistic. \\ \\
+We omitted the pathway from R to S since individuals who have been in recovery are much more likely to fall into addiction than a susceptible individual, and therefore, must be treated differently than a susceptible individual who has not been to recovery (i.e. cannot be homogeneously mixed in S). We think of individuals in the recovery class as in a permanent state of recovery for the rest of their lives, even if they are not undergoing active recovery, and we think of this class as an absorbing state. \textcolor{red}{Find source talking about addicted individuals who underwent recovery much more likely to fall back into addiction than susceptible individual.} We recognize that there may be additional pathways among the classes, but the ones we have chosen to include in our model are the ones we view as most important/realistic. \\ \\
 \textcolor{red}{In literature, see if PA pathway from P to A significant at all and similarly RA and RP from R to A} 
 This compartmental model can be represented by the following flow diagram with each arrow representing either the transition rate between one class to another or birth/death: 
 
@@ -201,26 +207,26 @@ We recognize that these estimated parameter values vary based on time and differ
 
 %Still need: susceptibles becoming heroin users, prescription opioid users becoming heroin users, opioid addicts becoming heroin users, prescription opioid users successfully finishing prescription, susceptibles becoming addicted to opioids, prescription opioid users becoming addicted to opioids, ...+more 
 
-For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain [1]: \\
+For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain \cite{TNgov1}: \\
 2013: 1,845,144 \\
 2014: 1,824,342 \\
 2015: 1,819,581 \\
 2016: 1,761,363 \\
 2017: 1,636,374 
 
-\textbf{Treatment admissions for prescription opioids} as primary substance of abuse in Tennessee [3] \\ %can get "new arrivals to R" from this info, apparently: integrate dR/dt over time frame interested in (t_1 to t_2) and on RHS, integrate \zeta*A+\nu*H (or can break into two integrals on the RHS), and can get new arrivals; don't have to worry about double counting or people cycling \\
+\textbf{Treatment admissions for prescription opioids} as primary substance of abuse in Tennessee \cite{TNMentalHealth}\\ %can get "new arrivals to R" from this info, apparently: integrate dR/dt over time frame interested in (t_1 to t_2) and on RHS, integrate \zeta*A+\nu*H (or can break into two integrals on the RHS), and can get new arrivals; don't have to worry about double counting or people cycling \\
 2014: 4,145\\
 2015: 4,085 \\
 2016: 3,911 \\
 \textcolor{red}{We assume that if one were using heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment?}
 
-\textbf{Treatment admissions for heroin} as primary substance of abuse in Tennessee [3]:  \\
+\textbf{Treatment admissions for heroin} as primary substance of abuse in Tennessee \cite{TNMentalHealth}:  \\
 2014: 538 \\
 2015: 826 \\
 2016: 1,184 \\
 These numbers do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do go to treatment with the primary substance of abuse being fentanyl, but there is not data available for those numbers currently. 
 
-We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} [2]: \\
+We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
 2013:(637-53=) 584 \\
 2014: (697-69=) 628 \\
 2015: (848-169=) 679 \\
@@ -230,15 +236,15 @@ We add together the heroin and fentanyl overdoses from the years 2013-2016 for t
 2013: (63+53=) 116 \\
 2014: (147+69=) 216 \\
 2015: (205+169=) 374 \\
-2016: (260+294=) 554 [2]. 
+2016: (260+294=) 554 \cite{PDO}. 
 
 %Can use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
 
-The \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee (took total deaths and subtracted out overdose deaths for the respective years) [5,7]: 
-2013: (63,199-584-116=) 62,499 out of an estimated total population of 6490795
-2014: (64,559-628-216=) 63,715 out of an estimated total population of 6540007
-2015: (66,329-679-374=) 65,276 out of an estimated total population of 6590726
-2016: (67,924-715-554=) 66,655 out of an estimated total population of 6649404
+The \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee (took total deaths and subtracted out overdose deaths for the respective years) \cite{TNgov2, USCensus}: \\
+2013: (63,199-584-116=) 62,499 out of an estimated total population of 6490795 \\
+2014: (64,559-628-216=) 63,715 out of an estimated total population of 6540007 \\
+2015: (66,329-679-374=) 65,276 out of an estimated total population of 6590726 \\
+2016: (67,924-715-554=) 66,655 out of an estimated total population of 6649404 \\
 
 
 
@@ -246,7 +252,7 @@ The \textbf{total number of deaths, excluding overdoses} for individuals in Tenn
 Will show existence of solution to my ODE system. \textcolor{red}{Prove a priori solution is bounded in finite time?}
 
 
-\textcolor{red}{Edit because removed delta} \textbf{Proof of non-negative initial conditions guaranteeing non-negative solutions} \\
+\textbf{Proof of non-negative initial conditions guaranteeing non-negative solutions} \\
 We will now show that starting with non-negative initial conditions, solutions for the system (1)-(5) are guaranteed to be non-negative for all time, using the following theorem which is an adaptation of Theorem 2.1 in \cite{Smith}: 
  
  \textbf{Theorem 1} (\cite{Smith}: adapted version of Theorem 2.1, Chapter 5) 
@@ -254,11 +260,11 @@ We will now show that starting with non-negative initial conditions, solutions f
 \end{comment}
  \textit{Assume that when $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$ with $\phi_{i}(0)=0$ for some $i$, then $f_i(\phi) \geq 0$. Then, if $\phi \in \mathbb{R}^n$ satisfies $\phi \geq 0$, the solution of $x'(t)=f(x(t)), x(t_{0})=\phi$ where $f: \mathbb{C}$ $\rightarrow$ $\mathbb{R}^n$ continuous, $\mathbb{C} \subset \mathbb{R}^n$ open and $\phi \in \mathbb{R}^n$, satisfies $x(t) \geq 0$ for all $t \geq t_{0}.$}
  
- \textbf{Proof} Consider the vector of initial conditions in $\mathbb{R}^5$, $\phi = (S_0, P_0, A_0, H_0, R_0).$ Since each vector component represents a proportion of a population, we know$\phi \geq 0.$ \\
+ \textbf{Proof} Consider the vector of initial conditions in $\mathbb{R}^5$, $\phi = (S_0, P_0, A_0, H_0, R_0).$ Since each vector component represents a proportion of a population, we know $\phi \geq 0.$ \\
  
 1) Assume $\phi = (0, P_0, A_0, H_0, R_0) \geq 0.$ Then, 
 \begin{center}
-$f_1(\phi)=\epsilon P_0 +\delta R_0 + \mu (P_0+R_0)+(\mu + \mu_A) A_0 + (\mu+\mu_H) H_0 \geq 0,$
+$f_1(\phi)=\epsilon P_0 + \mu (P_0+R_0)+(\mu + \mu_A) A_0 + (\mu+\mu_H) H_0 \geq 0,$
 \end{center}
 since all parameters and variables are non-negative. 
  
@@ -287,9 +293,9 @@ $f_5(\phi)=\zeta A_0 +\nu H_0 \geq 0,$
 since all parameters and variables are non-negative. 
 
 Thus, whenever $\phi \geq 0$ and $\phi_i(0)=0$ for some $i$, we see $f_i(\phi) \geq 0$. Therefore, since $\phi \geq 0$,  then by Theorem 1, the solution $X(t)=(S(t), P(t), A(t), H(t), R(t)) \geq 0$ for all $t \geq 0$, as desired. $\square$
- 
-\textcolor{red}{Edit because removed delta} \textbf{Addiction-Free Equilibrium} 
-\textcolor{red}{Was unable to solve for endemic equilibrium...need to eventually?}
+
+ \textbf{Addiction-Free Equilibrium} 
+\textcolor{red}{Was unable to solve for endemic equilibrium...need to eventually or just prove existence of one?}
 
 To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero and require that $A=H=R=0$ since these three compartments consist of individuals who are addiction to opioids or heroin. We are left with the system: \\
 \[0=-\alpha S^* -\beta \xi S^* P^* + \epsilon P^* +\mu P^* \quad\]
@@ -308,7 +314,8 @@ If $P^*=0$, then the only solution is $S^*=P^*=H^*=R^*=0$, but $S^*=P^*=H^*=R^*=
 
 Note that enforcing $P^* \neq 0$ implies that $\alpha \neq 0$, as well, which means that individuals are still able to be prescribed opioids. 
 
-\textcolor{red}{Edit because removed delta} \textbf{Basic Reproduction Number, \textbf{$\mathscr{R}_0$}}
+\textcolor{red}{Re-check work in future because removed delta, but should be same final result except 
+delta is not a part of "c"} \textbf{Basic Reproduction Number, \textbf{$\mathscr{R}_0$}}
 
 %In the future, may look into "targeted reproduction number" (simpler representation of R_0), or "type reproduction number", or breaking into cycles (if look at certain cycle, what would R_0 be)--per Lenhart 
 
@@ -318,11 +325,11 @@ We note that our goal in this section is to explore the structure of the model a
 
 
 For the purposes of calculating $\mathscr{R}_0$, we will assume $\gamma =0$ and $\xi =0$ (thus, $\beta \neq 0$) in order to ensure the existence of the addiction-free equilibrium. This results in the following system:
-\[\dv{S}{t} = -\alpha S - \beta SA  - \theta_{1} SH +\epsilon P +\delta R +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
+\[\dv{S}{t} = -\alpha S - \beta SA  - \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \theta_{2}PH- \mu P    \quad\]
 \[\dv{A}{t} = \sigma_{A} R +\beta SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad\]
-\[\dv{R}{t} = \zeta A +\nu H -\delta R -\sigma_{A}R-\sigma_{H}R -\mu R.\quad\]
+\[\dv{R}{t} = \zeta A +\nu H -\sigma_{A}R-\sigma_{H}R -\mu R.\quad\]
 
 
 In general, the differential equations of the $n$ disease compartments, $x_i'$, may be written as: 
@@ -359,13 +366,13 @@ $ \begin{pmatrix}
 
 -\sigma_{A}R+\zeta A+\theta_{3} AH + (\mu +\mu_{A})A \\
 -\theta_{3}AH-\sigma_{H}R+\nu H +(\mu +\mu_{H}) H \\
--\zeta A -\nu H +\delta R +\sigma_{A}R +\sigma_{H}R +\mu R\\
+-\zeta A -\nu H +\sigma_{A}R +\sigma_{H}R +\mu R\\
 \end{pmatrix}$.
 \end{center}
 
 These assumptions include the following: 
 \begin{itemize}
-\item $\mathscr{F}_{i} (0,y)=0$ and $\mathscr{V}_{1}(0,y)=0$,  $\forall$$y \geq 0$, $i=1,2,3$, which ensures that new addictions arise only from interacting with those currently addicted, and there is no immigration into the addicted compartments; these guarantee that the population free of addiction remains that way. 
+\item $\mathscr{F}_{i} (0,y)=0$ and $\mathscr{V}_{i}(0,y)=0$,  $\forall$$y \geq 0$, $i=1,2,3$, which ensures that new addictions arise only from interacting with those currently addicted, and there is no immigration into the addicted compartments; these guarantee that the population free of addiction remains that way. 
 \item $\mathscr{F}_{i} (x,y) \geq 0$, $\forall$$x,y \geq 0$, $i=1,2,3$ since these represent new addictions. 
 \item $\mathscr{V}_{i}(x,y) \leq 0$ whenever $x_i=0, i=1,2,3$ since there must be inflow only when the respective compartment is empty. 
 \item $\sum_{n=1}^{3} \mathscr{V}_{i}(x,y) \geq 0$, $\forall x,y \geq 0$ since this represents the total outflow from all addicted compartments. 
@@ -392,7 +399,7 @@ $ \begin{pmatrix}
 
 \zeta +\mu +\mu_A &  0  & -\sigma_A \\
 0 &  \nu+\mu+\mu_H & -\sigma_H\\
--\zeta& -\nu  & \delta + \sigma_A + \sigma_H + \mu\\
+-\zeta& -\nu  & \sigma_A + \sigma_H + \mu\\
 
 \end{pmatrix}$.
 \end{center}
@@ -404,14 +411,14 @@ $\sigma (FV^{-1}) = \{0, \frac{(r+s)-\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta 
 \}$
 \end{center}
 
-where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c=\delta + \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=a(bc-\sigma_H\nu)-\sigma_A\zeta b$.
+where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c= \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=a(bc-\sigma_H\nu)-\sigma_A\zeta b$.
 
 $\mathscr{R}_0$ may then be determined as the spectral radius of $FV^{-1}$, in which the $(i,j)$ entry is the expected number of secondary addictions in compartment $i$ produced by individuals initially in compartment $j$ :
 \begin{center}
 $\mathscr{R}_0=$ $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)}. $
 \end{center}
 
-This value is the spectral radius since it is the largest eigenvalue greater than 0. We can see this by first noting that the radicand $(r-s)^2+4\beta S^* z  \sigma_{A} \zeta \sigma_{H} \nu$ is positive, since all parameters are positive. In addition, $r$ is positive because in the multiplication of $bc=\delta \mu + \delta \nu+ \delta \mu_{H}+ \mu^{2} + \mu \nu+ \mu \mu_{H} + \mu \sigma_{A} + \mu \sigma_{H}+ \nu \sigma_{A}+$ \hl{$ \sigma_{H} \nu $} $+ \mu_{H}\sigma_{A}+\mu_{H}\sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{H} \nu$, leaving only a positive sum. Multiplying by $\beta S^*$, the resulting value $r$ is positive. Similarly, $s$ is positive because in the multiplication of $ac=\delta \mu_{A} + \delta \mu + \delta \zeta + \mu_{A} \mu+ \mu_{A} \sigma_{A}+\mu_{A} \sigma_{H} +\mu^{2} +\mu \zeta+ \mu \sigma_{A}+\mu \sigma_{H}+$ \hl{$\sigma_{A} \zeta$} $+ \zeta \sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{A} \zeta$, again resulting in a sum of only positive terms. Multiplied against positive value $z$, this results in $s$ being positive. Finally, the expansion of $det(V)$ is positive. This is because $bc$ is a positive sum containing a term that cancels with $-\sigma_{H} \nu$ as described above and $ac$ shown above contains the term $\sigma_{A} \zeta$ which multiplied with b cancels with $-\sigma_A\zeta b,$ thus resulting in a positive determinant. \textcolor{red}{Need to prove AFE is stable if $\mathscr{R}_0$ $<$ 1 and unstable if $>$ 1?}
+This value is the spectral radius since it is the largest eigenvalue greater than 0. We can see this by first noting that the radicand $(r-s)^2+4\beta S^* z  \sigma_{A} \zeta \sigma_{H} \nu$ is positive, since all parameters are positive. In addition, $r$ is positive because in the multiplication of $bc=\ \mu^{2} + \mu \nu+ \mu \mu_{H} + \mu \sigma_{A} + \mu \sigma_{H}+ \nu \sigma_{A}+$ \hl{$ \sigma_{H} \nu $} $+ \mu_{H}\sigma_{A}+\mu_{H}\sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{H} \nu$, leaving only a positive sum. Multiplying by $\beta S^*$, the resulting value $r$ is positive. Similarly, $s$ is positive because in the multiplication of $ac= \mu_{A} \mu+ \mu_{A} \sigma_{A}+\mu_{A} \sigma_{H} +\mu^{2} +\mu \zeta+ \mu \sigma_{A}+\mu \sigma_{H}+$ \hl{$\sigma_{A} \zeta$} $+ \zeta \sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{A} \zeta$, again resulting in a sum of only positive terms. Multiplied against positive value $z$, this results in $s$ being positive. Finally, the expansion of $det(V)$ is positive. This is because $bc$ is a positive sum containing a term that cancels with $-\sigma_{H} \nu$ as described above and $ac$ shown above contains the term $\sigma_{A} \zeta$ which multiplied with b cancels with $-\sigma_A\zeta b,$ thus resulting in a positive determinant. \textcolor{red}{Need to prove AFE is stable if $\mathscr{R}_0$ $<$ 1 and unstable if $>$ 1?}
 
 %Don't include, most likely: Increasing $\beta$ (the rate of addiction via non-prescription means), $\theta_1$ (the rate of heroin addiction of the susceptible population), and $\theta_2$ (the rate of heroin addiction of the prescribed population), all increase $\mathscr{R}_0$ since these parameters only appear in the numerator of $\mathscr{R}_0$, specifically within the $r$, $z$, and $s$ terms. \\ 
 
