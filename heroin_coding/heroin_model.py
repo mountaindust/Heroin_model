@@ -130,7 +130,7 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
   #  plt.plot(t, S, label='Susceptibles')
   #  plt.plot(t, P, label="Prescription Users")
     plt.plot(t, A, label="Opioid Addicts")
-    plt.plot(t, H, label="Heroin Addicts")
+    plt.plot(t, H, label="Heroin and Fentanyl Addicts")
     plt.plot(t, R, label="Recovering Addicts")
     plt.legend()
     plt.xlabel('Time (years)')
