@@ -19,7 +19,6 @@ params['alpha'] = 0.15                       #S->P the rate at which people are 
 params['beta'] = 0.0036                     #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value 
 params['xi'] =  0.74                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
 params['theta_1'] = 0.0003               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
-# params['delta'] = 0.15                     #R->S rate at which people come back to the susceptible class after successfully finishing treatment #[19] https://ac.els-cdn.com/S0740547213000779/1-s2.0-S0740547213000779-main.pdf?_tid=0a47e661-2ac3-45fb-a7da-9fa8c43271af&acdnat=1525189437_134c2f5932fa797a0725faa7c950a0f9 (page 1, 10% successfully treated for opioids + ESTIMATED 5% successfully treated for heroin)
 params['mu'] = 0.007288                      #P,A,H,R->S natural death rate  #from Christopher opioid value 
 params['mu_A'] = 0.004262                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
 params['mu_H'] = 0.008524                   #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # doubled opioid value from Christopher's paper 
@@ -112,7 +111,7 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
 #          P_star = params['alpha']/(params['alpha']+params['epsilon']+params['mu'])
 #          a= params['zeta']+params['mu']+params['mu_A']
 #          b= params['nu']+params['mu']+params['mu_H']
-#          c= params['delta']+params['sigma_A']+params['sigma_H']+params['mu']
+#          c= params['sigma_A']+params['sigma_H']+params['mu']
 #          z= params['theta_1']*S_star+params['theta_2']*P_star   
 #          r = params['beta']*S_star*(b*c-params['sigma_H']*params['nu'])
 #          s = z*(a*c-params['sigma_A']*params['zeta'])
