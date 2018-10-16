@@ -15,13 +15,12 @@ tstop = 10
 #parameters
 params = {}
 params['alpha'] = 0.15                  #S->P: prescription rate
-params['beta'] = 0.0036                 #total S->A addiction rate
+params['beta_P'] = 0.00266              #S->A due to P
+params['beta_A'] = 0.00094              #S->A due to A
 params['delta'] = 0.1                   #R->S: finish recovery
 params['epsilon'] = 3.0                 #P->S rate
 params['gamma'] = 0.00744               #P->A
-params['xi'] = 0.74                     #fraction of beta due to P
 params['zeta'] = 0.25                   #A->R rate of starting treatment
-params['nu'] = 0.2                      #R->A treatment relapse due to A
 params['mu'] = 0.007288                 #nomral death rate
 params['mu_star'] = 0.01155             #addiction death rate
 params['sigma'] = 0.7                   #R->A natural treatment relapse
@@ -44,15 +43,13 @@ def opioid_odes(t, X, params):
     P = X[1]
     A = X[2]
     R = X[3]
-    Y[0] = -params['alpha']*S-params['beta']*(1-params['xi'])*S*A-\
-        params['beta']*params['xi']*S*P+params['epsilon']*P+\
+    Y[0] = -params['alpha']*S-params['beta_A']**S*A-\
+        params['beta_P']*S*P+params['epsilon']*P+\
         params['delta']*R+params['mu']*(P+R)+params['mu_star']*A
     Y[1] = params['alpha']*S-(params['epsilon']+params['gamma']+params['mu'])*P
-    Y[2] = params['gamma']*P+params['sigma']*R+params['beta']*(1-params['xi'])*S*A+\
-        params['beta']*params['xi']*S*P+params['nu']*R*A-\
-        (params['zeta']+params['mu_star'])*A
-    Y[3] = params['zeta']*A-params['nu']*R*A-\
-        (params['delta']+params['sigma']+params['mu'])*R
+    Y[2] = params['gamma']*P+params['sigma']*R+params['beta_A']*S*A+\
+        params['beta_P']*S*P-(params['zeta']+params['mu_star'])*A
+    Y[3] = params['zeta']*A-(params['delta']+params['sigma']+params['mu'])*R
     return Y
 
 
@@ -84,12 +81,12 @@ def compute_R0(p=None):
     '''Check that AFE exists. If so, compute and return R0'''
     if p is None:
         p = params
-    if p['gamma'] != 0 or p['xi'] != 0:
+    if p['gamma'] != 0 or p['beta_P'] != 0:
         raise ValueError('AFE does not exist with these parameters.')
     else:
         Lambda = 1 - p['sigma']/(p['delta']+p['mu']+p['sigma'])
         S_star = 1 - p['alpha']/(p['alpha']+p['epsilon']+p['mu'])
-        return (p['beta']*S_star)/(p['mu']+p['zeta']*Lambda)
+        return (p['beta_A']*S_star)/(p['mu']+p['zeta']*Lambda)
 
 
 
