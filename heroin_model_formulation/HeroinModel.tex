@@ -19,6 +19,7 @@
 \usepackage{color,soul}
 \usepackage{combelow}
 \bibliographystyle{apa}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
 
 
 
@@ -82,6 +83,7 @@ The misuse of prescription pain relievers leads some individuals to start heroin
 According to the National Survey of Drug Use and Health (NSDUH) survey information from 2002-2011, nearly 80\% of heroin users reported non-medical prescription pain reliever use prior to their heroin use. Here, non-medical prescription use is defined as taking prescriptions that were not prescribed to the user directly or used only for the feelings it causes. In fact, those who had prior non-medical prescription pain reliever use were 19 times more likely to initiate heroin use than those without prior use \cite{Muhuri}. This could in part be due to the higher availability of heroin in recent years at a lower cost than alternative opioids \cite{NIDA1}. Moreover, approximately 3.6 percent of non-medical prescription pain reliever users began using heroin within 5 years of their first opioid; although a small percentage, this is a significant number of individuals given the magnitude of opioid addiction \cite{Muhuri}. In 2010, an abuse-deterrent formulation of the commonly abused prescription opioid OxyContin was released that made abuse through injection and inhalation more challenging. Although done with the intent of reducing opioid abuse, studies showed that many individuals switched to heroin use instead \cite{Cicero2, Cicero3}. One study of young adults ages 18-25 concluded that among many factors including race, education status, martial status, other drug use, as well as many others, the use of non-prescribed opioid pain relievers in the past year was the biggest indicator of an individual using heroin in the past month, past year or in their lifetime \cite{Ihongbe}. Comparing NSDUH data from 2002-2004 and 2008-2010, the average yearly rates of past year heroin use increased among non-medical opioid users, but heroin use stayed static for those who reported no non-medical use of opioids; the highest rate of heroin use was among individuals with past year non-medical use of opioids ranging between 100 and 365 days of use \cite{Jones}. 
 
 \textcolor{red}{Add more in here from background papers.}\\ In the 1960's, heroin users were composed mainly of younger, nonwhite men in urban areas with their initial opioid being heroin, but in recent decades, this trend has shifted to older, white, rural and suburban men and women with their initial opioid being a prescription \cite{Cicero}. Opioids are of no shortage in society today and since opioid addiction is driven largely by legal prescription medication availability, this has made a significant proportion of society susceptible to misuse and addiction to opioids, including heroin. 
+\textcolor{red}{Tennessee: TN Together Law (initial prescriptions have limit of 5 days with limited dosage of 40 morphine milligram equivalents, MME's), Pilfering Prevention Act (lockable bottles to reduce kids from getting access) and STOPTN (community group in TN). Great summary of statistics for Tennessee specifically: https://spark.adobe.com/page/mKMP4PaXOtIAy/}
 
 
 \textcolor{green}{Goal paragraph} \\ 
@@ -110,7 +112,7 @@ The motivation for our heroin model came from a previous model focusing on opioi
 
 \textcolor{red}{Include details on how my model different than the previous ones.} For the most part, models have not incorporated the connection between prescription opioid misuse and heroin or fentanyl use at all, instead focusing solely on heroin addiction and recovery. Although there are many factors that play a role in population size, susceptibility to drug use, relapse time and other parts of the drug-using process, we consider individuals in each of the classes to be homogeneous, for simplicity of a starting model. 
 
-%Compton says that current efforts from state and federal level: education health professionals/public about appropriate use, prescription drug-monitoring programs, regulations about excessive prescribing (pill mills) and producing abuse-deterrent opioids 
+%Compton says that current efforts from state and federal level: educating health professionals/public about appropriate use, prescription drug-monitoring programs, regulations about excessive prescribing (pill mills) and producing abuse-deterrent opioids 
 
 \textcolor{orange}{Future models to look for when published: \\
 ``Sub-epidemics within the opioid epidemic" by Hawre Jalal, Jeanine Buchanich, Lauren Balmert, Mark S. Roberts, and Donald Burke (see notes in binder from 7/2018); \\ 
@@ -163,14 +165,20 @@ We denote the initial conditions as
 $S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we assume all of these values are positive. From data, the initial values for each of the classes are the following proportions of the entire population, and therefore are dimension-less: \textcolor{red}{Fill in initial conditions for the population classes}. 
 
 The following are the \textbf{number of individuals initially in each class} for Tennessee: \\
-Susceptibles: \\
-Prescription opioid users, 2015: 1,819,581 \cite{TNgov1} \\
-\textit{Opioid addicts: need to find}  \\ %NSDUH stat was counting misusers 
-Heroin/fentanyl addicts, 2015/2016 average for ``Past Year Heroin Use": 14,000 \cite{NSDUH2} \\
-\textit{Recovering addicts: won't be able to find because we do not know the total of individuals total that have been in treatment ever in the past for our time frame}  
+*Susceptibles: (Total population in 2015-size of four other classes$=6,590,726-1,819,581-70,000-14,000-R_{0}=$FILL IN) \cite{USCensus} \\
+*Prescription opioid users, 2015: 1,819,581 \cite{TNgov1} \\
+\textcolor{blue}{*Opioid addicts: \\
+1) 2015/2016 average for ``Pain Reliever Use Disorder": 48,000 \cite{NSDUH2} \\
+-dependence falls under our definition for addiction but not abuse from their definitions \\
+%DSM: https://dsm.psychiatryonline.org/doi/pdf/10.1176/appi.books.9780890420249.dsm-iv-tr
+2) 56,000 in 2010 \\
+-Original website source not found $https://www.tn.gov/assets/entities/behavioral-health/sa/attachments/Prescription{\_}For{\_}Success{\_}SECTION{\_}1.pdf$. \\
+-Several sources say 70,000 opioid addicts, such as American Addiction Centers \\ %https://americanaddictioncenters.org/rehab-guide/tennessee/
+-Assuming opioid addicts includes heroin and fentanyl users, so took 70,000-14,000=56,000}
+*Heroin/fentanyl addicts, 2015/2016 average for ``Past Year Heroin Use": 14,000 \cite{NSDUH2} \textcolor{applegreen}{(Also available for NJ)} \\ %NSDUH Info for how do surveys for states: https://www.samhsa.gov/data/sites/default/files/NSDUHsaeMethodology2016/NSDUHsaeMethodology2016.pdf
+\textit{*Recovering addicts: won't be able to find because we do not know the total of individuals total that have been in treatment ever in the past for our time frame}  
 
-The number of heroin users do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do heroin and not fentanyl, but we have not been able to find data for fentanyl addicts only currently and we are under the assumption that it would be a negligible population that does fentanyl without heroin. 
-
+The number of heroin users do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but we have not been able to find data for fentanyl addicts only and therefore, are working under the assumption that it would be a negligible population that does fentanyl without heroin. 
 
  
 Here, we present our ordinary differential equation model: %without delta
@@ -299,7 +307,7 @@ Thus, whenever $\phi \geq 0$ and $\phi_i(0)=0$ for some $i$, we see $f_i(\phi) \
  \textbf{Prove solution is uniformly bounded a priori}
 
  \textbf{Proof} We see $$\frac{dS}{dt} + \frac{dP}{dt} + \frac{dA}{dt} +\frac{dH}{dt} +\frac{dR}{dt} = 0$$
-This means  $S(t) + P(t) + A(t) + H(t) +R(t) = c$ for some constant $c \geq 0$, upon integration with respect to time. Therefore, each state solution must be $\leq c$ for all $t \geq t_0$. Assuming we begin with non-negative initial conditions, then by previous work, we have shown that solutions will remain non-negative for all time. Thus, $0 \leq S(t), P(t), A(t), H(t), R(t) \leq c$ for all $t \geq t_0.$ In conclusion, our state solutions are uniformly bounded. $\square$
+This means  $S(t) + P(t) + A(t) + H(t) +R(t) = c$ for some constant $c \geq 0$, upon integration with respect to time. Therefore, each state solution must be $\leq c$ for all $t \geq t_0$. Assuming we begin with non-negative initial conditions, then by previous work, we have shown that solutions will remain non-negative for all time. Thus, $0 \leq S(t), P(t), A(t), H(t), R(t) \leq c$ for all $t \geq t_0.$ As before, we set $c=1$, so that each of the state solutions represent a fraction of the population. In conclusion, our state solutions are uniformly bounded. $\square$
  
  \textcolor{blue}{Have checked if correct.}
 
@@ -331,54 +339,103 @@ This means  $S(t) + P(t) + A(t) + H(t) +R(t) = c$ for some constant $c \geq 0$, 
 
 
 \textbf{Data} \\
-\textcolor{red}{***Most recent data updates on data collection document} \\
 We recognize that these estimated parameter values vary based on time and different locations within Tennessee, but are sufficient for analyzing the model. 
-%Use beta, xi, epsilon, and gamma from opioid model if cannot find data to update those values? 
+\begin{itemize}
 
 
-%Still need: susceptibles becoming heroin users, prescription opioid users becoming heroin users, opioid addicts becoming heroin users, prescription opioid users successfully finishing prescription, susceptibles becoming addicted to opioids, prescription opioid users becoming addicted to opioids, ...+more 
-
-For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain \cite{TNgov1}: \\
+\item For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain \cite{TNgov1}: \\
 2013: 1,845,144 \\
 2014: 1,824,342 \\
 2015: 1,819,581 \\
 2016: 1,761,363 \\
 2017: 1,636,374 
 
-\textbf{Treatment admissions for prescription opioids} as primary substance of abuse in Tennessee \cite{TNMentalHealth}\\ %can get "new arrivals to R" from this info, apparently: integrate dR/dt over time frame interested in (t_1 to t_2) and on RHS, integrate \zeta*A+\nu*H (or can break into two integrals on the RHS), and can get new arrivals; don't have to worry about double counting or people cycling \\
+\item \textbf{Treatment admissions for prescription opioids} as primary substance of abuse in Tennessee \cite{TNMentalHealth}: \textcolor{blue}{Tennessee Dept of Mental Health and Substance Abuse Services-funded admissions to substance abuse treatment services which serves Tennessee residents age 12 and older, in poverty and have no other insurance coverage for substance abuse treatment and/or recovery services:}\\ %can get "new arrivals to R" from this info, apparently: integrate dR/dt over time frame interested in (t_1 to t_2) and on RHS, integrate \zeta*A+\nu*H (or can break into two integrals on the RHS), and can get new arrivals; don't have to worry about double counting or people cycling \\
 2014: 4,145\\
 2015: 4,085 \\
 2016: 3,911 \\
 %Additional treatment admissions data for Tennessee: https://wwwdasis.samhsa.gov/dasis2/teds_pubs/2015_teds_rpt_st.pdf
-\textcolor{red}{We assume that if one were using heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment?}
 
-\textbf{Treatment admissions for heroin} as primary substance of abuse in Tennessee \cite{TNMentalHealth}:  \\
+\textcolor{blue}{OR for \textbf{non-heroin opiates/synthetics} from \cite{TEDS1_SAMSHA} \\
+2005: 1,578 \\
+2006: 1,529 \\
+2007: 1,743 \\
+2008: 2,022 \\
+2009: 2,464 \\
+2010: 3,384 \\
+2011: 3,884 \\
+2012: 4,203 \\
+2013: 4,485 \\
+2014: 4,530 \\
+2015: 4,326 \\}
+\textcolor{applegreen}{(Also available for NJ)}
+
+
+
+
+\textcolor{red}{We assume that if one were addicted to heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment?}
+
+\item \textbf{Treatment admissions for heroin} as primary substance of abuse in Tennessee \cite{TNMentalHealth}: \textcolor{blue}{Tennessee Dept of Mental Health and Substance Abuse Services-funded admissions to substance abuse treatment services which serves Tennessee residents age 12 and older, in poverty and have no other insurance coverage for substance abuse treatment and/or recovery services:}  \\
 2014: 538 \\
 2015: 826 \\
 2016: 1,184 \\
+
+\textcolor{blue}{OR from \cite{TEDS1_SAMSHA}: facilities that receive state/public funding  (generally referring to funding by the state substance abuse agency)} \\
+\textcolor{blue}{2010: 199} \\
+\textcolor{blue}{2011: 240} \\
+\textcolor{blue}{2012: 390} \\
+\textcolor{blue}{2013: 555} \\
+\textcolor{blue}{2014: 743} \\
+\textcolor{blue}{2015: 1,083} \\
+\textcolor{applegreen}{(Also available for NJ)}
+
 These numbers do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do go to treatment with the primary substance of abuse being fentanyl, but there is not data available for those numbers currently. 
+
+
+
+
+\item \textcolor{blue}{\textbf{Information for moving from recovery to opioid addiction or heroin/fentanyl addiction, $\sigma_A$ and $\sigma_H$:} \cite{TEDS2015_SAMSHA}}
+\textcolor{blue}{\\
+-Available for 2011-2015 \\
+-Seems more realistic that the individuals who go back to an addiction are those who ``drop out" rather than ``1-number of individuals who complete the program" since the latter includes those who are incarcerated, died, transferred, etc. \\
+-Number of ``Outpatient medication-assisted opioid therapy drop-outs"$=0$ for 2015 in TN \textcolor{applegreen}{(compare to NJ: 3,732)} \\
+-Number of ``Medication-assisted opioid detox drop-outs"$=0$ for 2015 in TN \textcolor{applegreen}{(compare to NJ: 311)}  \\
+-For ALL substance abuse treatment programs in TN: 3,039 dropped out out of 14,916 total admissions (extrapolate ratio to opioid related therapies?)}
+\textcolor{applegreen}{(Also available for NJ)}
 
 %Additional treatment admissions data for Tennessee: https://wwwdasis.samhsa.gov/dasis2/teds_pubs/2015_teds_rpt_st.pdf
 
-We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
+
+
+\item We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
 2013:(637-53=) 584 \\
 2014: (697-69=) 628 \\
 2015: (848-169=) 679 \\
-2016: (1,009-294=) 715  
+2016: (1,009-294=) 715 \\
 
-We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
+\textcolor{red}{Had note that it was a good thing methadone was pulled out separately from this data; why is that important? Because it's used for treatment?} \\
+
+\item We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
 2013: (63+53=) 116 \\
 2014: (147+69=) 216 \\
 2015: (205+169=) 374 \\
 2016: (260+294=) 554 \cite{PDO}. 
 
+\textcolor{applegreen}{(Available for NJ from 2012-2017 for both heroin and fentanyl at https://nj.gov/oag/njcares/index2.html)}
+
 %Can use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
 
-The \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee (took total deaths and subtracted out overdose deaths for the respective years) \cite{TNgov2, USCensus}: \\
+\item The \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee (took total deaths and subtracted out overdose deaths for the respective years) \cite{TNgov2, USCensus}: \\
 2013: (63,199-584-116=) 62,499 out of an estimated total population of 6490795 \\
 2014: (64,559-628-216=) 63,715 out of an estimated total population of 6540007 \\
 2015: (66,329-679-374=) 65,276 out of an estimated total population of 6590726 \\
 2016: (67,924-715-554=) 66,655 out of an estimated total population of 6649404 \\
+
+\item \textcolor{blue}{For the 609,000 participants in the study, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%).} \cite{Muhuri} \\
+\textcolor{blue}{$\implies$ ($\theta_2 + \theta_3$) 19 times greater than $\theta_1$?}
+
+
+\end{itemize}
 
 \textcolor{red}{Things to investigate for TN: Pilfering Prevention Act in TN: lockable pill bottles with code to unlock; opioid supply limit policy; STOPTN organization to look into} 
 
@@ -394,6 +451,7 @@ The \textbf{total number of deaths, excluding overdoses} for individuals in Tenn
 \textbf{Parameter Estimation} \\
 %May use ordinary least squares or bayseian inference since we are hoping to have data from experts
 %If do Bayes: see notes from 11/28/17 meeting 
+%epsilon for Christopher's opioid paper from 0.8 to 8 because of units and t is a year 
 \textcolor{red}{Fill in.}
 
 
@@ -561,7 +619,7 @@ This value is the spectral radius since it is the largest eigenvalue greater tha
 
 \textcolor{red}{Latin Hypercube/ PRCC or Sobol or both? Do we need local sensitivity analysis at all?} 
 %Info: https://www.mathworks.com/help/sldo/ug/what-is-sensitivity-analysis.html , https://www.mathworks.com/help/sldo/ug/sampling-parameters-and-states.html  
-
+%Variance methods: how big sample space affects results?
 \textcolor{red}{Will need to be updated:} In order to explore the sensitivity of each of the population classes to each of the parameters, we implemented Sobol sensitivity analysis in which the Saltelli sampler is utilized to generate N(2D+2) parameter samples where N$=$FILL IN is the number of sample points and D=16, the number of parameters in the model for a total of FILL IN samples \cite{Herman}. 
 Saltelli are the statistically good points chosen in the parameter space to test and records S, P, A, H and R at the final time (t=10 years) for the parameter choices. Samples N points from the problem and returns a matrix of parameter values. 
 %Think about why N(2D+2) and why N(D+2) for taking out second order interactions. 
@@ -593,7 +651,7 @@ Both $\mu_{A}$ and $\mu_{H}$ were restricted to the domain $[0,0.1]$ with the re
 -Obtain local data from Knox County/East Tennessee, can calculate $\mathscr{R}_0$ from there (would expect $<$ 1 b/c prescriptions seem to be a huge driving force behind addiction to opioids and individuals switching to heroin use. Contact with Davide Stern (UT hospital), Paul Erwin, Agricola Odoi, Kelly Cooper\\
 -Perform sensitivity analysis to determine the sensitivity of each of the classes to the parameters (i.e. the contribution of each of the parameters to the sizes of the classes). Plan to use Sobol sensitivity analysis in which the saltelli sampler is utilized to generate (statistically good) parameter samples. Will only perform on the full  odel, not the AFE b/c that would require $t$ very large and we want to look at shorter term, such as $t=10$ years. Will perform first, second and total indices. \\
 -Fit parameters to data that are difficult to find in literature. \\
--Explore management strategies for how to best treat pain with prescriptions while reducing opioid addiction and heroin use (optimal control or scenario analysis).  \\
+-Explore management strategies for how to best treat pain with prescriptions while reducing opioid addiction and heroin use (optimal control or scenario analysis: if reduce parameter, what happens).  \\
 Possible extentions: \\
 -Break recovery class into two different classes for opioid addicts and heroin users (look at pain management and why people relapse: START paper and Addiction Treatment Study). \\
 -Look into gender, race, socioeconomic class, incarceration, or rural versus urban location to investigate differences; treatment programs/types of treatment/success rates (see Modeling Gender Differences in Drug Abuse Epidemics paper, paper copy in desk and Length of Stay in Different Drug Using States: Lifestyles of Problem and Recreational Drug Consumers for location, also see "future papers to read" in heroin folder)
@@ -621,10 +679,22 @@ For a paper: \textit{Acknowledgements: The authors would like to thank Dr. Nicho
 -Consider relapse again in future-it's hard to keep track of how people got to recovered in the first place (from A or from H), so for now, doing $\sigma_A$ and $\sigma_H$ linear rates for relapse--may need to change in future. Later, may split into $R_A$ and $R_H$ to keep them separate...first want to see if ``catchall" R or $R_A$ and $R_H$ even matter to the dynamics?\\
 -May look into ``targeted reproduction number" (simpler representation of $\mathscr{R}_0$), or ``type reproduction number", or breaking into cycles (if look at certain cycle, what would $\mathscr{R}_0$ be)\\
 -Reconsider PH and SH pathways? \\
--Optimal control: functional consider expense of effort and cost of addiction from prescriptions? \\
 -Gabapentin mixed with opioids, instead of fentanyl \\
--Medical doctors concerns are about how to prescribe, need a good policy \\
--People: Met with Kelly Cooper, Laurie Meschke, Clea McNeely, Matthew Harris; Future connections?: Chris McCurty at the Florida Center for Excellence; Don Burke at University of Pittsburgh; Charles Simms from Economics dept at UT
+-Medical doctors concerns are about how to prescribe, need a good policy; are they more focused on alpha or epsilon? Does media affect doctors? 
+-Variance of length in P hard to put in ODE model \\
+\\ \\
+
+People: Met with Kelly Cooper, Laurie Meschke, Clea McNeely, Matthew Harris; Future connections?: Chris McCurty at the Florida Center for Excellence; Don Burke at University of Pittsburgh; Charles Simms from Economics dept at UT
+\\ \\
+
+Optimal control: \\
+-functional consider expense of effort and cost of addiction from prescriptions? \\
+-time-varying controls to move people from class to class with money (i.e. into recovery) \\
+-add control to rates going between R and A or H (i.e. zeta, nu, $sigma_A$, $sigma_H$) or going to P from S (i.e. alpha) or going to S from P (i.e. epsilon or gamma) with spending money or with some amount of effort in terms of money and make as a function of years such as alpha(t) or epsilon(t) \\
+-what can you affect by spending money on the problem? People going into/out of recovery? Identify those who are addicted/contact and trace people? \\
+-P to A transition, some due to lack of doctor awareness? \\
+
+
  
 
 
