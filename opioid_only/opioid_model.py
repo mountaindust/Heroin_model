@@ -21,6 +21,8 @@ params['delta'] = 0.1                   #R->S: finish recovery
 params['epsilon'] = 3.0                 #P->S rate
 params['gamma'] = 0.00744               #P->A
 params['zeta'] = 0.25                   #A->R rate of starting treatment
+params['nu_1'] = 0                      #RP relapse rate
+params['nu_2'] = 0                      #RA relapse rate
 params['mu'] = 0.007288                 #nomral death rate
 params['mu_star'] = 0.01155             #addiction death rate
 params['sigma'] = 0.7                   #R->A natural treatment relapse
@@ -48,8 +50,10 @@ def opioid_odes(t, X, params):
         params['delta']*R+params['mu']*(P+R)+params['mu_star']*A
     Y[1] = params['alpha']*S-(params['epsilon']+params['gamma']+params['mu'])*P
     Y[2] = params['gamma']*P+params['sigma']*R+params['beta_A']*S*A+\
-        params['beta_P']*S*P-(params['zeta']+params['mu_star'])*A
-    Y[3] = params['zeta']*A-(params['delta']+params['sigma']+params['mu'])*R
+        params['beta_P']*S*P-(params['zeta']+params['mu_star'])*A+\
+        params['nu_1']*R*P+params['nu_2']*R*A
+    Y[3] = params['zeta']*A-(params['delta']+params['sigma']+params['mu'])*R-\
+        params['nu_1']*R*P-params['nu_2']*R*A
     return Y
 
 

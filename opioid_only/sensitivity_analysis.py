@@ -27,7 +27,7 @@ parser.add_argument("--red_model", action="store_true",
                     help="run over only R0 parameters")
 
 
-def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,mu,mu_star,sigma):
+def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,mu,mu_star,sigma,nu_1=0,nu_2=0):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -43,6 +43,8 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,mu,mu_star,sigma):
     params['delta'] = delta
     params['epsilon'] = epsilon
     params['zeta'] = zeta
+    params['nu_1'] = nu_1
+    params['nu_2'] = nu_2
     params['mu'] = mu
     params['mu_star'] = mu_star
     params['sigma'] = sigma
@@ -61,7 +63,7 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,mu,mu_star,sigma):
 
 
 
-def run_full_model(alpha,beta_A,beta_P,delta,epsilon,gamma,zeta,mu,mu_star,sigma):
+def run_full_model(alpha,beta_A,beta_P,delta,epsilon,gamma,zeta,mu,mu_star,sigma,nu_1=0,nu_2=0):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -77,6 +79,8 @@ def run_full_model(alpha,beta_A,beta_P,delta,epsilon,gamma,zeta,mu,mu_star,sigma
     params['epsilon'] = epsilon
     params['gamma'] = gamma
     params['zeta'] = zeta
+    params['nu_1'] = nu_1
+    params['nu_2'] = nu_2
     params['mu'] = mu
     params['mu_star'] = mu_star
     params['sigma'] = sigma
@@ -111,11 +115,11 @@ def main(N, filename, reduced, pool=None):
         }
     else:
         problem = {
-            'num_vars': 10, #number of parameters
+            'num_vars': 12, #number of parameters
             'names': ['alpha', 'beta_A', 'beta_P', 'delta', 'epsilon', 'gamma',
-                      'zeta', 'mu', 'mu_star', 'sigma'],
+                      'zeta', 'mu', 'mu_star', 'sigma','nu_1','nu_2'],
             'bounds': [[0.02,0.2], [0.0001,0.01], [0.0001,0.01], [0,1], [0.8,8], [0.00235,0.0235],
-                       [0.2,2], [0.0023,0.023], [0.00365,0.0365], [0,1]]
+                       [0.2,2], [0.0023,0.023], [0.00365,0.0365], [0,1], [0,1], [0,1]]
             # 'bounds': [[0.003,0.3], [0.00036,0.036], [0.00036,0.036], [0,1], [0.1,10], [0.000744,0.0744],
             #            [0.05,5], [0.0007288,0.07288], [0.001155,0.1155], [0,1]]
         }
@@ -358,8 +362,12 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     rows = list(S1.index)
     # alpha, beta_A, beta_P, delta, epsilon, gamma, 
     # zeta, mu, mu*, sigma
-    cell_text = [['.02-.2'], ['0.0001,0.01'], ['0.0001,0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
-                 ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
+    # cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
+    #              ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
+    # alpha, beta_A, beta_P, delta, epsilon, gamma, 
+    # zeta, mu, mu*, sigma, nu_1, nu_2
+    cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
+                 ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1'], ['0-1'], ['0-1']]
     # alpha, beta_A, delta, epsilon, 
     # zeta, mu, mu*, sigma
     # cell_text = [['0.02-0.2'], ['0.0001,0.01'], ['0-1'], ['.8-8'],
