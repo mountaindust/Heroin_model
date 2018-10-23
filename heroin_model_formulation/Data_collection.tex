@@ -1,0 +1,173 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[numbers]{natbib}
+\usepackage{graphicx} 
+\usepackage{amssymb, amsmath, amsthm} 
+\usepackage{fontenc} 
+\usepackage{amscd,latexsym,amsfonts,amstext,amsbsy}
+\usepackage{euscript} 
+\usepackage{enumerate} 
+\usepackage{color}  
+\usepackage{physics}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{shapes,arrows}
+\usepackage{multicol}
+\usepackage{comment}
+\usepackage{color,soul}
+\usepackage{combelow}
+\bibliographystyle{apa}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+
+
+\textwidth = 16 cm
+\textheight = 24 cm
+\oddsidemargin = 0.0 cm
+\evensidemargin = 0.0 cm
+\topmargin = -2 cm
+\parskip = 0.2in
+\parindent = 0.0in
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{proporties}[theorem]{Proporties}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{definitions}[theorem]{Definitions}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+ 
+
+
+\begin{document}
+
+\textbf{Data for Heroin Model} \\
+Tricia Phillips \\
+\today \\
+\begin{itemize}
+
+\item The following are the \textbf{number of individuals initially in each class} for Tennessee: \\
+
+*\textbf{Susceptibles}: (Total population in 2015-size of four other classes$=6,590,726-1,819,581-48,000-14,000-R_{0}=$FILL IN) \cite{USCensus} \\
+
+*\textbf{Prescription opioid users}, 2015: 1,819,581 \cite{TNgov1} \\
+\textcolor{red}{Does not specify if 12 and older, assume it's okay because TN Dept of Health info mostly seems to be?} 
+
+*\textbf{Opioid addicts}, 2015/2016 average for ``Pain Reliever Use Disorder" for individuals 12 and older: 48,000 \cite{NSDUH2} \\
+We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation  \cite{DSM}.\\
+
+*\textbf{Heroin/fentanyl addicts}, 2015/2016 average for ``Past Year Heroin Use" for individuals 12 and older: 14,000 \cite{NSDUH2}  \\ 
+Although this number includes those who may have used heroin once or twice in the past year, we are under the assumption that the majority of these individuals are addicts and that very few, if any, individuals use heroin recreationally. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Overall, these two assumptions may work to balance one another out. 
+
+
+%NSDUH Info for how do surveys for states: https://www.samhsa.gov/data/sites/default/files/NSDUHsaeMethodology2016/NSDUHsaeMethodology2016.pdf
+
+\textit{*\textbf{Recovering addicts}: won't be able to find because we do not know the total of individuals total that have been in treatment ever in the past for our time frame}  \\
+
+
+
+\item For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain \cite{TNgov1}: \\
+2013: 1,845,144 \\
+2014: 1,824,342 \\
+2015: 1,819,581 \\
+2016: 1,761,363 \\
+2017: 1,636,374 
+
+\textcolor{red}{Does not specify if 12 and older, assume it's okay because TN Dept of Health info mostly seems to be?} 
+
+\item For Tennessee individuals 12 and older, \textbf{the number of treatment admissions for non-heroin opiates/synthetics} as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) \cite{TEDS2015_SAMSHA_admissions}: \\
+2005: 1,578 \\
+2006: 1,529 \\
+2007: 1,743 \\
+2008: 2,022 \\
+2009: 2,464 \\
+2010: 3,384 \\
+2011: 3,884 \\
+2012: 4,203 \\
+2013: 4,485 \\
+2014: 4,530 \\
+2015: 4,326 \\
+
+We are under the assumption that if one were addicted to heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment and would be included in the following numbers. 
+
+%can get "new arrivals to R" from this info, apparently: integrate dR/dt over time frame interested in (t_1 to t_2) and on RHS, integrate \zeta*A+\nu*H (or can break into two integrals on the RHS), and can get new arrivals; don't have to worry about double counting or people cycling \\
+
+\item For Tennessee individuals 12 and older, \textbf{the number of treatment admissions for heroin} as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) \cite{TEDS2015_SAMSHA_admissions}: \\
+2010: 199\\
+2011: 240 \\
+2012: 390 \\
+2013: 555 \\
+2014: 743 \\
+2015: 1,083 \\
+
+
+Again, these numbers do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do go to treatment with the primary substance of abuse being fentanyl, but there is not data available for those numbers currently. 
+
+
+%All TEDS tables: https://wwwdasis.samhsa.gov/dasis2/teds.htm
+
+\textbf{Information for moving from recovery to opioid addiction or heroin/fentanyl addiction, $\sigma_A$ and $\sigma_H$:} 
+
+We consider here the number of individuals in Tennessee age 12 and older who dropped out of treatment and assume that dropping out would result in an individual going back into addiction since they did not successfully complete treatment. The number of drop-outs from medication-assisted opioid detox programs and outpatient medication-assisted opioid programs was reported as essentially zero for Tennessee in 2012, 2013, and 2015, and 3 or fewer for 2011 and 2014, which does not seem realistic \cite{TEDS2011_SAMSHA_discharges, TEDS2012_SAMSHA_discharges, TEDS2013_SAMSHA_discharges, TEDS2014_SAMSHA_discharges, TEDS2015_SAMSHA_discharges}. Therefore, to get an estimate for what this value may look like, we took the total number of admissions into all drug treatment programs for each year and calculated the drop-out rates for each of those years: \\
+2011: 2,910/13,422=.217  \cite{TEDS2011_SAMSHA_admissions,TEDS2011_SAMSHA_discharges} \\
+2012: 3,127/13,525=.231 \cite{TEDS2012_SAMSHA_admissions, TEDS2012_SAMSHA_discharges} \\
+2013: 3,273/14,476=.226 \cite{TEDS2013_SAMSHA_admissions, TEDS2013_SAMSHA_discharges} \\
+2014: 3,164/14,909=.212  \cite{TEDS2014_SAMSHA_admissions, TEDS2014_SAMSHA_discharges} \\
+2015:  3,039/14,916=.204 \cite{TEDS2015_SAMSHA_admissions, TEDS2015_SAMSHA_discharges} \\
+
+We take the average of these drop out rates and extrapolate this to be an estimate for those dropping out of opioid-related therapies: .218. \textcolor{red}{(SEEMS WAY TOO LOW).}
+
+%Additional treatment admissions data for Tennessee: https://wwwdasis.samhsa.gov/dasis2/teds_pubs/2015_teds_rpt_st.pdf
+
+
+
+\item We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
+2013:(637-53=) 584 \\
+2014: (697-69=) 628 \\
+2015: (848-169=) 679 \\
+2016: (1,009-294=) 715 \\
+
+\textcolor{red}{Does not specify if 12 and older, assume it's okay because TN Dept of Health info mostly seems to be?} \\
+
+\textcolor{red}{Had note that it was a good thing methadone was pulled out separately from this data; why is that important? Because it's used for treatment?} \\
+
+\item We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
+2013: (63+53=) 116 \\
+2014: (147+69=) 216 \\
+2015: (205+169=) 374 \\
+2016: (260+294=) 554 \cite{PDO}. 
+
+\textcolor{red}{Does not specify if 12 and older, assume it's okay because TN Dept of Health info mostly seems to be?} \\
+
+
+%Can use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
+
+\item Taking the total number of deaths and subtracting out overdose deaths for respective years results in the \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee \cite{TNgov2, USCensus}: \\
+2013: (63,199-584-116=) 62,499 out of an estimated total population of 6490795 \\
+2014: (64,559-628-216=) 63,715 out of an estimated total population of 6540007 \\
+2015: (66,329-679-374=) 65,276 out of an estimated total population of 6590726 \\
+2016: (67,924-715-554=) 66,655 out of an estimated total population of 6649404 \\
+
+
+\textcolor{red}{How adjust that this is entire population and not just 12 and older? Can't find numbers of population under 12.}
+
+\textcolor{red}{Total number of deaths includes those under 12; how adjust?} 
+
+\item \textbf{Relationship among $\theta_1$, $\theta_2$, and $\theta_3$:} Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
+Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$). Although $\theta_2$ is going from P to H and consists of prescription opioid users who do not misuse their prescription, we will make the assumption that those who misuse are much more likely to be the ones to move to heroin use.
+
+
+\end{itemize}
+
+\pagebreak
+
+\bibliography{HeroinModel}
+
+ \end{document}
