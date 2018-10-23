@@ -15,11 +15,13 @@ tstop = 10
 #parameters
 params = {}
 params['alpha'] = 0.15                  #S->P: prescription rate
-params['beta_P'] = 0.00266              #S->A due to P
+#params['beta_P'] = 0.00266              #S->A due to P
+params['beta_P'] = 0
 params['beta_A'] = 0.00094              #S->A due to A
 params['delta'] = 0.1                   #R->S: finish recovery
 params['epsilon'] = 3.0                 #P->S rate
-params['gamma'] = 0.00744               #P->A
+#params['gamma'] = 0.00744               #P->A
+params['gamma'] = 0.005
 params['zeta'] = 0.25                   #A->R rate of starting treatment
 params['nu_1'] = 0                      #RP relapse rate
 params['nu_2'] = 0                      #RA relapse rate
@@ -45,7 +47,7 @@ def opioid_odes(t, X, params):
     P = X[1]
     A = X[2]
     R = X[3]
-    Y[0] = -params['alpha']*S-params['beta_A']**S*A-\
+    Y[0] = -params['alpha']*S-params['beta_A']*S*A-\
         params['beta_P']*S*P+params['epsilon']*P+\
         params['delta']*R+params['mu']*(P+R)+params['mu_star']*A
     Y[1] = params['alpha']*S-(params['epsilon']+params['gamma']+params['mu'])*P
