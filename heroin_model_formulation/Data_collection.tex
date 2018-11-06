@@ -112,22 +112,7 @@ Again, these numbers do not include fentanyl users explicitly, but we are under 
 
 %All TEDS tables: https://wwwdasis.samhsa.gov/dasis2/teds.htm
 
-\textbf{Information for moving from recovery to opioid addiction or heroin/fentanyl addiction, $\sigma_A$ and $\sigma_H$:} 
-
-We consider here the number of individuals in Tennessee age 12 and older who dropped out of treatment and assume that dropping out would result in an individual going back into addiction since they did not successfully complete treatment. The number of drop-outs from medication-assisted opioid detox programs and outpatient medication-assisted opioid programs was reported as essentially zero for Tennessee in 2012, 2013, and 2015, and 3 or fewer for 2011 and 2014, which does not seem realistic \cite{TEDS2011_SAMSHA_discharges, TEDS2012_SAMSHA_discharges, TEDS2013_SAMSHA_discharges, TEDS2014_SAMSHA_discharges, TEDS2015_SAMSHA_discharges}. Therefore, to get an estimate for what this value may look like, we took the total number of admissions into all drug treatment programs for each year and calculated the drop-out rates for each of those years: \\
-2011: 2,910/13,422=.217  \cite{TEDS2011_SAMSHA_admissions,TEDS2011_SAMSHA_discharges} \\
-2012: 3,127/13,525=.231 \cite{TEDS2012_SAMSHA_admissions, TEDS2012_SAMSHA_discharges} \\
-2013: 3,273/14,476=.226 \cite{TEDS2013_SAMSHA_admissions, TEDS2013_SAMSHA_discharges} \\
-2014: 3,164/14,909=.212  \cite{TEDS2014_SAMSHA_admissions, TEDS2014_SAMSHA_discharges} \\
-2015:  3,039/14,916=.204 \cite{TEDS2015_SAMSHA_admissions, TEDS2015_SAMSHA_discharges} \\
-
-We take the average of these drop out rates and extrapolate this to be an estimate for those dropping out of opioid-related therapies: .218. \textcolor{red}{(SEEMS WAY TOO LOW).}
-
-%Additional treatment admissions data for Tennessee: https://wwwdasis.samhsa.gov/dasis2/teds_pubs/2015_teds_rpt_st.pdf
-
-
-
-\item We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
+\item We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in the following  \textbf{total number of prescription opioid overdose deaths} \cite{PDO}: \\
 2013:(637-53=) 584 \\
 2014: (697-69=) 628 \\
 2015: (848-169=) 679 \\
@@ -145,28 +130,54 @@ Although this number does not explicitly state it is for individuals 12 and olde
 
 Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
+We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
+
 
 %Can use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
 
-\item Taking the total number of deaths and subtracting out overdose deaths for respective years results in the \textbf{total number of deaths, excluding overdoses} for individuals in Tennessee \cite{TNgov2}: \\
-2013: (63,199-584-116=) 62,499 out of an estimated total population of 6490795 \\
-2014: (64,559-628-216=) 63,715 out of an estimated total population of 6540007 \\
-2015: (66,329-679-374=) 65,276 out of an estimated total population of 6590726 \\
-2016: (67,924-715-554=) 66,655 out of an estimated total population of 6649404 \\
-
-
-\textcolor{red}{How adjust that this is entire population and not just 12 and older? Can't find numbers of population under 12.}
-
-\textcolor{red}{Total number of deaths includes those under 12; how adjust?} 
 
 \item \textbf{Total population} estimated in Tennessee each year \cite{USCensus}: \\
 2013: 6,490,795 \\
 2014: 6,540,007 \\
 2015: 6,590,726 \\
 2016: 6,649,404 \\
+2017: 6715984 \\
+\textcolor{red}{2018: FILL IN} \\
+
+There was an estimated 1,073,214 individuals Tennessee in 2018 aged 12 and under. To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the last total population estimate for 2017 being 6,715,984 from above, this means that approximately 15\% of the population is under the age of 12. \textcolor{red}{FIX when get updated 2018 total population}. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the following \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates.  \\
+2013: 5,517,176 \\
+2014: 5,559,006 \\
+2015: 5,602,117 \\
+2016: 5,651,993 \\
+2017: 5,708,586 \\
+
+%Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
+\item The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or in other words, a natural death rate of .008863 \cite{Kaiser}.
+
+
+\textcolor{red}{How adjust that this is entire population and not just 12 and older? Can't find numbers of population under 12.}
+
+\textcolor{red}{Total number of deaths includes those under 12; how adjust?} 
+
+
 
 \item \textbf{Relationship among $\theta_1$, $\theta_2$, and $\theta_3$:} Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
-Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$). Although $\theta_2$ is going from P to H and consists of prescription opioid users who do not misuse their prescription, we will make the assumption that those who misuse are much more likely to be the ones to move to heroin use.
+Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$). Although $\theta_2$ is going from P to H and consists of prescription opioid users who do not misuse their prescription, we will make the assumption that those who misuse are much more likely to be the ones to move to heroin use. \\
+\pagebreak
+
+\textcolor{red}{\emph{Ignore for now, later tell story about what model tells us regarding this.}} \\
+\textbf{Information for moving from recovery to opioid addiction or heroin/fentanyl addiction, $\sigma_A$ and $\sigma_H$:} 
+
+We consider here the number of individuals in Tennessee age 12 and older who dropped out of treatment and assume that dropping out would result in an individual going back into addiction since they did not successfully complete treatment. The number of drop-outs from medication-assisted opioid detox programs and outpatient medication-assisted opioid programs was reported as essentially zero for Tennessee in 2012, 2013, and 2015, and 3 or fewer for 2011 and 2014, which does not seem realistic \cite{TEDS2011_SAMSHA_discharges, TEDS2012_SAMSHA_discharges, TEDS2013_SAMSHA_discharges, TEDS2014_SAMSHA_discharges, TEDS2015_SAMSHA_discharges}. Therefore, to get an estimate for what this value may look like, we took the total number of admissions into all drug treatment programs for each year and calculated the drop-out rates for each of those years: \\
+2011: 2,910/13,422=.217  \cite{TEDS2011_SAMSHA_admissions,TEDS2011_SAMSHA_discharges} \\
+2012: 3,127/13,525=.231 \cite{TEDS2012_SAMSHA_admissions, TEDS2012_SAMSHA_discharges} \\
+2013: 3,273/14,476=.226 \cite{TEDS2013_SAMSHA_admissions, TEDS2013_SAMSHA_discharges} \\
+2014: 3,164/14,909=.212  \cite{TEDS2014_SAMSHA_admissions, TEDS2014_SAMSHA_discharges} \\
+2015:  3,039/14,916=.204 \cite{TEDS2015_SAMSHA_admissions, TEDS2015_SAMSHA_discharges} \\
+
+We take the average of these drop out rates and extrapolate this to be an estimate for those dropping out of opioid-related therapies: .218. (SEEMS WAY TOO LOW).
+
+%Additional treatment admissions data for Tennessee: https://wwwdasis.samhsa.gov/dasis2/teds_pubs/2015_teds_rpt_st.pdf
 
 
 \end{itemize}
