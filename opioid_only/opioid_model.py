@@ -25,8 +25,8 @@ params['gamma'] = 0.005
 params['zeta'] = 0.25                   #A->R rate of starting treatment
 params['nu_1'] = 0                      #RP relapse rate
 params['nu_2'] = 0                      #RA relapse rate
-params['mu'] = 0.007288                 #nomral death rate
-params['mu_star'] = 0.01155             #addiction death rate
+params['mu'] = 0.00729                 #nomral death rate
+params['mu_star'] = 0.01159             #addiction death rate
 params['sigma'] = 0.7                   #R->A natural treatment relapse
 
 def update_params(new_params):

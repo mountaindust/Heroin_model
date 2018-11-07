@@ -368,13 +368,13 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     ##### Extended full model #####
     # alpha, beta_A, beta_P, delta, epsilon, gamma, 
     # zeta, mu, mu*, sigma, nu_1, nu_2
-    cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
-                 ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1'], ['0-1'], ['0-1']]
+    # cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
+    #              ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1'], ['0-1'], ['0-1']]
     ##### R0 model #####
     # alpha, beta_A, delta, epsilon, 
     # zeta, mu, mu*, sigma
-    # cell_text = [['0.02-0.2'], ['0.0001,0.01'], ['0-1'], ['.8-8'],
-    #             ['0.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
+    cell_text = [['0.02-0.2'], ['0.0001,0.01'], ['0-1'], ['.8-8'],
+                ['0.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
     tbl_ax = plt.subplot(gs[2])
     the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
                  loc='center')
