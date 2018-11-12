@@ -38,4 +38,5 @@ heroin_papers/
 #folder of talks, pdfs and powerpoints
 talks/
 
-
+#MATLAB extra files
+*.m~
