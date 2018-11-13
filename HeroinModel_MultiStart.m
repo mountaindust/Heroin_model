@@ -1,3 +1,5 @@
+clear all;
+clc;
 
 % the parameter vector we will approximate
 % z=[alpha, beta, xi, theta_1, epsilon, mu, mu_A, mu_H, gamma, theta_2,
@@ -5,9 +7,9 @@
 
 
 % The vector of the initilized parameters 
-LowerBounds=[0.1  0.001  0.5   0.0001  0.8  0.001  0.001  0.002  0.0001  0.4  0.1  0.1  0.0001  0.7  0.05];
+LowerBounds=[0.1  0.001  0.5   0.0001  0.8  0.001  0.001  0.002  0.0001  0.4  0.1  0.1  0.0001  0.7  0.05 0.1 0.01 0.01];
 %z0=[0.5 0.3 0.8 0.000008 0.00027 0.0000003 0.0000006 0.0000001 0.000001 0.2815 0.1];
-UpperBounds=[0.5  0.005  0.9   0.001   2    0.009  0.009  0.01    0.001  0.9  0.5  0.5   0.001  1.0   0.5];
+UpperBounds=[0.5  0.005  0.9   0.001   2    0.009  0.009  0.01    0.001  0.9  0.5  0.5   0.001  1.0   0.5 0.3 0.2  0.3];
 
 xstart=0.5*(LowerBounds + UpperBounds); % initial guesses for parameters (starting in the middle of each of the ranges)
 
@@ -49,5 +51,4 @@ beep
 beep
 beep
 beep
-
 

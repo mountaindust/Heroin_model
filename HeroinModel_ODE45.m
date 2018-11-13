@@ -41,13 +41,20 @@ sigma_H=z(14);
  
 nu=z(15);
 
+A0=z(16);
+
+H0=z(17);
+
+R0=z(18);
+
+
 %Initials
 %MADE UP VALUES IN ORDER TO RUN CODE
-S0=0.7; 
+S0=1-0.1-z(16)-z(17)-z(18); 
 P0=0.1;
-A0=0.1;
-H0=.05;
-R0=.05; 
+A0=z(16);
+H0=z(17);
+R0=z(18); 
 X0=0;
 Z0=0;
 initials = [S0,P0,A0,H0,R0,X0,Z0];
@@ -124,8 +131,25 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  % the difference between estimated value and data 
  diff2=Estim2-Data2;
  
+ %Proportion of opioid addicts in 2015
+ addicts(2)=y(2,3); 
+ %yearly output from the model as a fraction
+ Estim3=[addicts(2)];
+%Made up for now
+ Data3=[.4];
+ %the difference between estimated value and data
+ diff3=Estim3-Data3;
+
+ 
+ %Proportion of heroin/fentanyl addicts in 2015
+ heroin(2)=y(2,4);
+ Estim4=[heroin(2)];
+ %Made up for now
+ Data4=[.2];
+ %the difference between estimated value and data
+ diff4=Estim4-Data4;
+ 
  %the relative error that we are trying to minimize for ordinary least
- %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2)) normalized by 
- value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2);
- 
- 
+ %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
+ %normalized by norm of the data
+ value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4);
