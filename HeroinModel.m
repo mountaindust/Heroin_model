@@ -34,6 +34,7 @@ sigma_H=z(14);
 nu=z(15);
 
 
+
 %ODE's 
 
 dy(1) = -alpha*y(1)-beta*(1-xi)*y(1)*y(3)-beta*xi*y(1)*y(2)-theta_1*y(1)*y(4)+epsilon*y(2)+mu*(y(2)+y(5))+(mu+mu_A)*y(3)+(mu+mu_H)*y(4);

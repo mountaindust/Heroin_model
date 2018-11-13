@@ -108,7 +108,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  
  
  
- 
  %Using ODE y(7) in order to account for new admissions coming into recovery class
  %(NOT total in recovery class), going to run from 2013-2015, so want:
  admitted=zeros(1,2);

@@ -28,7 +28,7 @@ ms=MultiStart('Display', 'iter'); % Define a multistart problem
 
 global ModelParameters
 
-for i=1: length(manymins) 
+for i=1: length(manymins)
     ModelParameters(i,:)=manymins(i).X;
 end
 
