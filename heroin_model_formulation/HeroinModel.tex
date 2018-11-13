@@ -184,9 +184,9 @@ The number of heroin users do not include fentanyl users explicitly, but we are 
 
  
 Here, we present our ordinary differential equation model: %without delta
-\[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
-\[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta (1- \xi) SA  +\beta \xi SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
+\[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta_{A} SA  +\beta_{P} SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad (4)\]
 \[\dv{R}{t} = \zeta A +\nu H -\sigma_{A}R-\sigma_{H}R -\mu R\quad(5).\]
 
@@ -194,9 +194,8 @@ Here, we present our ordinary differential equation model: %without delta
 The parameters involved in this model represent transition rates from one class to another and are per capita yearly rates; specifically: 
 \begin{itemize}
 \item $\alpha S$: rate at which susceptible individuals are prescribed opioids (1/year)
-\item $\beta$ : rate at which susceptible individuals become addicted to opioids by some means other than by prescription (1/year)
-\item $\beta(1-\xi) SA$: rate at which susceptible individuals become addicted to opioids by black market drugs or interaction with other addicts (1/year, dimension-less)
-\item $\beta \xi SP$ : rate at which susceptible population obtains extra prescription opioids and becomes addicted  (1/year, dimension-less)
+\item $\beta_{A} SA$: rate at which susceptible individuals become addicted to opioids by black market drugs or interaction with other addicts (1/year)
+\item $\beta_{P} SP$ : rate at which susceptible population obtains extra prescription opioids and becomes addicted  (1/year)
 \item $\theta_1 SH$: rate at which susceptible population becomes addicted to heroin or fentanyl by black market availability or interaction with other heroin or fentanyl users  (1/year)
 \item $\epsilon P$: rate at which individuals return to the susceptible class after being prescribed opioids and did not develop an addiction (1/year) 
 \item $\mu S, \mu P, \mu A, \mu H, \mu R$: natural death rates (1/year)
@@ -280,7 +279,7 @@ since $\alpha$ and $S_0$ are non-negative.
 
 3) Assume $\phi = (S_0, P_0, 0, H_0, R_0) \geq 0.$ Then,
 \begin{center}
-$f_3(\phi)=\gamma P_0 +\sigma_A R_0 + \beta \xi S_0 P_0 \geq 0,$
+$f_3(\phi)=\gamma P_0 +\sigma_A R_0 + \beta_{P} S_0 P_0 \geq 0,$
 \end{center}
 since all parameters and variables are non-negative. 
  
@@ -470,13 +469,13 @@ These numbers do not include fentanyl users explicitly, but we are under the ass
 \textcolor{red}{Was unable to solve for endemic equilibrium...need to eventually or just prove existence of one? Bifuraction analysis?}
 
 To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero and require that $A=H=R=0$ since these three compartments consist of individuals who are addiction to opioids or heroin. We are left with the system: \\
-\[0=-\alpha S^* -\beta \xi S^* P^* + \epsilon P^* +\mu P^* \quad\]
+\[0=-\alpha S^* -\beta_{P} S^* P^* + \epsilon P^* +\mu P^* \quad\]
 \[0=\alpha S^* - \epsilon P^* -\gamma P^* - \mu P^* \quad\]
-\[0=\gamma P^* + \beta \xi S^* P^*.   \quad\]
+\[0=\gamma P^* + \beta_{P} S^* P^*.   \quad\]
 
 
 
-If $P^*=0$, then the only solution is $S^*=P^*=H^*=R^*=0$, but $S^*=P^*=H^*=R^*=1$ by assumption, so this is not possible. Thus, we will assume $P^* \neq 0. $ This forces $\gamma + \beta \xi S^* =0$ and since all of our parameters and variables are non-negative, then it must be $\gamma=0$ and either $\beta=0$ or $\xi=0$. We have that $\gamma=0$ means that individuals who are prescribed opioids cannot become addicted to opioids. In addition, $\xi=0$ means that only black market opioids are available and there are no excess prescription drugs available and  $\beta=0$ means that susceptibles are unable to become addicted to opioids at all. We claim that $\beta=0$ is less realistic than the former since eliminating two paths to addiction from the susceptible class is less realistic than just eliminating one path. Under the assumption that $\gamma=0=\xi$ to ensure the existence of our addiction-free equilibrium and that $1=S+P+A+H+R$, we calculate the addiction-free equilibrium to be: \\
+If $P^*=0$, then the only solution is $S^*=P^*=H^*=R^*=0$, but $S^*=P^*=H^*=R^*=1$ by assumption, so this is not possible. Thus, we will assume $P^* \neq 0. $ This forces $\gamma + \beta_{P} S^* =0$ and since all of our parameters and variables are non-negative, then it must be $\gamma=0$ and $\beta_{P}=0$. We have that $\gamma=0$ means that individuals who are prescribed opioids cannot become addicted to opioids, and $\beta_{P}=0$ means that only black market opioids are available for susceptibles to become addicted to opioids and there are no excess prescription drugs available. Under the assumption that $\gamma=0=\beta_{P}$ to ensure the existence of our addiction-free equilibrium and that $1=S+P+A+H+R$, we calculate the addiction-free equilibrium to be: \\
 
 \[S^*=\frac{\epsilon + \mu}{\alpha + \epsilon +\mu}\quad\]
 \[P^*=\frac{\alpha}{\alpha + \epsilon +\mu}\quad\]
@@ -498,18 +497,18 @@ Note that enforcing $P^* \neq 0$ implies that $\alpha \neq 0$, as well, which me
 
 \textbf{Basic Reproduction Number, \textbf{$\mathscr{R}_0$}} \\
 \textcolor{red}{Re-check work in future because removed delta, but should be same final result except 
-delta is not a part of "c."} \\
+delta is not a part of "c." In addition, changed notation from $\beta$ and $\xi$ to $\beta_{A}$ and $\beta_{P}$, so make sure all notation was correctly converted.} \\
 %Can numerically check R_0 (i.e. plug in specific values for F and V and make sure that matches my R_0). Make sure if R_0>1, goes away from my equilibrium and if R_0<1, goes toward my equilibrium. 
 
 The basic reproduction number, denoted $\mathscr{R}_0$, is a term used in epidemiological models that gives the expected number of secondary disease cases that result from the introduction of a disease to a susceptible population. The value of $\mathscr{R}_0$ represents how successful the spread of the disease is expected to be; if $\mathscr{R}_0 < 1$, then the disease is expected to die out and the disease-free equilibrium will be locally stable; conversely, if $\mathscr{R}_0 >1$, then the disease is expected to spread and the disease-free equilibrium will be unstable \cite{Driessche}. \\ \\
- This idea may be applied to the context of our model since for the addiction-free equilibrium to occur, $\gamma=0$ and $\xi=0$, so that individuals can become addicted only with interactions with opioid addicted individuals or heroin users so takes the form of an infectious disease. Thus, in this case in which the prescription part is essentially taken out of the model so that it is a black-market-only driven model, $\mathscr{R}_0$ can be calculated. This value will be the ratio of the number of new addictions in the next year compared to the current year. At the addiction-free equilibrium, the population is completely susceptible, as needed for $\mathscr{R}_0$ to be an accurate measurement of addiction potential. 
+ This idea may be applied to the context of our model since for the addiction-free equilibrium to occur, $\gamma$ and $\beta_{P}$ must both be equal to 0, which means individuals can become addicted only with interactions with opioid addicted individuals or heroin users so this takes the form of an infectious disease. Thus, in this case in which the prescription part is essentially taken out of the model so that it is a black-market-only driven model, $\mathscr{R}_0$ can be calculated. This value will be the ratio of the number of new addictions in the next year compared to the current year. At the addiction-free equilibrium, the population is completely susceptible, as needed for $\mathscr{R}_0$ to be an accurate measurement of addiction potential. 
 We note that our goal in this section is to explore the structure of the model and not obtain a result for the full model. The disease compartments are those that contain infected individuals, or in our case, addicts \cite{Driessche}. Our model incorporates three addiction compartments, A, H, and R, since these all consist of opioid and/or heroin addicted individuals. We will utilize the Next Generation Matrix Method in order to calculate $\mathscr{R}_0$.
 
 
-For the purposes of calculating $\mathscr{R}_0$, we will assume $\gamma =0$ and $\xi =0$ (thus, $\beta \neq 0$) in order to ensure the existence of the addiction-free equilibrium. This results in the following system:
-\[\dv{S}{t} = -\alpha S - \beta SA  - \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
+For the purposes of calculating $\mathscr{R}_0$, we will assume $\gamma =0$ and $\beta_{P} =0$ in order to ensure the existence of the addiction-free equilibrium. This results in the following system:
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  - \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \theta_{2}PH- \mu P    \quad\]
-\[\dv{A}{t} = \sigma_{A} R +\beta SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
+\[\dv{A}{t} = \sigma_{A} R +\beta_{A} SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad\]
 \[\dv{R}{t} = \zeta A +\nu H -\sigma_{A}R-\sigma_{H}R -\mu R.\quad\]
 
@@ -536,7 +535,7 @@ Thus, under the assumption that A, H and R are the addicted compartments and abi
 $\mathscr{F}=$
 $ \begin{pmatrix}
 
-\beta SA \\
+\beta_{A} SA \\
 \theta_{1}SH+\theta_{2}PH \\
 0
 \end{pmatrix}$
@@ -569,7 +568,7 @@ Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\pa
 $F=$
 $ \begin{pmatrix}
 
-\beta S^* &  0  & 0 \\
+\beta_{A} S^* &  0  & 0 \\
 0 & \theta_1 S^* +\theta_2 P^* & 0\\
 0  &   0 & 0\\
 \end{pmatrix}$
@@ -588,21 +587,21 @@ $ \begin{pmatrix}
 
 The eigenvalues of $FV^{-1}$ are calculated to be: 
 \begin{center}
-$\sigma (FV^{-1}) = \{0, \frac{(r+s)-\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
-, \frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
+$\sigma (FV^{-1}) = \{0, \frac{(r+s)-\sqrt{(r-s)^2+4\beta_{A} S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
+, \frac{(r+s)+\sqrt{(r-s)^2+4\beta_{A} S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)} 
 \}$
 \end{center}
 
-where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c= \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=a(bc-\sigma_H\nu)-\sigma_A\zeta b$.
+where $a=\zeta +\mu + \mu_A$, $b=\nu + \mu + \mu_H$, $c= \sigma_A + \sigma_H +\mu$, $z=\theta_1 S^* + \theta_2 P^*$, $ r=\beta_{A} S^* (bc-\sigma_H \nu), s=z(ac-\sigma_{A} \zeta)$, and $det(V)=a(bc-\sigma_H\nu)-\sigma_A\zeta b$.
 
 $\mathscr{R}_0$ may then be determined as the spectral radius of $FV^{-1}$, in which the $(i,j)$ entry is the expected number of secondary addictions in compartment $i$ produced by individuals initially in compartment $j$ :
 \begin{center}
-$\mathscr{R}_0=$ $\frac{(r+s)+\sqrt{(r-s)^2+4\beta S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)}. $
+$\mathscr{R}_0=$ $\frac{(r+s)+\sqrt{(r-s)^2+4\beta_{A} S^* z  \sigma_A \zeta \sigma_H \nu}}{2det(V)}. $
 \end{center}
 
-This value is the spectral radius since it is the largest eigenvalue greater than 0. We can see this by first noting that the radicand $(r-s)^2+4\beta S^* z  \sigma_{A} \zeta \sigma_{H} \nu$ is positive, since all parameters are positive. In addition, $r$ is positive because in the multiplication of $bc=\ \mu^{2} + \mu \nu+ \mu \mu_{H} + \mu \sigma_{A} + \mu \sigma_{H}+ \nu \sigma_{A}+$ \hl{$ \sigma_{H} \nu $} $+ \mu_{H}\sigma_{A}+\mu_{H}\sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{H} \nu$, leaving only a positive sum. Multiplying by $\beta S^*$, the resulting value $r$ is positive. Similarly, $s$ is positive because in the multiplication of $ac= \mu_{A} \mu+ \mu_{A} \sigma_{A}+\mu_{A} \sigma_{H} +\mu^{2} +\mu \zeta+ \mu \sigma_{A}+\mu \sigma_{H}+$ \hl{$\sigma_{A} \zeta$} $+ \zeta \sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{A} \zeta$, again resulting in a sum of only positive terms. Multiplied against positive value $z$, this results in $s$ being positive. Finally, the expansion of $det(V)$ is positive. This is because $bc$ is a positive sum containing a term that cancels with $-\sigma_{H} \nu$ as described above and $ac$ shown above contains the term $\sigma_{A} \zeta$ which multiplied with b cancels with $-\sigma_A\zeta b,$ thus resulting in a positive determinant. \textcolor{red}{Need to prove AFE is stable if $\mathscr{R}_0$ $<$ 1 and unstable if $>$ 1?}
+This value is the spectral radius since it is the largest eigenvalue greater than 0. We can see this by first noting that the radicand $(r-s)^2+4\beta_{A} S^* z  \sigma_{A} \zeta \sigma_{H} \nu$ is positive, since all parameters are positive. In addition, $r$ is positive because in the multiplication of $bc=\ \mu^{2} + \mu \nu+ \mu \mu_{H} + \mu \sigma_{A} + \mu \sigma_{H}+ \nu \sigma_{A}+$ \hl{$ \sigma_{H} \nu $} $+ \mu_{H}\sigma_{A}+\mu_{H}\sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{H} \nu$, leaving only a positive sum. Multiplying by $\beta_{A} S^*$, the resulting value $r$ is positive. Similarly, $s$ is positive because in the multiplication of $ac= \mu_{A} \mu+ \mu_{A} \sigma_{A}+\mu_{A} \sigma_{H} +\mu^{2} +\mu \zeta+ \mu \sigma_{A}+\mu \sigma_{H}+$ \hl{$\sigma_{A} \zeta$} $+ \zeta \sigma_{H}$, all terms are positive and the highlighted term cancels with $-\sigma_{A} \zeta$, again resulting in a sum of only positive terms. Multiplied against positive value $z$, this results in $s$ being positive. Finally, the expansion of $det(V)$ is positive. This is because $bc$ is a positive sum containing a term that cancels with $-\sigma_{H} \nu$ as described above and $ac$ shown above contains the term $\sigma_{A} \zeta$ which multiplied with b cancels with $-\sigma_A\zeta b,$ thus resulting in a positive determinant. \textcolor{red}{Need to prove AFE is stable if $\mathscr{R}_0$ $<$ 1 and unstable if $>$ 1?}
 
-%Don't include, most likely: Increasing $\beta$ (the rate of addiction via non-prescription means), $\theta_1$ (the rate of heroin addiction of the susceptible population), and $\theta_2$ (the rate of heroin addiction of the prescribed population), all increase $\mathscr{R}_0$ since these parameters only appear in the numerator of $\mathscr{R}_0$, specifically within the $r$, $z$, and $s$ terms. \\ 
+%Don't include, most likely: Increasing $\beta_{A}$ (the rate of addiction via non-prescription means), $\theta_1$ (the rate of heroin addiction of the susceptible population), and $\theta_2$ (the rate of heroin addiction of the prescribed population), all increase $\mathscr{R}_0$ since these parameters only appear in the numerator of $\mathscr{R}_0$, specifically within the $r$, $z$, and $s$ terms. \\ 
 
 
 
