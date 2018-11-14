@@ -118,9 +118,9 @@ Heroin/fentanyl addicts, 2015/2016 average for ``Past Year Heroin Use": 14,000 [
 The number of heroin users do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do heroin and not fentanyl, but we have not been able to find data for fentanyl addicts only currently and we are under the assumption that it would be a negligible population that does fentanyl without heroin. \\
 
 Our ordinary differential equation model \textbf{(removing delta pathway)}: 
-\[\dv{S}{t} = -\alpha S - \beta (1- \xi) SA  -\beta \xi SP- \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
-\[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta (1- \xi) SA  +\beta \xi SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
+\[\dv{A}{t} = \gamma P + \sigma_{A} R +\beta_{A} SA  +\beta_{P} SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma_{H}R-\nu H-(\mu+\mu_{H})H  \quad (4)\]
 \[\dv{R}{t} = \zeta A +\nu H -\sigma_{A}R-\sigma_{H}R -\mu R\quad(5).\]
 
@@ -132,7 +132,7 @@ Our ordinary differential equation model \textbf{(removing delta pathway)}:
 \hspace{-.8cm}
 \begin{minipage}{.6\textwidth}
 \centering
-\includegraphics[width=.9\linewidth, height=0.26\textheight]{plot_with_delta_separate}
+\includegraphics[width=.2\linewidth, height=0.26\textheight]{plot_with_delta_separate}
 \vspace{-.4cm}
 \caption{Model including delta}
 \end{minipage}

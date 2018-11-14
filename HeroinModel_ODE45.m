@@ -13,9 +13,9 @@ global value
 %Parameters
 alpha=z(1); 
  
-beta=z(2); 
+beta_A=z(2); 
  
-xi=z(3);
+beta_P=z(3);
  
 theta_1=z(4);
  

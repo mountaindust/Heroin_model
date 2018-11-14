@@ -16,8 +16,8 @@ tstop = 10
 #parameters
 params = {}
 params['alpha'] = 0.15                       #S->P the rate at which people are prescribed opioids #from Christopher opioid value 
-params['beta'] = 0.0036                     #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value 
-params['xi'] =  0.74                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
+params['beta_A'] = 0.0036                    #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
+params['beta_P'] =  0.74                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
 params['theta_1'] = 0.0003               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
 params['mu'] = 0.007288                      #P,A,H,R->S natural death rate  #from Christopher opioid value 
 params['mu_A'] = 0.004262                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
@@ -55,13 +55,13 @@ def heroin_odes(t, X, params):
     H = X[3]
     R = X[4]
 
-    Y[0] = -params['alpha']*S-params['beta']*(1-params['xi'])*S*A-\
-        params['beta']*params['xi']*S*P-params['theta_1']*S*H+\
+    Y[0] = -params['alpha']*S-params['beta_A']*S*A-\
+        params['beta_P']*S*P-params['theta_1']*S*H+\
         params['epsilon']*P+params['mu']*(P+R)+\
         (params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
     Y[1] = params['alpha']*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
-    Y[2] = params['gamma']*P+params['sigma_A']*R+params['beta']*(1-params['xi'])*S*A+\
-        params['beta']*params['xi']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
+    Y[2] = params['gamma']*P+params['sigma_A']*R+params['beta_A']*S*A+\
+        params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
     Y[3] = params['theta_1']*S*H+params['theta_2']*P*H+params['theta_3']*A*H+params['sigma_H']*R-\
         params['nu']*H-params['mu']*H-params['mu_H']*H
     Y[4] = params['zeta']*A+params['nu']*H-\

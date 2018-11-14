@@ -28,7 +28,7 @@ parser.add_argument("--noplot", action="store_true",
 
 
 # Ignore this for now.
-def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
+def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
     '''Defines a model wrapper based on the parameter space in main()'''
     raise NotImplementedError("We haven't found reduced model yet!")
 
@@ -66,7 +66,7 @@ def run_reduced_model(alpha,beta,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
+def run_full_model(alpha,beta_A,delta,epsilon,gamma,beta_P,zeta,nu,mu,
                    theta_1,theta_2,theta_3,mu_A,mu_H,sigma_A,sigma_H):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
@@ -76,11 +76,11 @@ def run_full_model(alpha,beta,delta,epsilon,gamma,xi,zeta,nu,mu,
     params = dict(heroin_model.params)
     # Replace other parameter values
     params['alpha'] = alpha
-    params['beta'] = beta
+    params['beta_A'] = beta_A
     params['delta'] = delta
     params['epsilon'] = epsilon
     params['gamma'] = gamma
-    params['xi'] = xi
+    params['beta_P'] = beta_P
     params['zeta'] = zeta
     params['nu'] = nu
     params['mu'] = mu
@@ -118,7 +118,7 @@ def main(N, filename, reduced, pool=None, no_plot=False):
         raise NotImplementedError("Reduced model not currently implemented!")
         problem = {
             'num_vars': 9, #number of parameters
-            'names': ['alpha', 'beta', 'delta', 'epsilon', 'zeta', 'nu',
+            'names': ['alpha', 'beta_A', 'delta', 'epsilon', 'zeta', 'nu',
                         'mu', 'mu_star', 'sigma'],
             'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
                         [0,0.1], [0,0.5], [0,1]]
@@ -126,7 +126,7 @@ def main(N, filename, reduced, pool=None, no_plot=False):
     else:
         problem = {
             'num_vars': 16, #number of parameters
-            'names': ['alpha', 'beta', 'delta', 'epsilon', 'gamma', 'xi',
+            'names': ['alpha', 'beta_A', 'delta', 'epsilon', 'gamma', 'beta_P',
                       'zeta', 'nu', 'mu', 'theta_1', 'theta_2', 'theta_3',
                       'mu_A', 'mu_H', 'sigma_A', 'sigma_H'],
             'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
