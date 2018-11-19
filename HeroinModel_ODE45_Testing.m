@@ -3,101 +3,137 @@ function value = HeroinModel_ODE45_Testing(z)
 %%%GOING TO CHANGE FOR MY MODEL (right now it's a different model) 
 
 % Final time 
-N = 180;
+N = 4;
 T=N;
 tspan=linspace(0,T,N+1);
 global value 
  
 
-% Estimated  values of parameters from the "Model_MultiStar.m"
-%z0=[0.598865461058500,0.127071357078022,0.116748546762720,9.99604205662634e-05,4.78764501980746e-05,1.35331547234463e-05,1.19563837848761e-07,4.12372760163290e-06,1.50585703330823e-05,0.519590745645255,0.574934579070339];
-%z0= [0.523772604010212,0.104033132979486,0.190273501576715,9.99627115279089e-05,3.65423094912493e-05,1.34581576995548e-05,1.00221316942663e-07,5.74470493795167e-06,1.30656891116669e-05,0.555312086427258,0.494415504997107];
-%z0=[0.189627932102808,0.156249066705754,0.153469283449332,9.19240019288754e-05,8.44645615142794e-05,1.30317350951584e-05,7.73975660455356e-06,5.21061060135415e-06,4.09792383058129e-06,0.569060145549251,0.584974060214357];
-%z0=[0.133122315522406,0.186163341466148,0.554449932048055,7.95538371925574e-05,5.43545342741910e-05,1.51685046126194e-05,4.99067412766050e-06,7.09722489103569e-06,2.69569019387619e-05,0.144429593587413,0.674200088915047];
-z0=[0.406316891580689,0.101200921126464,0.162915225906188,1.07283038812341e-06,1.83877199370086e-05,1.00698823176837e-07,2.56689031764850e-05,1.00236694289975e-07,9.99506682425477e-05,0.515435842166515,0.380148738139410];
+% Estimated  values of parameters from "HeroinModel_MultiStart.m"
+z0=[0.1  0.001  0.5   0.0001  0.8  0.001  0.001  0.002  0.0001  0.4  0.1  0.1  0.0001  0.7  0.05 0.1 0.01 0.01];
 
 z=z0;
 
-% Parameter
+%Parameters
+alpha=z(1); 
+ 
+beta_A=z(2); 
+ 
+beta_P=z(3);
+ 
+theta_1=z(4);
+ 
+epsilon=z(5);
+ 
+mu=z(6);  
+ 
+mu_A=z(7);   
+ 
+mu_H=z(8);
+ 
+gamma=z(9);   
+ 
+theta_2=z(10); 
+ 
+sigma_A=z(11);
+ 
+zeta=z(12);
+ 
+theta_3=z(13);
+ 
+sigma_H=z(14);
+ 
+nu=z(15);
 
-% % Intrinsic Growth rate of Anchovy Population
-r1=z(1); 
-% % Intrinsic Growth rate of Jelly Fish Population
-r2=z(2); 
-% % Intrinsic Growth rate of Zoo-Plankton Population
-r3=z(3);
+A0=z(16);
 
-% % Carriying Capacity of Anchovy population
-K1=3e+5;
-% % Carriying Capacity of Jelly Fish population
-K2=1e+4;
-% % Carriying Capacity of Zoo-Plankton population
-K3=4e+5;
+H0=z(17);
+
+R0=z(18);
+
+
 %Initials
-A0=2.0839e5;
-J0=8.2297e3;
-Z0=2.983e5;
-initials = [A0, J0, Z0];
-
-%  Interaction rates:
-
-% % Predation constant of Anchovy on its prey, Zoo-Plankton
-m0=z(4);   
-% % Consumption constant of Anchovy by its predator,Jelly Fish
-m1=z(5);
-% % Predation constant of Jelly Fish on its prey, Anchovy
-m2=z(6);   
-% % Predation constant of Jelly Fish on its prey, Zoo-Plankton
-m3=z(7);
-% % Consumption constant of Zoo-Plankton by its predator, Anchovy
-m4=z(8);   
-% % Consumption constant of Zoo-Plankton by its predator, Jelly Fish
-m5=z(9);
-% % The rate of decay of Jelly Fish by ts pradator, Beroe ovata, 
-m6=z(10);
-% % Constant Harvesting rate 
-h=z(11);
+%MADE UP VALUES IN ORDER TO RUN CODE
+S0=1-0.1-z(16)-z(17)-z(18); 
+P0=0.1;
+A0=z(16);
+H0=z(17);
+R0=z(18); 
+X0=0;
+Z0=0;
+initials = [S0,P0,A0,H0,R0,X0,Z0];
 
 
+[t,y]=ode45(@(t,y) HeroinModel(t,y,z),tspan,initials);
 
 
-[t,y]=ode45(@(t,y) Model(t,y,z),tspan, initials);
-
-
-  A=y(:,1);
-  J=y(:,2);
-  Z=y(:,3);
+  S=y(:,1);
+  P=y(:,2);
+  A=y(:,3);
+  H=y(:,4);
+  R=y(:,5);
+  X=y(:,6);
+  Z=y(:,7);
   
   
   % int of harvesting , h*A
 
- for i=1:N
- temp(i) =h*(((y(i+1,1)+y(i,1))/2)*(t(i+1)-t(i)));
+ prescript=zeros(1,4);
+ for i=1:4
+ prescript(i) = y(i,2)+y(i+1,6)-y(i,6); 
  end
  
- % yearly landing from the model
+%yearly output from the model as a fraction
+ Estim1=[prescript(1),prescript(2),prescript(3),prescript(4)];
+       
+% Proportions of population of prescription opioid users (MADE UP FRACTIONS
+% FOR NOW)
+ Data1=[.1 .2 .3 .25];
  
- Estim=[sum(temp(1:12)),sum(temp(13:24)),sum(temp(25:36)), sum(temp(37:48)),sum(temp(49:60)),...
-        sum(temp(61:72)),sum(temp(73:84)),sum(temp(85:96)),sum(temp(97:108)),sum(temp(109:120)),...
-        sum(temp(121:132)),sum(temp(133:144)),sum(temp(145:156)),sum(temp(157:168)),sum(temp(169:180))];
-       % sum(temp(181:192)),sum(temp(193:204)),sum(temp(205:216)),sum(temp(217:228)),sum(temp(229:240))];
 
- 
-% yearly landing of Anchovy from 1997-2016 (20 years)
-% Data=[213780 195996 310801 260670 288616 336419 266069 306656 119255 212081 357089 225344 185606 203026 246390 109187 255309  71530 195350 112500];
-
-% Yearly landing of Anchovy from 2002-2016 (15 years)
- Data=[ 336419 266069 306656 119255 212081 357089 225344 185606 203026 246390 109187 255309  71530 195350 112500];
- 
-% Yearly landing of Anchovy from 2002-2016 (12 years)
-% Data=[119255 212081 357089 225344 185606 203026 246390 109187 255309  71530 195350 112500];
- 
- 
- 
 % the difference between estimated value and data 
- diff = (Estim-Data);
+ diff1= Estim1-Data1;
  
- value = norm(diff,2)./norm(Data) ; 
+ 
+ 
+ %Using ODE y(7) in order to account for new admissions coming into recovery class
+ %(NOT total in recovery class), going to run from 2013-2015, so want:
+ admitted=zeros(1,2);
+ for i=1:2
+ admitted(i) = y(i+1,7)-y(i,7);
+ end
+ 
+ %yearly output from the model as a fraction
+ Estim2=[admitted(1), admitted(2)];
+  
+ %Proportions of population being admitted into recovery (MADE UP FRACTIONS FOR NOW)
+ Data2=[.001,.0015];
+
+ % the difference between estimated value and data 
+ diff2=Estim2-Data2;
+ 
+ %Proportion of opioid addicts in 2015
+ addicts(2)=y(2,3); 
+ %yearly output from the model as a fraction
+ Estim3=[addicts(2)];
+%Made up for now
+ Data3=[.4];
+ %the difference between estimated value and data
+ diff3=Estim3-Data3;
+
+ 
+ %Proportion of heroin/fentanyl addicts in 2015
+ heroin(2)=y(2,4);
+ Estim4=[heroin(2)];
+ %Made up for now
+ Data4=[.2];
+ %the difference between estimated value and data
+ diff4=Estim4-Data4;
+ 
+ %the relative error that we are trying to minimize for ordinary least
+ %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
+ %normalized by norm of the data
+ value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4);
  
  
  figure(1)
