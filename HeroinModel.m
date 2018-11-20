@@ -33,6 +33,9 @@ sigma_H=z(14);
  
 nu=z(15);
 
+%Although we know total number of prescription users in 2013, we do not
+%know number initially (i.e. at the beginning moment of 2013), so that must
+%also be estimated
 P0=z(16);
 
 A0=z(17);

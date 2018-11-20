@@ -117,6 +117,21 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  
  
  
+%To use P(2013) data 
+%yearly output from the model as a fraction
+ Estim5=[z(16)+y(1,6)];
+       
+% Proportions of population of prescription opioid users (MADE UP FRACTIONS
+% FOR NOW)
+ Data5=[.1];
+ 
+
+% the difference between estimated value and data 
+ diff5= Estim5-Data5;
+ 
+ 
+ 
+ 
  %Using ODE y(7) in order to account for new admissions coming into recovery class
  %(NOT total in recovery class), going to run from 2013-2015, so want:
  admitted=zeros(1,2);
@@ -151,7 +166,10 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  %the difference between estimated value and data
  diff4=Estim4-Data4;
  
+ 
+ 
  %the relative error that we are trying to minimize for ordinary least
  %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
  %normalized by norm of the data
- value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4);
+ value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+...
+ norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
