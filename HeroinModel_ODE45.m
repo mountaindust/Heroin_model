@@ -41,20 +41,22 @@ sigma_H=z(14);
  
 nu=z(15);
 
-A0=z(16);
+P0=z(16);
 
-H0=z(17);
+A0=z(17);
 
-R0=z(18);
+H0=z(18);
+
+R0=z(19);
 
 
 %Initials
 %MADE UP VALUES IN ORDER TO RUN CODE
-S0=1-0.1-z(16)-z(17)-z(18); 
-P0=0.1;
-A0=z(16);
-H0=z(17);
-R0=z(18); 
+S0=1-z(16)-z(17)-z(18)-z(19); 
+P0=z(16);
+A0=z(17);
+H0=z(18);
+R0=z(19); 
 X0=0;
 Z0=0;
 initials = [S0,P0,A0,H0,R0,X0,Z0];
