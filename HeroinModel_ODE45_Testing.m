@@ -138,42 +138,51 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  
  figure(1)
  hold all
- scatter(1:1:15,Estim,'filled')
- scatter(1:1:15, Data, 'filled')
- set(gca, 'xtick', [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ])
+ scatter(1:1:4,Estim1,'filled')
+ scatter(1:1:4, Data1, 'filled')
+ set(gca, 'xtick', [ 1 2 3 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2002','2003','2004','2005','2006','2007','2008', '2009','2010', '2011', '2012','2013','2014','2015','2016'})
- ylabel('Landing')
- legend('Landing Simulated','Yearly Landing Data' )
+ set(gca,'xticklabel',{'2002','2003','2004','2005'})
+ %xlabel('Year')
+ ylabel('Proportion of prescription users')
+ legend('Prescription users simulated','Prescription users data' )
  
  figure(2)
 
-           subplot(2,2,1);plot(t,y(:,1),'b-','LineWidth',1)
-           subplot(2,2,1);xlabel('Time')
-           subplot(2,2,1);ylabel('Anchovy')
+           subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
+           subplot(2,2,1);xlabel('Year')
+           subplot(2,2,1);ylabel('Prescription Users')
            xlim([0 , T])
            
-           subplot(2,2,2);plot(t,y(:,2),'r-','LineWidth',1)
-           subplot(2,2,2);xlabel('Time')
-           subplot(2,2,2);ylabel('Jelly Fish')
+           subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',1)
+           subplot(2,2,2);xlabel('Year')
+           subplot(2,2,2);ylabel('Opioid Addicts')
            xlim([0 , T])
            
-           subplot(2,2,3);plot(t,y(:,3) ,' g-','LineWidth',1)
-           subplot(2,2,3);xlabel('Time')
-           subplot(2,2,3);ylabel('Zoo-Plankton')
+           subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
+           subplot(2,2,3);xlabel('Year')
+           subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
            xlim([0 , T])
            %ylim([0 , 1e+2])
            
-           subplot(2,2,4);
-           plot(t,y(:,1),'b-','LineWidth',1);
-           hold on
-           plot(t,y(:,2),'r-','LineWidth',1);
-           hold on
-           plot(t,y(:,3),' g-','LineWidth',1); 
-           xlabel('time')
-           ylabel('Size of Populations');
-           legend('A','P','Z')
+          
+           subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
+           subplot(2,2,3);xlabel('Year')
+           subplot(2,2,3);ylabel('Individuals in recovery')
            xlim([0 , T])
-           ylim([0 , 2e+5])
-           legend('A','P','Z')
+           %ylim([0 , 1e+2])
+           
+           %All together, make separate plot: 
+           %subplot(2,2,4);
+           %plot(t,y(:,1),'b-','LineWidth',1);
+           %hold on
+           %plot(t,y(:,2),'r-','LineWidth',1);
+           %hold on
+           %plot(t,y(:,3),' g-','LineWidth',1); 
+           %xlabel('time')
+           %ylabel('Size of Populations');
+           %legend('A','P','Z')
+           %xlim([0 , T])
+           %ylim([0 , 2e+5])
+           %legend('A','P','Z')
  
