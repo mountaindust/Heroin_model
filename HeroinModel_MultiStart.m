@@ -1,4 +1,5 @@
-clear all;
+%to avoid error with "manymins" 
+clear all; 
 clc;
 
 % the parameter vector we will approximate
