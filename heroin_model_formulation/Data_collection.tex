@@ -53,7 +53,9 @@ Tricia Phillips \\
 \today \\
 \begin{itemize}
 
-\item The following are the \textbf{number of individuals initially in each class} for Tennessee: \\
+\item We will run our model from 2013-2017, and initial conditions for the classes will be estimated, as we do not have data for the number of individuals in each class at the beginning of 2013.  \\
+
+\item The following are the \textbf{number of individuals in each class} for Tennessee in 2015: \\
 
 *\textbf{Susceptibles}: (Total population in 2015-size of four other classes$=6,590,726-1,819,581-48,000-14,000-R_{0}=$FILL IN) \cite{USCensus} \\
 
@@ -121,6 +123,12 @@ Again, these numbers do not include fentanyl users explicitly, but we are under 
 
 Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
+We may calculate the overdose death rate in the year 2015, since we know the number of addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 ($t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we will assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to opioids \cite{Gwira}. Therefore, we will assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 48,000 opioid addicts in 2015, this means that (48,000-0.546$\cdot$679)/48,000 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.992$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in $\mu_{A} \approx 0.00775.$
+
+Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the assumption that if an individual died of a heroin overdose they were addicted in line with our previous assumptions that if one is using heroin, they are considered addicted due to the nature of the drug. This means that (14,000-374)/14,000 $\approx$ 0.973 is the proportion of heroin users that remain until $t=1$, which implies 0.973$H_0=H_0 e^{-\mu_{H}(1)}$, which results in $\mu_{H} \approx 0.0271.$
+
+
+
 \textcolor{red}{Had note that it was a good thing methadone was pulled out separately from this data; why is that important? Because it's used for treatment?} \\
 
 \item We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
@@ -137,12 +145,12 @@ We make a note that individuals that do not have an opioid use disorder and die 
 %Can use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
 
 
-\item \textbf{Total population} estimated in Tennessee each year \cite{USCensus}: \\
+\item Total population estimated in Tennessee each year \cite{USCensus}: \\
 2013: 6,490,795 \\
 2014: 6,540,007 \\
 2015: 6,590,726 \\
 2016: 6,649,404 \\
-2017: 6715984 \\
+2017: 6,715,984 \\
 \textcolor{red}{2018: FILL IN} \\
 
 There was an estimated 1,073,214 individuals Tennessee in 2018 aged 12 and under. To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the last total population estimate for 2017 being 6,715,984 from above, this means that approximately 15\% of the population is under the age of 12. \textcolor{red}{FIX when get updated 2018 total population}. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the following \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates.  \\
@@ -153,7 +161,7 @@ There was an estimated 1,073,214 individuals Tennessee in 2018 aged 12 and under
 2017: 5,708,586 \\
 
 %Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
-\item The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or in other words, a natural death rate of .008863 \cite{Kaiser}.
+\item The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin overdose results in 48,825/5,651,993 $\approx$ 0.00864, which is the natural death rate, $\mu$.
 
 
 
