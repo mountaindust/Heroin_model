@@ -13,36 +13,36 @@ theta_1=z(4);
  
 epsilon=z(5);
  
-mu=z(6);  
+mu=.00864;  
  
-mu_A=z(7);   
+mu_A=0.00775;   
  
-mu_H=z(8);
+mu_H=0.0271;
  
-gamma=z(9);   
+gamma=z(6);   
  
-theta_2=z(10); 
+theta_2=z(7); 
  
-sigma_A=z(11);
+sigma_A=z(8);
  
-zeta=z(12);
+zeta=z(9);
  
-theta_3=z(13);
+theta_3=z(10);
  
-sigma_H=z(14);
+sigma_H=z(11);
  
-nu=z(15);
+nu=z(12);
 
 %Although we know total number of prescription users in 2013, we do not
 %know number initially (i.e. at the beginning moment of 2013), so that must
 %also be estimated
-P0=z(16);
+P0=z(13);
 
-A0=z(17);
+A0=z(14);
 
-H0=z(18);
+H0=z(15);
 
-R0=z(19);
+R0=z(16);
 
 
 %ODE's 

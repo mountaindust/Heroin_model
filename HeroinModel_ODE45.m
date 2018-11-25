@@ -21,42 +21,41 @@ theta_1=z(4);
  
 epsilon=z(5);
  
-mu=z(6);  
+mu=0.00864;  
  
-mu_A=z(7);   
+mu_A=0.00775;   
  
-mu_H=z(8);
+mu_H=0.0271;
  
-gamma=z(9);   
+gamma=z(6);   
  
-theta_2=z(10); 
+theta_2=z(7); 
  
-sigma_A=z(11);
+sigma_A=z(8);
  
-zeta=z(12);
+zeta=z(9);
  
-theta_3=z(13);
+theta_3=z(10);
  
-sigma_H=z(14);
+sigma_H=z(11);
  
-nu=z(15);
+nu=z(12);
 
-P0=z(16);
+P0=z(13);
 
-A0=z(17);
+A0=z(14);
 
-H0=z(18);
+H0=z(15);
 
-R0=z(19);
-
+R0=z(16);
 
 %Initials
 %MADE UP VALUES IN ORDER TO RUN CODE
-S0=1-z(16)-z(17)-z(18)-z(19); 
-P0=z(16);
-A0=z(17);
-H0=z(18);
-R0=z(19); 
+S0=1-z(13)-z(14)-z(15)-z(16); 
+P0=z(13);
+A0=z(14);
+H0=z(15);
+R0=z(16); 
 X0=0;
 Z0=0;
 initials = [S0,P0,A0,H0,R0,X0,Z0];
@@ -104,7 +103,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  prescript(i) = y(i,2)+y(i+1,6)-y(i,6); 
  end
  
-%yearly output from the model as a fraction
+%yearly output from the model as a fraction from 2014 to 2017, excludes
+%2013
  Estim1=[prescript(1),prescript(2),prescript(3),prescript(4)];
        
 % Proportions of population of prescription opioid users (MADE UP FRACTIONS
@@ -119,7 +119,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  
 %To use P(2013) data 
 %yearly output from the model as a fraction
- Estim5=[z(16)+y(1,6)];
+ Estim5=[z(13)+y(1,6)];
        
 % Proportions of population of prescription opioid users (MADE UP FRACTIONS
 % FOR NOW)
