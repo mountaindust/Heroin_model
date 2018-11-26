@@ -119,7 +119,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
 
 % output from the model as a proportion in 2013, MUST PUT IN z(13) value
 % here=0.1!!
-% SOMETHING SEEMS WRONG HERE: it gives whatever decimal I put in...CHECK 
  Estim2=[0.1+y(1,6)];
        
 % actual proportion of population that were prescription opioid users in 2013 (MADE UP FRACTIONS
@@ -183,7 +182,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  set(gca, 'xtick', [ 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014','2015','2016','2017'})
- %xlabel('Year')
+ xlabel('Year')
  ylabel('Proportion of prescription users')
  legend('Prescription users simulated','Prescription users data' )
  
@@ -195,14 +194,38 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013'})
- %xlabel('Year')
+ xlabel('Year')
  ylabel('Proportion of prescription users')
  legend('Prescription users simulated','Prescription users data' )
  
  
- 
- 
+  
  figure(3)
+ hold all
+ scatter(1:1:1, Estim4,'filled')
+ scatter(1:1:1, Data4, 'filled')
+ set(gca, 'xtick', [ 1 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2015'})
+ xlabel('Year')
+ ylabel('Proportion of opioid addicts')
+ legend('Opioid addicts simulated','Opioid addicts data' )
+ 
+  
+ figure(4)
+ hold all
+ scatter(1:1:1, Estim5,'filled')
+ scatter(1:1:1, Data5, 'filled')
+ set(gca, 'xtick', [ 1 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2015'})
+ xlabel('Year')
+ ylabel('Proportion of heroin/fentanyl users')
+ legend('Heroin/fentanyl users simulated','Heroin/fentanyl users data' )
+ 
+ 
+ 
+ figure(5)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -222,8 +245,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
            
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
-           subplot(2,2,3);xlabel('Year')
-           subplot(2,2,3);ylabel('Individuals in recovery')
+           subplot(2,2,4);xlabel('Year')
+           subplot(2,2,4);ylabel('Individuals in recovery')
            xlim([0 , T])
            %ylim([0 , 1e+2])
            
