@@ -1,8 +1,8 @@
 function value = HeroinModel_ODE45(z)
 
 
-% Final time, note: don't want to run too long because dynamics
-% can drastically change over a number of years, so here we will do 2013-2017:
+% Final time; don't want to run too long because dynamics can drastically change over
+% a number of years, so here we will do 2013-2017 where t=0 represents 2013 and t=4 represents 2017:
 N = 4; 
 T = N;
 
@@ -74,100 +74,95 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
   Z=y(:,7);
   
   
- % FIRST WAY: In order to count the total number of individuals in P at some point throughout the year, 
- % we want to add the total number of individuals using prescriptions at the beginning of the
- % year to those who come into P at some point during the year, so for second piece, want to integrate alpha*S 
- % from one year to the next year using trapezoidal rule. 
- 
-%prescript=zeros(4,8);
-%for i=4:8
-% prescript(i) = y(i,2)+alpha*((y(i+1,1)+y(i,1))/2)*(t(i+1)-t(i)); 
-% end
- 
- %yearly output from the model as a fraction
-%Estim=[prescript(4),prescript(5),prescript(6),prescript(7),prescript(8)];
-       
 
- %SECOND WAY: In order to count the total number of individuals in P at some point throughout the year, 
+ %COMPARING MODEL ESTIMATES TO DATA 
+ 
+ %%%%%
+ % In order to count the total number of individuals in P at some point throughout a certain year
+ % (the number who are in the class AT ALL during the year, it's okay if they leave), 
  % we want to add the total number of individuals using prescriptions at the beginning of the
  % year to those who come into P at some point during the year: 
- % prescript(i) is number of prescription users at beginning of year(time step) +
- % the number of new cases that came in from X'=dy(6) ODE from that year until the beginning of the next year 
- % so adding in those who come into P at some point during the year by integrating y(6) ODE 
- % but just focusing in on the one year we care about (so have to subtract)
- % Going to run from 2013 to 2017, so "IC" will be at 2013 and want info
- % for 2014-2017 so want:
+ % prescript(i) is number of prescription users at beginning of the year (time step) +
+ % the number of new cases that came in from X'=dy(6) ODE from that year until the beginning 
+ % of the next year. Thus, we are adding in those who come into P at some point during 
+ % the year by integrating y(6) ODE but just focusing in on the one year we care about 
+ %(so have to subtract: integrating gives total number of new cases from t=0 to t=i, so have to 
+ % subtract off the number from t=0 to t=i-1). 
+ % Here, calculating for years 2014-2017: 
  
- prescript=zeros(1,4);
+ total_prescription_users=zeros(1,4);
  for i=1:4
- prescript(i) = y(i,2)+y(i+1,6)-y(i,6); 
+ total_prescription_users(i) = y(i,2)+y(i+1,6)-y(i,6); 
  end
  
-%yearly output from the model as a fraction from 2014 to 2017, excludes
+% yearly output from the model as a proportion from 2014 to 2017, excludes
 %2013
- Estim1=[prescript(1),prescript(2),prescript(3),prescript(4)];
+ Estim1=[total_prescription_users(1),total_prescription_users(2),total_prescription_users(3), total_prescription_users(4)];
        
-% Proportions of population of prescription opioid users (MADE UP FRACTIONS
+% actual proportions of population that were prescription opioid users for 2014-2017 (MADE UP FRACTIONS
 % FOR NOW)
  Data1=[.1 .2 .3 .25];
  
-
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
- 
- 
-%To use P(2013) data 
-%yearly output from the model as a fraction
- Estim5=[z(13)+y(1,6)];
+%%%%%
+% We have total number of individuals who take prescription opioids for the
+% year 2013; so must take IC (which is estimated because don't know number
+% at beginning of the year) and add on the number of individuals that enter
+% the P class at any point during the year 2013, which comes from
+% integrating ODE X'=dy(6) from t=0 to t=1
+
+% output from the model as a proportion in 2013
+ Estim2=[z(13)+y(1,6)];
        
-% Proportions of population of prescription opioid users (MADE UP FRACTIONS
+% actual proportion of population that were prescription opioid users in 2013 (MADE UP FRACTIONS
 % FOR NOW)
- Data5=[.1];
+ Data2=[.1];
  
 
 % the difference between estimated value and data 
- diff5= Estim5-Data5;
+ diff2= Estim2-Data2;
  
  
- 
- 
- %Using ODE y(7) in order to account for new admissions coming into recovery class
- %(NOT total in recovery class), going to run from 2013-2015, so want:
- admitted=zeros(1,2);
+%%%%%
+ %To calculate number of new admissions coming into the recovery class
+ %(NOT total in recovery class), we use ODE Z'=dy(7); going to run from
+ %2013-2015 because those are the only years we have data for:
+ new_admissions=zeros(1,2);
  for i=1:2
- admitted(i) = y(i+1,7)-y(i,7);
+ new_admissions(i) = y(i+1,7)-y(i,7);
  end
  
- %yearly output from the model as a fraction
- Estim2=[admitted(1), admitted(2)];
+ % yearly output from the model as a proportion in the recovery class
+ Estim3=[new_admissions(1), new_admissions(2)];
   
- %Proportions of population being admitted into recovery (MADE UP FRACTIONS FOR NOW)
- Data2=[.001,.0015];
+ % actual proportions of population being admitted into recovery (MADE UP FRACTIONS FOR NOW)
+ Data3=[.001 .0015];
 
  % the difference between estimated value and data 
- diff2=Estim2-Data2;
- 
- %Proportion of opioid addicts in 2015
- addicts(2)=y(2,3); 
- %yearly output from the model as a fraction
- Estim3=[addicts(2)];
-%Made up for now
- Data3=[.4];
- %the difference between estimated value and data
  diff3=Estim3-Data3;
-
  
- %Proportion of heroin/fentanyl addicts in 2015
- heroin(2)=y(2,4);
- Estim4=[heroin(2)];
- %Made up for now
- Data4=[.2];
- %the difference between estimated value and data
+ 
+ %%%%%
+ % output from the model of the proportion of opioid addicts in 2015
+ Estim4=[y(2,3)];
+ % made up for now
+ Data4=[.4];
+ % the difference between estimated value and data
  diff4=Estim4-Data4;
  
+
+ %%%%%
+ % output from the model of the proportion of heroin/fentanyl addicts in 2015
+ Estim5=[y(2,4)];
+ % Made up for now
+ Data5=[.2];
+ % the difference between estimated value and data
+ diff5=Estim5-Data5;
  
  
+ %%%%%
  %the relative error that we are trying to minimize for ordinary least
  %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
  %normalized by norm of the data
