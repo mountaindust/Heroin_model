@@ -230,16 +230,25 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',1)
            subplot(2,2,2);xlabel('Year')
            subplot(2,2,2);ylabel('Opioid Addicts')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            %ylim([0 , 1e+2])
            
@@ -247,20 +256,28 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Individuals in recovery')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            %ylim([0 , 1e+2])
            
-           %All together, later make separate figure: 
-           %subplot(2,2,4);
-           %plot(t,y(:,1),'b-','LineWidth',1);
-           %hold on
-           %plot(t,y(:,2),'r-','LineWidth',1);
-           %hold on
-           %plot(t,y(:,3),' g-','LineWidth',1); 
-           %xlabel('time')
-           %ylabel('Size of Populations');
-           %legend('A','P','Z')
-           %xlim([0 , T])
-           %ylim([0 , 2e+5])
-           %legend('A','P','Z')
+           %Solutions all plotted together
+ figure(6)
+           plot(t,y(:,2),'b-','LineWidth',1);
+           hold all
+           plot(t,y(:,3),'r-','LineWidth',1);
+           hold all
+           plot(t,y(:,4),' g-','LineWidth',1); 
+           hold all
+           plot(t,y(:,5),' m-','LineWidth',1); 
+           xlabel('time')
+           ylabel('Size of Populations');
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           legend('P','A','H','R')
+           xlim([0 , T])
+           ylim([0 , 0.2])
+           legend('P','A','H','R')
  
