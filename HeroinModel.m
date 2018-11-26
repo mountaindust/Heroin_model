@@ -61,7 +61,7 @@ dy(5) = zeta*y(3)+nu*y(4)-sigma_A*y(5)-sigma_H*y(5)-mu*y(5);
 %individuals who enter the P class at any time from S (used in Estim1 and Estim2 in HeroinModel_ODE45.m) 
 dy(6) = alpha*y(1);
 %Z' ODE to calculate the number of new admissions into the recovery class over time from A and H classes
-%(used in FILL IN) 
+%(used in Estim3 in HeroinModel_ODE45.m) 
 dy(7) = zeta*y(3)+nu*y(4);
 
   dy=dy';  
