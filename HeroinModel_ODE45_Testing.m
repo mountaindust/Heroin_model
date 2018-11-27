@@ -1,3 +1,4 @@
+%File name: HeroinModel_ODE45_Testing.m
 function value = HeroinModel_ODE45_Testing(z)
 
 %%%GOING TO CHANGE FOR MY MODEL (right now it's a different model) 
@@ -64,7 +65,8 @@ H0=z(15);
 R0=z(16); 
 X0=0;
 Z0=0;
-initials = [S0,P0,A0,H0,R0,X0,Z0];
+K0=0;
+initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
 
 
 [t,y]=ode45(@(t,y) HeroinModel(t,y,z),tspan,initials);
@@ -77,6 +79,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0];
   R=y(:,5);
   X=y(:,6);
   Z=y(:,7);
+  K=y(:,8);
   
   
  %COMPARING MODEL ESTIMATES TO DATA 
