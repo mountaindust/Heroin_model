@@ -84,7 +84,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
   
  %COMPARING MODEL ESTIMATES TO DATA 
  
- %%%%%
+  %%%%%
  % In order to count the total number of individuals in P at some point throughout a certain year
  % (the number who are in the class AT ALL during the year, it's okay if they leave), 
  % we want to add the total number of individuals using prescriptions at the beginning of the
@@ -102,61 +102,76 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  total_prescription_users(i) = y(i,2)+y(i+1,6)-y(i,6); 
  end
  
-% yearly output from the model as a proportion from 2014 to 2017, excludes
-%2013
- Estim1=[total_prescription_users(1),total_prescription_users(2),total_prescription_users(3), total_prescription_users(4)];
-       
-% actual proportions of population that were prescription opioid users for 2014-2017 (MADE UP FRACTIONS
-% FOR NOW)
- Data1=[.1 .2 .3 .25];
- 
-% the difference between estimated value and data 
- diff1= Estim1-Data1;
- 
-%%%%%
 % We have total number of individuals who take prescription opioids for the
 % year 2013; so must take IC (which is estimated because don't know number
 % at beginning of the year) and add on the number of individuals that enter
 % the P class at any point during the year 2013, which comes from
-% integrating ODE X'=dy(6) from t=0 to t=1
+% integrating ODE X'=dy(6) from t=0 to t=1; this gives first value in
+% Estim1
 
-% output from the model as a proportion in 2013, MUST PUT IN z(13) value
-% here=0.1!!
- Estim2=[0.1+y(1,6)];
-       
-% actual proportion of population that were prescription opioid users in 2013 (MADE UP FRACTIONS
-% FOR NOW)
- Data2=[.2];
  
-
+% yearly output from the model as a proportion from 2013 to 2017
+ Estim1=[z(13)+y(1,6), total_prescription_users(1),total_prescription_users(2),total_prescription_users(3), total_prescription_users(4)];
+       
+% actual proportions of population that were prescription opioid users for
+% 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
+% total population in TN 12 and older) 
+ Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
+ 
 % the difference between estimated value and data 
- diff2= Estim2-Data2;
+ diff1= Estim1-Data1;
  
  
 %%%%%
- %To calculate number of new admissions coming into the recovery class
- %(NOT total in recovery class), we use ODE Z'=dy(7); going to run from
- %2013-2015 because those are the only years we have data for:
- new_admissions=zeros(1,2);
+ %To calculate number of new admissions coming into the recovery class 
+ %(NOT total in recovery class) from the opioid addict class, we use ODE Z'=dy(7); going to run from
+ %2013-2015 because those are the only years among 2013-2017 we have data for; 
+ %new_opioid_admissions is for years 2014-2015, and y(1,7) is the number that are
+ %admitted in the first year 2013
+ new_opioid_admissions=zeros(1,2);
  for i=1:2
- new_admissions(i) = y(i+1,7)-y(i,7);
+ new_opioid_admissions(i) = y(i+1,7)-y(i,7);
  end
  
  % yearly output from the model as a proportion in the recovery class
- Estim3=[new_admissions(1), new_admissions(2)];
+ Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
   
- % actual proportions of population being admitted into recovery (MADE UP FRACTIONS FOR NOW)
- Data3=[.001 .0015];
+ % actual proportions of population each year being admitted into recovery from opioid addict class
+ Data2=[4485./5517176 4530./5559006 4326./5602117];
+
+ % the difference between estimated value and data 
+ diff2=Estim2-Data2;
+ 
+ 
+ 
+ %%%%%
+ %To calculate number of new admissions coming into the recovery class 
+ %(NOT total in recovery class) from the heroin/fentanyl class, we use ODE K'=dy(8); going to run from
+ %2013-2015 because those are the only years among 2013-2017 we have data for; 
+ %new_heroin_admissions is for years 2014-2015, and y(1,8) is the number that are
+ %admitted in the first year 2013
+ new_heroin_admissions=zeros(1,2);
+ for i=1:2
+ new_heroin_admissions(i) = y(i+1,7)-y(i,7);
+ end
+ 
+ % yearly output from the model as a proportion that have been admitted into recovery class
+ Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
+  
+ % actual proportions of population each year being admitted into recovery from
+ % heroin/fentanyl class
+ Data3=[555./5517176 743./5559006 1083./5602117];
 
  % the difference between estimated value and data 
  diff3=Estim3-Data3;
  
- 
+
  %%%%%
  % output from the model of the proportion of opioid addicts in 2015
+ % MAY NEED TO FIX VALUE IF DECIDE THIS NUMBER COUNTS INDIVIDUALS IN RECOVERY, TOO 
  Estim4=[y(2,3)];
  % made up for now
- Data4=[.4];
+ Data4=[48000./5602117];
  % the difference between estimated value and data
  diff4=Estim4-Data4;
  
@@ -165,7 +180,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  % output from the model of the proportion of heroin/fentanyl addicts in 2015
  Estim5=[y(2,4)];
  % Made up for now
- Data5=[.2];
+ Data5=[14000./5602117];
  % the difference between estimated value and data
  diff5=Estim5-Data5;
  
@@ -180,30 +195,18 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  
  figure(1)
  hold all
- scatter(1:1:4, Estim1,'filled')
- scatter(1:1:4, Data1, 'filled')
- set(gca, 'xtick', [ 1 2 3 4 ])
+ scatter(1:1:5, Estim1,'filled')
+ scatter(1:1:5, Data1, 'filled')
+ set(gca, 'xtick', [0 1 2 3 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2014','2015','2016','2017'})
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
  xlabel('Year')
  ylabel('Proportion of prescription users')
  legend('Prescription users simulated','Prescription users data' )
  
- 
- figure(2)
- hold all
- scatter(1:1:1, Estim2,'filled')
- scatter(1:1:1, Data2, 'filled')
- set(gca, 'xtick', [ 1 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013'})
- xlabel('Year')
- ylabel('Proportion of prescription users')
- legend('Prescription users simulated','Prescription users data' )
- 
- 
+
   
- figure(3)
+ figure(2)
  hold all
  scatter(1:1:1, Estim4,'filled')
  scatter(1:1:1, Data4, 'filled')
@@ -215,7 +218,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  legend('Opioid addicts simulated','Opioid addicts data' )
  
   
- figure(4)
+ figure(3)
  hold all
  scatter(1:1:1, Estim5,'filled')
  scatter(1:1:1, Data5, 'filled')
@@ -228,7 +231,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  
  
  
- figure(5)
+ figure(4)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -266,7 +269,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
            %ylim([0 , 1e+2])
            
            %Solutions all plotted together
- figure(6)
+ figure(5)
            plot(t,y(:,2),'b-','LineWidth',1);
            hold all
            plot(t,y(:,3),'r-','LineWidth',1);
