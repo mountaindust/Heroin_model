@@ -11,8 +11,9 @@ global value
  
 
 % Estimated  values of parameters from "HeroinModel_MultiStart.m"
-z0=[0.1  0.001  0.5   0.0001  0.8  0.0001  0.4  0.1  0.1  0.0001  0.7  0.05 0.1 0.01 0.01 0.01];
-
+z0=[0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 ];
+%z0 when put in 0.1 for all parameters (something is incorrect) 
+%z0=[0.151141754728479,0.110132471130787,0.0993627024329870,0.111168714444703,0.170293860463054,0.0251293656173591,0.113341851280340,0.0932616166565709,0.100575378208625,0.383658825922296,0.0490664084545271,0.0955397305008730,0.100658901191478,0.0980476247689215,0.0992152504237340,0.304951939025043];
 z=z0;
 
 %Parameters
@@ -117,7 +118,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
  Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
- 
+
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
@@ -152,7 +153,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  %admitted in the first year 2013
  new_heroin_admissions=zeros(1,2);
  for i=1:2
- new_heroin_admissions(i) = y(i+1,7)-y(i,7);
+ new_heroin_admissions(i) = y(i+1,8)-y(i,8);
  end
  
  % yearly output from the model as a proportion that have been admitted into recovery class
@@ -197,19 +198,44 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  hold all
  scatter(1:1:5, Estim1,'filled')
  scatter(1:1:5, Data1, 'filled')
- set(gca, 'xtick', [0 1 2 3 4 ])
+ plot(t,y(:,3),'b-','LineWidth',1)
+ set(gca, 'xtick', [0 1 2 3 4])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
  xlabel('Year')
  ylabel('Proportion of prescription users')
  legend('Prescription users simulated','Prescription users data' )
  
-
-  
+ 
+ 
  figure(2)
+ hold all
+ scatter(1:1:3, Estim2,'filled')
+ scatter(1:1:3, Data2, 'filled')
+ set(gca, 'xtick', [1 2 3])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ xlabel('Year')
+ ylabel('Proportion of new admissions into R from A')
+ legend('New admissions simulated','New admissions data' )
+ 
+ 
+ figure(3)
+ hold all
+ scatter(1:1:3, Estim3,'filled')
+ scatter(1:1:3, Data3, 'filled')
+ set(gca, 'xtick', [1 2 3])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ xlabel('Year')
+ ylabel('Proportion of new admissions into R from H')
+ legend('New admissions simulated','New admissions data' )
+  
+ figure(4)
  hold all
  scatter(1:1:1, Estim4,'filled')
  scatter(1:1:1, Data4, 'filled')
+ plot(t,y(:,3),'b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
@@ -218,10 +244,11 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  legend('Opioid addicts simulated','Opioid addicts data' )
  
   
- figure(3)
+ figure(5)
  hold all
  scatter(1:1:1, Estim5,'filled')
  scatter(1:1:1, Data5, 'filled')
+ plot(t,y(:,4) ,' b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
@@ -231,7 +258,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  
  
  
- figure(4)
+ figure(6)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -269,7 +296,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
            %ylim([0 , 1e+2])
            
            %Solutions all plotted together
- figure(5)
+ figure(7)
            plot(t,y(:,2),'b-','LineWidth',1);
            hold all
            plot(t,y(:,3),'r-','LineWidth',1);
