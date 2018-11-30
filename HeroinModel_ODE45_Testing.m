@@ -104,7 +104,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  end
  
 % We have total number of individuals who take prescription opioids for the
-% year 2013; so must take IC (which is estimated because don't know number
+% year 2013; so must take IC (which is estimated by z(13) because don't know number
 % at beginning of the year) and add on the number of individuals that enter
 % the P class at any point during the year 2013, which comes from
 % integrating ODE X'=dy(6) from t=0 to t=1; this gives first value in
@@ -198,7 +198,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  hold all
  scatter(1:1:5, Estim1,'filled')
  scatter(1:1:5, Data1, 'filled')
- plot(t,y(:,3),'b-','LineWidth',1)
+ plot(t,y(:,2),'b-','LineWidth',1)
  set(gca, 'xtick', [0 1 2 3 4])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
