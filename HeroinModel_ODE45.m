@@ -112,7 +112,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
  Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
- 
+%Data simulated when put in 0.1 for all parameters
+%Data1=[0.1 0.16 0.18 0.2 0.21];
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
@@ -133,6 +134,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
   
  % actual proportions of population each year being admitted into recovery from opioid addict class
  Data2=[4485./5517176 4530./5559006 4326./5602117];
+ %%Data simulated when put in 0.1 for all parameters
+ %Data2=[0 0.011 0.013];
 
  % the difference between estimated value and data 
  diff2=Estim2-Data2;
@@ -147,7 +150,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  %admitted in the first year 2013
  new_heroin_admissions=zeros(1,2);
  for i=1:2
- new_heroin_admissions(i) = y(i+1,7)-y(i,7);
+ new_heroin_admissions(i) = y(i+1,8)-y(i,8);
  end
  
  % yearly output from the model as a proportion that have been admitted into recovery class
@@ -156,7 +159,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  % actual proportions of population each year being admitted into recovery from
  % heroin/fentanyl class
  Data3=[555./5517176 743./5559006 1083./5602117];
-
+ %%Data simulated when put in 0.1 for all parameters
+ %Data3=[0 0.01 0.011];
  % the difference between estimated value and data 
  diff3=Estim3-Data3;
  
@@ -167,6 +171,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  Estim4=[y(2,3)];
  % made up for now
  Data4=[48000./5602117];
+ %Data simulated when put in 0.1 for all parameters
+ %Data4=[0.12];
  % the difference between estimated value and data
  diff4=Estim4-Data4;
  
@@ -176,6 +182,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  Estim5=[y(2,4)];
  % Made up for now
  Data5=[14000./5602117];
+ %Data simulated when put in 0.1 for all parameters
+ %Data5=[0.11];
  % the difference between estimated value and data
  diff5=Estim5-Data5;
  
