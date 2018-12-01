@@ -59,7 +59,9 @@ R0=z(16);
 X0=0;
 Z0=0;
 K0=0;
-initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
+L0=0;
+M0=0;
+initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 
 
 
@@ -74,6 +76,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
   X=y(:,6);
   Z=y(:,7);
   K=y(:,8);
+  L=y(:,9);
+  M=y(:,10);
   
   
 
@@ -166,9 +170,14 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  
 
  %%%%%
- % output from the model of the proportion of opioid addicts in 2015
+ % output from the model of the proportion of opioid addicts in 2015; we take
+ % initial number of opioid addicts in 2015, y(2,3), and add the number of individuals that enter
+% the A class at any point during the year 2015, which comes from
+% integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
+ %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
+ % subtract off the number from t=0 to t=2). 
  % MAY NEED TO FIX VALUE IF DECIDE THIS NUMBER COUNTS INDIVIDUALS IN RECOVERY, TOO 
- Estim4=[y(2,3)];
+ Estim4=[y(2,3)+y(3,9)-y(2,9)];
  % made up for now
  Data4=[48000./5602117];
  %Data simulated when put in 0.1 for all parameters
@@ -178,8 +187,14 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0];
  
 
  %%%%%
- % output from the model of the proportion of heroin/fentanyl addicts in 2015
- Estim5=[y(2,4)];
+ % output from the model of the proportion of heroin/fentanyl addicts in
+ % 2015; we take initial number of heroin/fentanyl addicts in 2015, y(2,4),
+ % and add the number of individuals that enter
+ % the H class at any point during the year 2015, which comes from
+ % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
+ %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
+ % subtract off the number from t=0 to t=2). 
+ Estim5=[y(2,4)+y(3,10)-y(2,10)];
  % Made up for now
  Data5=[14000./5602117];
  %Data simulated when put in 0.1 for all parameters
