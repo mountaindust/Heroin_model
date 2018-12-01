@@ -66,8 +66,16 @@ dy(6) = alpha*y(1);
 dy(7) = zeta*y(3);
 %K' ODE to calculate the number of new admissions into the recovery class 
 %over time from H class
-%(used in Estim3 in HeroinModel.ODE45.m)
+%(used in Estim3 in HeroinModel_ODE45.m)
 dy(8) = nu*y(4);
+%L' ODE to calculate the number of new cases of opioid addiction over time;
+%i.e. individuals who enter the A class at any time (used in Estim4 in
+%HeroinModel_ODE45.m)
+dy(9) = gamma*y(2)+sigma_A*y(5)+beta_A*y(1)*y(3)+beta_P*y(1)*y(2);
+%M' ODE to calculate the number of new cases of heroin/fentanyl addiction
+%over time; i.e. individuals who enter the H class at any time (used in
+%HeroinModel_ODE45.m)
+dy(10) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma_H*y(5);
   dy=dy';  
  
 end
