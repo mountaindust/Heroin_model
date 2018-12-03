@@ -115,9 +115,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % actual proportions of population that were prescription opioid users for
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
- Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
+ %Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
 %Data simulated when put in 0.1 for all parameters
-%Data1=[0.1 0.16 0.18 0.2 0.21];
+ Data1=[0.1 0.16 0.18 0.2 0.21];
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
@@ -137,9 +137,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
   
  % actual proportions of population each year being admitted into recovery from opioid addict class
- Data2=[4485./5517176 4530./5559006 4326./5602117];
+ %Data2=[4485./5517176 4530./5559006 4326./5602117];
  %%Data simulated when put in 0.1 for all parameters
- %Data2=[0 0.011 0.013];
+ Data2=[0 0.011 0.013];
 
  % the difference between estimated value and data 
  diff2=Estim2-Data2;
@@ -162,9 +162,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
   
  % actual proportions of population each year being admitted into recovery from
  % heroin/fentanyl class
- Data3=[555./5517176 743./5559006 1083./5602117];
+ %Data3=[555./5517176 743./5559006 1083./5602117];
  %%Data simulated when put in 0.1 for all parameters
- %Data3=[0 0.01 0.011];
+ Data3=[0 0.01 0.011];
  % the difference between estimated value and data 
  diff3=Estim3-Data3;
  
@@ -179,9 +179,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % MAY NEED TO FIX VALUE IF DECIDE THIS NUMBER COUNTS INDIVIDUALS IN RECOVERY, TOO 
  Estim4=[y(2,3)+y(3,9)-y(2,9)];
  % made up for now
- Data4=[48000./5602117];
+% Data4=[48000./5602117];
  %Data simulated when put in 0.1 for all parameters
- %Data4=[0.12];
+ Data4=[0.16];
  % the difference between estimated value and data
  diff4=Estim4-Data4;
  
@@ -196,9 +196,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % subtract off the number from t=0 to t=2). 
  Estim5=[y(2,4)+y(3,10)-y(2,10)];
  % Made up for now
- Data5=[14000./5602117];
+ %Data5=[14000./5602117];
  %Data simulated when put in 0.1 for all parameters
- %Data5=[0.11];
+ Data5=[0.12];
  % the difference between estimated value and data
  diff5=Estim5-Data5;
  
