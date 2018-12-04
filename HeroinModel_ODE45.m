@@ -22,7 +22,7 @@ theta_1=z(4);
  
 epsilon=z(5);
  
-mu=0.00864;  
+mu=0.00868;  
  
 mu_A=0.00775;   
  
@@ -115,7 +115,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % actual proportions of population that were prescription opioid users for
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
-Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
+ Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
 %Data simulated when put in 0.1 for all parameters
 % Data1=[0.1 0.16 0.18 0.2 0.21];
 % the difference between estimated value and data 
