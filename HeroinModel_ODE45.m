@@ -91,7 +91,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % prescript(i) is number of prescription users at beginning of the year (time step) +
  % the number of new cases that came in from X'=dy(6) ODE from that year until the beginning 
  % of the next year. Thus, we are adding in those who come into P at some point during 
- % the year by integrating y(6) ODE but just focusing in on the one year we care about 
+ % the year by integrating X'=dy(6) ODE but just focusing in on the one year we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=i, so have to 
  % subtract off the number from t=0 to t=i-1). 
  % Here, calculating for years 2014-2017: 
