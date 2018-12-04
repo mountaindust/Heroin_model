@@ -57,7 +57,6 @@ R0=z(16);
 
 
 %Initials
-%MADE UP VALUES IN ORDER TO RUN CODE
 S0=1-z(13)-z(14)-z(15)-z(16); 
 P0=z(13);
 A0=z(14);
