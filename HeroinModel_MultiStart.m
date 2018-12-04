@@ -4,7 +4,7 @@ clear all;
 clc;
 
 % the parameter vector we will approximate
-% z=[alpha, beta, xi, theta_1, epsilon, gamma, theta_2,
+% z=[alpha, beta_A, beta_P, theta_1, epsilon, gamma, theta_2,
 % sigma_A, zeta, theta_3, sigma_H, nu, P0, A0, H0, R0]
 
 
