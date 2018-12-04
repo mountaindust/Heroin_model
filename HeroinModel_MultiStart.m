@@ -11,7 +11,7 @@ clc;
 % The vector of the initilized parameters 
 LowerBounds=[0.00001  0.00001  0.00001  0.00001 0.00001  0.00001 0.00001 0.00001 0.00001  0.00001  0.00001  0.00001 0.00001 0.00001 0.00001 0.00001];
 %z0=[0.5 0.3 0.8 0.000008 0.00027 0.0000003 0.0000006 0.0000001 0.000001 0.2815 0.1];
-UpperBounds=[0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9];
+UpperBounds=[0.99999  0.99999  0.99999  0.99999 0.99999  0.99999 0.99999 0.99999 0.99999  0.99999  0.99999  0.99999 0.99999 0.99999 0.99999 0.99999];
 
 xstart=0.5*(LowerBounds + UpperBounds); % initial guesses for parameters (starting in the middle of each of the ranges)
 
@@ -23,7 +23,7 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 %number of times want to do 
-numstartpoints=400;
+numstartpoints=4;
 
 ms=MultiStart('Display', 'iter'); % Define a multistart problem
 

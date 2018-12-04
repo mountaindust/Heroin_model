@@ -1,7 +1,6 @@
 %File name: HeroinModel_ODE45_Testing.m
 function value = HeroinModel_ODE45_Testing(z)
 
-%%%GOING TO CHANGE FOR MY MODEL (right now it's a different model) 
 
 % Final time 
 N = 4;
@@ -240,7 +239,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  scatter(1:1:3, Data2, 'filled')
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ set(gca,'xticklabel',{'2013','2014','2015'})
  xlabel('Year')
  ylabel('Proportion of new admissions into R from A')
  legend('New admissions simulated','New admissions data' )
@@ -252,7 +251,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  scatter(1:1:3, Data3, 'filled')
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ set(gca,'xticklabel',{'2013','2014','2015'})
  xlabel('Year')
  ylabel('Proportion of new admissions into R from H')
  legend('New admissions simulated','New admissions data' )
