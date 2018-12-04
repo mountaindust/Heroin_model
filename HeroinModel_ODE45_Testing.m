@@ -237,7 +237,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  hold all
  scatter(1:1:3, Estim2,'filled')
  scatter(1:1:3, Data2, 'filled')
- plot(t,y(:,7),'b-','LineWidth',1)
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015'})
@@ -250,7 +249,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  hold all
  scatter(1:1:3, Estim3,'filled')
  scatter(1:1:3, Data3, 'filled')
- plot(t,y(:,8),'b-','LineWidth',1)
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015'})
@@ -262,7 +260,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  hold all
  scatter(1:1:1, Estim4,'filled')
  scatter(1:1:1, Data4, 'filled')
- plot(t,y(:,9),'b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
@@ -275,7 +272,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  hold all
  scatter(1:1:1, Estim5,'filled')
  scatter(1:1:1, Data5, 'filled')
- plot(t,y(:,10) ,' b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
