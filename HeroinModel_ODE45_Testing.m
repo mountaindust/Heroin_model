@@ -223,67 +223,111 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  hold all
  scatter(1:1:5, Estim1,'filled')
  scatter(1:1:5, Data1, 'filled')
- %plot(t,y(:,2),'b-','LineWidth',1)
  set(gca, 'xtick', [1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
  xlabel('Year')
  ylabel('Proportion of prescription users')
- legend('Prescription users simulated','Prescription users data' )
+ legend('Proportion entering P simulated','Proportion entering P data')
+
  
  
- 
+
  figure(2)
  hold all
  scatter(1:1:3, Estim2,'filled')
  scatter(1:1:3, Data2, 'filled')
+ plot(t,y(:,7),'b-','LineWidth',1)
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015'})
  xlabel('Year')
  ylabel('Proportion of new admissions into R from A')
- legend('New admissions simulated','New admissions data' )
+ legend('Proportion entering R from A simulated','Proportion entering R from A data' )
  
  
  figure(3)
  hold all
  scatter(1:1:3, Estim3,'filled')
  scatter(1:1:3, Data3, 'filled')
+ plot(t,y(:,8),'b-','LineWidth',1)
  set(gca, 'xtick', [1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015'})
  xlabel('Year')
  ylabel('Proportion of new admissions into R from H')
- legend('New admissions simulated','New admissions data' )
+ legend('Proportion entering R from H simulated','Proportion entering R from H data' )
   
  figure(4)
  hold all
  scatter(1:1:1, Estim4,'filled')
  scatter(1:1:1, Data4, 'filled')
- %plot(t,y(:,3),'b-','LineWidth',1)
+ plot(t,y(:,9),'b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
  xlabel('Year')
  ylabel('Proportion of opioid addicts')
- legend('Opioid addicts simulated','Opioid addicts data' )
+ legend('Proportion of pioid addicts simulated','Proportion of opioid addicts data' )
  
   
  figure(5)
  hold all
  scatter(1:1:1, Estim5,'filled')
  scatter(1:1:1, Data5, 'filled')
- %plot(t,y(:,4) ,' b-','LineWidth',1)
+ plot(t,y(:,10) ,' b-','LineWidth',1)
  set(gca, 'xtick', [ 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2015'})
  xlabel('Year')
  ylabel('Proportion of heroin/fentanyl users')
- legend('Heroin/fentanyl users simulated','Heroin/fentanyl users data' )
+ legend('Proportion of heroin/fentanyl users simulated','Proportion of heroin/fentanyl users data' )
  
- 
- 
+
  figure(6)
+          
+           subplot(2,2,1);plot(t,y(:,6),'b-','LineWidth',1)
+           subplot(2,2,1);xlabel('Year')
+           subplot(2,2,1);ylabel('Proportion entering P')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+           
+           subplot(2,2,2);plot(t,y(:,7),'r-','LineWidth',1)
+           hold on 
+           subplot(2,2,2);plot(t,y(:,8) ,' g-','LineWidth',1)
+           subplot(2,2,2);xlabel('Year')
+           subplot(2,2,2);ylabel('Proportion entering R')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           legend('Proportion entering R from A','Proportion entering R from H' )
+           xlim([0 , T])
+           
+           subplot(2,2,3);plot(t,y(:,9) ,' y-','LineWidth',1)
+           subplot(2,2,3);xlabel('Year')
+           subplot(2,2,3);ylabel('Proportion entering A')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+           %ylim([0 , 1e+2])
+           
+          
+           subplot(2,2,4);plot(t,y(:,10) ,' m-','LineWidth',1)
+           subplot(2,2,4);xlabel('Year')
+           subplot(2,2,4);ylabel('Proportion entering H')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+           %ylim([0 , 1e+2])
+ 
+           
+         
+  
+ figure(7)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -320,8 +364,10 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
            xlim([0 , T])
            %ylim([0 , 1e+2])
            
+                
+                 
            %Solutions all plotted together
- figure(7)
+ figure(8)
            plot(t,y(:,2),'b-','LineWidth',1);
            hold all
            plot(t,y(:,3),'r-','LineWidth',1);
@@ -338,4 +384,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
            xlim([0 , T])
            ylim([0 , 0.2])
            legend('P','A','H','R')
+           
+           
+
  
