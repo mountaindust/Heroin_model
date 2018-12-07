@@ -209,3 +209,5 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  %normalized by norm of the data
  value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+...
  norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
+
+%Want value=f(x) to be small value when run MultiStart  

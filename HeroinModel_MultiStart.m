@@ -23,14 +23,15 @@ UpperBounds=[0.7      0.1      0.1       0.1        8      0.1      0.2        2
 xstart=0.5*(LowerBounds + UpperBounds); % initial guesses for parameters (starting in the middle of each of the ranges)
 
 % % % % %  Optimization Function fmincon  % % % % %
-%x0 is xstart, objective is our specific model
+%x0 is xstart, objective is what we are trying to minimize which comes from
+%value = HeroinModel_ODE45(z) = f(x) as output
 problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45...
          ,'lb',LowerBounds,'ub',UpperBounds);
 
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
-%number of times want to do 
-numstartpoints=400;
+%number of times want to run optimization scheme
+numstartpoints=4;
 
 ms=MultiStart('Display', 'iter'); % Define a multistart problem
 
@@ -60,4 +61,6 @@ beep
 beep
 beep
 beep
+
+%Want value=f(x) to be small value when run MultiStart  
 
