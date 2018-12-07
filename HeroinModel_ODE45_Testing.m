@@ -228,6 +228,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 
 
 
+ %{
+ %Data points from Estim1, Data1
  figure(1)
  hold all
  scatter(1:1:5, Estim1,'filled')
@@ -241,7 +243,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 
  
  
-
+ %Data points from Estim2, Data2
  figure(2)
  hold all
  scatter(1:1:3, Estim2,'filled')
@@ -254,6 +256,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  legend('Proportion entering R from A simulated','Proportion entering R from A data' )
  
  
+ %Data points from Estim3, Data3
  figure(3)
  hold all
  scatter(1:1:3, Estim3,'filled')
@@ -265,6 +268,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  ylabel('Proportion of new admissions into R from H')
  legend('Proportion entering R from H simulated','Proportion entering R from H data' )
   
+ 
+ 
+ %Data points from Estim4, Data4
  figure(4)
  hold all
  scatter(1:1:1, Estim4,'filled')
@@ -277,6 +283,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  legend('Proportion of pioid addicts simulated','Proportion of opioid addicts data' )
  
   
+ %Data points from Estim5, Data5
  figure(5)
  hold all
  scatter(1:1:1, Estim5,'filled')
@@ -289,6 +296,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  legend('Proportion of heroin/fentanyl users simulated','Proportion of heroin/fentanyl users data' )
  
 
+ %Plots of ODES used in Estim1-Estim5
  figure(6)
           
            subplot(2,2,1);plot(t,y(:,6),'b-','LineWidth',1)
@@ -328,10 +336,12 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            %ylim([0 , 1e+2])
+           
+           %}
  
            
          
-  
+ %ODE solutions plotted separately 
  figure(7)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
@@ -371,7 +381,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
            
                 
                  
-           %Solutions all plotted together
+ %ODE Solutions all plotted together
  figure(8)
            plot(t,y(:,2),'b-','LineWidth',1);
            hold all
