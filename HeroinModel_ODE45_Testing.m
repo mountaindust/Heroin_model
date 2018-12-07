@@ -243,7 +243,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 
  
  
- %Data points from Estim2, Data2
+ Data points from Estim2, Data2
  figure(2)
  hold all
  scatter(1:1:3, Estim2,'filled')
@@ -338,6 +338,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
            %ylim([0 , 1e+2])
            
            %}
+ 
+ 
+
  
            
          
