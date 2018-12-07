@@ -646,7 +646,8 @@ This value is the spectral radius since it is the largest eigenvalue greater tha
 \textbf{Sensitivity Analysis} 
 %Maybe use Brain Dynamics Toolbox for heat maps? https://github.com/breakspear/bdtoolkit
 %second order rates (like parameter*S*H) won't have much sensitivity, something to look out for 
-\textcolor{red}{Latin Hypercube/ PRCC or Sobol or both? Do we need local sensitivity analysis at all?} 
+\textcolor{red}{Latin Hypercube/ PRCC or Sobol or both? Do we need local sensitivity analysis at all?} \\
+\textcolor{red}{Things to do: Write up Marino paper basics of Latin Hypercube/PRCC sensitivity analysis; alter LHS/PRCC code sent from Christina (talk with her about which codes need to be changed/not be changed...see Lenhart seminar notes from sensitivity analysis meeting, as well); finish writing up Sobol basics; alter Sobol code (remove $\delta$)} 
 %Info: https://www.mathworks.com/help/sldo/ug/what-is-sensitivity-analysis.html , https://www.mathworks.com/help/sldo/ug/sampling-parameters-and-states.html  
 %Variance methods: how big sample space affects results?
 \textcolor{red}{Will need to be updated:} In order to explore the sensitivity of each of the population classes to each of the parameters, we implemented Sobol sensitivity analysis in which the Saltelli sampler is utilized to generate N(2D+2) parameter samples where N$=$FILL IN is the number of sample points and D=16, the number of parameters in the model for a total of FILL IN samples \cite{Herman}. 
@@ -713,7 +714,7 @@ For a paper: \textit{Acknowledgements: The authors would like to thank Dr. Nicho
 -Variance of length in P hard to put in ODE model \\
 \\ \\
 
-People: Met with Kelly Cooper, Laurie Meschke, Clea McNeely, Matthew Harris, Sharon Davis, Wil Cantrell; Future connections?: Dr. Steve Loyd at TN Substance Abuse Services; Hughes Melton from Virginia Dept of Behavioral Health and Developmental Services (through Wil Cantrell, see email 12/1/18); Chris McCurty at the Florida Center for Excellence; Don Burke at University of Pittsburgh; Charles Simms from Economics dept at UT
+People: Met with Kelly Cooper, Laurie Meschke, Clea McNeely, Matthew Harris, Sharon Davis, Wil Cantrell; Future connections?: Dr. Steve Loyd at TN Substance Abuse Services; Hughes Melton from Virginia Dept of Behavioral Health and Developmental Services (through Wil Cantrell, see email 12/1/18); Chris McCurty at the Florida Center for Excellence; Don Burke at University of Pittsburgh; Charles Simms from Economics dept at UT;  Dr. Bruce Ramshaw, Department of Surgery at UT Medical Center and UT Graduate School of Medicine (seems that he would be able to provide information specifically about opioid prescriptions post-surgery); (See email: medical doctors to contact? on 10/8/2018 for next three people) Dr. Daniel Sumrok, Center of Addiction Science at UT Health Science Center in Memphis (a few important quotes from website article suggest we could potentially get information on how doctors are changing their prescribing behaviors: ``The picture of addiction is much different now than it was even a decade ago. Anyone can become addicted to painkillers, and we are doing our part to reduce that dependency rate" and ``Center for Addiction Science trains physicians and health care professionals in evidence-based protocols to better recognize, diagnose, treat and prevent addiction."); Dr. Stephanie Vanterpool and Dr. Jason Buehler regarding opioid alternatives for surgery 
 \\ \\
 
 Optimal control: \\
