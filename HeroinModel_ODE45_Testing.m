@@ -10,9 +10,7 @@ global value
  
 
 % Estimated  values of parameters from "HeroinModel_MultiStart.m"
-z0=[0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 ];
-%z0 when put in 0.1 for all parameters (something is incorrect) 
-%z0=[0.151141754728479,0.110132471130787,0.0993627024329870,0.111168714444703,0.170293860463054,0.0251293656173591,0.113341851280340,0.0932616166565709,0.100575378208625,0.383658825922296,0.0490664084545271,0.0955397305008730,0.100658901191478,0.0980476247689215,0.0992152504237340,0.304951939025043];
+z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.8 0.05 0.1 0.0057 0.0013 0.009];
 z=z0;
 
 %Parameters
@@ -127,6 +125,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
+%print Estim1 values 
+ Estim1
  
 %%%%%
  %To calculate number of new admissions coming into the recovery class 
@@ -149,6 +149,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 
  % the difference between estimated value and data 
  diff2=Estim2-Data2;
+ 
+ %print Estim2 values 
+ Estim2
  
  
  
@@ -174,6 +177,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % the difference between estimated value and data 
  diff3=Estim3-Data3;
  
+ %print Estim3 values
+ Estim3
 
  %%%%%
  % output from the model of the proportion of opioid addicts in 2015; we take
@@ -191,6 +196,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % the difference between estimated value and data
  diff4=Estim4-Data4;
  
+ %print Estim4 value 
+ Estim4
 
  %%%%%
  % output from the model of the proportion of heroin/fentanyl addicts in
@@ -209,6 +216,9 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  diff5=Estim5-Data5;
  
  
+ %print Estim5 value 
+ Estim5
+ 
  %%%%%
  %the relative error that we are trying to minimize for ordinary least
  %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
@@ -217,7 +227,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
 
 
- 
+
  figure(1)
  hold all
  scatter(1:1:5, Estim1,'filled')
