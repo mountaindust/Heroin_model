@@ -4,13 +4,18 @@ function value = HeroinModel_ODE45_Testing(z)
 
 % Final time 
 N = 4;
-T=N;
+T = N;
 tspan=linspace(0,T,N+1);
 global value 
  
 
 % Estimated  values of parameters from "HeroinModel_MultiStart.m"
+% For testing, selected values based on opioid paper or something realistic (then
+% simulated data, put in HeroinModel_ODE45.m file, then ran
+% HeroinModel_MultiStart.m to see if got back these values for z
 z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.8 0.05 0.1 0.0057 0.0013 0.009];
+% When tested got:
+%z0=[[0.150161107255521,0.00380869386967680,0.00149298769055621,0.0872984749985357,3.25439679479616,0.00151684474187485,0.104431997965411,0.432381864908839,0.0504849321396042,0.304161057476428,0.460884286435396,0.0519159523800158,0.0999954889122865,0.00589489064530614,0.00189961986359587,0.00908242522815079]
 z=z0;
 
 %Parameters
