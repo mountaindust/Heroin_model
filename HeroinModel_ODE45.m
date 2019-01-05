@@ -117,7 +117,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % total population in TN 12 and older) 
 % Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
  %Data simulated when testing codes
- Data1=[0.1  0.2387  0.1861    0.1843    0.1842];
+ Data1=[0.1  0.2387  0.1861   0.1843  0.1842  ];
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
