@@ -31,7 +31,7 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 %number of times want to run optimization scheme
-numstartpoints=4;
+numstartpoints=300;
 
 ms=MultiStart('Display', 'iter'); % Define a multistart problem
 
