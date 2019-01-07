@@ -32,29 +32,35 @@
 \noindent \textbf{Ideas about recovery class:} \\ 
 
 \textit{NEW CLASS DEFINITIONS: The opioid addict and heroin addict classes will consist of those who are actively addicted, are in treatment, or are within 4 weeks post-treatment for opioid or heroin/fentanyl addiction. The recovered class will consist of those who completed treatment for opioid or heroin/fentanyl addiction and did not relapse within 4 weeks post-treatment, and therefore are considered in a stable/successful state of being recovered. Thus, we will make assumption that those in the recovery class are not considered addicted.}\\
+\textcolor{blue}{Tricia: find sources that justifies this timeline of 4 weeks and ``main idea" below about frequent relapse; anything related to acute withdrawal and frequent bouncing back to addiction after treatment} 
 
 
 
 -We will use multiple sources to deduct information since short-term studies give information on entering R from A or H, and longer-term studies such as a relapse rate within first year or within three years post-treatment, give information on leaving R to go to A or H. \\
-%Was not able to find relapse rate graph to understand shape and be better able to inform these rates.
 -We are going to use 4 weeks after treatment with no relapse as the mark of when people are ``successfully recovered" and can move to R. \textcolor{blue}{Tricia: Argue why choosing 4 weeks: because data suggests high level of relapse in that time frame which suggests not stably recovered and look for sources that talk about acute withdrawal (Gossop 1987)}
-Studies suggest that 91\% of prescription opioid addicts who complete recovery relapse back into addiction within 8 weeks (Weiss and Rao) and 70\% of heroin addicts relapse within 4 weeks (Smyth paper from Christopher?) \textcolor{red}{Although these are on a national level, we will assume the rates do not differ significantly for TN (for now)? Was not able to find any relapse statistics specifically for TN.} 
+Studies suggest that 91\% of prescription opioid addicts who complete recovery relapse back into addiction within 8 weeks (Weiss and Rao) and 70\% of heroin addicts relapse within 4 weeks (Smyth paper from Christopher?) Although these are on a national level, we will assume the rates do not differ significantly for Tennessee, as we were not able to find any relapse statistics specifically for the state. We were not able to find information on the relapse rate within 4 weeks after treatment for prescription opioid addicts. Therefore, we will assume it is approximately the same as heroin, \textcolor{blue}{Tricia: find source that suggests high percentage of relapse within a few weeks to justify why 70\%.} 
 
- \textcolor{red}{-Was not able to find opioid stat for 4 weeks} \\
-To adjust the first percentage to a 4 week percentage, \\
-\textcolor{red}{-could not find any sort of relapse rate graph over time \\
--could not find any acute stage withdrawal sources that suggested the distribution of relapsing individuals in the weeks following treatment} 
-
- 
- \textcolor{red}{These percentages are ``relapse rates" so that means they are going back to where they started. Should we make the assumption that's the case, and find source to see if people usually go back to primary drug of choice when relapse to support this? However, would this require the breaking up of the recovered class into two separate classes?}\\
 
 -90\% of individuals addicted to opioids or heroin relapse within one year post-treatment (Bailey), 91\% for heroin at some point post-treatment (double-check in Smyth) \textcolor{blue}{Tricia: look for other sources, too.}
 
--From here, if we can get rate that people enter R from H from parameter estimation (i.e. nuH), and then from data know that 70\% relapse within one month, then do 0.3nuH to get total that go to R  (i.e. estimate parameter and THEN adjust based on data).\\ \textcolor{red}{-But wouldn't this be if the time step were one month? And not one year?  \\
--Also, do we need to consider the number of people that are actually in recovery (make an assumption about that, such as 1 in 10 are in recovery from BlueCross BlueShield stat) AND successfully finish treatment because otherwise, homogeneously mixed addicts and moving too many to R? Make assumption that one cannot move to a stable recovered class without treatment of some sort since addiction is a disease? (Three levels: how many in active recovery in A or H AND finish treatment AND don't relapse in 4 weeks afterward....that's how many go to R. For example: 1 in 10 heroin addicts are in recovery, 20\% finish treatment overall, and then 30\% don't relapse within 4 weeks of treatment, so (.1)(.2)(.3)nuH?) If so, I need to look for overall rate of finishing treatment.\\}
+-From here, if we can get rate that people enter R from H from parameter estimation (i.e. nuH), and then from data know that 70\% relapse within one month, then do 0.3nuH to get total that go to R  (i.e. estimate parameter and THEN adjust based on data).\\ 
+\textcolor{red}{-But wouldn't this be if the time step were one month? And not one year? \textcolor{blue}{Tricia: think about units of parameters} \\
+-Also, do we need to consider the number of people that are actually in recovery (make an assumption about that, such as 1 in 10 are in recovery from BlueCross BlueShield stat) AND successfully finish treatment because otherwise, homogeneously mixed addicts and moving too many to R? Make assumption that one cannot move to a stable recovered class without treatment of some sort since addiction is a disease? (Three levels: how many in active recovery in A or H AND finish treatment AND don't relapse in 4 weeks afterward....that's how many go to R. For example: 1 in 10 heroin addicts are in recovery, 20\% finish treatment overall, and then 30\% don't relapse within 4 weeks of treatment, so (.1)(.2)(.3)nuH?) YES.} \textcolor{blue}{Tricia: look for overall rate of entering treatment and of finishing treatment.\\}
 
+\textcolor{red}{-could not find opioid stat for 4 weeks \\
+-could not find any sort of relapse rate graph over time to understand shape and be better able to inform the rates \\
+-could not find any acute stage withdrawal sources that suggested the distribution of relapsing individuals in the weeks following treatment}  \\
 
-
+\textcolor{red}{To-do: \\
+-Change model to include $\sigma R \frac{A}{A+H}$ and $\sigma R \frac{H}{A+H}$ for terms going back to A and H. This is in place of breaking up the recovered classes and having it be a way to know approximately the proportion that came from A that are relapsing back to A (and same for H). Note that it is only an approximation because based on the ``current time" class proportions. We will do this because these percentages we have are ``relapse rates" so that means they are going back to where they started. \textcolor{blue}{Find source to see if people usually go back to primary drug of choice when relapse to support that individuals relapse back approximately proportionally to where they came from}\\ 
+-Update parameter estimation code regarding treatment admission data and $\sigma$ change and anything else
+-Write down assumptions/choice reasoning for bounds in parameter estimation code \\ 
+-What analysis have done for journal article? \\
+-Start journal article on google drive and sift out what's important for article \\
+-Send them updates every Friday with documents and thoughts so they can look at things; keep google drive updated each week \\
+-Goal: journal article by May \\
+-Later: -may change to start at 2015 so that have 4 (or 3...) initial conditions \\
+-contrast our model with Christopher's and show that get different results; argue why fentanyl is not it's own class and why we include heroin since fentanyl is the biggest killer now}
 %-Main idea: pick something and go with it for now, but just have the details straightened out as far as treatment, after treatment period, and relapse, etc.
 
 \textbf{Where this came from:} \\
