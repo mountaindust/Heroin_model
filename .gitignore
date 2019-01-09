@@ -30,7 +30,10 @@ __pycache__/
 .vscode/
 
 #data from pdfs/other sources
+#old name of folder
 heroin_data/
+#new name of folder
+heroin_data_sources/
 
 #heroin papers/journal articles/other sources
 heroin_papers/
