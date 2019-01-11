@@ -13,14 +13,14 @@ global value
 % For testing, selected values based on opioid paper or something realistic (then
 % simulated data, put in HeroinModel_ODE45.m file, then ran
 % HeroinModel_MultiStart.m to see if got back these values for z
-z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.8 0.05 0.1 0.0057 0.0013 0.009];
+z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.05 0.1 0.0057 0.0013 0.009];
 % When tested got:
-%z0=[[0.150161107255521,0.00380869386967680,0.00149298769055621,0.0872984749985357,3.25439679479616,0.00151684474187485,0.104431997965411,0.432381864908839,0.0504849321396042,0.304161057476428,0.460884286435396,0.0519159523800158,0.0999954889122865,0.00589489064530614,0.00189961986359587,0.00908242522815079]
+%z0=
 z=z0;
 
 %Parameters
 alpha=z(1); 
- 
+
 beta_A=z(2); 
  
 beta_P=z(3);
@@ -39,38 +39,37 @@ gamma=z(6);
  
 theta_2=z(7); 
  
-sigma_A=z(8);
+sigma=z(8);
  
 zeta=z(9);
  
 theta_3=z(10);
  
-sigma_H=z(11);
- 
-nu=z(12);
+nu=z(11);
 
-P0=z(13);
+P0=z(12);
 
-A0=z(14);
+A0=z(13);
 
-H0=z(15);
+H0=z(14);
 
-R0=z(16);
+R0=z(15);
+
 
 
 
 %Initials
-S0=1-z(13)-z(14)-z(15)-z(16); 
-P0=z(13);
-A0=z(14);
-H0=z(15);
-R0=z(16); 
+S0=1-z(12)-z(13)-z(14)-z(15); 
+P0=z(12);
+A0=z(13);
+H0=z(14);
+R0=z(15); 
 X0=0;
-Z0=0;
-K0=0;
+%Z0=0;
+%K0=0;
 L0=0;
 M0=0;
-initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
+initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 
 
 
@@ -83,10 +82,10 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
   H=y(:,4);
   R=y(:,5);
   X=y(:,6);
-  Z=y(:,7);
-  K=y(:,8);
-  L=y(:,9);
-  M=y(:,10);
+  %Z=y(:,7);
+  %K=y(:,8);
+  L=y(:,7);
+  M=y(:,8);
   
   
   
@@ -134,56 +133,60 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  Estim1
  
 %%%%%
+%CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
  %To calculate number of new admissions coming into the recovery class 
  %(NOT total in recovery class) from the opioid addict class, we use ODE Z'=dy(7); going to run from
  %2013-2015 because those are the only years among 2013-2017 we have data for; 
  %new_opioid_admissions is for years 2014-2015, and y(1,7) is the number that are
  %admitted in the first year 2013
- new_opioid_admissions=zeros(1,2);
- for i=1:2
- new_opioid_admissions(i) = y(i+1,7)-y(i,7);
- end
+ 
+ %new_opioid_admissions=zeros(1,2);
+ %for i=1:2
+ %new_opioid_admissions(i) = y(i+1,7)-y(i,7);
+ %end
  
  % yearly output from the model as a proportion in the recovery class
- Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
+ %Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
   
  % actual proportions of population each year being admitted into recovery from opioid addict class
- Data2=[4485./5517176 4530./5559006 4326./5602117];
+% Data2=[4485./5517176 4530./5559006 4326./5602117];
  %%Data simulated when put in 0.1 for all parameters
  %Data2=[0 0.011 0.013];
 
  % the difference between estimated value and data 
- diff2=Estim2-Data2;
+% diff2=Estim2-Data2;
  
  %print Estim2 values 
- Estim2
+ %Estim2
  
  
  
  %%%%%
+ %CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
  %To calculate number of new admissions coming into the recovery class 
  %(NOT total in recovery class) from the heroin/fentanyl class, we use ODE K'=dy(8); going to run from
  %2013-2015 because those are the only years among 2013-2017 we have data for; 
  %new_heroin_admissions is for years 2014-2015, and y(1,8) is the number that are
  %admitted in the first year 2013
- new_heroin_admissions=zeros(1,2);
- for i=1:2
- new_heroin_admissions(i) = y(i+1,8)-y(i,8);
- end
+ 
+ %new_heroin_admissions=zeros(1,2);
+ %for i=1:2
+ %new_heroin_admissions(i) = y(i+1,8)-y(i,8);
+ %end
  
  % yearly output from the model as a proportion that have been admitted into recovery class
- Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
+ %Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
   
  % actual proportions of population each year being admitted into recovery from
  % heroin/fentanyl class
- Data3=[555./5517176 743./5559006 1083./5602117];
+ %Data3=[555./5517176 743./5559006 1083./5602117];
  %%Data simulated when put in 0.1 for all parameters
  %Data3=[0 0.01 0.011];
  % the difference between estimated value and data 
- diff3=Estim3-Data3;
+ %diff3=Estim3-Data3;
  
  %print Estim3 values
- Estim3
+ %Estim3
 
  %%%%%
  % output from the model of the proportion of opioid addicts in 2015; we take
@@ -192,8 +195,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- % MAY NEED TO FIX VALUE IF DECIDE THIS NUMBER COUNTS INDIVIDUALS IN RECOVERY, TOO 
- Estim4=[y(2,3)+y(3,9)-y(2,9)];
+ Estim4=[y(2,3)+y(3,7)-y(2,7)];
  % made up for now
  Data4=[48000./5602117];
  %Data simulated when put in 0.1 for all parameters
@@ -212,7 +214,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- Estim5=[y(2,4)+y(3,10)-y(2,10)];
+ Estim5=[y(2,4)+y(3,8)-y(2,8)];
  % Made up for now
  Data5=[14000./5602117];
  %Data simulated when put in 0.1 for all parameters
@@ -228,8 +230,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  %the relative error that we are trying to minimize for ordinary least
  %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
  %normalized by norm of the data
- value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+...
- norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
+ value = norm(diff1,2)./norm(Data1)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
 
 
 
@@ -380,7 +381,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
            subplot(2,2,4);xlabel('Year')
-           subplot(2,2,4);ylabel('Individuals in recovery')
+           subplot(2,2,4);ylabel('Recovered Individuals')
            set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
