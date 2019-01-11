@@ -6,9 +6,9 @@ clc;
 
 
 % the parameter vector we will approximate 
-%        z =[alpha  beta_A    beta_P   theta_1   epsilon  gamma   theta_2   sigma_A    zeta    theta_3  sigma_H    nu       P0      A0        H0       R0  ]
-LowerBounds=[0.01    0.00001  0.00001   0.00001    0.8   0.00001  0.00002   0.00001   0.00001  0.00004  0.00001  0.00001   0.01   0.00001   0.00001  0.00001];
-UpperBounds=[0.7      0.1      0.1       0.1        8      0.1      0.2        2       2        0.4        2        2      0.8      0.2       0.1      0.3];
+%        z =[alpha  beta_A    beta_P   theta_1   epsilon  gamma   theta_2   sigma    zeta    theta_3      nu       P0      A0        H0       R0  ]
+LowerBounds=[0.01    0.00001  0.00001   0.00001    0.8   0.00001  0.00002   0.00001   0.00001  0.00004    0.00001   0.01   0.00001   0.00001  0.00001];
+UpperBounds=[0.7      0.1      0.1       0.1        8      0.1      0.2        2       2        0.4          2      0.8      0.2       0.1      0.3];
 
 % For now: alpha guess from opioid paper since higher in TN; beta_A guess from opioid paper; 
 % beta_P guess from opioid paper; theta_1 complete guess, assume smaller than beta_A, beta_P; 
@@ -31,7 +31,7 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 %number of times want to run optimization scheme
-numstartpoints=300;
+numstartpoints=10;
 
 ms=MultiStart('Display', 'iter'); % Define a multistart problem
 

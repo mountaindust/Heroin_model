@@ -13,7 +13,7 @@ global value
  
 %Parameters
 alpha=z(1); 
- 
+
 beta_A=z(2); 
  
 beta_P=z(3);
@@ -32,30 +32,34 @@ gamma=z(6);
  
 theta_2=z(7); 
  
-sigma_A=z(8);
+sigma=z(8);
  
 zeta=z(9);
  
 theta_3=z(10);
  
-sigma_H=z(11);
- 
-nu=z(12);
+nu=z(11);
 
-P0=z(13);
+%Although we know total number of prescription users in 2013, we do not
+%know the initial number right at the start of 2013, so must be estimated
+P0=z(12);
 
-A0=z(14);
+%Do not know number of opioid addicts at start of 2013
+A0=z(13);
 
-H0=z(15);
+%Do not know number of heroin users at start of 2013
+H0=z(14);
 
-R0=z(16);
+%Do not know number of individuals in recovery at start of 2013
+R0=z(15);
+
 
 %Initials
-S0=1-z(13)-z(14)-z(15)-z(16); 
-P0=z(13);
-A0=z(14);
-H0=z(15);
-R0=z(16); 
+S0=1-z(12)-z(13)-z(14)-z(15); 
+P0=z(12);
+A0=z(13);
+H0=z(14);
+R0=z(15); 
 X0=0;
 Z0=0;
 K0=0;
