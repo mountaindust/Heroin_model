@@ -55,25 +55,30 @@ dy(2) = alpha*y(1)-epsilon*y(2)-gamma*y(2)-theta_2*y(2)*y(4)-mu*y(2);
 dy(3) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4))+beta_A*y(1)*y(3)+beta_P*y(1)*y(2)-zeta*y(3)-theta_3*y(3)*y(4)-mu*y(3)-mu_A*y(3);
 dy(4) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4))-nu*y(4)-(mu+mu_H)*y(4);
 dy(5) = zeta*y(3)+nu*y(4)-sigma*y(5)*y(3)/(y(3)+y(4))-sigma*y(5)*y(4)/(y(3)+y(4))-mu*y(5);
+
 %X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
 %individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
 dy(6) = alpha*y(1);
+
 %Z' ODE to calculate the number of new admissions into the recovery class
 %over time from A class
 %(used in Estim2 in HeroinModel_ODE45.m) 
-dy(7) = zeta*y(3);
+%dy(7) = zeta*y(3);
+
 %K' ODE to calculate the number of new admissions into the recovery class 
 %over time from H class
 %(used in Estim3 in HeroinModel_ODE45.m)
-dy(8) = nu*y(4);
+%dy(8) = nu*y(4);
+
 %L' ODE to calculate the number of new cases of opioid addiction over time;
 %i.e. individuals who enter the A class at any time (used in Estim4 in
 %HeroinModel_ODE45.m)
-dy(9) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4))+beta_A*y(1)*y(3)+beta_P*y(1)*y(2);
+dy(7) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4))+beta_A*y(1)*y(3)+beta_P*y(1)*y(2);
+
 %M' ODE to calculate the number of new cases of heroin/fentanyl addiction
 %over time; i.e. individuals who enter the H class at any time (used in
 %Estim5 in HeroinModel_ODE45.m)
-dy(10) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4));
+dy(8) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4));
   dy=dy';  
  
 end

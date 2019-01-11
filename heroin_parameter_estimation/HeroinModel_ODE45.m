@@ -61,11 +61,11 @@ A0=z(13);
 H0=z(14);
 R0=z(15); 
 X0=0;
-Z0=0;
-K0=0;
+%Z0=0;
+%K0=0;
 L0=0;
 M0=0;
-initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
+initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 
 
 
@@ -78,10 +78,10 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
   H=y(:,4);
   R=y(:,5);
   X=y(:,6);
-  Z=y(:,7);
-  K=y(:,8);
-  L=y(:,9);
-  M=y(:,10);
+ % Z=y(:,7);
+ % K=y(:,8);
+  L=y(:,7);
+  M=y(:,8);
   
   
 
@@ -121,56 +121,60 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % total population in TN 12 and older) 
 % Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
  %Data simulated when testing codes
- Data1=[0.1  0.2387  0.1861   0.1843  0.1842  ];
+ Data1=[0.1  0.2387  0.1861   0.1843  0.1842];
 % the difference between estimated value and data 
  diff1= Estim1-Data1;
  
  
 %%%%%
+%CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
  %To calculate number of new admissions coming into the recovery class 
  %(NOT total in recovery class) from the opioid addict class, we use ODE Z'=dy(7); going to run from
  %2013-2015 because those are the only years among 2013-2017 we have data for; 
  %new_opioid_admissions is for years 2014-2015, and y(1,7) is the number that are
  %admitted in the first year 2013
- new_opioid_admissions=zeros(1,2);
- for i=1:2
- new_opioid_admissions(i) = y(i+1,7)-y(i,7);
- end
+ 
+ %new_opioid_admissions=zeros(1,2);
+ %for i=1:2
+ %new_opioid_admissions(i) = y(i+1,7)-y(i,7);
+ %end
  
  % yearly output from the model as a proportion in the recovery class
- Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
+ %Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
   
  % actual proportions of population each year being admitted into recovery from opioid addict class
 % Data2=[4485./5517176 4530./5559006 4326./5602117];
   %Data simulated when testing codes
- Data2=[0 0.0003677 0.0004421];
+ %Data2=[0 0.0003677 0.0004421];
 
  % the difference between estimated value and data 
- diff2=Estim2-Data2;
+% diff2=Estim2-Data2;
  
  
  
  %%%%%
+ %CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
  %To calculate number of new admissions coming into the recovery class 
  %(NOT total in recovery class) from the heroin/fentanyl class, we use ODE K'=dy(8); going to run from
  %2013-2015 because those are the only years among 2013-2017 we have data for; 
  %new_heroin_admissions is for years 2014-2015, and y(1,8) is the number that are
  %admitted in the first year 2013
- new_heroin_admissions=zeros(1,2);
- for i=1:2
- new_heroin_admissions(i) = y(i+1,8)-y(i,8);
- end
+ 
+ %new_heroin_admissions=zeros(1,2);
+ %for i=1:2
+ %new_heroin_admissions(i) = y(i+1,8)-y(i,8);
+ %end
  
  % yearly output from the model as a proportion that have been admitted into recovery class
- Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
+ %Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
   
  % actual proportions of population each year being admitted into recovery from
  % heroin/fentanyl class
  %Data3=[555./5517176 743./5559006 1083./5602117];
  %Data simulated when testing codes
- Data3=[0  0.0001825  0.0002859];
+% Data3=[0  0.0001825  0.0002859];
  % the difference between estimated value and data 
- diff3=Estim3-Data3;
+ %diff3=Estim3-Data3;
  
 
  %%%%%
@@ -180,9 +184,8 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
 % integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- % MAY NEED TO FIX VALUE IF DECIDE THIS NUMBER COUNTS INDIVIDUALS IN RECOVERY, TOO 
- Estim4=[y(2,3)+y(3,9)-y(2,9)];
- % made up for now
+ Estim4=[y(2,3)+y(3,7)-y(2,7)];
+ %actual proportion of opioid addicted individuals in the population in 2015
  %Data4=[48000./5602117];
  %Data simulated when testing codes
  Data4=[0.0097];
@@ -198,7 +201,7 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- Estim5=[y(2,4)+y(3,10)-y(2,10)];
+ Estim5=[y(2,4)+y(3,8)-y(2,8)];
  % Made up for now
  %Data5=[14000./5602117];
  %Data simulated when testing codes
@@ -211,7 +214,6 @@ initials = [S0,P0,A0,H0,R0,X0,Z0,K0,L0,M0];
  %the relative error that we are trying to minimize for ordinary least
  %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
  %normalized by norm of the data
- value = norm(diff1,2)./norm(Data1)+ norm(diff2,2)./norm(Data2)+...
- norm(diff3,2)./norm(Data3)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
+ value = norm(diff1,2)./norm(Data1)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
 
 %Want value=f(x) to be small value when run MultiStart  
