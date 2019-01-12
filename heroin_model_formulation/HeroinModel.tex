@@ -346,7 +346,7 @@ Although this number includes those who may have used heroin once or twice in th
 
 %NSDUH Info for how do surveys for states: https://www.samhsa.gov/data/sites/default/files/NSDUHsaeMethodology2016/NSDUHsaeMethodology2016.pdf
 
-\textit{*\textbf{Recovering addicts}: won't be able to find because we do not know the total of individuals total that have been in treatment ever in the past for our time frame}  \\
+\textit{*\textbf{Recovered addicts}: won't be able to find because we do not know the total number of individuals that have been in treatment, successfully finished, and not relapsed in our time frame}  \\
 
 
 
@@ -397,14 +397,8 @@ Again, these numbers do not include fentanyl users explicitly, but we are under 
 2016: (1,009-294=) 715 \\
 
 Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
-%SEE WORK on 11/19/18 meeting notes for mu_A, mu_H, mu
-We may calculate the overdose death rate in the year 2015, since we know the number of addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we will assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to opioids \cite{Gwira}. Therefore, we will assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 48,000 opioid addicts in 2015, this means that (48,000-0.546$\cdot$679)/48,000 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.992$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in $\mu_{A} \approx 0.00775.$
 
-Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the assumption that if an individual died of a heroin overdose they were addicted in line with our previous assumptions that if one is using heroin, they are considered addicted due to the nature of the drug. This means that (14,000-374)/14,000 $\approx$ 0.973 is the proportion of heroin users that remain at $t=1$, which implies 0.973$H_0=H_0 e^{-\mu_{H}(1)}$, which results in $\mu_{H}$ $\approx 0.0271$, the continuous-time rate at which individuals are dying from the heroin class.
-
-%we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
-
-\item We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
+item We add together the heroin and fentanyl overdoses from the years 2013-2016 for the state of Tennessee. The \textbf{total number of heroin and fentanyl overdoses} for these four years are: \\
 2013: (63+53=) 116 \\
 2014: (147+69=) 216 \\
 2015: (205+169=) 374 \\
@@ -412,7 +406,15 @@ Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts
 
 Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
-We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
+
+%SEE WORK on 11/19/18 meeting notes for mu_A, mu_H, mu
+We may calculate the overdose death rate in the year 2015, since we know the number of addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we will assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to opioids \cite{Gwira}. Therefore, we will assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 48,000 opioid addicts in 2015, this means that (48,000-0.546$\cdot$679)/48,000 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.992$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in $\mu_{A} \approx 0.00775.$
+
+Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the assumption that if an individual died of a heroin overdose they were addicted in line with our previous assumptions that if one is using heroin, they are considered addicted due to the nature of the drug. This means that (14,000-374)/14,000 $\approx$ 0.973 is the proportion of heroin users that remain at $t=1$, which implies 0.973$H_0=H_0 e^{-\mu_{H}(1)}$, which results in $\mu_{H}$ $\approx 0.0271$, the continuous-time rate at which individuals are dying from the heroin class.
+
+%we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
+
+\item We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
 
 
 %Could use overdose data of heroin compared to number of heroin addicts in order to get a scaling, and then be able to determine number of fentanyl addicts based on the number of fentanyl overdoses. But for now, going with subset argument, that heroin users includes fentanyl users. 
