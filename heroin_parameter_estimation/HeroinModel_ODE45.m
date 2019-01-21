@@ -1,4 +1,4 @@
-%File name: HeroinModel_ODE45.m
+%File name: HeroinModel_ODE45.m (used to be in Heroin_model folder)
 function value = HeroinModel_ODE45(z)
 
 
@@ -53,6 +53,7 @@ H0=z(14);
 %Do not know number of individuals in recovery at start of 2013
 R0=z(15);
 
+omega=0.00001;
 
 %Initials
 S0=1-z(12)-z(13)-z(14)-z(15); 
@@ -116,7 +117,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 % yearly output from the model as a proportion from 2013 to 2017
  Estim1=[z(13)+y(1,6), total_prescription_users(1),total_prescription_users(2),total_prescription_users(3), total_prescription_users(4)];
        
-% actual proportions of population that were prescription opioid users for
+% Actual proportions of population that were prescription opioid users for
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
 % Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
@@ -185,7 +186,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
  Estim4=[y(2,3)+y(3,7)-y(2,7)];
- %actual proportion of opioid addicted individuals in the population in 2015
+ %Actual proportion of opioid addicted individuals in the population in 2015
  %Data4=[48000./5602117];
  %Data simulated when testing codes
  Data4=[0.0112];
@@ -202,7 +203,8 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
  Estim5=[y(2,4)+y(3,8)-y(2,8)];
- % Made up for now
+ %Actual proportion of heroin addicted individuals in the population in
+ %2015
  %Data5=[14000./5602117];
  %Data simulated when testing codes
  Data5=[0.0022];

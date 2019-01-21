@@ -1,4 +1,4 @@
-%File name: HeroinModel_ODE45_Testing.m
+%File name: HeroinModel_ODE45_Testing.m (used to be in Heroin_model folder)
 function value = HeroinModel_ODE45_Testing(z)
 
 
@@ -55,7 +55,7 @@ H0=z(14);
 
 R0=z(15);
 
-
+omega=.00001;
 
 
 %Initials

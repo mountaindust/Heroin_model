@@ -1,4 +1,4 @@
-%File name: HeroinModel_MultiStart.m
+%File name: HeroinModel_MultiStart.m (used to be in Heroin_model folder)
 %to avoid error with "manymins" 
 clear all; 
 clc;
