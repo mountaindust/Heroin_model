@@ -219,7 +219,7 @@ Note that enforcing $P^* \neq 0$ here implies that $\alpha \neq 0$, as well, whi
 \textbf{Numerical Results} 
 (literature information and parameter estimation) \\ \\
 \textcolor{blue}{Parameter estimation codes using Ordinary Least Squares: HeroinModel.m, \linebreak HeroinModel\_ODE45.m, HeroinModel\_MultiStart.m ...with these 3 files open, can run by typing ``HeroinModel\_MultiStart.m" \\ \\
-The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H}$ and $\sigma R \frac{H}{A+H}$, but not with the perturbation term) and runs from 2013-2017. Currently we only have 7 data points and 15 unknowns, but 2 more data points can be put in once February reports come out for a total of 9 data points. If we run from 2015-2017, we would have 7 data points total and 12 unknowns. \\ \\
+The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 7 data points and 15 unknowns, but 2 more data points can be put in once February reports come out for a total of 9 data points. If we run from 2015-2017, we would have 7 data points total and 12 unknowns. \\ \\
 I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
  $\beta_P$ guess from opioid paper; $\theta_1$ complete guess, assume smaller than $\beta_A$, $\beta_P$; 
  epsilon 0.8-8 from opioid paper; gamma guess from opioid paper; $\theta_2$
