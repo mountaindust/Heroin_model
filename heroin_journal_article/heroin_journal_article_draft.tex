@@ -18,6 +18,8 @@
 \usepackage{comment}
 \usepackage{color,soul}
 \usepackage{combelow}
+\usepackage{tabu}
+\usepackage{caption}
 \bibliographystyle{apa}
 \definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
 
@@ -218,13 +220,15 @@ If $P^*=0$, then equation (8) forces either $S^*=0$ or $\alpha=0$.  If $S^*=0$, 
 \textcolor{red}{Update basic reproduction number from new addiction-free equilibrium (change will be that $R$ is no longer an addicted compartment).} \\  
 \textcolor{blue}{Include proof of non-negative IC implies non-negative solutions?} \\ 
 \textcolor{blue}{What other analysis should be done?} \\ \\
+
 \textbf{Numerical Results} 
 (literature information and parameter estimation) \\ \\
 \textcolor{red}{This is where start to talk about Tennessee (see data section below)} \\
 We run our model from 2013-2017, and initial conditions for the classes are estimated, as we do not have data for the number of individuals in each class at the beginning of 2013. 
 
 \textcolor{blue}{Parameter estimation codes using Ordinary Least Squares: HeroinModel.m, \linebreak HeroinModel\_ODE45.m, HeroinModel\_MultiStart.m ...with these 3 files open, can run by typing ``HeroinModel\_MultiStart.m" \\ \\
-The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 7 data points and 15 unknowns, but 2 more data points can be put in once February reports come out for a total of 9 data points. If we run from 2015-2017, we would have 7 data points total and 12 unknowns. \\ \\
+The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 7 data points and 15 unknowns, but 3 more data points can be put in now for a total of 10 data points. If we run from 2015-2017, we would have 9 data points total and 12 unknowns.  \\ \\ 
+%\textcolor{red}{Put in 2014-2015 heroin addicts =14,000 (from Table 95: 2014/2015 heroin addict information:} 
 I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
  $\beta_P$ guess from opioid paper; $\theta_1$ complete guess, assume smaller than $\beta_A$, $\beta_P$; 
  epsilon 0.8-8 from opioid paper; gamma guess from opioid paper; $\theta_2$
@@ -236,74 +240,269 @@ I tried to choose realistic lower and upper bounds for the parameters in the fol
  \textcolor{blue}{Could this info be used for relationship among $\theta_1$, $\theta_2$, and $\theta_3$?: Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
 Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$).} \\
 
+
+\textcolor{red}{Put in 2014-2015 heroin addicts =14,000 from Table 95: 2014/2015 heroin addict information into data tables and code} \\
+%https://www.samhsa.gov\linebreak/data/sites/default/files/NSDUHsaeStateTabs2015B/NSDUHsaeSpecificStates2015.htm
+
+\textcolor{red}{Put in 2016-2017 opioid addicts: 42,000 and 2016-2017 heroin addicts: 19,000 from NSDUHsaeTennessee2017 (already downloaded on laptop) into data tables and code}  
+
 \textcolor{blue}{What other types of assumptions can we make regarding the parameters?} \\
+\textcolor{blue}{For the ``average" data points, used the lowest of the two years; is that okay?} \\
  
- \textcolor{blue}{Data used within code:} \\
- \textcolor{red}{Talk about specifically using model in Tennessee setting/population/using Tennessee data here} \\
- \textcolor{red}{Create table for data.}
- \textcolor{red}{Add in somewhere, if don't already have: we make assumption that those in the recovery class are not considered addicted.} \textcolor{red}{I believe ROSIE study says somewhere that individuals in treatment are mostly still taking drugs, which supports our decision to leave those in treatment in an addicted class: https://www.drugsandalcohol.ie/11542/1/ROSIE3-YearReport.pdf} \\
+ \textcolor{green}{Data used within code:} \\
  
-1) For Tennessee, the \textbf{total number of individuals taking prescription opioids} for pain \cite{TNgov1}: \\
-2013: 1,845,144 \\
-2014: 1,824,342 \\
-2015: 1,819,581 \\
-2016: 1,761,363 \\
-2017: 1,636,374 
+ \textcolor{blue}{Applying model to Tennessee population} \\
+We apply our model to the Tennessee population specifically in order to analyze the opioid epidemic on a smaller scale than the national level. Although there is still heterogeneity across Tennessee, it is lower than the amount one would find on a national scale. Below we present a data table consisting of estimates of the number of individuals in Tennessee in various categories for the years 2013-2018 found either in literature or that we estimated; explanations of each of the categories follows. 
 
-Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. \\
 
-2) For Tennessee, the 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{opioid addicts}): 48,000 \cite{NSDUH2} \\
-We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. \textcolor{blue}{Right now, I'm using this estimate for the year 2015...should I compare it to total number in 2015+total number in 2016 divided by 2 instead?} \\
+\begin{center}
+\captionof{table}{Number of individuals in each category, 2013-2018 }
+\begin{tabular}{|l|c|c|c|c|c|cl}
+\hline
+Year & 2013 & 2014 & 2015 & 2016 & 2017 & 2018\\
+\hline
+Total Population & 6,490,795 & 6,540,007 & 6,590,726 & 6,649,404 & 6,715,984 & 6,770,010\\
+Population 12 and older & 5,517,176 & 5,559,006 & 5,602,117 & 5,651,993 & 5,708,586 & -\\
+Prescription Opioid Users & 1,845,144 &1,824,342 & 1,819,581 & 1,761,363 &  1,636,374 &-\\
+Opioid Addicts & - & - & 48,000 & \textcolor{red}{42,000} & - &-\\
+Heroin Addicts & - & \textcolor{red}{14,000} & 14,000 & \textcolor{red}{19,000}  & - &-\\
+Prescription Opioid Overdose Deaths & - & - & 679 & -  & - &-\\
+Heroin/Fentanyl Overdose Deaths & - & - & 374 & -  & - &-\\
+\hline
+\end{tabular} \\
+\label{tab:template}
+\end{center}
+ \textcolor{red}{Those in red: still need to incorporate in code.}
+ 
+ \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\
+The first row provides the \textbf{total population estimates in Tennessee} each year \cite{USCensus}. However, since the remainder of the data we use is specific to individuals 12 and older, we estimate the number in this age group. 
+There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and under. (Note: we could not find the estimate for this age group for the years 2013-2017, so this is the best estimate we have for this age group). To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the total population estimate for 2018 being 6,770,010 from row 1, this means that approximately 15\% of the population is under the age of 12. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates; this is shown in the second row.  \\
 
-3) For Tennessee, the 2015/2016 average number of individuals 12 and older with ``Past Year Heroin Use" (\textbf{heroin/fentanyl addicts}): 14,000 \cite{NSDUH2}  \\ 
-Although this number includes those who may have used heroin once or twice in the past year, we are under the assumption that the majority of these individuals are addicts and that very few, if any, individuals use heroin recreationally. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Overall, these two assumptions may work to balance one another out. 
-\\
+The \textbf{total number of individuals taking prescription opioids} for pain is given in the third row \cite{TNgov1}. \\
+Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+\textcolor{red}{Think about these data points again: would they include addicted individuals, as well? Only some are addicted; make estimate of how many take prescriptions AND are addicted to be able to subtract out of here?}
 
-4) We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in the following  \textbf{total number of prescription opioid overdose deaths} for 2015: (848-169=) 679 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay?} 
+We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. \textcolor{red}{May find a better place for this later:Finally, we note that those who are addicted to opioids are strictly in the A class, as individuals in R are not considered addicted in our model.} 
 
-We add together the heroin and fentanyl overdoses for the state of Tennessee to obtain the \textbf{total number of heroin and fentanyl overdoses} in 2015 to be: (205+169=) 374 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+The 2014/2015 average number of individuals 12 and older with ``Past Year Heroin Use" (\textbf{heroin/fentanyl addicts}) was 14,000, the 2015/2016 average number was 14,000, and the 2016/2017 average number was 19,000 \cite{NSDUH0, NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay?}  Although this number includes those who may have used heroin once or twice in the past year, we are under the assumption that the majority of these individuals are addicts and that very few, if any, individuals use heroin recreationally. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Overall, these two assumptions may work to balance one another out. 
 
-%SEE WORK on 11/19/18 meeting notes for mu_A, mu_H, mu
-We may calculate the overdose death rate in the year 2015, since we know the number of addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to opioids \cite{Gwira}. Therefore, we assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 48,000 opioid addicts in 2015, this means that (48,000-0.546$\cdot$679)/48,000 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.992$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in $\mu_{A} \approx 0.00775.$
 
-Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the assumption that if an individual died of a heroin overdose they were addicted in line with our previous assumptions that if one is using heroin, they are considered addicted due to the nature of the drug. This means that (14,000-374)/14,000 $\approx$ 0.973 is the proportion of heroin users that remain at $t=1$, which implies 0.973$H_0=H_0 e^{-\mu_{H}(1)}$, which results in $\mu_{H}$ $\approx 0.0271$, the continuous-time rate at which individuals are dying from the heroin class.
+We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in (848-169=) 679 as the \textbf{total number of prescription opioid overdose deaths} for 2015. \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. 
 
-%we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
+We add together the heroin and fentanyl overdoses for the state of Tennessee to obtain the \textbf{total number of heroin and fentanyl overdoses} in 2015 to be (205+169=) 374 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
-We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." \\
-
-5) The total population estimates in Tennessee each year are the following \cite{USCensus}: \\
-2013: 6,490,795 \\
-2014: 6,540,007 \\
-2015: 6,590,726 \\
-2016: 6,649,404 \\
-2017: 6,715,984 \\
-2018: 6,770,010 
-
-There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and under. (Note: we could not find the estimate for this age group for the years 2013-2017, so this is the best estimate we have for this age group). To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the total population estimate for 2018 being 6,770,010 from above, this means that approximately 15\% of the population is under the age of 12. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the following \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates.  \\
-2013: 5,517,176 \\
-2014: 5,559,006 \\
-2015: 5,602,117 \\
-2016: 5,651,993 \\
-2017: 5,708,586 
-
-%Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
-The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
 
 
 \textcolor{blue}{General explanation of parameter estimation process:} \\
-In order to estimate parameters for our model, we used data regarding the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year from above and compared these to the proportions of the population in the classes at in certain years that out model simulated. We estimated the following parameters: \textcolor{red}{fill in which ones, maybe referring to a table} and used the values calculated above for $\mu$, $\mu_A$, and $\mu_H.$ We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. \\ \\
+The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. The following table displays the parameters that were estimated, along with their resulting estimated values: 
+
+
+
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Estimated Value} & {Units} \\ [0.5ex]
+
+ \hline\hline
+
+$\alpha$ &  &  \\
+
+ \hline
+
+$\beta_A$ &  &  \\
+
+\hline
+
+$\beta_P$ &  &  \\
+
+\hline
+
+$\theta_1$&  &  \\
+
+\hline
+
+$\epsilon$ &  &  \\
+
+\hline
+
+$\gamma$ &  &  \\
+
+\hline
+
+$\theta_2$ &  &  \\
+
+\hline
+
+$\sigma$ &  &  \\
+
+\hline
+
+$\zeta$ &  &  \\
+
+\hline
+
+$\theta_3$ &  &  \\
+
+\hline
+
+$\nu$ &  &  \\
+
+\hline
+
+$P_0$ &  &  \\
+
+\hline
+
+$A_0$ &  &  \\
+
+\hline
+
+$H_0$ &  &  \\
+
+\hline
+
+$R_0$ &  &  \\
+
+%\\ [1ex]
+
+ \hline
+
+\end{tabular}
+
+\end{center}
+ 
+
+
+
+
+
+
+ 
 \textbf{Conclusions} \\ \\
  \textcolor{red}{What did we show that we didn't know before?} \\
  \textcolor{red}{Think of questions that we can confront the model with regarding heroin and fentanyl deaths and connect to data on deaths; give results that give the reader an answer to these questions; think about analysis can do on model.}
 
 
-\textbf{Appendix} \\ \\
+\textbf{Appendix A} \\ \\
 \textcolor{blue}{Calculations of parameters from literature} \\
 \textcolor{red}{Fill in}
 
+
+
+%Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
+The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
+
+
+
+%SEE WORK on 11/19/18 meeting notes for mu_A, mu_H, mu
+We may calculate the overdose death rate in the year 2015, since we know the number of addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to opioids \cite{Gwira}. Therefore, we assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 48,000 opioid addicts in 2015, this means that (48,000-0.546$\cdot$679)/48,000 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.992$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in \boldmath{$\mu_{A} \approx 0.00775.$}\unboldmath
+
+Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the assumption that if an individual died of a heroin overdose they were addicted in line with our previous assumptions that if one is using heroin, they are considered addicted due to the nature of the drug. This means that (14,000-374)/14,000 $\approx$ 0.973 is the proportion of heroin users that remain at $t=1$, which implies 0.973$H_0=H_0 e^{-\mu_{H}(1)}$, which results in \boldmath{$\mu_{H}$ $\approx 0.0271$} \unboldmath, the continuous-time rate at which individuals are dying from the heroin class.
+
+%we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
+
+We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." \\
+
+
 \textcolor{blue}{Table of parameter values and units of parameters/unit conversions from data to parameters in parameter estimation} \\
 \textcolor{red}{Fill in}
+
+
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Unit Conversions} & {Units} \\ [0.5ex]
+
+ \hline\hline
+ 
+ $\mu$ &  &  \\
+
+ \hline
+ 
+ $\mu_A$ &  &  \\
+
+ \hline
+ 
+ $\mu_H$ &  &  \\
+
+ \hline
+
+$\alpha$ &  &  \\
+
+ \hline
+
+$\beta_A$ &  &  \\
+
+\hline
+
+$\beta_P$ &  &  \\
+
+\hline
+
+$\theta_1$&  &  \\
+
+\hline
+
+$\epsilon$ &  &  \\
+
+\hline
+
+$\gamma$ &  &  \\
+
+\hline
+
+$\theta_2$ &  &  \\
+
+\hline
+
+$\sigma$ &  &  \\
+
+\hline
+
+$\zeta$ &  &  \\
+
+\hline
+
+$\theta_3$ &  &  \\
+
+\hline
+
+$\nu$ &  &  \\
+
+\hline
+
+$P_0$ &  &  \\
+
+\hline
+
+$A_0$ &  &  \\
+
+\hline
+
+$H_0$ &  &  \\
+
+\hline
+
+$R_0$ &  &  \\
+
+%\\ [1ex]
+
+ \hline
+
+\end{tabular}
+
+\end{center}
+ 
+
+
+
 
 
 
