@@ -227,8 +227,8 @@ If $P^*=0$, then equation (8) forces either $S^*=0$ or $\alpha=0$.  If $S^*=0$, 
 We run our model from 2013-2017, and initial conditions for the classes are estimated, as we do not have data for the number of individuals in each class at the beginning of 2013. 
 
 \textcolor{blue}{Parameter estimation codes using Ordinary Least Squares: HeroinModel.m, \linebreak HeroinModel\_ODE45.m, HeroinModel\_MultiStart.m ...with these 3 files open, can run by typing ``HeroinModel\_MultiStart.m" \\ \\
-The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 7 data points and 15 unknowns, but 3 more data points can be put in now for a total of 10 data points. If we run from 2015-2017, we would have 9 data points total and 12 unknowns.  \\ \\ 
-%\textcolor{red}{Put in 2014-2015 heroin addicts =14,000 (from Table 95: 2014/2015 heroin addict information:} 
+The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 10 data points and 15 unknowns. \\ \\
+%We cannot use data for initial conditions, because data are numbers over the entire year, not at the beginning of the year/at a certain instant at beginning of 2015...so cannot run from 2015-2017 with known initial conditions \\ \\ 
 I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
  $\beta_P$ guess from opioid paper; $\theta_1$ complete guess, assume smaller than $\beta_A$, $\beta_P$; 
  epsilon 0.8-8 from opioid paper; gamma guess from opioid paper; $\theta_2$
@@ -240,17 +240,10 @@ I tried to choose realistic lower and upper bounds for the parameters in the fol
  \textcolor{blue}{Could this info be used for relationship among $\theta_1$, $\theta_2$, and $\theta_3$?: Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
 Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$).} \\
 
-
-\textcolor{red}{Put in 2014-2015 heroin addicts =14,000 from Table 95: 2014/2015 heroin addict information into data tables and code} \\
-%https://www.samhsa.gov\linebreak/data/sites/default/files/NSDUHsaeStateTabs2015B/NSDUHsaeSpecificStates2015.htm
-
-\textcolor{red}{Put in 2016-2017 opioid addicts: 42,000 and 2016-2017 heroin addicts: 19,000 from NSDUHsaeTennessee2017 (already downloaded on laptop) into data tables and code}  
-
 \textcolor{blue}{What other types of assumptions can we make regarding the parameters?} \\
 \textcolor{blue}{For the ``average" data points, used the lowest of the two years; is that okay?} \\
  
- \textcolor{green}{Data used within code:} \\
- 
+ \textcolor{green}{Data used within code} \\
  \textcolor{blue}{Applying model to Tennessee population} \\
 We apply our model to the Tennessee population specifically in order to analyze the opioid epidemic on a smaller scale than the national level. Although there is still heterogeneity across Tennessee, it is lower than the amount one would find on a national scale. Below we present a data table consisting of estimates of the number of individuals in Tennessee in various categories for the years 2013-2018 found either in literature or that we estimated; explanations of each of the categories follows. 
 
@@ -264,26 +257,26 @@ Year & 2013 & 2014 & 2015 & 2016 & 2017 & 2018\\
 Total Population & 6,490,795 & 6,540,007 & 6,590,726 & 6,649,404 & 6,715,984 & 6,770,010\\
 Population 12 and older & 5,517,176 & 5,559,006 & 5,602,117 & 5,651,993 & 5,708,586 & -\\
 Prescription Opioid Users & 1,845,144 &1,824,342 & 1,819,581 & 1,761,363 &  1,636,374 &-\\
-Opioid Addicts & - & - & 48,000 & \textcolor{red}{42,000} & - &-\\
-Heroin Addicts & - & \textcolor{red}{14,000} & 14,000 & \textcolor{red}{19,000}  & - &-\\
+Opioid Addicts & - & - & 48,000 & 42,000 & - &-\\
+Heroin Addicts & - &14,000 & 14,000 & 19,000  & - &-\\
 Prescription Opioid Overdose Deaths & - & - & 679 & -  & - &-\\
 Heroin/Fentanyl Overdose Deaths & - & - & 374 & -  & - &-\\
 \hline
 \end{tabular} \\
 \label{tab:template}
 \end{center}
- \textcolor{red}{Those in red: still need to incorporate in code.}
- 
- \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\
+
+ \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\ \\
+ \textcolor{blue}{Most of these are data points that are used directly in parameter estimation code, but some are used for calculation of $\mu$, $\mu_A$, $\mu_H$...leave these explanations here or put them in the appendix?} \\
 The first row provides the \textbf{total population estimates in Tennessee} each year \cite{USCensus}. However, since the remainder of the data we use is specific to individuals 12 and older, we estimate the number in this age group. 
 There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and under. (Note: we could not find the estimate for this age group for the years 2013-2017, so this is the best estimate we have for this age group). To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the total population estimate for 2018 being 6,770,010 from row 1, this means that approximately 15\% of the population is under the age of 12. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates; this is shown in the second row.  \\
 
 The \textbf{total number of individuals taking prescription opioids} for pain is given in the third row \cite{TNgov1}. \\
 Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
-\textcolor{red}{Think about these data points again: would they include addicted individuals, as well? Only some are addicted; make estimate of how many take prescriptions AND are addicted to be able to subtract out of here?}
+\textcolor{red}{Think about these data points again: would they include addicted individuals, as well? Only some are addicted; make estimate of how many take prescriptions AND are addicted to be able to subtract out of here? Would need to know what percentage of prescription opioid users are addicted and subtract that number of people out?}
 
 The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay?} 
-We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. \textcolor{red}{May find a better place for this later:Finally, we note that those who are addicted to opioids are strictly in the A class, as individuals in R are not considered addicted in our model.} 
+We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. \textcolor{red}{May find a better place for this later: Finally, we note that those who are addicted to opioids are strictly in the A class, as individuals in R are not considered addicted in our model.} 
 
 The 2014/2015 average number of individuals 12 and older with ``Past Year Heroin Use" (\textbf{heroin/fentanyl addicts}) was 14,000, the 2015/2016 average number was 14,000, and the 2016/2017 average number was 19,000 \cite{NSDUH0, NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay?}  Although this number includes those who may have used heroin once or twice in the past year, we are under the assumption that the majority of these individuals are addicts and that very few, if any, individuals use heroin recreationally. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Overall, these two assumptions may work to balance one another out. 
 
@@ -295,7 +288,7 @@ We add together the heroin and fentanyl overdoses for the state of Tennessee to 
 
 
 \textcolor{blue}{General explanation of parameter estimation process:} \\
-The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. The following table displays the parameters that were estimated, along with their resulting estimated values: 
+The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. \textcolor{blue}{How many details to give for paper?} The following table displays the parameters that were estimated, along with their resulting estimated values: 
 
 
 
@@ -389,10 +382,6 @@ $R_0$ &  &  \\
 
 \textbf{Appendix A} \\ \\
 \textcolor{blue}{Calculations of parameters from literature} \\
-\textcolor{red}{Fill in}
-
-
-
 %Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
 The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
 
