@@ -120,7 +120,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 % Actual proportions of population that were prescription opioid users for
 % 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
 % total population in TN 12 and older) 
-% Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
+ %Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
  %Data simulated when testing codes
  Data1=[0.0057  0.2387  0.1860   0.1843  0.1842];
 % the difference between estimated value and data 
@@ -179,35 +179,37 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  
 
  %%%%%
- % output from the model of the proportion of opioid addicts in 2015; we take
- % initial number of opioid addicts in 2015, y(2,3), and add the number of individuals that enter
+ % output from the model of the proportion of opioid addicts in 2014 and 2015; we take
+ % initial number of opioid addicts in 2014, y(1,3) and 2015, y(2,3), and add the number of individuals that enter
 % the A class at any point during the year 2015, which comes from
-% integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
- %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
- % subtract off the number from t=0 to t=2). 
- Estim4=[y(2,3)+y(3,7)-y(2,7)];
+% integrating ODE L'=dy(9) but just focusing in on these two specific years:
+% for 2014, we have to subtract because integrating gives total number of new cases from t=0 to t=2, so have to 
+ % subtract off the number from t=0 to t=1;
+ %for 2015, we have to subtract because integrating gives total number of new cases from t=0 to t=3, so have to 
+ % subtract off the number from t=0 to t=2. 
+ Estim4=[y(1,3)+y(2,7)-y(1,7), y(2,3)+y(3,7)-y(2,7)];
  %Actual proportion of opioid addicted individuals in the population in 2015
- %Data4=[48000./5602117];
+ Data4=[42000./5651993 48000./5602117];
  %Data simulated when testing codes
- Data4=[0.0112];
+ %Data4=[0.0112];
  % the difference between estimated value and data
  diff4=Estim4-Data4;
  
 
  %%%%%
  % output from the model of the proportion of heroin/fentanyl addicts in
- % 2015; we take initial number of heroin/fentanyl addicts in 2015, y(2,4),
+ % 2015 (for example); we take initial number of heroin/fentanyl addicts in 2015, y(2,4),
  % and add the number of individuals that enter
  % the H class at any point during the year 2015, which comes from
  % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- Estim5=[y(2,4)+y(3,8)-y(2,8)];
+ Estim5=[y(1,4)+y(2,8)-y(1,8), y(2,4)+y(3,8)-y(2,8), y(3,4)+y(4,8)-y(3,8)];
  %Actual proportion of heroin addicted individuals in the population in
  %2015
- %Data5=[14000./5602117];
+ Data5=[14000./5559006 14000./5602117 19000./5651993];
  %Data simulated when testing codes
- Data5=[0.0022];
+% Data5=[0.0022];
  % the difference between estimated value and data
  diff5=Estim5-Data5;
  

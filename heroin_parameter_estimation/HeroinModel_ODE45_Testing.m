@@ -195,9 +195,9 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 % integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- Estim4=[y(2,3)+y(3,7)-y(2,7)];
- % made up for now
- Data4=[48000./5602117];
+ Estim4=[y(1,3)+y(2,7)-y(1,7), y(2,3)+y(3,7)-y(2,7)];
+  %Actual proportion of opioid addicted individuals in the population in 2015
+ Data4=[42000./5651993 48000./5602117];
  %Data simulated when put in 0.1 for all parameters
  %Data4=[0.12];
  % the difference between estimated value and data
@@ -214,9 +214,10 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
  %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2). 
- Estim5=[y(2,4)+y(3,8)-y(2,8)];
- % Made up for now
- Data5=[14000./5602117];
+ Estim5=[y(1,4)+y(2,8)-y(1,8), y(2,4)+y(3,8)-y(2,8), y(3,4)+y(4,8)-y(3,8)];
+ %Actual proportion of heroin addicted individuals in the population in
+ %2015
+ Data5=[14000./5559006 14000./5602117 19000./5651993];
  %Data simulated when put in 0.1 for all parameters
  %Data5=[0.11];
  % the difference between estimated value and data
