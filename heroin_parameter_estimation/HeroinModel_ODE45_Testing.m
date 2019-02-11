@@ -3,7 +3,7 @@ function value = HeroinModel_ODE45_Testing(z)
 
 
 % Final time 
-N = 4;
+N = 25;
 T = N;
 tspan=linspace(0,T,N+1);
 global value 
