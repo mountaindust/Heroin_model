@@ -1,20 +1,19 @@
-% File name: HeroinModel.m (used to be in Heroin_model folder)
 
 % Defining function with inputs: time, classes of people, and parameter vector z to estimate
 
-function dy = f(t,y,z)
+function dy = f(t,y)
 
-% Parameters
+% Parameters--assigning numbers to test
 
-alpha=z(1); 
+alpha=.5; 
 
-beta_A=z(2); 
+beta_A=.02; 
  
-beta_P=z(3);
+beta_P=.03;
  
-theta_1=z(4);
+theta_1=0.04;
  
-epsilon=z(5);
+epsilon=0.5;
  
 mu=0.00868;  
  
@@ -22,19 +21,19 @@ mu_A=0.00775;
  
 mu_H=0.0271;
  
-gamma=z(6);   
+gamma=0.05;   
  
 % Assume twice as likely for P individual to use heroin than an S individual 
-theta_2=2*z(4); 
+theta_2=0.008; 
  
-sigma=z(7);
+sigma=0.04;
  
-zeta=z(8);
+zeta=.02;
  
 % Assume four times as likely for A individual to use heroin than an S individual 
-theta_3=4*z(4);
+theta_3=0.009;
  
-nu=z(9);
+nu=0.5;
 
 omega=0.00001;
 
@@ -62,19 +61,6 @@ dy(3) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1
 dy(4) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4)+omega)-nu*y(4)-(mu+mu_H)*y(4);
 dy(5) = zeta*y(3)+nu*y(4)-sigma*y(5)*y(3)/(y(3)+y(4)+omega)-sigma*y(5)*y(4)/(y(3)+y(4)+omega)-mu*y(5);
 
-% X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
-%individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
-dy(6) = alpha*y(1);
-
-% L' ODE to calculate the number of new cases of opioid addiction over time;
-%i.e. individuals who enter the A class at any time (used in Estim2 in
-%HeroinModel_ODE45.m)
-dy(7) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1)*y(2);
-
-% M' ODE to calculate the number of new cases of heroin/fentanyl addiction
-%over time; i.e. individuals who enter the H class at any time (used in
-%Estim3 in HeroinModel_ODE45.m)
-dy(8) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4)+omega);
   dy=dy';  
  
 end
