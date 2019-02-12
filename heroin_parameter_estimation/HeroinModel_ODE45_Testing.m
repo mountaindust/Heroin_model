@@ -1,5 +1,7 @@
-%File name: HeroinModel_ODE45_Testing.m (used to be in Heroin_model folder)
-function value = HeroinModel_ODE45_Testing(z)
+% File name: HeroinModel_ODE45_Testing.m (used to be in Heroin_model folder)
+
+% Later: if plotting Estim/Data points, put in: 
+% function value = HeroinModel_ODE45_Testing(z)
 
 
 % Final time 
@@ -9,13 +11,14 @@ tspan=linspace(0,T,N+1);
 global value 
  
 
-% Estimated  values of parameters from "HeroinModel_MultiStart.m"
-% For testing, selected values based on opioid paper or something realistic (then
-% simulated data, put in HeroinModel_ODE45.m file, then ran
-% HeroinModel_MultiStart.m to see if got back these values for z
+% Estimated parameter values from "HeroinModel_MultiStart.m"
+% z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.05 0.1 0.0057 0.0013 0.009];
+
+% For testing, selected parameter values based on opioid paper/something realistic, 
+% then simulated data, put data into HeroinModel_ODE45.m file Data1, Data2, Data3 vectors, 
+% then ran HeroinModel_MultiStart.m to see if got back these parameter values
 z0=[0.15 0.00094 0.00266 0.0001 3.25 0.00744 0.0002 0.5 0.05 0.0004 0.05 0.1 0.0057 0.0013 0.009];
-% When tested got:
-%z0=
+
 z=z0;
 
 %Parameters
@@ -57,16 +60,13 @@ R0=z(15);
 
 omega=.00001;
 
-
-%Initials
+% Initial conditions 
 S0=1-z(12)-z(13)-z(14)-z(15); 
 P0=z(12);
 A0=z(13);
 H0=z(14);
 R0=z(15); 
 X0=0;
-%Z0=0;
-%K0=0;
 L0=0;
 M0=0;
 initials = [S0,P0,A0,H0,R0,X0,L0,M0];
@@ -82,277 +82,18 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
   H=y(:,4);
   R=y(:,5);
   X=y(:,6);
-  %Z=y(:,7);
-  %K=y(:,8);
   L=y(:,7);
   M=y(:,8);
   
   
-  
- %COMPARING MODEL ESTIMATES TO DATA 
- 
-  %%%%%
- % In order to count the total number of individuals in P at some point throughout a certain year
- % (the number who are in the class AT ALL during the year, it's okay if they leave), 
- % we want to add the total number of individuals using prescriptions at the beginning of the
- % year to those who come into P at some point during the year: 
- % prescript(i) is number of prescription users at beginning of the year (time step) +
- % the number of new cases that came in from X'=dy(6) ODE from that year until the beginning 
- % of the next year. Thus, we are adding in those who come into P at some point during 
- % the year by integrating y(6) ODE but just focusing in on the one year we care about 
- %(so have to subtract: integrating gives total number of new cases from t=0 to t=i, so have to 
- % subtract off the number from t=0 to t=i-1). 
- % Here, calculating for years 2014-2017: 
- 
- total_prescription_users=zeros(1,4);
- for i=1:4
- total_prescription_users(i) = y(i,2)+y(i+1,6)-y(i,6); 
- end
- 
-% We have total number of individuals who take prescription opioids for the
-% year 2013; so must take IC (which is estimated because don't know number
-% at beginning of the year) and add on the number of individuals that enter
-% the P class at any point during the year 2013, which comes from
-% integrating ODE X'=dy(6) from t=0 to t=1; this gives first value in
-% Estim1
+ % Later: if plotting Estim/Data points, copy/paste "%%COMPARING MODEL
+ % ESTIMATES TO DATA%%" from HeroinModel_ODE45.m file.
+ % Note: if want to display Estim# points explicitly in command window, 
+ % write the following in the code, for example:
+ % Estim1 
 
- 
-% yearly output from the model as a proportion from 2013 to 2017
- Estim1=[z(13)+y(1,6),total_prescription_users(1),total_prescription_users(2),total_prescription_users(3), total_prescription_users(4)];
-       
-% actual proportions of population that were prescription opioid users for
-% 2013-2017 (total number of prescription opioid users in each year in TN that are 12 and older divided by
-% total population in TN 12 and older) 
- Data1=[1845144./5517176 1824342./5559006 1819581./5602117 1761363./5651993 1636374./5708586];
-%Data simulated when put in 0.1 for all parameters
-%Data1=[0.1 0.16 0.18 0.2 0.21];
-% the difference between estimated value and data 
- diff1= Estim1-Data1;
- 
-%print Estim1 values 
- Estim1
- 
-%%%%%
-%CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
- %To calculate number of new admissions coming into the recovery class 
- %(NOT total in recovery class) from the opioid addict class, we use ODE Z'=dy(7); going to run from
- %2013-2015 because those are the only years among 2013-2017 we have data for; 
- %new_opioid_admissions is for years 2014-2015, and y(1,7) is the number that are
- %admitted in the first year 2013
- 
- %new_opioid_admissions=zeros(1,2);
- %for i=1:2
- %new_opioid_admissions(i) = y(i+1,7)-y(i,7);
- %end
- 
- % yearly output from the model as a proportion in the recovery class
- %Estim2=[y(1,7), new_opioid_admissions(1), new_opioid_admissions(2)];
-  
- % actual proportions of population each year being admitted into recovery from opioid addict class
-% Data2=[4485./5517176 4530./5559006 4326./5602117];
- %%Data simulated when put in 0.1 for all parameters
- %Data2=[0 0.011 0.013];
-
- % the difference between estimated value and data 
-% diff2=Estim2-Data2;
- 
- %print Estim2 values 
- %Estim2
- 
- 
- 
- %%%%%
- %CANNOT USE ANYMORE SINCE CHANGED DEFINITION OF "RECOVERY CLASS"
- %To calculate number of new admissions coming into the recovery class 
- %(NOT total in recovery class) from the heroin/fentanyl class, we use ODE K'=dy(8); going to run from
- %2013-2015 because those are the only years among 2013-2017 we have data for; 
- %new_heroin_admissions is for years 2014-2015, and y(1,8) is the number that are
- %admitted in the first year 2013
- 
- %new_heroin_admissions=zeros(1,2);
- %for i=1:2
- %new_heroin_admissions(i) = y(i+1,8)-y(i,8);
- %end
- 
- % yearly output from the model as a proportion that have been admitted into recovery class
- %Estim3=[y(1,8), new_heroin_admissions(1), new_heroin_admissions(2)];
-  
- % actual proportions of population each year being admitted into recovery from
- % heroin/fentanyl class
- %Data3=[555./5517176 743./5559006 1083./5602117];
- %%Data simulated when put in 0.1 for all parameters
- %Data3=[0 0.01 0.011];
- % the difference between estimated value and data 
- %diff3=Estim3-Data3;
- 
- %print Estim3 values
- %Estim3
-
- %%%%%
- % output from the model of the proportion of opioid addicts in 2015; we take
- % initial number of opioid addicts in 2015, y(2,3), and add the number of individuals that enter
-% the A class at any point during the year 2015, which comes from
-% integrating ODE L'=dy(9) but just focusing in on the one year, 2015, we care about 
- %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
- % subtract off the number from t=0 to t=2). 
- Estim4=[y(1,3)+y(2,7)-y(1,7), y(2,3)+y(3,7)-y(2,7)];
-  %Actual proportion of opioid addicted individuals in the population in 2015
- Data4=[42000./5651993 48000./5602117];
- %Data simulated when put in 0.1 for all parameters
- %Data4=[0.12];
- % the difference between estimated value and data
- diff4=Estim4-Data4;
- 
- %print Estim4 value 
- Estim4
-
- %%%%%
- % output from the model of the proportion of heroin/fentanyl addicts in
- % 2015; we take initial number of heroin/fentanyl addicts in 2015, y(2,4),
- % and add the number of individuals that enter
- % the H class at any point during the year 2015, which comes from
- % integrating ODE M'=dy(10) but just focusing in on the one year, 2015, we care about 
- %(so have to subtract: integrating gives total number of new cases from t=0 to t=3, so have to 
- % subtract off the number from t=0 to t=2). 
- Estim5=[y(1,4)+y(2,8)-y(1,8), y(2,4)+y(3,8)-y(2,8), y(3,4)+y(4,8)-y(3,8)];
- %Actual proportion of heroin addicted individuals in the population in
- %2015
- Data5=[14000./5559006 14000./5602117 19000./5651993];
- %Data simulated when put in 0.1 for all parameters
- %Data5=[0.11];
- % the difference between estimated value and data
- diff5=Estim5-Data5;
- 
- 
- %print Estim5 value 
- Estim5
- 
- %%%%%
- %the relative error that we are trying to minimize for ordinary least
- %squares: the sum of the squared errors (norm gives sum(diff.^2)^(1/2))
- %normalized by norm of the data
- value = norm(diff1,2)./norm(Data1)+norm(diff4,2)./norm(Data4)+norm(diff5,2)./norm(Data5);
-
-
-
- %{
- %Data points from Estim1, Data1
+ % ODE solutions plotted separately 
  figure(1)
- hold all
- scatter(1:1:5, Estim1,'filled')
- scatter(1:1:5, Data1, 'filled')
- set(gca, 'xtick', [1 2 3 4 5])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
- xlabel('Year')
- ylabel('Proportion of prescription users')
- legend('Proportion entering P simulated','Proportion entering P data')
-
- 
- 
- Data points from Estim2, Data2
- figure(2)
- hold all
- scatter(1:1:3, Estim2,'filled')
- scatter(1:1:3, Data2, 'filled')
- set(gca, 'xtick', [1 2 3])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015'})
- xlabel('Year')
- ylabel('Proportion of new admissions into R from A')
- legend('Proportion entering R from A simulated','Proportion entering R from A data' )
- 
- 
- %Data points from Estim3, Data3
- figure(3)
- hold all
- scatter(1:1:3, Estim3,'filled')
- scatter(1:1:3, Data3, 'filled')
- set(gca, 'xtick', [1 2 3])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015'})
- xlabel('Year')
- ylabel('Proportion of new admissions into R from H')
- legend('Proportion entering R from H simulated','Proportion entering R from H data' )
-  
- 
- 
- %Data points from Estim4, Data4
- figure(4)
- hold all
- scatter(1:1:1, Estim4,'filled')
- scatter(1:1:1, Data4, 'filled')
- set(gca, 'xtick', [ 1 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2015'})
- xlabel('Year')
- ylabel('Proportion of opioid addicts')
- legend('Proportion of pioid addicts simulated','Proportion of opioid addicts data' )
- 
-  
- %Data points from Estim5, Data5
- figure(5)
- hold all
- scatter(1:1:1, Estim5,'filled')
- scatter(1:1:1, Data5, 'filled')
- set(gca, 'xtick', [ 1 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2015'})
- xlabel('Year')
- ylabel('Proportion of heroin/fentanyl users')
- legend('Proportion of heroin/fentanyl users simulated','Proportion of heroin/fentanyl users data' )
- 
-
- %Plots of ODES used in Estim1-Estim5
- figure(6)
-          
-           subplot(2,2,1);plot(t,y(:,6),'b-','LineWidth',1)
-           subplot(2,2,1);xlabel('Year')
-           subplot(2,2,1);ylabel('Proportion entering P')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
-           xlim([0 , T])
-           
-           subplot(2,2,2);plot(t,y(:,7),'r-','LineWidth',1)
-           hold on 
-           subplot(2,2,2);plot(t,y(:,8) ,' g-','LineWidth',1)
-           subplot(2,2,2);xlabel('Year')
-           subplot(2,2,2);ylabel('Proportion entering R')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
-           legend('Proportion entering R from A','Proportion entering R from H' )
-           xlim([0 , T])
-           
-           subplot(2,2,3);plot(t,y(:,9) ,' y-','LineWidth',1)
-           subplot(2,2,3);xlabel('Year')
-           subplot(2,2,3);ylabel('Proportion entering A')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
-           xlim([0 , T])
-           %ylim([0 , 1e+2])
-           
-          
-           subplot(2,2,4);plot(t,y(:,10) ,' m-','LineWidth',1)
-           subplot(2,2,4);xlabel('Year')
-           subplot(2,2,4);ylabel('Proportion entering H')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
-           xlim([0 , T])
-           %ylim([0 , 1e+2])
-           
-           %}
- 
- 
-
- 
-           
-         
- %ODE solutions plotted separately 
- figure(7)
 
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -377,8 +118,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            set(gca, 'fontsize',10)
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
-           %ylim([0 , 1e+2])
-           
+          
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
            subplot(2,2,4);xlabel('Year')
@@ -387,19 +127,17 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            set(gca, 'fontsize',10)
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
-           %ylim([0 , 1e+2])
-           
-                
+               
                  
- %ODE Solutions all plotted together
- figure(8)
+ % ODE Solutions all plotted together
+ figure(2)
            plot(t,y(:,2),'b-','LineWidth',1);
            hold all
            plot(t,y(:,3),'r-','LineWidth',1);
            hold all
-           plot(t,y(:,4),' g-','LineWidth',1); 
+           plot(t,y(:,4),'g-','LineWidth',1); 
            hold all
-           plot(t,y(:,5),' m-','LineWidth',1); 
+           plot(t,y(:,5),'m-','LineWidth',1); 
            xlabel('time')
            ylabel('Size of Populations');
            set(gca, 'xtick', [ 0 1 2 3 4 ])
@@ -407,9 +145,85 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            legend('P','A','H','R')
            xlim([0 , T])
-           ylim([0 , 0.2])
+           ylim([0 , 0.1])
            legend('P','A','H','R')
            
            
+%%% Later: plots with Estim/Data points if needed 
+ %{
+ %Data points from Estim1, Data1 (in future: plot model on top?) 
+ figure(3)
+ hold all
+ scatter(1:1:5, Estim1,'filled')
+ scatter(1:1:5, Data1, 'filled')
+ set(gca, 'xtick', [1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ xlabel('Year')
+ ylabel('Proportion of prescription users')
+ legend('Proportion in prescription users simulated','Proportion of prescription users data')
 
+ 
+ %Data points from Estim2, Data2 (in future: plot model on top?) 
+ figure(4)
+ hold all
+ scatter(1:1:1, Estim2,'filled')
+ scatter(1:1:1, Data2, 'filled')
+ set(gca, 'xtick', [ 1 2 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2015' '2016'})
+ xlabel('Year')
+ ylabel('Proportion of opioid addicts')
+ legend('Proportion of opioid addicts simulated','Proportion of opioid addicts data' )
+ 
+  
+ %Data points from Estim3, Data3 (in future: plot model on top?) 
+ figure(5)
+ hold all
+ scatter(1:1:1, Estim3,'filled')
+ scatter(1:1:1, Data3, 'filled')
+ set(gca, 'xtick', [ 1 2 3 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+ xlabel('Year')
+ ylabel('Proportion of heroin/fentanyl users')
+ legend('Proportion of heroin/fentanyl users simulated','Proportion of heroin/fentanyl users data' )
+ 
+
+ %Plots of ODES used in Estim1-Estim3
+ figure(6)
+          
+           subplot(2,2,1);plot(t,y(:,6),'b-','LineWidth',1)
+           subplot(2,2,1);xlabel('Year')
+           subplot(2,2,1);ylabel('Proportion entering P')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+           
+           
+           subplot(2,2,2);plot(t,y(:,7) ,' y-','LineWidth',1)
+           subplot(2,2,2);xlabel('Year')
+           subplot(2,2,2);ylabel('Proportion entering A')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+           
+           
+          
+           subplot(2,2,3);plot(t,y(:,8) ,' m-','LineWidth',1)
+           subplot(2,2,3);xlabel('Year')
+           subplot(2,2,3);ylabel('Proportion entering H')
+           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           xlim([0 , T])
+    
+           
+           %}
+
+
+ 
+ 
  
