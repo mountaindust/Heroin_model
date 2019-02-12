@@ -8,7 +8,7 @@
 N = 25;
 T = N;
 tspan=linspace(0,T,N+1);
-global value 
+% Later, if need at all with Estim/Data points: global value 
  
 
 % Estimated parameter values from "HeroinModel_MultiStart.m"

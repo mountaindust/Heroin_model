@@ -1,6 +1,7 @@
 % File name: HeroinModel_MultiStart.m (used to be in Heroin_model folder)
 
-% Avoids error with "manymins":
+% Avoids error with "manymins," if needed:
+
 clear all; 
 clc;
 
@@ -38,7 +39,7 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=17;
 
 % Define a multistart problem
 ms=MultiStart('Display', 'iter'); 
