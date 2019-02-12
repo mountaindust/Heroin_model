@@ -40,32 +40,27 @@ mu_H=0.0271;
  
 gamma=z(6);   
  
-theta_2=z(7); 
+%assume twice as likely for P individual to use heroin than an S individual 
+theta_2=2*z(4); 
  
-sigma=z(8);
+sigma=z(7);
  
-zeta=z(9);
+zeta=z(8);
  
-theta_3=z(10);
+%assume four times as likely for A individual to use heroin than an S
+%individual 
+theta_3=4*z(4);
  
-nu=z(11);
+nu=z(9);
 
-P0=z(12);
-
-A0=z(13);
-
-H0=z(14);
-
-R0=z(15);
-
-omega=.00001;
+omega=0.00001;
 
 % Initial conditions 
-S0=1-z(12)-z(13)-z(14)-z(15); 
-P0=z(12);
-A0=z(13);
-H0=z(14);
-R0=z(15); 
+P0=0.05;
+A0=0.0062;
+H0=0.00062;
+R0=0.00062;
+S0=1-0.05-0.0062-0.00062-0.00062; 
 X0=0;
 L0=0;
 M0=0;
@@ -73,7 +68,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 
 
 
-[t,y]=ode45(@(t,y) HeroinModel(t,y,z),tspan,initials);
+[t,y]=ode45(@(t,y) HeroinModel_simpler(t,y,z),tspan,initials);
 
 
   S=y(:,1);
