@@ -6,11 +6,11 @@ tspan=linspace(0,T,N+1);
  
 % Initial conditions
 
-S0=1-0.05-0.0062-0.00062-0.00062; 
-P0=0.05;
-A0=0.0062;
-H0=0.00062;
-R0=0.00062;
+S0=0.95; 
+P0=0.02;
+A0=0.01;
+H0=0.05;
+R0=0.05;
 initials = [S0,P0,A0,H0,R0];
 
 
@@ -30,34 +30,34 @@ initials = [S0,P0,A0,H0,R0];
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'fontsize',10)
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',1)
            subplot(2,2,2);xlabel('Year')
            subplot(2,2,2);ylabel('Opioid Addicts')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'fontsize',10)
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+          % set(gca, 'xtick', [ 0 1 2 3 4 ])
+          % set(gca, 'fontsize',10)
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
           
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Recovered Individuals')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'fontsize',10)
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
                
                  
@@ -72,9 +72,9 @@ initials = [S0,P0,A0,H0,R0];
            plot(t,y(:,5),'m-','LineWidth',1); 
            xlabel('time')
            ylabel('Size of Populations');
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'fontsize',10)
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            legend('P','A','H','R')
            xlim([0 , T])
            ylim([0 , 0.1])

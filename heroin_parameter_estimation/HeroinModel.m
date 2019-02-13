@@ -39,19 +39,19 @@ omega=0.00001;
 % Although we know total number of prescription users in 2013, we do not
 % know the initial number right at the start of 2013, so must be estimated;
 % same with opioid addicts, heroin users, and individuals in recovery
-P0=z(12);
+%P0=z(12);
 
 
-A0=z(13);
+%A0=z(13);
 
 
-H0=z(14);
+%H0=z(14);
 
 
-R0=z(15);
+%R0=z(15);
 
 
-S0=1-z(12)-z(13)-z(14)-z(15); 
+%S0=1-z(12)-z(13)-z(14)-z(15); 
 
 
 % ODEs 

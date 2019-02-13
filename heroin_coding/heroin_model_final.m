@@ -4,16 +4,16 @@
 function dy = f(t,y)
 
 % Parameters--assigning numbers to test
+    
+alpha=0.15; 
 
-alpha=.5; 
-
-beta_A=.02; 
+beta_A= 0.00094; 
  
-beta_P=.03;
+beta_P=0.00266;
  
-theta_1=0.04;
+theta_1=0.0001;
  
-epsilon=0.5;
+epsilon= 3.25;
  
 mu=0.00868;  
  
@@ -21,36 +21,23 @@ mu_A=0.00775;
  
 mu_H=0.0271;
  
-gamma=0.05;   
+gamma=0.00744;   
  
 % Assume twice as likely for P individual to use heroin than an S individual 
-theta_2=0.008; 
+theta_2=0.0002; 
  
-sigma=0.04;
+sigma=0.5;
  
 zeta=.02;
  
 % Assume four times as likely for A individual to use heroin than an S individual 
-theta_3=0.009;
+theta_3=0.05;
  
-nu=0.5;
+nu=0.0004;
 
 omega=0.00001;
 
-%Assume opioid-only project number (national level)
-P0=0.05;
 
-%Assume opioid-only project number (national level)
-A0=0.0062;
-
-%Assume 1/10th the number of heroin users compared to opioid addicts
-H0=0.00062;
-
-%Assume 1/10th of those who are addicted go into a stable recovery
-R0=0.00062;
-
-
-S0=1-0.05-0.0062-0.00062-0.00062; 
 
 
 % ODEs 
