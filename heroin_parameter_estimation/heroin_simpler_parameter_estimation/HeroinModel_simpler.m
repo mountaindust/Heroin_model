@@ -36,7 +36,7 @@ theta_3=4*z(4);
  
 nu=z(9);
 
-omega=0.00001;
+omega=0.0000000001;
 
 %Assume opioid-only project number (national level)
 P0=0.05;
@@ -75,6 +75,7 @@ dy(7) = gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1
 %over time; i.e. individuals who enter the H class at any time (used in
 %Estim3 in HeroinModel_ODE45.m)
 dy(8) = theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4)+omega);
+
   dy=dy';  
  
 end

@@ -1,9 +1,9 @@
-
+%%%This code does the same things as HeroinModel_ODE45_Testing (put in parameters, get solution and plots out)%%%
 % Defining function with inputs: time, classes of people, and parameter vector z to estimate
 
 function dy = f(t,y)
 
-% Parameters--assigning numbers to test
+% Parameters--values are realistic guesses for now until estimate parameters
     
 alpha=0.15; 
 
@@ -23,19 +23,17 @@ mu_H=0.0271;
  
 gamma=0.00744;   
  
-% Assume twice as likely for P individual to use heroin than an S individual 
 theta_2=0.0002; 
  
 sigma=0.5;
  
-zeta=.02;
+zeta=0.05;
  
-% Assume four times as likely for A individual to use heroin than an S individual 
-theta_3=0.05;
+theta_3=0.0004;
  
-nu=0.0004;
+nu=0.05;
 
-omega=0.00001;
+omega=0.0000000001;
 
 
 
