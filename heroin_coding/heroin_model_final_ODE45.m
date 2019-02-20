@@ -6,22 +6,27 @@ tspan=linspace(0,T,N+1);
  
 % Initial conditions
 
-S0=1-0.05-0.0062-0.00062-0.00062; 
 P0=0.05;
 A0=0.0062;
-H0=0.00062;
-R0=0.00062;
+H0=0.0026;
+R0=0.0006;
+S0=1-P0-A0-H0-R0; 
 initials = [S0,P0,A0,H0,R0];
 
 
 [t,y]=ode45(@(t,y) heroin_model_final(t,y),tspan,initials);
 
 
-  S=y(:,1);
-  P=y(:,2);
-  A=y(:,3);
-  H=y(:,4);
-  R=y(:,5);
+  S=y(:,1)';
+  P=y(:,2)';
+  A=y(:,3)';
+  H=y(:,4)';
+  R=y(:,5)';
+  
+  %making sure S+P+A+H+R=1
+  for i=1:N+1
+      sum(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
+  end
   
   
   % ODE solutions plotted separately 
@@ -54,7 +59,7 @@ initials = [S0,P0,A0,H0,R0];
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
            subplot(2,2,4);xlabel('Year')
-           subplot(2,2,4);ylabel('Recovered Individuals')
+           subplot(2,2,4);ylabel('Stably Recovered Individuals')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            %set(gca, 'fontsize',10)
            %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
@@ -63,24 +68,21 @@ initials = [S0,P0,A0,H0,R0];
                  
  % ODE Solutions all plotted together
  figure(2)
-           plot(t,y(:,1),'y-','LineWidth',1);
-           hold all
-           plot(t,y(:,2),'b-','LineWidth',1);
-           hold all
+          
            plot(t,y(:,3),'r-','LineWidth',1);
            hold all
            plot(t,y(:,4),'g-','LineWidth',1); 
            hold all
            plot(t,y(:,5),'m-','LineWidth',1); 
            xlabel('time')
-           ylabel('Size of Populations');
+           ylabel('Populations Proportions');
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            %set(gca, 'fontsize',10)
            %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
-           legend('P','A','H','R')
+           legend('A','H','R')
            xlim([0 , T])
            %ylim([0 , 0.1])
-           legend('P','A','H','R')
+           
            
 
    

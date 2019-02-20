@@ -82,6 +82,12 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
   M=y(:,8)';
   
   
+  % Making sure S+P+A+H+R=1
+  for i=1:N+1
+      sum(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
+  end
+  
+  
  % Later: if plotting Estim/Data points, copy/paste "%%COMPARING MODEL
  % ESTIMATES TO DATA%%" from HeroinModel_ODE45.m file.
  % Note: if want to display Estim# points explicitly in command window, 
@@ -131,25 +137,25 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
+          % set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',1)
            subplot(2,2,2);xlabel('Year')
            subplot(2,2,2);ylabel('Opioid Addicts')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
+          % set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+          % set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
            
            subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+          % set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            xlim([0 , T])
           
           
@@ -173,9 +179,9 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            plot(t,y(:,5),'m-','LineWidth',1); 
            xlabel('time')
            ylabel('Size of Populations');
-           set(gca, 'xtick', [ 0 1 2 3 4 ])
+           %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
            legend('P','A','H','R')
            xlim([0 , T])
            ylim([0 , 0.1])
@@ -183,7 +189,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            
            
  
- %Data points from Estim1
+ %Data points from Data1
  figure(3)
  hold all
  %scatter(1:1:25, Estim1,'filled')
@@ -196,7 +202,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  %legend('Proportion in prescription users simulated','Proportion of prescription users data')
 
  
- %Data points from Estim2
+ %Data points from Data2
  figure(4)
  hold all
  %scatter(1:1:N, Estim2,'filled')
@@ -209,7 +215,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  %legend('Proportion of opioid addicts simulated','Proportion of opioid addicts data' )
  
   
- %Data points from Estim3, Data3 (in future: plot model on top?) 
+ %Data points from Data3 
  figure(5)
  hold all
  %scatter(1:1:25, Estim3,'filled')
@@ -223,7 +229,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  
  
  
- %%% Later: plots with extra ODEs if needed 
+ %%% Later: plots with extra ODEs if needed;(in future: plot appropriate model ODES on top of data points?) 
 %{
  %Plots of ODES used in Estim1-Estim3
  figure(6)

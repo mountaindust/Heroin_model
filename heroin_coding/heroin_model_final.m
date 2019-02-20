@@ -11,9 +11,9 @@ beta_A= 0.00094;
  
 beta_P=0.00266;
  
-theta_1=0.0001;
+theta_1=0.0003;
  
-epsilon= 3.25;
+epsilon= 3.0;
  
 mu=0.00868;  
  
@@ -23,15 +23,15 @@ mu_H=0.0271;
  
 gamma=0.00744;   
  
-theta_2=0.0002; 
+theta_2=0.0003; 
  
-sigma=0.5;
+sigma=1.5;
  
-zeta=0.05;
+zeta=0.25;
  
-theta_3=0.0004;
+theta_3=3;
  
-nu=0.05;
+nu=0.15;
 
 omega=0.0000000001;
 

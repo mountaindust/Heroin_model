@@ -7,12 +7,17 @@ clc;
 
 % The parameter vector z we will approximate 
 %        z =[alpha  beta_A    beta_P     theta_1   epsilon    gamma   theta_2    sigma     zeta    theta_3      nu       P0      A0        H0        R0  ]
-%WORKED WITH THESE BOUNDS for z0=[0.15  0.00094  0.00266   0.0001   2.5   0.00744   0.0002   0.5  0.05   0.0004   0.05 0.1 0.0057 0.0013 0.009];
-LowerBounds=[0.1    0.0008     0.001     0.00001      1      0.001     0.0001   0.1      0.01      0.0001    0.01      0.01    0.001     0.001   0.001];
-UpperBounds=[0.2    0.00099    0.003     0.0002       3      0.009     0.0003    0.9       0.2      0.0009     0.1       0.3    0.009     0.009      0.2];
+%WORKED/VERY CLOSE WITH THESE BOUNDS for z0=[0.15  0.00094  0.00266   0.0001   2.5   0.00744   0.0002   0.5  0.05   0.0004   0.05 0.1 0.0057 0.0013 0.009];
+%LowerBounds=[0.1    0.0008     0.001     0.00001      1      0.001     0.0001   0.1      0.01      0.0001    0.01      0.01    0.001     0.001   0.001];
+%UpperBounds=[0.2    0.00099    0.003     0.0002       3      0.009     0.0003    0.9       0.2      0.0009     0.1       0.3    0.009     0.009      0.2];
+
+LowerBounds=[0.01    0.00001    0.0001     0.00001      0.8     0.001     0.00001   0.01      0.01    0.0001    0.01     0.001   0.0001     0.00001  0.00001];
+UpperBounds=[0.7       0.1      0.009      0.1          4       0.1         0.3      2         1       0.6       1       0.5     0.2         0.1      0.1];
 
 
-% Bound choices for now:
+
+
+% Bound choices in past:
 % alpha: guess from opioid paper since higher in TN
 % beta_A: guess from opioid paper
 % beta_P: guess from opioid paper
@@ -41,9 +46,9 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=100;
 
-% Define a multistart problem
+% Define a multistart problem; results are reported after each local solver run, in addition to the final summary
 ms=MultiStart('Display', 'iter'); 
 
 % Manymins is a vector of solution objects (obtain multiple solutions); run the multistart 
