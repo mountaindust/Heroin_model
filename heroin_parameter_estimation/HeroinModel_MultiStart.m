@@ -15,8 +15,6 @@ LowerBounds=[0.01    0.00001    0.0001     0.00001      0.8     0.001     0.0000
 UpperBounds=[0.7       0.1      0.009      0.1          4       0.1         0.3      2         1       0.6       1       0.5     0.2         0.1      0.1];
 
 
-
-
 % Bound choices in past:
 % alpha: guess from opioid paper since higher in TN
 % beta_A: guess from opioid paper
@@ -40,18 +38,19 @@ xstart=0.5*(LowerBounds + UpperBounds);
 % % % % %  Optimization Function fmincon  % % % % %
 % x0 is xstart, objective is what we are trying to minimize which comes from 
 % value = HeroinModel_ODE45(z) = f(x) as output
-problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45...
-         ,'lb',LowerBounds,'ub',UpperBounds);
+problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45,...
+         'lb',LowerBounds,'ub',UpperBounds);
 
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=5;
 
 % Define a multistart problem; results are reported after each local solver run, in addition to the final summary
 ms=MultiStart('Display', 'iter'); 
 
-% Manymins is a vector of solution objects (obtain multiple solutions); run the multistart 
+% Manymins is a vector of solutions containing the distinct local minima found during the run;
+%  runs MultiStart on numstartpoints to find a solution or multiple local solutions to problem
 [x,fval, exitflag, output, manymins]=run(ms,problem,numstartpoints);
 
 global ModelParameters
@@ -62,14 +61,15 @@ for i=1: length(manymins)
     ModelParameters(i,:)=manymins(i).X;
 end
 
-%each time step has an fval; takes values that are stored in manymins and
+%each time step has an fval; takes Fval values that are stored in manymins and
 %creates vector out of them
 for i=1: length(manymins) 
     fval(i)=manymins(i).Fval;
 end 
 fval=fval';
 
-%each time step has an exitflag value; takes values
+%each time step has an exitflag value; takes Exitflag values that are stored in
+%manymins and creates vector out of them
 for i=1: length(manymins) 
     EF(i)=manymins(i).Exitflag;
 end

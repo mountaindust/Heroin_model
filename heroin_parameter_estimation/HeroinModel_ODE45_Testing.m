@@ -15,7 +15,7 @@ tspan=linspace(0,N,N+1);
 % Estimated parameter values from "HeroinModel_MultiStart.m" (or parameter
 % values used for testing)
 %z =[alpha beta_A  beta_P   theta_1 epsilon  gamma   theta_2  sigma  zeta   theta_3   nu     P0       A0      H0     R0  ]
-z0=[0.2  0.00094  0.00266   0.0003     1.5   0.00744   0.0006   0.7  0.25   0.009     0.1    0.05   0.0062  0.0026 0.0006];
+z0=[0.2  0.00094  0.00266   0.0003    1.5    0.00744   0.0006  0.7   0.25    0.009   0.1    0.05   0.0062   0.0026  0.0006];
 
 z=z0;
 
@@ -48,7 +48,7 @@ theta_3=z(10);
  
 nu=z(11);
 
-omega=.00001;
+omega=0.0000000001;
 
 % Initial conditions 
 S0=1-z(12)-z(13)-z(14)-z(15); 
@@ -82,20 +82,12 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
   end
   
  
- 
- % OLD Yearly output from the model as a proportion of P individuals for
- % 2013-final year, Data1 is a row vector
- %Data1=zeros(1,N); 
- % For 2014-final year:
-    %for i=1:N
-     %  Data1(i)= y(i,2)+y(i+1,6)-y(i,6);
-    %end
-    
- % Yearly output from the model as a proportion of A individuals for
- % 2013-final year, Data2 is a row vector
- %Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
-   
 
+ % Yearly output from the model as a proportion of P individuals for
+ % 2013-final year, Data1 is a column vector
+ Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
+   
+% Same as Data1
 % Check1=zeros(1,length(y)-1);  
  % For 2013-year N-1:
     %for i=1:length(y)-1
@@ -104,11 +96,12 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
     
     
  % Yearly output from the model as a proportion of A individuals for
- % 2013-final year, Data2 is a row vector
+ % 2013-final year, Data2 is a column vector
  Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);  
 
     
- %Check2=zeros(1,length(y)-1);  
+ %Same as Data2
+ % Check2=zeros(1,length(y)-1);  
  % For 2013-year N-1:
     %for i=1:length(y)-1
       % Check2(i)= y(i,3)+y(i+1,7)-y(i,7);
@@ -116,21 +109,19 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
     
     
  % Yearly output from the model as a proportion of H individuals for
- % 2013-final year, Data3 is a row vector 
+ % 2013-final year, Data3 is a column vector 
  Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);   
  % For 2013 to year N-1:
     
    
- % Yearly output from the model as a proportion of H individuals for
- % 2013-final year, Check3 is a row vector 
- %Check3=zeros(1,length(y)-1);  
+ % Same as Data3
+ % Check3=zeros(1,length(y)-1);  
  % For 2013-year N-1:
    % for i=1:length(y)-1
      % Check3(i)= y(i,4)+y(i+1,8)-y(i,8);
     %end   
     
     
-  
  % ODE solutions plotted separately 
  figure(1)
          

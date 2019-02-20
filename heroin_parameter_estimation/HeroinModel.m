@@ -2,7 +2,7 @@
 
 % Defining function with inputs: time, classes of people, and parameter vector z to estimate
 
-function dy = f(t,y,z)
+function dy = HeroinModel(t,y,z)
 
 % Parameters
 
