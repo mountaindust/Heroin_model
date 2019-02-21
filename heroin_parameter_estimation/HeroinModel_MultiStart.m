@@ -44,34 +44,34 @@ problem=createOptimProblem('fmincon','x0', xstart,'objective',@HeroinModel_ODE45
 problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',99999);
 
 % Number of times I want to run optimization scheme
-numstartpoints=5;
+numstartpoints=200;
 
 % Define a multistart problem; results are reported after each local solver run, in addition to the final summary
 ms=MultiStart('Display', 'iter'); 
 
 % Manymins is a vector of solutions containing the distinct local minima found during the run;
 %  runs MultiStart on numstartpoints to find a solution or multiple local solutions to problem
-[x,fval, exitflag, output, manymins]=run(ms,problem,numstartpoints);
+[x,fval, exitflag, output, solutions]=run(ms,problem,numstartpoints);
 
 global ModelParameters
 
 %each component of manymins stores a vector of the parameters that were used each time step,
 %ModelParameters puts them into a matrix 
-for i=1: length(manymins)
-    ModelParameters(i,:)=manymins(i).X;
+for i=1: length(solutions)
+    ModelParameters(i,:)=solutions(i).X;
 end
 
 %each time step has an fval; takes Fval values that are stored in manymins and
 %creates vector out of them
-for i=1: length(manymins) 
-    fval(i)=manymins(i).Fval;
+for i=1: length(solutions) 
+    fval(i)=solutions(i).Fval;
 end 
 fval=fval';
 
 %each time step has an exitflag value; takes Exitflag values that are stored in
 %manymins and creates vector out of them
-for i=1: length(manymins) 
-    EF(i)=manymins(i).Exitflag;
+for i=1: length(solutions) 
+    EF(i)=solutions(i).Exitflag;
 end
 EF=EF';
 
