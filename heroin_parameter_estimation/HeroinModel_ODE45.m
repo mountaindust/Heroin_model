@@ -159,5 +159,8 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  % in each estimation, helpful to normalize; 
  % gives least squares percentage error so each piece weighted evenly)
  value = norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
-
+end
  % Want value=f(x) to be small value when run MultiStart  
+ 
+ 
+ 
