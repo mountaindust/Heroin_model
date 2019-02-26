@@ -1,5 +1,6 @@
-%File name: heroin_multistart_testing.m
+%File name: heroin_multistart_final_testing.m
 
+%function heroin_multistart_final_testing
 %Parameters
 alpha=0.3; 
 beta_A=0.0094; 
@@ -53,16 +54,16 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
   end
   
  
- % Yearly output from the model as a proportion of P individuals for
- % 2013-final year, Data1 is a column vector
+ % Yearly output from the model as a proportion of individuals in P at 
+ % some point during the yearfor 2013-final year, Data1 is a column vector
  Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
     
- % Yearly output from the model as a proportion of A individuals for
- % 2013-final year, Data2 is a column vector
+ % Yearly output from the model as a proportion of individuals in A at 
+ % some point during the yearfor 2013-final year, Data2 is a column vector
  Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);   
     
- % Yearly output from the model as a proportion of H individuals for
- % 2013-final year, Data3 is a column vector 
+ % Yearly output from the model as a proportion of individuals in H at 
+ % some point during the yearfor 2013-final year, Data3 is a column vector 
  Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);   
 
     
@@ -123,46 +124,44 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  figure(3)
  hold all
  scatter(t(1:end-1), Data1)
- plot(t(1:end-1), Data1)
+ %plot(t(1:end-1), Data1)
  %set(gca, 'xtick', [1 2 3 4 5])
  set(gca, 'fontsize',10)
  %set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
  xlabel('Year')
  ylabel('Proportion in P at some point during the year')
- legend('Data points interested in', 'ODE solution')
- %legend('Proportion in prescription users simulated','Proportion of prescription users data')
+ legend('Data points interested in for P')
 
  
  %Data points from Data2 and corresponding ODE solution plotted on top 
  figure(4)
  hold all
  scatter(t(1:end-1), Data2)
- plot(t(1:end-1), Data2)
+ %plot(t(1:end-1), Data2)
  %set(gca, 'xtick', [ 1 2 ])
  set(gca, 'fontsize',10)
  %set(gca,'xticklabel',{'2015' '2016'})
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
- legend('Data points interested in', 'ODE solution')
- %legend('Proportion of opioid addicts simulated','Proportion of opioid addicts data' )
- 
+ legend('Data points interested in for A')
+
   
  % Data points from Data3 and corresponding ODE solution plotted on top 
  figure(5)
  hold all
  scatter(t(1:end-1), Data3)
- plot(t(1:end-1), Data3)
+ %plot(t(1:end-1), Data3)
  %set(gca, 'xtick', [ 1 2 3 ])
  set(gca, 'fontsize',10)
  %set(gca,'xticklabel',{'2014', '2015', '2016'})
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
- legend('Data points interested in', 'ODE solution')
- %legend('Proportion of heroin/fentanyl users simulated','Proportion of heroin/fentanyl users data' )
- 
+ legend('Data points interested in for H')
+
+%end 
 
 function f = HeroinModel(t,y,pars)
-f=zeros(5,1);
+f=zeros(8,1);
 f(1)=-pars(1)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
 f(2)=pars(1)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
