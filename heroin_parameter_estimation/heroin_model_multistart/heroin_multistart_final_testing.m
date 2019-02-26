@@ -33,7 +33,7 @@ R0=0.0003;
 X0=0;
 L0=0;
 M0=0;
-initials = [S0,P0,A0,H0,R0,X0,L0,M0];
+initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 
 [t,y]=ode45(@HeroinModel,tspan,initials,[],pars);
@@ -66,7 +66,8 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
  % some point during the yearfor 2013-final year, Data3 is a column vector 
  Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);   
 
-    
+ 
+  
  % ODE solutions plotted separately 
  figure(1)
          
@@ -119,7 +120,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
            xlim([0 , N])
            legend('A','H','R')
            
-          
+        
  %Data points from Data1 and corresponding ODE solution plotted on top 
  figure(3)
  hold all
@@ -160,6 +161,7 @@ initials = [S0,P0,A0,H0,R0,X0,L0,M0];
 
 %end 
 
+           
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
 f(1)=-pars(1)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
@@ -167,6 +169,7 @@ f(2)=pars(1)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
+
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
 %individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
@@ -182,7 +185,7 @@ f(7) = pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+
 %Estim3 in HeroinModel_ODE45.m)
 f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15));
 
- 
+
 end
 
 
