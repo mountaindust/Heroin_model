@@ -26,7 +26,6 @@
     hold off
     
 %end
-
 function f = sir_rhs(t,y,pars)
    f=zeros(2,1);
    f(1)=-pars(1)*y(1)*y(2)/pars(3);

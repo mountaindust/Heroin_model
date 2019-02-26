@@ -12,7 +12,7 @@ function fit_SIR_model_multi
     problem = createOptimProblem('fmincon','objective',...
     @error_sum_of_squares,'x0',[0.9,0.2],'lb',[0.1,0.1],'ub',[2,2]);
     
-    ms=MultiStart;
+    ms=MultiStart('Display', 'iter');
     [theta_hat,f] = run(ms,problem,2);
 
     beta=theta_hat(1);
@@ -70,3 +70,11 @@ f=zeros(2,1);
 f(1)=-pars(1)*y(1)*y(2)/pars(3);
 f(2)=pars(1)*y(1)*y(2)/pars(3)-pars(2)*y(2);
 end
+
+%Order: MultiStart starts error_sum_of_squares with starting points
+    %(x0=[input_pars(1), input_pars(2)], those values are put into pars
+    %vector so that ode45 can be evaluated with those parameters, then the
+    %model is compared with the data. This is done over and over again
+    %until the optimal solution is found, which is called theta_hat, which
+    %then is put into pars vector and used to plot optimal solution with
+    %the data in MultiStart function. 
