@@ -11,7 +11,7 @@ R_0 = 0.0006 # [14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/197
 
 #temporal info, assigning default values
 tstart = 0
-tstop = 10
+tstop = 25
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
@@ -129,7 +129,7 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 
     fig = plt.figure(figsize=(8, 4.5))
   #  plt.plot(t, S, label='Susceptibles')
-  #  plt.plot(t, P, label="Prescription Users")
+    plt.plot(t, P, label="Prescription Users")
     plt.plot(t, A, label="Opioid Addicts")
     plt.plot(t, H, label="Heroin and Fentanyl Addicts")
     plt.plot(t, R, label="Stably Recovered Addicts")
