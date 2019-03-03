@@ -1,6 +1,5 @@
 %File name: heroin_multistart_final.m 
 
-%function heroin_multistart_final
 clf
 
 % We wish to estimate the parameter vector 
@@ -243,8 +242,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  legend('Data points interested in', 'ODE solution')
  
  
- 
-%end
 
 function value = HeroinModel_ODE45(z)
 
