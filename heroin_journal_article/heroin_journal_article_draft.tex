@@ -244,8 +244,7 @@ I tried to choose realistic lower and upper bounds for the parameters in the fol
  put opioid largest value in; $\theta_3$ guess four times as large as
  $\theta_1$; $\nu$ guess same as $\zeta$; $P_0$
  guess; $A_0$ guess; $H_0$ guess; $R_0$ guess} \\ \\
- \textcolor{blue}{Could this info be used for relationship among $\theta_1$, $\theta_2$, and $\theta_3$?: Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
-Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$).} \\
+
 
 \textcolor{blue}{What other types of assumptions can we make regarding the parameters?} \\
 \textcolor{blue}{For the ``average" data points, used the lowest of the two years; is that okay?} \\
@@ -290,12 +289,14 @@ The 2014/2015 average number of individuals 12 and older with ``Past Year Heroin
 
 We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in (848-169=) 679 as the \textbf{total number of prescription opioid overdose deaths} for 2015. \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. 
 
-We add together the heroin and fentanyl overdoses for the state of Tennessee to obtain the \textbf{total number of heroin and fentanyl overdoses} in 2015 to be (205+169=) 374 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+We add together the heroin and fentanyl overdoses for the state of Tennessee to obtain the \textbf{total number of heroin and fentanyl overdoses} in 2015 to be (205+169=) 374 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. 
+
+Calculations of parameters and estimates of initial conditions from this data is found in Appendix A. \\
 
 
 
 \textcolor{blue}{General explanation of parameter estimation process:} \\
-The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. \textcolor{blue}{How many details to give for paper?} The following table displays the parameters that were estimated, along with their resulting estimated values: 
+The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. \textcolor{blue}{How many details to give for paper?} The following table displays the parameters that were estimated with this process, along with their resulting estimated values: 
 
 
 
@@ -406,7 +407,11 @@ Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts
 
 %we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
 
-We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." \\
+We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
+
+\textcolor{blue}{Given the data presented in Table 1, we approximate the initial conditions of our states for 2013. There were 1,660,630 non-addicted prescription opioid users throughout the entire year 2013,  ...finish. \\
+Since we could not find data for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
+Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$). We will make an assumption here that $\theta_2 + \theta_3$ $=$ 19$\theta_1$ and that $\theta_2$ is approximately 3$\theta_1$, i.e. there is only a slightly elevated risk of moving to heroin risk when using opioids in a non-addictive way; this leave $\theta_3=16\theta_1.$} \\
 
 
 \textcolor{blue}{Table of parameter values and units of parameters/unit conversions from data to parameters in parameter estimation} \\
