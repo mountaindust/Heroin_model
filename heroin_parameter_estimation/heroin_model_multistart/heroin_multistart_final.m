@@ -76,7 +76,7 @@ M0=0;
 initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 
-[t,y]=ode45(@HeroinModel,tspan,initials,[],pars);
+[t,y]=ode15s(@HeroinModel,tspan,initials,[],pars);
 
  %Gives solution vector for each compartment 
   S=y(:,1);
@@ -285,7 +285,7 @@ M0=0;
 initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 
-[t,y]=ode45(@HeroinModel,tspan,initials,[],pars);
+[t,y]=ode15s(@HeroinModel,tspan,initials,[],pars);
   
  
  

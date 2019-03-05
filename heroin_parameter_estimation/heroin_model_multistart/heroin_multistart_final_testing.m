@@ -37,7 +37,7 @@ pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,s
 
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 25;
-tspan=linspace(0,N,N+10000);
+tspan=linspace(0,N,N+1);
 
 % Initial conditions 
 S0=1-0.13-0.01-0.001-0.0003; 
