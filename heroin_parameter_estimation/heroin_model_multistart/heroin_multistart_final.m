@@ -400,8 +400,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
  
  % Actual proportion of heroin addicted individuals in the population at some point during the year 
- % in 2014 and 2015
- % (total number of heroin addicted individuals in 2014 and 2015 in TN
+ % in 2014, 2015, and 2016
+ % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  % Data3=[14000/5559006 14000/5602117 19000/5651993];
  
