@@ -245,8 +245,9 @@ I tried to choose realistic lower and upper bounds for the parameters in the fol
  $\theta_1$; $\nu$ guess same as $\zeta$; $P_0$
  guess; $A_0$ guess; $H_0$ guess; $R_0$ guess} \\ \\
 
+\textcolor{red}{Put in anything needed for paper in MatLab\_descriptions.pdf.}
+\textcolor{red}{Describe process of having X, L, M ODE's and integrating from 0 to final time in order to get the proportion in a certain class at some point during the year. Note: we neglect higher order terms, i.e. people who go into P class multiple times (since we can't keep track of individuals in model) because data is about people who are in the class at all throughout the year but only counted once.} 
 
-\textcolor{blue}{What other types of assumptions can we make regarding the parameters?} \\
 \textcolor{blue}{For the ``average" data points, used the lowest of the two years; is that okay?} \\
  
  \textcolor{green}{Data used within code} \\
@@ -405,7 +406,7 @@ In our model we assume homogeneous mixing of the individuals in each of the comp
 
 
 \textbf{Appendix A} \\ \\
-\textcolor{blue}{Calculations of parameters from literature} \\
+\textcolor{blue}{Calculations of parameters and initial conditions from literature} \\
 %Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
 The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
 
@@ -424,7 +425,7 @@ We make a note that individuals that do not have an opioid use disorder and die 
 
 
 Since there is no information for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee in the literature, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
-Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$). We will make an assumption here that $\theta_2 + \theta_3$ $=$ 19$\theta_1$ and that $\theta_2$ is approximately 3$\theta_1$, i.e. there is only a slightly elevated risk of moving to heroin risk when using opioids in a non-addictive way; this leaves $\theta_3=16\theta_1.$ \\
+NMPR use can occur within the prescription class (i.e. from misuse that's not considered addiction), or in the addiction class. Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$), where both $\theta_2$ and $\theta_3$ are greater than $\theta_1.$ We will make an assumption here that $\theta_2 + \theta_3$ is exactly 19$\theta_1$, and that there is somewhat of an elevated risk of moving to heroin use from the prescription class versus the susceptible class, taking $\theta_2 =3 \theta_1$. This leaves $\theta_3=16\theta_1.$ \\
 
 %Note, the numbers that are not cited have come from Table 1 and cited before. 
 Given the data presented in Table 1, we approximate the initial conditions of our states for 2013. There were 1,845,144 total individuals 12 and older who were prescribed opioids (which includes those addicted) at some point during 2013 
@@ -440,19 +441,15 @@ $$\frac{1,845,144 \text{ prescription users}}{\text{year}} \cdot \frac{1}{6} \te
 at the beginning of the year. Thus, 
 $$\frac{307,524 \text{ prescription users}}{5,517,176 \text{ people}} \approx 0.056 $$
 of the population was using opioid prescriptions at the beginning of 2013. 
-Assuming, as before, that 4\% of these prescribed users are addicted, we have that $A_0=0.0022$ and $P_0=0.056-0.0022=0.0538.$ %explanation in data table above 
+Assuming, as before, that 4\% of these prescribed users are addicted, we have that $A_0=0.0022$ and $P_0=0.056-0.0022=0.0538.$ %explanation below data table above 
 \\ \\
 Assuming, as before, that 4\% of prescription opioid users are addicts, we can estimate 73,806 opioid addicts. This higher number is supported by an overall higher prescribing rate in 2013 compared to the next few years \cite{CDC7}.
 We will assume the number of heroin users is the same in 2013 as in 2014 and 2015. Thus, there were 4,485 prescription opioid treatment admissions and 555 heroin treatment admissions which is 0.057 of the opioid addict and heroin user population combined that are in recovery. Only 35\% of those in treatment do not relapse within 4 weeks after treatment, and thus have the ability to be in R, which is .057 of the entire A+H class \cite{Bailey}.
-Since 90\% of individuals relapse within one year post-treatment, that means that an additional 25\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .0057 of addicted and heroin users total \cite{Bailey}. This equates to approximately 500 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$
+Since 90\% of individuals relapse within one year post-treatment, that means that an additional 25\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .0057 of addicted and heroin users total \cite{Bailey}. This equates to approximately 500 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$ \\
 
-\textcolor{red}{Add in recovery/treatment admissions into data table from data collection pdf.}
-
-We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period. %CDC4
-In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume there are about a third as many heroin users compared to opioid addicts in 2013, as well. In 2013, addicts make up 0.0022 of the population at the start of 2013, so we assume $H_0 \approx 0.00074.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly pertaining to the order of magnitude expected.)
+We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period \cite{CDC4}. In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume there are about a third as many heroin users compared to opioid addicts in 2013, as well. In 2013, addicts make up 0.0022 of the population at the start of 2013, so we assume $H_0 \approx 0.00074.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly pertaining to the order of magnitude expected.) 
 %This proportion seems plausible because we assume that a majority of individuals using heroin in 2015 are using the drug at the beginning of the year, since heroin is such an addictive substance and the only ways to leave the compartment are through dying or becoming stably recovered. If we take 75\% to mean the majority, we also arrive at $$\frac{0.75 \cdot 14,000 \text{ heroin users}}{5,602,117 \text{ individuals in population}} \approx 0.0019$$ as the proportion of heroin users at the beginning of 2013. 
 
-\textcolor{red}{Put in sources.}
 
 \pagebreak
 \textcolor{blue}{Table of parameter values and units of parameters/unit conversions from data to parameters in parameter estimation} \\
