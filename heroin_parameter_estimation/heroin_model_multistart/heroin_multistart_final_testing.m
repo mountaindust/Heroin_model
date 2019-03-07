@@ -1,21 +1,21 @@
 %File name: heroin_multistart_final_testing.m
 
 %Parameters
-alpha=0.3; 
-beta_A=0.0094; 
-beta_P=0.00266; 
-theta_1=0.0003;
-epsilon=2.0;
-mu=0.00868; 
-mu_A=0.00775;   
-mu_H=0.0271;
-gamma=0.00744;   
-theta_2=0.0005; 
-sigma=0.7;
-zeta=0.1;
-theta_3=0.005; 
-nu=0.05;
-omega=0.0000000001;
+%alpha=0.3; 
+%beta_A=0.0094; 
+%beta_P=0.00266; 
+%theta_1=0.0003;
+%epsilon=2.0;
+%mu=0.00868; 
+%mu_A=0.00775;   
+%mu_H=0.0271;
+%gamma=0.00744;   
+%theta_2=0.0005; 
+%sigma=0.7;
+%zeta=0.1;
+%theta_3=0.005; 
+%nu=0.05;
+%omega=0.0000000001;
 
 %alpha=0.2; 
 %beta_A=0.00094; 
@@ -26,39 +26,57 @@ omega=0.0000000001;
 %mu_A=0.00775;   
 %mu_H=0.0271;
 %gamma=0.00744;   
-%theta_2=2*theta_1; 
+%theta_2=0.0006; 
 %sigma=0.7;
 %zeta=0.25;
-%theta_3=16*theta_1; 
+%theta_3=0.0009; 
 %nu=0.1;
 %omega=0.0000000001;
+
+
+
+alpha=0.2; 
+beta_A=0.00094; 
+beta_P=0.00266; 
+theta_1=0.0003;
+epsilon=1.5;
+mu=0.00868; 
+mu_A=0.00775;   
+mu_H=0.0271;
+gamma=0.00744;   
+theta_2=3*theta_1; 
+sigma=0.7;
+zeta=0.25;
+theta_3=16*theta_1; 
+nu=0.1;
+omega=0.0000000001;
 
 pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
 
 % Final time and N+# is # of equally spaced points from 0 to N 
-N = 25;
+N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions 
-S0=1-0.13-0.01-0.001-0.0003; 
-P0=0.13;
-A0=0.01;
-H0=0.001;
-R0=0.0003; 
-X0=0;
-L0=0;
-M0=0;
-initials = [S0;P0;A0;H0;R0;X0;L0;M0];
-
-%S0=1-0.05-0.0062-0.0026-0.0006; 
-%P0=0.05;
-%A0=0.0062;
-%H0=0.0026;
-%R0=0.0006; 
+%S0=1-0.13-0.01-0.001-0.0003; 
+%P0=0.13;
+%A0=0.01;
+%H0=0.001;
+%R0=0.0003; 
 %X0=0;
 %L0=0;
 %M0=0;
 %initials = [S0;P0;A0;H0;R0;X0;L0;M0];
+
+S0=1-0.0538-0.0022-0.00074-0.000091;
+P0=0.0538;
+A0=0.0022;
+H0=0.00074;
+R0=0.000091;
+X0=0;
+L0=0;
+M0=0;
+initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 
 
@@ -82,15 +100,22 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Yearly output from the model as a proportion of individuals in P at 
  % some point during the yearfor 2013-final year, Data1 is a column vector
- Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
-    
+% Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
+ %for 2013-2017
+ Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
+ 
  % Yearly output from the model as a proportion of individuals in A at 
  % some point during the yearfor 2013-final year, Data2 is a column vector
- Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);   
+% Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);  
+ %for 2014 and 2015 
+ Data2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
+
     
  % Yearly output from the model as a proportion of individuals in H at 
  % some point during the yearfor 2013-final year, Data3 is a column vector 
- Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);   
+% Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8); 
+ %for 2014 and 2015 
+ Data3=y(2:3,4)+y(3:4,8)-y(2:3,8);
 
  
   
