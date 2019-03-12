@@ -2,14 +2,11 @@
 
 clf
 
-% We wish to estimate the parameter vector 
-% x =[alpha,beta_A,beta_P,theta_1,epsilon,gamma,theta_2,sigma,zeta,theta_3,nu]
+% We wish to estimate the parameter vector (7 parameters)
+% x =[alpha,theta_1,epsilon,gamma,sigma,zeta,nu]
 %Give ranges on each of the parameters 
-%LowerBounds=[0.01  0.00001 0.0001 0.00001 0.8 0.001 0.00001 0.01 0.01 0.00001 0.01];
-%UpperBounds=[0.7    0.2     0.009   0.1    4   0.1    0.3     2   1     0.6   1  ];
-
-LowerBounds=[0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 ];
-UpperBounds=[2  2  2  2  4  2  2  2 ];
+LowerBounds=[0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 ];
+UpperBounds=[2  2  4  2  2  2  2 ];
 
 %Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
@@ -28,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=1000;
+numstartpoints=10;
 
 % Manymins is a vector of solutions containing the distinct local minima found during the run;
 %  runs MultiStart on numstartpoints to find a solution or multiple local solutions to problem
@@ -36,22 +33,22 @@ numstartpoints=1000;
 [x,fval,exitflag,output,solutions]=run(ms,problem,numstartpoints);
 
 alpha=x(1);
-beta_A=x(2); 
-beta_P=x(3);
-theta_1=x(4);
-epsilon=x(5);
+beta_A=0.00094; 
+beta_P=0.00266;
+theta_1=x(2);
+epsilon=x(3);
 mu=0.00868;  
 mu_A=0.00775;   
 mu_H=0.0271;
-gamma=0.00744;   
-theta_2=3*x(4); 
-sigma=x(6);
-zeta=x(7);
-theta_3=16*x(4);
-nu=x(8);
+gamma=x(4);   
+theta_2=3*x(2); 
+sigma=x(5);
+zeta=x(6);
+theta_3=16*x(2);
+nu=x(7);
 omega=0.0000000001;
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,0.00744,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
+pars=[alpha,0.00094,0.00266,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
 
 x
 fval
@@ -234,16 +231,16 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  legend('Data points interested in', 'ODE solution')
 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
- Estim3=y(2:3,4)+y(3:4,8)-y(2:3,8); 
- Data3=[0.000786390179205697;0.000803159008500578];
+ Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
+ Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  
  %Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
  hold all
  %plot(t(1:end-1),Estim3)
  %plot(t(1:end-1), Data3, 'x')
- plot(t(2:3),Estim3)
- plot(t(2:3), Data3, 'x')
+ plot(t(2:4),Estim3)
+ plot(t(2:4), Data3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
@@ -255,23 +252,23 @@ function value = HeroinModel_ODE45(z)
 
 %Parameters
 alpha=z(1);
-beta_A=z(2); 
-beta_P=z(3);
-theta_1=z(4);
-epsilon=z(5);
+beta_A=0.00094; 
+beta_P=0.00266;
+theta_1=z(2);
+epsilon=z(3);
 mu=0.00868;  
 mu_A=0.00775;   
 mu_H=0.0271;
-gamma=0.00744;   
-theta_2=3*z(4); 
-sigma=z(6);
-zeta=z(7);
-theta_3=16*z(4);
-nu=z(8);
+gamma=z(4);   
+theta_2=3*z(2); 
+sigma=z(5);
+zeta=z(6);
+theta_3=16*z(2);
+nu=z(7);
 omega=0.0000000001;
 
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,0.00744,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
+pars=[alpha,0.00094,0.00266,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
 
 % Final time; don't want to run too long because dynamics can drastically change over
 % a number of years, so here we will do 2013-? where t=0 represents 2013
@@ -335,11 +332,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  Estim1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
 
- % Actual proportions of population that were non-addicted prescription opioid users at some point
+ % Actual proportions of population (updated 3/12/19) that were non-addicted prescription opioid users at some point
  % during the year for 2013-2017 
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
- % Data1=[1660630/5517176 1641908/5559006 1637623/5602117 1585227/5651993 1472737/5708586];
+ 
+ % Data1=[1799015/5517176 1778733/5559006 1771581/5602117 1719363/5651993 1595465/5708586];
  
  % Data simulated when testing codes 
  
@@ -375,11 +373,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %only 2014 and 2015 data
  Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
  
- % Actual proportions of population that were opioid addicted individuals in
+ % Actual proportions of population (updated 3/12/19) that were opioid addicted individuals in
  % the population at some point during the year in 2014 and 2015 
  % (total number of opioid addicted individuals in 2014 and 2015 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
- % Data2=[42000/5651993 48000/5602117];
+ 
+ % Data2=[48000/5602117 42000/5651993];
  
  % Data simulated when testing codes 
  
@@ -415,17 +414,18 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);
  
  %for 2014 and 2015 only
- Estim3=y(2:3,4)+y(3:4,8)-y(2:3,8);  
+ Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
  
- % Actual proportion of heroin addicted individuals in the population at some point during the year 
+ % Actual proportion (updated 3/12/19) of heroin addicted individuals in the population at some point during the year 
  % in 2014, 2015, and 2016
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
+ 
  % Data3=[14000/5559006 14000/5602117 19000/5651993];
  
  % Data simulated when testing codes 
 
- Data3=[0.000786390179205697;0.000803159008500578];
+ Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  
  % The difference between estimated value and data
  
@@ -502,12 +502,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %value = norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5);
  
  %Run2 and Run3
- %value = norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
+ value = norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  
  %value=norm(Diff1,2)+norm(Diff2,2)+norm(Diff3,2);
  
  %Run4
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
  
  %Run12
  %value = norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3);

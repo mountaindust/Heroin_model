@@ -115,7 +115,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % some point during the yearfor 2013-final year, Data3 is a column vector 
 % Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8); 
  %for 2014 and 2015 
- Data3=y(2:3,4)+y(3:4,8)-y(2:3,8);
+ Data3=y(2:4,4)+y(3:5,8)-y(2:4,8);
 
  
   
