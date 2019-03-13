@@ -25,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=10;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -206,7 +206,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
  % Actual Data
  Data1=[1799015./5517176; 1778733./5559006; 1771581./5602117; 1719363./5651993; 1595465./5708586];
- 
+ % Actual Data in decimal form 
+ %Data1=[0.3260753327; 0.319973211; 0.3162342022; 0.3042047292; 0.2794851475];
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
  hold all
@@ -222,6 +223,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Data2=[0.00407696031266723;0.00500029527298183];
  % Actual Data
  Data2=[48000./5602117; 42000./5651993];
+ % Actual Data in decimal form
+ %Data2=[0.0085681895;0.0074310071];
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
  figure(10)
@@ -240,6 +243,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  % Actual Data
  Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ % Actual Data in decimal form 
+ %Data3=[0.0025184358; 0.0024990553; 0.0033616461];
  
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
@@ -340,6 +345,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % total population in TN 12 and older for each year) 
  
  Data1=[1799015./5517176; 1778733./5559006; 1771581./5602117; 1719363./5651993; 1595465./5708586];
+ %Data1=[0.3260753327; 0.319973211; 0.3162342022; 0.3042047292; 0.2794851475];
  
  % Data simulated when testing codes 
  %Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
@@ -379,6 +385,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  Data2=[48000./5602117; 42000./5651993];
+ %Data2=[0.0085681895;0.0074310071];
  
  % Data simulated when testing codes  
  %Data2=[0.00407696031266723;0.00500029527298183];
@@ -422,6 +429,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ %Data3=[0.0025184358; 0.0024990553; 0.0033616461];
  
  % Data simulated when testing codes 
  %Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
