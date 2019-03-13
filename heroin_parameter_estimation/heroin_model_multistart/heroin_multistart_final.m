@@ -25,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=5;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -94,11 +94,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(1)
  hold all
  plot(t,y(:,1))
- plot(t(1:end), State_data_1, 'x')
+ %plot(t(1:end), State_data_1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
- legend('Proportion of susceptibles simulated','Proportion of susceptibles (simulated) data' )
+ legend('Proportion of susceptibles')%,'Proportion of susceptibles (simulated) data' )
 
  State2=y(:,2);
  State_data_2=[0.0538000000000000;0.104768069960564;0.113970299917343;0.115542193082612;0.115733087680602;0.115675016908011];
@@ -108,11 +108,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(2)
  hold all
  plot(t,y(:,2))
- plot(t(1:end), State_data_2, 'x')
+ %plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
- legend('Proportion of prescription users simulated','Proportion of prescription users (simulated) data' )
+ legend('Proportion of prescription users')%,'Proportion of prescription users (simulated) data' )
 
 
  State3=y(:,3);
@@ -123,11 +123,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(3)
  hold all
  plot(t,y(:,3))
- plot(t(1:end), State_data_3, 'x')
+ %plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
- legend('Proportion of opioid addicts simulated','Proportion of opioid addicts (simulated) data' )
+ legend('Proportion of opioid addicts')%,'Proportion of opioid addicts (simulated) data' )
 
  
  State4=y(:,4);
@@ -137,11 +137,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(4)
  hold all
  plot(t,y(:,4))
- plot(t(1:end), State_data_4, 'x')
+ %plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
- legend('Proportion of heroin/fentanyl addicts simulated','Proportion of heroin/fentanyl addicts (simulated) data' )
+ legend('Proportion of heroin/fentanyl addicts')%,'Proportion of heroin/fentanyl addicts (simulated) data' )
  
 
  State5=y(:,5);
@@ -151,11 +151,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(5)
  hold all
  plot(t,y(:,5))
- plot(t(1:end), State_data_5, 'x')
+ %plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
- legend('Proportion of stably recovered addicts simulated','Proportion of stably recovered addicts (simulated) data' )
+ legend('Proportion of stably recovered addicts')%,'Proportion of stably recovered addicts (simulated) data' )
 
 
  
@@ -166,11 +166,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(6)
  hold all
  plot(t,y(:,6))
- plot(t(1:end), State_data_6, 'x')
+ %plot(t(1:end), State_data_6, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('X(t)')
- legend('X ODE solution','data simulated' )
+ legend('Proportion that enter P at some point during the year')%,'data simulated' )
 
 
  State7=y(:,7);
@@ -180,11 +180,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(7)
  hold all
  plot(t,y(:,7))
- plot(t(1:end), State_data_7, 'x')
+ %plot(t(1:end), State_data_7, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('L(t)')
- legend('L ODE solution','data simulated' )
+ legend('Proportion that enter A at some point during the year')%,'data simulated' )
   
  State8=y(:,8);
  State_data_8=[0;5.18916207835739e-05;0.000143072502492641;0.000253761633853627;0.000378815607538132;0.000516926137590890];
@@ -193,11 +193,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(8)
  hold all
  plot(t,y(:,8))
- plot(t(1:end), State_data_8, 'x')
+ %plot(t(1:end), State_data_8, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('M(t)')
- legend('M ODE solution','data simulated' )
+ legend('Proportion that enter H at some point during the year')%,'data simulated' )
  
  %%%
  
@@ -211,12 +211,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
  hold all
- plot(t(1:end-1),Estim1)
+ plot(t(1:end-1),Estim1, 'o')
  plot(t(1:end-1), Data1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P at some point during the year')
- legend('Data points interested in', 'ODE solution')
+ legend('ODE solution', 'Data')
 
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
  Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
@@ -231,12 +231,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  hold all
  %plot(t(1:end-1),Estim2)
  %plot(t(1:end-1), Data2, 'x')
- plot(t(2:3),Estim2)
+ plot(t(2:3),Estim2, 'o')
  plot(t(2:3), Data2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
- legend('Data points interested in', 'ODE solution')
+ legend('ODE solution', 'Data')
 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
  Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
@@ -251,12 +251,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  hold all
  %plot(t(1:end-1),Estim3)
  %plot(t(1:end-1), Data3, 'x')
- plot(t(2:4),Estim3)
+ plot(t(2:4),Estim3, 'o')
  plot(t(2:4), Data3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
- legend('Data points interested in', 'ODE solution')
+ legend('ODE solution', 'Data')
  
  
 
