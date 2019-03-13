@@ -239,7 +239,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
  %Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  % Actual Data
- Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
+ Data3=[14000/5559006 14000/5602117 19000/5651993];
  
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
