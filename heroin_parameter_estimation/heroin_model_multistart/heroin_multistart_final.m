@@ -6,7 +6,7 @@ clf
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,nu]
 % Ranges on each of the parameters 
 LowerBounds=[0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 0.00001 ];
-UpperBounds=[2  2  4  2  2  2  2 ];
+UpperBounds=[8  8  8  8  8  8  8 ];
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
