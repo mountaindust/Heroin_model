@@ -230,30 +230,13 @@ If $P^*=0$, then equation (8) forces either $S^*=0$ or $\alpha=0$.  If $S^*=0$, 
 
 \textbf{Numerical Results} 
 (literature information and parameter estimation) \\ \\
-\textcolor{red}{This is where start to talk about Tennessee (see data section below)} \\
-We run our model from 2013-2017, and initial conditions for the classes are estimated, as we do not have data for the number of individuals in each class at the beginning of 2013. 
-
-\textcolor{blue}{Parameter estimation codes using Ordinary Least Squares: HeroinModel.m, \linebreak HeroinModel\_ODE45.m, HeroinModel\_MultiStart.m ...with these 3 files open, can run by typing ``HeroinModel\_MultiStart.m" \\ \\
-The parameter estimation codes right now reflect recent changes of the model (including the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$) and runs from 2013-2017. Currently we only have 10 data points and 15 unknowns. \\ \\
-%We cannot use data for initial conditions, because data are numbers over the entire year, not at the beginning of the year/at a certain instant at beginning of 2015...so cannot run from 2015-2017 with known initial conditions \\ \\ 
-I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
- $\beta_P$ guess from opioid paper; $\theta_1$ complete guess, assume smaller than $\beta_A$, $\beta_P$; 
- epsilon 0.8-8 from opioid paper; gamma guess from opioid paper; $\theta_2$
- guess twice as large as $\theta_1$; $\sigma$ guess small because
- ``successful recovereds"; $\zeta$ will be smaller than opioid paper because fewer people will ``relapse" since more ``stable recovered" but still
- put opioid largest value in; $\theta_3$ guess four times as large as
- $\theta_1$; $\nu$ guess same as $\zeta$; $P_0$
- guess; $A_0$ guess; $H_0$ guess; $R_0$ guess} \\ \\
-
-\textcolor{red}{Put in anything needed for paper in MatLab\_descriptions.pdf.}
-\textcolor{red}{Describe process of having X, L, M ODE's and integrating from 0 to final time in order to get the proportion in a certain class at some point during the year. Note: we neglect higher order terms, i.e. people who go into P class multiple times (since we can't keep track of individuals in model) because data is about people who are in the class at all throughout the year but only counted once.} 
-
-\textcolor{blue}{For the ``average" data points, used the lowest of the two years; is that okay?} \\
  
  \textcolor{green}{Data used within code} \\
  \textcolor{blue}{Applying model to Tennessee population} \\
+ \textcolor{red}{This is where start to talk about Tennessee} \\
 We apply our model to the Tennessee population specifically in order to analyze the opioid epidemic on a smaller scale than the national level. Although there is still heterogeneity across Tennessee, it is lower than the amount one would find on a national scale. Below we present a data table consisting of estimates of the number of individuals in Tennessee in various categories for the years 2013-2018 found either in literature or that we estimated; explanations of each of the categories follows. 
 
+\textcolor{blue}{Leave data table/information here or put in appendix?}
 \textcolor{red}{Put in information of US prescription rate per capita at it's peak was 81.3/100 people and how TN has been far above that every year.}
 \captionof{table}{Number of individuals in each category, 2013-2018}
 \begin{tabular}{|l|c|c|c|c|c|c|l}
@@ -296,7 +279,7 @@ There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and u
 
 The \textbf{total number of individuals taking prescription opioids} for pain is given in the third row \cite{TNgov1}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
-The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay?} \textcolor{red}{May need to fill in more details about specific data such as collection process, self-reported probably equates to underreported, etc.}
+The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. \textcolor{blue}{Right now, I'm using these estimates for the years 2015 and 2016...is that okay? I.e. for the ``average" data points, used the lowest of the two years} \textcolor{red}{May need to fill in more details about specific data such as collection process, self-reported probably equates to underreported, etc.}
 We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. \textcolor{red}{May find a better place for this later: Finally, we note that those who are addicted to opioids are strictly in the A class, as individuals in R are not considered addicted in our model.} 
 
 The total number of prescription users each year, however, includes individuals addicted to their prescriptions. For 2015, we see that 48,000 out of 1,819,581 individuals were addicted to their prescriptions, which is approximately 2.64\% and in 2016, 2.39\% were. We take these percentages of prescription opioid user addicts in 2015 and 2016, the only years with the estimated number of opioid addicts, as a guide and estimate that 2.5\% of prescription opioid users are addicted to their prescriptions in the remaining years. We take this percentage to arrive at the opioid addict numbers for the remaining years and subtracting those numbers from the prescription opioid class gives the number of non-addicted prescription opioid users for 2013, 2014, and 2017; these values are in italics in Table 1. We assume here that individuals who use heroin are not using \textit{prescribed} opioids, since they are more expensive and provide less of a high, and therefore, heroin addicts do not need to be factored out of these total numbers. \\
@@ -314,10 +297,8 @@ Calculations of parameters and estimates of initial conditions from this data is
 
 
 
-\textcolor{blue}{General explanation of parameter estimation process:} \\
-The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A. In order to estimate the remaining parameters for our model, we used the proportion of prescription users, opioid addicts, and heroin/fentanyl addicts each year calculated from data above and compared these to the proportions of the population in the classes at in certain years that our model simulated. We ran the code from \textcolor{red}{fill in which years} with the time step in years. We utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between the data and model simulations. We used the optimization toolbox in MATLAB and specifically utilized the MultiStart algorithm and fmincon and used \textcolor{red}{fill in number} as the number of starting points to ensure that the global minimum is found, as this is a local solver. \textcolor{blue}{How many details to give for paper?} The following table displays the parameters that were estimated with this process, along with their resulting estimated values: 
-
-
+\textcolor{blue}{Parameter estimation process} \\
+The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated and assumptions on $\theta_2$, $\theta_3$, $\beta_A$, and $\beta_P$ are stated in Appendix A. In addition, although we have an estimate for the total number of prescription opioid users and opioid addicts in 2013, we do not know these numbers at the start of 2013; similarly for the other states. Thus, we approximate the initial conditions of our states for 2013 in Appendix A using information from Table 1. 
 
 \begin{center}
 
@@ -325,31 +306,15 @@ The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu
 
  \hline
 
-{Parameter} & {Estimated Value} & {Units} \\ [0.5ex]
+{Parameter} & {Value Assumed} & {Units} \\ [0.5ex]
 
  \hline\hline
-
-$\alpha$ &  &  \\
-
- \hline
 
 $\beta_A$ &  &  \\
 
 \hline
 
-$\beta_P$ &  &  \\
-
-\hline
-
-$\theta_1$&  &  \\
-
-\hline
-
-$\epsilon$ &  &  \\
-
-\hline
-
-$\gamma$ &  &  \\
+$\beta_P$&  &  \\
 
 \hline
 
@@ -357,21 +322,10 @@ $\theta_2$ &  &  \\
 
 \hline
 
-$\sigma$ &  &  \\
-
-\hline
-
-$\zeta$ &  &  \\
-
-\hline
-
 $\theta_3$ &  &  \\
 
 \hline
 
-$\nu$ &  &  \\
-
-\hline
 
 $P_0$ &  &  \\
 
@@ -387,7 +341,95 @@ $H_0$ &  &  \\
 
 $R_0$ &  &  \\
 
-%\\ [1ex]
+\hline
+\end{tabular}
+
+\end{center}
+ 
+
+
+In order to estimate the remaining parameters for our model, we utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between data and model simulations. We have data on the total number of non-addicted prescription users, opioid addicts, and heroin/fentanyl addicts each year, and therefore on their corresponding proportions out of the entire population in a given year. We have data on the proportion of individuals in P at some point during each of the years 2013-2017, the proportion of individuals in A at some point during each of the years 2014-2015, and the proportion of individuals in H at some point during each of the years 2014-2016, resulting in a total of 10 data points. \\
+
+\textcolor{blue}{Include these next couple of descriptions in paper or only in dissertation?} \\
+We simulate the proportions in each of these classes throughout the year in the following way. 
+In order to count the proportion of individuals in P, A, or H at some point throughout a certain year, 
+ we need to count those who are in each of the classes AT ALL during the year, even if they leave or come back at some point. We note that we neglect higher order terms, i.e. people who go into the P class multiple times, since we can't keep track of individuals in model; the data we use is about total proportion of people who are in the class at some point throughout the year but they are kept track of and only counted once. \\
+  
+To get the output from the model of the proportion of non-addicted prescription opioid users in each year, we take the proportion of non-addicted prescription opioid users at the beginning of each of the years and add on the proportion of individuals that enter the P class at any point during the year. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ For every year except 2013, a subtraction must be done since integrating gives the proportion from time $0$ to time $t$, but we only want the proportion from time $t-1$ to time $t$ (i.e. the new cases in a given year). Thus, the calculation is as follows for each year, with the last equation in each line what was calculated in the code: \\
+2013: $P_0 + \int_0^1 \alpha S = y(1,2)+y(2,6)-y(1,6)$ \\
+2014: $y(2,2)+\int_1^2 \alpha S$=$y(2,2)+\int_0^2 \alpha S$- $\int_0^1 \alpha S=y(2,2)+y(3,6)-y(2,6)$ \\
+2015: $y(3,2)+\int_2^3 \alpha S$=$y(3,2)+\int_0^3 \alpha S$- $\int_0^2 \alpha S=y(3,2)+y(4,6)-y(3,6)$ \\
+2016: $y(4,2)+\int_3^4 \alpha S$=$y(4,2)+\int_0^4 \alpha S$- $\int_0^3 \alpha S=y(4,2)+y(5,6)-y(4,6)$ \\
+2017: $y(5,2)+\int_4^5 \alpha S$=$y(5,2)+\int_0^5\alpha S$- $\int_0^4 \alpha S=y(5,2)+y(6,6)-y(5,6)$ \\
+
+
+ To get the output from the model of the proportion of opioid addicts in 2014 and 2015, we take the initial proportion of opioid addicts in each of these years and add the proportion of individuals that enter the A class at any point during the year 2014 or 2015. This latter part comes from integrating over those who enter the A class: $\int_0^t L'(t)dt=\int_0^t (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt$ which is equal to $L(t)-L(0)$; here, we take $L(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
+ 2014: $y(2,3)+\int_1^2 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(2,3)+y(3,7)-y(2,7)$ \\
+ 2015: $y(3,3)+\int_2^3 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(3,3)+y(4,7)-y(3,7)$ \\
+
+
+Finally, to obtain the output from the model of the proportion of heroin/fentanyl addicts for each year 2014-2016, we take the initial proportion of heroin/fentanyl addicts in each of these years and add the proportion of individuals that enter the H class at any point during the year. This latter part comes from integrating over those who enter the H class: $\int_0^t M'(t)dt=\int_0^t (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega})dt$ which is equal to $M(t)-M(0)$; here, we take $M(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
+ 2014: $y(2,4)+\int_1^2  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(2,4)+y(3,8)-y(2,8)$ \\
+ 2015: $y(3,4)+\int_2^3  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(3,4)+y(4,8)-y(3,8)$ \\
+ 2016: $y(4,4)+\int_3^4  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(4,4)+y(5,8)-y(4,8)$ \\
+
+
+We use the Global Optimization Toolbox in MATLAB, specifically utilizing the MultiStart algorithm and fmincon local solver. Since we wish to know the global minimum, we use \textcolor{red}{fill in number} starting points as this is a local solver. We give lower bounds of 0.00001 for all of the parameters and an upper bound of 2 for all of the parameters except $\epsilon$ with an upper bound of 4 since this parameter can easily be greater than 1 (i.e. in a given year, a prescription user may end prescription use more than once). We run our model from 2013-2018, keeping a short time frame so that dynamics are relatively the same in the time period with the time step in years. 
+
+\textcolor{blue}{How many details to give for paper? Put in anything needed for paper from MatLab\_descriptions.pdf if applicable.}
+
+
+%I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
+ %$\beta_P$ guess from opioid paper; $\theta_1$ complete guess, assume smaller than $\beta_A$, $\beta_P$; 
+% epsilon 0.8-8 from opioid paper; gamma guess from opioid paper; $\theta_2$
+% guess twice as large as $\theta_1$; $\sigma$ guess small because
+% ``successful recovereds"; $\zeta$ will be smaller than opioid paper because fewer people will ``relapse" since more ``stable recovered" but still
+% put opioid largest value in; $\theta_3$ guess four times as large as
+% $\theta_1$; $\nu$ guess same as $\zeta$; $P_0$
+% guess; $A_0$ guess; $H_0$ guess; $R_0$ guess} \\ \\
+
+
+The following table displays the 7 parameters that were estimated with this process, along with their resulting estimated values: 
+
+
+
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Estimated Value} & {Units} \\ [0.5ex]
+
+ \hline\hline
+
+$\alpha$ &  &  \\
+
+\hline
+
+$\theta_1$&  &  \\
+
+\hline
+
+$\epsilon$ &  &  \\
+
+\hline
+
+$\gamma$ &  &  \\
+
+\hline
+
+
+$\sigma$ &  &  \\
+
+\hline
+
+$\zeta$ &  &  \\
+
+
+\hline
+
+$\nu$ &  &  \\
 
  \hline
 
@@ -412,7 +454,7 @@ In our model we assume homogeneous mixing of the individuals in each of the comp
 
 
 \textbf{Appendix A} \\ \\
-\textcolor{blue}{Calculations of parameters and initial conditions from literature} \\
+\textcolor{blue}{Calculations of parameters from literature} \\
 %Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
 The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
 
@@ -427,16 +469,17 @@ Similarly, we may calculate $\mu_{H}$. There were 14,000 heroin/fentanyl addicts
 %we view it as a good thing that methadone was pulled out separately from this data for overdoses, because it's used in treatment in order to reduce cravings and not necessarily supply the high 
 
 We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
-\pagebreak
 
-
+\textcolor{blue}{Estimates of parameters from literature} \\
 Since there is no information for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee in the literature, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
 NMPR use can occur within the prescription class (i.e. from misuse that's not considered addiction), or in the addiction class. Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$), where both $\theta_2$ and $\theta_3$ are greater than $\theta_1.$ We will make an assumption here that $\theta_2 + \theta_3$ is exactly 19$\theta_1$, and that there is somewhat of an elevated risk of moving to heroin use from the prescription class versus the susceptible class, taking $\theta_2 =3 \theta_1$. This leaves $\theta_3=16\theta_1.$ \\
 
-We were not able to find values in the literature specific to Tennessee regarding an illicit-induced addiction rate; however, we use information from the national level and argue there is no strong reason that this national rate would be significantly different in Tennessee. In 2015, a study was done regarding the source of prescription opioids for adults reporting an prescription opioid use disorder for their most recent episode of misuse \cite{Han}. Here, 52.8\% of the prescription opioids were from a non-physician source, which included given/bought from a friend/relative, or bought from a drug dealer/stranger. 
+We were not able to find values in the literature specific to Tennessee regarding an illicit-induced addiction rate; however, we use information from the national level and argue there is no strong reason that this national rate would be significantly different in Tennessee. In 2015, a study was done regarding the source of prescription opioids for adults reporting an prescription opioid use disorder for their most recent episode of misuse \cite{Han}. Here, 52.8\% of the prescription opioids were from a non-physician source, which included given/bought from a friend/relative, or bought from a drug dealer/stranger. \textcolor{red}{Finish.}
+\textcolor{blue}{Okay to see even though opioid model is not a sub-model anymore (since we've changed the recovery class and terms?} We argue that $\beta_A$ is a reasonable parameter to estimate because the opioid-only model was insensitive to this parameter and although less so, $\beta_P$ was also relatively insignificant compared to other parameters explored \cite{Battista}.
 
 %Note, the numbers that are not cited have come from Table 1 and cited before. 
-Given the data presented in Table 1, we approximate the initial conditions of our states for 2013. There were 1,845,144 total individuals 12 and older who were prescribed opioids (which includes those addicted) at some point during 2013 
+\textcolor{blue}{Estimates of initial conditions from literature} \\
+There were 1,845,144 total individuals 12 and older who were prescribed opioids (which includes those addicted) at some point during 2013 
 and there was an average of 1.271 prescriptions per person, although we will assume this number holds when only considering the age group 12 and older \cite{CDC6}. 
 Thus, we calculate 
 $$\frac{1.271 \text{ prescriptions}}{\text{person$\cdot$ year}}\cdot \frac{5,517,176 \text{ people}}{1,845,144 \text{ prescription users}} \approx \frac{ 3.80 \text{ prescriptions}}{\text{prescription user $\cdot$ year }}.$$  
