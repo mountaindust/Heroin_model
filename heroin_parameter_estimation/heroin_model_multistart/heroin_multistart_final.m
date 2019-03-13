@@ -203,9 +203,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  %%% Data points we are interested in 
  Estim1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
- Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
+ %Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
  % Actual Data
- %Data1=[1799015/5517176 1778733/5559006 1771581/5602117 1719363/5651993 1595465/5708586];
+ Data1=[1799015/5517176 1778733/5559006 1771581/5602117 1719363/5651993 1595465/5708586];
  
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
@@ -219,9 +219,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
  Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
- Data2=[0.00407696031266723;0.00500029527298183];
+ %Data2=[0.00407696031266723;0.00500029527298183];
  % Actual Data
- %Data2=[48000/5602117 42000/5651993];
+ Data2=[48000/5602117 42000/5651993];
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
  figure(10)
@@ -237,9 +237,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
  Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
- Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
- % Actual Data
  %Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
+ % Actual Data
+ Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
@@ -339,11 +339,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
  
- %Data1=[1799015/5517176 1778733/5559006 1771581/5602117 1719363/5651993 1595465/5708586];
+ Data1=[1799015/5517176 1778733/5559006 1771581/5602117 1719363/5651993 1595465/5708586];
  
  % Data simulated when testing codes 
- 
- Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
+ %Data1=[0.235833383805590;0.281769508258203;0.289901045174989;0.291129796298533;0.291111675201331];
  
  % The difference between estimated values and data
  
@@ -379,11 +378,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of opioid addicted individuals in 2014 and 2015 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- %Data2=[48000/5602117 42000/5651993];
+ Data2=[48000/5602117 42000/5651993];
  
- % Data simulated when testing codes 
- 
- Data2=[0.00407696031266723;0.00500029527298183];
+ % Data simulated when testing codes  
+ %Data2=[0.00407696031266723;0.00500029527298183];
  
  % The difference between estimated value and data
  
@@ -423,11 +421,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- %Data3=[14000/5559006 14000/5602117 19000/5651993];
+ Data3=[14000/5559006 14000/5602117 19000/5651993];
  
  % Data simulated when testing codes 
-
- Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
+ %Data3=[0.000786390179205697;0.000803159008500578;0.000833277386135513];
  
  % The difference between estimated value and data
  
