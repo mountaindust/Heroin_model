@@ -36,8 +36,8 @@
 
 
 alpha=0.2; 
-beta_A=0.00094; 
-beta_P=0.00266; 
+beta_A=0.000273; 
+beta_P=0.000777; 
 theta_1=0.0003;
 epsilon=1.5;
 mu=0.00868; 
