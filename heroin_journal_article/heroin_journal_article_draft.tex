@@ -224,7 +224,99 @@ Equation (10) forces either $\mu=0$ or $R^*=0$; however, $\mu > 0$ since this is
 
 If $P^*=0$, then equation (8) forces either $S^*=0$ or $\alpha=0$.  If $S^*=0$, then the solution  $S^*=P^*=A^*=H^*=R^*=0$ contradicts equation (11). If $\alpha=0$, then we use equation (11) to solve for the addiction-free equilibrium of (1,0,0,0,0); this solution is included in the addiction-free equilibrium above when $\alpha=0$, as well. 
 
-\textcolor{red}{Update basic reproduction number from new addiction-free equilibrium (change will be that $R$ is no longer an addicted compartment).} \\  
+\textcolor{blue}{Basic Reproduction Number, \textbf{$\mathscr{R}_0$}}  
+%Can numerically check R_0 (i.e. plug in specific values for F and V and make sure that matches my R_0). Make sure if R_0>1, goes away from my equilibrium and if R_0<1, goes toward my equilibrium. 
+
+The basic reproduction number, denoted $\mathscr{R}_0$, is a term used in epidemiological models that gives the expected number of secondary disease cases that result from the introduction of a disease to a susceptible population. The value of $\mathscr{R}_0$ represents how successful the spread of the disease is expected to be; if $\mathscr{R}_0 < 1$, then the disease is expected to die out and the disease-free equilibrium will be locally stable; conversely, if $\mathscr{R}_0 >1$, then the disease is expected to spread and the disease-free equilibrium will be unstable \cite{Driessche}. \\ \\
+ This idea may be applied to the context of our model since for the addiction-free equilibrium to occur, $\gamma$ and $\beta_{P}$ must both be equal to 0, which means individuals can become addicted only with interactions with opioid addicted individuals or heroin users so this takes the form of an infectious disease. Thus, in this case in which the prescription part is essentially taken out of the model so that it is a black-market-only driven model, $\mathscr{R}_0$ can be calculated. This value will be the ratio of the number of new addictions in the next year compared to the current year. At the addiction-free equilibrium, the population is completely susceptible, as needed for $\mathscr{R}_0$ to be an accurate measurement of addiction potential. 
+We note that our goal in this section is to explore the structure of the model and not obtain a result for the full model. The disease compartments are those that contain infected individuals, or in our case, addicts \cite{Driessche}. Our model incorporates two addiction compartments, A and H, since these both consist of opioid or heroin/fentanyl addicted individuals. We will utilize the Next Generation Matrix Method in order to calculate $\mathscr{R}_0$.
+
+
+For the purposes of calculating $\mathscr{R}_0$, we will assume $\gamma =0$ and $\beta_{P} =0$ in order to ensure the existence of the addiction-free equilibrium. This results in the following system:
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  - \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
+\[\dv{P}{t} = \alpha S - \epsilon P  - \theta_{2}PH- \mu P    \quad\]
+\[\dv{A}{t} = \sigma R \frac{A}{A+H+\omega} +\beta_{A} SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
+\[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma R \frac{H}{A+H+\omega}-\nu H-(\mu+\mu_{H})H  \quad\]
+\[\dv{R}{t} = \zeta A +\nu H -\sigma R \frac{A}{A+H+\omega}-\sigma R \frac{H}{A+H+\omega} -\mu R.\quad\]
+
+
+In general, the differential equations of the $n$ disease compartments, $x_i'$, may be written as: 
+
+\[{x_i'} = \mathscr{F}_{i} (x,y)-\mathscr{V}_i (x,y),\quad i=1,...,n\] 
+
+where $x$ is a vector with the disease compartments as components, $y$ a vector with the non-disease compartments as components, $\mathscr{F}_{i}$ represents the rate that secondary infections contribute to disease compartment $i$ and $\mathscr{V}_{i}$ represents the rate of transitions, i.e. rate at which the disease compartment $i$ is decreased by means of death, recovery and progression of the disease for $i=1,2$ \cite{Driessche}. 
+
+Thus, for our two addicted compartments, we may write: 
+
+$$\dfrac{dA}{dt} = \mathscr{F}_{1} (x,y)-\mathscr{V}_{1}(x,y)$$
+$$\dfrac{dH}{dt} = \mathscr{F}_{2} (x,y)-\mathscr{V}_{2}(x,y)$$
+
+where $x= {[A\quad H]}^{T}$ and $y= {[S\quad P\quad R]}^{T}$.
+
+
+
+Thus, under the assumption that A and H are the addicted compartments and abiding by the parameter restrictions stated above, the assumptions of the Next Generation Method are satisfied for matrices $\mathscr{F}$ and $\mathscr{V}$ formulated here:
+
+\begin{center}
+$\mathscr{F}=$
+$ \begin{pmatrix}
+
+\sigma R \frac{A}{A+H+\omega}+\beta_{A} SA \\
+\theta_{1}SH+\theta_{2}PH+\sigma R \frac{H}{A+H+\omega} \\
+\end{pmatrix}$
+
+
+
+$\mathscr{V}=$
+$ \begin{pmatrix}
+
+\zeta A+\theta_{3} AH + (\mu +\mu_{A})A \\
+-\theta_{3}AH+\nu H +(\mu +\mu_{H}) H \\
+\end{pmatrix}$.
+\end{center}
+
+These assumptions include the following: 
+\begin{itemize}
+\item $\mathscr{F}_{i} (0,y)=0$ and $\mathscr{V}_{i}(0,y)=0$,  $\forall$$y \geq 0$, $i=1,2$, which ensures that new addictions arise only from interacting with those currently addicted, and there is no immigration into the addicted compartments; these guarantee that the population free of addiction remains that way. 
+\item $\mathscr{F}_{i} (x,y) \geq 0$, $\forall$$x,y \geq 0$, $i=1,2$ since these represent new addictions. 
+\item $\mathscr{V}_{i}(x,y) \leq 0$ whenever $x_i=0, i=1,2$ since there must be inflow only when the respective compartment is empty. 
+\item $\sum_{i=1}^{2} \mathscr{V}_{i}(x,y) \geq 0$, $\forall x,y \geq 0$ since this represents the total outflow from all addicted compartments. 
+\item The addiction-free system, $\dv{S}{t}\bigg|_{A,H=0}$, $\dv{P}{t}\bigg|_{A,H=0}$, and $\dv{R}{t}\bigg|_{A,H=0}$ has a unique equilibrium, ($\frac{\epsilon+\mu}{\alpha+\epsilon+\mu}$,$\frac{\alpha}{\alpha+\epsilon+\mu},0$) that is asymptotically stable. 
+\end{itemize}
+
+Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\partial \mathscr{V}_i}{\partial x_j} (0, y_0)$, $i, j =1, 2$, where (0, $y_{0}$) $=(\frac{\epsilon + \mu}{\alpha + \epsilon +\mu},\frac{\alpha}{\alpha + \epsilon +\mu},0,0,0)$ is the addiction-free equilibrium, we calculated the following \cite{Driessche}: 
+
+
+
+\begin{center}
+$F=$
+$ \begin{pmatrix}
+
+\beta_{A} \frac{\epsilon+\mu}{\alpha+\epsilon+\mu} &  0  \\
+0 & \theta_1 \frac{\epsilon+\mu}{\alpha+\epsilon+\mu}  +\theta_2 \frac{\alpha}{\alpha+\epsilon+\mu}  \\
+\end{pmatrix}$
+
+
+
+$V=$
+$ \begin{pmatrix}
+
+\zeta +\mu +\mu_A &  0  \\
+0 &  \nu+\mu+\mu_H \\
+
+\end{pmatrix}$.
+\end{center}
+
+The eigenvalues of $FV^{-1}$ are calculated to be: 
+\begin{center}
+$\sigma (FV^{-1}) = \{ \frac{\beta_A(\epsilon+\mu)}{(\alpha+\epsilon+\mu)(\zeta+\mu+\mu_A)}, \frac{\theta_1(\epsilon+\mu)+\theta_2 \alpha}{(\alpha+\epsilon+\mu)(\nu+\mu+\mu_H)} \}$
+\end{center}
+
+$\mathscr{R}_0$ may then be determined as the spectral radius of $FV^{-1}$, in which the $(i,j)$ entry is the expected number of secondary addictions in compartment $i$ produced by individuals initially in compartment $j$ :
+\begin{center}
+$\mathscr{R}_0=$ WHICHEVER IS LARGEST WHEN KNOW VALUES! 
+\end{center}
+
 \textcolor{blue}{Include proof of non-negative IC implies non-negative solutions?} \\ 
 \textcolor{blue}{What other analysis should be done?} \\ \\
 
