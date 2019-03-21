@@ -26,7 +26,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=1;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -100,7 +100,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Susceptibles')
  legend('Proportion of susceptibles')%,'Proportion of susceptibles (simulated) data' )
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+ 
+ 
  State2=y(:,2);
  State_data_2=[0.0538000000000000;0.104778499740900;0.113997188652202;0.115590121278705;0.115802079869451;0.115765576321047];
  
@@ -114,7 +118,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Prescription Users')
  legend('Proportion of prescription users')%,'Proportion of prescription users (simulated) data' )
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State3=y(:,3);
  State_data_3=[0.00220000000000000;0.00246639704803936;0.00300670991512291;0.00359316045751065;0.00417879834434984;0.00475303453851703];
@@ -129,7 +135,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Opioid addicts')
  legend('Proportion of opioid addicts')%,'Proportion of opioid addicts (simulated) data' )
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
  
  State4=y(:,4);
  State_data_4=[0.000740000000000000;0.000695799892054699;0.000694764521361800;0.000712356429213375;0.000741016358318476;0.000778007004649982];
@@ -143,7 +151,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
  legend('Proportion of heroin/fentanyl addicts')%,'Proportion of heroin/fentanyl addicts (simulated) data' )
- 
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State5=y(:,5);
  State_data_5=[9.10000000000000e-05;0.000507986469616663;0.000793969326262071;0.00103822429375203;0.00126544379595902;0.00148354693993777];
@@ -157,7 +167,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Stably recovered addicts')
  legend('Proportion of stably recovered addicts')%,'Proportion of stably recovered addicts (simulated) data' )
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  
  State6=y(:,6);
@@ -172,7 +184,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('X(t)')
  legend('Proportion that enter P at some point during the year')%,'data simulated' )
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State7=y(:,7);
  State_data_7=[0;0.000875611434414877;0.00214275241827616;0.00360814218025174;0.00522930263182315;0.00699369568319221];
@@ -186,7 +200,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('L(t)')
  legend('Proportion that enter A at some point during the year')%,'data simulated' )
-  
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+ 
+ 
  State8=y(:,8);
  State_data_8=[0;5.25070424183082e-05;0.000145580769103626;0.000258546799517392;0.000385767745736431;0.000525796689961627];
  
@@ -199,14 +217,16 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('M(t)')
  legend('Proportion that enter H at some point during the year')%,'data simulated' )
- 
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
  %%%
  
  %%% Data points we are interested in 
  Estim1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
  %Data1=[0.235846570639996;0.281823983065405;0.290005207611534;0.291287745718967;0.291323102150198];
  
- % Actual Data
+ % Actual Data for years 2013-2017
  Data1=[1799015./5517176; 1778733./5559006; 1771581./5602117; 1719363./5651993; 1595465./5708586];
  % Actual Data in decimal form 
  %Data1=[0.3260753327; 0.319973211; 0.3162342022; 0.3042047292; 0.2794851475];
@@ -219,12 +239,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Proportion in P at some point during the year')
  legend('ODE solution', 'Data')
-
+ set(gca, 'xtick', [ 0 1 2 3 4 5 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
  Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
  %Data2=[0.00373353803190064;0.00447209967709849];
  
- % Actual Data
+ % Actual Data for 2014-2015
  Data2=[48000./5602117; 42000./5651993];
  % Actual Data in decimal form
  %Data2=[0.0085681895;0.0074310071];
@@ -240,12 +262,15 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
  legend('ODE solution', 'Data')
-
+ set(gca, 'xtick', [ 1 2 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015'})
+ 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
  Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
  %Data3=[0.000788873618740017;0.000807730551775566;0.000839577375432413];
  
- % Actual Data
+ % Actual Data for 2014-2016
  Data3=[14000./5559006; 14000./5602117; 19000./5651993];
  % Actual Data in decimal form 
  %Data3=[0.0025184358; 0.0024990553; 0.0033616461];
@@ -261,7 +286,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
  legend('ODE solution', 'Data')
- 
+ set(gca, 'xtick', [ 1 2 3 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
  
 
 function value = HeroinModel_ODE45(z)

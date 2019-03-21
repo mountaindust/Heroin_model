@@ -167,7 +167,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            plot(t,y(:,5),'m-','LineWidth',1); 
            xlabel('time')
            ylabel('Size of Populations');
-           %set(gca, 'xtick', [ 0 1 2 3 4 ])
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            legend('A','H','R')
