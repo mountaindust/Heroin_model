@@ -108,7 +108,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % some point during the yearfor 2013-final year, Data2 is a column vector
 % Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);  
  %for 2014 and 2015 
- Data2=y(3:4,3)+y(4:5,7)-y(3:4,7); 
+ Data2=y(1:4,3)+y(2:5,7)-y(1:4,7);  
 
     
  % Yearly output from the model as a proportion of individuals in H at 

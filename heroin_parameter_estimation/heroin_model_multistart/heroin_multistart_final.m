@@ -26,7 +26,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -224,12 +224,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  %%% Data points we are interested in 
  Estim1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
- %Data1=[0.235846570639996;0.281823983065405;0.290005207611534;0.291287745718967;0.291323102150198];
+ %Data1=[0.237390491205581;0.282319594357887;0.290348720453166;0.291562720051384;0.291604012926364];
  
  % Actual Data for years 2013-2017
- Data1=[1799015./5517176; 1778733./5559006; 1771581./5602117; 1719363./5651993; 1595465./5708586];
- % Actual Data in decimal form 
- %Data1=[0.3260753327; 0.319973211; 0.3162342022; 0.3042047292; 0.2794851475];
+ Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
+
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
  hold all
@@ -244,37 +243,34 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
- Estim2=y(3:4,3)+y(4:5,7)-y(3:4,7); 
- %Data2=[0.00373353803190064;0.00447209967709849];
+ Estim2=y(1:4,3)+y(2:5,7)-y(1:4,7); 
+ %Data2=[0.00232614941904898;0.00308130605979707;0.00387884697601543;0.00466593415966151];
  
- % Actual Data for 2015-2016 
- Data2=[48000./5602117; 42000./5651993];
- % Actual Data in decimal form
- %Data2=[0.0085681895;0.0074310071];
+ % Actual Data for 2015-2016 (and now using estimates in 2013-2014,too)
+ Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
+
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
  figure(10)
  hold all
  %plot(t(1:end-1),Estim2)
  %plot(t(1:end-1), Data2, 'x')
- plot(t(2:3),Estim2, 'o')
- plot(t(2:3), Data2, 'x')
+ plot(t(1:4),Estim2, 'o')
+ plot(t(1:4), Data2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
  legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 1 2 ])
+ set(gca, 'xtick', [0 1 2 3 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2014', '2015'})
+ set(gca,'xticklabel',{'2013','2014','2015','2016'})
  
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);  
  Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
- %Data3=[0.000788873618740017;0.000807730551775566;0.000839577375432413];
+ %Data3=[0.000461960744056587;0.000471625353069596;0.000489156695195094];
  
  % Actual Data for 2014-2016
  Data3=[14000./5559006; 14000./5602117; 19000./5651993];
- % Actual Data in decimal form 
- %Data3=[0.0025184358; 0.0024990553; 0.0033616461];
  
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
@@ -320,7 +316,6 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions
-
 S0=1-0.0553-0.00148-0.000431-0.000091;
 P0=0.0553;
 A0=0.00148;
@@ -376,11 +371,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
  
- Data1=[1799015./5517176; 1778733./5559006; 1771581./5602117; 1719363./5651993; 1595465./5708586];
- %Data1=[0.3260753327; 0.319973211; 0.3162342022; 0.3042047292; 0.2794851475];
+ Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
  
  % Data simulated when testing codes 
- %Data1=[0.235846570639996;0.281823983065405;0.290005207611534;0.291287745718967;0.291323102150198];
+ %Data1=[0.237390491205581;0.282319594357887;0.290348720453166;0.291562720051384;0.291604012926364];
  
  % The difference between estimated values and data
  
@@ -405,8 +399,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Yearly output from the model as a proportion of population in A at some point during the year for
  % 2014 and 2015, Estim2 is a column vector
- % Only 2014 and 2015 data
- Estim2=y(3:4,3)+y(4:5,7)-y(3:4,7); 
+ % Only 2014 and 2015 data (and now using estimates for 2013-2014,too) 
+ Estim2=y(1:4,3)+y(2:5,7)-y(1:4,7); 
  
  % When testing all points with simulated data
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
@@ -416,11 +410,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of opioid addicted individuals in 2014 and 2015 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- Data2=[48000./5602117; 42000./5651993];
- %Data2=[0.0085681895;0.0074310071];
+ Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
  
  % Data simulated when testing codes  
- %Data2=[0.00373353803190064;0.00447209967709849];
+ %Data2=[0.00232614941904898;0.00308130605979707;0.00387884697601543;0.00466593415966151];
  
  % The difference between estimated value and data
  
@@ -461,10 +454,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  Data3=[14000./5559006; 14000./5602117; 19000./5651993];
- %Data3=[0.0025184358; 0.0024990553; 0.0033616461];
  
  % Data simulated when testing codes 
- %Data3=[0.000788873618740017;0.000807730551775566;0.000839577375432413];
+ %Data3=[0.000461960744056587;0.000471625353069596;0.000489156695195094];
  
  % The difference between estimated value and data
  
