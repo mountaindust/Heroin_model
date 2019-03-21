@@ -127,7 +127,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            subplot(2,2,1);ylabel('Prescription Users')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
           
            
@@ -136,7 +136,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            subplot(2,2,2);ylabel('Opioid Addicts')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
            
            subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
@@ -144,7 +144,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
           
            subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
@@ -152,7 +152,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            subplot(2,2,4);ylabel('Stably Recovered Individuals')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
            
           
@@ -169,17 +169,17 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            ylabel('Size of Populations');
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            legend('A','H','R')
            xlim([0 , N])
        
   figure(3) 
-    subplot(2,2,1);plot(t,y(:,1),'r-','LineWidth',1)
+           subplot(2,2,1);plot(t,y(:,1),'r-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Susceptibles')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
            
            subplot(2,2,2);plot(t,y(:,2),'b-','LineWidth',1)
@@ -187,23 +187,23 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            subplot(2,2,2);ylabel('Prescription Users')
            %set(gca, 'xtick', [ 0 1 2 3 4 ])
            set(gca, 'fontsize',10)
-           %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
            
- %{      
+%{ 
  %Data points from Data1 and corresponding ODE solution plotted on top 
- figure(3)
+ figure(4)
  hold all
  scatter(t(1:end-1), Data1)
  %plot(t(1:end-1), Data1)
  %set(gca, 'xtick', [1 2 3 4 5])
  set(gca, 'fontsize',10)
- %set(gca,'xticklabel',{'2013','2014','2015','2016','2017'})
+ %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  xlabel('Year')
  ylabel('Proportion in P at some point during the year')
  legend('Data points interested in for P')
-
  
+
  %Data points from Data2 and corresponding ODE solution plotted on top 
  figure(4)
  hold all
