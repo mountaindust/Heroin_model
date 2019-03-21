@@ -26,7 +26,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=1;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -242,11 +242,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'xtick', [ 0 1 2 3 4 5 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+ 
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
- Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
+ Estim2=y(3:4,3)+y(4:5,7)-y(3:4,7); 
  %Data2=[0.00373353803190064;0.00447209967709849];
  
- % Actual Data for 2014-2015
+ % Actual Data for 2015-2016 
  Data2=[48000./5602117; 42000./5651993];
  % Actual Data in decimal form
  %Data2=[0.0085681895;0.0074310071];
@@ -405,7 +406,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of population in A at some point during the year for
  % 2014 and 2015, Estim2 is a column vector
  % Only 2014 and 2015 data
- Estim2=y(2:3,3)+y(3:4,7)-y(2:3,7); 
+ Estim2=y(3:4,3)+y(4:5,7)-y(3:4,7); 
  
  % When testing all points with simulated data
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
