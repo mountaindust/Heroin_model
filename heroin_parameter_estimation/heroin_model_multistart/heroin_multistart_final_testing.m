@@ -33,9 +33,27 @@
 %nu=0.1;
 %omega=0.0000000001;
 
+% For R_0 checking:
+%alpha=0.2; 
+%beta_A=0.000273; 
+%beta_P=0; 
+%theta_1=0.0003;
+%epsilon=1.5;
+%mu=0.00868; 
+%mu_A=0.00775;   
+%mu_H=0.0271;
+%gamma=0;   
+%theta_2=3*theta_1; 
+%sigma=0.7;
+%zeta=0.25;
+%theta_3=16*theta_1; 
+%nu=0.1;
+%omega=0.0000000001;
 
-
-alpha=0.2; 
+%N = 5;
+%at = linspace(0, N, N+1); 
+%alpha=0.000014*at;
+alpha=0.2;
 beta_A=0.000273; 
 beta_P=0.000777; 
 theta_1=0.0003;
@@ -48,26 +66,16 @@ theta_2=3*theta_1;
 sigma=0.7;
 zeta=0.25;
 theta_3=16*theta_1; 
-nu=0.1;
+nu=0.0155;
 omega=0.0000000001;
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,nu,0.0000000001];
+pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001];
 
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
 tspan=linspace(0,N,N+1);
 
-% Initial conditions 
-%S0=1-0.13-0.01-0.001-0.0003; 
-%P0=0.13;
-%A0=0.01;
-%H0=0.001;
-%R0=0.0003; 
-%X0=0;
-%L0=0;
-%M0=0;
-%initials = [S0;P0;A0;H0;R0;X0;L0;M0];
-
+% Initial Conditions
 S0=1-0.0553-0.00148-0.000431-0.000091;
 P0=0.0553;
 A0=0.00148;
@@ -77,8 +85,6 @@ X0=0;
 L0=0;
 M0=0;
 initials = [S0;P0;A0;H0;R0;X0;L0;M0];
-
-
 
 [t,y]=ode15s(@HeroinModel,tspan,initials,[],pars);
 
