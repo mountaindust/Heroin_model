@@ -5,10 +5,10 @@ clf
 % We wish to estimate the parameter vector (7 parameters)
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
 % Ranges on each of the parameters 
-LowerBounds=[0.1  0.00001    2    0.000001  0.0001    0.1   0.00001   0.00001];
-%UpperBounds=[8  8  8  8  8  8  8 ];
-UpperBounds=[1      .1       10     .1        4        1       .1        .3];
-
+LowerBounds=[0.1  0.00001   0.5     0.00001   0.0001   0.00001   0.00001   0.00001];
+UpperBounds=[0.8    0.1      3        .1        4        1          .1        .3];
+%LowerBounds=[0.00001  0.00001   0.00001     0.00001   0.00001   0.00001   0.00001   0.00001];
+%UpperBounds=[2 2 2 2 2 2 .5 .5 ];
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
 
@@ -63,11 +63,11 @@ tspan=linspace(0,N,N+1);
 
 
 % Initial conditions
-S0=1-0.0553-0.00148;
 P0=0.0553;
 A0=0.00148;
 H0=x(7);
 R0=x(8);
+S0=1-0.0553-0.00148-x(7)-x(8);
 X0=0;
 L0=0;
 M0=0;
@@ -86,6 +86,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   L=y(:,7);
   M=y(:,8);
 
+   % Making sure S+P+A+H+R=1
+  for i=1:N+1
+      sum(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
+  end
+  
  %%% For testing purposes: states and corresponding simulated data 
  State1=y(:,1);
  State_data_1=[0.942698000000000;0.892213553364293;0.882306656928452;0.879920979270199;0.878837445896816;0.878036293854999];
@@ -316,11 +321,11 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions
-S0=1-0.0553-0.00148-0.000431-0.000091;
 P0=0.0553;
 A0=0.00148;
 H0=z(7);
 R0=z(8);
+S0=1-0.0553-0.00148-z(7)-z(8);
 X0=0;
 L0=0;
 M0=0;
@@ -535,6 +540,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Objective function value we wish to minimize; want value=fval(x) to be
  % small  when run MultiStart
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
+
  
  % For testing purposes with states and data sets
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5);
