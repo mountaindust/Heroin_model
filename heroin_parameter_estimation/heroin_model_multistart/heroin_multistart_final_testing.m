@@ -33,27 +33,31 @@
 %nu=0.1;
 %omega=0.0000000001;
 
+%{
 % For R_0 checking:
-%alpha=0.2; 
-%beta_A=0.000273; 
-%beta_P=0; 
-%theta_1=0.0003;
-%epsilon=1.5;
-%mu=0.00868; 
-%mu_A=0.00775;   
-%mu_H=0.0271;
-%gamma=0;   
-%theta_2=3*theta_1; 
-%sigma=0.7;
-%zeta=0.25;
-%theta_3=16*theta_1; 
-%nu=0.1;
-%omega=0.0000000001;
+alpha=0.2; 
+beta_A=0.000273; 
+beta_P=0; 
+theta_1=0.0003;
+epsilon=1.5;
+mu=0.00868; 
+mu_A=0.00775;   
+mu_H=0.0271;
+gamma=0;   
+theta_2=3*theta_1; 
+sigma=0.7;
+zeta=0.25;
+theta_3=16*theta_1; 
+nu=0.1;
+omega=0.0000000001;
+%}
 
-%N = 5;
+
+%N=5;
 %at = linspace(0, N, N+1); 
-%alpha=0.000014*at;
-alpha=0.2;
+%alpha=0.2*at;
+%tspan=linspace(0,N,N+1);
+m=0.01;
 beta_A=0.000273; 
 beta_P=0.000777; 
 theta_1=0.0003;
@@ -69,18 +73,17 @@ theta_3=16*theta_1;
 nu=0.0155;
 omega=0.0000000001;
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001];
-
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001];
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial Conditions
-S0=1-0.0553-0.00148-0.000431-0.000091;
-P0=0.0553;
-A0=0.00148;
-H0=0.000431;
-R0=0.000091;
+S0=0.88-0.0000000000000001-0.0000000000000001;%1-0.0553-0.00148-0.000431%-0.000091;
+P0=0.12;%0.0553;
+A0=0.0000000000000001;%0.00148;
+H0=0.0000000000000001;%0.000431;
+R0=0;%0.000091;
 X0=0;
 L0=0;
 M0=0;
@@ -96,7 +99,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   X=y(:,6);
   L=y(:,7);
   M=y(:,8);
-  
+  alpha=m*t;
   
   % Making sure S+P+A+H+R=1
   for i=1:N+1
@@ -239,8 +242,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-pars(1)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=pars(1)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-pars(1)*t*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=pars(1)*t*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
@@ -248,7 +251,7 @@ f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
 %individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
-f(6) = pars(1)*y(1);
+f(6) = pars(1)*t*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 %i.e. individuals who enter the A class at any time (used in Estim2 in
