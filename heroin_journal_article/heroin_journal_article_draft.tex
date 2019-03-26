@@ -597,37 +597,48 @@ NMPR use can occur within the prescription class (i.e. from misuse that's not co
 $$\frac{2 \text{ million people with pain reliever use disorder in 2015}}{12.5 \text{ million people who misused pain relievers in 2015}}=0.16.$$
 We extrapolate this to estimate that 16\% of the 2.1 million recent initiates are those who should be counted in the use disorder category (although we do not know the timeline of developing the use disorder and it may not happen within the year, it gives a rough idea). This results in an estimate of 336,000 individuals that were recent initiates of pain reliever misuse that we will consider having a use disorder within the year 2015. In the same year, a study was done regarding the source of the most recent episode of misuse of prescription opioids among adults reporting an prescription opioid use disorder in the past year \cite{Han}. (Note: this study was for individuals age 18 and older whereas the study done in \cite{SAMSHA5} was for those 12 and older; we will assume for simplicity that the information for those 18 and older will be similar to those between 12 and 18, as well.) Here, 52.8\% of the prescription opioids were from a non-physician source, which included being given to/bought from a friend/relative, or bought from a drug dealer/stranger. For simplicity, let IPUD indicate individuals with a prescription use disorder. 
 Thus, \\
-$$\frac{336,000\text { IPUD}}{320 \text{ million people}}\cdot \frac{0.528 \text{ source of opioids for IPUD is illicit}}{\text{all sources of opioids}}$$
-$$=0.00105 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{all opioid sources for entire population}}}.$$
-
-In our model, we consider two cases in which individuals become addicted. From \cite{Han}, we see that \\
+$$\frac{336,000\text { IPUD}}{320 \text{ million people}}\cdot \frac{0.528 \text{ opioid source for IPUD is illicit}}{\text{opioid sources $\cdot$ year}}$$
+$$=0.00105 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{opioid sources $\cdot$ year}}}.$$
+%Note: IPUD/people is really people/people so units cancel 
+From \cite{Han}, we see that \\
 $$\frac{.138 \text{ opioids obtained from drug dealers/strangers by IPUD}}{.528 \text{ opioids obtained illicitly by IPUD}}=.26$$ 
 relates to individuals obtaining opioids by the black market or interaction with other addicts and
 $$\frac{.218+.141+.031 \text{ opioids given/bought from a friend/relative or other for IPUD}}{.528 \text{ opioids obtained illicitly by IPUD}}=.74$$ 
-relates to individuals obtaining opioids from extra prescriptions that are available. 
+relates to individuals obtaining opioids from extra prescriptions that are available. This means that 74\% of illicit opioids come from a friend/relative/other source, whereas 26\% of illicit opioids are from the black market for opioid addicts. In our model, we consider two cases in which individuals become addicted (friend/relative versus black market) and we make the assumption that these percentages also apply to the two routes that one would become an addict in the first place via illicit opioids. 
 
 Thus, 
-$$\frac{0.26 \text{ opioids from drug dealers/strangers for IPUD}}{\text{ opioids obtained illicitly by IPUD}}\cdot \frac{0.00105 \text{ opioids obtained illicitly by IPUD}}{\text{all opioid sources for entire population}}$$
-$$ =\frac{0.000273 \text{ opioids from drug dealers/strangers for IPUD}}{\text{all opioid sources for entire population}}$$
-is the rate that individuals illicitly obtain their prescription opioids from the black market/other addict interaction and become addicted, $\beta_A$ and 
-$$\frac{0.74 \text{ opioids from friend/relative or other by IPUD}}{\text{ opioids obtained illicitly by IPUD}}\cdot \frac{0.00105 \text{ opioids obtained illicitly by IPUD}}{\text{all opioid sources for entire population}}$$
-$$ =\frac{0.000777 \text{ opioids from friend/relative or other for IPUD}}{\text{all opioid sources for entire population}}$$
-is the rate that individuals illicitly obtain their prescription opioids from extra pills that are available and become addicted, $\beta_P.$ \\
+$$\frac{0.26 \text{ opioids from drug dealers/strangers}}{\text{ opioids obtained illicitly}}\cdot \frac{0.00105 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
+$$ =\frac{0.000273 \text{ opioids from drug dealers/strangers}}{\text{opioid sources $\cdot$ year}}$$
+is the rate that individuals illicitly obtain their prescription opioids from the black market/other addict interaction and become addicted
+$$\implies \beta_A=\frac{0.000273}{\text{year}}.$$
+%Check exponential/continuous-time rate: 
+%Focus only on the one term: let K=SA, then K'=-beta_A*K => K=K_0*e^(-beta_A*t) and after 1 time step, assume (1-beta_A) of those in K class are still in K class => (1-0.000273)K_0=K_0*e^(-beta_A*1) => beta_A=0.000273, same as rate derived above. 
+%Note: units cancel because opioid source/opioid source
+Similarly,
+$$\frac{0.74 \text{ opioids from friend/relative or other}}{\text{ opioids obtained illicitly}}\cdot \frac{0.00105 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
+$$ =\frac{0.000777 \text{ opioids from friend/relative or other}}{\text{opioid sources $\cdot$ year}}$$
+is the rate that individuals illicitly obtain their prescription opioids from extra pills that are available and become addicted
+$$ \implies \beta_P=\frac{0.000777}{\text{year}}.$$ \\
+%Check exponential/continuous-time rate: 
+%Focus only on the one term: let J=SP, then J'=-beta_P*J => J=J_0*e^(-beta_P*t) and after 1 time step, assume (1-beta_P) of those in J class are still in J class => (1-0.000777)J_0=J_0*e^(-beta_P*1) => beta_P=0.000777, same as rate derived above. 
+%Note: units cancel because opioid source/opioid source 
+As mentioned before, 71\% of heroin users in 4 weeks \cite{Smyth}. Although these are on a national level, we will assume the rates do not differ significantly for Tennessee, as we were not able to find any relapse statistics specifically for the state. It is estimated that for every 10 people with substance use disorder, only 1 receives treatment for it \cite{SurgeonGeneral}. We assume this is an approximation for specifically opioid and heroin/fentanyl addicts, as well. In 2015, there were 13,110 discharges total in the state of Tennessee for substance abuse programs in facilities that receive state/public funding (generally referring to funding by the state substance abuse agency); out of those, 7,003 were due to completion of treatment, which is 53.4\% of all discharges \cite{TEDS2015_SAMSHA_discharges}. Realistically, an individual cannot go to a stably recovered class without going to treatment, completing treatment and remaining clean for 4 weeks post-treatment, since addiction is a disease. Using HA to represent heroin addict, we calculate
 
-
-As mentioned before, 71\% of heroin users in 4 weeks \cite{Smyth}. Although these are on a national level, we will assume the rates do not differ significantly for Tennessee, as we were not able to find any relapse statistics specifically for the state. 
-% 91\% of prescription opioid users relapsed back to addiction within 8 weeks post-treatment \cite{Weiss}. We were not able to find information on the relapse rate specifically within 4 weeks after treatment for prescription opioid addicts; we assume it is approximately the same as heroin for this short of a time frame, especially due to the acute withdrawal phase of the first few weeks discussed before in \cite{Gossop1}.
- It is estimated that for every 10 people with substance use disorder, only 1 receives treatment for it \cite{SurgeonGeneral}. We assume this is an approximation for specifically opioid and heroin/fentanyl addicts, as well. In 2015, there were 13,110 discharges total in the state of Tennessee for substance abuse programs in facilities that receive state/public funding (generally referring to funding by the state substance abuse agency); out of those, 7,003 were due to completion of treatment, which is 53.4\% of all discharges \cite{TEDS2015_SAMSHA_discharges}. Realistically, an individual cannot go to a stably recovered class without going to treatment, completing treatment and remaining clean for 4 weeks post-treatment, since addiction is a disease. Using HA to represent heroin addict, we calculate
-
-$$\frac{1 \text{ HA in treatment}}{10 \text{ HA}} \cdot \frac{53.4 \text{ HA complete treatment}}{100 \text{ HA in treatment}} \cdot \frac{29 \text{ HA do not relapse within 4 weeks post-treatment}}{100 \text{ HA completed treatment}}$$
-$$\implies \nu \approx  0.0155.$$
+$$\frac{1 \text{ HA in treatment}}{10 \text{ HA $\cdot$ year}} \cdot \frac{53.4 \text{ HA complete treatment}}{100 \text{ HA in treatment}} \cdot \frac{29 \text{ HA do not relapse within 4 weeks post-treatment}}{100 \text{ HA completed treatment}}$$
+$$= \frac{0.015486 \text{ HA do not relapse within 4 weeks post-treatment}}{\text{HA $\cdot$ year}}$$
+$$\implies \nu \approx \frac{0.0155}{\text{year}}.$$
+%Check exponential/continuous-time rate: 
+%Focus only on the one term: then H'=-nu*H => H=H_0*e^(-nu*t) and after 1 time step, assume (1-nu) of those in H class are still in H class => (1-0.0155)H_0=H_0*e^(-nu*1) => nu=0.01561, similar as rate derived above. 
 
 Studies done among opiate addicts (not just heroin) in recent years (\cite{Bailey, Broers}) suggest lower relapse rates at 4 weeks compared to the study consisting mostly of heroin users in \cite{Smyth} in which 71\% of the addicts relapsed within 4 weeks. Thus, we assume the relapse rate for prescription opioids will be slightly lower than that for heroin. We know from a study done in \cite{Weiss} that at the 8 week mark, 91\% of prescription opioids users had relapsed, so this is an upper limit, and we know from studies that higher rates of relapse occur in the first few weeks following treatment, as discussed before. Therefore, we make an estimate that 60\% of prescription opioids users relapse within 4 weeks after treatment. Letting OA represent opioid addicts, we calculate 
-$$\frac{1 \text{ OA in treatment}}{10 \text{ OA}} \cdot \frac{53.4 \text{ OA complete treatment}}{100 \text{ OA in treatment}} \cdot \frac{40 \text{ OA do not relapse within 4 weeks post-treatment}}{100 \text{ OA completed treatment}}$$
-$$\implies \zeta \approx  0.0214.$$
-%The exact calculation can be done for opioid addicts, as well, to obtain $ \zeta \approx  0.0155.$ 
+$$\frac{1 \text{ OA in treatment}}{10 \text{ OA $\cdot$ year}} \cdot \frac{53.4 \text{ OA complete treatment}}{100 \text{ OA in treatment}} \cdot \frac{40 \text{ OA do not relapse within 4 weeks post-treatment}}{100 \text{ OA completed treatment}}$$
+$$= \frac{0.02136 \text{ OA do not relapse within 4 weeks post-treatment}}{\text{OA $\cdot$ year}}$$
+$$\implies \zeta \approx  \frac{0.0214}{\text{year}}.$$
+%Check exponential/continuous-time rate: 
+%Focus only on the one term: then A'=-zeta*A => A=A_0*e^(-zeta*t) and after 1 time step, assume (1-zeta) of those in A class are still in A class => (1-0.0214)A_0=A_0*e^(-zeta*1) => zeta=0.0216, similar as rate derived above. 
 
-Since the H class is homogeneously mixed with all addicts, whether they have been in treatment or not, this calculation takes that into consideration to produce an average rate among all addicts and therefore, gives a rate at which any individual from that class would transition to the recovered class. \\
+
+Since the H class is homogeneously mixed with all addicts, whether they have been in treatment or not, the calculation for $\nu$ takes that into consideration to produce an average rate among all addicts within the class and therefore, gives a rate at which any individual from that class would transition to the recovered class; similarly for the A class.\\
 
 %Note, the numbers that are not cited have come from Table 1 and cited before. 
 \textcolor{blue}{Estimates of initial conditions from literature} \\
@@ -647,12 +658,13 @@ of the population was using opioid prescriptions at the beginning of 2013.
 Assuming, as before, a ratio of prescription users to opioid addicts in 2013 being approximately 1:37.9, we assume this is the ratio at the beginning of the year, as well, and so we have that $A_0=0.00148.$ As before, only 44.3\% of addicts are prescription users, so we take .443(.00148)$=$0.00065 and subtract this from the initial condition of P so that it correctly counts only non-addicted prescription opioids users: $P_0=0.056-0.00065=0.0553$ \cite{Han}. %explanation below data table above 
 \\ \\
 
-We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period \cite{CDC4}. In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume the same ratio of approximately 1:3.43 heroin users to opioid addicts in 2013, as well. In 2013, addicts make up 0.00148 of the population at the start of 2013, so we assume $H_0 \approx 0.000431.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly regarding the order of magnitude expected.) 
+\textcolor{red}{WILL MOST LIKELY DELETE BECAUSE NOW ESTIMATING H\_0 and R\_0 WITH PARAMETER ESTIMATION/MULTISTART. \\
+ We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period} \cite{CDC4}. \textcolor{red}{In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume the same ratio of approximately 1:3.43 heroin users to opioid addicts in 2013, as well. In 2013, addicts make up 0.00148 of the population at the start of 2013, so we assume $H_0 \approx 0.000431.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly regarding the order of magnitude expected.)}
 %This proportion seems plausible because we assume that a majority of individuals using heroin in 2015 are using the drug at the beginning of the year, since heroin is such an addictive substance and the only ways to leave the compartment are through dying or becoming stably recovered. If we take 75\% to mean the majority, we also arrive at $$\frac{0.75 \cdot 14,000 \text{ heroin users}}{5,602,117 \text{ individuals in population}} \approx 0.0019$$ as the proportion of heroin users at the beginning of 2013. 
 
-Before, we estimated 48,674 opioid addicts in 2013; this higher number is supported by an overall higher prescribing rate in 2013 compared to the next few years \cite{CDC7}.
-We will assume the number of heroin users is the same in 2013 as in 2014 and 2015. There were 4,485 prescription opioid treatment admissions and 555 heroin treatment admissions in 2013, which is 0.057 of the opioid addict and heroin user population combined that are in recovery. Only 35\% of those in treatment do not relapse within 4 weeks after treatment, and thus have the ability to be in R, which is approximately .0804 of the entire A+H class \cite{Bailey}.
-Since 90\% of individuals relapse within one year post-treatment, that means that an additional 55\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .00804 of addicted and heroin users total \cite{Bailey}. This equates to approximately 504 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$ \\
+\textcolor{red}{Before, we estimated 48,674 opioid addicts in 2013; this higher number is supported by an overall higher prescribing rate in 2013 compared to the next few years} \cite{CDC7}.
+\textcolor{red}{We will assume the number of heroin users is the same in 2013 as in 2014 and 2015. There were 4,485 prescription opioid treatment admissions and 555 heroin treatment admissions in 2013, which is 0.057 of the opioid addict and heroin user population combined that are in recovery. Only 35\% of those in treatment do not relapse within 4 weeks after treatment, and thus have the ability to be in R, which is approximately .0804 of the entire A+H class }\cite{Bailey}.
+\textcolor{red}{Since 90\% of individuals relapse within one year post-treatment, that means that an additional 55\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .00804 of addicted and heroin users total} \cite{Bailey}. \textcolor{red}{This equates to approximately 504 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$} \\
 
 
 \pagebreak
@@ -755,7 +767,7 @@ R & proportion of susceptible individuals & \small dimensionless \\
 
 \end{center}
  
-
+%Note to self: rates derived are proportions leaving the respective class (i.e. nu) and THEN when multiply by proportion of certain class out of whole population (i.e. multiply by H), get proportion out of total population that's leaving that class (i.e. nu*H). Exception to this is 
 
 
 
