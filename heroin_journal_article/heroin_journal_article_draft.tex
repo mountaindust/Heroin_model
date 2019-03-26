@@ -425,7 +425,7 @@ The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu
 
  \hline
 
-{Parameter} & {Value Assumed} & {Units} \\ [0.5ex]
+{Parameter (rate)} & {Value Assumed} & {Units} \\ [0.5ex]
 
  \hline\hline
 
@@ -597,8 +597,8 @@ NMPR use can occur within the prescription class (i.e. from misuse that's not co
 $$\frac{2 \text{ million people with pain reliever use disorder in 2015}}{12.5 \text{ million people who misused pain relievers in 2015}}=0.16.$$
 We extrapolate this to estimate that 16\% of the 2.1 million recent initiates are those who should be counted in the use disorder category (although we do not know the timeline of developing the use disorder and it may not happen within the year, it gives a rough idea). This results in an estimate of 336,000 individuals that were recent initiates of pain reliever misuse that we will consider having a use disorder within the year 2015. In the same year, a study was done regarding the source of the most recent episode of misuse of prescription opioids among adults reporting an prescription opioid use disorder in the past year \cite{Han}. (Note: this study was for individuals age 18 and older whereas the study done in \cite{SAMSHA5} was for those 12 and older; we will assume for simplicity that the information for those 18 and older will be similar to those between 12 and 18, as well.) Here, 52.8\% of the prescription opioids were from a non-physician source, which included being given to/bought from a friend/relative, or bought from a drug dealer/stranger. For simplicity, let IPUD indicate individuals with a prescription use disorder. 
 Thus, \\
-$$\frac{336,000\text { IPUD}}{320 \text{ million people}}\cdot \frac{0.528 \text{ source of opioids for IPUD is illicit}}{\text{all sources of opioids}}=$$
-$$0.00105 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{all opioid sources for entire population}}}.$$
+$$\frac{336,000\text { IPUD}}{320 \text{ million people}}\cdot \frac{0.528 \text{ source of opioids for IPUD is illicit}}{\text{all sources of opioids}}$$
+$$=0.00105 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{all opioid sources for entire population}}}.$$
 
 In our model, we consider two cases in which individuals become addicted. From \cite{Han}, we see that \\
 $$\frac{.138 \text{ opioids obtained from drug dealers/strangers by IPUD}}{.528 \text{ opioids obtained illicitly by IPUD}}=.26$$ 
@@ -656,89 +656,96 @@ Since 90\% of individuals relapse within one year post-treatment, that means tha
 
 
 \pagebreak
-\textcolor{blue}{Table of parameter values and units of parameters/unit conversions from data to parameters in parameter estimation} \\
+\textcolor{blue}{CS-unit conversions from data to parameters is what I've done above already right?} \\
+
+\textcolor{blue}{Table of parameter values and units of parameters} \\
 \textcolor{red}{Fill in}
 
 
 \begin{center}
-
-\begin{tabular}{|c | c | c|}
+ \setlength\extrarowheight{6pt}
+\begin{tabular}{|c | c | c | }
 
  \hline
 
-{Parameter} & {Unit Conversions} & {Units} \\ [0.5ex]
+{Parameter} & {Description} & {Units} \\ [0.5ex]
 
  \hline\hline
  
- $\mu$ &  &  \\
+ $\mu$ &  natural mortality rate & $\frac{1}{\text{year}}$ \\
+
+ \hline
+
+ $\mu_A$ & opioid addict overdose death rate & $\frac{1}{\text{year}}$\\
 
  \hline
  
- $\mu_A$ &  &  \\
-
- \hline
- 
- $\mu_H$ &  &  \\
+ $\mu_H$ &  heroin addict overdose death rate & $\frac{1}{\text{year}}$ \\
 
  \hline
 
-$\alpha$ &  &  \\
+$\alpha$ &  prescription rate & $\frac{1}{\text{year}}$    \\
 
  \hline
 
-$\beta_A$ &  &  \\
+$\beta_A$ & illicit addiction rate from the black market & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\beta_P$ &  &  \\
+$\beta_P$ &  illicit addiction rate from availability of excess pills & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\theta_1$&  &  \\
+$\theta_1$&  heroin addiction rate for susceptible individuals & $\frac{1}{\text{year}}$   \\
 
 \hline
 
-$\epsilon$ &  &  \\
+$\epsilon$ &  rate of finishing prescription addiction-free & $\frac{1}{\text{year}}$ \\
 
 \hline
 
-$\gamma$ &  &  \\
+$\gamma$ &  opioid addiction rate from prescription & $\frac{1}{\text{year}}$ \\
 
 \hline
 
-$\theta_2$ &  &  \\
+$\theta_2$ &  heroin addiction rate for prescription opioids users & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\sigma$ &  &  \\
+$\sigma$ &  relapse to addiction & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\zeta$ &  &  \\
+$\zeta$ &  rate of stable recovery for opioid addict & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\theta_3$ &  &  \\
+$\theta_3$ &   heroin addiction rate for opioid addicts & $\frac{1}{\text{year}}$\\
 
 \hline
 
-$\nu$ &  &  \\
+$\nu$ &  rate of stable recovery for heroin addict & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$P_0$ &  &  \\
+$\omega$ & perturbation term & \small dimensionless \\
+
+\hline
+S & proportion of susceptible individuals & \small dimensionless \\
 
 \hline
 
-$A_0$ &  &  \\
+P & proportion of susceptible individuals & \small dimensionless \\
 
 \hline
-
-$H_0$ &  &  \\
+A & proportion of susceptible individuals & \small dimensionless \\
 
 \hline
+H & proportion of susceptible individuals & \small dimensionless \\
 
-$R_0$ &  &  \\
+\hline
+R & proportion of susceptible individuals & \small dimensionless \\
+
 
 %\\ [1ex]
 
