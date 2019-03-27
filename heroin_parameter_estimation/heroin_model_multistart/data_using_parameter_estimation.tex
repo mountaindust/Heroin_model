@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[numbers]{natbib}
+\usepackage{graphicx} 
+\usepackage{amssymb, amsmath, amsthm} 
+\usepackage{fontenc} 
+\usepackage{amscd,latexsym,amsfonts,amstext,amsbsy}
+\usepackage{euscript} 
+\usepackage{enumerate} 
+\usepackage{color}  
+\usepackage{physics}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{shapes,arrows}
+\usepackage{multicol}
+\usepackage{comment}
+\usepackage{color,soul}
+\usepackage{combelow}
+\usepackage{tabu}
+\usepackage{caption}
+\usepackage{rotating}
+\bibliographystyle{apa}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+
+
+
+
+\textwidth = 16 cm
+\textheight = 24 cm
+\oddsidemargin = 0.0 cm
+\evensidemargin = 0.0 cm
+\topmargin = -2 cm
+\parskip = 0.2in
+\parindent = 0.0in
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{proporties}[theorem]{Proporties}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{definitions}[theorem]{Definitions}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+ 
+
+
+\begin{document}
+
+\begin{sidewaystable} 
+\captionof{table}{Number of individuals in each category, 2013-2018}
+\begin{tabular}{|l|c|c|c|c|c|c|l}
+\hline
+ & \footnotesize{2013} & \footnotesize{2014} & \footnotesize{2015} & \footnotesize{2016} & \footnotesize{2017} & \footnotesize{2018}\\
+\hline
+\footnotesize
+Total population & \footnotesize{6,490,795} & \footnotesize{6,540,007} & \footnotesize{6,590,726} & \footnotesize{6,649,404} & \footnotesize{6,715,984} & \footnotesize{6,770,010}\\
+\footnotesize
+Population 12 and older & \footnotesize{5,517,176} & \footnotesize{5,559,006} & \footnotesize{5,602,117} & \footnotesize{5,651,993} & \footnotesize{5,708,586} & -\\
+\footnotesize
+Prescription opioid users (includes those addicted) & \footnotesize{1,845,144} &\footnotesize{1,824,342} & \footnotesize{1,819,581} & \footnotesize{1,761,363} &  \footnotesize{1,636,374} &-\\
+\footnotesize
+Opioid addicts & \footnotesize{\textit{\textcolor{blue}{48,674}}} & \footnotesize{\textit{\textcolor{blue}{48,163}}} & \footnotesize{\textcolor{blue}{48,000}
+} & \footnotesize{\textcolor{blue}{42,000}} & \footnotesize{\textit{\textcolor{blue}{39,020}}} &-\\
+\footnotesize
+Non-addicted prescription opioid users   & \footnotesize{\textit{\textcolor{blue}{1,823,581}}} &\footnotesize{\textit{\textcolor{blue}{1,803,006}
+}} & \footnotesize{\textcolor{blue}{\textbf{1,798,317}}} & \footnotesize{\textcolor{blue}{\textbf{1,642,757}}} &  \footnotesize{\textit{\textcolor{blue}{1,619,088}
+}} &-\\
+\footnotesize
+Heroin addicts & - &\footnotesize{\textcolor{blue}{14,000}} & \footnotesize{\textcolor{blue}{14,000}} & \footnotesize{\textcolor{blue}{19,000}}  & - &-\\
+\footnotesize
+Prescription opioid overdose deaths & - & - & \footnotesize{679} & -  & - &-\\
+\footnotesize
+Heroin/fentanyl overdose deaths & - & - & \footnotesize{374} & -  & - &-\\
+\footnotesize
+Prescription opioid treatment admissions & \footnotesize{4,485} & \footnotesize{4,530} & \footnotesize{4,326} & -  & - &-\\
+\footnotesize
+Heroin treatment admissions & \footnotesize{555} & \footnotesize{743} & \footnotesize{1,083} & -  & - &-\\
+\hline
+\end{tabular} \\
+
+\textit{italicized} values are numbers that we estimated by extrapolating from a different year \\
+ \textbf{bolded} values are numbers that we estimated by information within the same year \\
+ the rest of the numbers are actual data \\
+ the numbers in \textcolor{blue}{blue} are data used for parameter estimation
+\label{tab:template}
+\end{sidewaystable} 
+
+ 
+\pagebreak
+
+Parameter assumptions from calculations done from literature information: \\
+$\beta_A=0.000273$ \\
+$\beta_P=0.000777$ \\
+$\mu=0.00868$ \\
+$\mu_{A}=0.00775$ \\
+$\mu_{H}=0.0271$ \\
+$\theta_2=3 \theta_1$ \\
+$\theta_3=16\theta_1$ \\
+$\nu=0.0155$ \\ 
+$\zeta=0.0241$ \\
+$P_0=0.0553$ \\
+$A_0=0.00148$ \\
+
+Using MultiStart to obtain 7 values: \\
+$[\alpha \ \theta_1 \ \epsilon \ \gamma \ \sigma \  \ H_0 \ R_0 ]$
+
+
+
+\begin{center}
+\begin{tabular}{|c | c | c | }
+
+ \hline
+
+{Parameter} & {Description} & {Units} \\ [0.5ex]
+
+ \hline\hline
+ 
+ $\mu$ &  natural mortality rate & $\frac{1}{\text{year}}$ \\
+
+ \hline
+
+ $\mu_A$ & opioid addict overdose death rate & $\frac{1}{\text{year}}$\\
+
+ \hline
+ 
+ $\mu_H$ &  heroin addict overdose death rate & $\frac{1}{\text{year}}$ \\
+
+ \hline
+
+$\alpha$ &  prescription rate & $\frac{1}{\text{year}}$    \\
+
+ \hline
+
+$\beta_A$ & illicit addiction rate from the black market & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\beta_P$ &  illicit addiction rate from availability of excess pills & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\theta_1$&  heroin addiction rate for susceptible individuals & $\frac{1}{\text{year}}$   \\
+
+\hline
+
+$\epsilon$ &  rate of finishing prescription addiction-free & $\frac{1}{\text{year}}$ \\
+
+\hline
+
+$\gamma$ &  opioid addiction rate from prescription & $\frac{1}{\text{year}}$ \\
+
+\hline
+
+$\theta_2$ &  heroin addiction rate for prescription opioids users & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\sigma$ &  relapse to addiction & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\zeta$ &  rate of stable recovery for opioid addict & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\theta_3$ &   heroin addiction rate for opioid addicts & $\frac{1}{\text{year}}$\\
+
+\hline
+
+$\nu$ &  rate of stable recovery for heroin addict & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\omega$ & perturbation term & \small dimensionless \\
+
+\hline
+S & proportion of susceptible individuals & \small dimensionless \\
+
+\hline
+
+P & proportion of susceptible individuals & \small dimensionless \\
+
+\hline
+A & proportion of susceptible individuals & \small dimensionless \\
+
+\hline
+H & proportion of susceptible individuals & \small dimensionless \\
+
+\hline
+R & proportion of susceptible individuals & \small dimensionless \\
+ \hline
+
+\end{tabular}
+
+\end{center}
+ 
+
+\end{document}
+
