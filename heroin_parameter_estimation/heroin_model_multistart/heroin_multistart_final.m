@@ -1,14 +1,21 @@
 %File name: heroin_multistart_final.m 
 
-clf
+clf;
+clear all;
 
 % We wish to estimate the parameter vector (7 parameters)
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
 % Ranges on each of the parameters 
-%LowerBounds=[0.1  0.00001   0.5     0.00001   0.0001   0.00001   0.00001];
-%UpperBounds=[0.8    0.1      3        .1        4         .1        .3];
-LowerBounds=[0.00001  0.00001   0.00001     0.00001   0.00001   0.00001   0.00001];
-UpperBounds=[2 2 4 2 4  .5 .5 ];
+%GIVES BEST RESULT SO FAR WITH ALPHA TIME DEPENDENT
+LowerBounds=[0.01  0.00001    0.1     0.0000001    3     0.001     0.00001 0.00001];
+UpperBounds=[0.1      1        6      0.0001       9          1        0.1     0.2  ];
+
+%GET very few runs that converge when make bounds much much wider
+%LowerBounds=[0.00001  0.00001    0.00001     0.0000001    0.00001     0.00001     0.00001  0.00001];
+%UpperBounds=[2      2        6      2       2          9        2     2  ];
+
+
+
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
 
@@ -26,14 +33,14 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=5;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
 [x,fval,exitflag,output,solutions]=run(ms,problem,numstartpoints);
 
-% x vector to estimate 
-alpha=x(1);
+% x vector to estimate, alpha=m*t+b 
+m=x(1);
 beta_A=0.000273; 
 beta_P=0.000777; 
 theta_1=x(2);
@@ -48,11 +55,13 @@ zeta=0.0214;
 theta_3=16*x(2);
 nu=0.0155;
 omega=0.0000000001;
+b=x(6);
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
 
 % Print optimal parameter solution and objective function value in command
 % window when completed 
+format short 
 x
 fval
 
@@ -65,9 +74,9 @@ tspan=linspace(0,N,N+1);
 % Initial conditions
 P0=0.0553;
 A0=0.00148;
-H0=x(6);
-R0=x(7);
-S0=1-0.0553-0.00148-x(6)-x(7);
+H0=x(7);
+R0=x(8);
+S0=1-0.0553-0.00148-x(7)-x(8);
 X0=0;
 L0=0;
 M0=0;
@@ -85,7 +94,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   X=y(:,6);
   L=y(:,7);
   M=y(:,8);
-
+  %alpha=-pars(1)*t+pars(16);
+  alpha=-x(1)*t+x(6);
+  
    % Making sure S+P+A+H+R=1
   for i=1:N+1
       sum(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
@@ -292,11 +303,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
-
 function value = HeroinModel_ODE45(z)
 
 %Parameters
-alpha=z(1);
+m=z(1);
 beta_A=0.000273; 
 beta_P=0.000777; 
 theta_1=z(2);
@@ -311,9 +321,10 @@ zeta=0.0214;
 theta_3=16*z(2);
 nu=0.0155;
 omega=0.0000000001;
+b=z(6);
 
 
-pars=[alpha,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
 
 % Final time N; will run 2013-2018 where t=0 represents 2013
 % and t=5 represents 2018, with spacing (T-0)/((N+1)-1)=1 between the points
@@ -323,9 +334,9 @@ tspan=linspace(0,N,N+1);
 % Initial conditions
 P0=0.0553;
 A0=0.00148;
-H0=z(6);
-R0=z(7);
-S0=1-0.0553-0.00148-z(6)-z(7);
+H0=z(7);
+R0=z(8);
+S0=1-0.0553-0.00148-z(7)-z(8);
 X0=0;
 L0=0;
 M0=0;
@@ -540,7 +551,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Objective function value we wish to minimize; want value=fval(x) to be
  % small  when run MultiStart
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
- %value=norm(Diff2,2)./norm(Data2);
+
 
  
  % For testing purposes with states and data sets
@@ -553,8 +564,8 @@ end
 
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-pars(1)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=pars(1)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-(-pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=(-pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
@@ -562,7 +573,7 @@ f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
 % i.e. individuals who enter the P class at any time from S (used in Estim1)
-f(6) = pars(1)*y(1);
+f(6) =(-pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 % i.e. individuals who enter the A class at any time (used in Estim2)
@@ -575,8 +586,6 @@ f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(
  
 
 end
-
-
 
 
 
