@@ -6,9 +6,9 @@ from scipy.integrate import ode
 
 params = {}
 params['alpha'] = 0.2                       #S->P the rate at which people are prescribed opioids #[20] https://www.cdc.gov/drugoverdose/pdf/pubs/2017-cdc-drug-surveillance-report.pdf (page 39, table 1A)
-params['beta_A'] = .4#0.000273                    #S->A total probability of becoming addicted to opioids other than by prescription #assume okay for now until find updated/source
+params['beta_A'] = 0.000273                    #S->A total probability of becoming addicted to opioids other than by prescription #assume okay for now until find updated/source
 params['beta_P'] =  0                    # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #assume okay for now until find updated/source
-params['theta_1'] = .4#0.0003                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['theta_1'] = 0.0003                  #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
 params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  # [24] https://www.cdc.gov/nchs/data/nvsr/nvsr66/nvsr66_05.pdf (page 1)
 params['mu_A'] = 0.00775                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # [25] https://www.cdc.gov/drugoverdose/data/analysis.html (Opioid Data Analysis, figure)
 params['mu_H'] = 0.0271                 #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # [25] https://www.cdc.gov/drugoverdose/data/analysis.html  (Opioid Data Analysis, figure)
