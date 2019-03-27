@@ -7,7 +7,7 @@ clear all;
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
 % Ranges on each of the parameters 
 %GIVES BEST RESULT SO FAR WITH ALPHA TIME DEPENDENT
-LowerBounds=[0.01  0.00001    0.1     0.0000001    3     0.001     0.00001 0.00001];
+LowerBounds=[-0.1  0.00001    0.1     0.0000001    3     0.001     0.00001 0.00001];
 UpperBounds=[0.1      1        6      0.0001       9          1        0.1     0.2  ];
 
 %GET very few runs that converge when make bounds much much wider
@@ -33,7 +33,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -76,7 +76,7 @@ P0=0.0553;
 A0=0.00148;
 H0=x(7);
 R0=x(8);
-S0=1-0.0553-0.00148-x(7)-x(8);
+S0=1-P0-A0-x(7)-x(8);
 X0=0;
 L0=0;
 M0=0;
@@ -95,7 +95,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   L=y(:,7);
   M=y(:,8);
   %alpha=-pars(1)*t+pars(16);
-  alpha=-x(1)*t+x(6);
+  alpha=x(1)*t+x(6);
   
    % Making sure S+P+A+H+R=1
   for i=1:N+1
@@ -336,7 +336,7 @@ P0=0.0553;
 A0=0.00148;
 H0=z(7);
 R0=z(8);
-S0=1-0.0553-0.00148-z(7)-z(8);
+S0=1-P0-A0-z(7)-z(8);
 X0=0;
 L0=0;
 M0=0;
@@ -564,8 +564,8 @@ end
 
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-(-pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=(-pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
@@ -573,7 +573,7 @@ f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
 % i.e. individuals who enter the P class at any time from S (used in Estim1)
-f(6) =(-pars(1)*t+pars(16))*y(1);
+f(6) =(pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 % i.e. individuals who enter the A class at any time (used in Estim2)

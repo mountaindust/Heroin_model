@@ -54,7 +54,7 @@ omega=0.0000000001;
 
 
 %slope of alpha 
-m=.02;
+m=-.02;
 beta_A=0.000273; 
 beta_P=0.000777; 
 theta_1=0.0003;
@@ -78,11 +78,11 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial Conditions
-S0=1-0.0553-0.00148-0.0003-0.0002;
 P0=0.0553;
 A0=0.00148;
 H0=0.0003;
 R0=0.0097;
+S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
 M0=0;
@@ -98,7 +98,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   X=y(:,6);
   L=y(:,7);
   M=y(:,8);
-  alpha=-m*t+b;
+  alpha=m*t+b;
   
   % Making sure S+P+A+H+R=1
   for i=1:N+1
@@ -241,8 +241,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-(-pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=(-pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
@@ -250,7 +250,7 @@ f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
 %individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
-f(6) = (-pars(1)*t+pars(16))*y(1);
+f(6) = (pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 %i.e. individuals who enter the A class at any time (used in Estim2 in
