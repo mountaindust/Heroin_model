@@ -7,10 +7,10 @@ clear all;
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
 % Ranges on each of the parameters 
 %GIVES BEST RESULT SO FAR WITH ALPHA TIME DEPENDENT
-LowerBounds=[-0.1  0.001    0.1     0.00001    3     0.001     0.000001 0.00001];
-UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.2  ];
+%LowerBounds=[-0.1  0.001    0.1     0.00001    3     0.001     0.000001 0.00001];
+%UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.2  ];
 
-%Result 
+%BEST RESULT SO FAR
 %x = -0.0122    0.1768    4.2465    0.0000   13.4338    0.3037    0.0002    0.0064
 %fval = 0.1611
 
@@ -24,8 +24,8 @@ UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.
 
 
 %Bounds playing with 
-%LowerBounds=[-0.1  0.001    0.1     0.000000000000001    3     0.001     0.00001 0.00001];
-%UpperBounds=[0.1      2        6      0.0001             10          1        0.1     0.2  ];
+LowerBounds=[-0.1  0.001    0.1     0.0000001    3     0.001     0.000001 0.00001];
+UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.2  ];
 
 
 
@@ -46,7 +46,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=6;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -85,8 +85,8 @@ tspan=linspace(0,N,N+1);
 
 
 % Initial conditions
-P0=0.0553;
-A0=0.00148;
+P0=0.07;
+A0=0.00169;
 H0=x(7);
 R0=x(8);
 S0=1-P0-A0-x(7)-x(8);
@@ -348,8 +348,8 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions
-P0=0.0553;
-A0=0.00148;
+P0=0.07;
+A0=0.00169;
 H0=z(7);
 R0=z(8);
 S0=1-P0-A0-z(7)-z(8);

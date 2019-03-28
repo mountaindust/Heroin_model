@@ -78,8 +78,8 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial Conditions
-P0=0.0553;
-A0=0.00148;
+P0=0.07;
+A0=0.00169;
 H0=0.0003;
 R0=0.0097;
 S0=1-P0-A0-H0-R0;
