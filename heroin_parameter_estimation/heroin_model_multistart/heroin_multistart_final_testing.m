@@ -52,7 +52,7 @@ nu=0.1;
 omega=0.0000000001;
 %}
 
-
+%alpha=0.2
 %slope of alpha 
 m=-.02;
 beta_A=0.000273; 
@@ -60,9 +60,11 @@ beta_P=0.000777;
 theta_1=0.0003;
 epsilon=1.5;
 mu=0.00868; 
-mu_A=0.00775;   
-mu_H=0.0271;
-gamma=0.00744;   
+mu_A=0.00870;      
+mu_H=0.0507;
+%gamma=0.00744;
+%slope of gamma
+n=-0.0001;
 theta_2=3*theta_1; 
 sigma=0.7;
 zeta=0.0214;
@@ -71,8 +73,10 @@ nu=0.0155;
 omega=0.0000000001;
 %y-intercept of alpha 
 b=0.4; 
+%y-intercept of gamma 
+c=0.01;
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,n,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001,b,c];
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001,b];
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
 tspan=linspace(0,N,N+1);
@@ -99,6 +103,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   L=y(:,7);
   M=y(:,8);
   alpha=m*t+b;
+  gamma=n*t+c;
   
   % Making sure S+P+A+H+R=1
   for i=1:N+1
@@ -116,7 +121,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % some point during the yearfor 2013-final year, Data2 is a column vector
 % Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);  
  %for 2014 and 2015 
- Data2=y(1:4,3)+y(2:5,7)-y(1:4,7);  
+ Data2=y(1:5,3)+y(2:6,7)-y(1:5,7); 
 
     
  % Yearly output from the model as a proportion of individuals in H at 
@@ -242,8 +247,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
 f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
-f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
+f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-(pars(9)*t+pars(17))*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(3)=(pars(9)*t+pars(17))*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
 

@@ -7,12 +7,17 @@ clear all;
 % x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
 % Ranges on each of the parameters 
 %GIVES BEST RESULT SO FAR WITH ALPHA TIME DEPENDENT
-LowerBounds=[-0.1  0.00001    0.1     0.0000001    3     0.001     0.00001 0.00001];
-UpperBounds=[0.1      1        6      0.0001       9          1        0.1     0.2  ];
+%LowerBounds=[-0.1  0.001    0.1     0.0000000001    3     0.001     0.00001 0.00001];
+%UpperBounds=[0.1      2        6      0.0001       9          1        0.1     0.2  ];
 
 %GET very few runs that converge when make bounds much much wider
 %LowerBounds=[0.00001  0.00001    0.00001     0.0000001    0.00001     0.00001     0.00001  0.00001];
 %UpperBounds=[2      2        6      2       2          9        2     2  ];
+
+
+%Bounds playing with 
+LowerBounds=[-0.1  0.001    0.1     0.0000000001    3     0.001     0.00001 0.00001];
+UpperBounds=[0.1      2        6      0.0001       9          1        0.1     0.2  ];
 
 
 
@@ -46,8 +51,8 @@ beta_P=0.000777;
 theta_1=x(2);
 epsilon=x(3);
 mu=0.00868;  
-mu_A=0.00775;   
-mu_H=0.0271;
+mu_A=0.00870;   
+mu_H=0.0507;
 gamma=x(4);   
 theta_2=3*x(2); 
 sigma=x(5);
@@ -57,7 +62,7 @@ nu=0.0155;
 omega=0.0000000001;
 b=x(6);
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
 
 % Print optimal parameter solution and objective function value in command
 % window when completed 
@@ -243,8 +248,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Data1=[0.237390586356170;0.282320213651865;0.290350287139703;0.291565611730532;0.291608516955584];
  
  % Actual Data for years 2013-2017
- Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
-
+ %Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
+ Data1=[1828096./5517176; 1807287./5559006; 1802570./5602117; 1746478./5651993; 1622545./5708586];
+ 
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
  hold all
@@ -259,20 +265,21 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
- Estim2=y(1:4,3)+y(2:5,7)-y(1:4,7); 
+ Estim2=y(1:5,3)+y(2:6,7)-y(1:5,7); 
  %Data2=[0.00223753712800777;0.00311956382567797;0.00401510188281510;0.00489676892035552];
  
  % Actual Data for 2015-2016 (and now using estimates in 2013-2014,too)
- Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
-
+ %Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
+ Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
+ 
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
  figure(10)
  hold all
  %plot(t(1:end-1),Estim2)
  %plot(t(1:end-1), Data2, 'x')
- plot(t(1:4),Estim2, 'o')
- plot(t(1:4), Data2, 'x')
+ plot(t(1:5),Estim2, 'o')
+ plot(t(1:5), Data2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
@@ -286,7 +293,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Data3=[0.000428336723542582;0.000413856720557604;0.000399782088321797];
  
  % Actual Data for 2014-2016
- Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ %Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ Data3=[7560./5559006; 7560./5602117; 10260./5651993];
  
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
@@ -312,8 +320,8 @@ beta_P=0.000777;
 theta_1=z(2);
 epsilon=z(3);
 mu=0.00868;  
-mu_A=0.00775;   
-mu_H=0.0271;
+mu_A=0.00870;   
+mu_H=0.0507;
 gamma=z(4);   
 theta_2=3*z(2); 
 sigma=z(5);
@@ -324,7 +332,7 @@ omega=0.0000000001;
 b=z(6);
 
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00775,0.0271,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
 
 % Final time N; will run 2013-2018 where t=0 represents 2013
 % and t=5 represents 2018, with spacing (T-0)/((N+1)-1)=1 between the points
@@ -387,7 +395,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
  
- Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
+ %Data1=[1823581./5517176; 1803006./5559006; 1798317./5602117; 1642757./5651993; 1619088./5708586];
+ Data1=[1828096./5517176; 1807287./5559006; 1802570./5602117; 1746478./5651993; 1622545./5708586];
  
  % Data simulated when testing codes 
  %Data1=[0.237390586356170;0.282320213651865;0.290350287139703;0.291565611730532;0.291608516955584];
@@ -416,7 +425,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of population in A at some point during the year for
  % 2014 and 2015, Estim2 is a column vector
  % Only 2014 and 2015 data (and now using estimates for 2013-2014,too) 
- Estim2=y(1:4,3)+y(2:5,7)-y(1:4,7); 
+  Estim2=y(1:5,3)+y(2:6,7)-y(1:5,7); 
  
  % When testing all points with simulated data
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
@@ -426,7 +435,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of opioid addicted individuals in 2014 and 2015 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
+ %Data2=[48674./5517176; 48163./5559006; 48000./5602117; 42000./5651993];
+ Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
  
  % Data simulated when testing codes  
  %Data2=[0.00223753712800777;0.00311956382567797;0.00401510188281510;0.00489676892035552];
@@ -469,7 +479,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ %Data3=[14000./5559006; 14000./5602117; 19000./5651993];
+ Data3=[7560./5559006; 7560./5602117; 10260./5651993];
  
  % Data simulated when testing codes 
  %Data3=[0.000428336723542582;0.000413856720557604;0.000399782088321797];
@@ -586,12 +597,4 @@ f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(
  
 
 end
-
-
-
-
-
-
-           
- 
 
