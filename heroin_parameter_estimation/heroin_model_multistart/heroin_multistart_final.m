@@ -22,10 +22,66 @@ clear all;
 %LowerBounds=[-0.1      0.00001    0.1     0.00001    0.1      0.001     0.00001 0.00001];
 %UpperBounds=[-.0001     .1        4       0.01         1          1        0.5     0.5  ];
 
+%Run 4 I believe 
+%LowerBounds=[-0.1  0.001    0.1     0.0000001    0.0001    0.001  0.000001   0.0001];
+%UpperBounds=[0.1      2        6      0.01          4        1          0.1     4];
 
-%Bounds playing with 
-LowerBounds=[-0.1  0.001    0.1     0.0000001    3     0.001     0.000001 0.00001];
-UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.2  ];
+
+%Run 7 I believe 
+%LowerBounds=[-0.1  0.001    0.1     0.0000001    0.001    0.001   0.00001  0.000001   1];
+%UpperBounds=[0.1      2        6      0.01          3        1      0.2      0.1     10];
+
+%Run 14
+%LowerBounds=[-0.1  0.001    0.1     0.0000001    0.001    0.001     0.000001   1];
+%UpperBounds=[0.1      2        6      0.01          3        1        0.1     10];
+
+%Run 16
+%LowerBounds=[-0.1  0.0000001   0.1    0.0000001    0.0000001    0.001   0.00001  0.0000001   ];
+%UpperBounds=[0.1      1        5         0.01          1          1       0.2       5];
+
+%Run 17
+%LowerBounds=[-0.1  0.0000001   0.1    0.1    0.0000001    0.001   0.00001  0.0000001   ];
+%UpperBounds=[0.1      1        5        2       0.0001          1       0.2    0.0001];
+
+%Run 18
+%LowerBounds=[-0.1  0.0000001   0.1    0.00001    0.0000001    0.001   0.00001  0.0000001   ];
+%UpperBounds=[0.1      1        10        2       0.0001          1       0.3    0.1];
+
+%Come back
+%LowerBounds=[-0.1  0.0000001   0.001    0.00001    0.0000001    0.001   0.00001  0.0000001   ];
+%UpperBounds=[0.1      1        10        2       0.0001          1       0.3    5];
+
+%Without R0
+%LowerBounds=[-1  0.000001   0.001    0.00001    0.00000001     0.000001   0.00000001];
+%UpperBounds=[1     0.1        4       0.2          0.1            1          5];
+
+%Run 19--great!
+%LowerBounds=[-1  0.000001   0.001    0.0001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
+%UpperBounds=[1     0.1        4       0.2          0.1            1        5       0.5  0.5   0.5   0.5   ];
+%RESULTS of Run 19: 
+%x= -0.0368    0.0025    2.1339    0.0001    0.0000    0.6012    0.0042    0.0878    0.0076    0.0009    0.4780
+%fval=0.1417
+
+%Run 20
+%LowerBounds=[-1  0.000001   0.001    0.000001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
+%UpperBounds=[1     0.1        4       0.2          0.1            1        5       0.5  0.5   0.5   0.5   ];
+%RESULTS of Run 20:
+%x = -0.0188    0.0549    3.9640    0.0000    0.0000    0.3985    0.0071    0.0530    0.0077    0.0009    0.2151
+%fval=0.1392
+
+%Run 21
+%LowerBounds=[-1  0.000001   0.001    0.000001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
+%UpperBounds=[1     0.1        6       0.2          0.1            1        5         0.5     0.5     0.5     0.5   ];
+%RESULTS of Run 21:
+%x = -0.0119    0.0969    2.1429    0.0000    0.0001    0.2729    0.0870    0.0964    0.0076    0.0008    0.0124
+%fval=0.1437
+
+LowerBounds=[-1  0.000001   0.001    0.000001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
+UpperBounds=[1     0.1        6       0.2          0.1            1        5         0.5     0.5     0.5     0.5   ];
+
+
+
+
 
 
 
@@ -46,7 +102,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -63,14 +119,15 @@ mu_A=0.00870;
 mu_H=0.0507;
 gamma=x(4);   
 theta_2=3*x(2); 
-sigma=x(5);
+sigma_A=x(5);
 zeta=0.0214;
 theta_3=16*x(2);
 nu=0.0155;
 omega=0.0000000001;
 b=x(6);
+sigma_H=x(7);
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma_A,0.0214,theta_3,0.0155,0.0000000001,b,sigma_H];
 
 % Print optimal parameter solution and objective function value in command
 % window when completed 
@@ -85,10 +142,10 @@ tspan=linspace(0,N,N+1);
 
 
 % Initial conditions
-P0=0.07;
-A0=0.00169;
-H0=x(7);
-R0=x(8);
+P0=x(8);%0.3;%0.07;
+A0=x(9);%0.0077;%0.00169;
+H0=x(10);%0.0001;%0.00136;%x(7);
+R0=x(11);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -332,15 +389,16 @@ mu_A=0.00870;
 mu_H=0.0507;
 gamma=z(4);   
 theta_2=3*z(2); 
-sigma=z(5);
+sigma_A=z(5);
 zeta=0.0214;
 theta_3=16*z(2);
 nu=0.0155;
 omega=0.0000000001;
 b=z(6);
+sigma_H=z(7);
 
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma,0.0214,theta_3,0.0155,0.0000000001,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma_A,0.0214,theta_3,0.0155,0.0000000001,b,sigma_H];
 
 % Final time N; will run 2013-2018 where t=0 represents 2013
 % and t=5 represents 2018, with spacing (T-0)/((N+1)-1)=1 between the points
@@ -348,10 +406,10 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions
-P0=0.07;
-A0=0.00169;
-H0=z(7);
-R0=z(8);
+P0=z(8);%0.3;%0.07;
+A0=z(9);%0.0077;%0.00169;
+H0=z(10);%0.0001;%0.00136;%x(7);
+R0=z(11);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -585,8 +643,8 @@ f=zeros(8,1);
 f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
 f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
-f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
-f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
+f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(17)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
+f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(17)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
 
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
@@ -599,7 +657,7 @@ f(7) = pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+
 
 % M' ODE to calculate the number of new cases of heroin/fentanyl addiction over time; 
 % i.e. individuals who enter the H class at any time (used in Estim3)
-f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15));
+f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(17)*y(5)*y(4))/(y(3)+y(4)+pars(15));
 
  
 
