@@ -1,0 +1,11 @@
+THIS IS JUST PRACTICE
+20_10_muA-muH_04_04
+N=20
+parameters: all [0,1] except muA, muH in [0,0.1]
+t=10
+IC
+    S_0 = 0.6221
+    P_0 = 0.37
+    A_0 = 0.0062
+    H_0 = 0.0014
+    R_0 = 0.0003
