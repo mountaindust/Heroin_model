@@ -23,78 +23,76 @@ UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     
 %LowerBounds=[-1  0.00001    0.00001   0.0000000001    3     0.000001     0.00001 0.00001];
 %UpperBounds=[1      2        6            1           9        1        0.5     0.5  ];
 
-
-%Run 4 I believe 
+%Run 4 from my paper log
 %LowerBounds=[-0.1  0.001    0.1     0.0000001    0.0001    0.001  0.000001   0.0001];
 %UpperBounds=[0.1      2        6      0.01          4        1          0.1     4];
 
-
-%Run 7 I believe 
+%Run 7 from my paper log 
 %LowerBounds=[-0.1  0.001    0.1     0.0000001    0.001    0.001   0.00001  0.000001   1];
 %UpperBounds=[0.1      2        6      0.01          3        1      0.2      0.1     10];
 
-%Run 14
+%Run 14 from my paper log
 %LowerBounds=[-0.1  0.001    0.1     0.0000001    0.001    0.001     0.000001   1];
 %UpperBounds=[0.1      2        6      0.01          3        1        0.1     10];
 
-%Run 16
+%Run 16 from my paper log 
 %LowerBounds=[-0.1  0.0000001   0.1    0.0000001    0.0000001    0.001   0.00001  0.0000001   ];
 %UpperBounds=[0.1      1        5         0.01          1          1       0.2       5];
 
-%Run 17
+%Run 17 from my paper log 
 %LowerBounds=[-0.1  0.0000001   0.1    0.1    0.0000001    0.001   0.00001  0.0000001   ];
 %UpperBounds=[0.1      1        5        2       0.0001          1       0.2    0.0001];
 
-%Run 18
+%Run 18 from my paper log 
 %LowerBounds=[-0.1  0.0000001   0.1    0.00001    0.0000001    0.001   0.00001  0.0000001   ];
 %UpperBounds=[0.1      1        10        2       0.0001          1       0.3    0.1];
 
-%Come back
+%Come back from my paper log 
 %LowerBounds=[-0.1  0.0000001   0.001    0.00001    0.0000001    0.001   0.00001  0.0000001   ];
 %UpperBounds=[0.1      1        10        2       0.0001          1       0.3    5];
 
-%Without R0
+%Without estimating R0 from my paper log 
 %LowerBounds=[-1  0.000001   0.001    0.00001    0.00000001     0.000001   0.00000001];
 %UpperBounds=[1     0.1        4       0.2          0.1            1          5];
 
-%Run 19--great!
+%Run 19 great when splitting up sigma into sigma_A and sigma_H, from my paper log 
 %LowerBounds=[-1  0.000001   0.001    0.0001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
-%UpperBounds=[1     0.1        4       0.2          0.1            1        5       0.5  0.5   0.5   0.5   ];
+%UpperBounds=[1     0.1        4       0.2          0.1            1        5       0.5      0.5     0.5     0.5   ];
 %RESULTS of Run 19: 
 %x= -0.0368    0.0025    2.1339    0.0001    0.0000    0.6012    0.0042    0.0878    0.0076    0.0009    0.4780
 %fval=0.1417
 
-%Run 20
+%Run 20 from my paper log 
 %LowerBounds=[-1  0.000001   0.001    0.000001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
 %UpperBounds=[1     0.1        4       0.2          0.1            1        5       0.5  0.5   0.5   0.5   ];
 %RESULTS of Run 20:
 %x = -0.0188    0.0549    3.9640    0.0000    0.0000    0.3985    0.0071    0.0530    0.0077    0.0009    0.2151
 %fval=0.1392
 
-%Run 21
+%Run 21 from my paper log 
 %LowerBounds=[-1  0.000001   0.001    0.000001    0.00000001     0.000001  0.00001  0.00001 0.00001 0.00001 0.00001 ];
 %UpperBounds=[1     0.1        6       0.2          0.1            1        5         0.5     0.5     0.5     0.5   ];
 %RESULTS of Run 21:
 %x = -0.0119    0.0969    2.1429    0.0000    0.0001    0.2729    0.0870    0.0964    0.0076    0.0008    0.0124
 %fval=0.1437
 
-%Run 23: few converge though because of -1 to 1 for m 
+%Run 23 few converge though because of -1 to 1 for m, from my paper log 
 %LowerBounds=[-1   0.000001   0.001    0.0001    0.00000001     0.000001  0.00001 0.00001 0.00001 0.00001 ];
 %UpperBounds=[1      1        6       0.2          0.1            1          0.5     0.5     0.5     0.5   ];
 
-%Run 23: with Lenhart in office, good enough 
+%Run 23 with Lenhart in office, good enough, from my paper log 
 %LowerBounds=[-0.1   0.0001     1    0.000001    0.00000001     0.000001 0.0001 0.0001 0.0001 0.0001 ];
 %UpperBounds=[0.1      1        6       0.2          0.1          1       0.5     0.5     0.5    0.5   ];
 %x= -0.0210    0.2562    3.5215    0.0001    0.0000    0.4609    0.0648    0.0077    0.0009    0.3288
 %fval=0.1350
 
-%Run 23b: made lower bound on epsilon lower for bigger range, one with Lenhart in office 
+%Run 23b made lower bound on epsilon lower for bigger range, one with Lenhart in office, from my paper log 
 %LowerBounds=[-0.1   0.0001     0.2    0.000001    0.00000001     0.000001   0.0001   0.0001   0.0001  0.0001 ];
 %UpperBounds=[0.1      1        6       0.2          0.1              1       0.5       0.5      0.5     0.5   ];
 %x=[-0.0232938669941276,0.274491197674059,3.80589997869509,5.50775141421631e-06,9.35412160715760e-07,0.507882966712332,0.0609677343429615,0.00775635360045256,0.000856017464737244,0.379999731834762]
 %fval=0.1326
 
-%Run 24: 
+%Run 24 from my paper log 
 %LowerBounds=[-0.1   0.0001     1    0.000001    0.00000001     0.000001 0.00001 0.0001 0.0001 0.0001 ];
 %UpperBounds=[0.1      1        6       0.2          0.1          1       0.5     0.5     0.5    0.5   ];
 %RESULT from Run 24
@@ -102,23 +100,22 @@ UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     
 % fval= 0.1331
 
 
-%Run 25: lowering upper bound on theta_1
+%Run 25 lowering upper bound on theta_1, from my paper log 
 %LowerBounds=[-0.1   0.0001     0.2    0.000001    0.00000001   0.000001 0.0001 0.0001 0.0001 0.0001 ];
 %UpperBounds=[0.1     0.1       6       0.2          0.1          1       0.5     0.5     0.5    0.5   ];
 %x= [-0.0126580403615966,0.0999495982658826,2.74747054509993,4.09337023211639e-06,5.78776738376931e-05,0.289198879195730,0.0785989346304095,0.00762054498221397,0.00120610212999436,0.0119485256871678]
 %fval=0.1811
 
 
-%Run 26b: increasing LB on gamma again
+%Run 26b increasing LB on gamma again, from my paper log 
 %LowerBounds=[-0.1   0.0001    0.2     0.001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
 %UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
 
-%Run 25c: increasing UB on theta_1
+%Run 25c, increasing UB on theta_1, from my paper log 
 %LowerBounds=[-0.1   0.0001     1     0.0001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
 %UpperBounds=[0.1     0.5       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
 %x=[-0.0134957161092346,0.204489901975793,5.78352777097860,0.000130040100191768,3.90947534199090e-05,0.331340127979528,0.0385444335706383,0.00769974455765799,0.000857642856768981,0.0422983312355828]
 %fval=0.1359
-
 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
@@ -138,7 +135,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=10;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -676,7 +673,6 @@ f(7) = pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+
 % i.e. individuals who enter the H class at any time (used in Estim3)
 f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15));
 
- 
 
 end
 
