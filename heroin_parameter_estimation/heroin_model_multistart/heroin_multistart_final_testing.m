@@ -1,37 +1,24 @@
 %File name: heroin_multistart_final_testing.m
 
 %Parameters
-%alpha=0.3; 
-%beta_A=0.0094; 
-%beta_P=0.00266; 
-%theta_1=0.0003;
-%epsilon=2.0;
-%mu=0.00868; 
-%mu_A=0.00775;   
-%mu_H=0.0271;
-%gamma=0.00744;   
-%theta_2=0.0005; 
-%sigma=0.7;
-%zeta=0.1;
-%theta_3=0.005; 
-%nu=0.05;
-%omega=0.0000000001;
-
-%alpha=0.2; 
-%beta_A=0.00094; 
-%beta_P=0.00266; 
-%theta_1=0.0003;
-%epsilon=1.5;
-%mu=0.00868; 
-%mu_A=0.00775;   
-%mu_H=0.0271;
-%gamma=0.00744;   
-%theta_2=0.0006; 
-%sigma=0.7;
-%zeta=0.25;
-%theta_3=0.0009; 
-%nu=0.1;
-%omega=0.0000000001;
+%slope of alpha 
+m=-.02;
+beta_A=0.000273; 
+beta_P=0.000777; 
+theta_1=0.0003;
+epsilon=1.5;
+mu=0.00868; 
+mu_A=0.00870;      
+mu_H=0.0507;
+gamma=0.00744;
+theta_2=3*theta_1; 
+sigma=0.7;
+zeta=0.0214;
+theta_3=16*theta_1; 
+nu=0.0155;
+omega=0.0000000001;
+%y-intercept of alpha 
+b=0.4; 
 
 %{
 % For R_0 checking:
@@ -52,26 +39,7 @@ nu=0.1;
 omega=0.0000000001;
 %}
 
-%Parameters
-%slope of alpha 
-m=-.02;
-beta_A=0.000273; 
-beta_P=0.000777; 
-theta_1=0.0003;
-epsilon=1.5;
-mu=0.00868; 
-mu_A=0.00870;      
-mu_H=0.0507;
-gamma=0.00744;
-theta_2=3*theta_1; 
-sigma=0.7;
-zeta=0.0214;
-theta_3=16*theta_1; 
-nu=0.0155;
-omega=0.0000000001;
-%y-intercept of alpha 
-b=0.4; 
-pars=[m,beta_A,beta_P,theta_1,epsilon,0.00868,0.00870,0.0507,gamma,theta_2,sigma,zeta,theta_3,0.0155,0.0000000001,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
@@ -114,7 +82,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of individuals in A at 
  % some point during the year for 2013-2017, Data2 is a column vector
  Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
-
 
  % Yearly output from the model as a proportion of individuals in H at 
  % some point during the year for 2014-2016, Data3 is a column vector 
