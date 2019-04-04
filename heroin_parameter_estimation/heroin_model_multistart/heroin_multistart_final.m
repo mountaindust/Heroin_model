@@ -3,8 +3,8 @@
 clf;
 clear all;
 
-% We wish to estimate the parameter vector (7 parameters)
-% x =[alpha,theta_1,epsilon,gamma,sigma,zeta,H0,R0]
+% We wish to estimate the parameter vector (10 parameters)
+% x =[m,theta_1,epsilon,gamma,sigma,b,P0,A0,H0,R0]
 % Ranges on each of the parameters 
 
 % Best result for objective function; going with this for now 
