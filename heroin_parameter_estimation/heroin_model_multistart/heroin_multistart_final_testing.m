@@ -52,7 +52,7 @@ nu=0.1;
 omega=0.0000000001;
 %}
 
-%alpha=0.2
+%Parameters
 %slope of alpha 
 m=-.02;
 beta_A=0.000273; 
@@ -98,6 +98,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   X=y(:,6);
   L=y(:,7);
   M=y(:,8);
+  
   alpha=m*t+b;
   
   % Making sure S+P+A+H+R=1
@@ -107,22 +108,16 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   
  
  % Yearly output from the model as a proportion of individuals in P at 
- % some point during the yearfor 2013-final year, Data1 is a column vector
-% Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);  
- %for 2013-2017
+ % some point during the year for 2013-2017, Data1 is a column vector
  Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
  
  % Yearly output from the model as a proportion of individuals in A at 
- % some point during the yearfor 2013-final year, Data2 is a column vector
-% Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7);  
- %for 2014 and 2015 
- Data2=y(1:5,3)+y(2:6,7)-y(1:5,7); 
+ % some point during the year for 2013-2017, Data2 is a column vector
+ Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
 
-    
+
  % Yearly output from the model as a proportion of individuals in H at 
- % some point during the yearfor 2013-final year, Data3 is a column vector 
-% Data3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8); 
- %for 2014 and 2015 
+ % some point during the year for 2014-2016, Data3 is a column vector 
  Data3=y(2:4,4)+y(3:5,8)-y(2:4,8);
 
  
