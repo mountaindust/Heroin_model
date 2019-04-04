@@ -3,34 +3,34 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-S_0 = 1-0.13-0.01-0.001-0.0003 #0.9406 # 1 - proportions in P_0, A_0, H_0, R_0
-P_0 = 0.13 #0.05 # [4] Study: http://annals.org/aim/fullarticle/2646632/prescription-opioid-use-misuse-use-disorders-u-s-adults-2015 (page 293)
-A_0 = 0.01 #0.0062 # [21] https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR1-2015/NSDUH-FFR1-2015/NSDUH-FFR1-2015.pdf (page 25)
-H_0 = 0.001 #0.0026  # [21] SAMSHA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR1-2015/NSDUH-FFR1-2015/NSDUH-FFR1-2015.pdf (page 11)
-R_0 = 0.0003 #0.0006 # [14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17) #((772000+618000)/total population in 2014 = 319,000,000)
+S_0 = 1-0.0369-0.0078-0.000856-0.446 #0.9406 # 1 - proportions in P_0, A_0, H_0, R_0
+P_0 = 0.0369 
+A_0 = 0.0078 
+H_0 = 0.000856 
+R_0 = 0.446 
 
 #temporal info, assigning default values
 tstart = 0
-tstop = 25
+tstop = 5
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
 #parameters
 params = {}
-params['alpha'] = 0.3 #0.2                     #S->P the rate at which people are prescribed opioids #from Christopher opioid value 
-params['beta_A'] = 0.0094 #0.00094                    #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
-params['beta_P'] =  0.00266                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
-params['theta_1'] = 0.0003               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['alpha'] = 0.545                     #S->P the rate at which people are prescribed opioids #from Christopher opioid value 
+params['beta_A'] = 0.000273                 #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
+params['beta_P'] =  0.000777                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
+params['theta_1'] = 0.313               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
 params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  #from Christopher opioid value 
-params['mu_A'] = 0.00775                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
-params['mu_H'] = 0.0271                  #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # doubled opioid value from Christopher's paper 
-params['gamma'] = 0.00744          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # from Christopher opioid value 
-params['epsilon'] = 2.0 #1.5         #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #from Christopher opioid value 
-params['theta_2'] = 0.0005 #0.0006                       #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
-params['sigma'] = 0.7  #R->A rate at which people relapse from treatment into the opioid addicted class #from Christopher opioid value 
-params['zeta'] = 0.1 #0.25                        #A->R rate at which addicted opioid users enter treatment/rehabilitation #from Christopher opioid value 
-params['theta_3'] = 0.005 #0.009                   #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
-params['nu'] = 0.05 #0.1                        #H->R rate at which heroin users enter treatment/rehabilitation #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17)
+params['mu_A'] = 0.00870                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
+params['mu_H'] = 0.0507                 #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # doubled opioid value from Christopher's paper 
+params['gamma'] = 0.000105          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # from Christopher opioid value 
+params['epsilon'] = 5.953          #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #from Christopher opioid value 
+params['theta_2'] = 0.939                      #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['sigma'] = 0.000000667  #R->A rate at which people relapse from treatment into the opioid addicted class #from Christopher opioid value 
+params['zeta'] = 0.0214                         #A->R rate at which addicted opioid users enter treatment/rehabilitation #from Christopher opioid value 
+params['theta_3'] = 5.008                  #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
+params['nu'] = 0.0155                         #H->R rate at which heroin users enter treatment/rehabilitation #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17)
 params['omega'] = 0.0000000001
 
 
@@ -125,14 +125,14 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1))
+    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1)+1)
 
     fig = plt.figure(figsize=(8, 4.5))
   #  plt.plot(t, S, label='Susceptibles')
   #  plt.plot(t, P, label="Prescription Users")
     plt.plot(t, A, label="Opioid Addicts")
     plt.plot(t, H, label="Heroin and Fentanyl Addicts")
-    plt.plot(t, R, label="Stably Recovered Addicts")
+   # plt.plot(t, R, label="Stably Recovered Addicts")
     plt.legend()
     plt.xlabel('Time (years)')
     plt.ylabel('Population proportion')
@@ -148,7 +148,7 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1))
+    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1)+1)
 
     total = []
     for i in range(len(A)):
@@ -156,7 +156,7 @@ def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 
     fig = plt.figure(figsize=(8, 4.5))
     plt.plot(t, total, label="Total Addicts", color = 'black')
-    plt.plot(t, R, label="Stably Recovered Addicts")
+    #plt.plot(t, R, label="Stably Recovered Addicts")
     plt.legend()
     plt.xlabel('Time (years)')
     plt.ylabel('Population proportion')
