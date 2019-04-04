@@ -66,47 +66,50 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(alpha,beta_A,delta,epsilon,gamma,beta_P,zeta,nu,mu,
-                   theta_1,theta_2,theta_3,mu_A,mu_H,sigma_A,sigma_H):
+def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
+                   theta_2,zeta,theta_3,nu,omega):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
-    tstop = 10
+    tstop = 5
     # Copy default parameter dict
     params = dict(heroin_model.params)
     # Replace other parameter values
     params['alpha'] = alpha
     params['beta_A'] = beta_A
-    params['delta'] = delta
+    params['beta_P'] = beta_P
+    params['theta_1'] = theta_1
     params['epsilon'] = epsilon
     params['gamma'] = gamma
-    params['beta_P'] = beta_P
-    params['zeta'] = zeta
-    params['nu'] = nu
+    params['sigma'] = sigma
     params['mu'] = mu
-    params['theta_1'] = theta_1
-    params['theta_2'] = theta_2
-    params['theta_3'] = theta_3
     params['mu_A'] = mu_A
     params['mu_H'] = mu_H
-    params['sigma_A'] = sigma_A
-    params['sigma_H'] = sigma_H
+    params['theta_2'] = theta_2
+    params['zeta'] = zeta
+    params['theta_3'] = theta_3
+    params['nu'] = nu
+    params['omega'] = omega 
+    
+    
+
     
     # Get initial conditions
-    S_0 = 0.6221
-    P_0 = 0.37
-    A_0 = 0.0062
-    H_0 = 0.0014
-    R_0 = 0.0003
+    S_0 = 1-0.0369-0.0078-0.000856-0.446 
+    P_0 = 0.0369 
+    A_0 = 0.0078 
+    H_0 = 0.000856 
+    R_0 = 0.446 
+    
     # Run model
     try:
         result = heroin_model.solve_odes(S_0,P_0,A_0,H_0,R_0,tstart,tstop,params)
     except:
         return (sys.exc_info()[1],None,None,None,None)
     # Return just the mean end value of each variable
-    return (np.mean(result[0][-100:]), np.mean(result[1][-100:]),
-            np.mean(result[2][-100:]), np.mean(result[3][-100:]),
-            np.mean(result[4][-100:]))
+    return (np.mean(result[0][-1:]), np.mean(result[1][-1:]),
+            np.mean(result[2][-1:]), np.mean(result[3][-1:]),
+            np.mean(result[4][-1:]))
 
 
 
@@ -125,13 +128,13 @@ def main(N, filename, reduced, pool=None, no_plot=False):
         }
     else:
         problem = {
-            'num_vars': 16, #number of parameters
-            'names': ['alpha', 'beta_A', 'delta', 'epsilon', 'gamma', 'beta_P',
-                      'zeta', 'nu', 'mu', 'theta_1', 'theta_2', 'theta_3',
-                      'mu_A', 'mu_H', 'sigma_A', 'sigma_H'],
-            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1],
-                       [0,1], [0,1], [0,0.1], [0,1], [0,1], [0,1],
-                       [0,.1], [0,.1], [0,1], [0,1]] #xi was always 0,1
+            'num_vars': 15, #number of parameters
+            'names': ['alpha', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 'gamma',
+                      'sigma', 'mu', 'mu_A', 'mu_H', 'theta_2', 'zeta',
+                      'theta_3', 'nu', 'omega'],
+            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,10], [0,1],
+                       [0,1], [0,0.1], [0,0.1], [0,0.1], [0,2], [0,1],
+                       [0,6], [0,1], [0,1]] 
         }
 
     ### Create an N by num_var matrix of parameter values ###
