@@ -53,54 +53,6 @@
 
 \begin{document}
 
-\begin{sidewaystable} 
-\captionof{table}{Number of individuals in each category, 2013-2018}
-\begin{tabular}{|l|c|c|c|c|c|c|l}
-\hline
- & \footnotesize{2013} & \footnotesize{2014} & \footnotesize{2015} & \footnotesize{2016} & \footnotesize{2017} & \footnotesize{2018}\\
-\hline
-\footnotesize
-Total population & \footnotesize{6,490,795} & \footnotesize{6,540,007} & \footnotesize{6,590,726} & \footnotesize{6,649,404} & \footnotesize{6,715,984} & \footnotesize{6,770,010}\\
-\footnotesize
-Population 12 and older & \footnotesize{5,517,176} & \footnotesize{5,559,006} & \footnotesize{5,602,117} & \footnotesize{5,651,993} & \footnotesize{5,708,586} & -\\
-\footnotesize
-Heroin users& - &\footnotesize{14,000} & \footnotesize{14,000} & \footnotesize{19,000}  & - &-\\
-\footnotesize
-Heroin addicts & - &\footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{10,260}}}  & - &-\\
-\footnotesize
-Prescription opioid addicts (includes heroin addicts) & - &  - & \footnotesize{48,000}
-& \footnotesize{42,000} & - &-\\
-\footnotesize
-Prescription opioid addicts (excludes heroin) & \footnotesize{\textit{\textcolor{blue}{43,418}}} & \footnotesize{\textit{\textcolor{blue}{42,928}}} & \footnotesize{\textcolor{blue}{\textbf{42,816}}
-} & \footnotesize{\textcolor{blue}{\textbf{37,464}}} & \footnotesize{\textit{\textcolor{blue}{34,805}}} &-\\
-\footnotesize
-Prescribed opioid users (includes those addicted) & \footnotesize{1,845,144} &\footnotesize{1,824,342} & \footnotesize{1,819,581} & \footnotesize{1,761,363} &  \footnotesize{1,636,374} &-\\
-\footnotesize
-Prescribed opioid users (excludes those addicted)   & \footnotesize{\textit{\textcolor{blue}{1,825,910}}} &\footnotesize{\textit{\textcolor{blue}{1,805,325}
-}} & \footnotesize{\textcolor{blue}{\textbf{1,800,613}}} & \footnotesize{\textcolor{blue}{\textbf{1,744,766}}} &  \footnotesize{\textit{\textcolor{blue}{1,620,955}
-}} &-\\
-\footnotesize
-Prescription opioid overdose deaths & - & - & \footnotesize{679} & -  & - &-\\
-\footnotesize
-Heroin/fentanyl overdose deaths & - & - & \footnotesize{374} & -  & - &-\\
-\footnotesize
-Prescription opioid treatment admissions & \footnotesize{4,485} & \footnotesize{4,530} & \footnotesize{4,326} & -  & - &-\\
-\footnotesize
-Heroin treatment admissions & \footnotesize{555} & \footnotesize{743} & \footnotesize{1,083} & -  & - &-\\
-\hline
-\end{tabular} \\
-\label{tab:template}
-
-\textit{italicized} values are numbers that we estimated by extrapolating from a different year \\
- \textbf{\textcolor{blue}{bolded}} values are numbers that we estimated by information within the same year \\
- the rest of the numbers are actual data \\
- the numbers in \textcolor{blue}{blue} are data used for parameter estimation
-\label{tab:template}
-\end{sidewaystable} 
-
- 
-\pagebreak
-
 Parameter assumptions from calculations done from literature information: \\
 $\beta_A=0.000273$ \\
 $\beta_P=0.000777$ \\
@@ -111,13 +63,39 @@ $\theta_2=3 \theta_1$ \\
 $\theta_3=16\theta_1$ \\
 $\nu=0.0155$ \\ 
 $\zeta=0.0241$ \\
-$P_0=0.0710$ \\
-$A_0=0.00169$ \\
+$\omega=10^{-10}$ 
 
-Using MultiStart to obtain 8 values, where $\alpha=mt+b$: \\
-$[m \ \theta_1 \ \epsilon \ \gamma \ \sigma \  b \ H_0 \ R_0 ]$
+Used MultiStart to obtain 10 parameter values; these are the results we are going with for now as ``good enough" (although still have parameters hitting bounds, this was the lowest objective function value we could seem to get): \\
+LowerBounds$=[-0.1 \  0.0001  \  0.2  \   0.0001   \ 0.00000001 \   0.000001\  0.0001\  0.0001\  0.0001 \ 0.0001 ] $\\
+UpperBounds$=[0.1   \   1    \   6    \   0.2 \        0.1   \       1    \    0.5\     0.5   \  0.5 \    0.5  ]$
 
+Parameters estimating: $[m \ \theta_1 \ \epsilon \ \gamma \ \sigma \  b \ P_0 \ A_0 \ H_0 \ R_0 ]$ \\
+Parameter estimates: $[-0.0286    \   0.313    \   \textbf{5.953}  \     \textbf{0.000105}   \     \textbf{0.000000667}    \  0.602  \     0.0369   \  0.0078 \   \textbf{0.446}]$
+where $\alpha=mt+b$, $\theta_2=3 \theta_1$, $\theta_3=16\theta_1$, and $S_0=1-P_0-A_0-H_0-R_0$ (and thus, a total of 12 parameter values relied on MultiStart least squares, and the \textbf{bolded} values are those that hit the upper/lower bounds when do several different runs). 
+\\ \\
+Objective function value: 0.1309.
 
+Thus, we have the following parameter estimates overall (\textcolor{red}{red} values most concerning): \\
+$\alpha=[0.602  \   0.574   \   0.545    \   0.516 \    0.488    \     0.459   ]$ \\
+$\beta_A=0.000273$ \\
+$\beta_P=0.000777$ \\
+$\textcolor{red}{\theta_1=0.313}$ \\
+$\epsilon=5.953$ \\
+$\textcolor{red}{\gamma=0.000105}$ \\
+$\textcolor{red}{\sigma=0.000000667}$ \\
+$\mu=0.00868$ \\
+$\mu_{A}=0.00870$ \\
+$\mu_{H}=0.0507$ \\
+$\textcolor{red}{\theta_2=0.939}$ \\
+$\zeta=0.0241$ \\
+$\textcolor{red}{\theta_3=5.008}$ \\
+$\nu=0.0155$ \\ 
+$\omega=10^{-10}$ \\ 
+$P_0=0.0369$ \\
+$A_0=0.0078$ \\
+$H_0=000856$ \\
+$\textcolor{red}{R_0=0.446}$ \\
+$S_0=0.508$ \\
 
 \begin{center}
 \begin{tabular}{|c | c | c | }
@@ -207,6 +185,54 @@ R & proportion of susceptible individuals & \small dimensionless \\
 
 \end{center}
  
+ \begin{sidewaystable} 
+\captionof{table}{Number of individuals in each category, 2013-2018}
+\begin{tabular}{|l|c|c|c|c|c|c|l}
+\hline
+ & \footnotesize{2013} & \footnotesize{2014} & \footnotesize{2015} & \footnotesize{2016} & \footnotesize{2017} & \footnotesize{2018}\\
+\hline
+\footnotesize
+Total population & \footnotesize{6,490,795} & \footnotesize{6,540,007} & \footnotesize{6,590,726} & \footnotesize{6,649,404} & \footnotesize{6,715,984} & \footnotesize{6,770,010}\\
+\footnotesize
+Population 12 and older & \footnotesize{5,517,176} & \footnotesize{5,559,006} & \footnotesize{5,602,117} & \footnotesize{5,651,993} & \footnotesize{5,708,586} & -\\
+\footnotesize
+Heroin users& - &\footnotesize{14,000} & \footnotesize{14,000} & \footnotesize{19,000}  & - &-\\
+\footnotesize
+Heroin addicts & - &\footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{10,260}}}  & - &-\\
+\footnotesize
+Prescription opioid addicts (includes heroin addicts) & - &  - & \footnotesize{48,000}
+& \footnotesize{42,000} & - &-\\
+\footnotesize
+Prescription opioid addicts (excludes heroin) & \footnotesize{\textit{\textcolor{blue}{43,418}}} & \footnotesize{\textit{\textcolor{blue}{42,928}}} & \footnotesize{\textcolor{blue}{\textbf{42,816}}
+} & \footnotesize{\textcolor{blue}{\textbf{37,464}}} & \footnotesize{\textit{\textcolor{blue}{34,805}}} &-\\
+\footnotesize
+Prescribed opioid users (includes those addicted) & \footnotesize{1,845,144} &\footnotesize{1,824,342} & \footnotesize{1,819,581} & \footnotesize{1,761,363} &  \footnotesize{1,636,374} &-\\
+\footnotesize
+Prescribed opioid users (excludes those addicted)   & \footnotesize{\textit{\textcolor{blue}{1,825,910}}} &\footnotesize{\textit{\textcolor{blue}{1,805,325}
+}} & \footnotesize{\textcolor{blue}{\textbf{1,800,613}}} & \footnotesize{\textcolor{blue}{\textbf{1,744,766}}} &  \footnotesize{\textit{\textcolor{blue}{1,620,955}
+}} &-\\
+\footnotesize
+Prescription opioid overdose deaths & - & - & \footnotesize{679} & -  & - &-\\
+\footnotesize
+Heroin/fentanyl overdose deaths & - & - & \footnotesize{374} & -  & - &-\\
+\footnotesize
+Prescription opioid treatment admissions & \footnotesize{4,485} & \footnotesize{4,530} & \footnotesize{4,326} & -  & - &-\\
+\footnotesize
+Heroin treatment admissions & \footnotesize{555} & \footnotesize{743} & \footnotesize{1,083} & -  & - &-\\
+\hline
+\end{tabular} \\
+\label{tab:template}
+
+\textit{italicized} values are numbers that we estimated by extrapolating from a different year \\
+ \textbf{\textcolor{blue}{bolded}} values are numbers that we estimated by information within the same year \\
+ the rest of the numbers are actual data \\
+ the numbers in \textcolor{blue}{blue} are data used for parameter estimation
+\label{tab:template}
+\end{sidewaystable} 
+
+ 
+\pagebreak
+
 
 \end{document}
 
