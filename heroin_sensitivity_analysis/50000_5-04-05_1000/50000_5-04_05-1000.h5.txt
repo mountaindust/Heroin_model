@@ -1,0 +1,11 @@
+50000_5-04_05-1000
+N=50000
+t=5
+parameter ranges: everything in [0,1] except epsilon in [0,10], mu, mu_A, and mu_H in [0,0.1], theta_2 in [0,2], theta_3 in [0,6]
+IC
+    S_0 = 1-0.0369-0.0078-0.000856-0.446 
+    P_0 = 0.0369 
+    A_0 = 0.0078 
+    H_0 = 0.000856 
+    R_0 = 0.446 
+
