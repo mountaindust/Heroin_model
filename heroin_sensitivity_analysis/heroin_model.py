@@ -11,7 +11,7 @@ R_0 = 0.446
 
 #temporal info, assigning default values
 tstart = 0
-tstop = 5
+tstop = 101
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
@@ -121,11 +121,14 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
 #          return (((r+s)+((r-s)**(2) + 4*params['beta']*S_star*z*params['sigma_A']*\
 #          params['zeta']*params['sigma_H']*params['nu'])**(.5))/(2*detV))
          
+    
+
+
 
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1)+1)
+    t = np.linspace(tstart, tstop, 10*(tstart+tstop)+2)
 
     fig = plt.figure(figsize=(8, 4.5))
   #  plt.plot(t, S, label='Susceptibles')
@@ -148,11 +151,12 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1)+1)
-
+    t = np.linspace(tstart, tstop, 10*(tstart+tstop)+2)
+#10*(tstart+tstop+.1)+1
     total = []
     for i in range(len(A)):
             total.append(A[i] + H[i])
+
 
     fig = plt.figure(figsize=(8, 4.5))
     plt.plot(t, total, label="Total Addicts", color = 'black')
@@ -167,7 +171,6 @@ def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
         plt.show()
     else:
         return fig
-
 
 
 
