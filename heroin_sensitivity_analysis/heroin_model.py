@@ -11,13 +11,14 @@ R_0 = 0.446
 
 #temporal info, assigning default values
 tstart = 0
-tstop =  4
+tstop =  5
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
 #parameters
 params = {}
-params['alpha'] = 0.545                     #S->P the rate at which people are prescribed opioids #from Christopher opioid value 
+params['m'] = -0.0286                     #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
+params['b'] = 0.602                 #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
 params['beta_A'] = 0.000273                 #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
 params['beta_P'] =  0.000777                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
 params['theta_1'] = 0.313               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
@@ -56,11 +57,11 @@ def heroin_odes(t, X, params):
     H = X[3]
     R = X[4]
 
-    Y[0] = -params['alpha']*S-params['beta_A']*S*A-\
+    Y[0] = -(params['m']*t+params['b'])*S-params['beta_A']*S*A-\
         params['beta_P']*S*P-params['theta_1']*S*H+\
         params['epsilon']*P+params['mu']*(P+R)+\
         (params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
-    Y[1] = params['alpha']*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
+    Y[1] = (params['m']*t+params['b'])*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
     Y[2] = params['gamma']*P+params['sigma']*R*A/(A+H+params['omega'])+params['beta_A']*S*A+\
         params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
     Y[3] = params['theta_1']*S*H+params['theta_2']*P*H+params['theta_3']*A*H+\
@@ -69,7 +70,6 @@ def heroin_odes(t, X, params):
         params['sigma']*R*A/(A+H+params['omega'])-params['sigma']*R*H/(A+H+params['omega'])-\
         params['mu']*R
     return Y
-
 
 
 #already assigned tstart above, so won't do again here. 
@@ -101,6 +101,8 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
         R.append(solver.y[4])
     #get list 
     return (S,P,A,H,R)
+    #alpha=params['m']*t+params['b']
+    #return (alpha) 
 
 # def compute_R0(p=None):
 #     '''Check that AFE exists. If so, compute and return R0'''
@@ -130,7 +132,7 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval; if want more, change solver.integrate(solver.t+.1) above
     # and change t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1) or maybe add +1 at the end here, for example)
-    t = np.linspace(tstart, tstop+1, (tstart+tstop+1))
+    t = np.linspace(tstart, tstop, (tstart+tstop+1))
 
     fig = plt.figure(figsize=(8, 4.5))
   #  plt.plot(t, S, label='Susceptibles')
@@ -153,7 +155,7 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop+1, (tstart+tstop+1))
+    t = np.linspace(tstart, tstop, (tstart+tstop+1))
 #10*(tstart+tstop+.1)+1
     total = []
     for i in range(len(A)):
@@ -180,12 +182,12 @@ def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 if __name__ == "__main__":
 
     #run model with default values and plot
-
-    #no paramaters because assigned all defaults above; gives tuple 
+    #no parameters because assigned all defaults above; gives tuple 
     sol = solve_odes()
     #need to unpack, use *
     plot_solution(*sol) 
     plot_addiction_totaled(*sol)
     #compute R_0
     #print(compute_R0(p=None))
+
     
