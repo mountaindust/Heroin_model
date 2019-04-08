@@ -7,15 +7,28 @@ clear all;
 % x =[m,theta_1,epsilon,gamma,sigma,b,P0,A0,H0,R0]
 % Ranges on each of the parameters 
 
-% Best result for objective function; going with this for now 
-LowerBounds=[-0.1   0.0001    0.2     0.0001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
-UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
+
+%Best we can do on 4/8/19 for realistic numbers although theta_1 still hits upper bound
+%LowerBounds=[-0.1   0.00001   0.2   0.0001    0.000001     0.0001  0.0001  0.0001 0.0001  0.0001 ];
+%UpperBounds=[0.1     0.1       6       0.2        0.1          1       0.5     0.5     0.5    0.5   ];
+%x=[-0.0120382648602391,0.0997531214323014,2.10018581425436,0.000112314487481875,0.00268044692122784,0.269298366811826,0.0963523859585739,0.00754523097086079,0.00118983997840967,0.000641822830099002];
+%fval=0.1819
+
+%Good result on 4/8/19 if don't want to estimate P0 and use calculated value instead
+LowerBounds=[-0.1   0.00001   0.2    0.0001    0.00000001   0.000001   0.0001  0.0001  0.0001  ];
+UpperBounds=[0.1     0.1       6       0.2          0.1          1       0.5     0.5  0.5     ];
+
+% Best result for objective function (on 4/4/19) BUT R0 just way too high so
+% need to adjust
+%LowerBounds=[-0.1   0.0001    0.2     0.0001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
+%UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
 
 %For testing purposes when change code
 %LowerBounds=[-0.1  0.000001    0.1     0.00001    0.01    0.001   0.000001 0.000001 0.000001 0.00001  ];
 %UpperBounds=[0.1      0.2        6      0.1        1        1       0.5      0.5      0.5     0.5  ];
 
-%Gives best result with alpha time dependent when not estimating IC's 
+%Gives best result with alpha time dependent when not estimating P0 and A0,
+%only H0 and R0
 %LowerBounds=[-0.1  0.001    0.1     0.00001    3     0.001     0.000001 0.00001];
 %UpperBounds=[0.1      2        6      0.01       15          1        0.1     0.2  ];
 
@@ -100,13 +113,6 @@ UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     
 % fval= 0.1331
 
 
-%Run 25 lowering upper bound on theta_1, from my paper log 
-%LowerBounds=[-0.1   0.0001     0.2    0.000001    0.00000001   0.000001 0.0001 0.0001 0.0001 0.0001 ];
-%UpperBounds=[0.1     0.1       6       0.2          0.1          1       0.5     0.5     0.5    0.5   ];
-%x= [-0.0126580403615966,0.0999495982658826,2.74747054509993,4.09337023211639e-06,5.78776738376931e-05,0.289198879195730,0.0785989346304095,0.00762054498221397,0.00120610212999436,0.0119485256871678]
-%fval=0.1811
-
-
 %Run 26b increasing LB on gamma again, from my paper log 
 %LowerBounds=[-0.1   0.0001    0.2     0.001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
 %UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
@@ -135,7 +141,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -174,10 +180,10 @@ tspan=linspace(0,N,N+1);
 
 
 % Initial conditions
-P0=x(7);%0.3;%0.07;
-A0=x(8);%0.0077;%0.00169;
-H0=x(9);%0.0001;%0.00136;%x(7);
-R0=x(10);
+P0=0.0710;
+A0=x(7);
+H0=x(8);%0.0001;%0.00136;%x(7);
+R0=x(9);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -429,10 +435,10 @@ N = 5;
 tspan=linspace(0,N,N+1);
 
 % Initial conditions
-P0=z(7);%0.3;%0.07;
-A0=z(8);%0.0077;%0.00169;
-H0=z(9);%0.0001;%0.00136;%x(7);
-R0=z(10);
+P0=0.0710;
+A0=z(7);
+H0=z(8);%0.0001;%0.00136;%x(7);
+R0=z(9);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
