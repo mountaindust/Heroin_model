@@ -107,9 +107,9 @@ def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     except:
         return (sys.exc_info()[1],None,None,None,None)
     # Return just the mean end value of each variable
-    return (np.mean(result[0][-1:]), np.mean(result[1][-1:]),
-            np.mean(result[2][-1:]), np.mean(result[3][-1:]),
-            np.mean(result[4][-1:]))
+    return (result[0][-1], result[1][-1],
+            result[2][-1], result[3][-1],
+            result[4][-1])
 
 
 
