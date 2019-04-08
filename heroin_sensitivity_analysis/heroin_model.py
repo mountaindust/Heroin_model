@@ -11,7 +11,7 @@ R_0 = 0.446
 
 #temporal info, assigning default values
 tstart = 0
-tstop = 101
+tstop =  4
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
@@ -90,9 +90,10 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
     solver.set_initial_value([S0,P0,A0,H0,R0], tstart).set_f_params(p)
     # solve, solve.t is the current time state of the solver; solver_successful() means no problems while integrating 
     while solver.successful() and solver.t < tstop:
-        solver.integrate(solver.t+.1) #integrate up to next integer time; solve many times, not just once
+        solver.integrate(solver.t+1) #to integrate up to next integer time, just do solver.t+1, but if we want smoother
+        # plots below, so going to solve at more times t so can plot them so do solver.t+.1 for example; solve many times, not just once
         # record solution at that time and append: adds to the list any time the data type is growing and then can convert to data array later 
-        #.y are the current solutions states; integrate up to next integer time--only need to record solution at each time
+        #.y are the current solutions states; integrate up to next integer (or next .1) time--only need to record solution at each time
         S.append(solver.y[0])
         P.append(solver.y[1])
         A.append(solver.y[2])
@@ -127,8 +128,9 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
 
 def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
-    #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop, 10*(tstart+tstop)+2)
+    #np.linspace returns evenly spaced values within a given interval; if want more, change solver.integrate(solver.t+.1) above
+    # and change t = np.linspace(tstart, tstop+.1, 10*(tstart+tstop+.1) or maybe add +1 at the end here, for example)
+    t = np.linspace(tstart, tstop+1, (tstart+tstop+1))
 
     fig = plt.figure(figsize=(8, 4.5))
   #  plt.plot(t, S, label='Susceptibles')
@@ -151,12 +153,12 @@ def plot_solution(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
 def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
-    t = np.linspace(tstart, tstop, 10*(tstart+tstop)+2)
+    t = np.linspace(tstart, tstop+1, (tstart+tstop+1))
 #10*(tstart+tstop+.1)+1
     total = []
     for i in range(len(A)):
             total.append(A[i] + H[i])
-
+    print(t)
 
     fig = plt.figure(figsize=(8, 4.5))
     plt.plot(t, total, label="Total Addicts", color = 'black')
@@ -186,3 +188,4 @@ if __name__ == "__main__":
     plot_addiction_totaled(*sol)
     #compute R_0
     #print(compute_R0(p=None))
+    
