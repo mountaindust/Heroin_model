@@ -7,19 +7,31 @@ clear all;
 % x =[m,theta_1,epsilon,gamma,sigma,b,P0,A0,H0,R0]
 % Ranges on each of the parameters 
 
+%Result going with from 4/10; bounds have reasons behind them and low enough objective function value 
+LowerBounds=[-0.1   0.00001   0.8    0.0001       0.00001   0.01   0.0001  0.0001  0.0001  ];
+UpperBounds=[0.1     0.1       8       0.5          0.1      1       0.5     0.5     0.5     ];
 
-%Best we can do on 4/8/19 for realistic numbers although theta_1 still hits upper bound
+%Good result on 4/8/19 since don't want to estimate P0 and use calculated
+%value instead (gives about same objective value as letting multistart estimate P0) 
+%LowerBounds=[-0.1   0.00001   0.2    0.0001    0.00000001   0.000001   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.1       6       0.2          0.1          1       0.5     0.5  0.5     ];
+
+%REALLY GOOD 4/10 (moved epsilon to range in opioid paper)
+%LowerBounds=[-0.1   0.00001   0.8    0.0001    0.00000001   0.000001   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.1       8       0.2          0.1          1       0.5     0.5  0.5     ];
+
+%ALSO GOOD 4/10
+%LowerBounds=[-0.1   0.00001   0.8    0.0001       0.00001   0.000001   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.1       8       0.2          0.1          1       0.5     0.5  0.5     ];
+
+
+%Best we can do on 4/8/19 for realistic numbers although theta_1 still hits upper bound; includes estimating P0
 %LowerBounds=[-0.1   0.00001   0.2   0.0001    0.000001     0.0001  0.0001  0.0001 0.0001  0.0001 ];
 %UpperBounds=[0.1     0.1       6       0.2        0.1          1       0.5     0.5     0.5    0.5   ];
 %x=[-0.0120382648602391,0.0997531214323014,2.10018581425436,0.000112314487481875,0.00268044692122784,0.269298366811826,0.0963523859585739,0.00754523097086079,0.00118983997840967,0.000641822830099002];
 %fval=0.1819
 
-%Good result on 4/8/19 if don't want to estimate P0 and use calculated value instead
-LowerBounds=[-0.1   0.00001   0.2    0.0001    0.00000001   0.000001   0.0001  0.0001  0.0001  ];
-UpperBounds=[0.1     0.1       6       0.2          0.1          1       0.5     0.5  0.5     ];
-
-% Best result for objective function (on 4/4/19) BUT R0 just way too high so
-% need to adjust
+% Best result for objective function (on 4/4/19) BUT R0 just way too high so need to adjust
 %LowerBounds=[-0.1   0.0001    0.2     0.0001    0.00000001    0.000001  0.0001  0.0001  0.0001  0.0001 ];
 %UpperBounds=[0.1      1       6       0.2         0.1          1        0.5     0.5     0.5     0.5   ];
 
@@ -141,7 +153,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=10;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
