@@ -64,38 +64,71 @@ $\theta_3=16\theta_1$ \\
 $\nu=0.0155$ \\ 
 $\zeta=0.0241$ \\
 $\omega=10^{-10}$ 
+$P_0=0.0710$
 
-Used MultiStart to obtain 10 parameter values; these are the results we are going with for now as ``good enough" (although still have parameters hitting bounds, this was the lowest objective function value we could seem to get): \\
-LowerBounds$=[-0.1 \  0.0001  \  0.2  \   0.0001   \ 0.00000001 \   0.000001\  0.0001\  0.0001\  0.0001 \ 0.0001 ] $\\
-UpperBounds$=[0.1   \   1    \   6    \   0.2 \        0.1   \       1    \    0.5\     0.5   \  0.5 \    0.5  ]$
+Used MultiStart to obtain 9 parameter values; these are the results we are settling on as ``good enough.''  \\
+We use the following vectors for the lower and upper bounds for the parameters we are estimating: 
 
-Parameters estimating: $[m \ \theta_1 \ \epsilon \ \gamma \ \sigma \  b \ P_0 \ A_0 \ H_0 \ R_0 ]$ \\
-Parameter estimates: $[-0.0286    \   0.313    \   \textbf{5.953}  \     \textbf{0.000105}   \     \textbf{0.000000667}    \  0.602  \     0.0369   \  0.0078 \   \textbf{0.446}]$
-where $\alpha=mt+b$, $\theta_2=3 \theta_1$, $\theta_3=16\theta_1$, and $S_0=1-P_0-A_0-H_0-R_0$ (and thus, a total of 12 parameter values relied on MultiStart least squares, and the \textbf{bolded} values are those that hit the upper/lower bounds when do several different runs). 
-\\ \\
-Objective function value: 0.1309.
+parameters estimating: $[m \hspace{0.9cm}   \theta_1 \hspace{1cm}   \epsilon \hspace{0.9cm} \gamma \hspace{1.3cm}  \sigma \hspace{1.2cm}   b \hspace{1cm}    A_0 \hspace{1cm}   H_0  \hspace{1cm}   R_0 ]$ \\
+lower bounds:  \hspace{1.2cm} $[-0.1 \hspace{0.3cm}  0.00001 \hspace{0.3cm}    0.8 \hspace{0.3cm}      0.0001  \hspace{0.3cm}        0.00001 \hspace{0.3cm}     0.01 \hspace{0.3cm}     0.0001 \hspace{0.3cm}    0.0001 \hspace{0.3cm}     0.0001  ]$ \\
+upper bounds:\hspace{1.2cm} $[\hspace{0.2cm}0.1 \hspace{0.8cm}     0.1  \hspace{0.9cm}        8  \hspace{0.8cm}        0.5  \hspace{0.9cm}           0.1 \hspace{1.1cm}        1  \hspace{0.9cm}        0.5   \hspace{0.9cm}     0.5    \hspace{0.9cm}    0.5     ]$.
+
+We choose these bounds for the following reasons: \\
+-0.1$\leq$m$\leq$ 0.1: we assume that since $\alpha$ will be a value less than 1 based on estimate in \cite{Battista}, so it's slope will not be very large in absolute value \\
+-0.00001$\leq$$\theta_1$$\leq$ 0.1: unknown, chosen intuitively that a susceptible individual would have less than a 0.1 probability of transitioning to the heroin class (see below regarding why upper bound is chosen this high) \\
+0.8$\leq$$\epsilon$$\leq$ 8: estimate from \cite{Battista} \\
+0.0001$\leq$$\gamma$$\leq$ 0.5: estimate based on value in \cite{Battista} \\
+0.00001$\leq$$\sigma$$\leq$ 0.1: unknown, minimizes objective function value without hitting bounds \\
+0.01$\leq$$b$$\leq$ 1: estimated based on value of $\alpha$ in \cite{Battista} \\
+0.0001$\leq$$A_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+0.0001$\leq$$H_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+0.0001$\leq$$R_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+
+We use data from Tennessee in the years 2013-2017 and compare it values from our model simulations with the goal of minimizing the difference between the values. We denote Data1$=[1825910/5517176; 1805325/5559006; 1800613/5602117; 1744766/5651993; 1620955/5708586]$ as the vector of values that represents the total proportion of the population that enters the P class at some point during the years 2013-2017 and Estim1$=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6)$ represents the total proportion that the model simulates as entering the P class at some point during the years 2013-2017. The vector Diff1$=$Estim1-Data1 represents the difference in these values each of the years. In order to find the relative error we calculate 
+$$\displaystyle \sqrt{\sum_{i=1}^{5} \text{Diff1(i)}^2} / \displaystyle \sqrt{\sum_{i=1}^{5} \text{Data1(i)}^2}. $$
+
+Similarly, Data2$=$[43418/5517176; 42928/5559006; 42816/5602117; 37464/5651993; 34805/5708586] and
+ Estim2$=$y(1:end-1,3)+y(2:end,7)-y(1:end-1,7) represent the actual and simulated total proportion of individuals in A at some point during the years 2013-2017. Again, we have Diff2$=$Estim2-Data being the vector of differences in these values each of the years and the relative error is calculated by 
+ $$\displaystyle \sqrt{\sum_{i=1}^{5} \text{Diff2(i)}^2} / \displaystyle \sqrt{\sum_{i=1}^{5} \text{Data2(i)}^2}.$$
+ 
+ 
+ Finally, Data3$=$[7560/5559006; 7560/5602117; 10260/5651993] and  Estim3$=$y(2:4,4)+y(3:5,8)-y(2:4,8) represent the actual and simulated total proportion of individuals in H at some point during the years 2014-2016, with Diff3=Estim3-Data3 being the vector representing the difference in these values each year. The relative error is calculated as 
+ $$\displaystyle \sqrt{\sum_{i=1}^{3} \text{Diff3(i)}^2} / {\displaystyle \sqrt{\sum_{i=1}^{3} \text{Data3(i)}^2}}.$$
+
+Since we wish to minimize the difference in all three of these data sets with the values that our model simulates, we add together their relative norms and set this as our objective function value to minimize. Thus our 
+$$\text{objective function value}=$$
+ $$\displaystyle \sqrt{\sum_{i=1}^{5} \text{Diff1(i)}^2} / \displaystyle \sqrt{\sum_{i=1}^{5} \text{Data1(i)}^2} + \displaystyle \sqrt{\sum_{i=1}^{5} \text{Diff2(i)}^2} / \displaystyle \sqrt{\sum_{i=1}^{5} \text{Data2(i)}^2} + \displaystyle \sqrt{\sum_{i=1}^{3} \text{Diff3(i)}^2} / \displaystyle \sqrt{\sum_{i=1}^{3} \text{Data3(i)}^2}.$$
+Note that we take the relative error in each of these due to the differences in magnitude of the data. %Think about more 
+This results in an objective function value of 0.1821 for the following set of parameters. 
+
+parameters: $[m \hspace{1.5cm}   \theta_1 \hspace{0.8cm}   \epsilon \hspace{1.3cm} \gamma \hspace{1.5cm}  \sigma \hspace{1.6cm}   b \hspace{1cm}    A_0 \hspace{1cm}   H_0  \hspace{1cm}   R_0 ]$ \\
+estimates: $[-0.0123 \hspace{0.2cm}     \textbf{0.0999}  \hspace{0.2cm}      3.09  \hspace{0.2cm}    \textbf{0.000103}     \hspace{0.2cm}           0.000684 \hspace{0.2cm}     0.291 \hspace{0.2cm}   0.00760    \hspace{0.2cm}         0.00121 \hspace{0.2cm}  0.000443   ]$ \\
+with each of these rounded to three significant figures, and where $\alpha=mt+b$, $\theta_2=3 \theta_1$ (assumed), $\theta_3=16\theta_1$ (assumed), and $S_0=1-P_0-A_0-H_0-R_0.$ Thus, a total of 11 parameter values relied on MultiStart least squares parameter estimation. 
+
+
+Although we have two parameters ($\theta_1$ and $\gamma$) in \textbf{bold} hitting their bounds (upper and lower, respectively) for each run performed, this was the lowest objective value function we could obtain while keeping in mind realistic values for each of the parameters and initial conditions based on their biological interpretation, and using realistic bounds as described above. We note that increasing the upper bound for $\theta_1$ is not only unrealistic but also raises the objective function value. Although decreasing the bound for $\gamma$ slightly reduces the objective function value, based on the value being 0.00744 in \cite{Battista}, we do not believe it to be much lower than 0.0001 and thus stopped there for a lower bound. Performing both of these changes simultaneously leads to a seemingly unrealistically high $\theta_1$ value and $R_0$ to a very unrealistic value. We did our best in striking a balance between minimizing the objective function value, reducing the number of parameters that were hitting bounds, and having biologically reasonable estimated values. 
 
 Thus, we have the following parameter estimates overall (\textcolor{red}{red} values most concerning): \\
-$\alpha=[0.602  \   0.574   \   0.545    \   0.516 \    0.488    \     0.459   ]$ \\
+$\alpha=[0.291  \   0.279  \   0.266    \   0.254 \    0.242    \     0.229   ]$ \\
 $\beta_A=0.000273$ \\
 $\beta_P=0.000777$ \\
-$\textcolor{red}{\theta_1=0.313}$ \\
-$\epsilon=5.953$ \\
-$\textcolor{red}{\gamma=0.000105}$ \\
-$\textcolor{red}{\sigma=0.000000667}$ \\
+$\textcolor{red}{\theta_1=0.0999}$ (seems too high)\\
+$\epsilon=3.09$ \\
+$\textcolor{red}{\gamma=0.000103}$ (seems too low) \\
+$\sigma=0.000684$ \\
 $\mu=0.00868$ \\
 $\mu_{A}=0.00870$ \\
 $\mu_{H}=0.0507$ \\
-$\textcolor{red}{\theta_2=0.939}$ \\
+$\textcolor{red}{\theta_2=0.300}$ (seems too high) \\
 $\zeta=0.0241$ \\
-$\textcolor{red}{\theta_3=5.008}$ \\
+$\textcolor{red}{\theta_3=1.60}$ (seems too high) \\
 $\nu=0.0155$ \\ 
 $\omega=10^{-10}$ \\ 
-$P_0=0.0369$ \\
-$A_0=0.0078$ \\
-$H_0=000856$ \\
-$\textcolor{red}{R_0=0.446}$ \\
-$S_0=0.508$ \\
+$P_0=0.0710$ \\
+$A_0=0.00760$ \\
+$H_0=0.00121$ \\
+$R_0=0.000443$ \\
+$S_0=0.9197$ \\
 
 \begin{center}
 \begin{tabular}{|c | c | c | }
