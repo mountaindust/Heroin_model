@@ -2,23 +2,23 @@
 
 %Parameters
 %slope of alpha 
-m=-.02;
+m=-.0123;
 beta_A=0.000273; 
 beta_P=0.000777; 
-theta_1=0.0003;
-epsilon=1.5;
+theta_1=0.0999;
+epsilon=3.09;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
-gamma=0.00744;
+gamma=0.000103;
 theta_2=3*theta_1; 
-sigma=0.7;
+sigma=0.000684;
 zeta=0.0214;
 theta_3=16*theta_1; 
 nu=0.0155;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.4; 
+b=0.291; 
 
 %{
 % For R_0 checking:
@@ -43,13 +43,13 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
-tspan=linspace(0,N,N+1);
+tspan=linspace(0,N,N+100);
 
 % Initial Conditions
-P0=0.07;
-A0=0.00169;
-H0=0.0003;
-R0=0.0097;
+P0=0.0710;
+A0=0.00760;
+H0=0.00121;
+R0=0.000443;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -89,7 +89,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  
   
- % ODE solutions plotted separately 
+ % ODE solutions plotted separately shown all together
  figure(1)
          
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
@@ -128,21 +128,22 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
           
                
                  
- % ODE Solutions plotted all together
+ % ODE Solutions for P, A, H plotted all together
  figure(2)
            plot(t,y(:,3),'r-','LineWidth',1);
            hold all
            plot(t,y(:,4),'g-','LineWidth',1); 
            hold all
            plot(t,y(:,5),'m-','LineWidth',1); 
-           xlabel('time')
+           xlabel('Year')
            ylabel('Size of Populations');
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            legend('A','H','R')
            xlim([0 , N])
-       
+   
+  % ODE Solutions for S and P plotted together
   figure(3) 
            subplot(2,2,1);plot(t,y(:,1),'r-','LineWidth',1)
            subplot(2,2,1);xlabel('Year')
@@ -160,6 +161,67 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            xlim([0 , N])
            
+ figure(4)
+           hold all
+           plot(t,y(:,1))
+           set(gca, 'fontsize',10)
+           xlabel('Year')
+           ylabel('Susceptible individuals')
+           legend('Proportion of susceptible individuals')
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+           
+ figure(5)
+           hold all
+           plot(t,y(:,2))
+           set(gca, 'fontsize',10)
+           xlabel('Year')
+           ylabel('Prescription Users')
+           legend('Proportion of prescription users')
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+           
+           
+ figure(6)
+           hold all
+           plot(t,y(:,3))
+           set(gca, 'fontsize',10)
+           xlabel('Year')
+           ylabel('Prescription opioid addicts')
+           legend('Proportion of prescription opioid addicts')
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+           
+                
+ figure(7)
+           hold all
+           plot(t,y(:,4))
+           set(gca, 'fontsize',10)
+           xlabel('Year')
+           ylabel('Heroin addicts')
+           legend('Proportion of heroin addicts')
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+           
+      
+ figure(8)
+           hold all
+           plot(t,y(:,5))
+           set(gca, 'fontsize',10)
+           xlabel('Year')
+           ylabel('Stably recovered individuals')
+           legend('Proportion of stably recovered individuals')
+           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+           set(gca, 'fontsize',10)
+           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
+           
+                   
+           
+         
 %{ 
  %Data points from Data1 and corresponding ODE solution plotted on top 
  figure(4)
