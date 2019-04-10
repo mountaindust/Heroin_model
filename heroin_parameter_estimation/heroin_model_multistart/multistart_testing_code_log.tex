@@ -1,0 +1,402 @@
+\documentclass[12pt]{article}
+\usepackage{color}
+\begin{document}
+\noindent \textbf{MultiStart result log for testing the code} \\
+Simulated data in heroin\_multistart\_final\_testing.m file with these parameters and ran for 25 time steps using \textbf{ode45}: \\
+alpha$=$0.3 \\
+beta\_{A}$=$0.0094 \\
+beta\_{P}$=$0.00266 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$2.0 \\
+gamma$=$0.00744 \\
+theta\_{2}$=$0.0005 \\
+sigma$=$0.7 \\
+zeta$=$0.1 \\
+theta\_{3}$=$0.005 \\
+nu$=$0.05 \\
+
+
+
+\noindent S0=0.8587 \\
+P0=0.13 \\
+A0=0.01 \\
+H0=0.001 \\
+R0=0.0003 \\
+X0=0 \\
+L0=0 \\
+M0=0 \\
+
+Parameter vector form: $[0.3 \ 0.0094 \ 0.00266 \ 0.0003 \ 2.0 \ 0.00744 \ 0.0005 \ 0.7 \ 0.1 \ 0.005 \ 0.05]$ \\
+
+\noindent Then, ran heroin\_multistart\_final.m file in order to estimate parameters and to see if would get original ones back to test the code.
+
+\begin{itemize}
+\item Run 1: Running \textbf{only 5 states} (not with extra 3 ODE's) with 100 starting points, with \\
+lower bounds: [0.01 \ 0.00001\ 0.0001 \ 0.00001 \ 0.8\ 0.001\ 0.00001\ 0.01\ 0.01\ 0.00001\ 0.01]\\
+upper bounds: [0.7  \  0.2  \   0.009 \  0.1 \   4  \ 0.1  \  0.3 \    2 \  1   \  0.6 \   1  ]\\
+
+Result: $[0.3003 \ 0.0099  \  0.0059  \  0.0028   \ 2.0052 \   0.0046 \   0.0227  \  0.6941 \   0.0990  \   0.0546]$ \textcolor{red}{(missing one entry by accident here)} with objective function value = sum of the relative errors of the 5 states
+  $=$ 4.0359e-04. \\
+
+\item Run 2: Running \textbf{all 8 ODES} with 100 starting points, with \\
+lower bounds: [0.01 \ 0.00001\ 0.0001 \ 0.00001 \ 0.8\ 0.001\ 0.00001\ 0.01\ 0.01\ 0.00001\ 0.01]\\
+upper bounds: [0.7  \  0.2  \   0.009 \  0.1 \   4  \ 0.1  \  0.3 \    2 \  1   \  0.6 \   1  ]\\
+
+Result: [0.3000  \  0.0100 \   0.0069  \  0.0001  \  2.0037  \  0.0038 \   0.0016  \ 0.7000 \   0.1000    \ 0.0050  \  0.0500] \\
+with objective function value = sum of the relative errors of the 8 states $=$  6.9102e-04.
+ 
+ 
+\item Run 3: Running all 8 ODEs with 100 starting points with \textbf{wider ranges} \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+Result: [0.3000   \ 0.0100 \   0.0065\    0.0002  \  2.0033  \  0.0041  \  0.0011 \   0.7000 \ 0.1000   \ 0.0050   \ 0.0500] \\
+with objective value function= sum of the relative errors of the 8 states $=$ 6.9040e-04.
+
+\item Run 4: Running all 8 ODEs with 100 starting points with \textbf{wider ranges}  \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4 \  2\  2\  2\  2\  2\  2 ] \\
+Result: [ 0.3000\    0.0105  \  0.0106\    0.0004 \   2.0068\    0.0006\    0.0029\  0.6953 \   0.0991 \   0.0072 \    0.0495] \\
+with objective value function = \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$  7.2026e-05. 
+
+(Note: still plotted ODE solutions over what the data points were for each of the ODE's, although they are not a part of the value function). 
+
+\item \textcolor{red}{We have 10 points of real data. Could we make an assumption about the IC and one of the parameters and and then only have to estimate 10 parameters?} \textcolor{blue}{Goal: 8 parameters for 10 data points.}
+
+
+\item \textcolor{red}{Sometimes get error that says: \\
+%In backsolveSys
+  %In solveKKTsystem
+  %In computeTrialStep
+ % In barrier
+  %In fmincon (line 800)
+  %In fmultistart
+  %In fmultistart
+%  In MultiStart/run (line 257)
+%  In heroin\_multistart\_final (line 37) 
+Warning: Matrix is close to singular or badly scaled. Results may be inaccurate. RCOND $=
+2.074797e-16.$} \textcolor{blue}{Could be from something with gradient being flat, don't worry about since getting good/makes sense results.}
+
+\item \textcolor{red}{When I don't do the relative error (i.e. don't divide by norm of the data), the third data ODE solution does not start at the right point at t=0, but it does when I do the relative error. Why might that happen?} \textcolor{blue}{because of orders of magnitude differences.}
+
+\item \textcolor{red}{Is it a problem if the exitflags are usually all 2's, which means ``At least one local minimum found. Some runs (but not all) of the local solver converged"?} \textcolor{blue}{it's okay}
+
+\item \textcolor{red}{Are these errors small enough? Could we have an identifiability issue?} \textcolor{blue}{yes, there are okay. It's okay that run 2 has bigger error because more terms in value function and more data.}
+
+\item \textcolor{blue}{Some parameters are more sensitive than others so okay if some are off by orders of magnitude because this means the model is NOT sensitive to those parameters. Sensitivity analysis with initial condition choices and parameters later; if a parameter is insensitive, then don't fit it. Instead, want to fit parameters that are hard to find in literature, such as alpha.}
+
+\end{itemize}
+---------------------------------
+\pagebreak
+
+Since had jaggedness in plot of P for some parameter/initial condition choices, decided to change to \textbf{ode15s} solver instead of ode45. Want to check codes similarly as before. 
+\\
+
+Simulated data in heroin\_multistart\_final\_testing.m file with these parameters and ran for 25 time steps using \textbf{ode15s}: \\
+alpha$=$0.3 \\
+beta\_{A}$=$0.0094 \\
+beta\_{P}$=$0.00266 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$2.0 \\
+gamma$=$0.00744 \\
+theta\_{2}$=$0.0005 \\
+sigma$=$0.7 \\
+zeta$=$0.1 \\
+theta\_{3}$=$0.005 \\
+nu$=$0.05 \\
+
+In vector form: $[0.3 \ 0.0094 \ 0.00266 \ 0.0003 \ 2.0 \ 0.00744 \ 0.0005 \ 0.7 \ 0.1 \ 0.005 \ 0.05]$ \\
+
+\begin{itemize} 
+\item Skipping Run 1 (because want all 8 ODE's as part of model) 
+ \item Skipping Run 2 (don't necessarily want strict bounds near the answer we are expecting)
+\item Run 3b: Running all 8 ODEs with 100 starting points with \textbf{wide ranges} in order to check ode15s results\\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+Result: [ 0.3000 \   0.0091 \   0.0009 \  2.25e$^{-5}$\   1.9985 \  0.0089 \ 0.0024 \   0.7000 \   0.1000 \    0.0050 \   0.0500] \\
+with objective value function= sum of the relative errors of the 8 states $=$    5.9710e-06. P plot looks much better/smoother than before, too, and all plots look good. 
+
+
+
+\item Run 4b: Running all 8 ODE's with 100 starting points with \textbf{different parameters/initial conditions} and with \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+
+alpha$=$0.2 \\
+beta\_{A}$=$0.00094 \\
+beta\_{P}$=$0.00266 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$1.5 \\
+gamma$=$0.00744 \\
+theta\_{2}$=$0.0006 \\
+sigma$=$0.7 \\
+zeta$=$0.25 \\
+theta\_{3}$=$0.0009 \\
+nu$=$0.1 \\
+
+In vector form: $[0.2 \ 0.00094 \ 0.00266 \ 0.0003 \ 1.5 \ 0.00744 \ 0.0006 \ 0.7 \ 0.25 \ 0.0009 \ 0.1]$ \\
+
+S0=0.9406 \\
+P0=0.05 \\
+A0=0.0062 \\
+H0=0.0026 \\
+R0=0.0006 \\
+X0=0 \\
+L0=0 \\
+M0=0 \\
+
+
+
+
+Result: [0.2000  \  0.0010\    0.0028\    0.0003   \ 1.5002 \   0.0073 \   0.0002 \   0.7000\    0.2500  \  0.0020] \textcolor{red}{missing one by accident} \\
+with objective value function= sum of the relative errors of the 8 states $=$  4.3719e-05. 
+
+
+
+
+\item Run 5b:  Running all 8 ODE's with 100 starting points with \textbf{the parameters/initial conditions of Run 4} and with \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+Result: [0.2000 \    0.0017  \  0.0060   \ 0.0006  \  1.5030  \  0.0044 \   0.0036  \  0.6961\    0.2460  \ 0.0159  \  0.0974 ] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$ 2.9567e-04.
+
+\item Run 6b: Running all 8 ODE's \textbf{for 5 years instead of 25} with 100 starting points with \textbf{the parameters/initial conditions of Run 4} and with \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+Result: [0.2000   \ 0.0013    \ 0.0026  \  0.0002  \  1.5000  \  0.0075  \  0.0008\    0.6999 \   0.2500\
+     0.0126   \ 0.1000 ] \\
+with objective value function= sum of the relative errors of the 8 states $=$  6.7462e-05. 
+
+\item Run 7b: Running all 8 ODE's \textbf{for 5 years instead of 25} with 100 starting points with \textbf{the parameters/initial conditions of Run 4},  and with \\
+lower bounds: [0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\  2\  2\  2\  2 ] \\
+
+Result: [0.2000 \   0.0063  \  0.0056 \   0.0010\    1.5028  \  0.0046 \   0.0124\    0.6879 \   0.2452\ 0.1093 \   0.0989
+ ] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about}$=$  1.7760e-04. 
+
+
+
+---------------------------------------------------
+
+\pagebreak
+
+
+alpha$=$0.2 \\
+beta\_{A}$=$0.00094 \\
+beta\_{P}$=$0.00266 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$1.5 \\
+sigma$=$0.7 \\
+zeta$=$0.25 \\
+nu$=$0.1 \\
+
+S0=1-0.0538-0.0022-0.00074-0.000091 \\
+P0=0.0538 \\
+A0=0.0022 \\
+H0=0.00074 \\
+R0=0.000091 \\
+X0=0 \\
+L0=0 \\
+M0=0 \\
+
+vector of parameters: [0.2 \ 0.00094 \ 0.00266 \ 0.0003 \ 1.5 \ .7 \ .25 \ .1]
+
+\item Run 8b: Running all 8 ODE's \textbf{for 5 years instead of 25} with 100 starting points with \textbf{our estimated $P_0$, $A_0$, $H_0$, $R_0$ and parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\gamma=0.00744$ (opioid paper national value, assume same for TN for simplification)} with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\   2 ] \\
+\textcolor{blue}{Note: I have taken $\gamma$ out of the vector to approximate, and have put in the corresponding relationships for $\theta_2$ and $\theta_3$ and taken them out of the vector to approximate as well}
+
+Result: [ 0.2000 \   0.0009  \  0.0027 \   0.0003  \  1.5000\    0.7000 \   0.2500\    0.1000] \\
+with objective value function= sum of the relative errors of the 8 states $=$   1.4979e-06.
+
+
+\item Run 9b: Running all 8 ODE's \textbf{for 5 years instead of 25}  with 100 starting points with \textbf{our estimated $P_0$, $A_0$, $H_0$, $R_0$ and parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\gamma=0.00744$} and with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\   2 ] \\
+\textcolor{blue}{Note: I have taken $\gamma$ out of the vector to approximate, and have put in the corresponding relationships for $\theta_2$ and $\theta_3$ and taken them out of the vector to approximate as well}
+
+Result: [  0.2000 \    0.0010 \   0.0027   \ 0.0003   \ 1.5000 \   0.6997  \  0.2500  \  0.1000] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$    6.4557e-06. \\
+
+
+
+\item Run 10b: \textcolor{blue}{SKIP: this is same as Run 8b because only restricted data points in data vectors, not state vectors!} Running all 8 ODE's \textbf{for 5 years to represent 2013-2017} with 100 starting points with \textbf{our estimated $P_0$, $A_0$, $H_0$, $R_0$ and parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\gamma=0.00744$} but  \textbf{only using 10 of the data points that we will eventually use with real data} with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\   2 ] \\
+\textcolor{blue}{Note: I have taken $\gamma$ out of the vector to approximate, and have put in the corresponding relationships for $\theta_2$ and $\theta_3$ and taken them out of the vector to approximate as well}
+
+Result: [ 0.2000  \  0.00094193 \   0.0027  \  0.0003 \   1.5000 \   0.7000  \  0.2500 \   0.1000 ] (EXACT) \\
+with objective value function= sum of the relative errors of the 8 states $=$    1.3724e-06.
+
+\textcolor{blue}{Got same result after fewer runs, as well.}
+
+
+\item Run 11b: Running all 8 ODE's \textbf{for 5 years instead of 25} with 50 starting points with \textbf{our estimated $P_0$, $A_0$, $H_0$, $R_0$ and parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\gamma=0.00744$} but  \textbf{only using 10 of the data points that we will eventually use with real data} with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  2\  2\  4\  2\  2\   2 ] \\
+\textcolor{blue}{Note: I have taken $\gamma$ out of the vector to approximate, and have put in the corresponding relationships for $\theta_2$ and $\theta_3$ and taken them out of the vector to approximate as well} 
+
+Result: [0.1999 \   0.3014\    0.0020 \   0.0354   \ 1.4919\    0.5682  \  1.8413 \   1.1193
+ ] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$ 4.9435e-04. Data plots good, but state plots mostly off from what they should have been. \\
+
+ \textbf{Try again with 200 starting points} \\
+Result: [0.2000\    0.0413  \  0.0023   \ 0.0171\    1.4984 \   0.4820 \   0.2403  \  0.0901] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$    8.3899e-05.
+
+ \textbf{Try again with 500 starting points} \\
+Result: [ 0.2000  \  0.0045  \  0.0026  \  0.0008  \  1.4999 \   0.6897 \   0.2538  \  0.1021] \\
+with objective value function= \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$    1.1616e-05. \\
+
+\textbf{Try again with 1000 starting points... closer} \\
+Result: [   0.2000   \ 0.0023 \   0.0026 \   0.0004\    1.5000\    0.6972\    0.2517\    0.1009 ] \\
+ objective value function$=$ \textbf{sum of the relative errors of the the 3 sets of data we care about} $=$ 3.4879e-06.
+
+
+\item Run 12: Running all 8 ODE's for 5 years with 100 starting points with our estimated initial conditions and parameters, but \textbf{only using data for P and A (10 data points for 8 parameters)} with same lower and upper bounds \\
+Result: [  0.1992   \ 0.1033\    0.0026  \  0.5134 \   1.4910\    0.1928   \ 0.3174\    1.3228] \\
+with objective value function$=$ \textbf{sum of the relative errors of only P and A} $=$  3.5212e-04
+
+
+\pagebreak
+--------------------------------------------------- \\
+Testing with assuming $\beta_A$ and $\beta_P$ instead of $\gamma.$ \\
+alpha$=$0.2 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$1.5 \\
+gamma$=$0.00744\\
+sigma$=$0.7 \\
+zeta$=$0.25 \\
+nu$=$0.1 \\
+
+S0=1-0.0538-0.0022-0.00074-0.000091 \\
+P0=0.0538 \\
+A0=0.0022 \\
+H0=0.00074 \\
+R0=0.000091 \\
+X0=0 \\
+L0=0 \\
+M0=0 \\
+
+vector of parameters: [0.2 \ 0.0003 \ 1.5 \ .00744 \ .7 \ .25 \ .1]
+
+\item Run 8c: Running all 8 ODE's for 5 years with 10 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.00094$ and $\beta_P=0.00266$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result: [  0.2000  \  0.0003  \  1.5000\    0.0074 \   0.7000\    0.2500\    0.1000]\\
+with objective value function$=$sum of the relative errors of the 8 states$=$ 2.1225e-06. 
+%norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8)
+
+
+
+\item Run 9c: Running all 8 ODE's for 5 years with 1000 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.00094$ and $\beta_P=0.00266$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result: [ 0.2000  \  0.0005  \  1.5000 \   0.0074  \  0.6977  \  0.2495 \   0.0997 ]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$4.4873e-06.
+
+
+With 2000 starting points: \\
+Result: [   0.2000  \  0.0004 \   1.5000 \   0.0074 \   0.6987  \  0.2498 \   0.0999]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$   2.3984e-06. 
+
+--------------------------------------------------- \\
+
+\item \textbf{Using real data} \\
+Run 10c\_real: Running all 8 ODE's for 5 years with 10 starting points (same with 100 starting points) with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.00094$ and $\beta_P=0.00266$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result: [ 0.2707 \   1.3295  \  3.9999\    0.0857  \  0.0000 \   1.9999   \ 1.3226]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$  0.1927
+
+
+\item Run 11c\_real Since epsilon and zeta hitting upper bounds, changing them both to an upper bound of 8 with 100 starting points. 
+
+Result: [  0.2858  \  1.7983   \ 6.8158  \  0.1764  \  0.0217  \  7.6867  \  1.9970 ]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$  0.1654.
+
+\pagebreak
+
+
+\item Run 12c\_real Changed all upper bounds to 8 with 100 starting points.
+
+Result: [    0.2860 \   5.6406\    6.8855\    0.1574  \  0.0717\    7.9602  \  7.1915]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$  0.1359.
+
+
+
+
+
+--------------------------------------------------- \\
+Changing values of $beta_A$ and $beta_P$ to fit use disorder specifically. Still testing with these values: 
+alpha$=$0.2 \\
+theta\_{1}$=$0.0003 \\
+epsilon$=$1.5 \\
+gamma$=$0.00744\\
+sigma$=$0.7 \\
+zeta$=$0.25 \\
+nu$=$0.1 \\
+
+S0=1-0.0538-0.0022-0.00074-0.000091 \\
+P0=0.0538 \\
+A0=0.0022 \\
+H0=0.00074 \\
+R0=0.000091 \\
+X0=0 \\
+L0=0 \\
+M0=0 \\
+
+vector of parameters: [0.2 \ 0.0003 \ 1.5 \ .00744 \ .7 \ .25 \ .1]
+
+\item Run 8d: Running all 8 ODE's for 5 years with 10 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and \textbf{$\beta_A=0.000273$ and $\beta_P=0.000777$} with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result good and objective value function$=$sum of the relative errors of the 8 states$=$ good. 
+
+\item Run 9d: Running all 8 ODE's for 5 years with 1000 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.000273$ and $\beta_P=0.000777$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result: [     0.2000 \   0.0005  \  1.5000 \   0.0074 \   0.6977 \   0.2495 \   0.0997 ]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$ 9.2832e-06. 
+
+
+--------------------------------------------------- \\
+\pagebreak
+
+Using Real Data:
+
+\item Run 1\_real: Running all 8 ODE's for 5 years with 100 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.000273$ and $\beta_P=0.000777$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+
+Result: [0.2707\    1.3295\    3.9999\    0.0875\    0.0000\    1.9999 \   1.3226 ]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$ 0.1927 (data plots terrible). \\
+
+\item Do different ideas/bounds, decide when want to change data. \\
+
+
+
+
+
+
+
+\item Run later\_real: Running all 8 ODE's for 5 years with 100 starting points with our estimated initial conditions, parameter assumptions of $\theta_2=3 \theta_1$ and $\theta_3=16\theta_1$ and $\beta_A=0.000273$ and $\beta_P=0.000777$ with \\
+lower bounds: [0.00001  \ 0.00001 \ 0.00001\ 0.00001\ 0.00001\ 0.00001\ 0.00001] \\
+upper bounds: [2 \ 2\  4\  2\  2\   2 \ 2 ] \\
+\textbf{with updated data which includes opioid addicts from 2013-2017, non-addicted prescription users from 2013-2017, and heroin users from 2014-2016} \\
+Result: [ ]\\
+with objective value function$=$sum of the relative errors of the 3 sets of data we care about (the proportion of individuals in P, A, or H at some point during specific years for each one)$=$ 
+
+\end{itemize}
+
+\end{document}
