@@ -66,8 +66,8 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
-                   theta_2,zeta,theta_3,nu,omega):
+def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
+                   theta_2,zeta,theta_3,nu,omega,b,P_0,A_0,H_0,R_0):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -75,7 +75,7 @@ def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     # Copy default parameter dict
     params = dict(heroin_model.params)
     # Replace other parameter values
-    params['alpha'] = alpha
+    params['m'] = m                   
     params['beta_A'] = beta_A
     params['beta_P'] = beta_P
     params['theta_1'] = theta_1
@@ -90,6 +90,7 @@ def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     params['theta_3'] = theta_3
     params['nu'] = nu
     params['omega'] = omega 
+    params['b'] = b
     
     
 
