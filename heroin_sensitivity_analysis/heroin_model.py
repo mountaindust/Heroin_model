@@ -156,11 +156,16 @@ def plot_addiction_totaled(S,P,A,H,R,tstart=tstart,tstop=tstop,show=True):
     '''Plot a solution set and either show it or return the plot object'''
     #np.linspace returns evenly spaced values within a given interval (0.1 apart in this case)
     t = np.linspace(tstart, tstop, (tstart+tstop+1))
+    print(t)
 #10*(tstart+tstop+.1)+1
     total = []
     for i in range(len(A)):
             total.append(A[i] + H[i])
-    print(t)
+
+    sum_of_values = []
+    for i in range(len(S)):
+            sum_of_values.append(S[i] + P[i] + A[i] + H[i] + R[i])
+    print(sum_of_values)
 
     fig = plt.figure(figsize=(8, 4.5))
     plt.plot(t, total, label="Total Addicts", color = 'black')
