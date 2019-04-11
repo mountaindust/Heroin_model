@@ -95,18 +95,18 @@ def run_full_model(alpha,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
 
     
     # Get initial conditions
-    S_0 = 1-0.0369-0.0078-0.000856-0.446 
-    P_0 = 0.0369 
-    A_0 = 0.0078 
-    H_0 = 0.000856 
-    R_0 = 0.446 
+    S_0 = 1-0.0710-0.00760-0.00121-0.000443 
+    P_0 = 0.0710 
+    A_0 = 0.00760 
+    H_0 = 0.00121 
+    R_0 = 0.000443
     
     # Run model
     try:
         result = heroin_model.solve_odes(S_0,P_0,A_0,H_0,R_0,tstart,tstop,params)
     except:
         return (sys.exc_info()[1],None,None,None,None)
-    # Return just the mean end value of each variable
+    # Return just the sensitivity at the end time for each state 
     return (result[0][-1], result[1][-1],
             result[2][-1], result[3][-1],
             result[4][-1])
@@ -128,13 +128,15 @@ def main(N, filename, reduced, pool=None, no_plot=False):
         }
     else:
         problem = {
-            'num_vars': 15, #number of parameters
-            'names': ['alpha', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 'gamma',
-                      'sigma', 'mu', 'mu_A', 'mu_H', 'theta_2', 'zeta',
-                      'theta_3', 'nu', 'omega'],
-            'bounds': [[0,1], [0,1], [0,1], [0,1], [0,10], [0,1],
-                       [0,1], [0,0.1], [0,0.1], [0,0.1], [0,2], [0,1],
-                       [0,6], [0,1], [0,1]] 
+            'num_vars': 20, #number of parameters/initial conditions with bounds +/- 50% of their baseline estimated value and alpha=m*t+b
+            'names': ['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
+                      'gamma', 'sigma', 'mu', 'mu_A', 'mu_H', 
+                      'theta_2', 'zeta','theta_3', 'nu', 'omega', 
+                      'b','P_0', 'A_0', 'H_0', 'R_0'],
+            'bounds': [[-0.1845,-0.00615], [0.0001365,0.0004095], [0.0003885,0.0011655], [0.04995,0.14985], [1.545,4.635], 
+                       [0.0000515,0.0001545], [0.000342,0.001026], [0.00434,0.01302], [0.00435,0.01305], [0.02535,0.07605], 
+                       [0.15,0.45], [0.0107,0.0321],  [0.8,2.4], [0.00775,0.02325], [0.00000000005,0.00000000015], 
+                       [0.1455,0.4365], [0.00355,0.07455], [0.0038,0.0114], [0.000605,0.001815], [0.0002215,0.0006645]] 
         }
 
     ### Create an N by num_var matrix of parameter values ###
