@@ -1,0 +1,9 @@
+175000_5-04_12-1701.h5.txt
+N=175,000
+t=5
+parameter ranges: all +/- 50% from baseline values, including for P0,A0,H0,R0
+S0=0.9197
+P0=0.0710
+A0=0.00760
+H0=0.00121
+R0=0.000443
