@@ -92,15 +92,9 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     params['omega'] = omega 
     params['b'] = b
     
-    
-
-    
     # Get initial conditions
-    S_0 = 1-0.0710-0.00760-0.00121-0.000443 
-    P_0 = 0.0710 
-    A_0 = 0.00760 
-    H_0 = 0.00121 
-    R_0 = 0.000443
+    S_0 = 1-P0-A0-H0-R0 
+    
     
     # Run model
     try:
