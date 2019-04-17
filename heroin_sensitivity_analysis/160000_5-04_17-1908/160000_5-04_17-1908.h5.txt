@@ -1,0 +1,5 @@
+160000_5-04_17-1908.h5.txt
+N=160000
+t=5
+parameter ranges: all +/- 50% of baseline values, including IC
+S0=1-P0-A0-H0-R0
