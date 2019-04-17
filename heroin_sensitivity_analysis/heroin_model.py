@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-S_0 = 1-0.0710-0.00760-0.00121-0.000443 
 P_0 = 0.0710 
 A_0 = 0.00760 
 H_0 = 0.00121 
 R_0 = 0.000443
+S_0 = 1-P_0-A_0-H_0-R_0
 
 #temporal info, assigning default values
 tstart = 0
