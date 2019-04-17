@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values
-S_0 = 0.9435
 P_0 = 0.05 #Study: Boudreau et al +  time increase??
 A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
 R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
+S_0 = 1 - P_0 - A_0 - R_0
 
 #temporal info
 tstart = 0
@@ -15,19 +15,17 @@ tstop = 10
 #parameters
 params = {}
 params['alpha'] = 0.15                  #S->P: prescription rate
-#params['beta_P'] = 0.00266              #S->A due to P
-params['beta_P'] = 0
+params['beta_P'] = 0.00266              #S->A due to P
 params['beta_A'] = 0.00094              #S->A due to A
 params['delta'] = 0.1                   #R->S: finish recovery
 params['epsilon'] = 3.0                 #P->S rate
-#params['gamma'] = 0.00744               #P->A
-params['gamma'] = 0.005
+params['gamma'] = 0.00744               #P->A
 params['zeta'] = 0.25                   #A->R rate of starting treatment
 params['nu_1'] = 0                      #RP relapse rate
 params['nu_2'] = 0                      #RA relapse rate
 params['mu'] = 0.00729                 #nomral death rate
 params['mu_star'] = 0.01159             #addiction death rate
-params['sigma'] = 0.7                   #R->A natural treatment relapse
+params['sigma'] = 0.9                   #R->A natural treatment relapse
 
 def update_params(new_params):
     '''Update the params dict with new values contained in new_params'''

@@ -49,10 +49,10 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,mu,mu_star,sigma,nu_1=0,nu
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.9435
     P_0 = 0.05 #Study: Boudreau et al +  time increase??
     A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
     R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
+    S_0 = 1 - P_0 - A_0 - R_0
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -85,10 +85,10 @@ def run_full_model(alpha,beta_A,beta_P,delta,epsilon,gamma,zeta,mu,mu_star,sigma
     params['mu_star'] = mu_star
     params['sigma'] = sigma
     # Get initial conditions
-    S_0 = 0.9435
     P_0 = 0.05 #Study: Boudreau et al +  time increase??
     A_0 = 0.0062 #SAMHSA: https://www.samhsa.gov/data/sites/default/files/NSDUH-FFR2-2015/NSDUH-FFR2-2015.pdf
     R_0 = 0.0003 #HSS Treatment Episode Data Set https://www.samhsa.gov/data/sites/default/files/2014_Treatment_Episode_Data_Set_National_Admissions_9_19_16.pdf
+    S_0 = 1 - P_0 - A_0 - R_0
     # Run model
     try:
         result = opioid_model.solve_odes(S_0,P_0,A_0,R_0,tstart,tstop,params)
@@ -316,7 +316,7 @@ def plot_S1_ST(S_sens, P_sens, A_sens, R_sens, show=True):
 
 
 
-def plot_S1_ST_tbl_from_store(store, show=True):
+def plot_S1_ST_tbl_from_store(store, show=True, ext='pdf'):
     S_sens = store['S_sens']
     P_sens = store['P_sens']
     A_sens = store['A_sens']
@@ -355,6 +355,7 @@ def plot_S1_ST_tbl_from_store(store, show=True):
         ax.tick_params(axis='y', labelsize=14)
         #ax.get_yaxis().set_visible(False)
         ax.legend(fontsize=16)
+        ax.set_ylim(bottom=0)
     axes[0].set_title('First-order indices', fontsize=26)
     axes[1].set_title('Total-order indices', fontsize=26)
     # Create table
@@ -368,13 +369,13 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     ##### Extended full model #####
     # alpha, beta_A, beta_P, delta, epsilon, gamma, 
     # zeta, mu, mu*, sigma, nu_1, nu_2
-    # cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
-    #              ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1'], ['0-1'], ['0-1']]
+    cell_text = [['.02-.2'], ['0.0001-0.01'], ['0.0001-0.01'], ['0-1'], ['.8-8'], ['.00235-.0235'],
+                 ['.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1'], ['0-1'], ['0-1']]
     ##### R0 model #####
     # alpha, beta_A, delta, epsilon, 
     # zeta, mu, mu*, sigma
-    cell_text = [['0.02-0.2'], ['0.0001,0.01'], ['0-1'], ['.8-8'],
-                ['0.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
+    # cell_text = [['0.02-0.2'], ['0.0001-0.01'], ['0-1'], ['.8-8'],
+    #             ['0.2-2'], ['.0023-.023'], ['.00365-.0365'], ['0-1']]
     tbl_ax = plt.subplot(gs[2])
     the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
                  loc='center')
@@ -386,7 +387,7 @@ def plot_S1_ST_tbl_from_store(store, show=True):
     if show:
         plt.show()
     else:
-        fig.savefig("param_sens_{}.pdf".format(time.strftime("%m_%d_%H%M")))
+        fig.savefig("param_sens_{}.{}".format(time.strftime("%m_%d_%H%M"), ext))
     return (fig, axes)
 
 
