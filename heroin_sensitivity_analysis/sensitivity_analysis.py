@@ -93,7 +93,7 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     params['b'] = b
     
     # Get initial conditions
-    S_0 = 1-P0-A0-H0-R0 
+    S_0 = 1-P_0-A_0-H_0-R_0 
     
     
     # Run model
