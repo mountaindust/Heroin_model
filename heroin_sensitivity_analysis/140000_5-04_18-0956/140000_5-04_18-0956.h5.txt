@@ -1,0 +1,9 @@
+140000_5-04_18-0956_thetas.h5.txt
+N=140000
+t=5
+parameters ranges: all +/- 50% of baseline except
+theta_1: [0.000001,0.1]
+theta_2: [0.000001,0.3]
+theta_3: [0.00001, 1.6]
+S0=1-P0-A0-H0-R0
+
