@@ -86,6 +86,7 @@ def solve_odes(S0=S_0,P0=P_0,A0=A_0,H0=H_0,R0=R_0,tstart=tstart,tstop=tstop,p=No
     R = [R0]
     # setup solver, dopri15: explicit Runge-Kutta method of order (4)5
     solver = ode(heroin_odes).set_integrator('dopri5')
+    #solver = ode(heroin_odes).set_integrator('vode', method='BDF')
     #pass parameters onto function that represents the ODEs
     solver.set_initial_value([S0,P0,A0,H0,R0], tstart).set_f_params(p)
     # solve, solve.t is the current time state of the solver; solver_successful() means no problems while integrating 
