@@ -7,9 +7,15 @@ clear all;
 % x =[m,theta_1,epsilon,gamma,sigma,b,P0,A0,H0,R0]
 % Ranges on each of the parameters 
 
-%Result going with from 4/10; bounds have reasons behind them and low enough objective function value 
+
+%Result was going to go with from 4/10; bounds have reasons behind them and low enough objective function value 
 LowerBounds=[-0.1   0.00001   0.8    0.0001       0.00001   0.01   0.0001  0.0001  0.0001  ];
 UpperBounds=[0.1     0.1       8       0.5          0.1      1       0.5     0.5     0.5     ];
+
+%Result COULD go with from 4/21; convergence happens on more runs 
+%LowerBounds=[-0.1   0.0001   0.8     0.0001       0.00001     0.01   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.1       8      0.099        0.099      1       0.5     0.5     0.5     ];
+
 
 %Good result on 4/8/19 since don't want to estimate P0 and use calculated
 %value instead (gives about same objective value as letting multistart estimate P0) 
