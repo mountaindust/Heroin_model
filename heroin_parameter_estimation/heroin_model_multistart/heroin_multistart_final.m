@@ -8,7 +8,16 @@ clear all;
 % Ranges on each of the parameters 
 
 
-%Result was going to go with from 4/10; bounds have reasons behind them and low enough objective function value 
+%Take out theta_1
+%LowerBounds=[-0.1       0.8     0.001      0.00001   0.01   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1         8      0.01         0.1      1       0.5     0.5     0.5     ];
+
+%Runs all converge fval=.2775
+%LowerBounds=[-0.1   0.000001   0.8      0.001       0.00001   0.01   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.00001       8      0.01         0.1      1       0.5     0.5     0.5     ];
+
+
+%Result going to go with from 4/10; bounds have reasons behind them and low enough objective function value 
 LowerBounds=[-0.1   0.00001   0.8    0.0001       0.00001   0.01   0.0001  0.0001  0.0001  ];
 UpperBounds=[0.1     0.1       8       0.5          0.1      1       0.5     0.5     0.5     ];
 
