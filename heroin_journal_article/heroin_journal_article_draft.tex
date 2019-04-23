@@ -582,6 +582,138 @@ $\nu$ &  &  \\
  
 
 
+\textbf{Sensitivity Analysis} 
+%Maybe use Brain Dynamics Toolbox for heat maps? https://github.com/breakspear/bdtoolkit
+%second order rates (like parameter*S*H) won't have much sensitivity, something to look out for 
+%Do we need local sensitivity analysis at all?
+%Info: https://www.mathworks.com/help/sldo/ug/what-is-sensitivity-analysis.html , https://www.mathworks.com/help/sldo/ug/sampling-parameters-and-states.html  
+%Variance methods: how big sample space affects results?
+There are two ways in which we analyze how the uncertainty in our outputs can be apportioned to the uncertainty in each of the inputs of the model \cite{Herman, Marino}. 
+
+
+
+\textcolor{blue}{Sobol sensitivity analysis} \\
+In order to explore the sensitivity of each of the population classes to the inputs (parameters and initial conditions), we implemented Sobol sensitivity analysis. First, the Saltelli sampler is utilized to generate N(2D+2) samples where N$=$\textcolor{red}{fill in} is the number of sample points and D=20, the number of inputs in the model for a total of \textcolor{red}{fill in} samples \cite{Herman}. 
+Saltelli are the statistically good points chosen in the parameter space to test and the outputs are the values of S, P, A, H and R at the final time (year 2018) for the different parameter and initial condition samples. 
+\textcolor{red}{Cannot figure out why N(2D+2) when including second order interactions}. 
+One method as described in \cite{Saltelli1} creates an $N \times 2k$ matrix of random numbers, and then splits this into two $N \times k$ matrices containing half of the samples each (call them J and L). From there, a third matrix is created in ($M_i$) which the $i^{th}$ column is substituted by the $i^{th}$ column of matrix L. The model output is then computed for all parameter samples (all of the rows of J, L, and $M_i$), which gives a total of N+N+$D\times N$ evaluations, or N(D+2). 
+From here, the first-order sensitivity index is measured as $S_i=\frac{V[E(Y|X_i)]}{V(Y)}$ 
+
+\textcolor{red}{should these have subscripts for V (subscript $X_i$) and E (subscript $X_{~i})$?  \\
+If so, does the mean come from only functions evaluated from $M_i$ matrix? But that wouldn't match what's in} \cite{Saltelli2} \textcolor{red}{because equivalent of $M_i$ there is $B_A^{(i)}$ which is not what they take the mean/variance over, it's $X_i$.} \textcolor{red}{So the first order index utilizes output from matrices A and B that are completely random as well and not focused on only varying that one parameter $X_i$?} This measures how much the output variance could be reduced on average if the $i^{th}$ input were fixed and the \textcolor{red}{sum of the $S_i$'s is equal to 1 if the model is additive(? a stats thing, so ours is not?) and less than 1 otherwise; the sum of the $S_{T_i}$ values is only equal to 1 for additive models and otherwise greater than 1}. 
+
+In \cite{Saltelli2}, instead, the matrix $X_{~i}$ represents the $N \times (k-1)$ matrix of all inputs except input $i.$ While fixing input $i$ to some value, each row of $X_{~i}$ is used to evaluate the model; this is done for each generated value of the $i^{th}$ input and then the mean of all of the outputs is taken. The variance of this mean is taken for this fixed input $i$, and then normalized over the variance of all of the outputs resulting in the first-order sensitivity index $S_i=\frac{V_{X_i}[E_{X_{~i}}(Y|X_i)]}{V(Y)}$ (this is normalized since the numerator can take values all the way from 0 to V(Y) based on the identity $V_{X_i}[E_{X_{~i}}(Y|X_i)]+E_{X_i}[V_{X_{~i}}(Y|X_i)]=V(Y))$. The total effect index is given by $S_{Ti}=1-\frac{V_{X_{~i}}[E_{X_i}(Y|X_{~i})]}{V(Y)}.$ \textcolor{red}{Understand why.}
+
+\textcolor{red}{How know which one the sobol analysis is using in SALib package, can't find anywhere how many evaluations it does; does it matter?}
+
+
+\textcolor{red}{Read Saltelli paper and other reference total indices equation 44: term+complement+interaction terms} \\
+
+For first-order indices, only one parameter is varied and the rest are held constant; for second-order indices, two parameters are varied and the rest are held constant; and for total-order indices, every combination of parameters is varied, from a single parameter varying alone to all higher-order interactions between parameters. The length of the colored bars, with each color representing a specific class, measures the contribution of a certain parameter to the variance of each of the classes in the model. The longer the colored bar, the higher the effect the parameter has on that class of individuals; the sum of each color adds to 1, so that for each parameter, the relative contribution to each of the classes is represented. We are able to retrieve the confidence intervals on the sensitivity of each of the populations to a respective change in the parameter(s) for first order changes, second order changes and total order changes. \\
+
+
+Below are the ranges we chose; most are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters except for...FILL IN. We note that $\alpha=m*t+b$. 
+
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Range of values}  \\ [0.5ex]
+
+ \hline\hline
+
+$m$ &  \\
+
+\hline
+
+$\beta_A$&    \\
+
+\hline
+
+$\beta_P$&    \\
+
+\hline
+
+$\theta_1$&    \\
+
+\hline 
+
+$\epsilon$ &    \\
+
+\hline
+
+$\gamma$ &    \\
+
+\hline
+
+
+$\sigma$ &    \\
+
+\hline
+
+$\mu$&    \\
+
+\hline
+
+$\mu_A$&    \\
+
+\hline
+
+$\mu_H$&    \\
+
+\hline
+
+$\theta_2$&    \\
+
+\hline
+
+$\zeta$&    \\
+
+\hline
+
+$\theta_3$ &  \\
+
+\hline
+
+$\nu$ &   \\
+
+\hline
+
+$\omega$ &   \\
+
+ \hline
+ 
+ $b$ &   \\
+
+ \hline
+ 
+ $P_0$ &   \\
+
+ \hline
+
+$A_0$ &   \\
+
+\hline
+$H_0$ &   \\
+
+ \hline
+ $R_0$ &   \\
+
+
+ \hline
+\end{tabular}
+
+\end{center}
+
+
+%Add in sensitivity analysis results and confidence interval information
+%Total --take average of all interactions for plots?? \\
+%Need to scale sensitivities of muA and muH based on their domain $[0,0.1]$??
+
+
+\textcolor{blue}{Latin Hypercube Sampling/PRCC} \\
 
 
 
