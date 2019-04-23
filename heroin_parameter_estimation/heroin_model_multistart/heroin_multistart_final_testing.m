@@ -43,7 +43,7 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 
 % Final time and N+# is # of equally spaced points from 0 to N 
 N = 5;
-tspan=linspace(0,N,N+100);
+tspan=linspace(0,N,N+1);
 
 % Initial Conditions
 P0=0.0710;
@@ -77,17 +77,43 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Yearly output from the model as a proportion of individuals in P at 
  % some point during the year for 2013-2017, Data1 is a column vector
- Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
+ %Data1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
  
  % Yearly output from the model as a proportion of individuals in A at 
  % some point during the year for 2013-2017, Data2 is a column vector
- Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
+ %Data2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
 
  % Yearly output from the model as a proportion of individuals in H at 
  % some point during the year for 2014-2016, Data3 is a column vector 
- Data3=y(2:4,4)+y(3:5,8)-y(2:4,8);
+ %Data3=y(2:4,4)+y(3:5,8)-y(2:4,8);
 
  
+ 
+ Estim1=y(1:end-1,2)+y(2:end,6)-y(1:end-1,6);
+ %Data1=[0.399384466780766;0.476721593432771;0.469765087997695;0.449866817308604;0.427737148099884];
+ 
+ % Actual Data for years 2013-2017
+ Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620955./5708586];
+ 
+
+ Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
+ %Data2=[0.00709261474856600;0.0106675766257930;0.0130723402928730;0.0148284456654410;0.0162165492691030];
+ 
+ % Actual Data for years 2013-2017 
+ Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
+
+
+ Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
+ %Data3=[0.00116527288223448;0.00120952017524577;0.00118883157707289];
+ 
+ % Actual Data for years 2014-2016
+ Data3=[7560./5559006; 7560./5602117; 10260./5651993];
+ 
+ Diff1=Estim1-Data1;
+ Diff2=Estim2-Data2;
+ Diff3=Estim3-Data3;
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)
+
   
  % ODE solutions plotted separately shown all together
  figure(1)
@@ -220,7 +246,47 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
            
                    
-           
+ % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
+ figure(9)
+ hold all
+ plot(t(1:end-1),Estim1, 'o')
+ plot(t(1:end-1), Data1, 'x')
+ set(gca, 'fontsize',10)
+ xlabel('Year')
+ ylabel('Proportion in P at some point during the year')
+ legend('ODE solution', 'Data')
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+ 
+ % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
+ figure(10)
+ hold all
+ plot(t(1:end-1),Estim2, 'o')
+ plot(t(1:end-1), Data2, 'x')
+ set(gca, 'fontsize',10)
+ xlabel('Year')
+ ylabel('Proportion in A at some point during the year')
+ legend('ODE solution', 'Data')
+ set(gca, 'xtick', [0 1 2 3 4])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
+ 
+ 
+  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
+ figure(11)
+ hold all
+ plot(t(2:4),Estim3, 'o')
+ plot(t(2:4), Data3, 'x')
+ set(gca, 'fontsize',10)
+ xlabel('Year')
+ ylabel('Proportion in H at some point during the year')
+ legend('ODE solution', 'Data')
+ set(gca, 'xtick', [ 1 2 3 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+ 
+            
          
 %{ 
  %Data points from Data1 and corresponding ODE solution plotted on top 
@@ -288,7 +354,6 @@ f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(
 
 
 end
-
 
 
 
