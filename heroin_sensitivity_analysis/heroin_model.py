@@ -4,9 +4,9 @@ from scipy.integrate import ode
 
 #initial population values, should add to 1
 P_0 = 0.0710 
-A_0 = 0.00760 
-H_0 = 0.00121 
-R_0 = 0.000443
+A_0 = 0.00739 
+H_0 = 0.00151 
+R_0 = 0.000517
 S_0 = 1-P_0-A_0-H_0-R_0
 
 #temporal info, assigning default values
@@ -17,20 +17,20 @@ tstop =  5
 
 #parameters
 params = {}
-params['m'] = -0.0123                     #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
-params['b'] = 0.291                 #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
+params['m'] = -0.0117                     #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
+params['b'] = 0.293                 #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
 params['beta_A'] = 0.000273                 #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
 params['beta_P'] =  0.000777                      # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
-params['theta_1'] = 0.0999               #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['theta_1'] = 0.0000679              #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
 params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  #from Christopher opioid value 
 params['mu_A'] = 0.00870                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
 params['mu_H'] = 0.0507                 #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # doubled opioid value from Christopher's paper 
-params['gamma'] = 0.000103          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # from Christopher opioid value 
-params['epsilon'] = 3.09          #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #from Christopher opioid value 
-params['theta_2'] = 0.300                      #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
-params['sigma'] = 0.000684  #R->A rate at which people relapse from treatment into the opioid addicted class #from Christopher opioid value 
+params['gamma'] = 0.001          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # from Christopher opioid value 
+params['epsilon'] = 3.36          #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #from Christopher opioid value 
+params['theta_2'] = 0.000204                      #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
+params['sigma'] = 0.0014 #R->A rate at which people relapse from treatment into the opioid addicted class #from Christopher opioid value 
 params['zeta'] = 0.0214                         #A->R rate at which addicted opioid users enter treatment/rehabilitation #from Christopher opioid value 
-params['theta_3'] = 1.60                  #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
+params['theta_3'] = 0.00109                  #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
 params['nu'] = 0.0155                         #H->R rate at which heroin users enter treatment/rehabilitation #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17)
 params['omega'] = 0.0000000001
 
