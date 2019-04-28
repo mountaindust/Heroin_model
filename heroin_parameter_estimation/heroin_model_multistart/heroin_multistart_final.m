@@ -9,6 +9,16 @@ clear all;
 % x =[m,theta_1,epsilon,gamma,sigma,b,P0,A0,H0,R0]
 % Ranges on each of the parameters 
 
+%Taking out estimating theta_1 and seeing fit 
+%LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.0001      8         0.01         0.1      1       0.5     0.5     0.5     ];
+
+
+%THE ONE from 4/25/19 when not using 2016 heroin data point 
+LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.0001  ];
+UpperBounds=[0.1     0.0001      8         0.01         0.1      1       0.5     0.5     0.5     ];
+
+
 %OKAY!!!-taking out 2016 value for heroin fval=.1192 sigma, gamma, theta
 %LowerBounds=[-0.1   0.00001     0.8      0.001       0.0001   0.01   0.0001  0.0001  0.0001  ];
 %UpperBounds=[0.1     0.0001      8        0.01         0.1      1       0.5     0.5     0.5     ];
@@ -18,8 +28,8 @@ clear all;
 %UpperBounds=[0.1     0.0001      8           0.01         0.1      1       0.5     0.5     0.5     ];
 
 %OR THIS ONE WITH HIGHER SIGMA LOWER BOUND (BEST)
-LowerBounds=[-0.1   0.000001     0.8      0.001       0.001   0.01   0.0001  0.0001  0.0001  ];
-UpperBounds=[0.1     0.0001      8           0.01         0.1      1       0.5     0.5     0.5     ];
+%LowerBounds=[-0.1   0.000001     0.8      0.001       0.001   0.01   0.0001  0.0001  0.0001  ];
+%UpperBounds=[0.1     0.0001      8           0.01         0.1      1       0.5     0.5     0.5     ];
 
 %LowerBounds=[-0.1   0.000001     0.8      0.001       0.0001   0.01   0.0001  0.0001  0.0001  ];
 %UpperBounds=[0.1     0.00001      8        0.01         0.1      1       0.5     0.5     0.5     ];
@@ -620,7 +630,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  %Data3=[7560./5559006; 7560./5602117; 10260./5651993];
- 
  Data3=[7560./5559006; 7560./5602117];
   
  % Data simulated when testing codes 

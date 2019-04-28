@@ -2,23 +2,23 @@
 
 %Parameters
 %slope of alpha 
-m=-.0123;
+m=-.0117;
 beta_A=0.000273; 
 beta_P=0.000777; 
-theta_1=0.0999;
-epsilon=3.09;
+theta_1=0.0000679;
+epsilon=3.36;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
-gamma=0.000103;
+gamma=0.001;
 theta_2=3*theta_1; 
-sigma=0.000684;
+sigma=0.0014;
 zeta=0.0214;
 theta_3=16*theta_1; 
 nu=0.0155;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.291; 
+b=0.293; 
 
 %{
 % For R_0 checking:
@@ -47,9 +47,9 @@ tspan=linspace(0,N,N+1);
 
 % Initial Conditions
 P0=0.0710;
-A0=0.00760;
-H0=0.00121;
-R0=0.000443;
+A0=0.00739;
+H0=0.00151;
+R0=0.000517;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -273,7 +273,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
  
  
-  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
+ % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
  hold all
  plot(t(2:4),Estim3, 'o')
@@ -287,46 +287,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
             
-         
-%{ 
- %Data points from Data1 and corresponding ODE solution plotted on top 
- figure(4)
- hold all
- scatter(t(1:end-1), Data1)
- %plot(t(1:end-1), Data1)
- %set(gca, 'xtick', [1 2 3 4 5])
- set(gca, 'fontsize',10)
- %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
- xlabel('Year')
- ylabel('Proportion in P at some point during the year')
- legend('Data points interested in for P')
- 
-
- %Data points from Data2 and corresponding ODE solution plotted on top 
- figure(4)
- hold all
- scatter(t(1:end-1), Data2)
- %plot(t(1:end-1), Data2)
- %set(gca, 'xtick', [ 1 2 ])
- set(gca, 'fontsize',10)
- %set(gca,'xticklabel',{'2015' '2016'})
- xlabel('Year')
- ylabel('Proportion in A at some point during the year')
- legend('Data points interested in for A')
-
-  
- % Data points from Data3 and corresponding ODE solution plotted on top 
- figure(5)
- hold all
- scatter(t(1:end-1), Data3)
- %plot(t(1:end-1), Data3)
- %set(gca, 'xtick', [ 1 2 3 ])
- set(gca, 'fontsize',10)
- %set(gca,'xticklabel',{'2014', '2015', '2016'})
- xlabel('Year')
- ylabel('Proportion in H at some point during the year')
- legend('Data points interested in for H')
-  %}
+    
 
            
 function f = HeroinModel(t,y,pars)
