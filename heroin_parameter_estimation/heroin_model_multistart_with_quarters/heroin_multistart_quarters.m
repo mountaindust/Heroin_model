@@ -11,6 +11,12 @@ clear all;
 LowerBounds=[-0.1     0.00001    0.00001   0.00001     1     0.0001    0.0001      0.001      0.0001    0.001     0.01        0.01   0.001      0.001    0.01    0.001 ];
 UpperBounds=[0.1       0.0001      0.0001   0.0001      3      0.001     0.001       0.01      0.001      0.01     0.1         0.09   0.01       0.1       0.2    0.01 ];
  
+%Wider bounds
+%LowerBounds=[-0.1     0.00001    0.00001   0.00001     1     0.0001    0.0001      0.001      0.0001    0.001     0.001        0.001   0.0001      0.001    0.01    0.00001 ];
+%UpperBounds=[0.1       0.1         0.1       0.1      8       0.1       0.1         0.1      0.1          0.1     0.1            0.1     0.1       0.1       0.2    0.01 ];
+ 
+
+
 
 
 %            [m       beta_A     beta_P    theta_1  epsilon   mu       mu_A        mu_H      gamma    theta_2     sigma       zeta  theta_3      nu       b          P0      A0     H0           R0];
@@ -55,7 +61,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=30;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
