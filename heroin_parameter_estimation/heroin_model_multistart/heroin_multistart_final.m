@@ -15,9 +15,12 @@ clear all;
 
 
 %THE ONE from 4/25/19 when not using 2016 heroin data point 
-LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.0001  ];
-UpperBounds=[0.1     0.0001      8         0.01         0.1      1       0.5     0.5     0.5     ];
+%LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.00001  ];
+%UpperBounds=[0.1     0.0001      8         0.1         0.1      1       0.5     0.5     0.5     ];
 
+
+LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.00001  ];
+UpperBounds=[0.1     0.3          8         0.1         0.1      1       0.5     0.5     0.5     ];
 
 %OKAY!!!-taking out 2016 value for heroin fval=.1192 sigma, gamma, theta
 %LowerBounds=[-0.1   0.00001     0.8      0.001       0.0001   0.01   0.0001  0.0001  0.0001  ];
@@ -447,17 +450,17 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
 
  %Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
- Estim3=y(2:3,4)+y(3:4,8)-y(2:3,8); 
+ Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8); 
  %Data3=[0.00116527288223448;0.00120952017524577;0.00118883157707289];
  
  % Actual Data for years 2014-2016
- %Data3=[7560./5559006; 7560./5602117; 10260./5651993];
- Data3=[7560./5559006; 7560./5602117];
+ Data3=[7560./5559006; 7560./5602117; 10260./5651993];
+ %Data3=[7560./5559006; 7560./5602117];
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
  hold all
- plot(t(2:3),Estim3, 'o')
- plot(t(2:3), Data3, 'x')
+ plot(t(2:4),Estim3, 'o')
+ plot(t(2:4), Data3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
@@ -620,7 +623,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % 2014-2016, Data3 is a column vector 
  % Only for 2014 and 2015 
  %Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
- Estim3=y(2:3,4)+y(3:4,8)-y(2:3,8);  
+ Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
  % When testing all points with simulated data 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);
  
@@ -629,8 +632,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- %Data3=[7560./5559006; 7560./5602117; 10260./5651993];
- Data3=[7560./5559006; 7560./5602117];
+ Data3=[7560./5559006; 7560./5602117; 10260./5651993];
+ %Data3=[7560./5559006; 7560./5602117];
   
  % Data simulated when testing codes 
  %Data3=[0.00116527288223448;0.00120952017524577;0.00118883157707289];

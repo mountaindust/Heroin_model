@@ -2,23 +2,23 @@
 
 %Parameters
 %slope of alpha 
-m=-.0117;
+m=-.0118;
 beta_A=0.000273; 
 beta_P=0.000777; 
-theta_1=0.0000679;
-epsilon=3.36;
+theta_1=0.0000921;
+epsilon=3.35;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
 gamma=0.001;
 theta_2=3*theta_1; 
-sigma=0.0014;
+sigma=0.00103;
 zeta=0.0214;
 theta_3=16*theta_1; 
 nu=0.0155;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.293; 
+b=0.294;
 
 %{
 % For R_0 checking:
@@ -47,9 +47,9 @@ tspan=linspace(0,N,N+1);
 
 % Initial Conditions
 P0=0.0710;
-A0=0.00739;
-H0=0.00151;
-R0=0.000517;
+A0=0.00737;
+H0=0.00173;
+R0=0.00468;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
