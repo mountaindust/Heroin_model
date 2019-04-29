@@ -20,7 +20,7 @@ clear all;
 
 
 LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.00001  ];
-UpperBounds=[0.1     0.3          8         0.1         0.1      1       0.5     0.5     0.5     ];
+UpperBounds=[0.1     0.0001       8         0.1         0.1      1       0.5     0.5     0.5     ];
 
 %OKAY!!!-taking out 2016 value for heroin fval=.1192 sigma, gamma, theta
 %LowerBounds=[-0.1   0.00001     0.8      0.001       0.0001   0.01   0.0001  0.0001  0.0001  ];
