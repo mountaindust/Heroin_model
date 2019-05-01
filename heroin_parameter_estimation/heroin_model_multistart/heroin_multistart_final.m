@@ -202,7 +202,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
