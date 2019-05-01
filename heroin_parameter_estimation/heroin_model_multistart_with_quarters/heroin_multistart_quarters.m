@@ -4,8 +4,8 @@ clf;
 clear all;
 
 
-LowerBounds=[-0.1   0.001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001 ];
-UpperBounds=[0.1     3         8         0.1         0.1     0.8     0.5       0.5     0.5    0.5   ];
+LowerBounds=[-0.1   0.000001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001  0.00001 0.001];
+UpperBounds=[0.1       1         8         0.5         0.5      0.8     0.5       0.5     0.5    0.5       3        5 ];
  
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
@@ -25,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=2;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -41,10 +41,10 @@ mu=0.00868;
 mu_A=0.00870;   
 mu_H=0.0507;
 gamma=x(4);   
-theta_2=3*x(2);
+theta_2=x(11);%3*x(2);
 sigma=x(5);
 zeta=0.0214;
-theta_3=16*x(2);
+theta_3=x(12);%16*x(2);
 nu=0.0155;
 omega=0.0000000001;
 b=x(6);
@@ -89,11 +89,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   %alpha=-pars(1)*t+pars(16);
   alpha=x(1)*t+x(6);
   
-   % Making sure S+P+A+H+R=1
-  for i=1:N+1
-      total(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
-  end
-  
+ % Making sure S+P+A+H+R=1
+ total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
+ 
  %%% For testing purposes: states and corresponding simulated data 
  %%% For testing purposes: states and corresponding simulated data 
  State1=y(:,1);
@@ -421,10 +419,10 @@ mu=0.00868;
 mu_A=0.00870;   
 mu_H=0.0507;
 gamma=z(4);   
-theta_2=3*z(2);
+theta_2=z(11);%3*z(2);
 sigma=z(5);
 zeta=0.0214;
-theta_3=16*z(2);
+theta_3=z(12);%16*z(2);
 nu=0.0155;
 omega=0.0000000001;
 b=z(6);
@@ -725,10 +723,12 @@ Diff6=Estim6-Data6;
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5);
  
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
+ 
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
  %value=norm(Diff4,2)./norm(Data4);
-
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff4,2)./norm(Data4);
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff4,2)./norm(Data4);
 
 
  
