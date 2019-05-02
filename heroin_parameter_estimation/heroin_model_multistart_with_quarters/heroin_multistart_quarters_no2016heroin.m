@@ -4,47 +4,10 @@ clf;
 clear all;
 
 
-LowerBounds=[-0.1   0.0001     0.8      0.001       0.001    0.1   0.00001  0.00001  0.00001 0.00001 ];
-UpperBounds=[0.1     3         8         0.1         0.1     0.8     0.5       0.5     0.5    0.5   ];
- 
-%LowerBounds=[-0.1      0.001     0.001    0.001     1     0.0001    0.0001      0.0001     0.01      0.001       0.01        0.01   0.01     0.01    0.1    0.001   ];
-%UpperBounds=[0.1       0.01      0.01     0.01      3      0.001     0.001       0.001       0.1       0.01       0.1         0.1    0.1       0.1    0.3    0.01    ];
- 
-%            [m       beta_A     beta_P    theta_1  epsilon   mu       mu_A        mu_H      gamma    theta_2     sigma       zeta  theta_3      nu       b     R0    
-%LowerBounds=[-0.1     0.00001    0.00001   0.00001     1     0.0001    0.0001      0.001      0.0001    0.001     0.01        0.01   0.001      0.001    0.01    0.001 ];
-%UpperBounds=[0.1       0.0001      0.0001   0.0001      3      0.001     0.001       0.01      0.001      0.01     0.1         0.09   0.01       0.1       0.2    0.01 ];
- 
-%Wider bounds
-%LowerBounds=[-0.1     0.00001    0.00001   0.00001     1     0.0001    0.0001      0.001      0.0001    0.001     0.001        0.001   0.0001      0.001    0.01    0.00001 ];
-%UpperBounds=[0.1       0.1         0.1       0.1      8       0.1       0.1         0.1      0.1          0.1     0.1            0.1     0.1       0.1       0.2    0.01 ];
+LowerBounds=[-0.1   0.000001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001  0.00001 0.001];
+UpperBounds=[0.1       1         8         0.5         0.5      0.8     0.5       0.5     0.5    0.5       3        5 ];
  
 
-
-%            [m       beta_A     beta_P    theta_1  epsilon   mu       mu_A        mu_H      gamma    theta_2     sigma       zeta  theta_3      nu       b          P0      A0     H0           R0];
-%LowerBounds=[-0.1     0.0001    0.0001     0.001     1     0.0001    0.0001      0.001      0.0001    0.0001     0.001        0.01   0.001      0.001    0.01      0.01   0.0001   0.0001     0.001 ];
-%UpperBounds=[0.1       0.001      0.001     0.1      3      0.001     0.001       0.01      0.001      0.001     0.01         0.09   0.01       0.1       0.2       0.1    0.01    0.01        0.01];
- 
-
-%Go one by one with altering bounds: first realistic ones that can be
-%changed up/down and then others if needed NOTE: P0 seems to be off (make
-%it higher and see what happens with rest of things, make it like .15) 
-%LowerBounds=[-0.1     0.00001    0.00001    0.001     3     0.0001    0.0001      0.000001     0.00001      0.1       0.0001        0.1   0.2        0.001    0.001      0.1   0.0001   0.0001     0.001 ];
-%UpperBounds=[0.1       0.001      0.001     0.1       5      0.01     0.01       0.0001       0.0001       0.2        0.01          0.3   0.3        0.1       0.1       0.3    0.01    0.01        0.01];
- 
-
-%Bounds that converge well with minimizing all 4 Diffs 
-%LowerBounds=[-0.1     0.000001    0.000001    0.001     5     0.01    0.01      0.000001     0.00001      0.1       0.0001        0.1   0.2        0.001    0.001     0.00001   0.0001   0.0001     0.001 ];
-%UpperBounds=[0.1       0.0001       0.0001     0.1      8      0.1     0.1       0.0001       0.0001       0.2        0.01        0.3   0.3        0.1       0.1       0.001      0.2    0.01        0.01];
- 
-%Pretty good bounds when minimizing Diff4 only 
-%LowerBounds=[-0.1  0.1  0.001  0.0001    1     0.001   0.001   0.001   0.001    0.001   0.1      0.01    0.01       0.1       0.1       0.01    0.01     0.01      0.01 ];
-%UpperBounds=[0.1   0.4    0.1   0.01     3      0.01    0.01    0.01    0.1     0.1     0.5      0.1      0.1       0.3       0.3       0.3      0.1       0.2         0.2    ];
-
-
-%Bounds I wanted as realistic but with decreasing order of magnitude range
-%LowerBounds=[-0.1     0.0001    0.0001    0.00001      1     0.0001    0.0001      0.0001     0.001      0.001       0.01        0.001   0.001        0.1      0.1     0.001   0.0001   0.0001     0.0001 ];
-%UpperBounds=[0.1      0.1        0.1       0.001      5      0.01       0.01        0.01      0.5         0.1        0.5          0.1     0.2        0.5       0.5       0.5      0.2    0.1        0.1];
- 
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
 
@@ -62,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=5;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -78,10 +41,10 @@ mu=0.00868;
 mu_A=0.00870;   
 mu_H=0.0507;
 gamma=x(4);   
-theta_2=3*x(2);
+theta_2=x(11);%3*x(2);
 sigma=x(5);
 zeta=0.0214;
-theta_3=16*x(2);
+theta_3=x(12);%16*x(2);
 nu=0.0155;
 omega=0.0000000001;
 b=x(6);
@@ -126,11 +89,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   %alpha=-pars(1)*t+pars(16);
   alpha=x(1)*t+x(6);
   
-   % Making sure S+P+A+H+R=1
-  for i=1:N+1
-      total(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
-  end
-  
+ % Making sure S+P+A+H+R=1
+ total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
+ 
  %%% For testing purposes: states and corresponding simulated data 
  %%% For testing purposes: states and corresponding simulated data 
  State1=y(:,1);
@@ -274,9 +235,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  % Yearly simulation of individuals in P class throughout year for years
  % 2013-2017
- Estim1=[sum(y(1:4,2)+y(2:5,6)-y(1:4,6)); sum(y(5:8,2)+y(6:9,6)-y(5:8,6)); sum(y(9:12,2)+y(10:13,6)-y(9:12,6));...
-         sum(y(13:16,2)+y(14:17,6)-y(13:16,6)); sum(y(17:20,2)+y(18:21,6)-y(17:20,6))];
  
+ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(13,2)+y(17,6)-y(13,6);...
+         y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
+     
  % Actual Data for years 2013-2017
  Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620951./5708586];
  %Data1=[1.43845164603714;1.11286466940459;0.885938700786563;0.652778992061590;0.412645314864569];
@@ -298,8 +260,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  % Yearly simulation of individuals in A class throughout year for years
  % 2013-2017
- Estim2=[sum(y(1:4,3)+y(2:5,7)-y(1:4,7)); sum(y(5:8,3)+y(6:9,7)-y(5:8,7)); sum(y(9:12,3)+y(10:13,7)-y(9:12,7));...
-         sum(y(13:16,3)+y(14:17,7)-y(13:16,7)); sum(y(17:20,3)+y(18:21,7)-y(17:20,7))];
+ Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
  
  
  % Actual Data for years 2013-2017 
@@ -325,11 +287,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly simulation of individuals in H class throughout year for years
  % 2014-2016
  
- Estim3=[sum(y(5:8,4)+y(6:9,8)-y(5:8,8)); sum(y(9:12,4)+y(10:13,8)-y(9:12,8))];
+ Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8)];
  
  % Actual Data for years 2014-2016
  Data3=[7560./5559006; 7560./5602117];
- %Data3=[0.00329131262863590;0.00247517918199099];
+ %Data3=[0.00329131262863590;0.00247517918199099;0.00186475092852713];
  
   
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
@@ -344,7 +306,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  legend('ODE solution', 'Data')
  set(gca, 'xtick', [ 0 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2014', '2015', '2016'})
+ set(gca,'xticklabel',{'2014', '2015'})
 
  
  tspan=linspace(0,N,25);
@@ -457,10 +419,10 @@ mu=0.00868;
 mu_A=0.00870;   
 mu_H=0.0507;
 gamma=z(4);   
-theta_2=3*z(2);
+theta_2=z(11);%3*z(2);
 sigma=z(5);
 zeta=0.0214;
-theta_3=16*z(2);
+theta_3=z(12);%16*z(2);
 nu=0.0155;
 omega=0.0000000001;
 b=z(6);
@@ -525,8 +487,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of the population in P at some point during the year for
  % 2013-2017, Estim1 is a column vector
 
- Estim1=[sum(y(1:4,2)+y(2:5,6)-y(1:4,6)); sum(y(5:8,2)+y(6:9,6)-y(5:8,6)); sum(y(9:12,2)+y(10:13,6)-y(9:12,6));...
-         sum(y(13:16,2)+y(14:17,6)-y(13:16,6)); sum(y(17:20,2)+y(18:21,6)-y(17:20,6))];
+ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(13,2)+y(17,6)-y(13,6);...
+         y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
  
 
 
@@ -565,9 +527,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of population in A at some point during the year for
  % 2013-2017, Estim2 is a column vector
  
-  Estim2=[sum(y(1:4,3)+y(2:5,7)-y(1:4,7)); sum(y(5:8,3)+y(6:9,7)-y(5:8,7)); sum(y(9:12,3)+y(10:13,7)-y(9:12,7));...
-         sum(y(13:16,3)+y(14:17,7)-y(13:16,7)); sum(y(17:20,3)+y(18:21,7)-y(17:20,7))];
- 
+ Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
  % When testing all points with simulated data
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
  
@@ -612,7 +573,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
 
   
- Estim3=[sum(y(5:8,4)+y(6:9,8)-y(5:8,8)); sum(y(9:12,4)+y(10:13,8)-y(9:12,8))];
+ Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8)];
  
 
  
@@ -623,7 +584,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  
  Data3=[7560./5559006; 7560./5602117];
- %Data3=[0.00329131262863590;0.00247517918199099];
+ %Data3=[0.00329131262863590;0.00247517918199099;0.00186475092852713];
  
   
  % Data simulated when testing codes 
@@ -655,6 +616,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
         (802767-17233)./5651993; (792767-17233)./5651993; (787767-17233)./5651993; (782767-17233)./5651993;...
         (769633-20367)./5708586; (759633-20367)./5708586; (729633-20367)./5708586; (692633-20367)./5708586;...
         (679000-19000)./5779971; (676000-19000)./5779971; (631000-19000)./5779971; (612000-19000)./5779971];
+    
  %Data4= [0.454333896046208;0.344172204122199;0.326922197389432;0.313023348479306;0.299173240736468;0.285246590712193;0.271265712176788;0.257179125779146;0.242979396664295;0.228729010760832;0.214345588313890;0.199884705047545;0.185311058657349;0.170641041739577;0.155860866435641;0.140966025229023;0.125963962781128;0.110838304568182;0.0956019865957489;0.0802410609195099;0.0647590920674275;0.0491538249410182;0.0334144339747313;0.0175514982918497];
  
  Diff4=Estim4-Data4;
@@ -759,10 +721,12 @@ Diff6=Estim6-Data6;
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5);
  
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
+ 
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
  %value=norm(Diff4,2)./norm(Data4);
-
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff4,2)./norm(Data4);
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff4,2)./norm(Data4);
 
 
  

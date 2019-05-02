@@ -25,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=2;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -235,9 +235,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  % Yearly simulation of individuals in P class throughout year for years
  % 2013-2017
- Estim1=[sum(y(1:4,2)+y(2:5,6)-y(1:4,6)); sum(y(5:8,2)+y(6:9,6)-y(5:8,6)); sum(y(9:12,2)+y(10:13,6)-y(9:12,6));...
-         sum(y(13:16,2)+y(14:17,6)-y(13:16,6)); sum(y(17:20,2)+y(18:21,6)-y(17:20,6))];
  
+ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(13,2)+y(17,6)-y(13,6);...
+         y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
+     
  % Actual Data for years 2013-2017
  Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620951./5708586];
  %Data1=[1.43845164603714;1.11286466940459;0.885938700786563;0.652778992061590;0.412645314864569];
@@ -259,8 +260,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  % Yearly simulation of individuals in A class throughout year for years
  % 2013-2017
- Estim2=[sum(y(1:4,3)+y(2:5,7)-y(1:4,7)); sum(y(5:8,3)+y(6:9,7)-y(5:8,7)); sum(y(9:12,3)+y(10:13,7)-y(9:12,7));...
-         sum(y(13:16,3)+y(14:17,7)-y(13:16,7)); sum(y(17:20,3)+y(18:21,7)-y(17:20,7))];
+ Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
  
  
  % Actual Data for years 2013-2017 
@@ -286,8 +287,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly simulation of individuals in H class throughout year for years
  % 2014-2016
  
- Estim3=[sum(y(5:8,4)+y(6:9,8)-y(5:8,8)); sum(y(9:12,4)+y(10:13,8)-y(9:12,8));...
-         sum(y(13:16,4)+y(14:17,8)-y(13:16,8))];
+ Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8);...
+         y(13,4)+y(17,8)-y(13,8)];
  
  % Actual Data for years 2014-2016
  Data3=[7560./5559006; 7560./5602117; 10260./5651993];
@@ -487,8 +488,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of the population in P at some point during the year for
  % 2013-2017, Estim1 is a column vector
 
- Estim1=[sum(y(1:4,2)+y(2:5,6)-y(1:4,6)); sum(y(5:8,2)+y(6:9,6)-y(5:8,6)); sum(y(9:12,2)+y(10:13,6)-y(9:12,6));...
-         sum(y(13:16,2)+y(14:17,6)-y(13:16,6)); sum(y(17:20,2)+y(18:21,6)-y(17:20,6))];
+ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(13,2)+y(17,6)-y(13,6);...
+         y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
  
 
 
@@ -527,9 +528,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of population in A at some point during the year for
  % 2013-2017, Estim2 is a column vector
  
-  Estim2=[sum(y(1:4,3)+y(2:5,7)-y(1:4,7)); sum(y(5:8,3)+y(6:9,7)-y(5:8,7)); sum(y(9:12,3)+y(10:13,7)-y(9:12,7));...
-         sum(y(13:16,3)+y(14:17,7)-y(13:16,7)); sum(y(17:20,3)+y(18:21,7)-y(17:20,7))];
- 
+ Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
  % When testing all points with simulated data
  %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
  
@@ -574,8 +574,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
 
   
- Estim3=[sum(y(5:8,4)+y(6:9,8)-y(5:8,8)); sum(y(9:12,4)+y(10:13,8)-y(9:12,8));...
-         sum(y(13:16,4)+y(14:17,8)-y(13:16,8))];
+ Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8);...
+         y(13,4)+y(17,8)-y(13,8)];
  
 
  
@@ -726,9 +726,9 @@ Diff6=Estim6-Data6;
  
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
- %value=norm(Diff4,2)./norm(Data4);
+ value=norm(Diff4,2)./norm(Data4);
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff4,2)./norm(Data4);
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff4,2)./norm(Data4);
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff4,2)./norm(Data4);
 
 
  
