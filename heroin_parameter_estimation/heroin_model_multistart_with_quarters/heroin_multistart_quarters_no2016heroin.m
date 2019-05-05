@@ -4,8 +4,17 @@ clf;
 clear all;
 
 
-LowerBounds=[-0.1   0.000001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001  0.00001 0.001];
-UpperBounds=[0.1      0.001       8         0.1         0.1      0.8     0.5       0.1     0.01   0.01      0.9   0.9 ];
+%Run1
+%LowerBounds=[-0.1   0.000001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001  0.00001 0.001];
+%UpperBounds=[0.1      0.001       8         0.1         0.1      0.8     0.5       0.1     0.01   0.01      0.9   0.9 ];
+ 
+%Run2, Run3
+%LowerBounds=[-0.1    0.00001     0.8      0.00001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001];
+%UpperBounds=[0.1      0.001       8        0.001         0.1      0.8     0.5       0.1     0.01   0.01       3     3 ];
+ 
+%Run4
+LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001];
+UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3 ];
  
 %Bounds for testing code
 %LowerBounds=[-0.1     0.00001     0.8      0.0001      0.0001    0.1     0.00001  0.00001  0.00001 0.00001  0.0001   0.001];
@@ -275,14 +284,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
  figure(10)
  hold all
- z2 = linspace(0,16,5);
+ z2 = linspace(0,4,5);
  scatter(z2, Estim2,'o');
  scatter(z2, Data2,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
  legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 4 8 12 16 ])
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
 
@@ -295,20 +304,21 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Actual Data for years 2014-2015
  Data3=[7560./5559006; 7560./5602117];
+ %Data3=[14000./5559006; 14000./5602117];
  %Data3=[0.00113354785405030;0.00105684472597906];
  
   
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
  hold all
- z3 = linspace(0,4,2);
+ z3 = linspace(0,1,2);
  scatter(z3, Estim3,'o');
  scatter(z3, Data3,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
  legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 4 ])
+ set(gca, 'xtick', [ 0 1 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015'})
 
@@ -505,6 +515,7 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  % total population in TN 12 and older for each year) 
  
  Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620951./5708586];
+ 
  %Data1=[0.454333735443525;0.344171566100465;0.313035715253311;0.299195267718064;0.285283575660588];
  
  % Data simulated when testing codes 
@@ -544,7 +555,7 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  % (total number of opioid addicted individuals in 2014 and 2015 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
-  Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34816./5708586];
+ Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34816./5708586];
   
  %Data2=[0.00860779586570128;0.00903232873704320;0.00940242291915349;0.00973116535395262;0.0100203808159110];
  
@@ -592,6 +603,7 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  
  
  Data3=[7560./5559006; 7560./5602117];
+ %Data3=[14000./5559006; 14000./5602117];
  %Data3=[0.00113354785405030;0.00105684472597906];
  
  % Data simulated when testing codes 
