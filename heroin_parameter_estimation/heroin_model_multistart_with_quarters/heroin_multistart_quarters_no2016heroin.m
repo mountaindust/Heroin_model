@@ -20,7 +20,8 @@ clear all;
 %LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.00001  0.00001];
 %UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3       .1     .1];
 
-%Run7--compare results with Run7c bounds if using this code 
+%Run7--compare results with Run7c bounds if using this code (using these
+%for results for meeting on 5/6)
 LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001  0.00001   0.001  0.001  0.00001  0.00001];
 UpperBounds=[0.1      0.001       8        0.1           1        0.8     0.5       0.1     0.01     0.01       3     5    .1      .1];
   
