@@ -28,14 +28,19 @@ clear all;
 %LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.0001  0.0001  0.00001  0.00001];
 %UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3      .1      .1       0.01     0.01];
 
-%Run9 again making sure not hitting bounds (using these for results on
-%meeting on 5/6)
+%Run9 again making sure not hitting bounds (was going to use these for results on
+%meeting on 5/6 but then wanted to move gamma bound up)
 %LowerBounds=[-0.1    0.00001     0.8      0.00001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.001  0.0001   0.00001  0.000001];
 %UpperBounds=[0.1      0.001       8        0.01           1      0.8     0.5       0.1     0.01    0.5      3      5      1      1       0.01     0.001];
  
-%Run9 again-moving gamma bound up 
-LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.001  0.0001   0.00001  0.000001];
-UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.01    0.5      3      5      1      1       0.01     0.001];
+%Run9 again-moving gamma bound up-good for converging (Run 1 on
+%spreadsheet, used for meeting 5/6) 
+LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.0001  0.0001   0.000001  0.000001];
+UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.1     0.1     3       5      1      1        0.001     0.001];
+ 
+%Run 2 on spreadsheet
+%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.0001  0.0001   0.000001  0.000001];
+%UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.1    0.1      3       5      1      1        0.001     0.001];
  
 %Run9b-trying to get to converge more
 %LowerBounds=[-0.1    0.00001      1      0.0001      0.0001    0.1    0.0001    0.0001  0.0001  0.0001   1   1     0.001   0.001    0.0001  0.0001];
@@ -72,7 +77,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run

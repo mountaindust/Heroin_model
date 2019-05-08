@@ -17,6 +17,7 @@
 \usepackage{multicol}
 \usepackage{comment}
 \usepackage{color,soul}
+\usepackage{rotating}
 \usepackage{combelow}
 \usepackage{tabu}
 \usepackage{caption}
@@ -223,7 +224,7 @@ Figure 1: Schematic diagram for heroin model
 To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero and require that $A=H=0$ since these two compartments consist of individuals who are addicted to opioids or heroin. We are left with the system: \\
 \[0=-\alpha S^* -\beta_{P} S^* P^* + \epsilon P^* +\mu (P^* + R^*) \quad (7)\]
 \[0=\alpha S^* - \epsilon P^* -\gamma P^* - \mu P^* \quad(8)\]
-\[0=\gamma P^* + \beta_{P} S^* P^*.   \quad(9)\]
+\[0=\gamma P^* + \beta_{P} S^* P^*   \quad(9)\]
 \[0=\mu R^* \quad(10)\]
 \[1=S^*+P^*+A^*+H^*+R^* \quad(11)\]
 
@@ -347,42 +348,42 @@ We apply our model to the Tennessee population specifically in order to analyze 
 \captionof{table}{Number of individuals in each category, 2013-2018}
 \begin{tabular}{|l|c|c|c|c|c|c|l}
 \hline
- & \footnotesize{2013} & \footnotesize{2014} & \footnotesize{2015} & \footnotesize{2016} & \footnotesize{2017} & \footnotesize{2018}\\
+ & \scriptsize{2013} & \scriptsize{2014} & \scriptsize{2015} & \scriptsize{2016} & \scriptsize{2017} & \scriptsize{2018}\\
 \hline
-\footnotesize
-Total population & \footnotesize{6,493,432} & \footnotesize{6,540,826} & \footnotesize{6,590,808} & \footnotesize{6,645,011} & \footnotesize{6,708,794} & \footnotesize{6,770,010}\\
-\footnotesize
-Population 12 and older & \footnotesize{\textit{\textcolor{blue}{5,519,417}}} & \footnotesize{\textit{\textcolor{blue}{5,559,702}}} & \footnotesize{\textit{\textcolor{blue}{5,602,187}}} & \footnotesize{\textit{\textcolor{blue}{5,648,259}}} & \footnotesize{\textit{\textcolor{blue}{5,702,475}}} & \footnotesize{\textbf{\textcolor{blue}{5,754,509}}} \\
-\footnotesize
-Heroin users& - &\footnotesize{14,000} & \footnotesize{14,000} & \footnotesize{19,000}  & - &-\\
-\footnotesize
-Heroin addicts & - &\footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{7,560}}} & \footnotesize{\textcolor{blue}{\textbf{10,260}}}  & - &-\\
-\footnotesize
-Prescription opioid addicts (includes heroin addicts) & - &  - & \footnotesize{48,000}
-& \footnotesize{42,000} & - &-\\
-\footnotesize
-Prescription opioid addicts (excludes heroin) & \footnotesize{\textit{\textcolor{blue}{43,418}}} & \footnotesize{\textit{\textcolor{blue}{42,928}}} & \footnotesize{\textcolor{blue}{\textbf{42,816}}
-} & \footnotesize{\textcolor{blue}{\textbf{37,464}}} & \footnotesize{\textit{\textcolor{blue}{34,816}}} &-\\
-\footnotesize
-Prescribed opioid users (includes those addicted) & \footnotesize{1,845,144} &\footnotesize{1,824,342} & \footnotesize{1,819,581} & \footnotesize{1,761,363} &  \footnotesize{1,636,374} &-\\
-\footnotesize
-Prescribed opioid users (excludes those addicted)   & \footnotesize{\textit{\textcolor{blue}{1,825,910}}} &\footnotesize{\textit{\textcolor{blue}{1,805,325}
-}} & \footnotesize{\textcolor{blue}{\textbf{1,800,613}}} & \footnotesize{\textcolor{blue}{\textbf{1,744,766}}} &  \footnotesize{\textit{\textcolor{blue}{1,620,951}
+\scriptsize
+Total population & \scriptsize{6,493,432} & \scriptsize{6,540,826} & \scriptsize{6,590,808} & \scriptsize{6,645,011} & \scriptsize{6,708,794} & \scriptsize{6,770,010}\\
+\scriptsize
+Population 12 and older & \scriptsize{\textit{\textcolor{blue}{5,519,417}}} & \scriptsize{\textit{\textcolor{blue}{5,559,702}}} & \scriptsize{\textit{\textcolor{blue}{5,602,187}}} & \scriptsize{\textit{\textcolor{blue}{5,648,259}}} & \scriptsize{\textit{\textcolor{blue}{5,702,475}}} & \scriptsize{\textbf{\textcolor{blue}{5,754,509}}} \\
+\scriptsize
+Heroin users& - &\scriptsize{14,000} & \scriptsize{14,000} & \scriptsize{19,000}  & - &-\\
+\scriptsize
+Heroin addicts & - &\scriptsize{\textcolor{blue}{\textbf{7,560}}} & \scriptsize{\textcolor{blue}{\textbf{7,560}}} & \scriptsize{\textcolor{blue}{\textbf{10,260}}}  & - &-\\
+\scriptsize
+Rx opioid addicts (includes heroin addicts) & - &  - & \scriptsize{48,000}
+& \scriptsize{42,000} & - &-\\
+\scriptsize
+Rx opioid addicts (excludes heroin addicts) & \scriptsize{\textit{\textcolor{blue}{43,418}}} & \scriptsize{\textit{\textcolor{blue}{42,928}}} & \scriptsize{\textcolor{blue}{\textbf{42,816}}
+} & \scriptsize{\textcolor{blue}{\textbf{37,464}}} & \scriptsize{\textit{\textcolor{blue}{34,816}}} &-\\
+\scriptsize
+Prescribed opioid users (includes Rx addicts) & \scriptsize{1,845,144} &\scriptsize{1,824,342} & \scriptsize{1,819,581} & \scriptsize{1,761,363} &  \scriptsize{1,636,374} &-\\
+\scriptsize
+Prescribed opioid users (excludes Rx addicts)   & \scriptsize{\textit{\textcolor{blue}{1,825,910}}} &\scriptsize{\textit{\textcolor{blue}{1,805,325}
+}} & \scriptsize{\textcolor{blue}{\textbf{1,800,613}}} & \scriptsize{\textcolor{blue}{\textbf{1,744,766}}} &  \scriptsize{\textit{\textcolor{blue}{1,620,951}
 }} &-\\
-\footnotesize
-Prescription opioid overdose deaths & - & - & \footnotesize{679} & -  & - &-\\
-\footnotesize
-Heroin/fentanyl overdose deaths & - & - & \footnotesize{374} & -  & - &-\\
-\footnotesize
-Prescription opioid treatment admissions & \footnotesize{4,485} & \footnotesize{4,530} & \footnotesize{4,326} & -  & - &-\\
-\footnotesize
-Heroin treatment admissions & \footnotesize{555} & \footnotesize{743} & \footnotesize{1,083} & -  & - &-\\
+\scriptsize
+Prescription opioid overdose deaths & - & - & \scriptsize{679} & -  & - &-\\
+\scriptsize
+Heroin/fentanyl overdose deaths & - & - & \scriptsize{374} & -  & - &-\\
+\scriptsize
+Prescription opioid treatment admissions & \scriptsize{4,485} & \scriptsize{4,530} & \scriptsize{4,326} & -  & - &-\\
+\scriptsize
+Heroin treatment admissions & \scriptsize{555} & \scriptsize{743} & \scriptsize{1,083} & -  & - &-\\
 \hline
 \end{tabular} \\
 \label{tab:template}
  \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\ \\
  \textcolor{blue}{Some of these are data points that are used directly in parameter estimation code, but some are used for calculation of $\mu$, $\mu_A$, $\mu_H$, IC,...leave these explanations here or put them in the appendix?} \\
-We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, \textbf{bolded} values are numbers that we estimated by information within the same year, the remaining numbers are actual data and the numbers in \textcolor{blue}{blue} are data used directly in parameter estimation.
+We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, whereas \textbf{bolded} values are numbers that we estimated by information within the same year. All other numbers are actual data and numbers in \textcolor{blue}{blue} are data used directly in parameter estimation.
  
 The first row provides the \textbf{total population estimates in Tennessee} each year \cite{USCensus}. 
 %I believe these might be done at some point such as in the middle of the year such as July, so may not be 100% accurate, but best we can do 
