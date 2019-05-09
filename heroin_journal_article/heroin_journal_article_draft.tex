@@ -183,7 +183,7 @@ We also note the fact that Naloxone, an overdose-reversing medication, has saved
 
 \textcolor{blue}{Explanation of different R class, how different from Christopher's opioid paper:} \\
 \textcolor{red}{Fix: don't want to use ``negative" language such as ``we did something to \textit{avoid} someting else," etc. Reword so saying something like ``Other choices for dealing with recovery include..., two recovery classes, etc...} \\
-We note that the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$ were included in order to avoid having two recovered classes, which would prevent the transition of individuals who recovered from one drug to initiate use of the other (or if we included those pathways, would become too complicated for a first model). One study suggested that 10\% of the prescription opioid addicts they followed up with post-treatment had used heroin at least five times in the previous year, which demonstrates the importance of keeping these transitions as possibilities \cite{Weiss}. We decided to define a recovered class instead of a recovery class as the model presented in \cite{Battista} did, because the recovery class would have consisted of two very different groups of individuals: those with a high chance of relapse (e.g. recently finished treatment) and those with a much lower chance of relapse (e.g. successfully finished treatment in the past and has remained free of addiction for a significant amount of time). This definition of the recovered class creates a compartment to place individuals who have been addicted in the past and have finished treatment but are not considered actively addicted anymore and should be dealt with differently than susceptible individuals, those in treatment, and those recently out of treatment. %This definition of a recovered class is also beneficial when it comes to the data; data for the number of addicted individuals would include those in recovery, so our class avoids having to parse out how many are in recovery versus not in recovery.  \\ 
+We note that the terms $\sigma R \frac{A}{A+H+\omega}$ and $\sigma R \frac{H}{A+H+\omega}$ were included in order to avoid having two recovered classes, which would prevent the transition of individuals who recovered from one drug to initiate use of the other (or if we included those pathways, would become too complicated for a first model). One study suggested that 10\% of the prescription opioid addicts they followed up with post-treatment had used heroin at least five times in the previous year, which demonstrates the importance of keeping these transitions as possibilities \cite{Weiss}. We decided to define a recovered class instead of a recovery class as the model presented in \cite{Battista} did, because the recovery class would have consisted of two very different groups of individuals: those with a high chance of relapse (e.g. recently finished treatment) and those with a much lower chance of relapse (e.g. successfully finished treatment in the past and has remained free of addiction for a significant amount of time). This definition of the recovered class creates a compartment to place individuals who have been addicted in the past and have finished treatment but are not considered actively addicted anymore and should be dealt with differently than susceptible individuals, those in treatment, and those recently out of treatment. We emphasize here that we do not consider the stably recovered class to contain addicts. %This definition of a recovered class is also beneficial when it comes to the data; data for the number of addicted individuals would include those in recovery, so our class avoids having to parse out how many are in recovery versus not in recovery.  \\ 
 
 We note here that the recovered class and relapse from that class is one of the key features that distinguishes our model from that of \cite{Battista}. In the opioid-only model, as the focus was on the dynamics of the epidemic as it was ramping up, at beginning of the epidemic, relapse did not depend on the number that were addicted. In contrast, since the epidemic has been established, there are high numbers of opioid and heroin/fentanyl addicts; the proportion in each category affects where people relapse to. \textcolor{red}{Be clearer with words here, depending on if interaction term or not; may need to alter argument about primary drug/source-driven?} 
 
@@ -335,16 +335,20 @@ $\mathscr{R}_0=$ WHICHEVER IS LARGEST WHEN KNOW VALUES!
 \textcolor{blue}{Include proof of non-negative IC implies non-negative solutions?} \\ 
 \textcolor{blue}{What other analysis should be done?} \\ \\
 
+\pagebreak
+
 \textbf{Numerical Results} 
-(literature information and parameter estimation) \\ \\
+(literature information and parameter estimation) 
  
  \textcolor{green}{Data used within code} \\
- \textcolor{blue}{Applying model to Tennessee population} \\
- \textcolor{red}{This is where start to talk about Tennessee} \\
-We apply our model to the Tennessee population specifically in order to analyze the opioid epidemic on a smaller scale than the national level. Although there is still heterogeneity across Tennessee, it is lower than the amount one would find on a national scale. Below we present a data table consisting of estimates of the number of individuals in Tennessee in various categories for the years 2013-2018 found either in literature or that we estimated; explanations of each of the categories follows. 
+ \textcolor{blue}{Applying model to Tennessee population/start to talk about Tennessee specifically} \\
+We apply our model to the Tennessee population specifically in order to analyze the opioid epidemic on a smaller scale than the national level. Although there is still heterogeneity across Tennessee, it is lower than the amount one would find on a national scale. \textcolor{red}{Put in information of US prescription rate per capita at it's peak was 81.3/100 people and how TN has been far above that every year...Talk about why applying to Tennessee specifically-worse state than others.}
 
-\textcolor{blue}{Leave data table/information here or put in appendix?}
-\textcolor{red}{Put in information of US prescription rate per capita at it's peak was 81.3/100 people and how TN has been far above that every year.}
+
+
+\textcolor{blue}{Leave data table/information here or put in appendix?} \\
+Below we present a data table consisting of estimates of the number of individuals in Tennessee in various categories for the years 2013-2018 found either in literature or that we estimated; explanations of each of the categories follows. 
+
 \captionof{table}{Number of individuals in each category, 2013-2018}
 \begin{tabular}{|l|c|c|c|c|c|c|l}
 \hline
@@ -363,12 +367,12 @@ Rx opioid addicts (includes heroin addicts) & - &  - & \scriptsize{48,000}
 & \scriptsize{42,000} & - &-\\
 \scriptsize
 Rx opioid addicts (excludes heroin addicts) & \scriptsize{\textit{\textcolor{blue}{43,418}}} & \scriptsize{\textit{\textcolor{blue}{42,928}}} & \scriptsize{\textcolor{blue}{\textbf{42,816}}
-} & \scriptsize{\textcolor{blue}{\textbf{37,464}}} & \scriptsize{\textit{\textcolor{blue}{34,816}}} &-\\
+} & \scriptsize{\textcolor{blue}{\textbf{37,464}}} & \scriptsize{\textit{\textcolor{blue}{34,805}}} &-\\
 \scriptsize
 Prescribed opioid users (includes Rx addicts) & \scriptsize{1,845,144} &\scriptsize{1,824,342} & \scriptsize{1,819,581} & \scriptsize{1,761,363} &  \scriptsize{1,636,374} &-\\
 \scriptsize
 Prescribed opioid users (excludes Rx addicts)   & \scriptsize{\textit{\textcolor{blue}{1,825,910}}} &\scriptsize{\textit{\textcolor{blue}{1,805,325}
-}} & \scriptsize{\textcolor{blue}{\textbf{1,800,613}}} & \scriptsize{\textcolor{blue}{\textbf{1,744,766}}} &  \scriptsize{\textit{\textcolor{blue}{1,620,951}
+}} & \scriptsize{\textcolor{blue}{\textbf{1,800,614}}} & \scriptsize{\textcolor{blue}{\textbf{1,744,766}}} &  \scriptsize{\textit{\textcolor{blue}{1,620,955}
 }} &-\\
 \scriptsize
 Prescription opioid overdose deaths & - & - & \scriptsize{679} & -  & - &-\\
@@ -381,46 +385,48 @@ Heroin treatment admissions & \scriptsize{555} & \scriptsize{743} & \scriptsize{
 \hline
 \end{tabular} \\
 \label{tab:template}
- \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\ \\
- \textcolor{blue}{Some of these are data points that are used directly in parameter estimation code, but some are used for calculation of $\mu$, $\mu_A$, $\mu_H$, IC,...leave these explanations here or put them in the appendix?} \\
-We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, whereas \textbf{bolded} values are numbers that we estimated by information within the same year. All other numbers are actual data and numbers in \textcolor{blue}{blue} are data used directly in parameter estimation.
+\\
+
+ \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\ 
+We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, whereas \textbf{bolded} values are numbers that we estimated by information within the same year. All other numbers are actual data and numbers in \textcolor{blue}{blue} are data used directly in parameter estimation. \textcolor{red}{Some values are used in Appendix A for parameter calculations rather than directly in the parameter estimation process--may change depending on if use those calculations at all/otherwise, may get rid of treatment admission data, for example.}
  
-The first row provides the \textbf{total population estimates in Tennessee} each year \cite{USCensus}. 
+The first row provides the \textbf{total population estimates in Tennessee} each year as of July 1 of the corresponding year \cite{USCensus}. 
 %I believe these might be done at some point such as in the middle of the year such as July, so may not be 100% accurate, but best we can do 
 However, since the remainder of the data we use is specific to individuals 12 and older, we estimate the number in this age group. 
-There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and under. (Note: we could not find the estimate for this age group for the years 2013-2017, so this is the best estimate we have for this age group). To figure out those who are 12 years old, we take approximately 1/8th of the individuals that are in the age group 5-12, which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the total population estimate for 2018 being 6,770,010 from row 1, this means that approximately 15\% of the population is under the age of 12. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the above total population estimates; this is shown in the second row.  \\
-
-The \textbf{total number of individuals taking prescription opioids for pain (prescribed)} is given in the third row \cite{TNgov1}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
-
-The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{prescription opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. For these estimates, we choose the lower of the two years to place the data points; for example, for the 2015/2016 average, 48,000 is placed in the year 2015. \textcolor{red}{May need to fill in more details about specific data such as collection process, self-reported probably equates to underreported, etc.}
-We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. We also remind the reader that these numbers include both individuals who are personally prescribed opioids or may obtain them illicitly.   \textcolor{red}{May find a better place for this later: Finally, we note that those who are addicted to opioids are strictly in the A class, as individuals in R are not considered addicted in our model.}  \\
+There were an estimated 1,073,214 individuals in Tennessee in 2018 aged 12 and under. (Note: we could not find the estimate for this age group for the years 2013-2017, so this is the best estimate we have for this age group). To figure out those who are exactly 12 years old, we take 1/8th of the individuals that are in the age group 5-12 (an estimated 665,401 individuals), which is approximately 83,175 individuals \cite{DOHHS}. Thus, an estimated (1073214-83175=) 990,039 individuals are \emph{under} the age of 12 in Tennessee. Given the total population estimate for 2018 being 6,770,010 from row 1, this means that approximately 15\% of the population is under the age of 12. Since we do not see a reason for this percentage to be significantly different from year to year, we assume that this percentage is constant throughout the time period we are looking at. Then, we are able to consider the \textbf{Tennessee population estimates for individuals 12 and older} in order to align with the rest of the data that is in this age range by taking off 15\% of the total population estimates for each year; this is shown in the second row.  \\
 
 
-The 2014/2015 average number of individuals 12 and older with ``Past Year Heroin Use" (\textbf{heroin/fentanyl addicts}) was 14,000, the 2015/2016 average number was 14,000, and the 2016/2017 average number was 19,000 \cite{NSDUH0, NSDUH2, NSDUH3}.  This number includes those who may have used heroin once or twice in the past year; however, it is estimated that 54\% of heroin users are dependent on the drug, which gives the resulting \textbf{bold} estimates in the table \cite{DrugAbuse}. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Again, for these estimates, we choose the lower of the two years to place the data points; for example, 10,260 is placed in the year 2016. The values \textbf{bolded} in Table 1 are because numbers were based on the data of individuals from the same year, and did not rely on any extrapolated data from a different year. \\
+The 2014/2015 average number of individuals 12 and older with ``Past Year Heroin Use" (\textbf{heroin/fentanyl addicts}) was 14,000, the 2015/2016 average number was 14,000, and the 2016/2017 average number was 19,000 as show in row 3 of the table \cite{NSDUH0, NSDUH2, NSDUH3}.  This number includes those who may have used heroin once or twice in the past year; however, it is estimated that 54\% of heroin users are dependent on the drug, which gives the resulting \textbf{bold} estimates in row 4 of the table \cite{DrugAbuse}. In addition, the number of heroin users does not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do fentanyl and not heroin, but data has not been found for fentanyl addicts only. Therefore, we are working under the assumption that it would be a negligible population that takes fentanyl without heroin. Again, for these estimates, we choose the lower of the two years to place the data points; for example, 10,260 is placed in the year 2016. The values \textbf{bolded} in Table 1 are because numbers were based on the data of individuals from the same year, and did not rely on any extrapolated data from a different year. \\
 %We are under the assumption that the majority of these individuals are addicts and that very few, if any, individuals use heroin recreationally. Overall, these two assumptions may work to balance one another out.
 
-In 2010, on the national level it was estimated that 14\% of individuals who abused or were dependent on pain medications also used heroin \cite{DrugAbuse}. It was right around this year that the number of overdose deaths due to heroin increased and continued to increase until 2016 \cite{TNgov1, CDC4}. Although fentanyl began being laced with heroin in this time frame, the overdose deaths due to fentanyl were recorded separately and heroin overdose deaths were still increasing despite that; therefore, it seems likely that an increase in overdose deaths would equate to a larger number of heroin addicts in each of those years. Therefore, we assume a higher percentage that 20\% of prescription opioid addicts used heroin each of the years 2013-2017. However, only 54\% of heroin users are addicts, which means that 10.8\% of prescription opioid addicts are also heroin addicts (.54*.2$=$.108) \cite{DrugAbuse}. We subtract these heroin addicts from the prescription opioid addict category each year; this results in the non-heroin addicted prescription opioid addicts. \\
+
+The \textbf{total number of individuals taking prescription opioids for pain (prescribed)} is given in row 5 \cite{TNgov1}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+
+The 2015/2016 average number of individuals 12 and older with ``Pain Reliever Use Disorder" (\textbf{prescription opioid addicts}) is 48,000 and the 2016/2017 average number was 42,000 \cite{NSDUH2, NSDUH3}. For these estimates, we choose the lower of the two years to place the data points; for example, for the 2015/2016 average, 48,000 is placed in the year 2015. \textcolor{red}{May need to fill in more details about specific data such as collection process, self-reported probably equates to underreported, etc.}
+We note that their definition of pain reliever use disorder includes those who meet the American Psychiatric Association criteria for dependence or abuse. Here, opioid dependence is classified as having "signs and symptoms that reflect compulsive, prolonged self-administration of opioid substances that are used for no legitimate medical purpose or...are used in doses that are greatly in excess of the amount needed for pain relief...regular patterns of compulsive drug use that daily activities are typically planned around obtaining and administering opioids." This definition falls under our definition of opioid addiction. Opioid abuse, on the other hand, they consider to be less severe than dependence, and would not lead to the development of withdrawal symptoms. This latter definition does not fall under our characterization of addiction, but we make a note of this to say that this estimate for those with a pain reliever use disorder may be overestimated for what we are concerned with, but is an acceptable approximation \cite{DSM}. In addition, we assume very few, if any, individuals are addicted to opioids outside of prescription opioids, but even if they are, we assume they are taking prescription opioids in some capacity, so we take pain reliever use disorder to include those with other non-prescription opioid addiction. We also remind the reader that these numbers include both individuals who are personally prescribed opioids or may obtain them illicitly. Finally, we note that those who are addicted to opioids are considered strictly in the A class, as individuals in R are not considered addicted in our model. \\
+
+
+
+In 2010, on the national level it was estimated that 14\% of individuals who abused or were dependent on pain medications also \textit{used} heroin \cite{DrugAbuse}. It was right around this year that the number of overdose deaths due to heroin increased and continued to increase until 2016 \cite{TNgov1, CDC4}. Although fentanyl began being laced with heroin in this time frame, the overdose deaths due to fentanyl were recorded separately and heroin overdose deaths were still increasing despite that; therefore, it seems likely that an increase in overdose deaths would equate to a larger number of heroin addicts in each of those years. Therefore, we assume a higher percentage that 20\% of prescription opioid addicts \textit{used} heroin each of the years 2013-2017. (Although this may not be exact or accurate for all of these years, it is a reasonable starting point to be able to work with the data we do have). However, only 54\% of heroin users are \textit{addicts}, which means that 10.8\% of prescription opioid addicts are also heroin addicts (.54*.2$=$.108) \cite{DrugAbuse}. We subtract these heroin addicts from the prescription opioid addict category each year; this results in the non-heroin addicted prescription opioid addicts for years 2015 and 2016. 
 %Calculations:
 %For 2015: 48000-0.108*48000=42816
 %For 2016: 42000-0.108*42000=37464
-
-
-From 2013 to 2017, the number of prescribed opioid users was decreasing, likely due to more awareness of the problem as suggested in \cite{CDC7} which resulted in a decreasing prescribing rate \cite{PDO}; thus, we expect the number of addicts to also be decreasing in that time period, especially due to the movement of individuals to heroin use. For 2015, we see there were 42,816 (non-heroin addicted) prescription opioid addicts compared to 1,819,581 prescribed opioid users, which is an approximate ratio of 1:42.5; thus, we use this exact ratio of addicts to prescribed opioids users for 2013 and 2014, as well, to estimate the number of opioid addicts (these values are in \textit{italics} in Table 1 since they are extrapolated from a different year). Although the numbers are most likely higher than this, this is an estimate. We apply a similar idea for the year 2017, utilizing data from 2016 that there are 37,464 (non-heroin addicted) prescription opioid addicts out of 1,761,363 prescription users, which is an approximate ratio of 1:47 (also \textit{italicized} in Table 1). \\
-%Calculations for excludes heroin addicted: 
+From 2013 to 2017, the number of prescribed opioid users was decreasing, likely due to more awareness of the problem as suggested in \cite{CDC7} which resulted in a decreasing prescribing rate \cite{PDO}; thus, we expect the number of addicts to also be decreasing in that time period, especially due to the movement of individuals to heroin use. For 2015, we see there were 42,816 (non-heroin addicted) prescription opioid addicts compared to 1,819,581 prescribed opioid users, which is an approximate ratio of 1:42.5; thus, we use the exact ratio of addicts to prescribed opioids users for 2013 and 2014, as well, to estimate the number of opioid addicts (these values are in \textit{italics} in Table 1 since they are extrapolated from a different year). Although the numbers are most likely higher than this, this is an estimate. We apply a similar idea for the year 2017, utilizing data from 2016 that there are 37,464 (non-heroin addicted) prescription opioid addicts out of 1,761,363 prescription users, which is an approximate ratio of 1:47 (also \textit{italicized} in Table 1), but we use the exact ratio to calculate. \\
+%Calculations for prescription opioid addicts that excludes heroin addicted: 
 %For 2015: 1819581/42816=42.49768778 so for 
 %2013: 1845144/42.49768778=43418
 %2014: 1824342/42.49768778=42928
 %For 2016: 1761363/37464=47.01481422 so for
 %2017: 1636374/47.01481422=34805
 
-%Calculations for includes heroin addicted: 
+%Calculations for prescription opioid addicts that includes heroin addicted: 
 %For 2015: 1819581/48000=37.9079375
 %2013: 1845144/37.9079375=48674
 %2014: 1824342/37.9079375=48163
 %For 2016: 1761363/42000=41.93721429
 %2017: 1636374/41.93721429=39020
 
-The total number of prescribed opioid users each year, however, includes individuals addicted to their prescriptions. In a 2015 study done among adults with prescription opioid use disorder, 44.3\% of them had obtained prescription opioids for their most recent episode of misuse from 1 or more physicians \cite{Han}. We make the assumptions that individuals who are addicted to heroin are not using \textit{prescribed} opioids, since they are more expensive and provide less of a high; although this study consisted of individuals with prescription opioid use disorder, regardless of their heroin addiction status, we will extrapolate this percentage to those who are non-heroin addicted\cite{NIDA1}.. We recognize this percentage may be on the low side (i.e. if heroin addicts were taken out of the study, this percentage may be higher since those non-heroin addicted would possibly obtain more from a physician source), but we take this as our best estimate. Therefore, we assume that 44.3 out of 100 non-heroin addicted prescription opioid addicts are personally prescribed opioids and subtract 44.3\% of the number of non-heroin prescription opioid addicts in each year from the prescribed opioid class in the corresponding year to obtain the number of non-addicted prescribed opioid users for 2013-2017.  \\
+The total number of prescribed opioid users each year, however, includes individuals addicted to their prescriptions. In a 2015 study done among adults with prescription opioid use disorder, 44.3\% of them had obtained prescription opioids for their most recent episode of misuse from 1 or more physicians \cite{Han}. We make the assumptions that individuals who are addicted to heroin are not using \textit{prescribed} opioids, since they are more expensive and provide less of a high; although this study consisted of individuals with prescription opioid use disorder, regardless of their heroin addiction status, we will extrapolate this percentage to those who are non-heroin addicted \cite{NIDA1}. We recognize this percentage may be on the low side (i.e. if heroin addicts were taken out of the study, this percentage may be higher since those non-heroin addicted would possibly obtain more from a physician source), but we take this as our best estimate. Therefore, we assume that 44.3 out of 100 non-heroin addicted prescription opioid addicts are personally prescribed opioids and subtract 44.3\% of the number of non-heroin prescription opioid addicts in each year from the prescribed opioid class in the corresponding year to obtain the number of non-addicted prescribed opioid users for 2013-2017.  \\
 
 %Calculations:
 %In 2013, 43418*0.443=19234 so 1845144-19234=1825910
@@ -429,20 +435,187 @@ The total number of prescribed opioid users each year, however, includes individ
 %In 2016: 37464*0.443=16597 so 1761363-16597=1744766
 %In 2017: 34805*0.443=15419 so 1636374-15419=1620955
 
-We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in (848-169=) 679 as the \textbf{total number of prescription opioid overdose deaths} for 2015. \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
+We use data on the number of prescription opioid overdose deaths which include natural, semi-synthetic, and synthetic opioids; however, we subtract out the number of fentanyl overdoses (fentanyl is classified as a synthetic prescription opioid), since those overdoses are counted for in their own category, listed below. This results in (848-169=) 679 as the \textbf{total number of prescription opioid overdose deaths} for 2015 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
 We add together the heroin and fentanyl overdoses for the state of Tennessee to obtain the \textbf{total number of heroin and fentanyl overdoses} in 2015 to be (205+169=) 374 \cite{PDO}. Although this number does not explicitly state it is for individuals 12 and older, we assume it is since it comes from the Tennessee Department of Health; if it does include individuals under 12, we assume that number is negligible. \\
 
-For Tennessee individuals 12 and older, \textbf{the number of treatment admissions for non-heroin opiates/synthetics} as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) is found in row eight of Table 1 \cite{TEDS2015_SAMSHA_admissions}. Here, we take non-heroin opiates/synthetics to mean prescription opioids. We are under the assumption that if one were addicted to heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment and would be included in the following numbers. Finally, row nine of Table 1 gives the \textbf{number of treatment admissions} for heroin as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) for Tennessee individuals 12 and older \cite{TEDS2015_SAMSHA_admissions}. Again, these numbers do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do go to treatment with the primary substance of abuse being fentanyl, but there is not data available for those numbers currently. 
+For Tennessee individuals 12 and older, \textbf{the number of treatment admissions for non-heroin opiates/synthetics} as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) is found in row 11 of Table 1 \cite{TEDS2015_SAMSHA_admissions}. Here, we take non-heroin opiates/synthetics to mean prescription opioids. We are under the assumption that if one were addicted to heroin in addition to prescription opioids, their heroin problem would be the primary reason for going to treatment and would be included in the following numbers. Finally, row 12 of Table 1 gives the \textbf{number of treatment admissions for heroin} as the primary substance of abuse to facilities that receive state/public funding (generally referring to funding by the state substance abuse agency) for Tennessee individuals 12 and older \cite{TEDS2015_SAMSHA_admissions}. Again, these numbers do not include fentanyl users explicitly, but we are under the assumption that those who take fentanyl are a subset of those who use heroin, and therefore, would mostly be included in these numbers. We admit the values may be slightly too low, for the cases of individuals who do go to treatment with the primary substance of abuse being fentanyl, but there is not data available for those numbers currently. \\
 
 
-Calculations of parameters and estimates of initial conditions from this data is found in Appendix A. \\
+
+\captionof{table}{Individuals Prescribed Opioids Quarterly, 2013-2018}
+\begin{tabular}{|l|c|c|c|c|c|c|l}
+\hline
+\scriptsize
+Quarter & \scriptsize{Prescribed opioid users (includes Rx addicts)} &  \scriptsize{Prescribed opioid users (excludes Rx addicts)} \\
+\hline
+\scriptsize
+2013 Quarter 1 & \scriptsize{856,000} & \scriptsize{\textcolor{blue}{\textbf{847,077}}} \\
+\scriptsize
+2013 Quarter 2 & \scriptsize{870,000} &  \scriptsize{\textcolor{blue}{\textbf{860,931}}}\\
+\scriptsize
+2013 Quarter 3 & \scriptsize{874,000} &  \scriptsize{\textcolor{blue}{\textbf{864,889}}}\\
+\scriptsize
+2013 Quarter 4 & \scriptsize{856,000} &  \scriptsize{\textcolor{blue}{\textbf{847,077}}}\\
+\scriptsize
+2014 Quarter 1 & \scriptsize{842,000} &  \scriptsize{\textcolor{blue}{\textbf{833,223}}}\\
+\scriptsize
+2014 Quarter 2 & \scriptsize{860,000} &  \scriptsize{\textcolor{blue}{\textbf{851,035}}}\\
+\scriptsize
+2014 Quarter 3 & \scriptsize{871,000} & \scriptsize{\textcolor{blue}{\textbf{861,921}}}\\
+\scriptsize
+2014 Quarter 4 & \scriptsize{850,000} &   \scriptsize{\textcolor{blue}{\textbf{841,140}}}\\
+\scriptsize
+2015 Quarter 1 & \scriptsize{836,000} &  \scriptsize{\textcolor{blue}{\textbf{827,285}}}\\
+\scriptsize
+2015 Quarter 2 & \scriptsize{861,000} &  \scriptsize{\textcolor{blue}{\textbf{852,025}}}\\
+\scriptsize
+2015 Quarter 3 & \scriptsize{865,000} &  \scriptsize{\textcolor{blue}{\textbf{855,983}}}\\
+\scriptsize
+2015 Quarter 4 & \scriptsize{854,000} & \scriptsize{\textcolor{blue}{\textbf{845,098}}}\\
+\scriptsize
+2016 Quarter 1 & \scriptsize{840,000} & \scriptsize{\textcolor{blue}{\textbf{832,085}}}\\
+\scriptsize
+2016 Quarter 2 & \scriptsize{829,000} &  \scriptsize{\textcolor{blue}{\textbf{821,189}}}\\
+\scriptsize
+2016 Quarter 3 & \scriptsize{801,000} &  \scriptsize{\textcolor{blue}{\textbf{793,453}}}\\
+\scriptsize
+2016 Quarter 4 & \scriptsize{783,000} & \scriptsize{\textcolor{blue}{\textbf{775,622}}}\\
+\scriptsize
+2017 Quarter 1 & \scriptsize{783,000} &  \scriptsize{\textcolor{blue}{\textbf{775,622}}}\\
+\scriptsize
+2017 Quarter 2 & \scriptsize{772,000} &  \scriptsize{\textcolor{blue}{\textbf{764,726}}}\\
+\scriptsize
+2017 Quarter 3 & \scriptsize{747,000} &  \scriptsize{\textcolor{blue}{\textbf{739,961}}}\\
+\scriptsize
+2017 Quarter 4 & \scriptsize{713,000} & \scriptsize{\textcolor{blue}{\textbf{706,282}}}\\
+\scriptsize
+2018 Quarter 1 & \scriptsize{695,000} &  \scriptsize{\textcolor{blue}{\textbf{688,502}}}\\
+\scriptsize
+2018 Quarter 2 & \scriptsize{690,000} &  \scriptsize{\textcolor{blue}{\textbf{683,722}}}\\
+\scriptsize
+2018 Quarter 3 & \scriptsize{648,000} &  \scriptsize{\textcolor{blue}{\textbf{641,942}}}\\
+\scriptsize
+2018 Quarter 4 & \scriptsize{631,000} &  \scriptsize{\textcolor{blue}{\textbf{625,162}}}\\
+\hline
+\end{tabular} 
+\label{tab:template}
+\\
+
+The Tennessee Department of Health also has quarterly estimates for the number of patients receiving opioids for pain by quarter from 2013-2018, as shown in the table above \cite{PDO, PDO2}. In both reports, a graph is given without specific numbers, so we utilized the online tool Webdigitizer to give best estimates to the values plotted. However, these numbers again include those who are opioid addicted. To be able to calculate an estimate for the number of non-addicted prescribed opioid users, we need an estimate of the number of opioid addicts in each quarter. We calculate the ratio of prescribed opioid users each quarter compared to the entire year, and use this same ratio to calculate the number of prescription opioid addicts per quarter.  (Although this may not be exact, it is a reasonable starting point to be able to work with the data we do have). For instance, in 2013 Quarter 1, there were 856,000 prescribed opioid users (includes addicts), which is approximately $1/46^{th}$ of the 1,845,144 prescribed opioid users (includes addicts) over the entire year. Therefore, we assume a similar ratio for (non-heroin addicted) opioid addicts, which gives an estimate of 20,142 prescription opioid addicts in 2013 Quarter 1. However, we care about approximately how many of these are using opioids that they are personally prescribed, which following similar calculations as before, is $.443*20142=8,923$ individuals; this number must be subtracted from 856,000 resulting in the estimated number of non-addicted prescribed opioid users in 2013 Quarter 1. We do this calculation for all quarters from 2013-2017. However, in 2018, we do not have data on the number of total prescription users for the whole year, so we extrapolate from 2017 information. There is a decreasing trend of (non-heroin addicted) opioid addicted individuals from 2013-2017, so we assume that trend continues in 2018. Between quarters 1 and 2 of 2017, there is a decrease of 104 (non-heroin addicted) opioid addicted individuals; between quarters 2 and 3 of 2017 there is a decrease of 236; between quarters 3 and 4 there is a decrease of 320. Taking the average of these results in a 220 person decrease each quarter. Thus, taking the most recent number of 6718 (non-heroin addicted) opioid addicted individuals in 2017 Quarter 4, we subtract 220 which results in 6498 (non-heroin addicted) opioid addicted individuals for 2018 Quarter 1, 6278 in 2018 Quarter 2, 6058 in 2018 Quarter 3, and 5838 in 2018 Quarter 4. Therefore, these numbers are subracted from the number of individuals that are prescribed opioids in each 2018 quarter.  \\
+
+
+%2013 Quarter 1 opioid addicts: (856000/1845144)*43418=20142
+%20142*.443=8923
+%856000-8923=847077
+
+%2013 Quarter 2 opioid addicts: (870000/1845144)*43418=20472
+%20472*.443=9069
+%870000-9069=860931
+
+%2013 Quarter 3 opioid addicts: (874000/1845144)*43418=20566
+%20566*.443=9111
+%874000-9111=864889
+
+%2013 Quarter 4 opioid addicts: (856000/1845144)*43418=20142
+%20142*.443=8923
+%856000-8923=847077
+
+%2014 Quarter 1 opioid addicts: (842000/1824342)*42928=19813
+%19813*.443=8777
+%842000-8777=833223
+
+%2014 Quarter 2 opioid addicts: (860000/1824342)*42928=20236
+%20236*.443=8965
+%860000-8965=851035
+
+%2014 Quarter 3 opioid addicts: (871000/1824342)*42928=20495
+%20495*.443=9079
+%871000-9079=861921
+
+%2014 Quarter 4 opioid addicts: (850000/1824342)*42928=20001
+%20001*.443=8860
+%850000-8860=841140
+
+%2015 Quarter 1 opioid addicts: (836000/1819581)*42816=19672
+%19762*.443=8715
+%836000-8715=827285
+
+%2015 Quarter 2 opioid addicts: (861000/1819581)*42816=20260
+%20260*.443=8975
+%861000-8975=852025
+
+%2015 Quarter 3 opioid addicts: (865000/1819581)*42816=20354
+%204354*.443=9017
+%865000-8017=855983
+
+%2015 Quarter 4 opioid addicts: (854000/1819581)*42816=20095
+%20095*.443=8902
+%854000-8902=845098
+
+%2016 Quarter 1 opioid addicts: (840000/1761363)*37464=17867
+%17867*.443=7915
+%840000-7915=832085
+
+%2016 Quarter 2 opioid addicts: (829000/1761363)*37464=17633
+%17633*.443=7811
+%829000-7811=821189
+
+%2016 Quarter 3 opioid addicts: (801000/1761363)*37464=17037
+%17037*.443=7547
+%801000-7547=793453
+
+%2016 Quarter 4 opioid addicts: (783000/1761363)*37464=16654
+%16654*.443=7378
+%783000-7378=775622
+
+
+%2017 Quarter 1 opioid addicts: (783000/1636374)*34805=16654
+%16654*.443=7378
+%783000-7378=775622
+
+%2017 Quarter 2 opioid addicts: (772000/1636374)*34805=16420
+%16420*.443=7274
+%772000-7274=764726
+
+%2017 Quarter 3 opioid addicts: (747000/1636374)*34805=15888
+%15888*.443=7038
+%747000-7038=739961
+
+%2017 Quarter 4 opioid addicts: (713000/1636374)*34805=15165
+%15165*.443=6718
+%713000-6718=706282
+
+
+%2018 Quarter 1 opioid addicts: 
+%695000-6498=688502
+
+%2018 Quarter 2 opioid addicts: 
+%690000-6278=683722
+
+%2018 Quarter 3 opioid addicts: 
+%648000-6058=641942
+
+%2018 Quarter 4 opioid addicts: 
+%631000-5838=625162
+
+
+
+
+
+
+
+
+
+We acknowledge that many data points are only estimates since there is a nesting of the classes, but believe they are a good starting point for our purposes here. Appendix A contains calculations for $\mu$, $\mu_A$, and $\mu_H$ based on data in Table 1, as well as other parameter and initial condition calculations.  \\
 
 
 
 \textcolor{blue}{Parameter estimation process} \\
-\textcolor{red}{Edit from/update from /combine with information from data\_using\_parameter\_estimation file in heroin model multistart folder}
-The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated and assumptions on $\theta_2$, $\theta_3$, $\beta_A$, and $\beta_P$ are stated in Appendix A. In addition, although we have an estimate for the total number of prescription opioid users and opioid addicts in 2013, we do not know these numbers at the start of 2013; similarly for the other states. Thus, we approximate the initial conditions of our states for 2013 in Appendix A using information from Table 1. 
+\textcolor{red}{Edit from/update from /combine with information from data\_using\_parameter\_estimation file in heroin model multistart folder} \\
+\textcolor{blue}{How many details to give for paper? Put in anything needed for paper from MatLab\_descriptions.pdf if applicable.} \\
+
+The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu_{H}$) are calculated in Appendix A, and the results are shown here:
 
 \begin{center}
 
@@ -454,36 +627,19 @@ The age-adjusted death rate ($\mu$) and overdose death rates ($\mu_{A}$ and $\mu
 
  \hline\hline
 
-$\beta_A$ &  &  \\
+$\mu$ & 0.00868 & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\beta_P$&  &  \\
+$\mu_A$& 0.00870  & $\frac{1}{\text{year}}$   \\
 
 \hline
 
-$\theta_2$ &  &  \\
+$\mu_H$ & 0.0507 & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\theta_3$ &  &  \\
-
-\hline
-
-
-$P_0$ &  &  \\
-
-\hline
-
-$A_0$ &  &  \\
-
-\hline
-
-$H_0$ &  &  \\
-
-\hline
-
-$R_0$ &  &  \\
+$\omega$ &  $10^{-10}$ & \scriptsize{dimensionless}   \\
 
 \hline
 \end{tabular}
@@ -491,36 +647,70 @@ $R_0$ &  &  \\
 \end{center}
  
 
+In order to estimate the remaining parameters for our model, we utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between data and model simulations. The data utilized (shown in blue in Table 1) are the proportion of non-addicted prescription users (years 2013-2017), opioid addicts (years 2013-2017), and heroin/fentanyl addicts (years 2014-2016) out of the entire population in a given year. These represent the proportion of individuals in P at some point during each of the years 2013-2017, the proportion of individuals in A at some point during each of the years 2014-2015, and the proportion of individuals in H at some point during each of the years 2014-2016. From Table 2, we have the proportion of the population that is in P each quarter of the years 2013-2018. 
+This results in a total of 37 data points.
 
-In order to estimate the remaining parameters for our model, we utilized the ordinary least squares method and formulated an objective function to minimize, which consists of the squared differences between data and model simulations. We have data on the total number of non-addicted prescription users, opioid addicts, and heroin/fentanyl addicts each year, and therefore on their corresponding proportions out of the entire population in a given year. We have data on the proportion of individuals in P at some point during each of the years 2013-2017, the proportion of individuals in A at some point during each of the years 2014-2015, and the proportion of individuals in H at some point during each of the years 2014-2016, resulting in a total of 10 data points. \\
+Although we have an estimate for the total number of prescription opioid users and opioid addicts  in 2013, we do not know these numbers at the start of 2013; similarly, we do not know this information for the other states. Therefore, we estimate the initial conditions using this process, as well. Thus, we wish to estimate 16 inputs total (parameters and initial conditions combined, where $m$ and $b$ are both estimated for $\alpha=m\cdot t + b$). \\
+
 
 \textcolor{blue}{Include these next couple of descriptions in paper or only in dissertation?} \\
 We simulate the proportions in each of these classes throughout the year in the following way. 
 In order to count the proportion of individuals in P, A, or H at some point throughout a certain year, 
  we need to count those who are in each of the classes AT ALL during the year, even if they leave or come back at some point. We note that we neglect higher order terms, i.e. people who go into the P class multiple times, since we can't keep track of individuals in model; the data we use is about total proportion of people who are in the class at some point throughout the year but they are kept track of and only counted once. \\
   
-To get the output from the model of the proportion of non-addicted prescription opioid users in each year, we take the proportion of non-addicted prescription opioid users at the beginning of each of the years and add on the proportion of individuals that enter the P class at any point during the year. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ For every year except 2013, a subtraction must be done since integrating gives the proportion from time $0$ to time $t$, but we only want the proportion from time $t-1$ to time $t$ (i.e. the new cases in a given year). Thus, the calculation is as follows for each year, with the last equation in each line what was calculated in the code: \\
-2013: $P_0 + \int_0^1 \alpha S = y(1,2)+y(2,6)-y(1,6)$ \\
-2014: $y(2,2)+\int_1^2 \alpha S$=$y(2,2)+\int_0^2 \alpha S$- $\int_0^1 \alpha S=y(2,2)+y(3,6)-y(2,6)$ \\
-2015: $y(3,2)+\int_2^3 \alpha S$=$y(3,2)+\int_0^3 \alpha S$- $\int_0^2 \alpha S=y(3,2)+y(4,6)-y(3,6)$ \\
-2016: $y(4,2)+\int_3^4 \alpha S$=$y(4,2)+\int_0^4 \alpha S$- $\int_0^3 \alpha S=y(4,2)+y(5,6)-y(4,6)$ \\
-2017: $y(5,2)+\int_4^5 \alpha S$=$y(5,2)+\int_0^5\alpha S$- $\int_0^4 \alpha S=y(5,2)+y(6,6)-y(5,6)$ \\
+To get the output from the model of the proportion of non-addicted prescription opioid users in each year, we take the proportion of non-addicted prescription opioid users at the beginning of each of the years and add on the proportion of individuals that enter the P class at any point during the year. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ For every year except 2013, a subtraction must be done since integrating gives the proportion from time $0$ to time $t$, but we only want the proportion from time $t-1$ to time $t$ (i.e. the new cases in a given year). Thus, the calculation is as follows for each year, with the last equation in each line what was calculated in the code (noting that our time step is years, but our linspace is broken into quarters of a year, so each entry represents the beginning of a quarter of a year): \\
+
+2013: $P_0 + \int_0^1 \alpha S = y(1,2)+y(5,6)-y(1,6)$ \\
+2014: $y(5,2)+\int_1^2 \alpha S$=$y(5,2)+\int_0^2 \alpha S$- $\int_0^1 \alpha S=y(5,2)+y(9,6)-y(5,6)$ \\
+2015: $y(9,2)+\int_2^3 \alpha S$=$y(9,2)+\int_0^3 \alpha S$- $\int_0^2 \alpha S=y(9,2)+y(13,6)-y(9,6)$ \\
+2016: $y(13,2)+\int_3^4 \alpha S$=$y(13,2)+\int_0^4 \alpha S$- $\int_0^3 \alpha S=y(13,2)+y(17,6)-y(13,6)$ \\
+2017: $y(17,2)+\int_4^5 \alpha S$=$y(17,2)+\int_0^5\alpha S$- $\int_0^4 \alpha S=y(17,2)+y(21,6)-y(17,6)$ \\
 
 
- To get the output from the model of the proportion of opioid addicts in 2014 and 2015, we take the initial proportion of opioid addicts in each of these years and add the proportion of individuals that enter the A class at any point during the year 2014 or 2015. This latter part comes from integrating over those who enter the A class: $\int_0^t L'(t)dt=\int_0^t (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt$ which is equal to $L(t)-L(0)$; here, we take $L(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
- 2014: $y(2,3)+\int_1^2 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(2,3)+y(3,7)-y(2,7)$ \\
- 2015: $y(3,3)+\int_2^3 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(3,3)+y(4,7)-y(3,7)$ \\
+ To get the output from the model of the proportion of (non-heroin addicted) opioid addicts in each of the years 2013-2017, we take the initial proportion of opioid addicts in each of these years and add the proportion of individuals that enter the A class at any point during the year 2014 or 2015. This latter part comes from integrating over those who enter the A class: $\int_0^t L'(t)dt=\int_0^t (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt$ which is equal to $L(t)-L(0)$; here, we take $L(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
+ 2013: $y(1,3)+\int_0^1 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(1,3)+y(5,7)-y(1,7)$ \\
+ 2014: $y(5,3)+\int_1^2 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(5,3)+y(9,7)-y(5,7)$ \\
+ 2015: $y(9,3)+\int_2^3 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(9,3)+y(13,7)-y(9,7)$ \\
+  2016: $y(13,3)+\int_3^4 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(13,3)+y(17,7)-y(13,7)$ \\
+   2017: $y(17,3)+\int_4^5 (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt= y(17,3)+y(21,7)-y(17,7)$ \\
 
 
-Finally, to obtain the output from the model of the proportion of heroin/fentanyl addicts for each year 2014-2016, we take the initial proportion of heroin/fentanyl addicts in each of these years and add the proportion of individuals that enter the H class at any point during the year. This latter part comes from integrating over those who enter the H class: $\int_0^t M'(t)dt=\int_0^t (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega})dt$ which is equal to $M(t)-M(0)$; here, we take $M(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
- 2014: $y(2,4)+\int_1^2  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(2,4)+y(3,8)-y(2,8)$ \\
- 2015: $y(3,4)+\int_2^3  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(3,4)+y(4,8)-y(3,8)$ \\
- 2016: $y(4,4)+\int_3^4  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(4,4)+y(5,8)-y(4,8)$ \\
+To obtain the output from the model of the proportion of heroin/fentanyl addicts for each year 2014-2016, we take the initial proportion of heroin/fentanyl addicts in each of these years and add the proportion of individuals that enter the H class at any point during the year. This latter part comes from integrating over those who enter the H class: $\int_0^t M'(t)dt=\int_0^t (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega})dt$ which is equal to $M(t)-M(0)$; here, we take $M(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
+ 2014: $y(5,4)+\int_1^2  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(5,4)+y(9,8)-y(5,8)$ \\
+ 2015: $y(9,4)+\int_2^3  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(9,4)+y(13,8)-y(9,8)$ \\
+ 2016: $y(13,4)+\int_3^4  (\theta_1 SH+\theta_2 PH+\theta_3 AH +\sigma R \frac{H}{A+H+\omega}) dt= y(13,4)+y(17,8)-y(13,8)$ \\
+
+
+
+
+Finally, to obtain the output from the model of the proportion of prescription opioid addicts for each year 2014-2016, we take the initial proportion of prescription opioid users addicts in each quarter and add the proportion of individuals that enter the P class at any point during the quarter. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ Similar to above, we will use subtraction of integrals to calculate for a specific quarter: \\
+ 2013 Quarter 1: $y(1,2)+\int_0^{0.25} \alpha S= y(1,2)+y(2,6)-y(1,6)$ \\
+ 2013 Quarter 2: $y(2,2)+\int_{0.25}^{0.5} \alpha S =y(2,2)+\int_0^{.5} \alpha S- \int_0^{0.25} =y(2,2)+y(3,6)-y(2,6)$ \\
+ 2013 Quarter 3: $y(3,2)+\int_{0.5}^{0.75} \alpha S =y(3,2)+\int_0^{.75} \alpha S- \int_0^{0.5} \alpha S=y(3,2)+y(4,6)-y(3,6)$ \\
+  2013 Quarter 4: $y(4,2)+\int_{0.75}^{1} \alpha S =y(4,2)+\int_0^{1} \alpha S- \int_0^{0.75} \alpha S=y(4,2)+y(5,6)-y(4,6)$ \\
+ \vdots \\
+  2018 Quarter 4: $y(24,2)+\int_{5.75}^{6} \alpha S =y(24,2)+\int_0^{6} \alpha S- \int_0^{5.75} \alpha S=y(24,2)+y(25,6)-y(24,6)$ \\
+
+
+
+
 
 
 We use the Global Optimization Toolbox in MATLAB, specifically utilizing the MultiStart algorithm and fmincon local solver. Since we wish to know the global minimum, we use \textcolor{red}{fill in number} starting points as this is a local solver. We give lower bounds of 0.00001 for all of the parameters and an upper bound of 2 for all of the parameters except $\epsilon$ with an upper bound of 4 since this parameter can easily be greater than 1 (i.e. in a given year, a prescription user may end prescription use more than once). We run our model from 2013-2018, keeping a short time frame so that dynamics are relatively the same in the time period with the time step in years. 
 
-\textcolor{blue}{How many details to give for paper? Put in anything needed for paper from MatLab\_descriptions.pdf if applicable.}
+
+Although we do not know any other exact rate values from literature, we use data from Table 1 to calculate rough estimates for $\beta_A$, $\beta_P$, $\nu$, $\zeta$, and the initial conditions, $P_0$, $A_0$, $H_0$, and $R_0$ (found in Appendix A) in order to guide our knowledge of the range of values the true values of these parameters may lie. \textcolor{red}{May change, depending on if use info for all of these parameters/IC or not; include relationships of theta values?}. \\
+
+Thus, we have the following ranges for our parameters and the reasons we chose these values that we believe are realistic: \textcolor{red}{EDIT!!!} \\
+-0.1$\leq$m$\leq$ 0.1: we assume that since $\alpha$ will be a value less than 1 based on estimate in \cite{Battista}, so it's slope will not be very large in absolute value \\
+-0.00001$\leq$$\theta_1$$\leq$ 0.1: unknown, chosen intuitively that a susceptible individual would have less than a 0.1 probability of transitioning to the heroin class (see below regarding why upper bound is chosen this high) \\
+0.8$\leq$$\epsilon$$\leq$ 8: estimate from \cite{Battista} \\
+0.0001$\leq$$\gamma$$\leq$ 0.5: estimate based on value in \cite{Battista} \\
+0.00001$\leq$$\sigma$$\leq$ 0.1: unknown, minimizes objective function value without hitting bounds \\
+0.01$\leq$$b$$\leq$ 1: estimated based on value of $\alpha$ in \cite{Battista} \\
+0.0001$\leq$$A_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+0.0001$\leq$$H_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+0.0001$\leq$$R_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
 
 
 %I tried to choose realistic lower and upper bounds for the parameters in the following way: $\alpha$ guess from opioid paper since higher in TN; $\beta_A $ guess from opioid paper; 
@@ -533,8 +723,7 @@ We use the Global Optimization Toolbox in MATLAB, specifically utilizing the Mul
 % guess; $A_0$ guess; $H_0$ guess; $R_0$ guess} \\ \\
 
 
-The following table displays the 7 parameters that were estimated with this process, along with their resulting estimated values: 
-
+The following table displays the 16 inputs that were estimated with this process, along with their resulting estimated values: 
 
 
 \begin{center}
@@ -545,42 +734,88 @@ The following table displays the 7 parameters that were estimated with this proc
 
 {Parameter} & {Estimated Value} & {Units} \\ [0.5ex]
 
- \hline\hline
+ \hline
 
-$\alpha$ &  &  \\
-
-\hline
-
-$\theta_1$&  &  \\
+$m$ &  & $\frac{1}{\text{year}}$ \\
 
 \hline
 
-$\epsilon$ &  &  \\
+$b$ &  &  $\frac{1}{\text{year}}$\\
 
 \hline
 
-$\gamma$ &  &  \\
+$\alpha$ &  & $\frac{1}{\text{year}}$  \\
 
 \hline
 
 
-$\sigma$ &  &  \\
+$\beta_A$&  & $\frac{1}{\text{year}}$  \\
 
 \hline
 
-$\zeta$ &  &  \\
+$\beta_P$ &  & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\theta_1$ &  &  $\frac{1}{\text{year}}$  \\
+
+\hline
+
+
+$\epsilon$ &  & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\gamma$ &  & $\frac{1}{\text{year}}$  \\
 
 
 \hline
 
-$\nu$ &  &  \\
+$\theta_2$ &  & $\frac{1}{\text{year}}$  \\
 
  \hline
+ $\sigma$ &  & $\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\zeta$ &  &  $\frac{1}{\text{year}}$\\
+
+\hline
+
+$\theta_3$ &  &$\frac{1}{\text{year}}$  \\
+
+\hline
+
+$\nu$ &  &  $\frac{1}{\text{year}}$ \\
+
+\hline
+
+$P_0$ &  & \scriptsize{dimensionless} \\
+
+\hline
+
+$A_0$ &  & \scriptsize{dimensionless} \\
+
+\hline
+
+$H_0$ &  & \scriptsize{dimensionless}  \\
+
+\hline
+
+$R_0$ &  & \scriptsize{dimensionless}  \\
+
+\hline
+
+$S_0$ &  & \scriptsize{dimensionless}  \\
+
+\hline
+
 
 \end{tabular}
 
 \end{center}
  
+ \pagebreak
 
 
 \textbf{Sensitivity Analysis} 
@@ -715,10 +950,10 @@ $H_0$ &   \\
 
 
 \textcolor{blue}{Latin Hypercube Sampling/PRCC} \\
+\textcolor{red}{Fill in background and results.}
 
 
-
-
+\pagebreak
  
 \textbf{Conclusions} \\ \\
  \textcolor{red}{What did we show that we didn't know before?} \\
@@ -727,17 +962,15 @@ $H_0$ &   \\
  \textcolor{blue}{Extensions}\\
  \textcolor{red}{Need to edit} \\
 In our model we assume homogeneous mixing of the individuals in each of the compartments and therefore, each individual has the same probability of transitioning from one stage to another, interacting with individuals from other stages, or leaving the system via death. Although done for the purpose of simplification, this is not an accurate representation of reality since there are factors that affect these probabilities, such as race, gender, geographical location and age. For example, there has been a shift in heroin use from urban areas to some suburban and rural areas and there is an increasing number of individuals ages 18-25 using the drug \cite{NIDA2}. West Virginia, New Hampshire and Ohio had the highest rates of opioid-related overdose deaths per 100,000 people in 2016 and Tennessee and Arkansas were among the states with the highest prescription rates per 100 people the same year \cite{NIH3}. Men have a higher likelihood of overdosing on prescription pain relievers compared to women, but since 1999, there has been a steeper increase in the number of women overdoses than men. In addition, women may form a quicker dependence on opioids compared to men, and have a higher probability of being prescribed higher doses and for longer periods of time \cite{CDC5}. Specific to heroin, using data from the 2008-2010 NSDUH studies, past year heroin use was twice as likely for men compared to women, and highest in the 18-25 year old age group \cite{Jones}. Incorporating these ideas into the model and parameter information would be possible future extensions. Although there is data on the misuse of opioids, we decided to focus specifically on addiction rather than misuse, due to the harmful consequences this behavior can have for an individual. However, the behavior and actions of individuals are not always very clearly defined, and there may be a benefit to expanding the spectrum of classes that individuals can fall into. 
-
+\pagebreak
 
 \textbf{Appendix A} \\ \\
 \textcolor{blue}{Calculations of parameters from literature} \\
 %Could be helpful if need for individuals under 12: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=CF 
-The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$.
-
-
+The \textbf{age-adjusted death rate} for Tennessee in 2016 was calculated to be 886.3 out of 100,000 individuals, or approximately 50,094 people out of a total population 12 and older of 5,651,993 \cite{Kaiser}. Subtracting off the number of people who died from a prescription opioid or heroin/fentanyl overdose in 2016 results in 48,825 people who died that year. This implies that (5,651,993-48,825)/5,651,993 $\approx$ 0.991 is the proportion of the population that remains by the beginning of 2017. If we consider $T_0$ to be the total population in 2016, we can find the continuous-time rate at which individuals die naturally from the equation 0.991$T_0$=$T_0e^{-\mu t}$, which results in the natural death rate $\mu \approx 0.00868$. \\
 
 %SEE WORK on 11/19/18 meeting notes for mu_A, mu_H, mu
-We calculate the overdose death rate in the year 2015, since we know the number of prescription opioid addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to prescription opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to prescription opioids \cite{Gwira}. Therefore, we assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 42,816 prescription opioid addicts (non-heroin addicted) in 2015, this means that (42,816-0.546$\cdot$679)/42,816 $\approx$ 0.992 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.991$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in \boldmath{$\mu_{A} \approx 0.00870.$}\unboldmath We note here that since we want a rate of overdose deaths out of the addicted class, we use the number of non-heroin addicted prescription opioid addicts, although the overdose deaths are out of all prescription opioids addicts, whether they are addicted to heroin or not. However, since we do not know the number of overdoses specifically for non-heroin addicted prescription opioid addicts, we use this simplification that all of them are for this group. 
+We calculate the overdose death rate in the year 2015, since we have a reasonable estimate for the number of (non-heroin) prescription opioid addicted individuals in that year. To find the continuous-time rate at which individuals are dying from the addicted class, we consider the equation $k A_{0}=A_{0}e^{-\mu_{A}t}$, where $A_0$ is the number of individuals addicted to prescription opioids in 2015 and $k$ is the proportion of these individuals in the addicted class at the start of 2016 (when $t=1$). In 2015, there were 679 individuals out of the entire Tennessee population 12 and older that overdosed on prescription opioids \cite{PDO}. However, it is estimated that only 54.6\% of these individuals were actually at an increased risk for an opioid-related overdose death; we assume that if an individual met the criteria for at least one high-risk factor, that they were considered addicted to prescription opioids \cite{Gwira}. Therefore, we assume 54.6\% of the 679 individuals that overdosed were addicted. With a total of 42,816 prescription opioid addicts (non-heroin addicted) in 2015, this means that (42,816-0.546$\cdot$679)/42,816 $\approx$ 0.991 is the proportion of addicted individuals that remain by the beginning of the next year. This implies 0.991$A_0=A_0 e^{-\mu_{A}(1)}$, and solving results in \boldmath{$\mu_{A} \approx 0.00870$}\unboldmath. We note here that since we want a rate of overdose deaths out of the addicted class, we use the number of non-heroin addicted prescription opioid addicts, although the overdose death data is out of all prescription opioids addicts, whether they are addicted to heroin or not. However, since we do not know the number of overdoses specifically for non-heroin addicted prescription opioid addicts, we use this simplification that all of the opioid overdose deaths are from this group. \\
 %have to do this calculation because mu_A is IN the A class and not just anyone who overdoses 
 
 Similarly, we may calculate $\mu_{H}$. There were 7,560 heroin/fentanyl addicts in 2015 and 374 heroin-related overdoses. We make the simplifying assumption that if an individual died of a heroin overdose they were addicted to heroin. This means that (7,560-374)/7,560 $\approx$ 0.951 is the proportion of heroin users that remain at $t=1$, which implies 0.951$H_0=H_0 e^{-\mu_{H}(1)}$, which results in \boldmath{$\mu_{H}$ $\approx 0.0507$} \unboldmath, the continuous-time rate at which individuals are dying from the heroin class.
@@ -746,7 +979,11 @@ Similarly, we may calculate $\mu_{H}$. There were 7,560 heroin/fentanyl addicts 
 
 We make a note that individuals that do not have an opioid use disorder and die because of an opioid overdose are counted in the ``natural mortality rate." 
 
+\pagebreak
+
 \textcolor{blue}{Estimates of parameters from literature} \\
+\textcolor{red}{WILL MOST LIKELY DELETE THIS SECTION BECAUSE NOW ESTIMATING PARAMETERS AND IC WITH MULTISTART??--unless case use as reasoning for bounds, i.e. to have intuition on order of magnitudes??} 
+
 Since there is no information for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee in the literature, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
 NMPR use can occur within the prescription class (i.e. from misuse that's not considered addiction), or in the addiction class. Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$), where both $\theta_2$ and $\theta_3$ are greater than $\theta_1.$ We will make an assumption here that $\theta_2 + \theta_3$ is exactly 19$\theta_1$, and that there is somewhat of an elevated risk of moving to heroin use from the prescription class versus the susceptible class, taking $\theta_2 =3 \theta_1$. This leaves $\theta_3=16\theta_1.$ \\
 
@@ -799,7 +1036,6 @@ Since the H class is homogeneously mixed with all addicts, whether they have bee
 
 %Note, the numbers that are not cited have come from Table 1 and cited before. 
 \textcolor{blue}{Estimates of initial conditions from literature} \\
-
 %There were 1,845,144 total individuals 12 and older who were prescribed opioids (which includes those addicted) at some point during 2013 
 %and there was an average of 1.271 prescriptions per person, although we will assume this number holds when only considering the age group 12 and older \cite{CDC6}. 
 %Thus, we calculate 
@@ -835,20 +1071,18 @@ $$A_0=\frac{P_0}{42.1}=0.00169.$$ \\ \\
 %As before, only 44.3\% of addicts are prescription users, so we take .443(.00148)$=$0.00065 and subtract this from the initial condition of P so that it correctly counts only non-addicted prescription opioids users: $P_0=0.056-0.00065=0.0553$ \cite{Han}. %explanation below data table above 
 
 
-\textcolor{red}{WILL MOST LIKELY DELETE BECAUSE NOW ESTIMATING H\_0 and R\_0 WITH PARAMETER ESTIMATION/MULTISTART. \\
- We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period...HOWEVER, IT SEEMS THAT if heroin were laced with heroin, it would be counted as fentanyl overdose, so the fact that heroin overdoses are also still increasing through 2016 suggests more heroin addicts overall} \cite{CDC4}. \textcolor{red}{In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume the same ratio of approximately 1:3.43 heroin users to opioid addicts in 2013, as well. In 2013, addicts make up 0.00148 of the population at the start of 2013, so we assume $H_0 \approx 0.000431.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly regarding the order of magnitude expected.)}
+ We do not have information on the number of heroin users in 2013, so we extrapolate from information in 2015. We note first that although opioid overdose deaths increase from 2013 to 2015, that does not necessarily equate to more heroin users in 2015, due to the rise in fentanyl contamination during this time period...HOWEVER, IT SEEMS THAT if heroin were laced with heroin, it would be counted as fentanyl overdose, so the fact that heroin overdoses are also still increasing through 2016 suggests more heroin addicts overall \cite{CDC4}. In order to keep a proportion approximately equivalent to the number of opioid addicts to heroin users in 2015, we assume the same ratio of approximately 1:3.43 heroin users to opioid addicts in 2013, as well. In 2013, addicts make up 0.00148 of the population at the start of 2013, so we assume $H_0 \approx 0.000431.$ (Note: the proportion of prescription opioid users to heroin users is also similar, particularly regarding the order of magnitude expected.)
 %This proportion seems plausible because we assume that a majority of individuals using heroin in 2015 are using the drug at the beginning of the year, since heroin is such an addictive substance and the only ways to leave the compartment are through dying or becoming stably recovered. If we take 75\% to mean the majority, we also arrive at $$\frac{0.75 \cdot 14,000 \text{ heroin users}}{5,602,117 \text{ individuals in population}} \approx 0.0019$$ as the proportion of heroin users at the beginning of 2013. 
 
-\textcolor{red}{Before, we estimated 48,674 opioid addicts in 2013; this higher number is supported by an overall higher prescribing rate in 2013 compared to the next few years} \cite{CDC7}.
-\textcolor{red}{We will assume the number of heroin users is the same in 2013 as in 2014 and 2015. There were 4,485 prescription opioid treatment admissions and 555 heroin treatment admissions in 2013, which is 0.057 of the opioid addict and heroin user population combined that are in recovery. Only 35\% of those in treatment do not relapse within 4 weeks after treatment, and thus have the ability to be in R, which is approximately .0804 of the entire A+H class }\cite{Bailey}.
-\textcolor{red}{Since 90\% of individuals relapse within one year post-treatment, that means that an additional 55\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .00804 of addicted and heroin users total} \cite{Bailey}. \textcolor{red}{This equates to approximately 504 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$} \\
+Before, we estimated 48,674 opioid addicts in 2013; this higher number is supported by an overall higher prescribing rate in 2013 compared to the next few years \cite{CDC7}.
+We will assume the number of heroin users is the same in 2013 as in 2014 and 2015. There were 4,485 prescription opioid treatment admissions and 555 heroin treatment admissions in 2013, which is 0.057 of the opioid addict and heroin user population combined that are in recovery. Only 35\% of those in treatment do not relapse within 4 weeks after treatment, and thus have the ability to be in R, which is approximately .0804 of the entire A+H class \cite{Bailey}.
+Since 90\% of individuals relapse within one year post-treatment, that means that an additional 55\% relapse after the 4 week mark and move out of R; therefore, we make a simplifying assumption that 10\% of those that can be in R actually are at a specific point in time, resulting in a proportion of .00804 of addicted and heroin users total \cite{Bailey}. This equates to approximately 504 individuals, which out of a total population 12 years and older in 2013 of 5,517,716, we conclude $R_0=0.000091.$\\
 
 
 \pagebreak
-\textcolor{blue}{CS-unit conversions from data to parameters is what I've done above already right?} \\
+\textcolor{blue}{Unit conversions from data to parameters is only when calculating/estimating them by hand, correct?} \\
 
 \textcolor{blue}{Table of parameter values and units of parameters} \\
-\textcolor{red}{Fill in}
 
 
 \begin{center}
