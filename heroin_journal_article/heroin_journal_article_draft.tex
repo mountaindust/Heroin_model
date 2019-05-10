@@ -998,7 +998,7 @@ $$\frac{2 \text{ million people with pain reliever use disorder in 2015}}{12.5 \
 We extrapolate this to estimate that 16\% of the 2.1 million recent initiates are those who should be counted in the use disorder category (although we do not know the timeline of developing the use disorder and it may not happen within the year, it gives a rough idea). This results in an estimate of 336,000 individuals that were recent initiates of pain reliever misuse that we will consider having a use disorder within the year 2015. In the same year, a study was done regarding the source of the most recent episode of misuse of prescription opioids among adults reporting an prescription opioid use disorder in the past year \cite{Han}. (Note: this study was for individuals age 18 and older whereas the study done in \cite{SAMSHA5} was for those 12 and older; we will assume for simplicity that the information for those 18 and older will be similar to those between 12 and 18, as well.) Here, 52.8\% of the prescription opioids were from a non-physician source, which included being given to/bought from a friend/relative, or bought from a drug dealer/stranger. For simplicity, let IPUD indicate individuals with a prescription use disorder. 
 Thus, \\
 $$\frac{336,000\text { IPUD}}{320 \text{ million people}}\cdot \frac{0.528 \text{ opioid source for IPUD is illicit}}{\text{opioid sources $\cdot$ year}}$$
-$$=0.00105 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{opioid sources $\cdot$ year}}}.$$
+$$=0.000554 \frac{ \text { IPUD obtain opioids illicitly}}{{\text{opioid sources $\cdot$ year}}}.$$
 %Note: IPUD/people is really people/people so units cancel 
 From \cite{Han}, we see that \\
 $$\frac{.138 \text{ opioids obtained from drug dealers/strangers by IPUD}}{.528 \text{ opioids obtained illicitly by IPUD}}=.26$$ 
@@ -1007,22 +1007,23 @@ $$\frac{.218+.141+.031 \text{ opioids given/bought from a friend/relative or oth
 relates to individuals obtaining opioids from extra prescriptions that are available. This means that 74\% of illicit opioids come from a friend/relative/other source, whereas 26\% of illicit opioids are from the black market for opioid addicts. In our model, we consider two cases in which individuals become addicted (friend/relative versus black market) and we make the assumption that these percentages also apply to the two routes that one would become an addict in the first place via illicit opioids. 
 
 Thus, 
-$$\frac{0.26 \text{ opioids from drug dealers/strangers}}{\text{ opioids obtained illicitly}}\cdot \frac{0.00105 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
-$$ =\frac{0.000273 \text{ opioids from drug dealers/strangers}}{\text{opioid sources $\cdot$ year}}$$
+$$\frac{0.26 \text{ opioids from drug dealers/strangers}}{\text{ opioids obtained illicitly}}\cdot \frac{0.000554 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
+$$ =\frac{0.000141 \text{ opioids from drug dealers/strangers}}{\text{opioid sources $\cdot$ year}}$$
 is the rate that individuals illicitly obtain their prescription opioids from the black market/other addict interaction and become addicted
-$$\implies \beta_A=\frac{0.000273}{\text{year}}.$$
+$$\implies \beta_A=\frac{0.000141}{\text{year}}.$$
 %Check exponential/continuous-time rate: 
 %Focus only on the one term: let K=SA, then K'=-beta_A*K => K=K_0*e^(-beta_A*t) and after 1 time step, assume (1-beta_A) of those in K class are still in K class => (1-0.000273)K_0=K_0*e^(-beta_A*1) => beta_A=0.000273, same as rate derived above. 
 %Note: units cancel because opioid source/opioid source
 Similarly,
-$$\frac{0.74 \text{ opioids from friend/relative or other}}{\text{ opioids obtained illicitly}}\cdot \frac{0.00105 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
-$$ =\frac{0.000777 \text{ opioids from friend/relative or other}}{\text{opioid sources $\cdot$ year}}$$
+$$\frac{0.74 \text{ opioids from friend/relative or other}}{\text{ opioids obtained illicitly}}\cdot \frac{0.000554 \text{ opioids obtained illicitly}}{\text{opioid sources $\cdot$ year}}$$
+$$ =\frac{0.000403 \text{ opioids from friend/relative or other}}{\text{opioid sources $\cdot$ year}}$$
 is the rate that individuals illicitly obtain their prescription opioids from extra pills that are available and become addicted
-$$ \implies \beta_P=\frac{0.000777}{\text{year}}.$$ \\
+$$ \implies \beta_P=\frac{0.000403}{\text{year}}.$$ 
+Although these may be good estimates for rates if they were rates of linear terms(i.e. $\beta_A S$ and $\beta_P *S$, they are rates of non-linear terms, and therefore, can be much better estimated using ordinary least squares. (Note: this does provide insight on realistic orders of magnitudes, though).  
 %Check exponential/continuous-time rate: 
 %Focus only on the one term: let J=SP, then J'=-beta_P*J => J=J_0*e^(-beta_P*t) and after 1 time step, assume (1-beta_P) of those in J class are still in J class => (1-0.000777)J_0=J_0*e^(-beta_P*1) => beta_P=0.000777, same as rate derived above. 
 %Note: units cancel because opioid source/opioid source 
-As mentioned before, 71\% of heroin users in 4 weeks \cite{Smyth}. Although these are on a national level, we will assume the rates do not differ significantly for Tennessee, as we were not able to find any relapse statistics specifically for the state. It is estimated that for every 10 people with substance use disorder, only 1 receives treatment for it \cite{SurgeonGeneral}. We assume this is an approximation for specifically opioid and heroin/fentanyl addicts, as well. In 2015, there were 13,110 discharges total in the state of Tennessee for substance abuse programs in facilities that receive state/public funding (generally referring to funding by the state substance abuse agency); out of those, 7,003 were due to completion of treatment, which is 53.4\% of all discharges \cite{TEDS2015_SAMSHA_discharges}. Realistically, an individual cannot go to a stably recovered class without going to treatment, completing treatment and remaining clean for 4 weeks post-treatment, since addiction is a disease. Using HA to represent heroin addict, we calculate
+As mentioned before, 71\% of heroin users relapse within 4 weeks \cite{Smyth}. Although these are on a national level, we will assume the rates do not differ significantly for Tennessee, as we were not able to find any relapse statistics specifically for the state. It is estimated that for every 10 people with substance use disorder, only 1 receives treatment for it \cite{SurgeonGeneral}. We assume this is an approximation for opioid and heroin/fentanyl addicts, as well, and assume this is the case for a year-long period. In 2015, there were 13,110 discharges total in the state of Tennessee for substance abuse programs in facilities that receive state/public funding (generally referring to funding by the state substance abuse agency); out of those, 7,003 were due to completion of treatment, which is 53.4\% of all discharges \cite{TEDS2015_SAMSHA_discharges}. Realistically, an individual cannot go to a stably recovered class without going to treatment, completing treatment and remaining clean for 4 weeks post-treatment, since addiction is a disease. Using HA to represent heroin addict, we calculate
 
 $$\frac{1 \text{ HA in treatment}}{10 \text{ HA $\cdot$ year}} \cdot \frac{53.4 \text{ HA complete treatment}}{100 \text{ HA in treatment}} \cdot \frac{29 \text{ HA do not relapse within 4 weeks post-treatment}}{100 \text{ HA completed treatment}}$$
 $$= \frac{0.015486 \text{ HA do not relapse within 4 weeks post-treatment}}{\text{HA $\cdot$ year}}$$
@@ -1051,7 +1052,7 @@ Since the H class is homogeneously mixed with all addicts, whether they have bee
 %$$\frac{3.80 \text{ prescriptions}}{\text{prescription user $\cdot$ year}} \cdot \frac{{16.5 \text{ prescription days}}}{\text{prescription}} \approx \frac{62.71 \text{ prescription days}}{\text{prescription user $\cdot$ year}} $$
 %which is approximately one sixth of the year. Therefore, we make a rough estimate that one sixth of the total number of prescription users throughout 2013 were using prescription opioids at the beginning of the year. %i.e. group these individuals into "6 groups" of 65 days each (although it doesn't work like that, but pretend 1/6th of the group has their 65 days starting from the beginning of the year, next 1/6th group for the next 65 days, and so on. 
 %Thus, $$\frac{307,524 \text{ prescription users}}{5,517,176 \text{ people}} \approx 0.056 $$
-
+\textcolor{red}{Not updated!--should just be the 2,000,000/90*16.5/2.34 number for prescribed users any given day but cannot get the units right.}
 In the first quarter of 2013, there were 856,000 individuals prescribed opioids in Tennessee, and a total of 2,000,000 prescriptions in the same quarter; this is approximately 2.34 prescriptions per prescribed user in this quarter \cite{PDO}. In addition, the average number of days that prescribed users in Tennessee actively took prescription opioids in 2013 was 66.9 days; extrapolating this to the first quarter gives 
 
 $$\frac{ x \text{ average prescription days}}{90 \text{ days}}=\frac{66.9 \text{ average prescription days}}{365 \text{ days}}$$
