@@ -1,64 +1,18 @@
-%File name: heroin_multistart_quarters_no2016heroin.m 
+%File name: heroin_multistart_quarters.m 
 
 clf;
 clear all;
 
+%Realistic parameter bounds 
+%LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.0001  0.0001   0.000001  0.000001];
+%UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.1     0.1     3       5      1      1        0.001     0.001];
+ 
+% Realistic parameter bounds
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0]
+LowerBounds=[-0.1  0.00001  0.000001  0.00001    0.8    0.0001  0.0001   0.0001  0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001 ];
+UpperBounds=[ 0.1   0.001     0.001    0.001      8      0.1       1     0.1      0.1      5       0.1   0.8    0.5       0.1     0.1       0.1   ];
+  
 
-%Run1
-%LowerBounds=[-0.1   0.000001     0.8      0.0001      0.0001    0.1   0.00001  0.00001  0.00001 0.00001  0.00001 0.001];
-%UpperBounds=[0.1      0.001       8         0.1         0.1      0.8     0.5       0.1     0.01   0.01      0.9   0.9 ];
- 
-%Run2, Run3
-%LowerBounds=[-0.1    0.00001     0.8      0.00001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001];
-%UpperBounds=[0.1      0.001       8        0.001         0.1      0.8     0.5       0.1     0.01   0.01       3     3 ];
- 
-%Run4, Run5
-%LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001  0.001];
-%UpperBounds=[0.1      0.001       8        0.1         0.1     0.8     0.5       0.1     0.01   0.01       3      3 ];
- 
-%Run6
-%LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.00001  0.00001];
-%UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3       .1     .1];
-
-%Run7
-%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.0001  0.0001];
-%UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3      .1      .1];
- 
-%Run9
-%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.0001  0.0001  0.00001  0.00001];
-%UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3      .1      .1       0.01     0.01];
-
-%Run9 again making sure not hitting bounds (was going to use these for results on
-%meeting on 5/6 but then wanted to move gamma bound up)
-%LowerBounds=[-0.1    0.00001     0.8      0.00001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.001  0.0001   0.00001  0.000001];
-%UpperBounds=[0.1      0.001       8        0.01           1      0.8     0.5       0.1     0.01    0.5      3      5      1      1       0.01     0.001];
- 
-%Run9 again-moving gamma bound up-good for converging (Run 1 on
-%spreadsheet, used for meeting 5/6) 
-LowerBounds=[-0.1    0.00001     0.8      0.001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.0001  0.0001   0.000001  0.000001];
-UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.1     0.1     3       5      1      1        0.001     0.001];
- 
-%Run 2 on spreadsheet
-%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001   0.0001  0.0001  0.0001   0.01   0.01  0.0001  0.0001   0.000001  0.000001];
-%UpperBounds=[0.1      0.001       8        0.1          0.1     0.8     0.5       0.1     0.1    0.1      3       5      1      1        0.001     0.001];
- 
-%Run9b-trying to get to converge more
-%LowerBounds=[-0.1    0.00001      1      0.0001      0.0001    0.1    0.0001    0.0001  0.0001  0.0001   1   1     0.001   0.001    0.0001  0.0001];
-%UpperBounds=[0.1      0.001       8        0.01       0.01     0.8      0.1      0.01    0.01    0.01    3   3      .1      .1       0.1     0.1];
- 
-%Run10
-%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001  0.0001  0.0001  ];
-%UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3      .1      .1      ];
-
-
-%Run11
-%LowerBounds=[-0.1    0.00001     0.8      0.0001      0.0001    0.1    0.0001  0.00001  0.00001 0.00001   0.001 0.001 ];
-%UpperBounds=[0.1      0.001       8        0.1         0.1      0.8     0.5       0.1     0.01   0.01       3     3   ];
-
-%Bounds for testing code
-%LowerBounds=[-0.1     0.00001     0.8      0.0001      0.0001    0.1     0.00001  0.00001  0.00001 0.00001  0.0001   0.001];
-%UpperBounds=[0.1       0.001      8         0.01        0.01      0.8     0.5       0.5     0.5    0.5       0.01     0.1 ];
- 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
@@ -77,7 +31,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=10;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -85,21 +39,21 @@ numstartpoints=100;
 
 % x vector to estimate, alpha=m*t+b 
 m=x(1);
-beta_A=x(15);%0.000273; 
-beta_P=x(16);%0.000777; 
-theta_1=x(2);
-epsilon=x(3);
+beta_A=x(2);
+beta_P=x(3);
+theta_1=x(4);
+epsilon=x(5);
 mu=0.00868;  
 mu_A=0.00870;   
 mu_H=0.0507;
-gamma=x(4);   
-theta_2=x(11);%3*x(2);
-sigma=x(5);
-zeta=x(13);%0.0214;
-theta_3=x(12);%16*x(2);
-nu=x(14);%0.0155;
+gamma=x(6);   
+theta_2=x(7);%3*x(2);
+sigma=x(8);
+zeta=x(9);%0.0214;
+theta_3=x(10);%16*x(2);
+nu=x(11);%0.0155;
 omega=0.0000000001;
-b=x(6);
+b=x(12);
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
@@ -109,17 +63,17 @@ format short
 x
 fval
 
-% Final time N; will run 2013-2018 where t=0 represents 2013
-% and t=5 represents 2018, with spacing (N-0)/(25-1)=0.25 between the points:
+% Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
+% and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
 tspan=linspace(0,N,25);
 
 
 % Initial conditions
-P0=x(7);
-A0=x(8);
-H0=x(9);%0.0001;%0.00136;%x(7);
-R0=x(10);
+P0=x(13);
+A0=x(14);
+H0=x(15);%0.0001;%0.00136;%x(7);
+R0=x(16);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -139,7 +93,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   L=y(:,7);
   M=y(:,8);
   %alpha=-pars(1)*t+pars(16);
-  alpha=x(1)*t+x(6);
+  alpha=x(1)*t+x(12);
   
  % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
@@ -154,7 +108,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(1)
  hold all
  plot(t,y(:,1))
- %plot(t(1:end), State_data_1, 'x')
+ plot(t(1:end), State_data_1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -172,7 +126,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(2)
  hold all
  plot(t,y(:,2))
- %plot(t(1:end), State_data_2, 'x')
+ plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
@@ -189,7 +143,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(3)
  hold all
  plot(t,y(:,3))
-%plot(t(1:end), State_data_3, 'x')
+ plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
@@ -206,7 +160,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(4)
  hold all
  plot(t,y(:,4))
- %plot(t(1:end), State_data_4, 'x')
+ plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
@@ -223,7 +177,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(5)
  hold all
  plot(t,y(:,5))
- %plot(t(1:end), State_data_5, 'x')
+ plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
@@ -239,7 +193,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(6)
  hold all
  plot(t,y(:,6))
- %plot(t(1:end), State_data_6, 'x')
+ plot(t(1:end), State_data_6, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('X(t)')
@@ -254,7 +208,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(7)
  hold all
  plot(t,y(:,7))
- %plot(t(1:end), State_data_7, 'x')
+ plot(t(1:end), State_data_7, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('L(t)')
@@ -270,7 +224,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(8)
  hold all
  plot(t,y(:,8))
- %plot(t(1:end), State_data_8, 'x')
+ plot(t(1:end), State_data_8, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('M(t)')
@@ -278,20 +232,19 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) %correspond to the actual t values from t vector that I want to label
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- %%%
- 
+
  
  %%% Data points we are interested in 
 
 
- % Yearly simulation of individuals in P class throughout year for years
+ % Yearly simulation of individuals in P class at all during the year for years
  % 2013-2017
  
  Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6)];
      
  % Actual Data for years 2013-2017
- Data1=[1825910./5519417; 1805325./5559702; 1800613./5602187; 1744766./5648259; 1620951./5702475];
+ Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475];
  
  %Data1=[0.454333735443525;0.344171566100465;0.313035715253311;0.299195267718064;0.285283575660588];
  
@@ -310,14 +263,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  
 
- % Yearly simulation of individuals in A class throughout year for years
+ % Yearly simulation of individuals in A class at all during the year for years
  % 2013-2017
  Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
         y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
  
  
  % Actual Data for years 2013-2017 
- Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34816./5702475];
+ Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475];
  %Data2=[0.00860779586570128;0.00903232873704320;0.00940242291915349;0.00973116535395262;0.0100203808159110];
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
@@ -336,7 +289,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 
 
- % Yearly simulation of individuals in H class throughout year for years
+ % Yearly simulation of individuals in H class at all during the year for years
  % 2014-2016
  
  Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
@@ -363,26 +316,18 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  
  tspan=linspace(0,N,25);
+ % Yearly simulation of individuals in P class at all during the quarters in years
+ % 2013-2018
  Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
- 
- % Actual Data for years 2013-2018 INCLUDES addicts 
- %Data4=[856000./5517176; 870000./5517176; 874000./5517176; 856000./5517176;...
-        %842000./5559006; 860000./5559006; 871000./5559006; 850000./5559006;...
-        %836000./5602117; 861000./5602117; 865000./5602117; 854000./5602117;...
-        %840000./5651993; 829000./5651993; 801000./5651993; 783000./5651993;...
-        %783000./5708586; 772000./5708586; 747000./5708586; 713000./5708586;...
-        %695000./5779971; 690000./5779971; 648000./5779971; 631000./5779971];
         
- %Actual Data for years 2013-2018 EXCLUDES addicts (take ratio of Rx users
- %in quarter out of entire year and assume same ratio for opioid addicts in
- %the quarter to year so take out that number, i.e. .46*OA of year)
-Data4=[(856000-20142)./5519417; (870000-20472)./5519417; (874000-20566)./5519417; (856000-20142)./5519417;...
-        (842000-19813)./5559702; (860000-20236)./5559702; (871000-20495)./5559702; (850000-20001)./5559702;...
-        (836000-19672)./5602187; (861000-20260)./5602187; (865000-20354)./5602187; (854000-20095)./5602187;...
-        (840000-17867)./5648259; (829000-17633)./5648259; (801000-17037)./5648259; (783000-16654)./5648259;...
-        (783000-16659)./5702475; (772000-16425)./5702475; (747000-15893)./5702475; (713000-15170)./5702475;...
-        (695000-15000)./5754509; (690000-15000)./5754509; (648000-15000)./5754509; (631000-15000)./5754509];
+ %Actual Data for years 2013-2018 
+ Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
  
     %Data4=[0.261346770979485;0.201260989188623;0.174242683012588;0.161506109537114;0.155101976782864;0.151460704684903;0.149033078258584;0.147114922330169;0.145431331345751;0.143863917776433;0.142334376444317;0.140814453735682;0.139300242891450;0.137790901793028;0.136282639463777;0.134774414294923;0.133265368984576;0.131753862101771;0.130241589522517;0.128724191794107;0.127206695782661;0.125685293335629;0.124161341735557;0.122637061894953];
  
@@ -408,96 +353,40 @@ Data4=[(856000-20142)./5519417; (870000-20472)./5519417; (874000-20566)./5519417
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
  
  
- %{                  
- Estim5=y(1:20,3)+y(2:21,7)-y(1:20,7);                 
-                      
- %Actual Data for years 2013-2017
- Data5=[836027./(42.*5517176); 843027./(42.*5517176); 850027./(42.*5517176); 830027./(42.*5517176);...
-        810038./(42.*5559006); 840038./(42.*5559006); 851038./(42.*5559006); 820038./(42.*5559006);...
-        795305./(42.*5602117); 835305./(42.*5602117); 836305./(42.*5602117); 830305./(42.*5602117);...
-        802767./(47.*5651993); 792767./(47.*5651993); 787767./(47.*5651993); 782767./(47.*5651993);...
-        769633./(47.*5708586); 759633./(47.*5708586); 729633./(47.*5708586); 692633./(47.*5708586)];
-
- figure(13)
- hold all
- plot(t(1:20),Estim5, 'o')
- plot(t(1:20), Data5, 'x')
- set(gca, 'fontsize',10)
- xlabel('Quarter')
- ylabel('Proportion in A each quarter')
- legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19])
- set(gca, 'fontsize',10)
- xtickangle(90)
- set(gca,'XLim',[0 23])
- set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
-                       'Q1 2014', 'Q2 2014', 'Q3 2014', 'Q4 2014',...
-                       'Q1 2015', 'Q2 2015', 'Q3 2015', 'Q4 2015',...
-                       'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
-                       'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017'})
-                   
-                   
-                   
-Estim6=y(5:16,4)+y(6:17,8)-y(5:16,8);                 
-                      
- %Actual Data for years 2014-2016
-Data6=[810038./(239.*5559006); 840038./(239.*5559006); 851038./(239.*5559006); 820038./(239.*5559006);...
-        795305./(238.*5602117); 835305./(238.*5602117); 836305./(238.*5602117); 830305./(238.*5602117);...
-        802767./(170.*5651993); 792767./(170.*5651993); 787767./(170.*5651993); 782767./(170.*5651993)];
-
-figure(14)
- hold all
- plot(t(5:16),Estim6, 'o')
- plot(t(5:16), Data6, 'x')
- set(gca, 'fontsize',10)
- xlabel('Quarter')
- ylabel('Proportion in H each quarter')
- legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15])
- set(gca, 'fontsize',10)
- xtickangle(90)
- set(gca,'XLim',[0 23])
- set(gca,'xticklabel',{'Q1 2014', 'Q2 2014', 'Q3 2014', 'Q4 2014',...
-                       'Q1 2015', 'Q2 2015', 'Q3 2015', 'Q4 2015',...
-                       'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016'})
  
- 
- %}
 function value = HeroinModel_ODE15s(z)
 
-%Parameters
+% Parameters
 m=z(1);
-beta_A=z(15);%0.000273; 
-beta_P=z(16);%0.000777; 
-theta_1=z(2);
-epsilon=z(3);
+beta_A=z(2);
+beta_P=z(3);
+theta_1=z(4);
+epsilon=z(5);
 mu=0.00868;  
 mu_A=0.00870;   
 mu_H=0.0507;
-gamma=z(4);   
-theta_2=z(11);%3*z(2);
-sigma=z(5);
-zeta=z(13);%0.0214;
-theta_3=z(12);%16*z(2);
-nu=z(14);%0.0155;
+gamma=z(6);   
+theta_2=z(7);
+sigma=z(8);
+zeta=z(9);
+theta_3=z(10);
+nu=z(11);
 omega=0.0000000001;
-b=z(6);
+b=z(12);
 
-
+% Parameter vector
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
-% Final time N; will run 2013-2018 where t=0 represents 2013
-% and t=5 represents 2018, with spacing (T-0)/((N+1)-1)=1 between the points
+% Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
+% and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
 tspan=linspace(0,N,25);
 
-
-
 % Initial conditions
-P0=z(7);
-A0=z(8);
-H0=z(9);
-R0=z(10);
+P0=z(13);
+A0=z(14);
+H0=z(15);
+R0=z(16);
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -508,7 +397,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 % Run stiff ODE solver 
 [t,y]=ode15s(@HeroinModel,tspan,initials,[],pars);
   
- 
  
  % COMPARING MODEL ESTIMATES TO DATA 
  value=0;
@@ -527,8 +415,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % To get the output from the model of the proportion of non-addicted prescription opioid users in 2014, 2015
  % 2016, and 2017 (remaining entries of Estim1),
- % we take the initial number of non-addicted prescription opioid users 
- % in 2014: y(1,2), 2015: y(2,2), 2016: y(3,2), and 2017: y(4,2) and add the number of individuals that enter
+ % we take the initial number of non-addicted prescription opioid users at
+ % the beginning of the year
+ % in 2014: y(5,2), 2015: y(9,2), 2016: y(13,2), and 2017: y(17,2) and add the number of individuals that enter
  % the P class at any point during each of these years, which comes from
  % integrating ODE X'=dy(6) but just focusing in on these four specific years:
  % for 2014, we have to subtract because integrating gives total number of new cases from t=0 to t=2, so have to 
@@ -543,23 +432,19 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Yearly output from the model as a proportion of the population in P at some point during the year for
  % 2013-2017, Estim1 is a column vector
 
-Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
+ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6)];
  
 
 
- % Actual proportions of population (updated 3/12/19) that were non-addicted prescription opioid users at some point
+ % Actual proportions of population that were non-addicted prescription opioid users at some point
  % during the year for 2013-2017 
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
  
- Data1=[1825910./5519417; 1805325./5559702; 1800613./5602187; 1744766./5648259; 1620951./5702475];
- 
- %Data1=[0.454333735443525;0.344171566100465;0.313035715253311;0.299195267718064;0.285283575660588];
- 
- % Data simulated when testing codes 
- %Data1=[0.399384466780766;0.476721593432771;0.469765087997695;0.449866817308604;0.427737148099884];
- 
+ Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475];
+  
+
  % The difference between estimated values and data
  
  Diff1=Estim1-Data1; 
@@ -570,15 +455,29 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  % we need to count the number who are in the class AT ALL during the year,
  % even if they leave or come back at some point. 
  
- % To get the output from the model of the proportion of opioid addicts in 2014 and 2015 (Estim2),
- % we take the initial number of opioid addicts in 2014, y(2,3), and 2015, y(3,3),
+ % To get the output from the model of the proportion of opioid
+ % addicts in 2013 (first entry of Estim2), 
+ % we take the total number of opioid addicts
+ % at the beginning of 2013 (A_0=IC)
+ % and add on the number of individuals that enter the P class at any point during the year 2013, 
+ % which comes from integrating ODE L'=dy(7) from t=0 to t=1; this gives
+ % first value in Estim2. 
+ 
+ % To get the output from the model of the proportion of opioid addicts in 2014, 2015, 2016, and 2017 
+ % (remaining entries of Estim2),
+ % we take the initial number of opioid addicts at the beginning of the year
+ % in 2014: y(5,3), 2015: y(9,3), 2016: y(13,3), and 2017: y(17,3)
  % and add the number of individuals that enter
- % the A class at any point during the year 2014 or 2015, which comes from
- % integrating ODE L'=dy(9) but just focusing in on these two specific years:
+ % the A class at any point during the year, which comes from
+ % integrating ODE L'=dy(9) but just focusing in on these specific years:
  % for 2014, we have to subtract because integrating gives total number of new cases from t=0 to t=2, so have to 
  % subtract off the number from t=0 to t=1;
  % for 2015, we have to subtract because integrating gives total number of new cases from t=0 to t=3, so have to 
  % subtract off the number from t=0 to t=2. 
+ % for 2016, we have to subtract because integrating gives total number of new cases from t=0 to t=4, so have to 
+ % subtract off the number from t=0 to t=3. 
+ % for 2017, we have to subtract because integrating gives total number of new cases from t=0 to t=5, so have to 
+ % subtract off the number from t=0 to t=4. 
 
  
  % Yearly output from the model as a proportion of population in A at some point during the year for
@@ -586,20 +485,15 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  
  Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
         y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];
- % When testing all points with simulated data
- %Estim2=y(1:end-1,3)+y(2:end,7)-y(1:end-1,7); 
+    
  
- % Actual proportions of population (updated 3/12/19) that were opioid addicted individuals in
- % the population at some point during the year in 2014 and 2015 
- % (total number of opioid addicted individuals in 2014 and 2015 in TN
+ % Actual proportions of population that were opioid addicted individuals in
+ % the population at some point during the year 
+ % (total number of opioid addicted individuals in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34816./5702475];
- 
- %Data2=[0.00860779586570128;0.00903232873704320;0.00940242291915349;0.00973116535395262;0.0100203808159110];
- 
- % Data simulated when testing codes  
- %Data2=[0.00709261474856600;0.0106675766257930;0.0130723402928730;0.0148284456654410;0.0162165492691030];
+ Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475];
+  
  
  % The difference between estimated value and data
  
@@ -613,10 +507,10 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  % even if they leave or come back at some point. 
  
  % To get the output from the model of the proportion of heroin/fentanyl addicts in
- % 2014, 2015, and 2016 (Estim3), we take initial number of heroin/fentanyl addicts in 2014, y(2,4), 
- % and 2015, y(3,4), and 2016, y(4,4), and add the number of individuals that enter the H class at any point
+ % 2014, 2015, and 2016 (Estim3), we take initial number of heroin/fentanyl addicts in 2014: y(5,4), 
+ % 2015: y(9,4), and 2016: y(13,4), and add the number of individuals that enter the H class at any point
  % during the year 2014, 2015, or 2016, which comes from
- % integrating ODE M'=dy(10) but just focusing in on the three specific years:
+ % integrating ODE M'=dy(8) but just focusing in on the three specific years:
  % for 2014, we have to subtract because integrating gives total number of new cases from t=0 to t=2, so have to 
  % subtract off the number from t=0 to t=1. 
  % for 2015, we have to subtract because integrating gives total number of new cases from t=0 to t=3, so have to 
@@ -626,87 +520,92 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
  
 
  % Yearly output from the model as a proportion of population in H at some point during the year for
- % 2014-2016, Data3 is a column vector 
- % Only for 2014 and 2015 
- %Estim3=y(2:4,4)+y(3:5,8)-y(2:4,8);  
+ % 2014-2016, Estim3 is a column vector 
 
-  
  Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
 
  
- % Actual proportion (updated 3/12/19) of heroin addicted individuals in the population at some point during the year 
+ % Actual proportion of heroin addicted individuals in the population at some point during the year 
  % in 2014, 2015, and 2016
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  
  Data3=[7560./5559702; 7560./5602187; 10260./5648259];
- %Data3=[14000./5559006; 14000./5602117; 19000./5651993];
- %Data3=[14000./5559006; 14000./5602117];
- %Data3=[0.00113354785405030;0.00105684472597906];
- 
- % Data simulated when testing codes 
- %Data3=[0.00116527288223448;0.00120952017524577;0.00118883157707289];
+
  
  % The difference between estimated value and data
  
  Diff3=Estim3-Data3;
 
  
+  %%%%%
+ % In order to count the total number of individuals in P at some point throughout a certain quarter of a year, 
+ % we need to count the number who are in the class AT ALL during the quarter,
+ % even if they leave or come back at some point. 
   
- Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
- %Data1=[0.399384466780766;0.476721593432771;0.469765087997695;0.449866817308604;0.427737148099884];
- %FILL IN 2018 total pop/data points and COMPARE TO YEARS that we know and
- %use 2nd graph for 2014 on!!
+ % To get the output from the model of the proportion of non-addicted
+ % prescription opioid users in the first quarter of 2013 (first entry of Estim4), 
+ % we take the total number of non-addiction prescription opioid users 
+ % at the beginning of 2013 (P_0=IC)
+ % and add on the number of individuals that enter the P class at any point during the first quarter of 2013, 
+ % which comes from integrating ODE X'=dy(6) from t=0 to t=0.25; this gives
+ % first value in Estim1. 
  
- %Actual Data for years 2013-2018 INCLUDES addicts 
- %Data4=[856000./5517176; 870000./5517176; 874000./5517176; 856000./5517176;...
-        %842000./5559006; 860000./5559006; 871000./5559006; 850000./5559006;...
-        %836000./5602117; 861000./5602117; 865000./5602117; 854000./5602117;...
-        %840000./5651993; 829000./5651993; 801000./5651993; 783000./5651993;...
-        %783000./5708586; 772000./5708586; 747000./5708586; 713000./5708586;...
-        %695000./5779971; 690000./5779971; 648000./5779971; 631000./5779971];
+ % To get the output from the model of the proportion of non-addicted prescription opioid users in the 
+ % rest of the quarters of years 2013-2018 (remaining entries of Estim4),
+ % we take the initial number of non-addicted prescription opioid users at
+ % the beginning of each of the quarters and add the number of individuals that enter
+ % the P class at any point during each of the quarters, which comes from
+ % integrating ODE X'=dy(6) but just focusing in oon the specific quarter
+ % for 2013 Q2, we have to subtract because integrating gives total number of new cases from t=0 to t=.5, so have to 
+ % subtract off the number from t=0 to t=0.25;
+ % for 2013 Q3, we have to subtract because integrating gives total number of new cases from t=0 to t=0.75, so have to 
+ % subtract off the number from t=0 to t=0.5. 
+ % for 2013 Q4, we have to subtract because integrating gives total number of new cases from t=0 to t=1, so have to 
+ % subtract off the number from t=0 to t=0.75. 
+ % for 2014 Q1: gives total number of new cases from t=0 to t=1.25, so subtract the number from t=0 to t=1. 
+ % for 2014 Q2: gives total number of new cases from t=0 to t=1.5, so subtract the number from t=0 to t=1.25. 
+ % for 2014 Q3: gives total number of new cases from t=0 to t=1.75, so subtract the number from t=0 to t=1.5. 
+ % for 2014 Q4: gives total number of new cases from t=0 to t=2, so subtract the number from t=0 to t=1.75. 
+ % for 2015 Q1: gives total number of new cases from t=0 to t=2.25, so subtract the number from t=0 to t=2. 
+ % for 2015 Q2: gives total number of new cases from t=0 to t=2.5, so subtract the number from t=0 to t=2.25. 
+ % for 2015 Q3: gives total number of new cases from t=0 to t=2.75, so subtract the number from t=0 to t=2.5. 
+ % for 2015 Q4: gives total number of new cases from t=0 to t=3, so subtract the number from t=0 to t=2.75. 
+ % for 2016 Q1: gives total number of new cases from t=0 to t=3.25, so subtract the number from t=0 to t=3. 
+ % for 2016 Q2: gives total number of new cases from t=0 to t=3.5, so subtract the number from t=0 to t=3.25. 
+ % for 2016 Q3: gives total number of new cases from t=0 to t=3.75, so subtract the number from t=0 to t=3.5. 
+ % for 2016 Q4: gives total number of new cases from t=0 to t=4, so subtract the number from t=0 to t=3.75. 
+ % for 2017 Q1: gives total number of new cases from t=0 to t=4.25, so subtract the number from t=0 to t=4. 
+ % for 2017 Q2: gives total number of new cases from t=0 to t=4.5, so subtract the number from t=0 to t=4.25. 
+ % for 2017 Q3: gives total number of new cases from t=0 to t=4.75, so subtract the number from t=0 to t=4.5. 
+ % for 2017 Q4: gives total number of new cases from t=0 to t=5, so subtract the number from t=0 to t=4.75. 
+ % for 2018 Q1: gives total number of new cases from t=0 to t=5.25, so subtract the number from t=0 to t=5. 
+ % for 2018 Q2: gives total number of new cases from t=0 to t=5.5, so subtract the number from t=0 to t=5.25. 
+ % for 2018 Q3: gives total number of new cases from t=0 to t=5.75, so subtract the number from t=0 to t=5.5. 
+ % for 2018 Q4: gives total number of new cases from t=0 to t=6, so subtract the number from t=0 to t=5.75. 
         
- %Actual Data for years 2013-2018 EXCLUDES addicts 
- Data4=[(856000-20142)./5519417; (870000-20472)./5519417; (874000-20566)./5519417; (856000-20142)./5519417;...
-        (842000-19813)./5559702; (860000-20236)./5559702; (871000-20495)./5559702; (850000-20001)./5559702;...
-        (836000-19672)./5602187; (861000-20260)./5602187; (865000-20354)./5602187; (854000-20095)./5602187;...
-        (840000-17867)./5648259; (829000-17633)./5648259; (801000-17037)./5648259; (783000-16654)./5648259;...
-        (783000-16659)./5702475; (772000-16425)./5702475; (747000-15893)./5702475; (713000-15170)./5702475;...
-        (695000-15000)./5754509; (690000-15000)./5754509; (648000-15000)./5754509; (631000-15000)./5754509];
  
- %Data4=[0.261346770979485;0.201260989188623;0.174242683012588;0.161506109537114;0.155101976782864;0.151460704684903;0.149033078258584;0.147114922330169;0.145431331345751;0.143863917776433;0.142334376444317;0.140814453735682;0.139300242891450;0.137790901793028;0.136282639463777;0.134774414294923;0.133265368984576;0.131753862101771;0.130241589522517;0.128724191794107;0.127206695782661;0.125685293335629;0.124161341735557;0.122637061894953];
+ % Yearly output from the model as a proportion of the population in P at some point during a quarter of year for
+ % years 2013-2018, Estim4 is a column vector
+
+ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
+
+
+
+ %Actual proportion of non-addicted prescription opioid users for every quarter in years 2013-2018 
+ Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
  
+
  Diff4=Estim4-Data4;
  
-%{ 
-                  
-Estim5=y(1:20,3)+y(2:21,7)-y(1:20,7);                 
-                      
- %Actual Data for years 2013-2017
-Data5=[836027./(42.*5517176); 843027./(42.*5517176); 850027./(42.*5517176); 830027./(42.*5517176);...
-        810038./(42.*5559006); 840038./(42.*5559006); 851038./(42.*5559006); 820038./(42.*5559006);...
-        795305./(42.*5602117); 835305./(42.*5602117); 836305./(42.*5602117); 830305./(42.*5602117);...
-        802767./(47.*5651993); 792767./(47.*5651993); 787767./(47.*5651993); 782767./(47.*5651993);...
-        769633./(47.*5708586); 759633./(47.*5708586); 729633./(47.*5708586); 692633./(47.*5708586)];
-                   
-Diff5=Estim5-Data5;
-                   
- 
-Estim6=y(5:16,4)+y(6:17,8)-y(5:16,8);                 
-                      
- %Actual Data for years 2014-2016
-Data6=[810038./(239.*5559006); 840038./(239.*5559006); 851038./(239.*5559006); 820038./(239.*5559006);...
-        795305./(238.*5602117); 835305./(238.*5602117); 836305./(238.*5602117); 830305./(238.*5602117);...
-        802767./(170.*5651993); 792767./(170.*5651993); 787767./(170.*5651993); 782767./(170.*5651993)];
- 
- 
-Diff6=Estim6-Data6;
- 
- 
-%}
- 
+
 
  %%% For testing purposes: states and corresponding simulated data 
  
@@ -768,29 +667,24 @@ Diff6=Estim6-Data6;
  
  %%%%%
  % The *relative* error that we are trying to minimize for ordinary least
- % squares: the sum of the squared errors (norm gives sqrt(sum from 1 to N of (diff#)^2)
- % normalized by norm of the data (because of difference in magnitude of
+ % squares: the sum of the squared errors [norm gives sqrt(sum from 1 to N
+ % of (Diff#)^2)]
+ % normalized by norm of the data [because of difference in magnitude of
  % the data points in each estimation and the difference in the number of data points 
- % in each estimation, helpful to normalize; gives least squares percentage error so each piece weighted evenly)
+ % in each estimation, helpful to normalize; gives least squares percentage
+ % error so each piece weighted evenly].
  
- % For testing purposes with states 
- %value = norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  
+ % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
+
  % For testing purposes with states and data sets
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  
- % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
- 
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
- %value=norm(Diff4,2)./norm(Data4);
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff4,2)./norm(Data4);
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff4,2)./norm(Data4);
-
-
  
 end
  
+
 
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
@@ -801,7 +695,7 @@ f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4)
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
-% i.e. individuals who enter the P class at any time from S (used in Estim1)
+% i.e. individuals who enter the P class at any time from S (used in Estim1, Estim4)
 f(6) =(pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;

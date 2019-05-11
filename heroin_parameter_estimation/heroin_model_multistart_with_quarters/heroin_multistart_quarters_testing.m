@@ -1,4 +1,4 @@
-%File name: heroin_multistart_final_testing.m
+%File name: heroin_multistart_quarters_testing.m
 
 %Parameters
 %slope of alpha 
