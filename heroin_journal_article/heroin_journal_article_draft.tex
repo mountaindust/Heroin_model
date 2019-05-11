@@ -345,7 +345,7 @@ $\mathscr{R}_0=$ WHICHEVER IS LARGEST WHEN KNOW VALUES!
  
  \textcolor{green}{Tennessee background/why this state specifically } \\
 \textcolor{blue}{Tennessee specific information/start to talk about Tennessee} \\
-The U.S. prescription rate per capita from 2006-2017 was at it's peak in 2012 with a rate of 81.3 out of 100 people being prescribed \cite{CDC8}. Tennessee has been consistently above that number for this entire time period with the following rates for years 2006-2017: 124.8, 128.8, 132.9, 138.4, 140.0, 138.5, 136.1, 127.1, 121.3, 114.9, 107.5, and 94.4, respectively \cite{CDC9}. From it's peak in Quarter 3 of 2014 to Quarter 4 of 2018, the number of opioid prescribed individuals in the state decreased by 28\%. There was a 300\% increase from 2013 to 2016 of heroin overdose deaths, and in the same time period over a 450\% increase in fentanyl-related deaths, mostly from illicitly manufactured fentanyl \cite{PDO}. From 2013-2017, there was over an 800\% increase in fentanyl-related overdose deaths \cite{PDO2}. Overall, opioid overdose deaths increased from 11.0 to 18.1 per 100,00 individuals from 2012 to 2016. In 2016, 80\% of opioid overdose deaths involved multiple drugs, up from 63\% in 2012. Due to these alarming statistics within the state of Tennessee, we wish to apply our model specifically to this state, as we believe facing this problem on a smaller scale with less heterogeneity than at the national level could be of use. 
+The U.S. opioid prescription rate per capita from 2006-2017 was at it's peak in 2012 with a rate of 81.3 out of 100 people being prescribed \cite{CDC8}. Tennessee has been consistently above that number for this entire time period with the following rates for years 2006-2017: 124.8, 128.8, 132.9, 138.4, 140.0, 138.5, 136.1, 127.1, 121.3, 114.9, 107.5, and 94.4, respectively \cite{CDC9}. From it's peak in Quarter 3 of 2014 to Quarter 4 of 2018, the number of opioid prescribed individuals in the state decreased by 28\% \cite{PDO}. There was a 300\% increase from 2013 to 2016 of heroin overdose deaths, and in the same time period over a 450\% increase in deaths involving fentanyl, mostly from illicitly manufactured fentanyl. From 2013-2017, there was over an 800\% increase in overdose deaths involving fentanyl \cite{PDO2}. Overall, opioid overdose deaths increased from 11.0 to 18.1 per 100,00 individuals from 2012 to 2016. In 2016, 80\% of opioid overdose deaths involved multiple drugs, up from 63\% in 2012. Due to these alarming statistics within the state of Tennessee, we wish to apply our model specifically to this state, as we believe facing this problem on a smaller scale with less heterogeneity than at the national level could be of use. 
 
  \textcolor{green}{Data used within code} \\
  \textcolor{blue}{Applying model to Tennessee population}
@@ -666,11 +666,11 @@ In order to count the proportion of individuals in P, A, or H at some point thro
   
 To get the output from the model of the proportion of non-addicted prescription opioid users in each year, we take the proportion of non-addicted prescription opioid users at the beginning of each of the years and add on the proportion of individuals that enter the P class at any point during the year. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ For every year except 2013, a subtraction must be done since integrating gives the proportion from time $0$ to time $t$, but we only want the proportion from time $t-1$ to time $t$ (i.e. the new cases in a given year). Thus, the calculation is as follows for each year, with the last equation in each line what was calculated in the code (noting that our time step is years, but our linspace is broken into quarters of a year, so each entry represents the beginning of a quarter of a year): \\
 
-2013: $P_0 + \int_0^1 \alpha S = y(1,2)+y(5,6)-y(1,6)$ \\
-2014: $y(5,2)+\int_1^2 \alpha S$=$y(5,2)+\int_0^2 \alpha S$- $\int_0^1 \alpha S=y(5,2)+y(9,6)-y(5,6)$ \\
-2015: $y(9,2)+\int_2^3 \alpha S$=$y(9,2)+\int_0^3 \alpha S$- $\int_0^2 \alpha S=y(9,2)+y(13,6)-y(9,6)$ \\
-2016: $y(13,2)+\int_3^4 \alpha S$=$y(13,2)+\int_0^4 \alpha S$- $\int_0^3 \alpha S=y(13,2)+y(17,6)-y(13,6)$ \\
-2017: $y(17,2)+\int_4^5 \alpha S$=$y(17,2)+\int_0^5\alpha S$- $\int_0^4 \alpha S=y(17,2)+y(21,6)-y(17,6)$ \\
+2013: $P_0 + \int_0^1 \alpha S dt= y(1,2)+y(5,6)-y(1,6)$ \\
+2014: $y(5,2)+\int_1^2 \alpha S dt$=$y(5,2)+\int_0^2 \alpha S dt$- $\int_0^1 \alpha S dt=y(5,2)+y(9,6)-y(5,6)$ \\
+2015: $y(9,2)+\int_2^3 \alpha S dt$=$y(9,2)+\int_0^3 \alpha S dt$- $\int_0^2 \alpha S dt=y(9,2)+y(13,6)-y(9,6)$ \\
+2016: $y(13,2)+\int_3^4 \alpha S dt$=$y(13,2)+\int_0^4 \alpha S dt$- $\int_0^3 \alpha S dt=y(13,2)+y(17,6)-y(13,6)$ \\
+2017: $y(17,2)+\int_4^5 \alpha S dt$=$y(17,2)+\int_0^5\alpha S dt$- $\int_0^4 \alpha S dt=y(17,2)+y(21,6)-y(17,6)$ \\
 
 
  To get the output from the model of the proportion of (non-heroin addicted) opioid addicts in each of the years 2013-2017, we take the initial proportion of opioid addicts in each of these years and add the proportion of individuals that enter the A class at any point during the year 2014 or 2015. This latter part comes from integrating over those who enter the A class: $\int_0^t L'(t)dt=\int_0^t (\gamma P + \sigma R\frac{A}{A+H+\omega}+\beta_A SA+\beta_P SP) dt$ which is equal to $L(t)-L(0)$; here, we take $L(0)=0.$ Similar to above with the subtraction of integrals to calculate for a specific year, we have: \\
@@ -690,12 +690,12 @@ To obtain the output from the model of the proportion of heroin/fentanyl addicts
 
 
 Finally, to obtain the output from the model of the proportion of prescription opioid addicts for each year 2014-2016, we take the initial proportion of prescription opioid users addicts in each quarter and add the proportion of individuals that enter the P class at any point during the quarter. This latter part comes from integrating over those who enter the P class: $\int_0^t X'(t)dt=\int_0^t \alpha S(t)dt$ which is equal to $X(t)-X(0)$; here, we take $X(0)=0.$ Similar to above, we will use subtraction of integrals to calculate for a specific quarter: \\
- 2013 Quarter 1: $y(1,2)+\int_0^{0.25} \alpha S= y(1,2)+y(2,6)-y(1,6)$ \\
- 2013 Quarter 2: $y(2,2)+\int_{0.25}^{0.5} \alpha S =y(2,2)+\int_0^{.5} \alpha S- \int_0^{0.25} =y(2,2)+y(3,6)-y(2,6)$ \\
- 2013 Quarter 3: $y(3,2)+\int_{0.5}^{0.75} \alpha S =y(3,2)+\int_0^{.75} \alpha S- \int_0^{0.5} \alpha S=y(3,2)+y(4,6)-y(3,6)$ \\
-  2013 Quarter 4: $y(4,2)+\int_{0.75}^{1} \alpha S =y(4,2)+\int_0^{1} \alpha S- \int_0^{0.75} \alpha S=y(4,2)+y(5,6)-y(4,6)$ \\
+ 2013 Quarter 1: $y(1,2)+\int_0^{0.25} \alpha S dt= y(1,2)+y(2,6)-y(1,6)$ \\
+ 2013 Quarter 2: $y(2,2)+\int_{0.25}^{0.5} \alpha S dt =y(2,2)+\int_0^{.5} \alpha S dt- \int_0^{0.25} =y(2,2)+y(3,6)-y(2,6)$ \\
+ 2013 Quarter 3: $y(3,2)+\int_{0.5}^{0.75} \alpha S dt =y(3,2)+\int_0^{.75} \alpha S dt- \int_0^{0.5} \alpha S dt=y(3,2)+y(4,6)-y(3,6)$ \\
+  2013 Quarter 4: $y(4,2)+\int_{0.75}^{1} \alpha S dt =y(4,2)+\int_0^{1} \alpha S dt- \int_0^{0.75} \alpha S dt=y(4,2)+y(5,6)-y(4,6)$ \\
  \vdots \\
-  2018 Quarter 4: $y(24,2)+\int_{5.75}^{6} \alpha S =y(24,2)+\int_0^{6} \alpha S- \int_0^{5.75} \alpha S=y(24,2)+y(25,6)-y(24,6)$ \\
+  2018 Quarter 4: $y(24,2)+\int_{5.75}^{6} \alpha S dt =y(24,2)+\int_0^{6} \alpha S dt- \int_0^{5.75} \alpha S dt=y(24,2)+y(25,6)-y(24,6)$ \\
 
 
 

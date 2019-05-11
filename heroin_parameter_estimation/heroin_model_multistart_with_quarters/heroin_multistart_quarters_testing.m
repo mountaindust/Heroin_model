@@ -2,23 +2,23 @@
 
 %Parameters
 %slope of alpha 
-m=-.0123;
-beta_A=0.000273; 
-beta_P=0.000777; 
-theta_1=0.00001;
-epsilon=3;
+m=-.0156;
+beta_A=0.00235; 
+beta_P=0.000141; 
+theta_1=0.000507;
+epsilon=2.54;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
-gamma=0.00744;
-theta_2=3*theta_1; 
-sigma=0.00744;
-zeta=0.0214;
-theta_3=16*theta_1; 
-nu=0.0155;
+gamma=0.00115;
+theta_2=0.0370; 
+sigma=0.0284;
+zeta=0.265;
+theta_3=3.51; 
+nu=0.00657;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.3; 
+b=0.303; 
 
 %{
 % For R_0 checking:
@@ -41,15 +41,15 @@ omega=0.0000000001;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
-% Final time and N+# is # of equally spaced points from 0 to N 
+% Final time and last entry of tspan is # of equally spaced points from 0 to N 
 N = 6;
-tspan=linspace(0,N,25);
+tspan=linspace(0,N,100);
 
 % Initial Conditions
-P0=0.2;
-A0=0.00760;
-H0=0.00121;
-R0=0.00443;
+P0=0.0835;
+A0=0.00671;
+H0=0.000874;
+R0=0.0509;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -69,41 +69,37 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   
   alpha=m*t+b;
   
-  % Making sure S+P+A+H+R=1
-  for i=1:N+1
-      total(i)=y(i,1)+y(i,2)+y(i,3)+y(i,4)+y(i,5);
-  end
-  
+% Making sure S+P+A+H+R=1
+  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
+
+%{
+Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
+         y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6)];
  
-Estim1=[sum(y(1:4,2)+y(2:5,6)-y(1:4,6)); sum(y(5:8,2)+y(6:9,6)-y(5:8,6)); sum(y(9:12,2)+y(10:13,6)-y(9:12,6));...
-         sum(y(13:16,2)+y(14:17,6)-y(13:16,6)); sum(y(17:20,2)+y(18:21,6)-y(17:20,6))];
-     
-Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620955./5708586];
+Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];       
 
-
-Estim2=[sum(y(1:4,3)+y(2:5,7)-y(1:4,7)); sum(y(5:8,3)+y(6:9,7)-y(5:8,7)); sum(y(9:12,3)+y(10:13,7)-y(9:12,7));...
-         sum(y(13:16,3)+y(14:17,7)-y(13:16,7)); sum(y(17:20,3)+y(18:21,7)-y(17:20,7))];
-     
-Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
-
-
-Estim3=[sum(y(5:8,4)+y(6:9,8)-y(5:8,8)); sum(y(9:12,4)+y(10:13,8)-y(9:12,8));...
-         sum(y(13:16,4)+y(14:17,8)-y(13:16,8))];
-     
-Data3=[7560./5559006; 7560./5602117; 10260./5651993]; 
+Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
-
 Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
 
-Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176; (856000-19973)./5517176;...
-        (842000-19962)./5559006; (860000-19962)./5559006; (851038-19962)./5559006; (820038--19962)./5559006;...
-        (795305-19695)./5602117; (835305-19695)./5602117; (836305-19695)./5602117; (830305-19695)./5602117;...
-        (802767-17233)./5651993; (792767-17233)./5651993; (787767-17233)./5651993; (782767-17233)./5651993;...
-        (769633-20367)./5708586; (759633-20367)./5708586; (729633-20367)./5708586; (692633-20367)./5708586;...
-        (679000-19000)./5779971; (676000-19000)./5779971; (631000-19000)./5779971; (612000-19000)./5779971];
-    
 
+ Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475];
+ Diff1=Estim1-Data1; 
+ Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475];
+ Diff2=Estim2-Data2;  
+ Data3=[7560./5559702; 7560./5602187; 10260./5648259];
+ Diff3=Estim3-Data3;
+ Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
+ Diff4=Estim4-Data4;
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
+%}
  
  % ODE solutions plotted separately shown all together
  figure(1)
@@ -154,15 +150,13 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
  figure(2)
            plot(t,y(:,3),'r-','LineWidth',1);
            hold all
-           plot(t,y(:,4),'g-','LineWidth',1); 
-           hold all
-           plot(t,y(:,5),'m-','LineWidth',1); 
+           plot(t,y(:,4),'g-','LineWidth',1);
            xlabel('Year')
-           ylabel('Size of Populations');
+           ylabel('Size of Addicted Populations');
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
            xtickangle(90)
-           legend('A','H','R')
+           legend('A','H')
            set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016',...
                        '2017', '2018', '2019'})
@@ -170,26 +164,24 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
 
  
  figure(3)
-           hold all
-           plot(t,y(:,1))
-           %plot(t(1:end), State_data_1, 'x')
-           set(gca, 'fontsize',10)
-           xlabel('Year')
-           ylabel('Susceptibles')
-           legend('Proportion of susceptibles')%,'Proportion of susceptibles (simulated) data' )
-           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
-           set(gca, 'fontsize',10)
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ hold all
+ plot(t,y(:,1))
+ set(gca, 'fontsize',10)
+ xlabel('Year')
+ ylabel('Susceptibles')
+ legend('Proportion of susceptibles')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
            
  figure(4)
  hold all
  plot(t,y(:,2))
- %plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
- legend('Proportion of prescription users')%,'Proportion of prescription users (simulated) data' )
+ legend('Proportion of prescription users')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -199,26 +191,22 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
  figure(5)
  hold all
  plot(t,y(:,3))
- %plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
- legend('Proportion of opioid addicts')%,'Proportion of opioid addicts (simulated) data' )
+ legend('Proportion of opioid addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
           
-      
- 
-                
+                   
  figure(6)
  hold all
  plot(t,y(:,4))
-%plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
- legend('Proportion of heroin/fentanyl addicts')%,'Proportion of heroin/fentanyl addicts (simulated) data' )
+ legend('Proportion of heroin/fentanyl addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
@@ -227,17 +215,16 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
  figure(7)
  hold all
  plot(t,y(:,5))
- %plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
- legend('Proportion of stably recovered addicts')%,'Proportion of stably recovered addicts (simulated) data' )
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ legend('Proportion of stably recovered addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
-              
-           
+ %{             
+ % Data points from proportion that is in P at some point in the year and corresponding ODE solution points 
  figure(8)
  hold all
  z1 = linspace(0,4,5); %defines mesh where going to plot Estim1, Data1 values 
@@ -251,41 +238,41 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  
- 
 
  
- % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
+  % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
  figure(9)
  hold all
- z2 = linspace(0,16,5);
+ z2 = linspace(0,4,5);
  scatter(z2, Estim2,'o');
  scatter(z2, Data2,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A at some point during the year')
  legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 4 8 12 16 ])
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
 
 
 
 
- % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
+ % Data points from proportion that is in H at some point in the year and corresponding ODE solution points 
  figure(10)
  hold all
- z3 = linspace(0,8,3);
+ z3 = linspace(0,2,3);
  scatter(z3, Estim3,'o');
  scatter(z3, Data3,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H at some point during the year')
  legend('ODE solution', 'Data')
- set(gca, 'xtick', [ 0 4 8 ])
+ set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
 
+ % Data points from proportion that is in P at some point in the quarter of a year and corresponding ODE solution points 
  figure(11)
  hold all
  z4 = linspace(0,23,24);
@@ -306,6 +293,7 @@ Data4=[(856000-19973)./5517176; (870000-19973)./5517176; (874000-19973)./5517176
                        'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
  
+%}
            
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);

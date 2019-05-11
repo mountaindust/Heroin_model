@@ -132,7 +132,7 @@ $R_0=0.000443$ \\
 $S_0=0.9197$ \\
 
 \pagebreak
-May 6, 2019 meeting: 
+May 6, 2019 meeting (2 options): 
 
 \begin{multicols}{2}
 Not using 2016 heroin data point (36 data points, estimating 15 values) \\
@@ -195,7 +195,82 @@ $\beta_A=0.000468$ \\
 $\beta_P=0.000136$ \\
 \end{multicols}
 
+
+
+
+
 \pagebreak
+May 15, 2019 meeting (final results): 
+Using all data points (37 data points, estimating 17 values) \\
+
+\textbf{fval=0.1609} \\
+Used calculations: \\
+$\mu=0.00868$ \\
+$\mu_{A}=0.00870$ \\
+$\mu_{H}=0.0507$ \\
+$\omega=10^{-10}$ \\ 
+
+Estimated with 200 starting points (187 converged): \\
+$m=-.0156$ \\
+$b=0.303$\\
+$\alpha=[0.303  \   0.287  \   0.272    \   0.256 \    0.240 \     0.225  \  0.209  ]$ \\
+$\beta_A=0.00235$\\
+$\beta_P=0.000141$\\
+$\theta_1=0.0005074$\\
+$\epsilon=2.54$ \\
+$\gamma=0.00115$\\
+$\theta_2=0.0370$\\
+$\sigma=0.0284$\\
+$\zeta=0.265$\\
+$\theta_3=3.51$\\ 
+$\nu=0.00657$\\
+$\omega=0.0000000001$\\
+$P_0=0.0835$\\
+$A_0=0.00671$\\
+$H_0=0.000874$\\
+$R_0=0.0509$\\
+$S_0=0.858016$\\
+
+
+
+parameters estimating: $[m \hspace{0.9cm}   \beta_A \hspace{1.4cm}   \beta_P \hspace{1.4cm} \theta_1 \hspace{0.9cm}  \epsilon \hspace{0.8cm} \gamma \hspace{1.2cm}  \theta_2 \hspace{1cm}   \sigma ]$ \\
+lower bounds:  \hspace{1.2cm} $[-0.1 \hspace{0.3cm}  0.00001 \hspace{0.3cm}    0.000001 \hspace{0.3cm}      0.00001  \hspace{0.3cm}        0.8 \hspace{0.3cm}     0.001 \hspace{0.3cm}     0.0001 \hspace{0.3cm}    0.0001 ]$ \\
+upper bounds:\hspace{1.3cm} $[\hspace{0.2cm}0.1 \hspace{0.8cm}     0.01  \hspace{0.9cm}        0.01  \hspace{0.9cm}        0.001  \hspace{0.9cm}           8 \hspace{0.6cm}        0.1  \hspace{0.9cm}            2    \hspace{1.2cm}    1     ]$,
+
+parameters estimating: $[ \zeta \hspace{1.1cm}   \theta_3 \hspace{1.2cm} \nu \hspace{0.9cm}   b \hspace{1cm}   P_0 \hspace{0.9cm} A_0 \hspace{1.3cm} H_0  \hspace{1.2cm}  R_0 ]$ \\
+lower bounds:  \hspace{1.2cm} $[    0.0001   \hspace{0.3cm}     0.001 \hspace{0.3cm} 0.0001 \hspace{0.3cm}  0.1 \hspace{0.3cm}    0.0001 \hspace{0.3cm}      0.00001  \hspace{0.3cm}        0.00001 \hspace{0.3cm}     0.00001  ]$ \\
+upper bounds:\hspace{1.3cm} $[\hspace{0.2cm} 0.5     \hspace{0.9cm}    4   \hspace{1cm} 0.1  \hspace{0.8cm}     0.8  \hspace{0.9cm}        0.5 \hspace{0.8cm}        0.1  \hspace{0.9cm}           0.1 \hspace{1.1cm}        0.1     ]$.
+
+
+
+
+
+We choose these bounds for the following reasons: \\
+-0.1$\leq$m$\leq$ 0.1: we assume that since $\alpha$ will be a value less than 1 based on estimate in \cite{Battista}, so it's slope will not be very large in absolute value \\
+0.00001$\leq$$\beta_A$$\leq$ 0.01: based on preliminary calculations in Appendix A \\
+0.000001$\leq$$\beta_P$$\leq$0.01: based on preliminary calculations in Appendix A \\
+0.00001$\leq$$\theta_1$$\leq$ 0.001: chosen intuitively that a susceptible individual interacting with a heroin user would have less than a 0.1 probability of transitioning to the heroin class  \\
+0.8$\leq$$\epsilon$$\leq$ 8: estimate from \cite{Battista} \\
+0.001$\leq$$\gamma$$\leq$ 0.1: estimate based on value in \cite{Battista} \\
+0.0001$\leq$$\theta_2$$\leq$2: chosen intuitively that a prescription opioid user interacting with a heroin user would have a larger probability of transitioning to the heroin class than that of a susceptible individual (see *) \cite{Muhuri}\\
+0.0001$\leq$$\sigma$$\leq$ 1: unknown, chosen intuitively for relapses that could occur from a stably recovered state  \\
+0.0001$\leq$$\zeta$$\leq$0.5: based on preliminary calculations in Appendix A\\
+0.001$\leq$$\theta_3$$\leq$ 4: chosen intuitively that an opioid addict interacting with a heroin user would have a much larger probability of transitioning to the heroin class than that of a susceptible individual (see *) \cite{Muhuri}\\
+0.0001$\leq$$\nu$$\leq$0.1: based on preliminary calculations in Appendix A \\
+0.01$\leq$$b$$\leq$ 0.8: estimated based on value of $\alpha$ in \cite{Battista} \\
+0.0001$\leq$$P_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
+0.00001$\leq$$A_0$$\leq$ 0.1: assume small but no greater than 10\% of the population \\
+0.00001$\leq$$H_0$$\leq$ 0.1: assume small but no greater than 10\% of the population \\
+0.00001$\leq$$R_0$$\leq$ 0.1: assume small but no greater than 10\% of the population \\
+
+
+*We consider a national study of individuals 12 and older to establish a general relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
+NMPR use can occur within the prescription class (i.e. from misuse that's not considered addiction), or in the addiction class. Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is at least 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$), where both $\theta_2$ and $\theta_3$ are greater than $\theta_1.$ 
+
+
+\pagebreak
+
+
 \begin{center}
 \begin{tabular}{|c | c | c | }
 
