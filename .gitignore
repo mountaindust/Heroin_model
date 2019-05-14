@@ -43,3 +43,5 @@ talks/
 
 #MATLAB extra files
 *.m~
+*.mat
+
