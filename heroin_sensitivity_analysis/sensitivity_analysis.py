@@ -272,6 +272,7 @@ def plot_S1_ST(S_sens, P_sens, A_sens, H_sens, R_sens, show=True):
     for ax in axes:
         ax.tick_params(labelsize=18)
         ax.legend(fontsize=16)
+        ax.set_ylim(bottom=0)
     axes[0].set_title('First-order indices', fontsize=26)
     axes[1].set_title('Total-order indices', fontsize=26)
     plt.tight_layout()
@@ -314,7 +315,8 @@ def plot_sens_data_double():
 
 
 
-### This is left-over from journal article plotting for opioid only ###                      
+### This is left-over from journal article plotting for opioid only ###
+### This is also stale. Could be adapted to compare two different intervals ###                   
 def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
                       S_sens_02, P_sens_02, A_sens_02, R_sens_02, H="x"):
     '''Plot unit hypercube with double hypercube'''

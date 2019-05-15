@@ -392,6 +392,7 @@ def plot_S1_ST_tbl_from_store(store, show=True, ext='pdf'):
 
 
 
+### This is stale. Could be adapted to compare two different intervals ###
 def plot_S1_ST_double(S_sens_01, P_sens_01, A_sens_01, R_sens_01,
                       S_sens_02, P_sens_02, A_sens_02, R_sens_02, H="x"):
     '''Plot unit hypercube with double hypercube'''
