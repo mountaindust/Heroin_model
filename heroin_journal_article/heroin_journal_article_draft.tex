@@ -733,9 +733,9 @@ We choose these realistic bounds for the following reasons: \\
 0.001$\leq$$\gamma$$\leq$ 0.1: estimate based on value in \cite{Battista} \\
 0.0001$\leq$$\theta_2$$\leq$2: chosen intuitively that a prescription opioid user interacting with a heroin user would have a larger probability of transitioning to the heroin class than that of a susceptible individual (see *) \cite{Muhuri}\\
 0.0001$\leq$$\sigma$$\leq$ 1: unknown, chosen intuitively for relapses that could occur from a stably recovered state  \\
-0.0001$\leq$$\zeta$$\leq$0.5: based on preliminary calculations in Appendix A\\
+0.0001$\leq$$\zeta$$\leq$0.5: unknown, wide bounds\\
 0.001$\leq$$\theta_3$$\leq$ 4: chosen intuitively that an opioid addict interacting with a heroin user would have a much larger probability of transitioning to the heroin class than that of a susceptible individual (see *) \cite{Muhuri}\\
-0.0001$\leq$$\nu$$\leq$0.1: based on preliminary calculations in Appendix A \\
+0.0001$\leq$$\nu$$\leq$0.1: unknown, wide bounds  \\
 0.01$\leq$$b$$\leq$ 0.8: estimated based on value of $\alpha$ in \cite{Battista} \\
 0.0001$\leq$$P_0$$\leq$ 0.5: assume small but no greater than 50\% of the population \\
 0.00001$\leq$$A_0$$\leq$ 0.1: assume small but no greater than 10\% of the population \\
@@ -847,7 +847,23 @@ $S_0$ & 0.858016  & \scriptsize{dimensionless}  \\
 \end{tabular}
 \end{center}
  
- \textcolor{red}{Later: throw out everything 2016 and on since there seems to be a change right at 2016? Maybe make alpha piecewise where it's constant until 2018 and then slope downward? Great overall result if can say inflection point at 2016, where Rx's really decrease at that point bc prescribing too much and individuals turning to heroin instead(...but need to be careful, bc some data points I use are an average between 2 years and I select the lower of the 2 years to place the data point)}
+ \textcolor{red}{Later: throw out everything 2016 and on since there seems to be a change right at 2016? Maybe make alpha piecewise where it's constant until 2018 and then slope downward? Great overall result if can say inflection point at 2016, where Rx's really decrease at that point bc prescribing too much and individuals turning to heroin instead(...but need to be careful, bc some data points I use are an average between 2 years and I select the lower of the 2 years to place the data point). \\
+May investigate other functions of alpha that may not be linear. Consider a more general function for alpha(t) to capture P data. Could do a piecewise fit (linear or non-linear) at end of 2015/beginning of 2016, or even have the point fitted where it switches the piecewise function; goal would be to analyze data by looking at time-varying parameters. Looks like there is transience at from 2013-2016 and then linearity after quarter 3 of 2015 or beginning of 2016 }
+
+\textcolor{red}{Policy information in 2016:
+Requirements with the force of law: Tenn. Code Ann. § 53-10-310 (2016)
+Since 2013, providers in Tennessee are required to check the state?s controlled substance
+database or have a healthcare practitioner delegate check the database before prescribing
+or dispensing a controlled substance if the healthcare practitioner is aware or reasonably
+certain that a person is attempting to obtain a Schedule II-V controlled substance, which
+includes, among other, opioids and benzodiazepines. \\
+In 2013: Requirements with the force of law: Tenn. Code Ann. § 53-11-308 (2013)
+In 2013, the Tennessee Legislature amended its controlled substances statute to add
+limitations to the prescribing of opioids. The amended statute prohibits dispensing of
+prescriptions for any opioids or benzodiazepines in quantities greater than a 30-day
+supply. The statute also requires prescribers of opioids, benzodiazepines, barbiturates, or
+carisoprodol to patients who are in chronic, long-term drug therapy for 90 days or longer
+to consider mandatory urine testing. }
  \pagebreak
 
 
@@ -881,7 +897,7 @@ In \cite{Saltelli2}, instead, the matrix $X_{~i}$ represents the $N \times (k-1)
 For first-order indices, only one parameter is varied and the rest are held constant; for second-order indices, two parameters are varied and the rest are held constant; and for total-order indices, every combination of parameters is varied, from a single parameter varying alone to all higher-order interactions between parameters. The length of the colored bars, with each color representing a specific class, measures the contribution of a certain parameter to the variance of each of the classes in the model. The longer the colored bar, the higher the effect the parameter has on that class of individuals; the sum of each color adds to 1, so that for each parameter, the relative contribution to each of the classes is represented. We are able to retrieve the confidence intervals on the sensitivity of each of the populations to a respective change in the parameter(s) for first order changes, second order changes and total order changes. \\
 
 
-Below are the ranges we chose; most are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters except for...FILL IN. We note that $\alpha=m*t+b$. 
+Below are the ranges we chose; most are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters except for...FILL IN. We note that $\alpha=m \cdot t+b$. 
 
 \begin{center}
 
@@ -1015,7 +1031,7 @@ We make a note that individuals that do not have an opioid use disorder and die 
 \pagebreak
 
 \textcolor{blue}{Estimates of parameters from literature} \\
-\textcolor{red}{WILL MOST LIKELY DELETE THIS SECTION BECAUSE NOW ESTIMATING PARAMETERS AND IC WITH MULTISTART??--unless case use as reasoning for bounds, i.e. to have intuition on order of magnitudes??} 
+\textcolor{red}{WILL MOST LIKELY DELETE THIS SECTION BECAUSE NOW ESTIMATING PARAMETERS AND IC WITH MULTISTART??--unless use as reasoning for bounds, i.e. to have intuition on order of magnitudes for betaA and betaP, but NOT zeta or nu or any IC} 
 
 Since there is no information for values of $\theta_1$, $\theta_2$, or $\theta_3$ for Tennessee in the literature, we consider a national study of individuals 12 and older to establish a relationship among these three rates. For a national study consisting of 609,000 participants, ``the recent heroin incidence rate was 19 times higher among those who reported prior non-medical pain reliever (NMPR) use (0.39\%) than among those who did not report NMPR use (0.02\%) \cite{Muhuri}.
 NMPR use can occur within the prescription class (i.e. from misuse that's not considered addiction), or in the addiction class. Thus, we will extrapolate this information to say that the rate that prescription opioid users and opioid addicts move to heroin use is 19 times greater than the rate at which susceptibles move to heroin use (i.e. $\theta_2 + \theta_3$ $>$ 19$\theta_1$), where both $\theta_2$ and $\theta_3$ are greater than $\theta_1.$ We will make an assumption here that $\theta_2 + \theta_3$ is exactly 19$\theta_1$, and that there is somewhat of an elevated risk of moving to heroin use from the prescription class versus the susceptible class, taking $\theta_2 =3 \theta_1$. This leaves $\theta_3=16\theta_1.$ \\
