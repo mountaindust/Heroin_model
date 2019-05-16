@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=2;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -108,7 +108,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
- legend('Proportion of susceptibles')%,'Proportion of susceptibles (simulated) data' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -126,7 +125,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
- legend('Proportion of prescription users')%,'Proportion of prescription users (simulated) data' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -143,7 +141,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
- legend('Proportion of opioid addicts')%,'Proportion of opioid addicts (simulated) data' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -160,7 +157,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
- legend('Proportion of heroin/fentanyl addicts')%,'Proportion of heroin/fentanyl addicts (simulated) data' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -177,7 +173,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
- legend('Proportion of stably recovered addicts')%,'Proportion of stably recovered addicts (simulated) data' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -193,7 +188,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('X(t)')
- legend('Proportion that enter P at some point during the year')%,'data simulated' )
+ legend({'Proportion that enter P at some point during the year'}, 'FontSize', 11)%,'data simulated' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -209,7 +204,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('L(t)')
- legend('Proportion that enter A at some point during the year')%,'data simulated' )
+ legend({'Proportion that enter A at some point during the year'}, 'FontSize', 11)%,'data simulated' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -225,7 +220,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('M(t)')
- legend('Proportion that enter H at some point during the year')%,'data simulated' )
+ legend({'Proportion that enter H at some point during the year'}, 'FontSize', 11)%,'data simulated' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) %correspond to the actual t values from t vector that I want to label
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -248,12 +243,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(9)
  hold all
  z1 = linspace(0,4,5); %defines mesh where going to plot Estim1, Data1 values 
- scatter(z1, Estim1,'o');
- scatter(z1, Data1,'x');
+ scatter(z1, Estim1, 50,'o');
+ scatter(z1, Data1, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in P at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in P') % at some point during the year
+ legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
@@ -273,12 +268,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(10)
  hold all
  z2 = linspace(0,4,5);
- scatter(z2, Estim2,'o');
- scatter(z2, Data2,'x');
+ scatter(z2, Estim2, 50,'o');
+ scatter(z2, Data2, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in A at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in A') % at some point during the year
+ legend({'ODE solution', 'Data'},'FontSize', 14) 
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
@@ -299,12 +294,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(11)
  hold all
  z3 = linspace(0,2,3);
- scatter(z3, Estim3,'o');
- scatter(z3, Data3,'x');
+ scatter(z3, Estim3, 50,'o');
+ scatter(z3, Data3, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in H at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in H') % at some point during the year
+ legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
@@ -329,12 +324,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  figure(12)
  hold all
  z4 = linspace(0,23,24);
- scatter(z4, Estim4,'o');
- scatter(z4, Data4,'x');
+ scatter(z4, Estim4, 50,'o');
+ scatter(z4, Data4, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
- ylabel('Proportion in P each quarter')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in P') % at some point during the year
+ legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
  set(gca, 'fontsize',10)
  xtickangle(90)

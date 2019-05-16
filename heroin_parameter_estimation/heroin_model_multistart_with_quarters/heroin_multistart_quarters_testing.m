@@ -43,6 +43,8 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
 N = 6;
+%tspan=linspace(0,N,25);
+% For smooth plots
 tspan=linspace(0,N,100);
 
 % Initial Conditions
@@ -72,6 +74,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
 
+% Comment out if don't need objective function value 
 %{
 Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6)];
@@ -156,7 +159,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
            xtickangle(90)
-           legend('A','H')
+           legend({'A','H'}, 'FontSize', 14)
            set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016',...
                        '2017', '2018', '2019'})
@@ -169,7 +172,6 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
- legend('Proportion of susceptibles')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -181,7 +183,6 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
- legend('Proportion of prescription users')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -194,7 +195,6 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
- legend('Proportion of opioid addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -206,7 +206,6 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
- legend('Proportion of heroin/fentanyl addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
@@ -218,22 +217,23 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
- legend('Proportion of stably recovered addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
- %{             
+ %Comment out if don't need fitting plots 
+ %{
+              
  % Data points from proportion that is in P at some point in the year and corresponding ODE solution points 
  figure(8)
  hold all
  z1 = linspace(0,4,5); %defines mesh where going to plot Estim1, Data1 values 
- scatter(z1, Estim1,'o');
- scatter(z1, Data1,'x');
+ scatter(z1, Estim1, 50, 'o');
+ scatter(z1, Data1, 50, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in P at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in P')
+  legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
@@ -244,12 +244,12 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(9)
  hold all
  z2 = linspace(0,4,5);
- scatter(z2, Estim2,'o');
- scatter(z2, Data2,'x');
+ scatter(z2, Estim2, 50, 'o');
+ scatter(z2, Data2, 50, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in A at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in A')
+ legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
@@ -261,12 +261,12 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(10)
  hold all
  z3 = linspace(0,2,3);
- scatter(z3, Estim3,'o');
- scatter(z3, Data3,'x');
+ scatter(z3, Estim3, 50,'o');
+ scatter(z3, Data3, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('Proportion in H at some point during the year')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in H')
+  legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
@@ -276,12 +276,12 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(11)
  hold all
  z4 = linspace(0,23,24);
- scatter(z4, Estim4,'o');
- scatter(z4, Data4,'x');
+ scatter(z4, Estim4, 50, 'o');
+ scatter(z4, Data4, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
- ylabel('Proportion in P each quarter')
- legend('ODE solution', 'Data')
+ ylabel('Proportion in P')
+ legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
  set(gca, 'fontsize',10)
  xtickangle(90)
