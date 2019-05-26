@@ -19,8 +19,8 @@ clear all;
 %UpperBounds=[0.1     0.0001      8         0.1         0.1      1       0.5     0.5     0.5     ];
 
 
-LowerBounds=[-0.1   0.000001     0.8      0.001        0.001    0.1   0.0001  0.0001  0.00001  ];
-UpperBounds=[0.1     0.0001       8         0.1         0.1      1       0.5     0.5     0.5     ];
+LowerBounds=[-0.1   0.000001     0.8      0.0001        0.0001    0.1   0.0001  0.0001  0.00001  ];
+UpperBounds=[0.1     0.0001       8         0.1          0.1        1     0.5     0.5     0.5     ];
 
 %OKAY!!!-taking out 2016 value for heroin fval=.1192 sigma, gamma, theta
 %LowerBounds=[-0.1   0.00001     0.8      0.001       0.0001   0.01   0.0001  0.0001  0.0001  ];
@@ -202,7 +202,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=10;
+numstartpoints=30;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -273,14 +273,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   
  %%% For testing purposes: states and corresponding simulated data 
  State1=y(:,1);
- State_data_1=[0.918310000000000;0.805891147322323;0.795343198140614;0.800167531772899;0.807415535411417;0.815314370556873];
- 
+ State_data_1=[0.915220000000000;0.909363647939647;0.912195235212623;0.915271066237107;0.918375056138264;0.921495555512809];
+     
  
  % Simulated data points for S and corresponding ODE solution plotted on top 
  figure(1)
  hold all
  plot(t,y(:,1))
- %plot(t(1:end), State_data_1, 'x')
+ plot(t(1:end), State_data_1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -291,14 +291,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  
  State2=y(:,2);
- State_data_2=[0.0700000000000000;0.181431964214806;0.190700151889657;0.184640683324631;0.176244892140012;0.167287826503889];
+ State_data_2=[0.0710000000000000;0.0769912098590027;0.0742870075803353;0.0713354446896955;0.0683531714139834;0.0653522800264156];
  
  
  % Simulated data points for P and corresponding ODE solution plotted on top 
  figure(2)
  hold all
  plot(t,y(:,2))
- %plot(t(1:end), State_data_2, 'x')
+ plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
@@ -308,14 +308,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State3=y(:,3);
- State_data_3=[0.00169000000000000;0.00691885542935752;0.0103284063031936;0.0126246022679654;0.0143047932938793;0.0156351034806005];
+ State_data_3=[0.00737000000000000;0.00722303269879493;0.00708084842482764;0.00693951595311553;0.00679885789635725;0.00665879294390987];
  
  
  % Simulated data points for A and corresponding ODE solution plotted on top 
  figure(3)
  hold all
  plot(t,y(:,3))
- %plot(t(1:end), State_data_3, 'x')
+ plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
@@ -325,13 +325,13 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
  
  State4=y(:,4);
- State_data_4=[0.000300000000000000;0.000901775933758651;0.00108929131141892;0.00112603220600494;0.00110510358346006;0.00106236200490771];
+ State_data_4=[0.00173000000000000;0.00160625207987268;0.00149140244485008;0.00138478933359258;0.00128583422886192;0.00119399639447003];
  
  % Simulated data points for H and corresponding ODE solution plotted on top 
  figure(4)
  hold all
  plot(t,y(:,4))
-%plot(t(1:end), State_data_4, 'x')
+ plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
@@ -341,13 +341,13 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State5=y(:,5);
- State_data_5=[0.00970000000000000;0.00485625710059339;0.00253895235534859;0.00144115042506153;0.000929675567548659;0.000700337446132192];
+ State_data_5=[0.00468000000000000;0.00481585742213024;0.00494550633579949;0.00506918378463544;0.00518708032080239;0.00529937512066341];
  
  % Simulated data points for R and corresponding ODE solution plotted on top 
  figure(5)
  hold all
  plot(t,y(:,5))
- %plot(t(1:end), State_data_5, 'x')
+ plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
@@ -358,13 +358,13 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
  
  State6=y(:,6);
- State_data_6=[0;0.329384466780766;0.624674095998732;0.903739032106769;1.16896516609074;1.42045742205061];
+ State_data_6=[0;0.262183673545998;0.513812866430539;0.755489669560203;0.987164212037442;1.20877102276257];
  
  % Simulated data for X and corresponding ODE solution plotted on top 
  figure(6)
  hold all
  plot(t,y(:,6))
- %plot(t(1:end), State_data_6, 'x')
+ plot(t(1:end), State_data_6, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('X(t)')
@@ -374,13 +374,13 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018'})
 
  State7=y(:,7);
- State_data_7=[0;0.00540261474856621;0.00915133594500147;0.0118952699346806;0.0140991133321563;0.0160108693073805];
+ State_data_7=[0;0.000135965936828635;0.000271146594528454;0.000401682477506223;0.000527424046729980;0.000648314109552405];
  
  % Simulated data for L and corresponding ODE solution plotted on top 
  figure(7)
  hold all
  plot(t,y(:,7))
- %plot(t(1:end), State_data_7, 'x')
+ plot(t(1:end), State_data_7, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('L(t)')
@@ -391,13 +391,13 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  
  State8=y(:,8);
- State_data_8=[0;0.000650898984602961;0.000914395933078790;0.00103462479690564;0.00109742416797360;0.00113590122723384];
+ State_data_8=[0;1.10245742605816e-06;2.17546374550268e-06;3.21771718984808e-06;4.22894458150900e-06;5.20904900937005e-06];
  
  % Simulated data for M and corresponding ODE solution plotted on top 
  figure(8)
  hold all
  plot(t,y(:,8))
- %plot(t(1:end), State_data_8, 'x')
+ plot(t(1:end), State_data_8, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('M(t)')
@@ -414,6 +414,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Actual Data for years 2013-2017
  Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620955./5708586];
+ %Data1=[0.333183673545998;0.328620402743543;0.315963810709999;0.303009987166935;0.289959982139115];
  
  % Simulated data points from proportion that is in P at some point in the year and corresponding ODE solution plotted on top 
  figure(9)
@@ -433,6 +434,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Actual Data for years 2013-2017 
  Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
+ %Data2=[0.00750596593682863;0.00735821335649475;0.00721138430780541;0.00706525752233929;0.00691974795917967];
  
  
  % Simulated data points from proportion that is in A at some point in the year and corresponding ODE solution plotted on top 
@@ -455,6 +457,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  
  % Actual Data for years 2014-2016
  Data3=[7560./5559006; 7560./5602117; 10260./5651993];
+ %Data3=[0.00160732508619213;0.00149244469829442;0.00138580056098424];
+ 
  %Data3=[7560./5559006; 7560./5602117];
  % Simulated data points from proportion that is in H at some point in the year and corresponding ODE solution plotted on top 
  figure(11)
@@ -553,6 +557,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % total population in TN 12 and older for each year) 
  
  Data1=[1825910./5517176; 1805325./5559006; 1800613./5602117; 1744766./5651993; 1620955./5708586];
+  %Data1=[0.333183673545998;0.328620402743543;0.315963810709999;0.303009987166935;0.289959982139115];
   
  % Data simulated when testing codes 
  %Data1=[0.399384466780766;0.476721593432771;0.469765087997695;0.449866817308604;0.427737148099884];
@@ -591,6 +596,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  Data2=[43418./5517176; 42928./5559006; 42816./5602117; 37464./5651993; 34805./5708586];
+ %Data2=[0.00750596593682863;0.00735821335649475;0.00721138430780541;0.00706525752233929;0.00691974795917967];
  
  % Data simulated when testing codes  
  %Data2=[0.00709261474856600;0.0106675766257930;0.0130723402928730;0.0148284456654410;0.0162165492691030];
@@ -627,6 +633,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % When testing all points with simulated data 
  %Estim3=y(1:end-1,4)+y(2:end,8)-y(1:end-1,8);
  
+ %Data3=[0.00160732508619213;0.00149244469829442;0.00138580056098424];
+ 
  % Actual proportion (updated 3/12/19) of heroin addicted individuals in the population at some point during the year 
  % in 2014, 2015, and 2016
  % (total number of heroin addicted individuals in 2014, 2015, and 2016 in TN
@@ -647,14 +655,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Comparing simulated data for susceptibles to output of model for
  % susceptibles 
  State1=y(:,1);
- State_data_1=[0.918310000000000;0.805891147322323;0.795343198140614;0.800167531772899;0.807415535411417;0.815314370556873];
+ State_data_1=[0.915220000000000;0.909363647939647;0.912195235212623;0.915271066237107;0.918375056138264;0.921495555512809];
  
  State_diff_1= State1-State_data_1;
  
  % Comparing simulated data for prescription users to output of model for
  % prescription users
  State2=y(:,2);
- State_data_2=[0.0700000000000000;0.181431964214806;0.190700151889657;0.184640683324631;0.176244892140012;0.167287826503889];
+ State_data_2=[0.0710000000000000;0.0769912098590027;0.0742870075803353;0.0713354446896955;0.0683531714139834;0.0653522800264156];
  
  State_diff_2=State2-State_data_2;
  
@@ -662,14 +670,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Comparing simulated data for opioid addicts to output of model for
  % opioid addicts
  State3=y(:,3);
- State_data_3=[0.00169000000000000;0.00691885542935752;0.0103284063031936;0.0126246022679654;0.0143047932938793;0.0156351034806005];
+ State_data_3=[0.00737000000000000;0.00722303269879493;0.00708084842482764;0.00693951595311553;0.00679885789635725;0.00665879294390987];
  
  State_diff_3=State3-State_data_3;
  
  % Comparing simulated data for heroin addicts to output of model for
  % heroin addicts
  State4=y(:,4);
- State_data_4=[0.000300000000000000;0.000901775933758651;0.00108929131141892;0.00112603220600494;0.00110510358346006;0.00106236200490771];
+ State_data_4=[0.00173000000000000;0.00160625207987268;0.00149140244485008;0.00138478933359258;0.00128583422886192;0.00119399639447003];
  
  
  State_diff_4=State4-State_data_4;
@@ -678,25 +686,25 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Comparing simulated data for stably recovered individuals to output of model for
  % stably recovered individuals 
  State5=y(:,5);
- State_data_5=[0.00970000000000000;0.00485625710059339;0.00253895235534859;0.00144115042506153;0.000929675567548659;0.000700337446132192];
+ State_data_5=[0.00468000000000000;0.00481585742213024;0.00494550633579949;0.00506918378463544;0.00518708032080239;0.00529937512066341];
  
  State_diff_5=State5-State_data_5;
  
  % Comparing simulated data for proportion of individuals entering P throughout the year and the model output 
  State6=y(:,6);
- State_data_6=[0;0.329384466780766;0.624674095998732;0.903739032106769;1.16896516609074;1.42045742205061];
+ State_data_6=[0;0.262183673545998;0.513812866430539;0.755489669560203;0.987164212037442;1.20877102276257];
  
  State_diff_6=State6-State_data_6;
  
  % Comparing simulated data for proportion of individuals entering A throughout the year and the model output 
  State7=y(:,7);
- State_data_7=[0;0.00540261474856621;0.00915133594500147;0.0118952699346806;0.0140991133321563;0.0160108693073805];
+ State_data_7=[0;0.000135965936828635;0.000271146594528454;0.000401682477506223;0.000527424046729980;0.000648314109552405];
  
  State_diff_7=State7-State_data_7;
  
  % Comparing simulated data for proportion of individuals entering H throughout the year and the model output 
  State8=y(:,8);
- State_data_8=[0;0.000650898984602961;0.000914395933078790;0.00103462479690564;0.00109742416797360;0.00113590122723384];
+ State_data_8=[0;1.10245742605816e-06;2.17546374550268e-06;3.21771718984808e-06;4.22894458150900e-06;5.20904900937005e-06];
  
  State_diff_8=State8-State_data_8;
  
@@ -711,8 +719,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  %value = norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  
  % For testing purposes with states and data sets
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5);
- 
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3);
 
