@@ -4,9 +4,9 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0     c      d]
-LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   0.1];
-UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   0.1   0.8];
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0     c      ]
+LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   ];
+UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   0.1   ];
   
 
 
@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=50;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -51,9 +51,9 @@ nu=x(11);
 omega=0.0000000001;
 b=x(12);
 c=x(17);
-d=x(18);
+%d=x(18);
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];%,d];
 
 
 
@@ -348,9 +348,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
                        'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
                        'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
- 
- 
- 
+disp(a(0,pars))
+disp(a(1,pars))
+disp(a(2,pars))
+disp(a(3,pars))
+disp(a(4,pars))
+disp(a(5,pars))
+disp(a(6,pars))
+
 function value = HeroinModel_ODE15s(z)
 
 % Parameters
@@ -371,10 +376,10 @@ nu=z(11);
 omega=0.0000000001;
 b=z(12);
 c=z(17);
-d=z(18);
+%d=z(18);
 
 % Parameter vector
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];%,d];
 
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
@@ -680,10 +685,11 @@ end
 
            
 function alpha = a(t,pars)
-if     (t < 3)
+if     t>=0 && t<=3.25 
     alpha = pars(1)*t+pars(16);
-elseif (t >= 3) 
-    alpha = pars(17)*t+pars(18);
+elseif t>3.25 && t<=6
+    alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
+    %alpha = pars(17)*t+pars(18);
     %alpha = pars(1)*t+pars(16);
 end
 end
