@@ -4,9 +4,9 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0]
-LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001 ];
-UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   ];
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0     c      d]
+LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   0.1];
+UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   0.1   0.8];
   
 
 
@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=2;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -50,8 +50,8 @@ theta_3=x(10);
 nu=x(11);
 omega=0.0000000001;
 b=x(12);
-c=x(1);
-d=x(12);
+c=x(17);
+d=x(18);
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d];
 
@@ -370,8 +370,8 @@ theta_3=z(10);
 nu=z(11);
 omega=0.0000000001;
 b=z(12);
-c=-0.02;
-d=0.36;
+c=z(17);
+d=z(18);
 
 % Parameter vector
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d];
@@ -680,10 +680,11 @@ end
 
            
 function alpha = a(t,pars)
-if     (t <= 3)
+if     (t < 3)
     alpha = pars(1)*t+pars(16);
 elseif (t >= 3) 
     alpha = pars(17)*t+pars(18);
+    %alpha = pars(1)*t+pars(16);
 end
 end
 
@@ -698,7 +699,7 @@ f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
 % i.e. individuals who enter the P class at any time from S (used in Estim1, Estim4)
-f(6) =a(t,pars)*y(1);
+f(6) = a(t,pars)*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 % i.e. individuals who enter the A class at any time (used in Estim2)

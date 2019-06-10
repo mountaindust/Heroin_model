@@ -19,8 +19,8 @@ nu=0.00657;
 omega=0.0000000001;
 %y-intercept of alpha 
 b=0.303;
-c=-0.02;
-d=0.36;
+c=-0.0156;
+d=0.303;
 
 %syms alpha(t)
 %alpha(t) = piecewise(t<3,m*t+b,t>=3,c*t+d);
@@ -78,7 +78,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   L=y(:,7);
   M=y(:,8);
   
-  alpha=m*t+b;
+  %alpha=m*t+b;
   
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
@@ -305,7 +305,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 %}
            
 function alpha = a(t,pars)
-if     (t <= 3)
+if     (t < 3)
     alpha = pars(1)*t+pars(16);
 elseif (t >= 3) 
     alpha = pars(17)*t+pars(18);
