@@ -93,7 +93,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  % ODE solutions plotted separately shown all together
  figure(1)
          
-           subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',1)
+           subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',3)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -105,7 +105,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  
           
            
-           subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',1)
+           subplot(2,2,2);plot(t,y(:,3),'r-','LineWidth',3)
            subplot(2,2,2);xlabel('Year')
            subplot(2,2,2);ylabel('Opioid Addicts')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -115,7 +115,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
  
            
-           subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',1)
+           subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',3)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -125,7 +125,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
  
           
-           subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',1)
+           subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',3)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Stably Recovered Individuals')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -137,9 +137,9 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
                  
  % ODE Solutions for P, A, H plotted all together
  figure(2)
-           plot(t,y(:,3),'r-','LineWidth',1);
+           plot(t,y(:,3),'r-','LineWidth',3);
            hold all
-           plot(t,y(:,4),'g-','LineWidth',1);
+           plot(t,y(:,4),'g-','LineWidth',3);
            xlabel('Year')
            ylabel('Size of Addicted Populations');
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -154,7 +154,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  
  figure(3)
  hold all
- plot(t,y(:,1))
+ plot(t,y(:,1),'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -165,7 +165,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            
  figure(4)
  hold all
- plot(t,y(:,2))
+ plot(t,y(:,2),'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
@@ -177,7 +177,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            
  figure(5)
  hold all
- plot(t,y(:,3))
+ plot(t,y(:,3),'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
@@ -188,7 +188,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
                    
  figure(6)
  hold all
- plot(t,y(:,4))
+ plot(t,y(:,4),'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
@@ -199,7 +199,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
       
  figure(7)
  hold all
- plot(t,y(:,5))
+ plot(t,y(:,5),'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
