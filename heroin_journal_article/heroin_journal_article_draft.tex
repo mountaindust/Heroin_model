@@ -846,6 +846,71 @@ $S_0$ & 0.858016  & \scriptsize{dimensionless}  \\
 
 \end{tabular}
 \end{center}
+
+Below are the fits of our model simulations to data. 
+\begin{center}
+\includegraphics[scale=0.5]{Data1_multistart_plot.pdf}
+
+
+Figure 2: Model simulation fit to yearly prescription opioid user data
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.6]{Data4_multistart_plot.pdf}
+
+Figure 3: Model simulation fit to quarterly prescription opioid user data
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.6]{Data2_multistart_plot.pdf}
+
+
+Figure 4: Model simulation fit to yearly prescription opioid addict data
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.6]{Data3_multistart_plot.pdf}
+
+Figure 5: Model simulation fit to yearly heroin/fentanyl addict data
+\end{center}
+
+
+The parameters from Table 3 result in the following solution curves: 
+
+\begin{center}
+\includegraphics[scale=0.5]{S_final_parameters_smooth.pdf}
+
+
+Figure 6: Numerical simulation for susceptible class
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{P_final_parameters_smooth.pdf}
+
+Figure 7: Numerical simulation for prescription opioid user class
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{A_final_parameters_smooth.pdf}
+
+
+Figure 8: Numerical simulation for prescription opioid addict class
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{H_final_parameters_smooth.pdf}
+
+Figure 9: Numerical simulation for heroin addict class
+\end{center}
+
+
+
+\begin{center}
+\includegraphics[scale=0.5]{R_final_parameters_smooth.pdf}
+
+Figure 10: Numerical simulation for stably recovered class
+\end{center}
+
  
  \textcolor{red}{Later: throw out everything 2016 and on since there seems to be a change right at 2016? Maybe make alpha piecewise where it's constant until 2018 and then slope downward? Great overall result if can say inflection point at 2016, where Rx's really decrease at that point bc prescribing too much and individuals turning to heroin instead(...but need to be careful, bc some data points I use are an average between 2 years and I select the lower of the 2 years to place the data point). \\
 May investigate other functions of alpha that may not be linear. Consider a more general function for alpha(t) to capture P data. Could do a piecewise fit (linear or non-linear) at end of 2015/beginning of 2016, or even have the point fitted where it switches the piecewise function; goal would be to analyze data by looking at time-varying parameters. Looks like there is transience at from 2013-2016 and then linearity after quarter 3 of 2015 or beginning of 2016 }
