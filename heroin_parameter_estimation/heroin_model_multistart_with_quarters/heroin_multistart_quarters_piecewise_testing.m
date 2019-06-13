@@ -1,25 +1,27 @@
 %File name: heroin_multistart_quarters_testing.m
+clf;
+clear all;
 
 %Parameters
 %slope of alpha 
-m=-0.006830253037281;
-beta_A=0.004293038257672; 
-beta_P=5.014493971279505e-04; 
-theta_1=5.044469628290473e-04;
-epsilon=2.520128383368088;
+m=-0.0032;%-0.00365;
+beta_A=0.0041;%0.00344; 
+beta_P=0.000353;%0.000353; 
+theta_1=0.000493;%0.0005;
+epsilon=2.47;%;2.50;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
-gamma=0.001507745932234;
-theta_2=0.226743931036357; 
-sigma=0.028369556152803;
-zeta=0.295303762317258;
-theta_3=1.034791538532301; 
-nu=0.024781363178723;
+gamma=0.0013;%0.00135;
+theta_2=0.0745;%0.142; 
+sigma=0.0353;%0.0771;
+zeta=0.3775;%0.329;
+theta_3=0.1773;%0.122; 
+nu=0.0876;%0.0458;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.287376838064959;
-c=-0.029868055872735;
+b=0.278;%0.269;
+c=-0.0322;%-0.0299;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
@@ -33,10 +35,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.091150667706971;
-A0=0.006587935116875;
-H0=8.649011082317799e-04;
-R0=0.053285736259145;
+P0=0.0987;%0.0971;
+A0=0.0062;%0.00645;
+H0=0.000812;%0.000847;
+R0=0.0563;%0.0220;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -58,6 +60,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
   
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
+
+disp(a(0,pars))
+disp(a(1,pars))
+disp(a(2,pars))
+disp(a(3,pars))
+disp(a(4,pars))
+disp(a(5,pars))
+disp(a(6,pars))
 
 % Comment out if don't need objective function value 
 
@@ -115,7 +125,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
  
            
-           subplot(2,2,3);plot(t,y(:,4) ,' g-','LineWidth',3)
+           subplot(2,2,3);plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -125,7 +135,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
  
           
-           subplot(2,2,4);plot(t,y(:,5) ,' m-','LineWidth',3)
+           subplot(2,2,4);plot(t,y(:,5) , 'Color', [0.7,0,0.7],'LineWidth',3)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Stably Recovered Individuals')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -139,7 +149,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(2)
            plot(t,y(:,3),'r-','LineWidth',3);
            hold all
-           plot(t,y(:,4),'g-','LineWidth',3);
+           plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);
            xlabel('Year')
            ylabel('Size of Addicted Populations');
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -154,7 +164,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  
  figure(3)
  hold all
- plot(t,y(:,1),'LineWidth',3)
+ plot(t,y(:,1),'k-','LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -165,7 +175,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            
  figure(4)
  hold all
- plot(t,y(:,2),'LineWidth',3)
+ plot(t,y(:,2),'b-','LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
@@ -177,7 +187,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
            
  figure(5)
  hold all
- plot(t,y(:,3),'LineWidth',3)
+ plot(t,y(:,3),'r-','LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
@@ -188,7 +198,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
                    
  figure(6)
  hold all
- plot(t,y(:,4),'LineWidth',3)
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
@@ -199,7 +209,7 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
       
  figure(7)
  hold all
- plot(t,y(:,5),'LineWidth',3)
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
@@ -282,9 +292,9 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
            
 function alpha = a(t,pars)
-if     t>=0 && t<=3.25 
+if  t<=3.25 
     alpha = pars(1)*t+pars(16);
-elseif t>3.25 && t<=6
+else
     alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
     %alpha = pars(17)*t+pars(18);
     %alpha = pars(1)*t+pars(16);

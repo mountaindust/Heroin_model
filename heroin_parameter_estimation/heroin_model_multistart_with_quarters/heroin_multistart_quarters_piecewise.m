@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=50;
+numstartpoints=200;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -111,7 +111,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points for S and corresponding ODE solution plotted on top 
  figure(1)
  hold all
- plot(t,y(:,1),'LineWidth',3)
+ plot(t,y(:,1),'k-','LineWidth',3)
  %plot(t(1:end), State_data_1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -128,7 +128,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points for P and corresponding ODE solution plotted on top 
  figure(2)
  hold all
- plot(t,y(:,2),'LineWidth',3)
+ plot(t,y(:,2),'b-','LineWidth',3)
  %plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -144,7 +144,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points for A and corresponding ODE solution plotted on top 
  figure(3)
  hold all
- plot(t,y(:,3),'LineWidth',3)
+ plot(t,y(:,3),'r-','LineWidth',3)
  %plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -160,7 +160,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points for H and corresponding ODE solution plotted on top 
  figure(4)
  hold all
- plot(t,y(:,4),'LineWidth',3)
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
  %plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -176,7 +176,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
  % Simulated data points for R and corresponding ODE solution plotted on top 
  figure(5)
  hold all
- plot(t,y(:,5),'LineWidth',3)
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
  %plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -685,9 +685,9 @@ end
 
            
 function alpha = a(t,pars)
-if     t>=0 && t<=3.25 
+if  t<=3.25 
     alpha = pars(1)*t+pars(16);
-elseif t>3.25 && t<=6
+else 
     alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
     %alpha = pars(17)*t+pars(18);
     %alpha = pars(1)*t+pars(16);
