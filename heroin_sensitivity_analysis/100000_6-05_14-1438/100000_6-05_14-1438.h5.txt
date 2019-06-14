@@ -1,6 +1,11 @@
 100000_6-05_14-1438.h5.txt
 N=100,000
 t=6
+alpha linear
+parameter names: ['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
+                      'gamma', 'sigma', 'mu', 'mu_A', 'mu_H', 
+                      'theta_2', 'zeta','theta_3', 'nu', 'omega', 
+                      'b','P_0', 'A_0', 'H_0', 'R_0']
 parameter ranges: all +/- 50% of baseline values except gamma is [0.0001, 0.01]:
 [[-0.0234,-0.0078], [0.00118,0.00353], [0.0000705,0.000212], [0.000254,0.000761], [1.27,3.81], 
                        [0.0001,0.01], [0.0142,0.0426], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
