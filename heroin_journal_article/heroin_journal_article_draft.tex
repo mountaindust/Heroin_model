@@ -954,7 +954,7 @@ Making alpha continuous adds only one more parameter to be estimated. The ranges
 
 The following table displays the 17 inputs that were estimated with this process, along with their resulting estimated values. The objective function value (using rounded parameters found in Table 4) is fval$=$0.1279. \\
 
-PUT IN RESULTS--these are the old values for now \\
+
 \begin{center}
 Table 4: Parameter Estimation Results (alpha piecewise linear) 
 \end{center}
@@ -1045,7 +1045,6 @@ $S_0$ & 0.8393  & \scriptsize{dimensionless}  \\
 
 \hline
 
-
 \end{tabular}
 \end{center}
 
@@ -1053,46 +1052,82 @@ $S_0$ & 0.8393  & \scriptsize{dimensionless}  \\
 Below are the fits of our model simulations to data. 
 \begin{multicols}{2}
 
-\begin{center}
-\includegraphics[scale=0.4]{R_final_parameters_smooth.pdf}
-
-Figure 11: Numerical simulation for stably recovered class
-\end{center}
-
+\vspace{0.5cm}
 
 \begin{center}
-\includegraphics[scale=0.4]{R_final_parameters_smooth.pdf}
+\includegraphics[scale=0.45]{Data1_multistart_plot_piecewise.pdf}
 
-Figure 12: Numerical simulation for stably recovered class
+
+Figure 11: Model simulation fit to yearly prescription opioid user data
 \end{center}
 
+\vspace{5cm}
+
+\begin{center}
+\includegraphics[scale=0.47]{Data4_multistart_plot_piecewise.pdf}
+
+Figure 12: Model simulation fit to quarterly prescription opioid user data
+\end{center}
 
 \columnbreak
+
+\begin{center}
+\includegraphics[scale=0.45]{Data2_multistart_plot_piecewise.pdf}
+
+
+Figure 13: Model simulation fit to yearly prescription opioid addict data
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\includegraphics[scale=0.46]{Data3_multistart_plot_piecewise.pdf}
+
+Figure 14: Model simulation fit to yearly heroin/fentanyl addict data
+\end{center}
+
 \end{multicols}
 
-The parameters from Table 3 result in the following solution curves: 
+The parameters from Table 4 result in the following solution curves: 
+
+\begin{center}
+\includegraphics[scale=0.4]{S_final_parameters_smooth_piecewise.pdf}
+
+
+Figure 15: Numerical simulation for susceptible class
+\end{center}
 
 \begin{multicols}{2}
 
 \begin{center}
-\includegraphics[scale=0.4]{R_final_parameters_smooth.pdf}
+\includegraphics[scale=0.4]{P_final_parameters_smooth_piecewise.pdf}
 
-Figure 13: Numerical simulation for stably recovered class
+Figure 16: Numerical simulation for prescription opioid user class
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.4]{A_final_parameters_smooth_piecewise.pdf}
+
+
+Figure 17: Numerical simulation for prescription opioid addict class
 \end{center}
 
 \columnbreak
 
-
 \begin{center}
-\includegraphics[scale=0.4]{R_final_parameters_smooth.pdf}
+\includegraphics[scale=0.4]{H_final_parameters_smooth_piecewise.pdf}
 
-Figure 14: Numerical simulation for stably recovered class
+Figure 18: Numerical simulation for heroin addict class
 \end{center}
 
+
+
+\begin{center}
+\includegraphics[scale=0.4]{R_final_parameters_smooth_piecewise.pdf}
+
+Figure 10: Numerical simulation for stably recovered class
+\end{center}
 \end{multicols}
-
-
-
 
 
 We use the AIC (Akaike's Information Criterion) in order to compare between alpha linear and alpha piecewise linear cases. The idea here is to determine whether the model better fits with the data because of the addition of one more parameter or because it actually is a better fit, i.e. is it a better fit considering we add one more parameter to estimate. The score is meaningless by itself and only has meaning in the context of comparing two scores. \textcolor{red}{Fill in.} \\ \\
