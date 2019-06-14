@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-P_0 = 0.0835 
-A_0 = 0.00671
-H_0 = 0.000874 
-R_0 = 0.0509
+P_0 = 0.095#0.0835 
+A_0 = 0.00647#0.00671
+H_0 = 0.000843#0.000874 
+R_0 = 0.0584#0.0509
 S_0 = 1-P_0-A_0-H_0-R_0
 
 #temporal info, assigning default values
@@ -17,22 +17,29 @@ tstop =  6
 
 #parameters
 params = {}
-params['m'] = -0.0156                     #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
-params['b'] = 0.303                #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids #from Christopher opioid value 
-params['beta_A'] = 0.00235                 #S->A total probability of becoming addicted to opioids other than by prescription #from Christopher opioid value
-params['beta_P'] =  0.000141                     # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE) #from Christopher opioid value 
-params['theta_1'] = 0.000507              #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts #ESTIMATED [30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
-params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  #from Christopher opioid value 
-params['mu_A'] = 0.00870                  #A->S enhanced death rate for opioid addicts (only overdose rate=4/100,000) # from Christopher opioid value 
-params['mu_H'] = 0.0507                 #H->S enhanced death rate for heroin addicts (only overdose rate=4/100,000) # doubled opioid value from Christopher's paper 
-params['gamma'] = 0.00115          # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE) # from Christopher opioid value 
-params['epsilon'] = 2.54          #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted) #from Christopher opioid value 
-params['theta_2'] = 0.0370                     #P->H rate at which opioid prescribed user population becomes addicted to heroin #[30] https://www.drugabuse.gov/publications/drugfacts/heroin#ref
-params['sigma'] = 0.0284 #R->A rate at which people relapse from treatment into the opioid addicted class #from Christopher opioid value 
-params['zeta'] = 0.265                         #A->R rate at which addicted opioid users enter treatment/rehabilitation #from Christopher opioid value 
-params['theta_3'] = 3.51                  #A->H rate at which the opioid addicted population becomes addicted to heroin #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 7)
-params['nu'] = 0.00657                         #H->R rate at which heroin users enter treatment/rehabilitation #[14] https://d14rmgtrwzf5a.cloudfront.net/sites/default/files/19774-prescription-opioids-and-heroin.pdf (page 17)
-params['omega'] = 0.0000000001
+params['m'] = -0.00483#-0.0156                       #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
+params['b'] = 0.283#0.303                         #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
+params['beta_A'] = 0.0044#0.00235                  #S->A total probability of becoming addicted to opioids other than by prescription 
+params['beta_P'] =  0.000469#0.000141                # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
+params['theta_1'] = 0.000502#0.000507                #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
+params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  
+params['mu_A'] = 0.00870                    #A->S overdose death rate for opioid addicts 
+params['mu_H'] = 0.0507                     #H->S overdose death rate for heroin addicts 
+params['gamma'] = 0.00146#0.00115         # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE)  
+params['epsilon'] = 2.49#2.54                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
+params['theta_2'] = 0.148#0.0370                  #P->H rate at which opioid prescribed user population becomes addicted to heroin 
+params['sigma'] = 0.0283#0.0284                    #R->A rate at which people relapse from treatment into the opioid addicted class 
+params['zeta'] = 0.318#0.265                      #A->R rate at which addicted opioid users enter treatment/rehabilitation 
+params['theta_3'] = 2.38#3.51                    #A->H rate at which the opioid addicted population becomes addicted to heroin 
+params['nu'] = 0.0482#0.00657                      #H->R rate at which heroin users enter treatment/rehabilitation 
+params['omega'] = 0.0000000001              #perturbation term for relapse rates
+params['c']= -0.0313                        #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
+
+def alpha(t):
+    if t <= 3.25:
+       return params['m']*t+params['b']
+    else:
+       return params['m']*3.25+params['b']-params['c']*3.25+params['c']*t
 
 
 def update_params(new_params):
@@ -56,12 +63,20 @@ def heroin_odes(t, X, params):
     A = X[2]
     H = X[3]
     R = X[4]
+    
+    # For alpha linear
+    #Y[0] = -(params['m']*t+params['b'])*S-params['beta_A']*S*A-\
+        #params['beta_P']*S*P-params['theta_1']*S*H+\
+        #params['epsilon']*P+params['mu']*(P+R)+\
+        #(params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
+   # Y[1] = (params['m']*t+params['b'])*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
 
-    Y[0] = -(params['m']*t+params['b'])*S-params['beta_A']*S*A-\
+   # For alpha piecewise linear
+    Y[0] = -alpha(t)*S-params['beta_A']*S*A-\
         params['beta_P']*S*P-params['theta_1']*S*H+\
         params['epsilon']*P+params['mu']*(P+R)+\
         (params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
-    Y[1] = (params['m']*t+params['b'])*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
+    Y[1] = alpha(t)*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
     Y[2] = params['gamma']*P+params['sigma']*R*A/(A+H+params['omega'])+params['beta_A']*S*A+\
         params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
     Y[3] = params['theta_1']*S*H+params['theta_2']*P*H+params['theta_3']*A*H+\
@@ -195,5 +210,12 @@ if __name__ == "__main__":
     plot_addiction_totaled(*sol)
     #compute R_0
     #print(compute_R0(p=None))
+    print(alpha(0))
+    print(alpha(1))
+    print(alpha(2))
+    print(alpha(3))
+    print(alpha(4))
+    print(alpha(5))
+    print(alpha(6))
 
     

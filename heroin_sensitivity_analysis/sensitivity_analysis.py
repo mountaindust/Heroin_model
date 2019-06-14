@@ -67,7 +67,7 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
-                   theta_2,zeta,theta_3,nu,omega,b,P_0,A_0,H_0,R_0):
+                   theta_2,zeta,theta_3,nu,omega,b,c,P_0,A_0,H_0,R_0):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -91,7 +91,8 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     params['nu'] = nu
     params['omega'] = omega 
     params['b'] = b
-    
+    params['c'] = c
+
     # Get initial conditions
     S_0 = 1-P_0-A_0-H_0-R_0 
     #P_0 = 0.0710 
@@ -127,16 +128,21 @@ def main(N, filename, reduced, pool=None, no_plot=False):
         }
     else:
         problem = {
-            'num_vars': 20, #number of parameters/initial conditions with bounds +/- 50% (except for IC, it's +/- 40%) of their baseline estimated value and alpha=m*t+b 
+            'num_vars': 21, #number of parameters/initial conditions with bounds +/-50%, alpha=m*t+b for first set of bounds and alpha=piecewise linear for second set of bounds
             'names': ['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
                       'gamma', 'sigma', 'mu', 'mu_A', 'mu_H', 
                       'theta_2', 'zeta','theta_3', 'nu', 'omega', 
-                      'b','P_0', 'A_0', 'H_0', 'R_0'],
-            'bounds': [[-0.0234,-0.0078], [0.00118,0.00353], [0.0000705,0.000212], [0.000254,0.000761], [1.27,3.81], 
-                       [0.0001,0.01], [0.0142,0.0426], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
-                       [0.0185,0.0555], [0.133,0.398],  [1.755,5.265], [0.00329,0.00986], [0.00000000005,0.00000000015], 
-                       [0.152,0.455], [0.0418,0.125], [0.00336,0.01], [0.000437,0.00131], [0.0255,0.0764]]  
-        }
+                      'b','c','P_0', 'A_0', 'H_0', 'R_0'],
+            #'bounds': [[-0.0234,-0.0078], [0.00118,0.00353], [0.0000705,0.000212], [0.000254,0.000761], [1.27,3.81], 
+             #          [0.0001,0.01], [0.0142,0.0426], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
+              #         [0.0185,0.0555], [0.133,0.398],  [1.755,5.265], [0.00329,0.00986], [0.00000000005,0.00000000015], 
+               #        [0.152,0.455], [0.0418,0.125], [0.00336,0.01], [0.000437,0.00131], [0.0255,0.0764]]  
+        #}   # for alpha linear
+            'bounds': [[-0.00725,-0.00242], [0.0022,0.0066], [0.000235,0.000704], [0.000251,0.000753], [1.25,3.74], 
+                       [0.00073,0.00219], [0.0142,0.0425], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
+                       [0.074,0.222], [0.159,0.477],  [1.19,3.57], [0.0241,0.0723], [0.00000000005,0.00000000015], 
+                       [0.142,0.423], [-0.0470,-0.0157], [0.0475,0.143], [0.00324,0.00971], [0.000422,0.00126], [0.0292,0.0876]]  
+        }   # for alpha piecewise linear 
 
     ### Create an N by num_var matrix of parameter values ###
     param_values = saltelli.sample(problem, N, calc_second_order=True)
