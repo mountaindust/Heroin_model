@@ -35,7 +35,7 @@ params['nu'] = 0.0482#0.00657                      #H->R rate at which heroin us
 params['omega'] = 0.0000000001              #perturbation term for relapse rates
 params['c']= -0.0313                        #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
 
-def alpha(t):
+def alpha(t, params):
     if t <= 3.25:
        return params['m']*t+params['b']
     else:
@@ -72,11 +72,11 @@ def heroin_odes(t, X, params):
    # Y[1] = (params['m']*t+params['b'])*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
 
    # For alpha piecewise linear
-    Y[0] = -alpha(t)*S-params['beta_A']*S*A-\
+    Y[0] = -alpha(t, params)*S-params['beta_A']*S*A-\
         params['beta_P']*S*P-params['theta_1']*S*H+\
         params['epsilon']*P+params['mu']*(P+R)+\
         (params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
-    Y[1] = alpha(t)*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
+    Y[1] = alpha(t, params)*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
     Y[2] = params['gamma']*P+params['sigma']*R*A/(A+H+params['omega'])+params['beta_A']*S*A+\
         params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
     Y[3] = params['theta_1']*S*H+params['theta_2']*P*H+params['theta_3']*A*H+\
@@ -210,12 +210,13 @@ if __name__ == "__main__":
     plot_addiction_totaled(*sol)
     #compute R_0
     #print(compute_R0(p=None))
-    print(alpha(0))
-    print(alpha(1))
-    print(alpha(2))
-    print(alpha(3))
-    print(alpha(4))
-    print(alpha(5))
-    print(alpha(6))
+
+    #print(alpha(0,params))
+    #print(alpha(1,params))
+    #print(alpha(2,params))
+    #print(alpha(3,params))
+    #print(alpha(4,params))
+    #print(alpha(5,params))
+    #print(alpha(6,params))
 
     
