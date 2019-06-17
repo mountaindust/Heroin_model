@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 200; 
+nsample = 1000; 
 
 %% LHS MATRIX  %%
 
@@ -96,7 +96,7 @@ save LV_Model_LHS_Heroin.mat;
   alpha = 1e-3;
   %this uses total exposures as the metric. Change second input argument if want
   %to test something else
- [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
+ [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,A_lhs,time_points+1,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
 
 
 %% Scatter plots
