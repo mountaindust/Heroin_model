@@ -159,8 +159,8 @@ $S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we
 
  
 Here, we present our ordinary differential equation model:
-\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\epsilon P +\mu (S+P+R+A+H) + \mu_{A}A + \mu_{H} H -\mu S \quad (1)\] 
-\[\dv{P}{t} = \alpha S - \epsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\varepsilon P +\mu (S+P+R+A+H) + \mu_{A}A + \mu_{H} H -\mu S \quad (1)\] 
+\[\dv{P}{t} = \alpha S - \varepsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
 \[\dv{A}{t} = \gamma P + \sigma R \frac{A}{A+H+\omega} +\beta_{A} SA  +\beta_{P} SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma R \frac{H}{A+H+\omega}-\nu H-(\mu+\mu_{H})H  \quad (4)\]
 \[\dv{R}{t} = \zeta A +\nu H -\sigma R \frac{A}{A+H+\omega}-\sigma R \frac{H}{A+H+\omega} -\mu R\quad(5)\]
@@ -169,7 +169,7 @@ Here, we present our ordinary differential equation model:
 
 We assume that these five compartments sum to one, so that the population is of constant size, i.e. the total death rate is equal to the incoming rate for the susceptible class since we believe overdose deaths will not significantly alter our population. We impose this since we are working with a short time frame and believe the population will not change very much over this time period. Since the birth and death rate of the susceptible class, $\mu S$, is the same, equation (1) simplifies to: 
 
-\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\epsilon P +\mu (P+R)+ (\mu + \mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\varepsilon P +\mu (P+R)+ (\mu + \mu_{A})A + (\mu+\mu_{H}) H \quad (1)\] 
 
 
 The parameters involved in this model represent transition rates from one class to another and are per capita yearly rates:
@@ -178,7 +178,7 @@ The parameters involved in this model represent transition rates from one class 
 \item $\beta_{A} SA$: rate at which susceptible individuals become addicted to opioids by black market drugs or interaction with other addicts (1/year)
 \item $\beta_{P} SP$ : rate at which susceptible population obtains extra prescription opioids and becomes addicted  per year
 \item $\theta_1 SH$: rate at which susceptible population becomes addicted to heroin or fentanyl by black market availability or interaction with other heroin or fentanyl users  (1/year)
-\item $\epsilon P$: rate at which individuals return to the susceptible class after being prescribed opioids and did not develop an addiction (1/year) 
+\item $\varepsilon P$: rate at which individuals return to the susceptible class after being prescribed opioids and did not develop an addiction (1/year) 
 \item $\mu S, \mu P, \mu A, \mu H, \mu R$: natural death rates (1/year)
 \item $\mu_A A$: enhanced death rate for opioid addicts; overdose rate which results in death (1/year)
 \item $\mu_H H$: enhanced death rate for heroin or fentanyl addicts; overdose rate which results in death (1/year)
@@ -241,8 +241,8 @@ Figure 1: Schematic diagram for heroin model
  \textcolor{blue}{Addiction-Free Equilibrium} 
 
 To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero and require that $A=H=0$ since these two compartments consist of individuals who are addicted to opioids or heroin. We are left with the system: \\
-\[0=-\alpha S^* -\beta_{P} S^* P^* + \epsilon P^* +\mu (P^* + R^*) \quad (7)\]
-\[0=\alpha S^* - \epsilon P^* -\gamma P^* - \mu P^* \quad(8)\]
+\[0=-\alpha S^* -\beta_{P} S^* P^* + \varepsilon P^* +\mu (P^* + R^*) \quad (7)\]
+\[0=\alpha S^* - \varepsilon P^* -\gamma P^* - \mu P^* \quad(8)\]
 \[0=\gamma P^* + \beta_{P} S^* P^*   \quad(9)\]
 \[0=\mu R^* \quad(10)\]
 \[1=S^*+P^*+A^*+H^*+R^* \quad(11)\]
@@ -250,8 +250,8 @@ To find the addiction-free equilibrium, we set equations (1)-(5) equal to zero a
 
 Equation (10) forces either $\mu=0$ or $R^*=0$; however, $\mu > 0$ since this is the natural death rate, so we require $R^*=0$. If $P^* \neq 0, $ this forces $\gamma + \beta_{P} S^* =0$ from equation (9), and since all of our parameters and variables are non-negative, then it must be $\gamma=0$ and $\beta_{P}=0$. We note that $\gamma=0$ means that individuals who are prescribed opioids cannot become addicted to opioids, and $\beta_{P}=0$ means that only black market opioids are available for susceptibles to become addicted to opioids and there are no excess prescription drugs available. Under the assumption that $\gamma=0=\beta_{P}$ to ensure the existence of our addiction-free equilibrium, we calculate the addiction-free equilibrium to be: \\
 
-\[S^*=\frac{\epsilon + \mu}{\alpha + \epsilon +\mu}\quad\]
-\[P^*=\frac{\alpha}{\alpha + \epsilon +\mu}\quad\]
+\[S^*=\frac{\varepsilon + \mu}{\alpha + \varepsilon +\mu}\quad\]
+\[P^*=\frac{\alpha}{\alpha + \varepsilon +\mu}\quad\]
 \[A^*=0\quad\]
 \[H^*=0\quad\]
 \[R^*=0\quad\] 
@@ -267,8 +267,8 @@ We note that our goal in this section is to explore the structure of the model a
 
 
 For the purposes of calculating $\mathscr{R}_0$, we will assume $\gamma =0$ and $\beta_{P} =0$ in order to ensure the existence of the addiction-free equilibrium. This results in the following system:
-\[\dv{S}{t} = -\alpha S - \beta_{A} SA  - \theta_{1} SH +\epsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
-\[\dv{P}{t} = \alpha S - \epsilon P  - \theta_{2}PH- \mu P    \quad\]
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  - \theta_{1} SH +\varepsilon P +\mu (P+R) + (\mu+\mu_{A})A + (\mu+\mu_{H}) H \quad \] 
+\[\dv{P}{t} = \alpha S - \varepsilon P  - \theta_{2}PH- \mu P    \quad\]
 \[\dv{A}{t} = \sigma R \frac{A}{A+H+\omega} +\beta_{A} SA  -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma R \frac{H}{A+H+\omega}-\nu H-(\mu+\mu_{H})H  \quad\]
 \[\dv{R}{t} = \zeta A +\nu H -\sigma R \frac{A}{A+H+\omega}-\sigma R \frac{H}{A+H+\omega} -\mu R.\quad\]
@@ -315,10 +315,10 @@ These assumptions include the following:
 \item $\mathscr{F}_{i} (x,y) \geq 0$, $\forall$$x,y \geq 0$, $i=1,2$ since these represent new addictions. 
 \item $\mathscr{V}_{i}(x,y) \leq 0$ whenever $x_i=0, i=1,2$ since there must be inflow only when the respective compartment is empty. 
 \item $\sum_{i=1}^{2} \mathscr{V}_{i}(x,y) \geq 0$, $\forall x,y \geq 0$ since this represents the total outflow from all addicted compartments. 
-\item The addiction-free system, $\dv{S}{t}\bigg|_{A,H=0}$, $\dv{P}{t}\bigg|_{A,H=0}$, and $\dv{R}{t}\bigg|_{A,H=0}$ has a unique equilibrium, ($\frac{\epsilon+\mu}{\alpha+\epsilon+\mu}$,$\frac{\alpha}{\alpha+\epsilon+\mu},0$) that is asymptotically stable. 
+\item The addiction-free system, $\dv{S}{t}\bigg|_{A,H=0}$, $\dv{P}{t}\bigg|_{A,H=0}$, and $\dv{R}{t}\bigg|_{A,H=0}$ has a unique equilibrium, ($\frac{\varepsilon+\mu}{\alpha+\varepsilon+\mu}$,$\frac{\alpha}{\alpha+\varepsilon+\mu},0$) that is asymptotically stable. 
 \end{itemize}
 
-Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\partial \mathscr{V}_i}{\partial x_j} (0, y_0)$, $i, j =1, 2$, where (0, $y_{0}$) $=(\frac{\epsilon + \mu}{\alpha + \epsilon +\mu},\frac{\alpha}{\alpha + \epsilon +\mu},0,0,0)$ is the addiction-free equilibrium, we calculated the following \cite{Driessche}: 
+Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\partial \mathscr{V}_i}{\partial x_j} (0, y_0)$, $i, j =1, 2$, where (0, $y_{0}$) $=(\frac{\varepsilon + \mu}{\alpha + \varepsilon +\mu},\frac{\alpha}{\alpha + \varepsilon +\mu},0,0,0)$ is the addiction-free equilibrium, we calculated the following \cite{Driessche}: 
 
 
 
@@ -326,8 +326,8 @@ Taking $F=\frac{\partial \mathscr{F}_i}{\partial x_j} (0, y_0)$ and $V=\frac{\pa
 $F=$
 $ \begin{pmatrix}
 
-\beta_{A} \frac{\epsilon+\mu}{\alpha+\epsilon+\mu} &  0  \\
-0 & \theta_1 \frac{\epsilon+\mu}{\alpha+\epsilon+\mu}  +\theta_2 \frac{\alpha}{\alpha+\epsilon+\mu}  \\
+\beta_{A} \frac{\varepsilon+\mu}{\alpha+\varepsilon+\mu} &  0  \\
+0 & \theta_1 \frac{\varepsilon+\mu}{\alpha+\varepsilon+\mu}  +\theta_2 \frac{\alpha}{\alpha+\varepsilon+\mu}  \\
 \end{pmatrix}$
 
 
@@ -343,7 +343,7 @@ $ \begin{pmatrix}
 
 The eigenvalues of $FV^{-1}$ are calculated to be: 
 \begin{center}
-$\sigma (FV^{-1}) = \{ \frac{\beta_A(\epsilon+\mu)}{(\alpha+\epsilon+\mu)(\zeta+\mu+\mu_A)}, \frac{\theta_1(\epsilon+\mu)+\theta_2 \alpha}{(\alpha+\epsilon+\mu)(\nu+\mu+\mu_H)} \}$
+$\sigma (FV^{-1}) = \{ \frac{\beta_A(\varepsilon+\mu)}{(\alpha+\varepsilon+\mu)(\zeta+\mu+\mu_A)}, \frac{\theta_1(\varepsilon+\mu)+\theta_2 \alpha}{(\alpha+\varepsilon+\mu)(\nu+\mu+\mu_H)} \}$
 \end{center}
 
 $\mathscr{R}_0$ may then be determined as the spectral radius of $FV^{-1}$, in which the $(i,j)$ entry is the expected number of secondary addictions in compartment $i$ produced by individuals initially in compartment $j$ :
@@ -410,7 +410,7 @@ Heroin treatment admissions & \scriptsize{555} & \scriptsize{743} & \scriptsize{
 \\
 
  \textcolor{blue}{Explanations of the estimates/where they come from in literature/assumptions made} \\ 
-We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, whereas \textbf{bolded} values are numbers that we estimated by information within the same year. All other numbers are actual data and numbers in \textcolor{blue}{blue} are data used directly in parameter estimation. \textcolor{red}{Some values are used in Appendix A for parameter calculations rather than directly in the parameter estimation process--may change depending on if use those calculations at all/otherwise, may get rid of treatment admission data, for example.}
+We note that \textit{italicized} values are numbers that we estimated by extrapolating from a different year, whereas \textbf{bolded} values are numbers that we estimated by information within the same year. All other numbers are actual reported data and numbers in \textcolor{blue}{blue} are data used directly in parameter estimation. \textcolor{red}{Some values are used in Appendix A for parameter calculations rather than directly in the parameter estimation process--may change depending on if use those calculations at all/otherwise, may get rid of treatment admission data, for example.}
  
 The first row provides the \textbf{total population estimates in Tennessee} each year as of July 1 of the corresponding year \cite{USCensus}. 
 %I believe these might be done at some point such as in the middle of the year such as July, so may not be 100% accurate, but best we can do 
@@ -720,14 +720,14 @@ Finally, to obtain the output from the model of the proportion of prescription o
 
 
 
-We use the Global Optimization Toolbox in MATLAB, specifically utilizing the MultiStart algorithm and fmincon local solver. Since the global minimum is of interest, we use \textcolor{red}{fill in number} starting points as this is a local solver. We give lower bounds of 0.00001 for all of the parameters and an upper bound of 2 for all of the parameters except $\epsilon$ with an upper bound of 4 since this parameter can easily be greater than 1 (i.e. in a given year, a prescription user may end prescription use more than once). We run our model from 2013-2018, keeping a short time frame so that dynamics are relatively the same in the time period with the time step in years. 
+We use the Global Optimization Toolbox in MATLAB, specifically utilizing the MultiStart algorithm and fmincon local solver. Since the global minimum is of interest, we use \textcolor{red}{fill in number} starting points as this is a local solver. We give lower bounds of 0.00001 for all of the parameters and an upper bound of 2 for all of the parameters except $\varepsilon$ with an upper bound of 4 since this parameter can easily be greater than 1 (i.e. in a given year, a prescription user may end prescription use more than once). We run our model from 2013-2018, keeping a short time frame so that dynamics are relatively the same in the time period with the time step in years. 
 
 
 Although we do not know any other exact rate values from literature, we use data from Table 1 to calculate rough estimates for $\beta_A$, $\beta_P$, $\nu$, $\zeta$, and the initial conditions, $P_0$, $A_0$, $H_0$, and $R_0$ (found in Appendix A) in order to guide our knowledge of the range of values the true values of these parameters may lie. \textcolor{red}{May change, depending on if use info for all of these parameters/IC or not; include relationships of theta values here or in both places?}. \\
 
 Thus, we have the following ranges for our parameters: 
 
-parameters estimating: $[m \hspace{0.9cm}   \beta_A \hspace{1.4cm}   \beta_P \hspace{1.4cm} \theta_1 \hspace{0.9cm}  \epsilon \hspace{0.8cm} \gamma \hspace{1.2cm}  \theta_2 \hspace{1cm}   \sigma ]$ \\
+parameters estimating: $[m \hspace{0.9cm}   \beta_A \hspace{1.4cm}   \beta_P \hspace{1.4cm} \theta_1 \hspace{0.9cm}  \varepsilon \hspace{0.8cm} \gamma \hspace{1.2cm}  \theta_2 \hspace{1cm}   \sigma ]$ \\
 lower bounds:  \hspace{1.2cm} $[-0.1 \hspace{0.3cm}  0.00001 \hspace{0.3cm}    0.000001 \hspace{0.3cm}      0.00001  \hspace{0.3cm}        0.8 \hspace{0.3cm}     0.001 \hspace{0.3cm}     0.0001 \hspace{0.3cm}    0.0001 ]$ \\
 upper bounds:\hspace{1.3cm} $[\hspace{0.2cm}0.1 \hspace{0.8cm}     0.01  \hspace{0.9cm}        0.01  \hspace{0.9cm}        0.001  \hspace{0.9cm}           8 \hspace{0.6cm}        0.1  \hspace{0.9cm}            2    \hspace{1.2cm}    1     ]$, \\
 
@@ -740,7 +740,7 @@ We choose these realistic bounds for the following reasons: \\
 0.00001$\leq$$\beta_A$$\leq$ 0.01: based on preliminary calculations in Appendix A \\
 0.000001$\leq$$\beta_P$$\leq$0.01: based on preliminary calculations in Appendix A \\
 0.00001$\leq$$\theta_1$$\leq$ 0.001: chosen intuitively that a susceptible individual interacting with a heroin user would have less than a 0.1 probability of transitioning to the heroin class  \\
-0.8$\leq$$\epsilon$$\leq$ 8: estimate from \cite{Battista} \\
+0.8$\leq$$\varepsilon$$\leq$ 8: estimate from \cite{Battista} \\
 0.001$\leq$$\gamma$$\leq$ 0.1: estimate based on value in \cite{Battista} \\
 0.0001$\leq$$\theta_2$$\leq$2: chosen intuitively that a prescription opioid user interacting with a heroin user would have a larger probability of transitioning to the heroin class than that of a susceptible individual (see *) \cite{Muhuri}\\
 0.0001$\leq$$\sigma$$\leq$ 1: unknown, chosen intuitively for relapses that could occur from a stably recovered state  \\
@@ -806,7 +806,7 @@ $\theta_1$ & 0.000507  &  $\frac{1}{\text{year}}$  \\
 \hline
 
 
-$\epsilon$ & 2.54 & $\frac{1}{\text{year}}$  \\
+$\varepsilon$ & 2.54 & $\frac{1}{\text{year}}$  \\
 
 \hline
 
@@ -894,8 +894,8 @@ Figure 5: Model simulation fit to yearly heroin/fentanyl addict data
 \end{center}
 
 \end{multicols}
-
-The parameters from Table 3 result in the following solution curves: 
+%%%
+The parameters from Table 3 result in the following solution curves of each of the classes from 2013 through the end of 2018: 
 
 \begin{center}
 \includegraphics[scale=0.4]{S_final_parameters_smooth.pdf}
@@ -997,7 +997,7 @@ $\theta_1$ & 0.000502  &  $\frac{1}{\text{year}}$  \\
 \hline
 
 
-$\epsilon$ & 2.49 & $\frac{1}{\text{year}}$  \\
+$\varepsilon$ & 2.49 & $\frac{1}{\text{year}}$  \\
 
 \hline
 
@@ -1087,8 +1087,8 @@ Figure 14: Model simulation fit to yearly heroin/fentanyl addict data
 \end{center}
 
 \end{multicols}
-
-The parameters from Table 4 result in the following solution curves: 
+%%%
+The parameters from Table 4 result in the following solution curves of each class from 2013 through the end of 2018: 
 
 \begin{center}
 \includegraphics[scale=0.4]{S_final_parameters_smooth_piecewise.pdf}
@@ -1163,7 +1163,7 @@ There are two ways in which we analyze how the uncertainty in our outputs can be
 
 
 \textcolor{blue}{Sobol sensitivity analysis} \\
-In order to explore the sensitivity of each of the population classes to the inputs (parameters and initial conditions), we implemented Sobol sensitivity analysis. First, the Saltelli sampler is utilized to generate N(2D+2) samples where N$=$\textcolor{red}{fill in} is the number of sample points and D=20, the number of inputs in the model for a total of \textcolor{red}{fill in} samples \cite{Herman}. 
+In order to explore the sensitivity of each of the population classes to the inputs (parameters and initial conditions), we implemented Sobol sensitivity analysis. First, the Saltelli sampler is utilized to generate N(2D+2) samples where N is the number of sample points and D is the number of inputs in the model \cite{Herman}. 
 Saltelli are the statistically good points chosen in the parameter space to test and the outputs are the values of S, P, A, H and R at the final time (year 2018) for the different parameter and initial condition samples. 
 \textcolor{red}{Cannot figure out why N(2D+2) when including second order interactions}. 
 One method as described in \cite{Saltelli1} creates an $N \times 2k$ matrix of random numbers, and then splits this into two $N \times k$ matrices containing half of the samples each (call them J and L). From there, a third matrix is created in ($M_i$) which the $i^{th}$ column is substituted by the $i^{th}$ column of matrix L. The model output is then computed for all parameter samples (all of the rows of J, L, and $M_i$), which gives a total of N+N+$D\times N$ evaluations, or N(D+2). 
@@ -1182,27 +1182,9 @@ In \cite{Saltelli2}, instead, the matrix $X_{~i}$ represents the $N \times (k-1)
 For first-order indices, only one parameter is varied and the rest are held constant; for second-order indices, two parameters are varied and the rest are held constant; and for total-order indices, every combination of parameters is varied, from a single parameter varying alone to all higher-order interactions between parameters. The length of the colored bars, with each color representing a specific class, measures the contribution of a certain parameter to the variance of each of the classes in the model. The longer the colored bar, the higher the effect the parameter has on that class of individuals; the sum of each color adds to 1, so that for each parameter the relative contribution to each of the classes is represented. We are able to retrieve the confidence intervals on the sensitivity of each of the populations to a respective change in the parameter(s) for first order changes, second order changes and total order changes. \\
 
 
-Below are the ranges we chose; most are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters except for...FILL IN. We note that $\alpha=m \cdot t+b$. \\ \\
+Below are the ranges we chose for each parameter, which are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters. We note that $\alpha$ takes on a linear form in this case, and specifically, $\alpha=m \cdot t+b$. In this case, N=100,000 and D=20 for a total of 4,200,000 samples. We ran this for 6 years and the sensitivities of the population classes to each of the parameters were calculated at the final time. \\ \\
 
-$N=100,000$
-$t=6$
-alpha linear
-parameter names: \['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
-                      'gamma', 'sigma', 'mu', 'mu_A', 'mu_H', 
-                      'theta_2', 'zeta','theta_3', 'nu', 'omega', 
-                      'b','P_0', 'A_0', 'H_0', 'R_0'\]
 
-parameters ranges: all +/- 50\%; [[-0.0234,-0.0078], [0.00118,0.00353], [0.0000705,0.000212], [0.000254,0.000761], [1.27,3.81], 
-                       [0.000575,0.00173], [0.0142,0.0426], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
-                       [0.0185,0.0555], [0.133,0.398],  [1.755,5.265], [0.00329,0.00986], [0.00000000005,0.00000000015], 
-                       [0.152,0.455], [0.0418,0.125], [0.00336,0.01], [0.000437,0.00131], [0.0255,0.0764]];
-
-IC:
-$P_0 = 0.0835 
-A_0 = 0.00671
-H_0 = 0.000874 
-R_0 = 0.0509
-S_0 = 1-P_0-A_0-H_0-R_0$
 \begin{center}
 \includegraphics[scale=0.5]{100000_6-05_11-1729.pdf}
 
@@ -1220,82 +1202,82 @@ Figure 11: Sobol sensitivity results-classes at the final time (t=6 years repres
 
  \hline\hline
 
-$m$ &  \\
+$m$ & [-0.0234,-0.0078] \\
 
 \hline
 
-$\beta_A$&    \\
+$\beta_A$&  [0.00118,0.00353]   \\
 
 \hline
 
-$\beta_P$&    \\
+$\beta_P$&  [0.0000705,0.000212]  \\
 
 \hline
 
-$\theta_1$&    \\
+$\theta_1$&  [0.000254,0.000761]  \\
 
 \hline 
 
-$\epsilon$ &    \\
+$\varepsilon$ & [1.27,3.81]    \\
 
 \hline
 
-$\gamma$ &    \\
+$\gamma$ &  [0.000575,0.00173]  \\
 
 \hline
 
 
-$\sigma$ &    \\
+$\sigma$ &  [0.0142,0.0426]  \\
 
 \hline
 
-$\mu$&    \\
+$\mu$& [0.00434,0.01302]   \\
 
 \hline
 
-$\mu_A$&    \\
+$\mu_A$&  [0.00435,0.0131]  \\
 
 \hline
 
-$\mu_H$&    \\
+$\mu_H$&  [0.0254,0.0761]  \\
 
 \hline
 
-$\theta_2$&    \\
+$\theta_2$&  [0.0185,0.0555]   \\
 
 \hline
 
-$\zeta$&    \\
+$\zeta$& [0.133,0.398]   \\
 
 \hline
 
-$\theta_3$ &  \\
+$\theta_3$ &  [1.755,5.265] \\
 
 \hline
 
-$\nu$ &   \\
+$\nu$ & [0.00329,0.00986]   \\
 
 \hline
 
-$\omega$ &   \\
+$\omega$ & [0.00000000005,0.00000000015]   \\
 
  \hline
  
- $b$ &   \\
+ $b$ &     [0.152,0.455]  \\
 
  \hline
  
- $P_0$ &   \\
+ $P_0$ &  [0.0418,0.125] \\
 
  \hline
 
-$A_0$ &   \\
+$A_0$ &  [0.00336,0.01]  \\
 
 \hline
-$H_0$ &   \\
+$H_0$ & [0.000437,0.00131]  \\
 
  \hline
- $R_0$ &   \\
+ $R_0$ &  [0.0255,0.0764]  \\
 
 
  \hline
@@ -1306,30 +1288,23 @@ $H_0$ &   \\
 
 
 
+\vspace{1cm}
 
-$N=100,000$
-$t=6$
-alpha piecewise linear
-parameter names: \['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
-                      'gamma', 'sigma', 'mu', 'mu_A', 'mu_H', 
-                      'theta_2', 'zeta','theta_3', 'nu', 'omega', 
-                      'b','c','P_0', 'A_0', 'H_0', 'R_0'\]
+Below are the ranges we chose for each parameter, which are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters for the case of $\alpha$ taking on a piecewise linear form. Specifically, 
 
-parameter ranges: all +/- 50\%; [[-0.00725,-0.00242], [0.0022,0.0066], [0.000235,0.000704], [0.000251,0.000753], [1.25,3.74], 
-                       [0.00073,0.00219], [0.0142,0.0425], [0.00434,0.01302], [0.00435,0.0131], [0.0254,0.0761], 
-                       [0.074,0.222], [0.159,0.477],  [1.19,3.57], [0.0241,0.0723], [0.00000000005,0.00000000015], 
-                       [0.142,0.423], [-0.0470,-0.0157], [0.0475,0.143], [0.00324,0.00971], [0.000422,0.00126], [0.0292,0.0876]]  
+\[
+    \alpha(x)=\left\{
+                \begin{array}{ll}
+                  m\cdot t + b \text{ before Quarter 2 2016 } (t \leq 3.25) \\
+                  m(3.25)+b+c(t-3.25) \text{ after Quarter 2 2016 } (t > 3.25)
+                \end{array}
+              \right.
+  \]
 
-IC:
-$P_0 = 0.095 
-A_0 = 0.00647
-H_0 = 0.000843 
-R_0 = 0.0584
-S_0 = 1-P_0-A_0-H_0-R_0$
-
+ In this case, N=100,000 and D=21 for a total of 4,400,000 samples. We ran this for 6 years and the sensitivities of the population classes to each of the parameters were calculated at the final time. \\ \\
 
 \begin{center}
-\includegraphics[scale=0.5]{100000_6-06_14-1500.pdf}
+\includegraphics[scale=0.5]{100000_6-06_16-1134.pdf}
 
 Figure 12: Sobol sensitivity results-classes at the final time (t=6 years representing end of 2018) for alpha linearly (piecewise) dependent on time  
 \end{center}
@@ -1346,82 +1321,85 @@ Figure 12: Sobol sensitivity results-classes at the final time (t=6 years repres
 
  \hline\hline
 
-$m$ &  \\
+$m$ & [-0.00725,-0.00242] \\
 
 \hline
 
-$\beta_A$&    \\
+$\beta_A$& [0.0022,0.0066]    \\
 
 \hline
 
-$\beta_P$&    \\
+$\beta_P$& [0.000235,0.000704]    \\
 
 \hline
 
-$\theta_1$&    \\
+$\theta_1$& [0.000251,0.000753]   \\
 
 \hline 
 
-$\epsilon$ &    \\
+$\varepsilon$ &  [1.25,3.74]  \\
 
 \hline
 
-$\gamma$ &    \\
+$\gamma$ & [0.00073,0.00219]   \\
 
 \hline
 
 
-$\sigma$ &    \\
+$\sigma$ &  [0.0142,0.0425]   \\
 
 \hline
 
-$\mu$&    \\
+$\mu$&   [0.00434,0.01302] \\
 
 \hline
 
-$\mu_A$&    \\
+$\mu_A$&  [0.00435,0.0131]    \\
 
 \hline
 
-$\mu_H$&    \\
+$\mu_H$&  [0.0254,0.0761]  \\
 
 \hline
 
-$\theta_2$&    \\
+$\theta_2$& [0.074,0.222]   \\
 
 \hline
 
-$\zeta$&    \\
+$\zeta$& [0.159,0.477]   \\
 
 \hline
 
-$\theta_3$ &  \\
+$\theta_3$ &  [1.19,3.57]  \\
 
 \hline
 
-$\nu$ &   \\
+$\nu$ &  [0.0241,0.0723] \\
 
 \hline
 
-$\omega$ &   \\
+$\omega$ & [0.00000000005,0.00000000015]  \\
 
  \hline
  
- $b$ &   \\
+ $b$ & [0.142,0.423]  \\
 
  \hline
  
- $P_0$ &   \\
+ $c$ &  [-0.0470,-0.0157] \\
 
  \hline
 
-$A_0$ &   \\
+$P_0$ & [0.0475,0.143] \\
+
+ \hline
+$A_0$ &  [0.00324,0.00971] \\
 
 \hline
-$H_0$ &   \\
+$H_0$ & [0.000422,0.00126]   \\
 
  \hline
- $R_0$ &   \\
+ $R_0$ & [0.0292,0.0876]   \\
 
 
  \hline
@@ -1429,7 +1407,8 @@ $H_0$ &   \\
 
 \end{center}
 
-
+\textcolor{red}{Edit: Comparing the sensitivity analyses between alpha linear and alpha piecewise linear, the main difference is seen in the parameter $m$ (alpha linear case was more sensitive to this parameter because it was the slope of alpha but in the alpha piecewise linear case, m was very very small and c was bigger, and that took the place of the more sensitive slope parameter). In both cases, the first-order index results are very similar to the total-order index results which suggests that there are not higher-order interactions occurring. \\
+We observe that the P class is most sensitive to $\varepsilon$ and $b$ in either case, which is advantageous from a control perspective as controlling how much is prescribed is more manageable than preventing individuals from getting addicted to prescription opioids.}
 %Add in sensitivity analysis results and confidence interval information
 %Total --take average of all interactions for plots?? \\
 %Need to scale sensitivities of muA and muH based on their domain $[0,0.1]$??
@@ -1447,7 +1426,7 @@ $H_0$ &   \\
  
  \textcolor{blue}{Extensions}\\
  \textcolor{red}{Need to edit} \\
-In our model we assume homogeneous mixing of the individuals in each of the compartments and therefore, each individual has the same probability of transitioning from one stage to another, interacting with individuals from other stages, or leaving the system via death. Although done for the purpose of simplification, this is not an accurate representation of reality since there are factors that affect these probabilities, such as race, gender, geographical location and age. For example, there has been a shift in heroin use from urban areas to some suburban and rural areas and there is an increasing number of individuals ages 18-25 using the drug \cite{NIDA2}. West Virginia, New Hampshire and Ohio had the highest rates of opioid-related overdose deaths per 100,000 people in 2016 and Tennessee and Arkansas were among the states with the highest prescription rates per 100 people the same year \cite{NIH3}. Men have a higher likelihood of overdosing on prescription pain relievers compared to women, but since 1999, there has been a steeper increase in the number of women overdoses than men. In addition, women may form a quicker dependence on opioids compared to men, and have a higher probability of being prescribed higher doses and for longer periods of time \cite{CDC5}. Specific to heroin, using data from the 2008-2010 NSDUH studies, past year heroin use was twice as likely for men compared to women, and highest in the 18-25 year old age group \cite{Jones}. Incorporating these ideas into the model and parameter information would be possible future extensions. Although there is data on the misuse of opioids, we decided to focus specifically on addiction rather than misuse, due to the harmful consequences this behavior can have for an individual. However, the behavior and actions of individuals are not always very clearly defined, and there may be a benefit to expanding the spectrum of classes that individuals can fall into. In Tennessee specifically, the majority of individuals who overdosed either on heroin or fentanyl were white and male \cite{PDO}. 
+In our model we assume homogeneous mixing of the individuals in each of the compartments and therefore, each individual has the same probability of transitioning from one stage to another, interacting with individuals from other stages, or leaving the system via death. Although done for the purpose of simplification, this is not an accurate representation of reality since there are factors that affect these probabilities, such as race, gender, geographical location and age. For example, there has been a shift in heroin use from urban areas to some suburban and rural areas and there is an increasing number of individuals ages 18-25 using the drug \cite{NIDA2}. West Virginia, New Hampshire and Ohio had the highest rates of opioid-related overdose deaths per 100,000 people in 2016 and Tennessee and Arkansas were among the states with the highest prescription rates per 100 people the same year \cite{NIH3}. Men have a higher likelihood of overdosing on prescription pain relievers compared to women, but since 1999, there has been a steeper increase in the number of women overdoses than men. In addition, women may form a quicker dependence on opioids compared to men, and have a higher probability of being prescribed higher doses and for longer periods of time \cite{CDC5}. Specific to heroin, using data from the 2008-2010 NSDUH studies, past year heroin use was twice as likely for men compared to women, and highest in the 18-25 year old age group \cite{Jones}. Incorporating these ideas into the model and parameter information would be possible future extensions. Although there is data on the misuse of opioids, we decided to focus specifically on addiction rather than misuse, due to the harmful consequences this behavior can have for an individual. However, the behavior and actions of individuals are not always very clearly defined, and there may be a benefit to expanding the spectrum of classes that individuals can fall into. In Tennessee specifically, the majority of individuals who overdosed either on heroin or fentanyl were white and male \cite{PDO}. A more detailed look could be given to the individual cases of hepatitis C for opioid users. 
 \pagebreak
 
 \textbf{Appendix A} \\ \\
@@ -1610,7 +1589,7 @@ $\theta_1$&  heroin addiction rate for susceptible individuals & $\frac{1}{\text
 
 \hline
 
-$\epsilon$ &  rate of finishing prescription addiction-free & $\frac{1}{\text{year}}$ \\
+$\varepsilon$ &  rate of finishing prescription addiction-free & $\frac{1}{\text{year}}$ \\
 
 \hline
 
