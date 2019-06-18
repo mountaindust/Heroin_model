@@ -62,7 +62,7 @@ for x=1:nsample %Run solution x times choosing different values
     f=@ODE_LHS_Heroin;
 %     x;
 %     
-%      LHSmatrix(x,:);
+%     LHSmatrix(x,:);
      
      [t,y] = ode15s(@(t,y)f(t,y,LHSmatrix,x),tspan,y0,[]); 
      %[t,y]=ode15s(@ODE_LHS_Heroin,tspan,y0,[],LHSmatrix);
