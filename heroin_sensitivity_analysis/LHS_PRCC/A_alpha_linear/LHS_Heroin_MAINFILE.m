@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 1000; 
+nsample = 3000; 
 
 %% LHS MATRIX  %%
 

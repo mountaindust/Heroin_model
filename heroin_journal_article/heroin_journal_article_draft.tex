@@ -159,7 +159,7 @@ $S(0)=S_{0}$, $P(0)=P_{0}$, $A(0)=A_{0}$, $H(0)=H_{0}$, and $R(0)=R_{0}$, and we
 
  
 Here, we present our ordinary differential equation model:
-\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\varepsilon P +\mu (S+P+R+A+H) + \mu_{A}A + \mu_{H} H -\mu S \quad (1)\] 
+\[\dv{S}{t} = -\alpha S - \beta_{A} SA  -\beta_{P} SP- \theta_{1} SH +\varepsilon P +\mu (S+P+A+H+R) + \mu_{A}A + \mu_{H} H -\mu S \quad (1)\] 
 \[\dv{P}{t} = \alpha S - \varepsilon P  - \gamma P - \theta_{2}PH- \mu P    \quad(2)\]
 \[\dv{A}{t} = \gamma P + \sigma R \frac{A}{A+H+\omega} +\beta_{A} SA  +\beta_{P} SP -\zeta A - \theta_{3}AH-(\mu + \mu_{A})A   \quad (3)\]
 \[\dv{H}{t} = \theta_{1}SH+\theta_{2}PH+\theta_{3}AH + \sigma R \frac{H}{A+H+\omega}-\nu H-(\mu+\mu_{H})H  \quad (4)\]
@@ -1260,7 +1260,7 @@ In \cite{Saltelli2}, instead, the matrix $X_{~i}$ represents the $N \times (k-1)
 For first-order indices, only one parameter is varied and the rest are held constant; for second-order indices, two parameters are varied and the rest are held constant; and for total-order indices, every combination of parameters is varied, from a single parameter varying alone to all higher-order interactions between parameters. The length of the colored bars, with each color representing a specific class, measures the contribution of a certain parameter to the variance of each of the classes in the model. The longer the colored bar, the higher the effect the parameter has on that class of individuals; the sum of each color adds to 1, so that for each parameter the relative contribution to each of the classes is represented. We are able to retrieve the confidence intervals on the sensitivity of each of the populations to a respective change in the parameter(s) for first order changes, second order changes and total order changes. \\
 
 
-Below are the ranges we chose for each parameter, which are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters. We note that $\alpha$ takes on a linear form in this case, and specifically, $\alpha=m \cdot t+b$. In this case, N=100,000 and D=20 for a total of 4,200,000 samples. We ran this for 6 years and the sensitivities of the population classes to each of the parameters were calculated at the final time. \\ \\
+Below are the ranges we chose for each parameter, which are +/-50\% of the baseline values found from parameter estimation or calculations of the parameters. We note that $\alpha$ takes on a linear form in this case, and specifically, $\alpha=m \cdot t+b$. In this case, N=100,000 and D=20 for a total of 4,200,000 samples, in which this value of $N$ ensures that results do not change with a slightly higher $N$ value. We ran this for 6 years and the sensitivities of the population classes to each of the parameters were calculated at the final time. \\ \\
 
 
 \begin{center}
@@ -1493,7 +1493,380 @@ We observe that the P class is most sensitive to $\varepsilon$ and $b$ in either
 
 
 \textcolor{blue}{Latin Hypercube Sampling/PRCC} \\
-\textcolor{red}{Fill in background and results.}
+
+We implement Latin Hypercube Sampling, a type of uncertainty analysis, which examines the uncertainty in the output of a model based on the uncertainty in the inputs \cite{Marino}. Each of our inputs is sampled from a uniform distribution; the parameter range is divided into $N$ intervals of equal probability, and each interval is randomly sampled once for each parameter. Here, $N > p+1$, where $p$ is the number of inputs, is the minimum requirement. If input ranges do not span across several orders of magnitude, a linear scale is used for sampling; if this is not the case, in order to prevent under-sampling in the outer ranges of the intervals, a log scale would be used. This sampling technique ensures the entire range for the parameter is considered. This results in the $N \times p$ LHS matrix; the model is evaluated from the set of inputs in each row of this matrix. One can study the outputs to gain information on the differences observed in the output from the variation in the parameter combinations in order to quantify the certainty one has with parameters. \textcolor{red}{Do anything with this specifically?} 
+
+Moreover, sensitivity analysis provides a way to quantify how much the uncertainty in specific model inputs affect specific model outputs. Inputs in biological models often have much uncertainty. Therefore, the information gained from local sensitivity analysis is limited since partial derivatives of the outputs are calculated multiple times based on a small variation in a single input; instead, global sensitivity analysis is advantagoues in that inputs are varied simultaneously. Certain criteria are best for utilizing PRCC (a sampling-based method in which the effect of increasing/decreasing a particular input on a certain output is measured, after taking out the linear effects of all other inputs): nonlinear, monotonic relationships between inputs and outputs; criteria most suitable for Sobol sensitivity analysis (a variance-based method in which the variability in the output can be apportioned to the uncertainty in an input or combination of inputs) is the following: non-linear, non-monotonic relationships. \textcolor{red}{Unable to find specifically how PRCC's are calculated, not in Marino paper or elsewhere. Is that okay?}
+
+Although a minimum of $N=17+1=18$ sample points for the alpha linear case is required, the sample size must be big enough for which a similar set of parameters are deemed important for a certain output with consecutive runs. In this case, the best we are able to do is with $N=3000$ runs, although the inclusion/exclusion of the importance of $\beta_A$, $\nu$, and $\omega$ may change in subsequent runs. \textcolor{red}{As increase nsample number, more and more become significant, and fewer have the opportunity to bounce between not significant and significant; should there be an upper limit?}
+
+Below are the monotonicity plots for alpha linear for FILL IN samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
+
+\textcolor{red}{Fill in?}
+
+
+Below are the monotonicity plots for alpha piecewise linear for FILL IN samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
+
+
+\textcolor{red}{Fill in?}
+
+
+We utilize the same ranges of parameters as shown in Table FILL IN and FILL IN which are 50\% of baseline parameter values. \\
+
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear}
+
+
+
+
+
+
+
+
+\begin{center}
+\begin{tabular}{c  c  c }
+
+
+
+{Input} & \shortstack{PRCC for proportion of \\ A class at final time} & \shortstack{$p$-value for proportion of \\ A class at final time}  \\ [0.4ex]
+ \hline
+
+$m$ & &  \\
+
+
+
+$b$ &   &  \\
+
+
+
+
+$\beta_A$& &   \\
+
+
+
+$\beta_P$ &  &   \\
+
+
+
+$\theta_1$ & &    \\
+
+
+
+
+$\varepsilon$ &  & \\
+
+
+
+$\gamma$ &  &   \\
+
+
+
+
+$\theta_2$ &  &  \\
+
+
+ $\sigma$ &   &   \\
+
+
+
+$\zeta$ & &  \\
+
+
+
+$\theta_3$ &  &  \\
+
+
+
+$\nu$ &  &   \\
+
+
+
+$P_0$ &   &  \\
+
+
+
+$A_0$ & &\\
+
+
+
+$H_0$ &  &   \\
+
+
+
+$R_0$ &  &   \\
+
+
+
+$S_0$ &   & \\
+
+
+\hline
+
+
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+\begin{tabular}{c  c  c }
+
+
+
+{Input} & \shortstack{PRCC for proportion of \\ H class at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
+ \hline
+
+$m$ & &  \\
+
+
+
+$b$ &   &  \\
+
+
+
+
+$\beta_A$& &   \\
+
+
+
+$\beta_P$ &  &   \\
+
+
+
+$\theta_1$ & &    \\
+
+
+
+
+$\varepsilon$ &  & \\
+
+
+
+$\gamma$ &  &   \\
+
+
+
+
+$\theta_2$ &  &  \\
+
+
+ $\sigma$ &   &   \\
+
+
+
+$\zeta$ & &  \\
+
+
+
+$\theta_3$ &  &  \\
+
+
+
+$\nu$ &  &   \\
+
+
+
+$P_0$ &   &  \\
+
+
+
+$A_0$ & &\\
+
+
+
+$H_0$ &  &   \\
+
+
+
+$R_0$ &  &   \\
+
+
+
+$S_0$ &   & \\
+
+
+\hline
+
+
+\end{tabular}
+\end{center}
+
+
+
+
+
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha piecewise linear}
+
+\begin{center}
+\begin{tabular}{c  c  c }
+
+
+
+{Input} & \shortstack{PRCC for proportion of \\ A class at final time} & \shortstack{$p$-value for proportion of \\ A class at final time} \\ [0.4ex]
+ \hline
+
+$m$ & &  \\
+
+
+
+$b$ &   &  \\
+
+
+
+
+$\beta_A$& &   \\
+
+
+
+$\beta_P$ &  &   \\
+
+
+
+$\theta_1$ & &    \\
+
+
+
+
+$\varepsilon$ &  & \\
+
+
+
+$\gamma$ &  &   \\
+
+
+
+
+$\theta_2$ &  &  \\
+
+
+ $\sigma$ &   &   \\
+
+
+
+$\zeta$ & &  \\
+
+
+
+$\theta_3$ &  &  \\
+
+
+
+$\nu$ &  &   \\
+
+
+
+$P_0$ &   &  \\
+
+
+
+$A_0$ & &\\
+
+
+
+$H_0$ &  &   \\
+
+
+
+$R_0$ &  &   \\
+
+
+
+$S_0$ &   & \\
+
+
+\hline
+
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{c  c  c }
+
+
+
+{Input} & \shortstack{PRCC for proportion of \\ Hclass at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
+ \hline
+
+$m$ & &  \\
+
+
+
+$b$ &   &  \\
+
+
+
+
+$\beta_A$& &   \\
+
+
+
+$\beta_P$ &  &   \\
+
+
+
+$\theta_1$ & &    \\
+
+
+
+
+$\varepsilon$ &  & \\
+
+
+
+$\gamma$ &  &   \\
+
+
+
+
+$\theta_2$ &  &  \\
+
+
+ $\sigma$ &   &   \\
+
+
+
+$\zeta$ & &  \\
+
+
+
+$\theta_3$ &  &  \\
+
+
+
+$\nu$ &  &   \\
+
+
+
+$P_0$ &   &  \\
+
+
+
+$A_0$ & &\\
+
+
+
+$H_0$ &  &   \\
+
+
+
+$R_0$ &  &   \\
+
+
+
+$S_0$ &   & \\
+
+
+\hline
+
+
+\end{tabular}
+\end{center}
+
+
+It is beneficial to also look at Sobol sensitivity analysis in order to examine if there are any higher-order interactions among parameters that are occuring and also to be able to apportion the output variance to certain inputs. 
+
+
+
 
 
 \pagebreak
