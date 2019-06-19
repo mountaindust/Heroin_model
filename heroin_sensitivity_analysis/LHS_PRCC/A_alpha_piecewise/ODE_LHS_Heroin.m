@@ -20,13 +20,11 @@ nu= LHSmatrix(x,14);
 omega= LHSmatrix(x,15);
 b= LHSmatrix(x,16);
 c=LHSmatrix(x,17);
-
-
-S0=0.8393;
-P0=0.095;
-A0=0.00647;
-H0=0.000843;
-R0=0.0584;
+P0=LHSmatrix(x,18);
+A0=LHSmatrix(x,19);
+H0=LHSmatrix(x,20);
+R0=LHSmatrix(x,21);
+S0=1-P0-A0-H0-R0;
      
 %% Distemper model for shelter
 %have included a 5th equation that keeps track of the total exposed, which
@@ -40,8 +38,8 @@ R0=0.0584;
 
     
     
-    dydt=[-a(t,params)*y(1)-beta_A*y(1)*y(3)-beta_P*y(1)*y(2)-theta_1*y(1)*y(4)+epsilon*y(2)+mu*(y(2)+y(5))+(mu+mu_A)*y(3)+(mu+mu_H)*y(4)
-         a(t,params)*y(1)-epsilon*y(2)-gamma*y(2)-theta_2*y(2)*y(4)-mu*y(2)
+    dydt=[-a(t,m,b,c)*y(1)-beta_A*y(1)*y(3)-beta_P*y(1)*y(2)-theta_1*y(1)*y(4)+epsilon*y(2)+mu*(y(2)+y(5))+(mu+mu_A)*y(3)+(mu+mu_H)*y(4)
+         a(t,m,b,c)*y(1)-epsilon*y(2)-gamma*y(2)-theta_2*y(2)*y(4)-mu*y(2)
          gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1)*y(2)-zeta*y(3)-theta_3*y(3)*y(4)-(mu+mu_A)*y(3)
          theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4)+omega)-nu*y(4)-(mu+mu_H)*y(4)
          zeta*y(3)+nu*y(4)-sigma*y(5)*y(3)/(y(3)+y(4)+omega)-sigma*y(5)*y(4)/(y(3)+y(4)+omega)-mu*y(5)];
@@ -51,11 +49,11 @@ R0=0.0584;
 end
 
 
-function alpha = a(t,params)
+function alpha = a(t,m,b,c)
 if  t<=3.25 
-    alpha = params(1)*t+params(16);
+    alpha = m*t+b;
 else 
-    alpha = params(1)*3.25+params(16)-params(17)*3.25+params(17)*t;
+    alpha = m*3.25+b-c*3.25+c*t;
 end
 end
 
