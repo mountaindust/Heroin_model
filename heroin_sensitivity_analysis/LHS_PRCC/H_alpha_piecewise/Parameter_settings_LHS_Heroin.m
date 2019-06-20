@@ -22,8 +22,6 @@ c=-0.0313;
 % %
 
 params=[m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,theta_2,zeta,theta_3,nu,omega,b,c];
-% Parameter Labels 
-PRCC_var={'m','beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_A','mu_H','theta_2','zeta','theta_3','nu','omega','b','c'};
 
 
 %% TIME SPAN OF THE SIMULATION
@@ -33,15 +31,18 @@ time_points = 6; % time points of interest for the distemper analysis- amount of
 
 % INITIAL CONDITIONS FOR THE ODE MODEL
 
-S0=0.8393;
 P0=0.095;
 A0=0.00647;
 H0=0.000843;
 R0=0.0584;
+S0=1-P0-A0-H0-R0;
 
 total=S0+P0+A0+H0+R0;
 
 y0 = [S0,P0,A0,H0,R0]; 
 % Variables Labels
-y_var_label={'S0', 'P0', 'A0','H0','R0'};
+% y_var_label={'S0','P0','A0','H0','R0'};
+
+PRCC_var={'m','beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_A','mu_H','theta_2','zeta','theta_3','nu','omega','b','c','P0','A0','H0','R0'};
+
 

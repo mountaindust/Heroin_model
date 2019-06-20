@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 100; 
+nsample = 300; 
 
 %% LHS MATRIX  %%
 
@@ -713,7 +713,9 @@ for x=1:nsample %Run solution x times choosing different values, represents each
  
     
      %store results of each [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,y0,[]);
-     
+     %HOW ARE THESE W# OUTPUTS ONLY FOR time 0 through 6, shouldn't they be for
+     %each row of LHSmatrix (each set of parameters)? How does S_lhs1 get
+     %different values of W1(timepoints+1,1) for each x?
      W1 = [t y1]; % [time y]
      W2 = [t y2];
      W3 = [t y3];
@@ -919,11 +921,12 @@ end
 
 %% Monotonicity curves 
 
-
+%%Are these okay with breaks? They changed once I added on initial conditions, should
+%%that happen? 
  
  figure(1);
  subplot(331)
- plot(LHSmatrix1(:,1),S_lhs1,'o')
+ plot(LHSmatrix1(:,1),S_lhs1,'o') %(i.e. first column of LHSmatrix1 is m increasing as it goes down, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
  xlabel('m')
  ylabel('Susceptible Individuals')
  subplot(332)
