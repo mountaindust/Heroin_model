@@ -1240,7 +1240,7 @@ We implement Latin Hypercube Sampling, a type of uncertainty analysis, which exa
 
 Moreover, sensitivity analysis provides a way to quantify how much the uncertainty in specific model inputs affect specific model outputs. Inputs in biological models often have much uncertainty. Therefore, the information gained from local sensitivity analysis is limited since partial derivatives of the outputs are calculated multiple times based on a small variation in a single input; instead, global sensitivity analysis is advantagoues in that inputs are varied simultaneously. Certain criteria are best for utilizing PRCC (a sampling-based method in which the effect of increasing/decreasing a particular input on a certain output is measured, after taking out the linear effects of all other inputs): nonlinear, monotonic relationships between inputs and outputs; criteria most suitable for Sobol sensitivity analysis (a variance-based method in which the variability in the output can be apportioned to the uncertainty in an input or combination of inputs) is the following: non-linear, non-monotonic relationships. \textcolor{red}{Unable to find specifically how PRCC's are calculated, not in Marino paper or elsewhere. Is that okay?}
 
-Although a minimum of $N=17+1=18$ sample points for the alpha linear case is required, the sample size must be big enough for which a similar set of parameters are deemed important for a certain output with consecutive runs. In this case, the best we are able to do is with $N=3000$ runs, although the inclusion/exclusion of the importance of $\beta_A$, $\nu$, and $\omega$ may change in subsequent runs. \textcolor{red}{As increase nsample number, more and more become significant, and fewer have the opportunity to bounce between not significant and significant; should there be an upper limit?}
+Although a minimum of $N=17+1=18$ sample points for the alpha linear case is required, the sample size must be big enough for which a similar set of parameters are deemed important for a certain output with consecutive runs. We use this standard for each of the results shown below, with the number of samples specifically stated for each. 
 
 Below are the monotonicity plots for alpha linear for FILL IN samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
 
@@ -1253,17 +1253,106 @@ Below are the monotonicity plots for alpha piecewise linear for FILL IN samples;
 \textcolor{red}{Fill in?}
 
 
-We utilize the same ranges of parameters as shown in Table FILL IN and FILL IN which are 50\% of baseline parameter values. \\
+We set the ranges for the parameters to be +/- 50\% of the baseline parameter values, which result in these ranges for alpha linear: \\
 
-\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear}
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Range of values}  \\ [0.5ex]
+
+ \hline\hline
+
+$m$ & [-0.0234,-0.0078] \\
+
+\hline
+
+$\beta_A$&  [0.00118,0.00353]   \\
+
+\hline
+
+$\beta_P$&  [0.0000705,0.000212]  \\
+
+\hline
+
+$\theta_1$&  [0.000254,0.000761]  \\
+
+\hline 
+
+$\varepsilon$ & [1.27,3.81]    \\
+
+\hline
+
+$\gamma$ &  [0.000575,0.00173]  \\
+
+\hline
+
+
+$\sigma$ &  [0.0142,0.0426]  \\
+
+\hline
+
+$\mu$& [0.00434,0.01302]   \\
+
+\hline
+
+$\mu_A$&  [0.00435,0.0131]  \\
+
+\hline
+
+$\mu_H$&  [0.0254,0.0761]  \\
+
+\hline
+
+$\theta_2$&  [0.0185,0.0555]   \\
+
+\hline
+
+$\zeta$& [0.133,0.398]   \\
+
+\hline
+
+$\theta_3$ &  [1.755,5.265] \\
+
+\hline
+
+$\nu$ & [0.00329,0.00986]   \\
+
+\hline
+
+$\omega$ & [0.00000000005,0.00000000015]   \\
+
+ \hline
+ 
+ $b$ &     [0.152,0.455]  \\
+
+ \hline
+ 
+ $P_0$ &  [0.0418,0.125] \\
+
+ \hline
+
+$A_0$ &  [0.00336,0.01]  \\
+
+\hline
+$H_0$ & [0.000437,0.00131]  \\
+
+ \hline
+ $R_0$ &  [0.0255,0.0764]  \\
+
+
+ \hline
+\end{tabular}
+
+\end{center}
 
 
 
 
 
-
-
-
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear with SOME NUMBER OF samples}
 \begin{center}
 \begin{tabular}{c  c  c }
 
@@ -1348,7 +1437,7 @@ $S_0$ &   & \\
 \end{center}
 
 
-
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear for SOME NUMBER OF SAMPLES}
 \begin{center}
 \begin{tabular}{c  c  c }
 
@@ -1434,9 +1523,104 @@ $S_0$ &   & \\
 
 
 
+The parameter ranges utilized for alpha piecewise linear are shown here:
+\begin{center}
+
+\begin{tabular}{|c | c | c|}
+
+ \hline
+
+{Parameter} & {Range of values}  \\ [0.5ex]
+
+ \hline\hline
+
+$m$ & [-0.00725,-0.00242] \\
+
+\hline
+
+$\beta_A$& [0.0022,0.0066]    \\
+
+\hline
+
+$\beta_P$& [0.000235,0.000704]    \\
+
+\hline
+
+$\theta_1$& [0.000251,0.000753]   \\
+
+\hline 
+
+$\varepsilon$ &  [1.25,3.74]  \\
+
+\hline
+
+$\gamma$ & [0.00073,0.00219]   \\
+
+\hline
 
 
-\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha piecewise linear}
+$\sigma$ &  [0.0142,0.0425]   \\
+
+\hline
+
+$\mu$&   [0.00434,0.01302] \\
+
+\hline
+
+$\mu_A$&  [0.00435,0.0131]    \\
+
+\hline
+
+$\mu_H$&  [0.0254,0.0761]  \\
+
+\hline
+
+$\theta_2$& [0.074,0.222]   \\
+
+\hline
+
+$\zeta$& [0.159,0.477]   \\
+
+\hline
+
+$\theta_3$ &  [1.19,3.57]  \\
+
+\hline
+
+$\nu$ &  [0.0241,0.0723] \\
+
+\hline
+
+$\omega$ & [0.00000000005,0.00000000015]  \\
+
+ \hline
+ 
+ $b$ & [0.142,0.423]  \\
+
+ \hline
+ 
+ $c$ &  [-0.0470,-0.0157] \\
+
+ \hline
+
+$P_0$ & [0.0475,0.143] \\
+
+ \hline
+$A_0$ &  [0.00324,0.00971] \\
+
+\hline
+$H_0$ & [0.000422,0.00126]   \\
+
+ \hline
+ $R_0$ & [0.0292,0.0876]   \\
+
+
+ \hline
+\end{tabular}
+
+\end{center}
+
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha piecewise linear with 300 samples}
 
 \begin{center}
 \begin{tabular}{c  c  c }
@@ -1446,73 +1630,63 @@ $S_0$ &   & \\
 {Input} & \shortstack{PRCC for proportion of \\ A class at final time} & \shortstack{$p$-value for proportion of \\ A class at final time} \\ [0.4ex]
  \hline
 
-$m$ & &  \\
+$m$ & -0.0098742 & 0.86476  \\
+
+
+$\beta_A$& 0.039135 & 0.4995  \\
+
+
+$\beta_P$ & 0.071251  & 0.2185   \\
+
+
+$\theta_1$ & -0.028338 &  0.62493   \\
+
+
+$\varepsilon$ &  -0.34531 & 7.9457e-10 \\
+
+
+$\gamma$ & 0.38344 & 6.0576e-12   \\
+
+ $\sigma$ & 0.17775  & 0.0019976  \\
+ 
+$\mu$ & 0.076348   & 0.18724 \\
+
+$\mu_A$ & -0.080501  & 0.1643 \\
+
+$\mu_H$ & 0.3881  & 3.1914e-12 \\
+
+$\theta_2$ & -0.044068 & 0.44698 \\
+
+
+$\zeta$ & -0.94843 & 1.0065e-150 \\
+
+
+$\theta_3$ & -0.895  & 1.7153e-106 \\
+
+
+$\nu$ & 0.28789  & 3.9074e-07  \\
+
+$\omega$ & -0.010821  & 0.85194  \\
+
+$b$ &  0.41994 & 3.0241e-14 \\
+
+
+$c$ &  0.0048736 & 0.93301 \\
+
+$P_0$ &  0.29884 &  1.3241e-07\\
 
 
 
-$b$ &   &  \\
+$A_0$ & 0.051754 & 0.37171\\
 
 
 
-
-$\beta_A$& &   \\
-
-
-
-$\beta_P$ &  &   \\
+$H_0$ &  0.85937 & 8.4662e-89   \\
 
 
 
-$\theta_1$ & &    \\
+$R_0$ & -0.90818 &   9.91e-115\\
 
-
-
-
-$\varepsilon$ &  & \\
-
-
-
-$\gamma$ &  &   \\
-
-
-
-
-$\theta_2$ &  &  \\
-
-
- $\sigma$ &   &   \\
-
-
-
-$\zeta$ & &  \\
-
-
-
-$\theta_3$ &  &  \\
-
-
-
-$\nu$ &  &   \\
-
-
-
-$P_0$ &   &  \\
-
-
-
-$A_0$ & &\\
-
-
-
-$H_0$ &  &   \\
-
-
-
-$R_0$ &  &   \\
-
-
-
-$S_0$ &   & \\
 
 
 \hline
@@ -1520,6 +1694,9 @@ $S_0$ &   & \\
 
 \end{tabular}
 \end{center}
+
+
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha piecewise linear with 400 samples}
 
 \begin{center}
 \begin{tabular}{c  c  c }
@@ -1529,73 +1706,71 @@ $S_0$ &   & \\
 {Input} & \shortstack{PRCC for proportion of \\ Hclass at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
  \hline
 
-$m$ & &  \\
-
-
-
-$b$ &   &  \\
+$m$ & -0.046178 & 0.35697 \\
 
 
 
 
-$\beta_A$& &   \\
+
+
+$\beta_A$&0.050641 & 0.31235   \\
 
 
 
-$\beta_P$ &  &   \\
+$\beta_P$ & 0.017772 & 0.72308  \\
 
 
 
-$\theta_1$ & &    \\
-
-
-
-
-$\varepsilon$ &  & \\
-
-
-
-$\gamma$ &  &   \\
+$\theta_1$ & -0.044235 & 0.37758   \\
 
 
 
 
-$\theta_2$ &  &  \\
-
-
- $\sigma$ &   &   \\
+$\varepsilon$ & -0.0016514  & 0.97373 \\
 
 
 
-$\zeta$ & &  \\
+$\gamma$ &  0.025731 &  0.60788 \\
+
+ $\sigma$ & 0.99328  &  0 \\
+
+$\mu$ & -0.47589   & 5.3378e-24 \\
+
+$\mu_A$ & 0.039706  & 0.4284 \\
+
+$\mu_H$ & -0.88904 & 4.1301e-137 \\
+
+$\theta_2$ & 0.010764  & 0.83007  \\
+
+
+$\zeta$ &-0.011441 &  0.81956\\
+
+
+$\theta_3$ & 0.03165  & 0.52793  \\
+
+
+$\nu$ & -0.86025 & 1.7159e-118  \\
+
+$b$ &  0.061172 & 0.22218 \\
+
+$c$ &  0.044832 & 0.37117 \\
+
+$P_0$ & -0.69442  & 7.4924e-59 \\
 
 
 
-$\theta_3$ &  &  \\
+$A_0$ &-0.0574 & 0.25206\\
 
 
 
-$\nu$ &  &   \\
+$H_0$ &  0.00080693 & 0.98716  \\
 
 
 
-$P_0$ &   &  \\
+$R_0$ & 0.9519  & 1.5038e-206  \\
 
 
 
-$A_0$ & &\\
-
-
-
-$H_0$ &  &   \\
-
-
-
-$R_0$ &  &   \\
-
-
-
-$S_0$ &   & \\
 
 
 \hline
