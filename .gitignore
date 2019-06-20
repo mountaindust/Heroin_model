@@ -37,6 +37,8 @@ heroin_data_sources/
 
 #heroin papers/journal articles/other sources
 heroin_papers/
+heroin_journal_article/
+heroin_model_formulation/
 
 #folder of talks, pdfs and powerpoints
 talks/
