@@ -713,9 +713,9 @@ for x=1:nsample %Run solution x times choosing different values, represents each
  
     
      %store results of each [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,y0,[]);
-     %HOW ARE THESE W# OUTPUTS ONLY FOR time 0 through 6, shouldn't they be for
-     %each row of LHSmatrix (each set of parameters)? How does S_lhs1 get
-     %different values of W1(timepoints+1,1) for each x?
+     %These get overwritten for each x of the for loop, so the final result
+     %in the workspace shown is for the final x value (the last row of each LHS matrix) over the
+     %entire time span 
      W1 = [t y1]; % [time y]
      W2 = [t y2];
      W3 = [t y3];
@@ -741,7 +741,7 @@ for x=1:nsample %Run solution x times choosing different values, represents each
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %store final value of each class (time_points+1 is final time since first
-  %column is IC's), start with 2nd column because 1st just counts classes
+  %column is IC's), start with 2nd column because 1st just for time values 
      S_lhs1(:,x)=W1(time_points+1,2);
      P_lhs1(:,x)=W1(time_points+1,3);
      A_lhs1(:,x)=W1(time_points+1,4);
