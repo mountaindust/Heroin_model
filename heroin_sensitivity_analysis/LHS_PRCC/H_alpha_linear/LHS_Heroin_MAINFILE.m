@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 1000; 
+nsample = 400; 
 
 %% LHS MATRIX  %%
 
@@ -48,15 +48,21 @@ theta_3_LHS=LHS_Call_Heroin(theta_3-(theta_3/2),0,theta_3+(theta_3/2),0,nsample,
 nu_LHS=LHS_Call_Heroin(nu-(nu/2),0,nu+(nu/2),0,nsample,'unif');
 omega_LHS=LHS_Call_Heroin(omega-(omega/2),0,omega+(omega/2),0,nsample,'unif');
 b_LHS=LHS_Call_Heroin(b-(b/2),0,b+(b/2),0,nsample,'unif');
+P0_LHS=LHS_Call_Heroin(P0-(P0/2),0,P0+(P0/2),0,nsample,'unif');
+A0_LHS=LHS_Call_Heroin(A0-(A0/2),0,A0+(A0/2),0,nsample,'unif');
+H0_LHS=LHS_Call_Heroin(H0-(H0/2),0,H0+(H0/2),0,nsample,'unif');
+R0_LHS=LHS_Call_Heroin(R0-(R0/2),0,R0+(R0/2),0,nsample,'unif');
 
-
- 
  
 
 %% LHS MATRIX and PARAMETER LABELS
  %storing vectors from above in matrix form 
-  LHSmatrix  = [m_LHS,beta_A_LHS,beta_P_LHS,theta_1_LHS,epsilon_LHS,gamma_LHS,sigma_LHS,mu_LHS,mu_A_LHS,mu_H_LHS,theta_2_LHS,zeta_LHS,theta_3_LHS,nu_LHS,omega_LHS,b_LHS];
-
+  LHSmatrix  = [m_LHS,beta_A_LHS,beta_P_LHS,theta_1_LHS,epsilon_LHS,gamma_LHS,sigma_LHS,mu_LHS,mu_A_LHS,mu_H_LHS,theta_2_LHS,zeta_LHS,theta_3_LHS,nu_LHS,omega_LHS,b_LHS,P0_LHS,A0_LHS,H0_LHS,R0_LHS];
+  %QUESTION: HOW DO I GET THE LAST FOUR COLUMNS OF THIS TO BE THE INITIAL
+  %CONDITIONS, BECAUSE I BELIEVE y0 BELOW IN ODE SOLVER IS TAKING THE BASELINE INITIAL
+  %CONDITIONS FROM PARAMETER_SETTING FILE (If I create a new vector, what
+  %do I put in the ODE_LHS_Heroin file for P0, A0, H0, R0 because won't let
+  %me add a new vector)--check if correct what have below 
  
 for x=1:nsample %Run solution x times choosing different values
     f=@ODE_LHS_Heroin;
@@ -64,7 +70,7 @@ for x=1:nsample %Run solution x times choosing different values
 %     
 %      LHSmatrix(x,:);
      
-     [t,y] = ode15s(@(t,y)f(t,y,LHSmatrix,x),tspan,y0,[]); 
+     [t,y] = ode15s(@(t,y)f(t,y,LHSmatrix,x),tspan,[LHSmatrix(x,17),LHSmatrix(x,18),LHSmatrix(x,19),LHSmatrix(x,20),1-LHSmatrix(x,17)-LHSmatrix(x,18)-LHSmatrix(x,19)-LHSmatrix(x,20)],[]); 
      %[t,y]=ode15s(@ODE_LHS_Heroin,tspan,y0,[],LHSmatrix);
      W = [t y]; % [time y]
     
@@ -101,7 +107,7 @@ save LV_Model_LHS_Heroin.mat;
 
 %% Scatter plots
 
-  PRCC_PLOT_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,'Total Heroin Addicts');
+  PRCC_PLOT_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,'Total Opioid Addicts');
   
   
   
@@ -112,7 +118,7 @@ save LV_Model_LHS_Heroin.mat;
  %% Monotonicity plots
  
 
-%fixing all but running LHS for one at a time
+%fixing all except running LHS for one parameter at a time
 
 %m
        
@@ -132,6 +138,10 @@ theta_3_LHS1=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS1=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS1=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS1=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS1=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS1=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS1=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS1=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %beta_A
 
@@ -151,6 +161,10 @@ theta_3_LHS2=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS2=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS2=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS2=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS2=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS2=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS2=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS2=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 
 %beta_P
@@ -171,7 +185,10 @@ theta_3_LHS3=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS3=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS3=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS3=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
+P0_LHS3=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS3=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS3=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS3=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %theta_1
 
@@ -191,8 +208,10 @@ theta_3_LHS4=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS4=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS4=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS4=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
-
+P0_LHS4=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS4=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS4=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS4=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 
 
@@ -214,8 +233,10 @@ theta_3_LHS5=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS5=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS5=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS5=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
-
+P0_LHS5=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS5=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS5=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS5=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 
 
@@ -238,8 +259,10 @@ theta_3_LHS6=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS6=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS6=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS6=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
-
+P0_LHS6=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS6=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS6=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS6=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %sigma
 
@@ -259,8 +282,10 @@ theta_3_LHS7=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS7=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS7=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS7=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
-
+P0_LHS7=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS7=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS7=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS7=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %mu
 
@@ -280,6 +305,10 @@ theta_3_LHS8=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS8=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS8=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS8=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS8=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS8=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS8=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS8=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %mu_A
 
@@ -299,6 +328,10 @@ theta_3_LHS9=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS9=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS9=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS9=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS9=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS9=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS9=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS9=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %mu_H
 
@@ -318,6 +351,11 @@ theta_3_LHS10=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS10=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS10=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS10=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS10=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS10=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS10=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS10=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
+
 
 %theta_2
 m_LHS11=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
@@ -336,6 +374,10 @@ theta_3_LHS11=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS11=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS11=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS11=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS11=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS11=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS11=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS11=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 
 %zeta
@@ -356,7 +398,10 @@ theta_3_LHS12=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS12=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS12=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS12=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
-
+P0_LHS12=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS12=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS12=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS12=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %theta_3
 
@@ -376,6 +421,10 @@ theta_3_LHS13=LHS_Call_Heroin(theta_3-(theta_3/2),0,theta_3+(theta_3/2),0,nsampl
 nu_LHS13=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS13=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS13=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS13=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS13=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS13=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS13=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %nu 
 
@@ -395,6 +444,10 @@ theta_3_LHS14=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS14=LHS_Call_Heroin(nu-(nu/2),0,nu+(nu/2),0,nsample,'unif');
 omega_LHS14=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS14=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS14=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS14=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS14=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS14=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %omega
 
@@ -414,6 +467,10 @@ theta_3_LHS15=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS15=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS15=LHS_Call_Heroin(omega-(omega/2),0,omega+(omega/2),0,nsample,'unif');
 b_LHS15=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS15=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS15=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS15=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS15=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
 %b
 
@@ -433,31 +490,127 @@ theta_3_LHS16=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS16=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS16=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS16=LHS_Call_Heroin(b-(b/2),0,b+(b/2),0,nsample,'unif');
+P0_LHS16=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS16=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS16=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS16=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
+%P0
 
+m_LHS17=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
+beta_A_LHS17=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
+beta_P_LHS17=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
+theta_1_LHS17=LHS_Call_Heroin(theta_1-0,0,theta_1+0,0,nsample,'unif');
+epsilon_LHS17=LHS_Call_Heroin(epsilon-0,0,epsilon+0,0,nsample,'unif');
+gamma_LHS17=LHS_Call_Heroin(gamma-0,0,gamma+0,0,nsample,'unif');
+sigma_LHS17=LHS_Call_Heroin(sigma-0,0,sigma+0,0,nsample,'unif');
+mu_LHS17=LHS_Call_Heroin(mu-0,0,mu+0,0,nsample,'unif');
+mu_A_LHS17=LHS_Call_Heroin(mu_A-0,0,mu_A+0,0,nsample,'unif');
+mu_H_LHS17=LHS_Call_Heroin(mu_H-0,0,mu_H+0,0,nsample,'unif');
+theta_2_LHS17=LHS_Call_Heroin(theta_2-0,0,theta_2+0,0,nsample,'unif');
+zeta_LHS17=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
+theta_3_LHS17=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
+nu_LHS17=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
+omega_LHS17=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
+b_LHS17=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS17=LHS_Call_Heroin(P0-(P0/2),0,P0+(P0/2),0,nsample,'unif');
+A0_LHS17=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS17=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS17=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
 
+%A0
+
+m_LHS18=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
+beta_A_LHS18=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
+beta_P_LHS18=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
+theta_1_LHS18=LHS_Call_Heroin(theta_1-0,0,theta_1+0,0,nsample,'unif');
+epsilon_LHS18=LHS_Call_Heroin(epsilon-0,0,epsilon+0,0,nsample,'unif');
+gamma_LHS18=LHS_Call_Heroin(gamma-0,0,gamma+0,0,nsample,'unif');
+sigma_LHS18=LHS_Call_Heroin(sigma-0,0,sigma+0,0,nsample,'unif');
+mu_LHS18=LHS_Call_Heroin(mu-0,0,mu+0,0,nsample,'unif');
+mu_A_LHS18=LHS_Call_Heroin(mu_A-0,0,mu_A+0,0,nsample,'unif');
+mu_H_LHS18=LHS_Call_Heroin(mu_H-0,0,mu_H+0,0,nsample,'unif');
+theta_2_LHS18=LHS_Call_Heroin(theta_2-0,0,theta_2+0,0,nsample,'unif');
+zeta_LHS18=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
+theta_3_LHS18=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
+nu_LHS18=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
+omega_LHS18=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
+b_LHS18=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS18=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS18=LHS_Call_Heroin(A0-(A0/2),0,A0+(A0/2),0,nsample,'unif');
+H0_LHS18=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS18=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
+
+%H0
+
+m_LHS19=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
+beta_A_LHS19=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
+beta_P_LHS19=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
+theta_1_LHS19=LHS_Call_Heroin(theta_1-0,0,theta_1+0,0,nsample,'unif');
+epsilon_LHS19=LHS_Call_Heroin(epsilon-0,0,epsilon+0,0,nsample,'unif');
+gamma_LHS19=LHS_Call_Heroin(gamma-0,0,gamma+0,0,nsample,'unif');
+sigma_LHS19=LHS_Call_Heroin(sigma-0,0,sigma+0,0,nsample,'unif');
+mu_LHS19=LHS_Call_Heroin(mu-0,0,mu+0,0,nsample,'unif');
+mu_A_LHS19=LHS_Call_Heroin(mu_A-0,0,mu_A+0,0,nsample,'unif');
+mu_H_LHS19=LHS_Call_Heroin(mu_H-0,0,mu_H+0,0,nsample,'unif');
+theta_2_LHS19=LHS_Call_Heroin(theta_2-0,0,theta_2+0,0,nsample,'unif');
+zeta_LHS19=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
+theta_3_LHS19=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
+nu_LHS19=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
+omega_LHS19=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
+b_LHS19=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS19=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS19=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS19=LHS_Call_Heroin(H0-(H0/2),0,H0+(H0/2),0,nsample,'unif');
+R0_LHS19=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
+
+%R0
+
+m_LHS20=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
+beta_A_LHS20=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
+beta_P_LHS20=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
+theta_1_LHS20=LHS_Call_Heroin(theta_1-0,0,theta_1+0,0,nsample,'unif');
+epsilon_LHS20=LHS_Call_Heroin(epsilon-0,0,epsilon+0,0,nsample,'unif');
+gamma_LHS20=LHS_Call_Heroin(gamma-0,0,gamma+0,0,nsample,'unif');
+sigma_LHS20=LHS_Call_Heroin(sigma-0,0,sigma+0,0,nsample,'unif');
+mu_LHS20=LHS_Call_Heroin(mu-0,0,mu+0,0,nsample,'unif');
+mu_A_LHS20=LHS_Call_Heroin(mu_A-0,0,mu_A+0,0,nsample,'unif');
+mu_H_LHS20=LHS_Call_Heroin(mu_H-0,0,mu_H+0,0,nsample,'unif');
+theta_2_LHS20=LHS_Call_Heroin(theta_2-0,0,theta_2+0,0,nsample,'unif');
+zeta_LHS20=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
+theta_3_LHS20=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
+nu_LHS20=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
+omega_LHS20=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
+b_LHS20=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
+P0_LHS20=LHS_Call_Heroin(P0-0,0,P0+0,0,nsample,'unif');
+A0_LHS20=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
+H0_LHS20=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
+R0_LHS20=LHS_Call_Heroin(R0-(R0/2),0,R0+(R0/2),0,nsample,'unif');
 
 %% LHS MATRIX and PARAMETER LABELS
-
+%taking parameter blocks above and putting them in matrix form 
   
-LHSmatrix1 =[m_LHS1 beta_A_LHS1 beta_P_LHS1 theta_1_LHS1 epsilon_LHS1 gamma_LHS1 sigma_LHS1 mu_LHS1 mu_A_LHS1 mu_H_LHS1 theta_2_LHS1 zeta_LHS1 theta_3_LHS1   nu_LHS1 omega_LHS1 b_LHS1 ];
-LHSmatrix2 =[m_LHS2 beta_A_LHS2 beta_P_LHS2 theta_1_LHS2 epsilon_LHS2 gamma_LHS2 sigma_LHS2 mu_LHS2 mu_A_LHS2 mu_H_LHS2 theta_2_LHS2 zeta_LHS2 theta_3_LHS2 nu_LHS2 omega_LHS2 b_LHS2 ];
-LHSmatrix3 =[m_LHS3 beta_A_LHS3 beta_P_LHS3 theta_1_LHS3 epsilon_LHS3 gamma_LHS3 sigma_LHS3 mu_LHS3 mu_A_LHS3 mu_H_LHS3 theta_2_LHS3 zeta_LHS3 theta_3_LHS3 nu_LHS3 omega_LHS3 b_LHS3 ];
-LHSmatrix4 =[m_LHS4 beta_A_LHS4 beta_P_LHS4 theta_1_LHS4 epsilon_LHS4 gamma_LHS4 sigma_LHS4 mu_LHS4 mu_A_LHS4 mu_H_LHS4 theta_2_LHS4 zeta_LHS4 theta_3_LHS4 nu_LHS4 omega_LHS4 b_LHS4 ];
-LHSmatrix5 =[m_LHS5 beta_A_LHS5 beta_P_LHS5 theta_1_LHS5 epsilon_LHS5 gamma_LHS5 sigma_LHS5 mu_LHS5 mu_A_LHS5 mu_H_LHS5 theta_2_LHS5 zeta_LHS5 theta_3_LHS5 nu_LHS5 omega_LHS5 b_LHS5 ]; 
-LHSmatrix6 =[m_LHS6 beta_A_LHS6 beta_P_LHS6 theta_1_LHS6 epsilon_LHS6 gamma_LHS6 sigma_LHS6 mu_LHS6 mu_A_LHS6 mu_H_LHS6 theta_2_LHS6 zeta_LHS6 theta_3_LHS6 nu_LHS6 omega_LHS6 b_LHS6 ];
-LHSmatrix7 =[m_LHS7 beta_A_LHS7 beta_P_LHS7 theta_1_LHS7 epsilon_LHS7 gamma_LHS7 sigma_LHS7 mu_LHS7 mu_A_LHS7 mu_H_LHS7 theta_2_LHS7 zeta_LHS7 theta_3_LHS7 nu_LHS7 omega_LHS7 b_LHS7 ];
-LHSmatrix8 =[m_LHS8 beta_A_LHS8 beta_P_LHS8 theta_1_LHS8 epsilon_LHS8 gamma_LHS8 sigma_LHS8 mu_LHS8 mu_A_LHS8 mu_H_LHS8 theta_2_LHS8 zeta_LHS8 theta_3_LHS8 nu_LHS8 omega_LHS8 b_LHS8 ];
-LHSmatrix9 =[m_LHS9 beta_A_LHS9 beta_P_LHS9 theta_1_LHS9 epsilon_LHS9 gamma_LHS9 sigma_LHS9 mu_LHS9 mu_A_LHS9 mu_H_LHS9 theta_2_LHS9 zeta_LHS9 theta_3_LHS9 nu_LHS9 omega_LHS9 b_LHS9 ];
-LHSmatrix10 =[m_LHS10 beta_A_LHS10 beta_P_LHS10 theta_1_LHS10 epsilon_LHS10 gamma_LHS10 sigma_LHS10 mu_LHS10 mu_A_LHS10 mu_H_LHS10 theta_2_LHS10 zeta_LHS10 theta_3_LHS10 nu_LHS10 omega_LHS10 b_LHS10 ];
-LHSmatrix11 =[m_LHS11 beta_A_LHS11 beta_P_LHS11 theta_1_LHS11 epsilon_LHS11 gamma_LHS11 sigma_LHS11 mu_LHS11 mu_A_LHS11 mu_H_LHS11 theta_2_LHS11 zeta_LHS11 theta_3_LHS11 nu_LHS11 omega_LHS11 b_LHS11 ];
-LHSmatrix12 =[m_LHS12 beta_A_LHS12 beta_P_LHS12 theta_1_LHS12 epsilon_LHS12 gamma_LHS12 sigma_LHS12 mu_LHS12 mu_A_LHS12 mu_H_LHS12 theta_2_LHS12 zeta_LHS12 theta_3_LHS12 nu_LHS12 omega_LHS12 b_LHS12 ];
-LHSmatrix13 =[m_LHS13 beta_A_LHS13 beta_P_LHS13 theta_1_LHS13 epsilon_LHS13 gamma_LHS13 sigma_LHS13 mu_LHS13 mu_A_LHS13 mu_H_LHS13 theta_2_LHS13 zeta_LHS13 theta_3_LHS13 nu_LHS13 omega_LHS13 b_LHS13 ];
-LHSmatrix14 =[m_LHS14 beta_A_LHS14 beta_P_LHS14 theta_1_LHS14 epsilon_LHS14 gamma_LHS14 sigma_LHS14 mu_LHS14 mu_A_LHS14 mu_H_LHS14 theta_2_LHS14 zeta_LHS14 theta_3_LHS14 nu_LHS14 omega_LHS14 b_LHS14 ];
-LHSmatrix15 =[m_LHS15 beta_A_LHS15 beta_P_LHS15 theta_1_LHS15 epsilon_LHS15 gamma_LHS15 sigma_LHS15 mu_LHS15 mu_A_LHS15 mu_H_LHS15 theta_2_LHS15 zeta_LHS15 theta_3_LHS15 nu_LHS15 omega_LHS15 b_LHS15 ]; 
-LHSmatrix16 =[m_LHS16 beta_A_LHS16 beta_P_LHS16 theta_1_LHS16 epsilon_LHS16 gamma_LHS16 sigma_LHS16 mu_LHS16 mu_A_LHS16 mu_H_LHS16 theta_2_LHS16 zeta_LHS16 theta_3_LHS16 nu_LHS16 omega_LHS16 b_LHS16 ];
+LHSmatrix1 =[m_LHS1 beta_A_LHS1 beta_P_LHS1 theta_1_LHS1 epsilon_LHS1 gamma_LHS1 sigma_LHS1 mu_LHS1 mu_A_LHS1 mu_H_LHS1 theta_2_LHS1 zeta_LHS1 theta_3_LHS1 nu_LHS1 omega_LHS1 b_LHS1 P0_LHS1 A0_LHS1 H0_LHS1 R0_LHS1];
+LHSmatrix2 =[m_LHS2 beta_A_LHS2 beta_P_LHS2 theta_1_LHS2 epsilon_LHS2 gamma_LHS2 sigma_LHS2 mu_LHS2 mu_A_LHS2 mu_H_LHS2 theta_2_LHS2 zeta_LHS2 theta_3_LHS2 nu_LHS2 omega_LHS2 b_LHS2 P0_LHS2 A0_LHS2 H0_LHS2 R0_LHS2];
+LHSmatrix3 =[m_LHS3 beta_A_LHS3 beta_P_LHS3 theta_1_LHS3 epsilon_LHS3 gamma_LHS3 sigma_LHS3 mu_LHS3 mu_A_LHS3 mu_H_LHS3 theta_2_LHS3 zeta_LHS3 theta_3_LHS3 nu_LHS3 omega_LHS3 b_LHS3 P0_LHS3 A0_LHS3 H0_LHS3 R0_LHS3];
+LHSmatrix4 =[m_LHS4 beta_A_LHS4 beta_P_LHS4 theta_1_LHS4 epsilon_LHS4 gamma_LHS4 sigma_LHS4 mu_LHS4 mu_A_LHS4 mu_H_LHS4 theta_2_LHS4 zeta_LHS4 theta_3_LHS4 nu_LHS4 omega_LHS4 b_LHS4 P0_LHS4 A0_LHS4 H0_LHS4 R0_LHS4];
+LHSmatrix5 =[m_LHS5 beta_A_LHS5 beta_P_LHS5 theta_1_LHS5 epsilon_LHS5 gamma_LHS5 sigma_LHS5 mu_LHS5 mu_A_LHS5 mu_H_LHS5 theta_2_LHS5 zeta_LHS5 theta_3_LHS5 nu_LHS5 omega_LHS5 b_LHS5 P0_LHS5 A0_LHS5 H0_LHS5 R0_LHS5]; 
+LHSmatrix6 =[m_LHS6 beta_A_LHS6 beta_P_LHS6 theta_1_LHS6 epsilon_LHS6 gamma_LHS6 sigma_LHS6 mu_LHS6 mu_A_LHS6 mu_H_LHS6 theta_2_LHS6 zeta_LHS6 theta_3_LHS6 nu_LHS6 omega_LHS6 b_LHS6 P0_LHS6 A0_LHS6 H0_LHS6 R0_LHS6];
+LHSmatrix7 =[m_LHS7 beta_A_LHS7 beta_P_LHS7 theta_1_LHS7 epsilon_LHS7 gamma_LHS7 sigma_LHS7 mu_LHS7 mu_A_LHS7 mu_H_LHS7 theta_2_LHS7 zeta_LHS7 theta_3_LHS7 nu_LHS7 omega_LHS7 b_LHS7 P0_LHS7 A0_LHS7 H0_LHS7 R0_LHS7];
+LHSmatrix8 =[m_LHS8 beta_A_LHS8 beta_P_LHS8 theta_1_LHS8 epsilon_LHS8 gamma_LHS8 sigma_LHS8 mu_LHS8 mu_A_LHS8 mu_H_LHS8 theta_2_LHS8 zeta_LHS8 theta_3_LHS8 nu_LHS8 omega_LHS8 b_LHS8 P0_LHS8 A0_LHS8 H0_LHS8 R0_LHS8];
+LHSmatrix9 =[m_LHS9 beta_A_LHS9 beta_P_LHS9 theta_1_LHS9 epsilon_LHS9 gamma_LHS9 sigma_LHS9 mu_LHS9 mu_A_LHS9 mu_H_LHS9 theta_2_LHS9 zeta_LHS9 theta_3_LHS9 nu_LHS9 omega_LHS9 b_LHS9 P0_LHS9 A0_LHS9 H0_LHS9 R0_LHS9];
+LHSmatrix10 =[m_LHS10 beta_A_LHS10 beta_P_LHS10 theta_1_LHS10 epsilon_LHS10 gamma_LHS10 sigma_LHS10 mu_LHS10 mu_A_LHS10 mu_H_LHS10 theta_2_LHS10 zeta_LHS10 theta_3_LHS10 nu_LHS10 omega_LHS10 b_LHS10 P0_LHS10 A0_LHS10 H0_LHS10 R0_LHS10];
+LHSmatrix11 =[m_LHS11 beta_A_LHS11 beta_P_LHS11 theta_1_LHS11 epsilon_LHS11 gamma_LHS11 sigma_LHS11 mu_LHS11 mu_A_LHS11 mu_H_LHS11 theta_2_LHS11 zeta_LHS11 theta_3_LHS11 nu_LHS11 omega_LHS11 b_LHS11 P0_LHS11 A0_LHS11 H0_LHS11 R0_LHS11];
+LHSmatrix12 =[m_LHS12 beta_A_LHS12 beta_P_LHS12 theta_1_LHS12 epsilon_LHS12 gamma_LHS12 sigma_LHS12 mu_LHS12 mu_A_LHS12 mu_H_LHS12 theta_2_LHS12 zeta_LHS12 theta_3_LHS12 nu_LHS12 omega_LHS12 b_LHS12 P0_LHS12 A0_LHS12 H0_LHS12 R0_LHS12];
+LHSmatrix13 =[m_LHS13 beta_A_LHS13 beta_P_LHS13 theta_1_LHS13 epsilon_LHS13 gamma_LHS13 sigma_LHS13 mu_LHS13 mu_A_LHS13 mu_H_LHS13 theta_2_LHS13 zeta_LHS13 theta_3_LHS13 nu_LHS13 omega_LHS13 b_LHS13 P0_LHS13 A0_LHS13 H0_LHS13 R0_LHS13];
+LHSmatrix14 =[m_LHS14 beta_A_LHS14 beta_P_LHS14 theta_1_LHS14 epsilon_LHS14 gamma_LHS14 sigma_LHS14 mu_LHS14 mu_A_LHS14 mu_H_LHS14 theta_2_LHS14 zeta_LHS14 theta_3_LHS14 nu_LHS14 omega_LHS14 b_LHS14 P0_LHS14 A0_LHS14 H0_LHS14 R0_LHS14];
+LHSmatrix15 =[m_LHS15 beta_A_LHS15 beta_P_LHS15 theta_1_LHS15 epsilon_LHS15 gamma_LHS15 sigma_LHS15 mu_LHS15 mu_A_LHS15 mu_H_LHS15 theta_2_LHS15 zeta_LHS15 theta_3_LHS15 nu_LHS15 omega_LHS15 b_LHS15 P0_LHS15 A0_LHS15 H0_LHS15 R0_LHS15]; 
+LHSmatrix16 =[m_LHS16 beta_A_LHS16 beta_P_LHS16 theta_1_LHS16 epsilon_LHS16 gamma_LHS16 sigma_LHS16 mu_LHS16 mu_A_LHS16 mu_H_LHS16 theta_2_LHS16 zeta_LHS16 theta_3_LHS16 nu_LHS16 omega_LHS16 b_LHS16 P0_LHS16 A0_LHS16 H0_LHS16 R0_LHS16];
+LHSmatrix17 =[m_LHS17 beta_A_LHS17 beta_P_LHS17 theta_1_LHS17 epsilon_LHS17 gamma_LHS17 sigma_LHS17 mu_LHS17 mu_A_LHS17 mu_H_LHS17 theta_2_LHS17 zeta_LHS17 theta_3_LHS17 nu_LHS17 omega_LHS17 b_LHS17 P0_LHS17 A0_LHS17 H0_LHS17 R0_LHS17];
+LHSmatrix18 =[m_LHS18 beta_A_LHS18 beta_P_LHS18 theta_1_LHS18 epsilon_LHS18 gamma_LHS18 sigma_LHS18 mu_LHS18 mu_A_LHS18 mu_H_LHS18 theta_2_LHS18 zeta_LHS18 theta_3_LHS18 nu_LHS18 omega_LHS17 b_LHS18 P0_LHS18 A0_LHS18 H0_LHS18 R0_LHS18];
+LHSmatrix19 =[m_LHS19 beta_A_LHS19 beta_P_LHS19 theta_1_LHS19 epsilon_LHS19 gamma_LHS19 sigma_LHS19 mu_LHS19 mu_A_LHS19 mu_H_LHS19 theta_2_LHS19 zeta_LHS19 theta_3_LHS19 nu_LHS19 omega_LHS17 b_LHS19 P0_LHS19 A0_LHS19 H0_LHS19 R0_LHS19];
+LHSmatrix20 =[m_LHS20 beta_A_LHS20 beta_P_LHS20 theta_1_LHS20 epsilon_LHS20 gamma_LHS20 sigma_LHS20 mu_LHS20 mu_A_LHS20 mu_H_LHS20 theta_2_LHS20 zeta_LHS20 theta_3_LHS20 nu_LHS20 omega_LHS17 b_LHS20 P0_LHS20 A0_LHS20 H0_LHS20 R0_LHS20];
 
-  
 for x=1:nsample %Run solution x times choosing different values, represents each row of the matrix that's going to go through the ODE solver to produce the plots 
     f=@ODE_LHS_Heroin;
     x;
@@ -479,32 +632,41 @@ for x=1:nsample %Run solution x times choosing different values, represents each
     LHSmatrix14(x,:);
     LHSmatrix15(x,:);
     LHSmatrix16(x,:);
- 
+    LHSmatrix17(x,:);
+    LHSmatrix18(x,:);
+    LHSmatrix19(x,:);
+    LHSmatrix20(x,:);
+
     
     %run each with only 1 parameter varying in each (each ODE run nsample
     %times, 1 time for each row in LHSmatrix# to produce output for each parameter in a
     %certain range)
-    [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,y0,[]); 
-    [t,y2] = ode15s(@(t,y2)f(t,y2,LHSmatrix2,x),tspan,y0,[]); 
-    [t,y3] = ode15s(@(t,y3)f(t,y3,LHSmatrix3,x),tspan,y0,[]);
-    [t,y4] = ode15s(@(t,y4)f(t,y4,LHSmatrix4,x),tspan,y0,[]); 
-    [t,y5] = ode15s(@(t,y5)f(t,y5,LHSmatrix5,x),tspan,y0,[]); 
-    [t,y6] = ode15s(@(t,y6)f(t,y6,LHSmatrix6,x),tspan,y0,[]);
-    [t,y7] = ode15s(@(t,y7)f(t,y7,LHSmatrix7,x),tspan,y0,[]); 
-    [t,y8] = ode15s(@(t,y8)f(t,y8,LHSmatrix8,x),tspan,y0,[]);
-    [t,y9] = ode15s(@(t,y9)f(t,y9,LHSmatrix9,x),tspan,y0,[]);
-    [t,y10] = ode15s(@(t,y10)f(t,y10,LHSmatrix10,x),tspan,y0,[]);
-    [t,y11] = ode15s(@(t,y11)f(t,y11,LHSmatrix11,x),tspan,y0,[]);
-    [t,y12] = ode15s(@(t,y12)f(t,y12,LHSmatrix12,x),tspan,y0,[]);
-    [t,y13] = ode15s(@(t,y13)f(t,y13,LHSmatrix13,x),tspan,y0,[]);
-    [t,y14] = ode15s(@(t,y14)f(t,y14,LHSmatrix14,x),tspan,y0,[]);
-    [t,y15] = ode15s(@(t,y15)f(t,y15,LHSmatrix15,x),tspan,y0,[]);
-    [t,y16] = ode15s(@(t,y16)f(t,y16,LHSmatrix16,x),tspan,y0,[]);
-   
- 
+    [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,[LHSmatrix1(x,17),LHSmatrix1(x,18),LHSmatrix1(x,19),LHSmatrix1(x,20),1-LHSmatrix1(x,17)-LHSmatrix1(x,18)-LHSmatrix1(x,19)-LHSmatrix1(x,20)],[]); 
+    [t,y2] = ode15s(@(t,y2)f(t,y2,LHSmatrix2,x),tspan,[LHSmatrix2(x,17),LHSmatrix2(x,18),LHSmatrix2(x,19),LHSmatrix2(x,20),1-LHSmatrix2(x,17)-LHSmatrix2(x,18)-LHSmatrix2(x,19)-LHSmatrix2(x,20)],[]); 
+    [t,y3] = ode15s(@(t,y3)f(t,y3,LHSmatrix3,x),tspan,[LHSmatrix3(x,17),LHSmatrix3(x,18),LHSmatrix3(x,19),LHSmatrix3(x,20),1-LHSmatrix3(x,17)-LHSmatrix3(x,18)-LHSmatrix3(x,19)-LHSmatrix3(x,20)],[]);
+    [t,y4] = ode15s(@(t,y4)f(t,y4,LHSmatrix4,x),tspan,[LHSmatrix4(x,17),LHSmatrix4(x,18),LHSmatrix4(x,19),LHSmatrix4(x,20),1-LHSmatrix4(x,17)-LHSmatrix4(x,18)-LHSmatrix4(x,19)-LHSmatrix4(x,20)],[]); 
+    [t,y5] = ode15s(@(t,y5)f(t,y5,LHSmatrix5,x),tspan,[LHSmatrix5(x,17),LHSmatrix5(x,18),LHSmatrix5(x,19),LHSmatrix5(x,20),1-LHSmatrix5(x,17)-LHSmatrix5(x,18)-LHSmatrix5(x,19)-LHSmatrix5(x,20)],[]); 
+    [t,y6] = ode15s(@(t,y6)f(t,y6,LHSmatrix6,x),tspan,[LHSmatrix6(x,17),LHSmatrix6(x,18),LHSmatrix6(x,19),LHSmatrix6(x,20),1-LHSmatrix6(x,17)-LHSmatrix6(x,18)-LHSmatrix6(x,19)-LHSmatrix6(x,20)],[]);
+    [t,y7] = ode15s(@(t,y7)f(t,y7,LHSmatrix7,x),tspan,[LHSmatrix7(x,17),LHSmatrix7(x,18),LHSmatrix7(x,19),LHSmatrix7(x,20),1-LHSmatrix7(x,17)-LHSmatrix7(x,18)-LHSmatrix7(x,19)-LHSmatrix7(x,20)],[]); 
+    [t,y8] = ode15s(@(t,y8)f(t,y8,LHSmatrix8,x),tspan,[LHSmatrix8(x,17),LHSmatrix8(x,18),LHSmatrix8(x,19),LHSmatrix8(x,20),1-LHSmatrix8(x,17)-LHSmatrix8(x,18)-LHSmatrix8(x,19)-LHSmatrix8(x,20)],[]);
+    [t,y9] = ode15s(@(t,y9)f(t,y9,LHSmatrix9,x),tspan,[LHSmatrix9(x,17),LHSmatrix9(x,18),LHSmatrix9(x,19),LHSmatrix9(x,20),1-LHSmatrix9(x,17)-LHSmatrix9(x,18)-LHSmatrix9(x,19)-LHSmatrix9(x,20)],[]);
+    [t,y10] = ode15s(@(t,y10)f(t,y10,LHSmatrix10,x),tspan,[LHSmatrix10(x,17),LHSmatrix10(x,18),LHSmatrix10(x,19),LHSmatrix10(x,20),1-LHSmatrix10(x,17)-LHSmatrix10(x,18)-LHSmatrix10(x,19)-LHSmatrix10(x,20)],[]);
+    [t,y11] = ode15s(@(t,y11)f(t,y11,LHSmatrix11,x),tspan,[LHSmatrix11(x,17),LHSmatrix11(x,18),LHSmatrix11(x,19),LHSmatrix11(x,20),1-LHSmatrix11(x,17)-LHSmatrix11(x,18)-LHSmatrix11(x,19)-LHSmatrix11(x,20)],[]);
+    [t,y12] = ode15s(@(t,y12)f(t,y12,LHSmatrix12,x),tspan,[LHSmatrix12(x,17),LHSmatrix12(x,18),LHSmatrix12(x,19),LHSmatrix12(x,20),1-LHSmatrix12(x,17)-LHSmatrix12(x,18)-LHSmatrix12(x,19)-LHSmatrix12(x,20)],[]);
+    [t,y13] = ode15s(@(t,y13)f(t,y13,LHSmatrix13,x),tspan,[LHSmatrix13(x,17),LHSmatrix13(x,18),LHSmatrix13(x,19),LHSmatrix13(x,20),1-LHSmatrix13(x,17)-LHSmatrix13(x,18)-LHSmatrix13(x,19)-LHSmatrix13(x,20)],[]);
+    [t,y14] = ode15s(@(t,y14)f(t,y14,LHSmatrix14,x),tspan,[LHSmatrix14(x,17),LHSmatrix14(x,18),LHSmatrix14(x,19),LHSmatrix14(x,20),1-LHSmatrix14(x,17)-LHSmatrix14(x,18)-LHSmatrix14(x,19)-LHSmatrix14(x,20)],[]);
+    [t,y15] = ode15s(@(t,y15)f(t,y15,LHSmatrix15,x),tspan,[LHSmatrix15(x,17),LHSmatrix15(x,18),LHSmatrix15(x,19),LHSmatrix15(x,20),1-LHSmatrix15(x,17)-LHSmatrix15(x,18)-LHSmatrix15(x,19)-LHSmatrix15(x,20)],[]);
+    [t,y16] = ode15s(@(t,y16)f(t,y16,LHSmatrix16,x),tspan,[LHSmatrix16(x,17),LHSmatrix16(x,18),LHSmatrix16(x,19),LHSmatrix16(x,20),1-LHSmatrix16(x,17)-LHSmatrix16(x,18)-LHSmatrix16(x,19)-LHSmatrix16(x,20)],[]);
+    [t,y17] = ode15s(@(t,y17)f(t,y17,LHSmatrix17,x),tspan,[LHSmatrix17(x,17),LHSmatrix17(x,18),LHSmatrix17(x,19),LHSmatrix17(x,20),1-LHSmatrix17(x,17)-LHSmatrix17(x,18)-LHSmatrix17(x,19)-LHSmatrix17(x,20)],[]);
+    [t,y18] = ode15s(@(t,y18)f(t,y18,LHSmatrix18,x),tspan,[LHSmatrix18(x,17),LHSmatrix18(x,18),LHSmatrix18(x,19),LHSmatrix18(x,20),1-LHSmatrix18(x,17)-LHSmatrix18(x,18)-LHSmatrix18(x,19)-LHSmatrix18(x,20)],[]);
+    [t,y19] = ode15s(@(t,y19)f(t,y19,LHSmatrix19,x),tspan,[LHSmatrix19(x,17),LHSmatrix19(x,18),LHSmatrix19(x,19),LHSmatrix19(x,20),1-LHSmatrix19(x,17)-LHSmatrix19(x,18)-LHSmatrix19(x,19)-LHSmatrix19(x,20)],[]);
+    [t,y20] = ode15s(@(t,y20)f(t,y20,LHSmatrix20,x),tspan,[LHSmatrix20(x,17),LHSmatrix20(x,18),LHSmatrix20(x,19),LHSmatrix20(x,20),1-LHSmatrix20(x,17)-LHSmatrix20(x,18)-LHSmatrix20(x,19)-LHSmatrix20(x,20)],[]);
+    
     
      %store results of each [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,y0,[]);
-     
+     %HOW ARE THESE W# OUTPUTS ONLY FOR time 0 through 6, shouldn't they be for
+     %each row of LHSmatrix (each set of parameters)? How does S_lhs1 get
+     %different values of W1(timepoints+1,1) for each x?
      W1 = [t y1]; % [time y]
      W2 = [t y2];
      W3 = [t y3];
@@ -521,8 +683,10 @@ for x=1:nsample %Run solution x times choosing different values, represents each
      W14 = [t y14]; 
      W15 = [t y15]; 
      W16 = [t y16]; 
-   
-     
+     W17 = [t y17];
+     W18 = [t y18];
+     W19 = [t y19];
+     W20 = [t y20];
    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -637,8 +801,33 @@ for x=1:nsample %Run solution x times choosing different values, represents each
      A_lhs16(:,x)=W16(time_points+1,4);
      H_lhs16(:,x)=W16(time_points+1,5);
      R_lhs16(:,x)=W16(time_points+1,6);
+     
+     S_lhs17(:,x)=W17(time_points+1,2);
+     P_lhs17(:,x)=W17(time_points+1,3);
+     A_lhs17(:,x)=W17(time_points+1,4);
+     H_lhs17(:,x)=W17(time_points+1,5);
+     R_lhs17(:,x)=W17(time_points+1,6);
+     
+     S_lhs18(:,x)=W18(time_points+1,2);
+     P_lhs18(:,x)=W18(time_points+1,3);
+     A_lhs18(:,x)=W18(time_points+1,4);
+     H_lhs18(:,x)=W18(time_points+1,5);
+     R_lhs18(:,x)=W18(time_points+1,6);
+     
+     S_lhs19(:,x)=W19(time_points+1,2);
+     P_lhs19(:,x)=W19(time_points+1,3);
+     A_lhs19(:,x)=W19(time_points+1,4);
+     H_lhs19(:,x)=W19(time_points+1,5);
+     R_lhs19(:,x)=W19(time_points+1,6);
     
+     
+     S_lhs20(:,x)=W20(time_points+1,2);
+     P_lhs20(:,x)=W20(time_points+1,3);
+     A_lhs20(:,x)=W20(time_points+1,4);
+     H_lhs20(:,x)=W20(time_points+1,5);
+     R_lhs20(:,x)=W20(time_points+1,6);
     
+   
 end
 %% Save the workspace
   
@@ -663,12 +852,201 @@ end
 [prcc14 sign14 sign_label14] = PRCC_Heroin(LHSmatrix14,H_lhs14,1:length(time_points),PRCC_var,alpha);
 [prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,H_lhs15,1:length(time_points),PRCC_var,alpha);
 [prcc16 sign16 sign_label16] = PRCC_Heroin(LHSmatrix16,H_lhs16,1:length(time_points),PRCC_var,alpha);
+[prcc17 sign17 sign_label17] = PRCC_Heroin(LHSmatrix17,H_lhs17,1:length(time_points),PRCC_var,alpha);
+[prcc18 sign18 sign_label18] = PRCC_Heroin(LHSmatrix17,H_lhs18,1:length(time_points),PRCC_var,alpha);
+[prcc19 sign19 sign_label19] = PRCC_Heroin(LHSmatrix17,H_lhs19,1:length(time_points),PRCC_var,alpha);
+[prcc20 sign20 sign_label20] = PRCC_Heroin(LHSmatrix17,H_lhs20,1:length(time_points),PRCC_var,alpha);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Monotonicity curves for opioid addicted individuals at a particular time point (last time step)
-figure(1);
+%% Monotonicity curves 
+
+%%Are these okay with breaks? They changed once I added on initial conditions, should
+%%that happen? 
+ 
+ figure(1);
+ subplot(331)
+ plot(LHSmatrix1(:,1),S_lhs1,'o') %(i.e. first column of LHSmatrix1 is m increasing as it goes down, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
+ xlabel('m')
+ ylabel('Susceptible Individuals')
+ subplot(332)
+ plot(LHSmatrix2(:,2),S_lhs2,'o')
+ xlabel('beta_A')
+ ylabel('Susceptible Individuals')
+ subplot(333)
+ plot(LHSmatrix3(:,3),S_lhs3,'o')
+ xlabel('beta_P')
+ ylabel('Susceptible Individuals')
+subplot(334)
+plot(LHSmatrix4(:,4),S_lhs4,'o')
+xlabel('theta_1')
+ylabel('Susceptible Individuals')
+subplot(335)
+plot(LHSmatrix5(:,5),S_lhs5,'o')
+xlabel('epsilon')
+ylabel('Susceptible Individuals')
+subplot(336)
+plot(LHSmatrix6(:,6),S_lhs6,'o')
+xlabel('gamma')
+ylabel('Susceptible Individuals')
+subplot(337)
+plot(LHSmatrix7(:,7),S_lhs7,'o')
+xlabel('sigma')
+ylabel('Susceptible Individuals')
+subplot(338)
+plot(LHSmatrix8(:,8),S_lhs8,'o')
+xlabel('mu')
+ylabel('Susceptible Individuals')
+subplot(339)
+plot(LHSmatrix9(:,9),S_lhs9,'o')
+xlabel('mu_A')
+ylabel('Susceptible Individuals')
+
+figure(2);
+subplot(331)
+ plot(LHSmatrix10(:,10),S_lhs10,'o')
+ xlabel('mu_H')
+ ylabel('Susceptible Individuals')
+ subplot(332)
+ plot(LHSmatrix11(:,11),S_lhs11,'o')
+ xlabel('theta_2')
+ ylabel('Susceptible Individuals')
+ subplot(333)
+ plot(LHSmatrix12(:,12),S_lhs12,'o')
+ xlabel('zeta')
+ ylabel('Susceptible Individuals')
+ subplot(334)
+ plot(LHSmatrix13(:,13),S_lhs13,'o')
+ xlabel('theta_3')
+ ylabel('Susceptible Individuals')
+ subplot(335)
+ plot(LHSmatrix14(:,14),S_lhs14,'o')
+ xlabel('nu')
+ ylabel('Susceptible Individuals')
+ subplot(336)
+ plot(LHSmatrix15(:,15),S_lhs15,'o')
+ %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
+ xlabel('omega')
+ ylabel('Susceptible Individuals')
+ subplot(337)
+ plot(LHSmatrix16(:,16),S_lhs16,'o')
+ xlabel('b')
+ ylabel('Susceptible Individuals')
+ 
+ figure(3);
+ subplot(221)
+ plot(LHSmatrix17(:,17),S_lhs17,'o')
+ xlabel('P0')
+ ylabel('Susceptible Individuals')
+ subplot(222)
+ plot(LHSmatrix18(:,18),S_lhs18,'o')
+ xlabel('A0')
+ ylabel('Susceptible Individuals')
+ subplot(223)
+ plot(LHSmatrix19(:,19),S_lhs19,'o')
+ xlabel('H0')
+ ylabel('Susceptible Individuals')
+ subplot(224)
+ plot(LHSmatrix20(:,20),S_lhs20,'o')
+ xlabel('R0')
+ ylabel('Susceptible Individuals')
+ 
+ 
+ %Monotonicity curves for prescription opioids users at last time step 
+ 
+  
+ figure(4);
+ subplot(331)
+ plot(LHSmatrix1(:,1),P_lhs1,'o')
+ xlabel('m')
+ ylabel('Prescription opioid users')
+ subplot(332)
+ plot(LHSmatrix2(:,2),P_lhs2,'o')
+ xlabel('beta_A')
+ ylabel('Prescription opioid users')
+ subplot(333)
+ plot(LHSmatrix3(:,3),P_lhs3,'o')
+ xlabel('beta_P')
+ ylabel('Prescription opioid users')
+subplot(334)
+plot(LHSmatrix4(:,4),P_lhs4,'o')
+xlabel('theta_1')
+ylabel('Prescription opioid users')
+subplot(335)
+plot(LHSmatrix5(:,5),P_lhs5,'o')
+xlabel('epsilon')
+ylabel('Prescription opioid users')
+subplot(336)
+plot(LHSmatrix6(:,6),P_lhs6,'o')
+xlabel('gamma')
+ylabel('Prescription opioid users')
+subplot(337)
+plot(LHSmatrix7(:,7),P_lhs7,'o')
+xlabel('sigma')
+ylabel('Prescription opioid users')
+subplot(338)
+plot(LHSmatrix8(:,8),P_lhs8,'o')
+xlabel('mu')
+ylabel('Prescription opioid users')
+subplot(339)
+plot(LHSmatrix9(:,9),P_lhs9,'o')
+xlabel('mu_A')
+ylabel('Prescription opioid users') 
+
+figure(5);
+subplot(331)
+ plot(LHSmatrix10(:,10),P_lhs10,'o')
+ xlabel('mu_H')
+ ylabel('Prescription opioid users')
+ subplot(332)
+ plot(LHSmatrix11(:,11),P_lhs11,'o')
+ xlabel('theta_2')
+ ylabel('Prescription opioid users')
+ subplot(333)
+ plot(LHSmatrix12(:,12),P_lhs12,'o')
+ xlabel('zeta')
+ ylabel('Prescription opioid users')
+ subplot(334)
+ plot(LHSmatrix13(:,13),P_lhs13,'o')
+ xlabel('theta_3')
+ ylabel('Prescription opioid users')
+ subplot(335)
+ plot(LHSmatrix14(:,14),P_lhs14,'o')
+ xlabel('nu')
+ ylabel('Prescription opioid users')
+ subplot(336)
+ plot(LHSmatrix15(:,15),P_lhs15,'o')
+ %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
+ xlabel('omega')
+ ylabel('Prescription opioid users') 
+ subplot(337)
+ plot(LHSmatrix16(:,16),P_lhs16,'o')
+ xlabel('b')
+ ylabel('Prescription opioid users')
+
+ figure(6);
+ subplot(221)
+ plot(LHSmatrix17(:,17),P_lhs17,'o')
+ xlabel('P0')
+ ylabel('Prescription opioid users')
+ subplot(222)
+ plot(LHSmatrix18(:,18),P_lhs18,'o')
+ xlabel('A0')
+ ylabel('Prescription opioid users')
+ subplot(223)
+ plot(LHSmatrix19(:,19),P_lhs19,'o')
+ xlabel('H0')
+ ylabel('Prescription opioid users')
+ subplot(224)
+ plot(LHSmatrix20(:,20),P_lhs20,'o')
+ xlabel('R0')
+ ylabel('Prescription opioid users')
+ 
+ 
+ %Monotonicity curves for prescription addicted individuals at last time step 
+ 
+ figure(7);
  subplot(331)
  %take first column of LHSmatrix1 because those are the values m is varying over to produce the output in A_lhs1
  plot(LHSmatrix1(:,1),A_lhs1,'o') 
@@ -707,7 +1085,7 @@ plot(LHSmatrix9(:,9),A_lhs9,'o')
 xlabel('mu_A')
 ylabel('Opioid addicted') 
 
-figure(2);
+figure(8);
 subplot(331)
  plot(LHSmatrix10(:,10),A_lhs10,'o')
  xlabel('mu_H')
@@ -728,19 +1106,38 @@ subplot(331)
  plot(LHSmatrix14(:,14),A_lhs14,'o')
  xlabel('nu')
  ylabel('Opioid addicted')
- subplot(337)
+ subplot(336)
  plot(LHSmatrix15(:,15),A_lhs15,'o')
  xlabel('omega')
  ylabel('Opioid addicted')
- subplot(338)
+ subplot(337)
  plot(LHSmatrix16(:,16),A_lhs16,'o')
  xlabel('b')
  ylabel('Opioid addicted')
-
+ 
+ 
+ figure(9);
+ subplot(221)
+ plot(LHSmatrix17(:,17),A_lhs17,'o')
+ xlabel('P0')
+ ylabel('Opioid addicted')
+ subplot(222)
+ plot(LHSmatrix18(:,18),A_lhs18,'o')
+ xlabel('A0')
+ ylabel('Opioid addicted')
+ subplot(223)
+ plot(LHSmatrix19(:,19),A_lhs19,'o')
+ xlabel('H0')
+ ylabel('Opioid addicted')
+ subplot(224)
+ plot(LHSmatrix20(:,20),A_lhs20,'o')
+ xlabel('R0')
+ ylabel('Opioid addicted')
+ 
  
  %Monotonicity curves for heroin addicted individuals at last time step 
  
- figure(3);
+ figure(10);
  subplot(331)
  plot(LHSmatrix1(:,1),H_lhs1,'o')
  xlabel('m')
@@ -778,7 +1175,7 @@ plot(LHSmatrix9(:,9),H_lhs9,'o')
 xlabel('mu_A')
 ylabel('Heroin addicted') 
 
-figure(4);
+figure(11);
 subplot(331)
  plot(LHSmatrix10(:,10),H_lhs10,'o')
  xlabel('mu_H')
@@ -799,164 +1196,39 @@ subplot(331)
  plot(LHSmatrix14(:,14),H_lhs14,'o')
  xlabel('nu')
  ylabel('Heroin addicted')
- subplot(337)
+ subplot(336)
  plot(LHSmatrix15(:,15),H_lhs15,'o')
  %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
  xlabel('omega')
  ylabel('Heroin addicted') 
- subplot(338)
+ subplot(337)
  plot(LHSmatrix16(:,16),H_lhs16,'o')
  xlabel('b')
  ylabel('Heroin addicted')
 
 
- 
- figure(5);
- subplot(331)
- plot(LHSmatrix1(:,1),S_lhs1,'o')
- xlabel('m')
- ylabel('Susceptible Individuals')
- subplot(332)
- plot(LHSmatrix2(:,2),S_lhs2,'o')
- xlabel('beta_A')
- ylabel('Susceptible Individuals')
- subplot(333)
- plot(LHSmatrix3(:,3),S_lhs3,'o')
- xlabel('beta_P')
- ylabel('Susceptible Individuals')
-subplot(334)
-plot(LHSmatrix4(:,4),S_lhs4,'o')
-xlabel('theta_1')
-ylabel('Susceptible Individuals')
-subplot(335)
-plot(LHSmatrix5(:,5),S_lhs5,'o')
-xlabel('epsilon')
-ylabel('Susceptible Individuals')
-subplot(336)
-plot(LHSmatrix6(:,6),S_lhs6,'o')
-xlabel('gamma')
-ylabel('Susceptible Individuals')
-subplot(337)
-plot(LHSmatrix7(:,7),S_lhs7,'o')
-xlabel('sigma')
-ylabel('Susceptible Individuals')
-subplot(338)
-plot(LHSmatrix8(:,8),S_lhs8,'o')
-xlabel('mu')
-ylabel('Susceptible Individuals')
-subplot(339)
-plot(LHSmatrix9(:,9),S_lhs9,'o')
-xlabel('mu_A')
-ylabel('Susceptible Individuals')
-
-figure(6);
-subplot(331)
- plot(LHSmatrix10(:,10),S_lhs10,'o')
- xlabel('mu_H')
- ylabel('Susceptible Individuals')
- subplot(332)
- plot(LHSmatrix11(:,11),S_lhs11,'o')
- xlabel('theta_2')
- ylabel('Susceptible Individuals')
- subplot(333)
- plot(LHSmatrix12(:,12),S_lhs12,'o')
- xlabel('zeta')
- ylabel('Susceptible Individuals')
- subplot(334)
- plot(LHSmatrix13(:,13),S_lhs13,'o')
- xlabel('theta_3')
- ylabel('Susceptible Individuals')
- subplot(335)
- plot(LHSmatrix14(:,14),S_lhs14,'o')
- xlabel('nu')
- ylabel('Susceptible Individuals')
- subplot(337)
- plot(LHSmatrix15(:,15),S_lhs15,'o')
- %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
- xlabel('omega')
- ylabel('Susceptible Individuals')
- subplot(338)
- plot(LHSmatrix16(:,16),S_lhs16,'o')
- xlabel('b')
- ylabel('Susceptible Individuals')
-
+ figure(12);
+ subplot(221)
+ plot(LHSmatrix17(:,17),H_lhs17,'o')
+ xlabel('P0')
+ ylabel('Heroin addicted')
+ subplot(222)
+ plot(LHSmatrix18(:,18),H_lhs18,'o')
+ xlabel('A0')
+ ylabel('Heroin addicted')
+ subplot(223)
+ plot(LHSmatrix19(:,19),H_lhs19,'o')
+ xlabel('H0')
+ ylabel('Heroin addicted')
+ subplot(224)
+ plot(LHSmatrix20(:,20),H_lhs20,'o')
+ xlabel('R0')
+ ylabel('Heroin addicted')
  
  
- 
- figure(7);
- subplot(331)
- plot(LHSmatrix1(:,1),P_lhs1,'o')
- xlabel('m')
- ylabel('Prescription opioid users')
- subplot(332)
- plot(LHSmatrix2(:,2),P_lhs2,'o')
- xlabel('beta_A')
- ylabel('Prescription opioid users')
- subplot(333)
- plot(LHSmatrix3(:,3),P_lhs3,'o')
- xlabel('beta_P')
- ylabel('Prescription opioid users')
-subplot(334)
-plot(LHSmatrix4(:,4),P_lhs4,'o')
-xlabel('theta_1')
-ylabel('Prescription opioid users')
-subplot(335)
-plot(LHSmatrix5(:,5),P_lhs5,'o')
-xlabel('epsilon')
-ylabel('Prescription opioid users')
-subplot(336)
-plot(LHSmatrix6(:,6),P_lhs6,'o')
-xlabel('gamma')
-ylabel('Prescription opioid users')
-subplot(337)
-plot(LHSmatrix7(:,7),P_lhs7,'o')
-xlabel('sigma')
-ylabel('Prescription opioid users')
-subplot(338)
-plot(LHSmatrix8(:,8),P_lhs8,'o')
-xlabel('mu')
-ylabel('Prescription opioid users')
-subplot(339)
-plot(LHSmatrix9(:,9),P_lhs9,'o')
-xlabel('mu_A')
-ylabel('Prescription opioid users') 
-
-figure(8);
-subplot(331)
- plot(LHSmatrix10(:,10),P_lhs10,'o')
- xlabel('mu_H')
- ylabel('Prescription opioid users')
- subplot(332)
- plot(LHSmatrix11(:,11),P_lhs11,'o')
- xlabel('theta_2')
- ylabel('Prescription opioid users')
- subplot(333)
- plot(LHSmatrix12(:,12),P_lhs12,'o')
- xlabel('zeta')
- ylabel('Prescription opioid users')
- subplot(334)
- plot(LHSmatrix13(:,13),P_lhs13,'o')
- xlabel('theta_3')
- ylabel('Prescription opioid users')
- subplot(335)
- plot(LHSmatrix14(:,14),P_lhs14,'o')
- xlabel('nu')
- ylabel('Prescription opioid users')
- subplot(337)
- plot(LHSmatrix15(:,15),P_lhs15,'o')
- %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
- xlabel('omega')
- ylabel('Prescription opioid users') 
- subplot(338)
- plot(LHSmatrix16(:,16),P_lhs16,'o')
- xlabel('b')
- ylabel('Prescription opioid users')
- 
- 
- 
- 
- 
- figure(9);
+%Monotonicity curves for stably recovered individuals at last time step 
+   
+ figure(13);
  subplot(331)
  plot(LHSmatrix1(:,1),R_lhs1,'o')
  xlabel('m')
@@ -994,7 +1266,7 @@ plot(LHSmatrix9(:,9),R_lhs9,'o')
 xlabel('mu_A')
 ylabel('Stable Recovereds')
 
-figure(10);
+figure(14);
 subplot(331)
  plot(LHSmatrix10(:,10),R_lhs10,'o')
  xlabel('mu_H')
@@ -1015,17 +1287,33 @@ subplot(331)
  plot(LHSmatrix14(:,14),R_lhs14,'o')
  xlabel('nu')
  ylabel('Stable Recovereds')
- subplot(337)
+ subplot(336)
  plot(LHSmatrix15(:,15),R_lhs15,'o')
  %set(gca,'yticklabel',num2str(get(gca,'ytick')','%.9f'))
  xlabel('omega')
  ylabel('Stable Recovereds')
- subplot(338)
+ subplot(337)
  plot(LHSmatrix16(:,16),R_lhs16,'o')
  xlabel('b')
  ylabel('Stable Recovereds')
 
  
  
- 
+ figure(15);
+ subplot(221)
+ plot(LHSmatrix17(:,17),R_lhs17,'o')
+ xlabel('P0')
+ ylabel('Stable Recovereds')
+ subplot(222)
+ plot(LHSmatrix18(:,18),R_lhs18,'o')
+ xlabel('A0')
+ ylabel('Stable Recovereds')
+ subplot(223)
+ plot(LHSmatrix19(:,19),R_lhs19,'o')
+ xlabel('H0')
+ ylabel('Stable Recovereds')
+ subplot(224)
+ plot(LHSmatrix20(:,20),R_lhs20,'o')
+ xlabel('R0')
+ ylabel('Stable Recovereds')
  

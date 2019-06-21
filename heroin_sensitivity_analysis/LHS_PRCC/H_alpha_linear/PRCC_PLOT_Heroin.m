@@ -35,16 +35,16 @@ end
 
 AA(1,:)={'Variable'          'PRCC'              'p-value'};
 
-figure(11);
+figure(16);
 set(gcf, 'Position',  [1, 1, 1700, 800])
 
-for i=1:16
+for i=1:20
     c4=['r',num2str(i)];
     c5=['rx',num2str(i)];
     [r p]=corr(eval(c4),eval(c5));
     a=['[PRCC , p-value] = ' '[' num2str(r) ' , '  num2str(p) '].'];% ' Time point=' num2str(s-1)];
     %figure,
-    subplot(4,4,i)
+    subplot(4,5,i)
     plot((eval(c4)),(eval(c5)),'.'),title(a),...
             legend(PRCC_var{i}),xlabel(PRCC_var{i}),ylabel(y_var);
 AA(i+1,:)={PRCC_var{i} num2str(r) num2str(p)};

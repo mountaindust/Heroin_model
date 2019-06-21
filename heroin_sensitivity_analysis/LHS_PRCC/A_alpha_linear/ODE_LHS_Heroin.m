@@ -19,13 +19,12 @@ theta_3= LHSmatrix(x,13);
 nu= LHSmatrix(x,14);
 omega= LHSmatrix(x,15);
 b= LHSmatrix(x,16);
+P0=LHSmatrix(x,17);
+A0=LHSmatrix(x,18);
+H0=LHSmatrix(x,19);
+R0=LHSmatrix(x,20);
+S0=1-P0-A0-H0-R0;
 
-
-S0=0.9197;
-P0=0.0710;
-A0=0.00760;
-H0=0.00121;
-R0=0.000443;
 
      
 %% Distemper model for shelter

@@ -1242,16 +1242,104 @@ Moreover, sensitivity analysis provides a way to quantify how much the uncertain
 
 Although a minimum of $N=17+1=18$ sample points for the alpha linear case is required, the sample size must be big enough for which a similar set of parameters are deemed important for a certain output with consecutive runs. We use this standard for each of the results shown below, with the number of samples specifically stated for each. 
 
-Below are the monotonicity plots for alpha linear for FILL IN samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
-
-\textcolor{red}{Fill in?}
+Below are the monotonicity plots for alpha linear for $N=400$ samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
 
 
-Below are the monotonicity plots for alpha piecewise linear for FILL IN samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
+\begin{center}
+\includegraphics[scale=0.5]{S1_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{S2_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{S3_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P1_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P2_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P3_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A1_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A2_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A3_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H1_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H2_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H3_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R1_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R2_monotonicity_linear.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R3_monotonicity_linear.pdf}
+\end{center}
 
 
-\textcolor{red}{Fill in?}
+Below are the monotonicity plots for alpha piecewise linear for $N=400$ samples; we note that although some plots may seem non-monotonic, they are actually flat due to the scale on the values. 
 
+
+\begin{center}
+\includegraphics[scale=0.5]{S1_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{S2_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{S3_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P1_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P2_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{P3_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A1_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A2_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{A3_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H1_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H2_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{H3_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R1_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R2_monotonicity_piecewise.pdf}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{R3_monotonicity_piecewise.pdf}
+\end{center}
 
 We set the ranges for the parameters to be +/- 50\% of the baseline parameter values, which result in these ranges for alpha linear: \\
 
@@ -1352,7 +1440,7 @@ $H_0$ & [0.000437,0.00131]  \\
 
 
 
-\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear with SOME NUMBER OF samples}
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear with 200 samples}
 \begin{center}
 \begin{tabular}{c  c  c }
 
@@ -1361,73 +1449,74 @@ $H_0$ & [0.000437,0.00131]  \\
 {Input} & \shortstack{PRCC for proportion of \\ A class at final time} & \shortstack{$p$-value for proportion of \\ A class at final time}  \\ [0.4ex]
  \hline
 
-$m$ & &  \\
+$m$ & -0.011535 & 0.8722  \\
 
 
 
-$b$ &   &  \\
-
-
-
-
-$\beta_A$& &   \\
-
-
-
-$\beta_P$ &  &   \\
-
-
-
-$\theta_1$ & &    \\
+$\beta_A$ & 0.099737 & 0.15997 \\
 
 
 
 
-$\varepsilon$ &  & \\
+$\beta_P$ & -0.0938 & 0.18646  \\
 
 
 
-$\gamma$ &  &   \\
+$\theta_1$ & 0.10841 & 0.12651   \\
 
 
 
 
-$\theta_2$ &  &  \\
-
-
- $\sigma$ &   &   \\
+$\varepsilon$ &  -0.29203 &2.7188e-05 \\
 
 
 
-$\zeta$ & &  \\
+$\gamma$ & 0.34199 &  7.1776e-07 \\
+ $\sigma$ & -0.34694  & 4.832e-07  \\
+  $\mu$ & -0.11397  & 0.10808  \\
+   $\mu_A$ & -0.060767  & 0.39267  \\
+    $\mu_H$ & 0.39758 & 5.5605e-09 \\
+    
 
 
 
-$\theta_3$ &  &  \\
+$\theta_2$ & 0.020953 & 0.76838  \\
 
 
 
-$\nu$ &  &   \\
+
+
+$\zeta$ & -0.91537 & 3.6041e-80  \\
 
 
 
-$P_0$ &   &  \\
+$\theta_3$ & -0.95001 & 4.81e-102 \\
 
 
 
-$A_0$ & &\\
+$\nu$ & 0.08866 & 0.21187  \\
+
+
+$b$ & 0.41521&  9.7498e-10\\
+
+
+$\omega$ & 0.023761  & 0.7384  \\
+
+$P_0$ & 0.2641   & 0.0001576 \\
 
 
 
-$H_0$ &  &   \\
+$A_0$ &-0.045736  & 0.52017\\
 
 
 
-$R_0$ &  &   \\
+$H_0$ & 0.8625  &  1.7749e-60 \\
 
 
 
-$S_0$ &   & \\
+$R_0$ &  -0.93392 & 2.1118e-90   \\
+
+
 
 
 \hline
@@ -1437,7 +1526,7 @@ $S_0$ &   & \\
 \end{center}
 
 
-\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear for SOME NUMBER OF SAMPLES}
+\captionof{table}{LHS/PRCC Sensitivity Analysis Results for alpha linear for 400 samples}
 \begin{center}
 \begin{tabular}{c  c  c }
 
@@ -1446,73 +1535,73 @@ $S_0$ &   & \\
 {Input} & \shortstack{PRCC for proportion of \\ H class at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
  \hline
 
-$m$ & &  \\
-
-
-
-$b$ &   &  \\
+$m$ & 0.0029174 &  0.95362\\
 
 
 
 
-$\beta_A$& &   \\
+
+
+$\beta_A$& -0.071717 & 0.15223  \\
 
 
 
-$\beta_P$ &  &   \\
+$\beta_P$ &  0.076742 & 0.12545   \\
 
 
 
-$\theta_1$ & &    \\
-
-
-
-
-$\varepsilon$ &  & \\
-
-
-
-$\gamma$ &  &   \\
+$\theta_1$ & 0.043042 &  0.39059   \\
 
 
 
 
-$\theta_2$ &  &  \\
-
-
- $\sigma$ &   &   \\
+$\varepsilon$ & -0.0061562  & 0.90231 \\
 
 
 
-$\zeta$ & &  \\
+$\gamma$ & -0.024102 & 0.6308   \\
+
+ $\sigma$ & 0.99231   &  0  \\
+ 
+ $\mu$ & -0.40926  &  1.386e-17  \\
+  
+ $\mu_A$ & -0.019459   &  0.69802  \\
+   
+ $\mu_H$ & -0.87371   &  1.2531e-126\\
+    
+
+$\theta_2$ & -0.059779 & 0.2329  \\
+
+
+$\zeta$ & 0.0013806 & 0.97804  \\
 
 
 
-$\theta_3$ &  &  \\
+$\theta_3$ &  0.031708 & 0.52717 \\
+
+
+$\nu$ & -0.22839  & 3.9385e-06  \\
+
+$b$ & -0.013039   & 0.79489  \\
+
+
+$\omega$ & 0.11267  & 0.024221 \\
+
+$P_0$ & -0.58071   &  1.94e-37\\
 
 
 
-$\nu$ &  &   \\
+$A_0$ & -0.033281 & 0.50686\\
 
 
 
-$P_0$ &   &  \\
+$H_0$ &  0.0063497 &  0.89926 \\
 
 
 
-$A_0$ & &\\
+$R_0$ & 0.9417  & 2.2302e-190 \\
 
 
-
-$H_0$ &  &   \\
-
-
-
-$R_0$ &  &   \\
-
-
-
-$S_0$ &   & \\
 
 
 \hline
@@ -1703,71 +1792,70 @@ $R_0$ & -0.90818 &   9.91e-115\\
 
 
 
-{Input} & \shortstack{PRCC for proportion of \\ Hclass at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
+{Input} & \shortstack{PRCC for proportion of \\ H class at final time} & \shortstack{$p$-value for proportion of \\ H class at final time}  \\ [0.4ex]
  \hline
 
-$m$ & -0.046178 & 0.35697 \\
+$m$ & -0.072153 & 0.14975 \\
+
+
+
+$\beta_A$& 0.094057 & 0.060188  \\
+
+
+
+$\beta_P$ & -0.038181 & 0.44635 \\
+
+
+
+$\theta_1$ & 0.023331 & 0.64178  \\
 
 
 
 
-
-
-$\beta_A$&0.050641 & 0.31235   \\
-
-
-
-$\beta_P$ & 0.017772 & 0.72308  \\
+$\varepsilon$ & -0.021226  & 0.67212 \\
 
 
 
-$\theta_1$ & -0.044235 & 0.37758   \\
+$\gamma$ &  -0.0072294 &  0.88539 \\
+
+ $\sigma$ &0.99131&  0 \\
+
+$\mu$ & -0.32236  & 4.0009e-11 \\
+
+$\mu_A$ & 0.046263  & 0.35608 \\
+
+$\mu_H$ & -0.84869 & 3.7468e-112 \\
+
+$\theta_2$ &-0.018376  & 0.71407  \\
+
+
+$\zeta$ & 0.00073979 &  0.98823 \\
+
+
+$\theta_3$ & 0.084117  & 0.092945  \\
+
+
+$\nu$ &-0.8352& 2.1231e-105  \\
+
+$b$ & 0.03716&0.45861 \\
+
+$c$ &  -0.0093803 & 0.85164\\
+
+$\omega$ &  0.044832 & 0.37117 \\
+
+$P_0$ & -0.64294  & 4.9687e-48 \\
 
 
 
-
-$\varepsilon$ & -0.0016514  & 0.97373 \\
-
-
-
-$\gamma$ &  0.025731 &  0.60788 \\
-
- $\sigma$ & 0.99328  &  0 \\
-
-$\mu$ & -0.47589   & 5.3378e-24 \\
-
-$\mu_A$ & 0.039706  & 0.4284 \\
-
-$\mu_H$ & -0.88904 & 4.1301e-137 \\
-
-$\theta_2$ & 0.010764  & 0.83007  \\
-
-
-$\zeta$ &-0.011441 &  0.81956\\
-
-
-$\theta_3$ & 0.03165  & 0.52793  \\
-
-
-$\nu$ & -0.86025 & 1.7159e-118  \\
-
-$b$ &  0.061172 & 0.22218 \\
-
-$c$ &  0.044832 & 0.37117 \\
-
-$P_0$ & -0.69442  & 7.4924e-59 \\
+$A_0$ & -0.032792& 0.51314\\
 
 
 
-$A_0$ &-0.0574 & 0.25206\\
+$H_0$ &  0.066229 &  0.18621 \\
 
 
 
-$H_0$ &  0.00080693 & 0.98716  \\
-
-
-
-$R_0$ & 0.9519  & 1.5038e-206  \\
+$R_0$ & 0.93811  & 2.2638e-185 \\
 
 
 
@@ -1926,7 +2014,7 @@ Below are the ranges we chose for each parameter, which are +/-50\% of the basel
 \begin{center}
 \includegraphics[scale=0.5]{100000_6-06_16-1134.pdf}
 
-Figure 12: Sobol sensitivity results-classes at the final time (t=6 years representing end of 2018) for alpha linearly (piecewise) dependent on time  
+Figure 12: Sobol sensitivity results-classes at the final time (t=6 years representing end of 2018) for alpha linearly piecewise dependent on time  
 \end{center}
 
 
@@ -2027,7 +2115,11 @@ $H_0$ & [0.000422,0.00126]   \\
 
 \end{center}
 
-\textcolor{red}{Edit: Comparing the sensitivity analyses between alpha linear and alpha piecewise linear, the main difference is seen in the parameter $m$ (alpha linear case was more sensitive to this parameter because it was the slope of alpha but in the alpha piecewise linear case, m was very very small and c was bigger, and that took the place of the more sensitive slope parameter). In both cases, the first-order index results are very similar to the total-order index results which suggests that there are not higher-order interactions occurring. \\
+The confidence intervals for each parameter corresponding to a certain population class is shown below:
+
+
+
+\textcolor{red}{Edit: Comparing the sensitivity analyses between alpha linear and alpha piecewise linear, the main difference is seen in the parameter $m$ (alpha linear case was more sensitive to this parameter because it was the slope of alpha but in the alpha piecewise linear case, m was one order of magnitude less negative than c, and that took the place of the more sensitive slope parameter). In both cases, the first-order index results are very similar to their respective total-order index results which suggests that there are not higher-order interactions occurring. Other differences to point out is that H is more sensitive to $\nu$ in the piecewise linear case, a small difference in the sensitivity of A and H to $\zeta$ and finally, slight differences are seen in the initial conditions.  \\
 We observe that the P class is most sensitive to $\varepsilon$ and $b$ in either case, which is advantageous from a control perspective as controlling how much is prescribed is more manageable than preventing individuals from getting addicted to prescription opioids.}
 %Add in sensitivity analysis results and confidence interval information
 %Total --take average of all interactions for plots?? \\
