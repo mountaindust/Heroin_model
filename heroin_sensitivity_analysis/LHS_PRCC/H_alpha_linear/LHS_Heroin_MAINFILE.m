@@ -607,9 +607,9 @@ LHSmatrix14 =[m_LHS14 beta_A_LHS14 beta_P_LHS14 theta_1_LHS14 epsilon_LHS14 gamm
 LHSmatrix15 =[m_LHS15 beta_A_LHS15 beta_P_LHS15 theta_1_LHS15 epsilon_LHS15 gamma_LHS15 sigma_LHS15 mu_LHS15 mu_A_LHS15 mu_H_LHS15 theta_2_LHS15 zeta_LHS15 theta_3_LHS15 nu_LHS15 omega_LHS15 b_LHS15 P0_LHS15 A0_LHS15 H0_LHS15 R0_LHS15]; 
 LHSmatrix16 =[m_LHS16 beta_A_LHS16 beta_P_LHS16 theta_1_LHS16 epsilon_LHS16 gamma_LHS16 sigma_LHS16 mu_LHS16 mu_A_LHS16 mu_H_LHS16 theta_2_LHS16 zeta_LHS16 theta_3_LHS16 nu_LHS16 omega_LHS16 b_LHS16 P0_LHS16 A0_LHS16 H0_LHS16 R0_LHS16];
 LHSmatrix17 =[m_LHS17 beta_A_LHS17 beta_P_LHS17 theta_1_LHS17 epsilon_LHS17 gamma_LHS17 sigma_LHS17 mu_LHS17 mu_A_LHS17 mu_H_LHS17 theta_2_LHS17 zeta_LHS17 theta_3_LHS17 nu_LHS17 omega_LHS17 b_LHS17 P0_LHS17 A0_LHS17 H0_LHS17 R0_LHS17];
-LHSmatrix18 =[m_LHS18 beta_A_LHS18 beta_P_LHS18 theta_1_LHS18 epsilon_LHS18 gamma_LHS18 sigma_LHS18 mu_LHS18 mu_A_LHS18 mu_H_LHS18 theta_2_LHS18 zeta_LHS18 theta_3_LHS18 nu_LHS18 omega_LHS17 b_LHS18 P0_LHS18 A0_LHS18 H0_LHS18 R0_LHS18];
-LHSmatrix19 =[m_LHS19 beta_A_LHS19 beta_P_LHS19 theta_1_LHS19 epsilon_LHS19 gamma_LHS19 sigma_LHS19 mu_LHS19 mu_A_LHS19 mu_H_LHS19 theta_2_LHS19 zeta_LHS19 theta_3_LHS19 nu_LHS19 omega_LHS17 b_LHS19 P0_LHS19 A0_LHS19 H0_LHS19 R0_LHS19];
-LHSmatrix20 =[m_LHS20 beta_A_LHS20 beta_P_LHS20 theta_1_LHS20 epsilon_LHS20 gamma_LHS20 sigma_LHS20 mu_LHS20 mu_A_LHS20 mu_H_LHS20 theta_2_LHS20 zeta_LHS20 theta_3_LHS20 nu_LHS20 omega_LHS17 b_LHS20 P0_LHS20 A0_LHS20 H0_LHS20 R0_LHS20];
+LHSmatrix18 =[m_LHS18 beta_A_LHS18 beta_P_LHS18 theta_1_LHS18 epsilon_LHS18 gamma_LHS18 sigma_LHS18 mu_LHS18 mu_A_LHS18 mu_H_LHS18 theta_2_LHS18 zeta_LHS18 theta_3_LHS18 nu_LHS18 omega_LHS18 b_LHS18 P0_LHS18 A0_LHS18 H0_LHS18 R0_LHS18];
+LHSmatrix19 =[m_LHS19 beta_A_LHS19 beta_P_LHS19 theta_1_LHS19 epsilon_LHS19 gamma_LHS19 sigma_LHS19 mu_LHS19 mu_A_LHS19 mu_H_LHS19 theta_2_LHS19 zeta_LHS19 theta_3_LHS19 nu_LHS19 omega_LHS19 b_LHS19 P0_LHS19 A0_LHS19 H0_LHS19 R0_LHS19];
+LHSmatrix20 =[m_LHS20 beta_A_LHS20 beta_P_LHS20 theta_1_LHS20 epsilon_LHS20 gamma_LHS20 sigma_LHS20 mu_LHS20 mu_A_LHS20 mu_H_LHS20 theta_2_LHS20 zeta_LHS20 theta_3_LHS20 nu_LHS20 omega_LHS20 b_LHS20 P0_LHS20 A0_LHS20 H0_LHS20 R0_LHS20];
 
 for x=1:nsample %Run solution x times choosing different values, represents each row of the matrix that's going to go through the ODE solver to produce the plots 
     f=@ODE_LHS_Heroin;
@@ -853,9 +853,9 @@ end
 [prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,H_lhs15,1:length(time_points),PRCC_var,alpha);
 [prcc16 sign16 sign_label16] = PRCC_Heroin(LHSmatrix16,H_lhs16,1:length(time_points),PRCC_var,alpha);
 [prcc17 sign17 sign_label17] = PRCC_Heroin(LHSmatrix17,H_lhs17,1:length(time_points),PRCC_var,alpha);
-[prcc18 sign18 sign_label18] = PRCC_Heroin(LHSmatrix17,H_lhs18,1:length(time_points),PRCC_var,alpha);
-[prcc19 sign19 sign_label19] = PRCC_Heroin(LHSmatrix17,H_lhs19,1:length(time_points),PRCC_var,alpha);
-[prcc20 sign20 sign_label20] = PRCC_Heroin(LHSmatrix17,H_lhs20,1:length(time_points),PRCC_var,alpha);
+[prcc18 sign18 sign_label18] = PRCC_Heroin(LHSmatrix18,H_lhs18,1:length(time_points),PRCC_var,alpha);
+[prcc19 sign19 sign_label19] = PRCC_Heroin(LHSmatrix19,H_lhs19,1:length(time_points),PRCC_var,alpha);
+[prcc20 sign20 sign_label20] = PRCC_Heroin(LHSmatrix20,H_lhs20,1:length(time_points),PRCC_var,alpha);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
