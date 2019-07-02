@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 400; 
+nsample = 100; 
 
 %% LHS MATRIX  %%
 
@@ -59,19 +59,16 @@ R0_LHS=LHS_Call_Heroin(R0-(R0/2),0,R0+(R0/2),0,nsample,'unif');
 %% LHS MATRIX and PARAMETER LABELS
  %storing vectors from above in matrix form 
   LHSmatrix  = [m_LHS,beta_A_LHS,beta_P_LHS,theta_1_LHS,epsilon_LHS,gamma_LHS,sigma_LHS,mu_LHS,mu_A_LHS,mu_H_LHS,theta_2_LHS,zeta_LHS,theta_3_LHS,nu_LHS,omega_LHS,b_LHS,c_LHS,P0_LHS,A0_LHS,H0_LHS,R0_LHS];
-  %QUESTION: HOW DO I GET THE LAST FOUR COLUMNS OF THIS TO BE THE INITIAL
-  %CONDITIONS, BECAUSE I BELIEVE y0 BELOW IN ODE SOLVER IS TAKING THE BASELINE INITIAL
-  %CONDITIONS FROM PARAMETER_SETTING FILE (If I create a new vector, what
-  %do I put in the ODE_LHS_Heroin file for P0, A0, H0, R0 because won't let
-  %me add a new vector)--check if correct what have below 
+  
+ 
  
 for x=1:nsample %Run solution x times choosing different values
     f=@ODE_LHS_Heroin;
 %     x;
 %     
 %      LHSmatrix(x,:);
-     
-     [t,y] = ode15s(@(t,y)f(t,y,LHSmatrix,x),tspan,[LHSmatrix(x,18),LHSmatrix(x,19),LHSmatrix(x,20),LHSmatrix(x,21),1-LHSmatrix(x,18)-LHSmatrix(x,19)-LHSmatrix(x,20)-LHSmatrix(x,21)],[]); 
+     y0=[1-LHSmatrix(x,18)-LHSmatrix(x,19)-LHSmatrix(x,20)-LHSmatrix(x,21),LHSmatrix(x,18),LHSmatrix(x,19),LHSmatrix(x,20),LHSmatrix(x,21)];
+     [t,y] = ode15s(@(t,y)f(t,y,LHSmatrix,x),tspan,y0,[]); 
      %[t,y]=ode15s(@ODE_LHS_Heroin,tspan,y0,[],LHSmatrix);
      W = [t y]; % [time y]
     
@@ -101,8 +98,7 @@ save LV_Model_LHS_Heroin.mat;
 
 
   alpha = 1e-3;
-  %this uses total exposures as the metric. Change second input argument if want
-  %to test something else
+  
  [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
 
 
@@ -557,7 +553,7 @@ nu_LHS18=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS18=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS18=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
 c_LHS18=LHS_Call_Heroin(c-0,0,c+0,0,nsample,'unif');
-P0_LHS18=LHS_Call_Heroin(P0-(P0/2),0,P0+(P0/2),0,nsample,'unif');
+P0_LHS18=LHS_Call_Heroin(P0,0,P0+(P0/2),0,nsample,'unif');
 A0_LHS18=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
 H0_LHS18=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
 R0_LHS18=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');
@@ -659,7 +655,7 @@ LHSmatrix19 =[m_LHS19 beta_A_LHS19 beta_P_LHS19 theta_1_LHS19 epsilon_LHS19 gamm
 LHSmatrix20 =[m_LHS20 beta_A_LHS20 beta_P_LHS20 theta_1_LHS20 epsilon_LHS20 gamma_LHS20 sigma_LHS20 mu_LHS20 mu_A_LHS20 mu_H_LHS20 theta_2_LHS20 zeta_LHS20 theta_3_LHS20 nu_LHS20 omega_LHS20 b_LHS20 c_LHS20 P0_LHS20 A0_LHS20 H0_LHS20 R0_LHS20];
 LHSmatrix21 =[m_LHS21 beta_A_LHS21 beta_P_LHS21 theta_1_LHS21 epsilon_LHS21 gamma_LHS21 sigma_LHS21 mu_LHS21 mu_A_LHS21 mu_H_LHS21 theta_2_LHS21 zeta_LHS21 theta_3_LHS21 nu_LHS21 omega_LHS21 b_LHS21 c_LHS21 P0_LHS21 A0_LHS21 H0_LHS21 R0_LHS21];
         
-for x=1:nsample %Run solution x times choosing different values, represents each row of the matrix that's going to go through the ODE solver to produce the plots 
+for x=1:nsample %Run solution nsample times choosing different values, represents each row of the matrix that's going to go through the ODE solver to produce the plots 
     f=@ODE_LHS_Heroin;
     x;
      
@@ -686,36 +682,61 @@ for x=1:nsample %Run solution x times choosing different values, represents each
     LHSmatrix20(x,:);
     LHSmatrix21(x,:);
     
+    %Initial conditions for each LHSMatrix# solve, last four entries of LHSMatrix# rows 
+    k1=[1-LHSmatrix1(x,18)-LHSmatrix1(x,19)-LHSmatrix1(x,20)-LHSmatrix1(x,21),LHSmatrix1(x,18),LHSmatrix1(x,19),LHSmatrix1(x,20),LHSmatrix1(x,21)];
+    k2=[1-LHSmatrix2(x,18)-LHSmatrix2(x,19)-LHSmatrix2(x,20)-LHSmatrix2(x,21),LHSmatrix2(x,18),LHSmatrix2(x,19),LHSmatrix2(x,20),LHSmatrix2(x,21)];
+    k3=[1-LHSmatrix3(x,18)-LHSmatrix3(x,19)-LHSmatrix3(x,20)-LHSmatrix3(x,21),LHSmatrix3(x,18),LHSmatrix3(x,19),LHSmatrix3(x,20),LHSmatrix3(x,21)];
+    k4=[1-LHSmatrix4(x,18)-LHSmatrix4(x,19)-LHSmatrix4(x,20)-LHSmatrix4(x,21),LHSmatrix4(x,18),LHSmatrix4(x,19),LHSmatrix4(x,20),LHSmatrix4(x,21)];
+    k5=[1-LHSmatrix5(x,18)-LHSmatrix5(x,19)-LHSmatrix5(x,20)-LHSmatrix5(x,21),LHSmatrix5(x,18),LHSmatrix5(x,19),LHSmatrix5(x,20),LHSmatrix5(x,21)];
+    k6=[1-LHSmatrix6(x,18)-LHSmatrix6(x,19)-LHSmatrix6(x,20)-LHSmatrix6(x,21),LHSmatrix6(x,18),LHSmatrix6(x,19),LHSmatrix6(x,20),LHSmatrix6(x,21)];
+    k7=[1-LHSmatrix7(x,18)-LHSmatrix7(x,19)-LHSmatrix7(x,20)-LHSmatrix7(x,21),LHSmatrix7(x,18),LHSmatrix7(x,19),LHSmatrix7(x,20),LHSmatrix7(x,21)];
+    k8=[1-LHSmatrix8(x,18)-LHSmatrix8(x,19)-LHSmatrix8(x,20)-LHSmatrix8(x,21),LHSmatrix8(x,18),LHSmatrix8(x,19),LHSmatrix8(x,20),LHSmatrix8(x,21)];
+    k9=[1-LHSmatrix9(x,18)-LHSmatrix9(x,19)-LHSmatrix9(x,20)-LHSmatrix9(x,21),LHSmatrix9(x,18),LHSmatrix9(x,19),LHSmatrix9(x,20),LHSmatrix9(x,21)];
+    k10=[1-LHSmatrix10(x,18)-LHSmatrix10(x,19)-LHSmatrix10(x,20)-LHSmatrix10(x,21),LHSmatrix10(x,18),LHSmatrix10(x,19),LHSmatrix10(x,20),LHSmatrix10(x,21)];
+    k11=[1-LHSmatrix11(x,18)-LHSmatrix11(x,19)-LHSmatrix11(x,20)-LHSmatrix11(x,21),LHSmatrix11(x,18),LHSmatrix11(x,19),LHSmatrix11(x,20),LHSmatrix11(x,21)];
+    k12=[1-LHSmatrix12(x,18)-LHSmatrix12(x,19)-LHSmatrix12(x,20)-LHSmatrix12(x,21),LHSmatrix12(x,18),LHSmatrix12(x,19),LHSmatrix12(x,20),LHSmatrix12(x,21)];
+    k13=[1-LHSmatrix13(x,18)-LHSmatrix13(x,19)-LHSmatrix13(x,20)-LHSmatrix13(x,21),LHSmatrix13(x,18),LHSmatrix13(x,19),LHSmatrix13(x,20),LHSmatrix13(x,21)];
+    k14=[1-LHSmatrix14(x,18)-LHSmatrix14(x,19)-LHSmatrix14(x,20)-LHSmatrix14(x,21),LHSmatrix14(x,18),LHSmatrix14(x,19),LHSmatrix14(x,20),LHSmatrix14(x,21)];
+    k15=[1-LHSmatrix15(x,18)-LHSmatrix15(x,19)-LHSmatrix15(x,20)-LHSmatrix15(x,21),LHSmatrix15(x,18),LHSmatrix15(x,19),LHSmatrix15(x,20),LHSmatrix15(x,21)];
+    k16=[1-LHSmatrix16(x,18)-LHSmatrix16(x,19)-LHSmatrix16(x,20)-LHSmatrix16(x,21),LHSmatrix16(x,18),LHSmatrix16(x,19),LHSmatrix16(x,20),LHSmatrix16(x,21)];
+    k17=[1-LHSmatrix17(x,18)-LHSmatrix17(x,19)-LHSmatrix17(x,20)-LHSmatrix17(x,21),LHSmatrix17(x,18),LHSmatrix17(x,19),LHSmatrix17(x,20),LHSmatrix17(x,21)];
+    k18=[1-LHSmatrix18(x,18)-LHSmatrix18(x,19)-LHSmatrix18(x,20)-LHSmatrix18(x,21),LHSmatrix18(x,18),LHSmatrix18(x,19),LHSmatrix18(x,20),LHSmatrix18(x,21)];
+    k19=[1-LHSmatrix19(x,18)-LHSmatrix19(x,19)-LHSmatrix19(x,20)-LHSmatrix19(x,21),LHSmatrix19(x,18),LHSmatrix19(x,19),LHSmatrix19(x,20),LHSmatrix19(x,21)];
+    k20=[1-LHSmatrix20(x,18)-LHSmatrix20(x,19)-LHSmatrix20(x,20)-LHSmatrix20(x,21),LHSmatrix20(x,18),LHSmatrix20(x,19),LHSmatrix20(x,20),LHSmatrix20(x,21)];
+    k21=[1-LHSmatrix21(x,18)-LHSmatrix21(x,19)-LHSmatrix21(x,20)-LHSmatrix21(x,21),LHSmatrix21(x,18),LHSmatrix21(x,19),LHSmatrix21(x,20),LHSmatrix21(x,21)];
+    
+    
+    
     %run each with only 1 parameter varying in each (each ODE run nsample
     %times, 1 time for each row in LHSmatrix# to produce output for each parameter in a
     %certain range)
-    [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,[LHSmatrix1(x,18),LHSmatrix1(x,19),LHSmatrix1(x,20),LHSmatrix1(x,21),1-LHSmatrix1(x,18)-LHSmatrix1(x,19)-LHSmatrix1(x,20)-LHSmatrix1(x,21)],[]); 
-    [t,y2] = ode15s(@(t,y2)f(t,y2,LHSmatrix2,x),tspan,[LHSmatrix2(x,18),LHSmatrix2(x,19),LHSmatrix2(x,20),LHSmatrix2(x,21),1-LHSmatrix2(x,18)-LHSmatrix2(x,19)-LHSmatrix2(x,20)-LHSmatrix2(x,21)],[]); 
-    [t,y3] = ode15s(@(t,y3)f(t,y3,LHSmatrix3,x),tspan,[LHSmatrix3(x,18),LHSmatrix3(x,19),LHSmatrix3(x,20),LHSmatrix3(x,21),1-LHSmatrix3(x,18)-LHSmatrix3(x,19)-LHSmatrix3(x,20)-LHSmatrix3(x,21)],[]);
-    [t,y4] = ode15s(@(t,y4)f(t,y4,LHSmatrix4,x),tspan,[LHSmatrix4(x,18),LHSmatrix4(x,19),LHSmatrix4(x,20),LHSmatrix4(x,21),1-LHSmatrix4(x,18)-LHSmatrix4(x,19)-LHSmatrix4(x,20)-LHSmatrix4(x,21)],[]); 
-    [t,y5] = ode15s(@(t,y5)f(t,y5,LHSmatrix5,x),tspan,[LHSmatrix5(x,18),LHSmatrix5(x,19),LHSmatrix5(x,20),LHSmatrix5(x,21),1-LHSmatrix5(x,18)-LHSmatrix5(x,19)-LHSmatrix5(x,20)-LHSmatrix5(x,21)],[]); 
-    [t,y6] = ode15s(@(t,y6)f(t,y6,LHSmatrix6,x),tspan,[LHSmatrix6(x,18),LHSmatrix6(x,19),LHSmatrix6(x,20),LHSmatrix6(x,21),1-LHSmatrix6(x,18)-LHSmatrix6(x,19)-LHSmatrix6(x,20)-LHSmatrix6(x,21)],[]);
-    [t,y7] = ode15s(@(t,y7)f(t,y7,LHSmatrix7,x),tspan,[LHSmatrix7(x,18),LHSmatrix7(x,19),LHSmatrix7(x,20),LHSmatrix7(x,21),1-LHSmatrix7(x,18)-LHSmatrix7(x,19)-LHSmatrix7(x,20)-LHSmatrix7(x,21)],[]); 
-    [t,y8] = ode15s(@(t,y8)f(t,y8,LHSmatrix8,x),tspan,[LHSmatrix8(x,18),LHSmatrix8(x,19),LHSmatrix8(x,20),LHSmatrix8(x,21),1-LHSmatrix8(x,18)-LHSmatrix8(x,19)-LHSmatrix8(x,20)-LHSmatrix8(x,21)],[]);
-    [t,y9] = ode15s(@(t,y9)f(t,y9,LHSmatrix9,x),tspan,[LHSmatrix9(x,18),LHSmatrix9(x,19),LHSmatrix9(x,20),LHSmatrix9(x,21),1-LHSmatrix9(x,18)-LHSmatrix9(x,19)-LHSmatrix9(x,20)-LHSmatrix9(x,21)],[]);
-    [t,y10] = ode15s(@(t,y10)f(t,y10,LHSmatrix10,x),tspan,[LHSmatrix10(x,18),LHSmatrix10(x,19),LHSmatrix10(x,20),LHSmatrix10(x,21),1-LHSmatrix10(x,18)-LHSmatrix10(x,19)-LHSmatrix10(x,20)-LHSmatrix10(x,21)],[]);
-    [t,y11] = ode15s(@(t,y11)f(t,y11,LHSmatrix11,x),tspan,[LHSmatrix11(x,18),LHSmatrix11(x,19),LHSmatrix11(x,20),LHSmatrix11(x,21),1-LHSmatrix11(x,18)-LHSmatrix11(x,19)-LHSmatrix11(x,20)-LHSmatrix11(x,21)],[]);
-    [t,y12] = ode15s(@(t,y12)f(t,y12,LHSmatrix12,x),tspan,[LHSmatrix12(x,18),LHSmatrix12(x,19),LHSmatrix12(x,20),LHSmatrix12(x,21),1-LHSmatrix12(x,18)-LHSmatrix12(x,19)-LHSmatrix12(x,20)-LHSmatrix12(x,21)],[]);
-    [t,y13] = ode15s(@(t,y13)f(t,y13,LHSmatrix13,x),tspan,[LHSmatrix13(x,18),LHSmatrix13(x,19),LHSmatrix13(x,20),LHSmatrix13(x,21),1-LHSmatrix13(x,18)-LHSmatrix13(x,19)-LHSmatrix13(x,20)-LHSmatrix13(x,21)],[]);
-    [t,y14] = ode15s(@(t,y14)f(t,y14,LHSmatrix14,x),tspan,[LHSmatrix14(x,18),LHSmatrix14(x,19),LHSmatrix14(x,20),LHSmatrix14(x,21),1-LHSmatrix14(x,18)-LHSmatrix14(x,19)-LHSmatrix14(x,20)-LHSmatrix14(x,21)],[]);
-    [t,y15] = ode15s(@(t,y15)f(t,y15,LHSmatrix15,x),tspan,[LHSmatrix15(x,18),LHSmatrix15(x,19),LHSmatrix15(x,20),LHSmatrix15(x,21),1-LHSmatrix15(x,18)-LHSmatrix15(x,19)-LHSmatrix15(x,20)-LHSmatrix15(x,21)],[]);
-    [t,y16] = ode15s(@(t,y16)f(t,y16,LHSmatrix16,x),tspan,[LHSmatrix16(x,18),LHSmatrix16(x,19),LHSmatrix16(x,20),LHSmatrix16(x,21),1-LHSmatrix16(x,18)-LHSmatrix16(x,19)-LHSmatrix16(x,20)-LHSmatrix16(x,21)],[]);
-    [t,y17] = ode15s(@(t,y17)f(t,y17,LHSmatrix17,x),tspan,[LHSmatrix17(x,18),LHSmatrix17(x,19),LHSmatrix17(x,20),LHSmatrix17(x,21),1-LHSmatrix17(x,18)-LHSmatrix17(x,19)-LHSmatrix17(x,20)-LHSmatrix17(x,21)],[]);
-    [t,y18] = ode15s(@(t,y18)f(t,y18,LHSmatrix18,x),tspan,[LHSmatrix18(x,18),LHSmatrix18(x,19),LHSmatrix18(x,20),LHSmatrix18(x,21),1-LHSmatrix18(x,18)-LHSmatrix18(x,19)-LHSmatrix18(x,20)-LHSmatrix18(x,21)],[]);
-    [t,y19] = ode15s(@(t,y19)f(t,y19,LHSmatrix19,x),tspan,[LHSmatrix19(x,18),LHSmatrix19(x,19),LHSmatrix19(x,20),LHSmatrix19(x,21),1-LHSmatrix19(x,18)-LHSmatrix19(x,19)-LHSmatrix19(x,20)-LHSmatrix19(x,21)],[]);
-    [t,y20] = ode15s(@(t,y20)f(t,y20,LHSmatrix20,x),tspan,[LHSmatrix20(x,18),LHSmatrix20(x,19),LHSmatrix20(x,20),LHSmatrix20(x,21),1-LHSmatrix20(x,18)-LHSmatrix20(x,19)-LHSmatrix20(x,20)-LHSmatrix20(x,21)],[]);
-    [t,y21] = ode15s(@(t,y21)f(t,y21,LHSmatrix21,x),tspan,[LHSmatrix21(x,18),LHSmatrix21(x,19),LHSmatrix21(x,20),LHSmatrix21(x,21),1-LHSmatrix21(x,18)-LHSmatrix21(x,19)-LHSmatrix21(x,20)-LHSmatrix21(x,21)],[]);
+    [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,k1,[]); 
+    [t,y2] = ode15s(@(t,y2)f(t,y2,LHSmatrix2,x),tspan,k2,[]); 
+    [t,y3] = ode15s(@(t,y3)f(t,y3,LHSmatrix3,x),tspan,k3,[]);
+    [t,y4] = ode15s(@(t,y4)f(t,y4,LHSmatrix4,x),tspan,k4,[]); 
+    [t,y5] = ode15s(@(t,y5)f(t,y5,LHSmatrix5,x),tspan,k5,[]); 
+    [t,y6] = ode15s(@(t,y6)f(t,y6,LHSmatrix6,x),tspan,k6,[]);
+    [t,y7] = ode15s(@(t,y7)f(t,y7,LHSmatrix7,x),tspan,k7,[]); 
+    [t,y8] = ode15s(@(t,y8)f(t,y8,LHSmatrix8,x),tspan,k8,[]);
+    [t,y9] = ode15s(@(t,y9)f(t,y9,LHSmatrix9,x),tspan,k9,[]);
+    [t,y10] = ode15s(@(t,y10)f(t,y10,LHSmatrix10,x),tspan,k10,[]);
+    [t,y11] = ode15s(@(t,y11)f(t,y11,LHSmatrix11,x),tspan,k11,[]);
+    [t,y12] = ode15s(@(t,y12)f(t,y12,LHSmatrix12,x),tspan,k12,[]);
+    [t,y13] = ode15s(@(t,y13)f(t,y13,LHSmatrix13,x),tspan,k13,[]);
+    [t,y14] = ode15s(@(t,y14)f(t,y14,LHSmatrix14,x),tspan,k14,[]);
+    [t,y15] = ode15s(@(t,y15)f(t,y15,LHSmatrix15,x),tspan,k15,[]);
+    [t,y16] = ode15s(@(t,y16)f(t,y16,LHSmatrix16,x),tspan,k16,[]);
+    [t,y17] = ode15s(@(t,y17)f(t,y17,LHSmatrix17,x),tspan,k17,[]);
+    [t,y18] = ode15s(@(t,y18)f(t,y18,LHSmatrix18,x),tspan,k18,[]);
+    [t,y19] = ode15s(@(t,y19)f(t,y19,LHSmatrix19,x),tspan,k19,[]);
+    [t,y20] = ode15s(@(t,y20)f(t,y20,LHSmatrix20,x),tspan,k20,[]);
+    [t,y21] = ode15s(@(t,y21)f(t,y21,LHSmatrix21,x),tspan,k21,[]);
  
     
-     %store results of each [t,y1] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,y0,[]);
-     %HOW ARE THESE W# OUTPUTS ONLY FOR time 0 through 6, shouldn't they be for
-     %each row of LHSmatrix (each set of parameters)? How does S_lhs1 get
-     %different values of W1(timepoints+1,1) for each x?
+     %store results of each [t,y#] = ode15s(@(t,y1)f(t,y1,LHSmatrix1,x),tspan,k#,[]);
+     %these get overwritten for each x of the for loop, so the final result
+     %in the workspace shown is for the final x value (the last row of each LHS matrix) over the
+     %entire time span 
      W1 = [t y1]; % [time y]
      W2 = [t y2];
      W3 = [t y3];
@@ -740,8 +761,9 @@ for x=1:nsample %Run solution x times choosing different values, represents each
    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+  
   %store final value of each class (time_points+1 is final time since first
-  %column is IC's), start with 2nd column because 1st just counts classes
+  %column is IC's), start with 2nd column because 1st just for time values 
      S_lhs1(:,x)=W1(time_points+1,2);
      P_lhs1(:,x)=W1(time_points+1,3);
      A_lhs1(:,x)=W1(time_points+1,4);
@@ -923,12 +945,9 @@ end
 
  %% Monotonicity curves 
 
-%%Are these okay with breaks? They changed once I added on initial conditions, should
-%%that happen? 
- 
  figure(1);
  subplot(421)
- plot(LHSmatrix1(:,1),S_lhs1,'o') %(i.e. first column of LHSmatrix1 is m increasing as it goes down, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
+ plot(LHSmatrix1(:,1),S_lhs1,'o') %(i.e. first column of LHSmatrix1 is m varying, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
  xlabel('m')
  ylabel('S')
  subplot(422)
@@ -1060,7 +1079,6 @@ subplot(421)
 plot(LHSmatrix9(:,9),P_lhs9,'o')
 xlabel('\mu_A')
 ylabel('P') 
-
 subplot(422)
  plot(LHSmatrix10(:,10),P_lhs10,'o')
  xlabel('\mu_H')

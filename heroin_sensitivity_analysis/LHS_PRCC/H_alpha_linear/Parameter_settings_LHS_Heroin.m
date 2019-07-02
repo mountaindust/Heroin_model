@@ -38,7 +38,7 @@ R0=0.0509;
 
 total=S0+P0+A0+H0+R0;
 
-y0 = [S0,P0,A0,H0,R0]; 
+%y0 = [S0,P0,A0,H0,R0]; 
 % Variables Labels
 %y_var_label={'S0', 'P0', 'A0','H0','R0'};
 PRCC_var={'m','beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_A','mu_H','theta_2','zeta','theta_3','nu','omega','b','P0','A0','H0','R0'};

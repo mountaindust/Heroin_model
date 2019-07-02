@@ -39,7 +39,7 @@ S0=1-P0-A0-H0-R0;
 
 total=S0+P0+A0+H0+R0;
 
-y0 = [S0,P0,A0,H0,R0]; 
+%y0 = [S0,P0,A0,H0,R0]; 
 % Variables Labels
 % y_var_label={'S0','P0','A0','H0','R0'};
 
