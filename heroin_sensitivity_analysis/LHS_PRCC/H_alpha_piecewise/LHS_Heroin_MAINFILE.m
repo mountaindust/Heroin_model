@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test from each parameter interval (i.e. number of uniform intervals)
-nsample = 100; 
+nsample = 600; 
 
 %% LHS MATRIX  %%
 
@@ -553,7 +553,7 @@ nu_LHS18=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS18=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 b_LHS18=LHS_Call_Heroin(b-0,0,b+0,0,nsample,'unif');
 c_LHS18=LHS_Call_Heroin(c-0,0,c+0,0,nsample,'unif');
-P0_LHS18=LHS_Call_Heroin(P0,0,P0+(P0/2),0,nsample,'unif');
+P0_LHS18=LHS_Call_Heroin(P0-(P0/2),0,P0+(P0/2),0,nsample,'unif');
 A0_LHS18=LHS_Call_Heroin(A0-0,0,A0+0,0,nsample,'unif');
 H0_LHS18=LHS_Call_Heroin(H0-0,0,H0+0,0,nsample,'unif');
 R0_LHS18=LHS_Call_Heroin(R0-0,0,R0+0,0,nsample,'unif');

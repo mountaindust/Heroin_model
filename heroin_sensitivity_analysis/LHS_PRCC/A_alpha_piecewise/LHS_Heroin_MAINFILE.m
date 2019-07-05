@@ -944,7 +944,7 @@ end
 
 %%Are these okay with breaks? They changed once I added on initial conditions, should
 %%that happen? 
- %{
+
  figure(1);
  subplot(421)
  plot(LHSmatrix1(:,1),S_lhs1,'o') %(i.e. first column of LHSmatrix1 is m varying, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
@@ -1131,7 +1131,7 @@ subplot(422)
  xlabel('R0')
  ylabel('P')
  
- %}
+ 
  %Monotonicity curves for prescription addicted individuals at last time step 
  
  figure(7);
@@ -1320,7 +1320,7 @@ subplot(422)
  
  
 %Monotonicity curves for stably recovered individuals at last time step 
-  %{
+  
  figure(13);
  subplot(421)
  plot(LHSmatrix1(:,1),R_lhs1,'o')
@@ -1410,4 +1410,4 @@ subplot(422)
  plot(LHSmatrix21(:,21),R_lhs21,'o')
  xlabel('R0')
  ylabel('R')
- %}
+ 
