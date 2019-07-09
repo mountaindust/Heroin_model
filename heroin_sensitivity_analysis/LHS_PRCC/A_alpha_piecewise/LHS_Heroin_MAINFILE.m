@@ -942,8 +942,6 @@ end
 
 %% Monotonicity curves 
 
-%%Are these okay with breaks? They changed once I added on initial conditions, should
-%%that happen? 
 
  figure(1);
  subplot(421)

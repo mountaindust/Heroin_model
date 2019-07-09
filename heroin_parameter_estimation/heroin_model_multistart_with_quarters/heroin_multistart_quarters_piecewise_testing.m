@@ -1,4 +1,4 @@
-%File name: heroin_multistart_quarters_testing.m
+%File name: heroin_multistart_quarters_piecewise_testing.m
 clf;
 clear all;
 
