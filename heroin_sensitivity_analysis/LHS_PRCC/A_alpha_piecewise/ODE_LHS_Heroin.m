@@ -24,7 +24,7 @@ P0=LHSmatrix(x,18);
 A0=LHSmatrix(x,19);
 H0=LHSmatrix(x,20);
 R0=LHSmatrix(x,21);
-S0=1-P0-A0-H0-R0;
+S0=1-LHSmatrix(x,18)-LHSmatrix(x,19)-LHSmatrix(x,20)-LHSmatrix(x,21);
      
 %% Distemper model for shelter
 %have included a 5th equation that keeps track of the total exposed, which
