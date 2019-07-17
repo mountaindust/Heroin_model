@@ -61,10 +61,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
 
+format long
 disp(a(0,pars))
 disp(a(1,pars))
 disp(a(2,pars))
 disp(a(3,pars))
+disp(a(3.25,pars))
 disp(a(4,pars))
 disp(a(5,pars))
 disp(a(6,pars))
@@ -224,8 +226,8 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(8)
  hold all
  z1 = linspace(0,4,5); %defines mesh where going to plot Estim1, Data1 values 
- scatter(z1, Estim1, 50, 'o');
- scatter(z1, Data1, 50, 'x');
+ scatter(z1, Estim1, 100, 'o');
+ scatter(z1, Data1, 100, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P')
@@ -240,8 +242,8 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(9)
  hold all
  z2 = linspace(0,4,5);
- scatter(z2, Estim2, 50, 'o');
- scatter(z2, Data2, 50, 'x');
+ scatter(z2, Estim2, 100, 'o');
+ scatter(z2, Data2, 100, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
@@ -257,8 +259,8 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(10)
  hold all
  z3 = linspace(0,2,3);
- scatter(z3, Estim3, 50,'o');
- scatter(z3, Data3, 50,'x');
+ scatter(z3, Estim3, 100,'o');
+ scatter(z3, Data3, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
@@ -272,8 +274,8 @@ Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
  figure(11)
  hold all
  z4 = linspace(0,23,24);
- scatter(z4, Estim4, 50, 'o');
- scatter(z4, Data4, 50,'x');
+ scatter(z4, Estim4, 100, 'o');
+ scatter(z4, Data4, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
  ylabel('Proportion in P')
