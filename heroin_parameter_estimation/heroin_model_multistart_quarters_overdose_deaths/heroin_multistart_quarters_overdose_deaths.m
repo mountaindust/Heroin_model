@@ -4,9 +4,9 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0     c      ]
-LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   ];
-UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   0.1   ];
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0]
+LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001  0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001 ];
+UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1    0.8    0.5       0.1     0.1       0.1   ];
   
 
 
@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=20;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -50,16 +50,8 @@ theta_3=x(10);
 nu=x(11);
 omega=0.0000000001;
 b=x(12);
-c=x(17);
-%d=x(18);
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];%,d];
-
-
-
-%syms alpha(t)
-%alpha(t)=piecewise(t<3,pars(1)*t+pars(16),t>=3,pars(17)*t+pars(18));
-
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 % Print optimal parameter solution and objective function value in command
 % window when completed 
@@ -101,7 +93,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   J=y(:,9);
   K=y(:,10);
   %alpha=-pars(1)*t+pars(16);
-  %alpha=x(1)*t+x(12);
+  alpha=x(1)*t+x(12);
   
  % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
@@ -148,7 +140,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % Simulated data points for A and corresponding ODE solution plotted on top 
  figure(3)
  hold all
- plot(t,y(:,3),'r-','LineWidth',3)
+ plot(t,y(:,3),'r','LineWidth',3)
  %plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
@@ -237,7 +229,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
 
- 
  State9=y(:,9);
  State_data_9=[0;1.28915665512514e-05;2.56208759021105e-05;3.81987487725662e-05;5.06350513046481e-05;6.29379634243770e-05;7.51151444917463e-05;8.71775334200859e-05;9.91214055831169e-05;0.000110961172973100;0.000122691703224832;0.000134325859421633;0.000145860766835309;0.000157305407370460;0.000168659384162855;0.000179929321219478;0.000191116046634964;0.000202220388803647;0.000213248928508481;0.000224198261683510;0.000235076319246200;0.000245880598080347;0.000256614256140880;0.000267280062167769;0.000277875977682533];
  
@@ -254,7 +245,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
 
-
+ 
  State10=y(:,10);
  State_data_10=[0;1.28915665512514e-05;2.56208759021105e-05;3.81987487725662e-05;5.06350513046481e-05;6.29379634243770e-05;7.51151444917463e-05;8.71775334200859e-05;9.91214055831169e-05;0.000110961172973100;0.000122691703224832;0.000134325859421633;0.000145860766835309;0.000157305407370460;0.000168659384162855;0.000179929321219478;0.000191116046634964;0.000202220388803647;0.000213248928508481;0.000224198261683510;0.000235076319246200;0.000245880598080347;0.000256614256140880;0.000267280062167769;0.000277875977682533];
  
@@ -270,7 +261,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) %correspond to the actual t values from t vector that I want to label
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
-
+ 
  
  %%% Data points we are interested in 
 
@@ -295,9 +286,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  xlabel('Year')
  ylabel('Proportion in P') % at some point during the year
  legend({'ODE solution', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 4 5 ])
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
  
 
  % Yearly simulation of individuals in A class at all during the year for years
@@ -307,7 +298,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  
  % Actual Data for years 2013-2017 
- Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
+  Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
 
  
   % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
@@ -320,9 +311,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  xlabel('Year')
  ylabel('Proportion in A') % at some point during the year
  legend({'ODE solution', 'Data'},'FontSize', 14) 
- set(gca, 'xtick', [ 0 1 2 3 4 5 ])
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016', '2017', '2018'})
+ set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
 
 
 
@@ -351,7 +342,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca,'xticklabel',{'2014', '2015', '2016'})
 
  
- 
+ tspan=linspace(0,N,25);
  % Yearly simulation of individuals in P class at all during the quarters in years
  % 2013-2018
  Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
@@ -386,11 +377,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
                        'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
                        'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
+ 
+ 
                    
-                   
-                   
-                   
-% Yearly simulation of individuals overdosing from A class during the year for years
+ % Yearly simulation of individuals overdosing from A class during the year for years
 % 2013-2017 (anyone in A class throughout the year times mu_A)
  
  Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9);...
@@ -415,6 +405,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})                   
                    
  
+ 
+ 
  % Yearly simulation of individuals overdosing from H class during the year for years
 % 2013-2017 (anyone in H class throughout the year times mu_H)
  
@@ -437,17 +429,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  legend({'ODE solution', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})                   
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})                         
                    
                    
-disp(a(0,pars))
-disp(a(1,pars))
-disp(a(2,pars))
-disp(a(3,pars))
-disp(a(4,pars))
-disp(a(5,pars))
-disp(a(6,pars))
-
+                   
+                    
 function value = HeroinModel_ODE15s(z)
 
 % Parameters
@@ -467,11 +453,9 @@ theta_3=z(10);
 nu=z(11);
 omega=0.0000000001;
 b=z(12);
-c=z(17);
-%d=z(18);
 
 % Parameter vector
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];%,d];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
@@ -532,7 +516,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
 
  Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
- 
 
 
  % Actual proportions of population that were non-addicted prescription opioid users at some point
@@ -541,7 +524,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % total population in TN 12 and older for each year) 
  
  Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
-
+ 
  % The difference between estimated values and data
  
  Diff1=Estim1-Data1; 
@@ -582,14 +565,14 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
         y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];
-    
  
  % Actual proportions of population that were opioid addicted individuals in
  % the population at some point during the year 
  % (total number of opioid addicted individuals in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
+  Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
+
  
  % The difference between estimated value and data
  
@@ -699,8 +682,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  %The difference between estimated value and data 
  Diff4=Estim4-Data4;
  
- 
- % Yearly output from the model as a proportion of the population that
+% Yearly output from the model as a proportion of the population that
  % overdoses from A class at some point during the year for
  % years 2013-2017, Estim5 is a column vector
  Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9);...
@@ -795,6 +777,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  State_diff_10=State10-State_data_10;
  
+ 
  %%%%%
  % The *relative* error that we are trying to minimize for ordinary least
  % squares: the sum of the squared errors [norm gives sqrt(sum from 1 to N
@@ -806,9 +789,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
- 
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);
-
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
 
  % For testing purposes with states and data sets
@@ -816,30 +796,20 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  
 end
-
-           
-function alpha = a(t,pars)
-if  t<=3.25 
-    alpha = pars(1)*t+pars(16);
-else 
-    alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
-    %alpha = pars(17)*t+pars(18);
-    %alpha = pars(1)*t+pars(16);
-end
-end
+ 
 
 
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-a(t,pars)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=a(t,pars)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
 % i.e. individuals who enter the P class at any time from S (used in Estim1, Estim4)
-f(6) = a(t,pars)*y(1);
+f(6) =(pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 % i.e. individuals who enter the A class at any time (used in Estim2)
@@ -856,5 +826,6 @@ f(9) = pars(7)*y(3);
 %K' ODE to calculate number of heroin/fentanayl addict overdoses over
 %time; i.e. individuals who overdose at any time (used in Estim6)
 f(10) = pars(8)*y(4);
+
 end
 

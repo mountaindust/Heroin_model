@@ -1,51 +1,62 @@
-%File name: heroin_multistart_quarters_piecewise_testing.m
-clf;
-clear all;
+%File name: heroin_multistart_quarters_testing.m
 
 %Parameters
 %slope of alpha 
-m=-0.00483;%-0.004831534;
-beta_A=0.0044;%0.004397639;
-beta_P=0.000469;%0.0004686;
-theta_1=0.000502;%0.00050178;
-epsilon=2.49;%2.494959842;
+m=-.0156;
+beta_A=0.00235; 
+beta_P=0.000141; 
+theta_1=0.000507;
+epsilon=2.54;
 mu=0.00868; 
 mu_A=0.00870;      
 mu_H=0.0507;
-gamma=0.00146;%0.001457803;
-theta_2=0.148;%0.148273758;
-sigma=0.0283;%0.028318428;
-zeta=0.318;%0.318058863;
-theta_3=2.38;%2.379076045;
-nu=0.0482;%0.048152163;
+gamma=0.00115;
+theta_2=0.0370; 
+sigma=0.0284;
+zeta=0.265;
+theta_3=3.51; 
+nu=0.00657;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.283;%0.283129553;
-c=-0.0313;%-0.031298274;
+b=0.303; 
 
+%{
+% For R_0 checking:
+alpha=0.2; 
+beta_A=0.000273; 
+beta_P=0; 
+theta_1=0.0003;
+epsilon=1.5;
+mu=0.00868; 
+mu_A=0.00775;   
+mu_H=0.0271;
+gamma=0;   
+theta_2=3*theta_1; 
+sigma=0.7;
+zeta=0.25;
+theta_3=16*theta_1; 
+nu=0.1;
+omega=0.0000000001;
+%}
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
- 
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
 N = 6;
 tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
-
+%tspan=linspace(0,N,100);
 
 % Initial Conditions
-P0=0.095;%0.094988976;
-A0=0.00647;%0.006465234;
-H0=0.000843;%0.000842791;
-R0=0.0584;%0.058439379;
+P0=0.0835;
+A0=0.00671;
+H0=0.000874;
+R0=0.0509;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
 M0=0;
-J0=0;
-K0=0;
-initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
+initials = [S0;P0;A0;H0;R0;X0;L0;M0];
 
 [t,y]=ode15s(@HeroinModel,tspan,initials,[],pars);
 
@@ -57,62 +68,41 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   X=y(:,6);
   L=y(:,7);
   M=y(:,8);
-  J=y(:,9);
-  K=y(:,10);
   
-  %alpha=m*t+b;
+  alpha=m*t+b;
   
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
 
-format long
-disp(a(0,pars))
-disp(a(1,pars))
-disp(a(2,pars))
-disp(a(3,pars))
-disp(a(3.25,pars))
-disp(a(4,pars))
-disp(a(5,pars))
-disp(a(6,pars))
-
 % Comment out if don't need objective function value 
 
 Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
-         y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
+         y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6)];
  
 Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
-        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];      
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7)];   
 
 Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
 Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
-Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9);...
-        y(17,9)-y(13,9); y(21,9)-y(17,9)];
-    
-Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
-        y(17,10)-y(13,10); y(21,10)-y(17,10)];
 
 
- Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
- Diff1=Estim1-Data1; 
- Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
- Diff2=Estim2-Data2;  
- Data3=[7560./5559702; 7560./5602187; 10260./5648259];
- Diff3=Estim3-Data3;
- Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475];
+Diff1=Estim1-Data1; 
+Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475];
+Diff2=Estim2-Data2;  
+Data3=[7560./5559702; 7560./5602187; 10260./5648259];
+Diff3=Estim3-Data3;
+Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
         833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
         827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
         832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
         775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
         688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
- Diff4=Estim4-Data4;
- Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259; 381./5702475];
- Diff5=Estim5-Data5;
- Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
- Diff6=Estim6-Data6;
- 
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+Diff4=Estim4-Data4;
+
+value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)
 
  
  % ODE solutions plotted separately shown all together
@@ -150,7 +140,7 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
  
           
-           subplot(2,2,4);plot(t,y(:,5) , 'Color', [0.7,0,0.7],'LineWidth',3)
+           subplot(2,2,4);plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Stably Recovered Individuals')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -179,7 +169,7 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  
  figure(3)
  hold all
- plot(t,y(:,1),'k-','LineWidth',3)
+ plot(t,y(:,1),'k','LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -221,10 +211,10 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
  
-      
+
  figure(7)
  hold all
- plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
+ plot(t,y(:,5), 'Color', [0.7,0,0.7],'LineWidth',3)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
@@ -233,14 +223,14 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
  %Comment out if don't need fitting plots 
-
+ 
               
  % Data points from proportion that is in P at some point in the year and corresponding ODE solution points 
  figure(8)
  hold all
- z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
- scatter(z1, Estim1, 100, 'o');
- scatter(z1, Data1, 100, 'x');
+ z1 = linspace(0,4,5); %defines mesh where going to plot Estim1, Data1 values 
+ scatter(z1, Estim1, 50, 'o');
+ scatter(z1, Data1, 50, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P')
@@ -254,9 +244,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
   % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
  figure(9)
  hold all
- z2 = linspace(0,5,6);
- scatter(z2, Estim2, 100, 'o');
- scatter(z2, Data2, 100, 'x');
+ z2 = linspace(0,4,5);
+ scatter(z2, Estim2, 50, 'o');
+ scatter(z2, Data2, 50, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
@@ -272,8 +262,8 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(10)
  hold all
  z3 = linspace(0,2,3);
- scatter(z3, Estim3, 100,'o');
- scatter(z3, Data3, 100,'x');
+ scatter(z3, Estim3, 50,'o');
+ scatter(z3, Data3, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
@@ -287,8 +277,8 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(11)
  hold all
  z4 = linspace(0,23,24);
- scatter(z4, Estim4, 100, 'o');
- scatter(z4, Data4, 100,'x');
+ scatter(z4, Estim4, 50, 'o');
+ scatter(z4, Data4, 50,'x');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
  ylabel('Proportion in P')
@@ -305,73 +295,34 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
  
 
- figure(12)
- hold all
- z5 = linspace(0,4,5); %defines mesh where going to plot Estim5, Data5 values 
- scatter(z5, Estim5, 50,'o');
- scatter(z5, Data5, 50,'x');
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Proportion overdose from A') % at some point during the year
- legend({'ODE solution', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 4 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
- 
- figure(13)
- hold all
- z6 = linspace(0,4,5); %defines mesh where going to plot Estim6, Data6 values 
- scatter(z6, Estim6, 50,'o');
- scatter(z6, Data6, 50,'x');
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Proportion overdose from H') % at some point during the year
- legend({'ODE solution', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 4 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
- 
- 
-function alpha = a(t,pars)
-if  t<=3.25 
-    alpha = pars(1)*t+pars(16);
-else
-    alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
-    %alpha = pars(17)*t+pars(18);
-    %alpha = pars(1)*t+pars(16);
-end
-end
-
-
+           
 function f = HeroinModel(t,y,pars)
 f=zeros(8,1);
-f(1)=-a(t,pars)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
-f(2)=a(t,pars)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
+f(1)=-(pars(1)*t+pars(16))*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
+f(2)=(pars(1)*t+pars(16))*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
 f(4)=pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(14)*y(4)-(pars(6)+pars(8))*y(4);
 f(5)=pars(12)*y(3)+pars(14)*y(4)-(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))-(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15))-pars(6)*y(5);
 
-% X' ODE to calculate the number of new cases of prescription opioid use over time;
-% i.e. individuals who enter the P class at any time from S (used in Estim1, Estim4)
-f(6) = a(t,pars)*y(1);
+
+% X' ODE to calculate the number of new cases of prescription opioid use over time; i.e.
+%individuals who enter the P class at any time from S (used in Estim1 in HeroinModel_ODE45.m) 
+f(6) = (pars(1)*t+pars(16))*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
-% i.e. individuals who enter the A class at any time (used in Estim2)
+%i.e. individuals who enter the A class at any time (used in Estim2 in
+%HeroinModel_ODE45.m)
 f(7) = pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2);
 
-% M' ODE to calculate the number of new cases of heroin/fentanyl addiction over time; 
-% i.e. individuals who enter the H class at any time (used in Estim3)
+% M' ODE to calculate the number of new cases of heroin/fentanyl addiction
+%over time; i.e. individuals who enter the H class at any time (used in
+%Estim3 in HeroinModel_ODE45.m)
 f(8) = pars(4)*y(1)*y(4)+pars(10)*y(2)*y(4)+pars(13)*y(3)*y(4)+(pars(11)*y(5)*y(4))/(y(3)+y(4)+pars(15));
 
-%J' ODE to calculate number of prescription opioid addict overdoses over
-%time; i.e. individuals who overdose at any time (used in Estim5)
-f(9) = pars(7)*y(3);
-
-%K' ODE to calculate number of heroin/fentanayl addict overdoses over
-%time; i.e. individuals who overdose at any time (used in Estim6)
-f(10) = pars(8)*y(4);
 
 end
+
+
 
 
  
