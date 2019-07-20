@@ -94,20 +94,18 @@ figure(2);
 
   
  figure(3);
- subplot(221)
  plot((0.0283-LHSmatrix(:,7))*100/0.0283,(0.004418807691222-A_lhs)*100/0.004418807691222,'o') %(i.e. first column of LHSmatrix1 is m varying, and S_lhs1 is ODE output from using those values (while all other parameters are fixed), so this is how S is affected
+ hold on
+ plot((0.0283-LHSmatrix(:,7))*100/0.0283,(0.002197350239427-H_lhs)*100/0.002197350239427,'o')
+ hold off
  xlabel('Percent reduction in \sigma')
- ylabel('Percent reduction in A')
+ ylabel('Percent reduction in A or H')
+ legend({'Percent reduction in A', 'Percent reduction in H'},'FontSize', 10)
  set(gca,'XTick',0:10:100);
  xlim([0 90])
  ylim([0 85])
- subplot(222)
- plot((0.0283-LHSmatrix(:,7))*100/0.0283,(0.002197350239427-H_lhs)*100/0.002197350239427,'o')
- xlabel('Percent reduction in \sigma')
- ylabel('Percent reduction in H')
- set(gca, 'XTick', 0:10:100)
- xlim([0 90])
- ylim([0 85])
+ 
+ 
  
 
 
