@@ -239,8 +239,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  %plot(t(1:end), State_data_9, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('M(t)')
- legend({'Proportion that enter H at some point during the year'}, 'FontSize', 11)%,'data simulated' )
+ ylabel('J(t)')
+ legend({'Proportion that overdose from A'}, 'FontSize', 11)%,'data simulated' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) %correspond to the actual t values from t vector that I want to label
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -256,8 +256,8 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  %plot(t(1:end), State_data_10, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
- ylabel('M(t)')
- legend({'Proportion that enter H at some point during the year'}, 'FontSize', 11)%,'data simulated' )
+ ylabel('K(t)')
+ legend({'Proportion that overdose from H'}, 'FontSize', 11)%,'data simulated' )
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) %correspond to the actual t values from t vector that I want to label
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})

@@ -10,7 +10,7 @@ beta_P=0.000469;%0.0004686;
 theta_1=0.000502;%0.00050178;
 epsilon=2.49;%2.494959842;
 mu=0.00868; 
-mu_A=0.00870;      
+mu_A=0.0109;      
 mu_H=0.0507;
 gamma=0.00146;%0.001457803;
 theta_2=0.148;%0.148273758;
@@ -240,14 +240,15 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
  scatter(z1, Estim1, 100, 'o');
+ plot(z1,Estim1);
  scatter(z1, Data1, 100, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P')
-  legend({'ODE solution', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 4 ])
+  legend({'Model simulation', 'Data'},'FontSize', 14)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
 
  
@@ -256,14 +257,15 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z2 = linspace(0,5,6);
  scatter(z2, Estim2, 100, 'o');
+ plot(z2,Estim2);
  scatter(z2, Data2, 100, 'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
- legend({'ODE solution', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 4 ])
+ legend({'OModel simulation', 'Data'},'FontSize', 14)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016', '2017'})
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
 
 
 
@@ -273,11 +275,12 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z3 = linspace(0,2,3);
  scatter(z3, Estim3, 100,'o');
+ plot(z3,Estim3);
  scatter(z3, Data3, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
-  legend({'ODE solution', 'Data'},'FontSize', 14)
+  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
@@ -288,11 +291,12 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z4 = linspace(0,23,24);
  scatter(z4, Estim4, 100, 'o');
+ plot(z4,Estim4);
  scatter(z4, Data4, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
  ylabel('Proportion in P')
- legend({'ODE solution', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
  set(gca, 'fontsize',10)
  xtickangle(90)
@@ -308,12 +312,13 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(12)
  hold all
  z5 = linspace(0,4,5); %defines mesh where going to plot Estim5, Data5 values 
- scatter(z5, Estim5, 50,'o');
- scatter(z5, Data5, 50,'x');
+ scatter(z5, Estim5, 100,'o');
+ plot(z5,Estim5);
+ scatter(z5, Data5, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
- legend({'ODE solution', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
@@ -321,12 +326,13 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(13)
  hold all
  z6 = linspace(0,4,5); %defines mesh where going to plot Estim6, Data6 values 
- scatter(z6, Estim6, 50,'o');
- scatter(z6, Data6, 50,'x');
+ scatter(z6, Estim6, 100,'o');
+ plot(z6,Estim6);
+ scatter(z6, Data6, 100,'x');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
- legend({'ODE solution', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
