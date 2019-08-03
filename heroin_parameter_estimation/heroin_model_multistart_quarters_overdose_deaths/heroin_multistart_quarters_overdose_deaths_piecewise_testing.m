@@ -262,7 +262,7 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
- legend({'OModel simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
@@ -337,6 +337,94 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
  
+ 
+ figure(14)
+ set(gcf, 'Position',  [1, 1, 1700, 800])
+
+ z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
+ subplot(3,2,1);scatter(z1, Estim1, 80, 'o');
+ hold on
+ subplot(3,2,1);scatter(z1, Data1, 80, 'x');
+ set(gca, 'fontsize',10)
+ subplot(3,2,1);xlabel('Year')
+ subplot(3,2,1);ylabel('Proportion in P')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
+ 
+ z2 = linspace(0,5,6);
+ subplot(3,2,2);scatter(z2, Estim2, 80, 'o');
+ hold on
+ subplot(3,2,2);scatter(z2, Data2, 80, 'x');
+ set(gca, 'fontsize',10)
+ subplot(3,2,2);xlabel('Year')
+ subplot(3,2,2);ylabel('Proportion in A')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
+ 
+ z3 = linspace(0,2,3);
+ subplot(3,2,3);scatter(z3, Estim3, 80,'o');
+ hold on
+ subplot(3,2,3);scatter(z3, Data3, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(3,2,3);xlabel('Year')
+ subplot(3,2,3);ylabel('Proportion in H')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+ 
+ z4 = linspace(0,23,24);
+ subplot(3,2,4);scatter(z4, Estim4, 80, 'o');
+ hold on
+ subplot(3,2,4);scatter(z4, Data4, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(3,2,4);xlabel('Quarter')
+ subplot(3,2,4);ylabel('Proportion in P')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
+ set(gca, 'fontsize',10)
+ xtickangle(90)
+ set(gca,'XLim',[0 23])
+ set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
+                       'Q1 2014', 'Q2 2014', 'Q3 2014', 'Q4 2014',...
+                       'Q1 2015', 'Q2 2015', 'Q3 2015', 'Q4 2015',...
+                       'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
+                       'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
+                       'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
+ 
+ 
+ 
+ z5 = linspace(0,4,5); %defines mesh where going to plot Estim5, Data5 values 
+ subplot(3,2,5);scatter(z5, Estim5, 80,'o');
+ hold on
+ subplot(3,2,5);scatter(z5, Data5, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(3,2,5);xlabel('Year')
+ subplot(3,2,5);ylabel('Proportion overdose from A') % at some point during the year
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
+                   
+                   
+                   
+ z6 = linspace(0,4,5);
+ subplot(3,2,6);scatter(z6, Estim6, 80,'o');
+ hold on 
+ subplot(3,2,6);scatter(z6, Data6, 80,'x');
+ subplot(3,2,6);xlabel('Year')
+ subplot(3,2,6);ylabel('Proportion overdose from H')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
+  
+ 
+
  
 function alpha = a(t,pars)
 if  t<=3.25 
