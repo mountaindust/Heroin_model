@@ -4,24 +4,24 @@ clear all;
 
 %Parameters
 %slope of alpha 
-m=-0.00483;%-0.004831534;
-beta_A=0.0044;%0.004397639;
-beta_P=0.000469;%0.0004686;
-theta_1=0.000502;%0.00050178;
-epsilon=2.49;%2.494959842;
+m=-0.0026;
+beta_A=0.000547;
+beta_P=0.0000352;
+theta_1=0.00066;
+epsilon=2.45;
 mu=0.00868; 
 mu_A=0.0109;      
 mu_H=0.0507;
-gamma=0.00146;%0.001457803;
-theta_2=0.148;%0.148273758;
-sigma=0.0283;%0.028318428;
-zeta=0.318;%0.318058863;
-theta_3=2.38;%2.379076045;
-nu=0.0482;%0.048152163;
+gamma=0.00103;
+theta_2=1.99;
+sigma=0.0207;
+zeta=0.259;
+theta_3=3.91;
+nu=0.000332;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.283;%0.283129553;
-c=-0.0313;%-0.031298274;
+b=0.281;
+c=-0.0308;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
@@ -35,10 +35,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.095;%0.094988976;
-A0=0.00647;%0.006465234;
-H0=0.000843;%0.000842791;
-R0=0.0584;%0.058439379;
+P0=0.102;
+A0=0.00649;
+H0=0.000483;
+R0=0.076;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -115,8 +115,33 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
 
  
- % ODE solutions plotted separately shown all together
- figure(1)
+ for i=1:21;
+    continuous1(i)=y(i,2)+y(i+4,6)-y(i,6);
+ end 
+ 
+ for i=1:21;
+    continuous2(i)=y(i,3)+y(i+4,7)-y(i,7);
+ end 
+ 
+ for i=1:9;
+    continuous3(i)=y(i+4,4)+y(i+8,8)-y(i+4,8);
+ end 
+ 
+ for i=1:24;
+    continuous4(i)=y(i,2)+y(i+1,6)-y(i,6);
+ end 
+ 
+ for i=1:17;
+    continuous5(i)=y(i+4,9)-y(i,9);
+ end 
+ 
+ for i=1:17;
+     continuous6(i)=y(i+4,10)-y(i,10);
+ end 
+ 
+ 
+ 
+figure(1)
          
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',3)
            subplot(2,2,1);xlabel('Year')
@@ -239,30 +264,32 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(8)
  hold all
  z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
+ z7 = linspace(0,5,21);
  scatter(z1, Estim1, 100, 'o');
- plot(z1,Estim1);
  scatter(z1, Data1, 100, 'x');
+ plot(z7,continuous1,'k-');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P')
-  legend({'Model simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
 
  
-  % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
+ % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
  figure(9)
  hold all
  z2 = linspace(0,5,6);
+ z8 = linspace(0,5,21);
  scatter(z2, Estim2, 100, 'o');
- plot(z2,Estim2);
  scatter(z2, Data2, 100, 'x');
+ plot(z8,continuous2,'k-');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
- legend({'Model simulation', 'Data'},'FontSize', 14)
+ legend({'OModel simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
@@ -274,13 +301,14 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(10)
  hold all
  z3 = linspace(0,2,3);
+ z9 = linspace(0,2,9);
  scatter(z3, Estim3, 100,'o');
- plot(z3,Estim3);
  scatter(z3, Data3, 100,'x');
+ plot(z9,continuous3,'k-');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
-  legend({'Model simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
@@ -290,9 +318,10 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(11)
  hold all
  z4 = linspace(0,23,24);
+ z10 = linspace(0,23,24);
  scatter(z4, Estim4, 100, 'o');
- plot(z4,Estim4);
  scatter(z4, Data4, 100,'x');
+ plot(z10,continuous4,'k-');
  set(gca, 'fontsize',10)
  xlabel('Quarter')
  ylabel('Proportion in P')
@@ -312,9 +341,10 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  figure(12)
  hold all
  z5 = linspace(0,4,5); %defines mesh where going to plot Estim5, Data5 values 
+ z11 = linspace(0,4,17);
  scatter(z5, Estim5, 100,'o');
- plot(z5,Estim5);
  scatter(z5, Data5, 100,'x');
+ plot(z11,continuous5,'k-');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
@@ -323,12 +353,15 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
  
+ 
+ 
  figure(13)
  hold all
  z6 = linspace(0,4,5); %defines mesh where going to plot Estim6, Data6 values 
+ z12 = linspace(0,4,17);
  scatter(z6, Estim6, 100,'o');
- plot(z6,Estim6);
  scatter(z6, Data6, 100,'x');
+ plot(z12,continuous6,'k-');
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
