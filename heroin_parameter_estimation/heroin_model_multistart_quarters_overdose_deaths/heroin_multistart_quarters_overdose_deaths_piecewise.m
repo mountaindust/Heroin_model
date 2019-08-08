@@ -27,7 +27,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=100;
+numstartpoints=200;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -116,7 +116,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(1)
  hold all
  plot(t,y(:,1),'k-','LineWidth',3)
- plot(t(1:end), State_data_1, 'x')
+ %plot(t(1:end), State_data_1, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Susceptibles')
@@ -133,7 +133,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(2)
  hold all
  plot(t,y(:,2),'b-','LineWidth',3)
- plot(t(1:end), State_data_2, 'x')
+%plot(t(1:end), State_data_2, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Prescription Users')
@@ -149,7 +149,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(3)
  hold all
  plot(t,y(:,3),'r-','LineWidth',3)
- plot(t(1:end), State_data_3, 'x')
+ %plot(t(1:end), State_data_3, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Opioid addicts')
@@ -165,7 +165,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(4)
  hold all
  plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
- plot(t(1:end), State_data_4, 'x')
+ %plot(t(1:end), State_data_4, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
@@ -181,7 +181,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(5)
  hold all
  plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
- plot(t(1:end), State_data_5, 'x')
+ %plot(t(1:end), State_data_5, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Stably recovered addicts')
@@ -196,7 +196,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(6)
  hold all
  plot(t,y(:,6),'LineWidth',3)
- plot(t(1:end), State_data_6, 'x')
+ %plot(t(1:end), State_data_6, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('X(t)')
@@ -212,7 +212,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(7)
  hold all
  plot(t,y(:,7),'LineWidth',3)
- plot(t(1:end), State_data_7, 'x')
+ %plot(t(1:end), State_data_7, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('L(t)')
@@ -228,7 +228,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(8)
  hold all
  plot(t,y(:,8),'LineWidth',3)
- plot(t(1:end), State_data_8, 'x')
+ %plot(t(1:end), State_data_8, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('M(t)')
@@ -245,7 +245,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(9)
  hold all
  plot(t,y(:,9),'LineWidth',3)
- plot(t(1:end), State_data_9, 'x')
+ %plot(t(1:end), State_data_9, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('J(t)')
@@ -262,7 +262,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  figure(10)
  hold all
  plot(t,y(:,10),'LineWidth',3)
- plot(t(1:end), State_data_10, 'x')
+ %plot(t(1:end), State_data_10, 'x')
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('K(t)')
@@ -282,10 +282,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
      
  % Actual Data for years 2013-2018
- %Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
+ Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
  
  %Testing Data 
- Data1=[0.331574325986979;0.322519449361526;0.319556848622964;0.310384043536721;0.283643697595965;0.250408236361685];
+ %Data1=[0.331574325986979;0.322519449361526;0.319556848622964;0.310384043536721;0.283643697595965;0.250408236361685];
  
  % Data points from proportion that is in P at some point in the year and corresponding ODE solution points 
  figure(11)
@@ -309,10 +309,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  
  % Actual Data for years 2013-2018
- %Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
+ Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
  
  %Testing Data
- Data2=[0.00802951524269548;0.00770633035801977;0.00735449191012147;0.00695263159030065;0.00648268985580833;0.00594322842197851];
+ %Data2=[0.00802951524269548;0.00770633035801977;0.00735449191012147;0.00695263159030065;0.00648268985580833;0.00594322842197851];
  
  
   % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
@@ -337,10 +337,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
  % Actual Data for years 2014-2016
- %Data3=[7560./5559702; 7560./5602187; 10260./5648259];
+ Data3=[7560./5559702; 7560./5602187; 10260./5648259];
  
  %Testing Data
- Data3=[0.00108078107424111;0.00155735427751202;0.00221294953998018];
+ %Data3=[0.00108078107424111;0.00155735427751202;0.00221294953998018];
  
  
  % Data points from proportion that is in H at some point in the year and corresponding ODE solution points 
@@ -365,15 +365,15 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
 
         
  %Actual Data for years 2013-2018 
-% Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
- %       833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
-  %      827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
-   %     832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
-    %    775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
-     %   688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
+ Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
  
  %Testing Data
- Data4=[0.159345888525904;0.155369684395518;0.153226232495256;0.152038272755859;0.151303670490909;0.150774641564431;0.150353591755673;0.149995131706456;0.149672168321776;0.149358805511151;0.149050068737102;0.148734280370870;0.148085068864361;0.147016117783976;0.145043027658001;0.142252916511528;0.138990114824242;0.135356694964831;0.131519862311692;0.127622405412348;0.123717988037982;0.119806623029534;0.115881867009583;0.111940266417211];
+%Data4=[0.159345888525904;0.155369684395518;0.153226232495256;0.152038272755859;0.151303670490909;0.150774641564431;0.150353591755673;0.149995131706456;0.149672168321776;0.149358805511151;0.149050068737102;0.148734280370870;0.148085068864361;0.147016117783976;0.145043027658001;0.142252916511528;0.138990114824242;0.135356694964831;0.131519862311692;0.127622405412348;0.123717988037982;0.119806623029534;0.115881867009583;0.111940266417211];
  
  % Data points from proportion that is in P at some point in the quarter of a year and corresponding ODE solution points 
  figure(14)
@@ -405,10 +405,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9); y(21,9)-y(17,9)];
      
  % Actual Data for years 2013-2017
- %Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259; 381./5702475];
+ Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259; 381./5702475];
  
  %Testing Data
- Data5=[6.93893503425710e-05;6.66363564939064e-05;6.36911749420292e-05;6.03701269735515e-05;5.65022143567912e-05];
+ %Data5=[6.93893503425710e-05;6.66363564939064e-05;6.36911749420292e-05;6.03701269735515e-05;5.65022143567912e-05];
  
  
   % Data points from proportion that is in A at some point and overdoses in the year and corresponding ODE solution points 
@@ -433,10 +433,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
         y(17,10)-y(13,10); y(21,10)-y(17,10)];
     
  % Actual Data for years 2013-2017
- %Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
+ Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
  
  %Testing Data
- Data6=[2.99015652964405e-05;4.35881487901691e-05;6.30645587490766e-05;9.02990840950082e-05;0.000126571634010397];
+ %Data6=[2.99015652964405e-05;4.35881487901691e-05;6.30645587490766e-05;9.02990840950082e-05;0.000126571634010397];
  
   % Data points from proportion that is in H at some point and overdoses in the year and corresponding ODE solution points 
  figure(16)
@@ -553,10 +553,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % (total number of non-addicted prescription opioid users in each year in TN that are 12 and older divided by
  % total population in TN 12 and older for each year) 
  
- %Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
+ Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
 
  %Testing Data
- Data1=[0.331574325986979;0.322519449361526;0.319556848622964;0.310384043536721;0.283643697595965;0.250408236361685];
+ %Data1=[0.331574325986979;0.322519449361526;0.319556848622964;0.310384043536721;0.283643697595965;0.250408236361685];
  
  % The difference between estimated values and data
  
@@ -605,10 +605,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % (total number of opioid addicted individuals in TN
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
- %Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
+ Data2=[43418./5519417; 42928./5559702; 42816./5602187; 37464./5648259; 34805./5702475; 31244./5754509];
  
  %Testing Data
- Data2=[0.00802951524269548;0.00770633035801977;0.00735449191012147;0.00695263159030065;0.00648268985580833;0.00594322842197851];
+ %Data2=[0.00802951524269548;0.00770633035801977;0.00735449191012147;0.00695263159030065;0.00648268985580833;0.00594322842197851];
  
  % The difference between estimated value and data
  
@@ -646,10 +646,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % that are 12 and older divided by the total population in TN 12 and older for each year) 
  
  
- %Data3=[7560./5559702; 7560./5602187; 10260./5648259];
+ Data3=[7560./5559702; 7560./5602187; 10260./5648259];
  
  %Testing Data
- Data3=[0.00108078107424111;0.00155735427751202;0.00221294953998018];
+ %Data3=[0.00108078107424111;0.00155735427751202;0.00221294953998018];
  
 
  % The difference between estimated value and data
@@ -712,15 +712,15 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
 
 
  %Actual proportion of non-addicted prescription opioid users for every quarter in years 2013-2018 
- %Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
-  %      833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
-   %     827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
-    %    832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
-     %   775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
-      %  688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
+ Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688502./5754509; 683722./5754509; 641942./5754509; 625162./5754509];
       
  %Testing Data
- Data4=[0.159345888525904;0.155369684395518;0.153226232495256;0.152038272755859;0.151303670490909;0.150774641564431;0.150353591755673;0.149995131706456;0.149672168321776;0.149358805511151;0.149050068737102;0.148734280370870;0.148085068864361;0.147016117783976;0.145043027658001;0.142252916511528;0.138990114824242;0.135356694964831;0.131519862311692;0.127622405412348;0.123717988037982;0.119806623029534;0.115881867009583;0.111940266417211];
+ %Data4=[0.159345888525904;0.155369684395518;0.153226232495256;0.152038272755859;0.151303670490909;0.150774641564431;0.150353591755673;0.149995131706456;0.149672168321776;0.149358805511151;0.149050068737102;0.148734280370870;0.148085068864361;0.147016117783976;0.145043027658001;0.142252916511528;0.138990114824242;0.135356694964831;0.131519862311692;0.127622405412348;0.123717988037982;0.119806623029534;0.115881867009583;0.111940266417211];
  
 
  %The difference between estimated value and data 
@@ -735,10 +735,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % Actual proportion of addicted prescription opioid users that overdose
  % each year 2013-2017
  
- %Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259; 381./5702475];
+ Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259; 381./5702475];
  
  %Testing Data
- Data5=[6.93893503425710e-05;6.66363564939064e-05;6.36911749420292e-05;6.03701269735515e-05;5.65022143567912e-05];
+ %Data5=[6.93893503425710e-05;6.66363564939064e-05;6.36911749420292e-05;6.03701269735515e-05;5.65022143567912e-05];
  
  
  %The difference between estimated value and data
@@ -751,10 +751,10 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10); y(17,10)-y(13,10); y(21,10)-y(17,10)];
     
  % Actual proportion of heroin addicts that overdose each year 2013-2017
- %Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
+ Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
  
  %Testing Data
- Data6=[2.99015652964405e-05;4.35881487901691e-05;6.30645587490766e-05;9.02990840950082e-05;0.000126571634010397];
+ %Data6=[2.99015652964405e-05;4.35881487901691e-05;6.30645587490766e-05;9.02990840950082e-05;0.000126571634010397];
  
  
 
@@ -842,7 +842,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
  
- %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
  
  
  %%%%
@@ -850,10 +850,12 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5);
 
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff6,2)./norm(Data6);
+ 
  %value=norm(Diff5,2)./norm(Data5);
  
  % For testing purposes with states and data sets
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8)+norm(State_diff_9,2)./norm(State_data_9)+norm(State_diff_10,2)./norm(State_data_10);
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8)+norm(State_diff_9,2)./norm(State_data_9)+norm(State_diff_10,2)./norm(State_data_10);
   
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(State_diff_1,2)./norm(State_data_1)+norm(State_diff_2,2)./norm(State_data_2)+norm(State_diff_3,2)./norm(State_data_3)+norm(State_diff_4,2)./norm(State_data_4)+norm(State_diff_5,2)./norm(State_data_5)+norm(State_diff_6,2)./norm(State_data_6)+norm(State_diff_7,2)./norm(State_data_7)+norm(State_diff_8,2)./norm(State_data_8);
  
