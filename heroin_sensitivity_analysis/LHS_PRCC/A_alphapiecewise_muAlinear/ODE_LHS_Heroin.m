@@ -1,6 +1,6 @@
 function dydt=LV_ODE_LHS_Heroin(t,y,LHSmatrix,x)
 %% PARAMETERS %%
-Parameter_settings_LHS_Heroin;
+%Parameter_settings_LHS_Heroin;
 
 m= LHSmatrix(x,1);
 beta_A= LHSmatrix(x,2);
