@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-P_0 = 0.095#0.0835 
-A_0 = 0.00647#0.00671
-H_0 = 0.000843#0.000874 
-R_0 = 0.0584#0.0509
+P_0 = 0.0937
+A_0 = 0.00543
+H_0 = 0.000408
+R_0 = 0.0861
 S_0 = 1-P_0-A_0-H_0-R_0
 
 #temporal info, assigning default values
@@ -17,23 +17,25 @@ tstop =  6
 
 #parameters
 params = {}
-params['m'] = -0.00483#-0.0156                       #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
-params['b'] = 0.283#0.303                         #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
-params['beta_A'] = 0.0044#0.00235                  #S->A total probability of becoming addicted to opioids other than by prescription 
-params['beta_P'] =  0.000469#0.000141                # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
-params['theta_1'] = 0.000502#0.000507                #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
+params['m'] = -0.00597                    #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
+params['b'] = 0.295                        #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
+params['beta_A'] = 0.00479                  #S->A total probability of becoming addicted to opioids other than by prescription 
+params['beta_P'] =  0.00139                # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
+params['theta_1'] = 0.0686                #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
 params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  
-params['mu_A'] = 0.00870                    #A->S overdose death rate for opioid addicts 
 params['mu_H'] = 0.0507                     #H->S overdose death rate for heroin addicts 
-params['gamma'] = 0.00146#0.00115         # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE)  
-params['epsilon'] = 2.49#2.54                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
-params['theta_2'] = 0.148#0.0370                  #P->H rate at which opioid prescribed user population becomes addicted to heroin 
-params['sigma'] = 0.0283#0.0284                    #R->A rate at which people relapse from treatment into the opioid addicted class 
-params['zeta'] = 0.318#0.265                      #A->R rate at which addicted opioid users enter treatment/rehabilitation 
-params['theta_3'] = 2.38#3.51                    #A->H rate at which the opioid addicted population becomes addicted to heroin 
-params['nu'] = 0.0482#0.00657                      #H->R rate at which heroin users enter treatment/rehabilitation 
+params['gamma'] = 0.00238         # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE)  
+params['epsilon'] = 2.520                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
+params['theta_2'] = 0.356                  #P->H rate at which opioid prescribed user population becomes addicted to heroin 
+params['sigma'] = 0.0278                   #R->A rate at which people relapse from treatment into the opioid addicted class 
+params['zeta'] = 0.474                    #A->R rate at which addicted opioid users enter treatment/rehabilitation 
+params['theta_3'] = 1.87                   #A->H rate at which the opioid addicted population becomes addicted to heroin 
+params['nu'] = 0.000462                    #H->R rate at which heroin users enter treatment/rehabilitation 
 params['omega'] = 0.0000000001              #perturbation term for relapse rates
-params['c']= -0.0313                        #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
+params['c']= -0.0298                       #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
+params['d']= 0.00305                         #only for linear muA, slope of time-dependent muA for 2013-2018
+params['e']= 0.00952                          #only for linear muA, y-intercept of time-dependent muA for 2013-2018
+
 
 def alpha(t, params):
     if t <= 3.25:
@@ -41,6 +43,9 @@ def alpha(t, params):
     else:
        return params['m']*3.25+params['b']-params['c']*3.25+params['c']*t
 
+def muA(t, params):
+       return params['d']*t+params['e']
+      
 
 def update_params(new_params):
     '''Update the params dict with new values contained in new_params'''
@@ -75,10 +80,10 @@ def heroin_odes(t, X, params):
     Y[0] = -alpha(t, params)*S-params['beta_A']*S*A-\
         params['beta_P']*S*P-params['theta_1']*S*H+\
         params['epsilon']*P+params['mu']*(P+R)+\
-        (params['mu']+params['mu_A'])*A+(params['mu']+params['mu_H'])*H
+        (params['mu']+muA(t,params))*A+(params['mu']+params['mu_H'])*H
     Y[1] = alpha(t, params)*S-params['epsilon']*P-params['gamma']*P-params['theta_2']*P*H-params['mu']*P
     Y[2] = params['gamma']*P+params['sigma']*R*A/(A+H+params['omega'])+params['beta_A']*S*A+\
-        params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-params['mu_A']*A
+        params['beta_P']*S*P-params['zeta']*A-params['theta_3']*A*H-params['mu']*A-muA(t,params)*A
     Y[3] = params['theta_1']*S*H+params['theta_2']*P*H+params['theta_3']*A*H+\
         params['sigma']*R*H/(A+H+params['omega'])-params['nu']*H-params['mu']*H-params['mu_H']*H
     Y[4] = params['zeta']*A+params['nu']*H-\
@@ -210,13 +215,23 @@ if __name__ == "__main__":
     plot_addiction_totaled(*sol)
     #compute R_0
     #print(compute_R0(p=None))
+    
+    print('alpha values')
+    print(alpha(0,params))
+    print(alpha(1,params))
+    print(alpha(2,params))
+    print(alpha(3,params))
+    print(alpha(4,params))
+    print(alpha(5,params))
+    print(alpha(6,params))
 
-    #print(alpha(0,params))
-    #print(alpha(1,params))
-    #print(alpha(2,params))
-    #print(alpha(3,params))
-    #print(alpha(4,params))
-    #print(alpha(5,params))
-    #print(alpha(6,params))
+    print('muA values')
+    print(muA(0,params))
+    print(muA(1,params))
+    print(muA(2,params))
+    print(muA(3,params))
+    print(muA(4,params))
+    print(muA(5,params))
+    print(muA(6,params))
 
     
