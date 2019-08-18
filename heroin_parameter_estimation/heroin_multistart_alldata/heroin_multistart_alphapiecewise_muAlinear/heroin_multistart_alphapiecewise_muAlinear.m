@@ -4,10 +4,11 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta    theta3    nu     b     P0        A0       H0       R0       c       d      e ]
-LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001    0.0001  0.0001    0.0001   0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   0.001  0.001];
-UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1       0.7      4      0.1    0.8     0.5       0.1     0.1       0.1     0.1    0.2    0.5 ];
-  
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta    theta3    nu      b     P0        A0       H0       R0       c      d         e ]
+%LowerBounds=[-0.1  0.00001   0.000001 0.0001    0.8    0.001    0.0001    0.001   0.0001   0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   0.0001   0.001];
+%UpperBounds=[ 0.1    0.01      0.01     0.1       8      0.1       2       2        1       4        1     0.8    0.5       0.1     0.1       0.1    0.1    0.01     0.1 ];
+LowerBounds=[-0.1  0.0001   0.0001  0.0001    0.8     0.001    0.0001    0.001   0.0001   0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  -0.1   0.0001   0.001];
+UpperBounds=[0.1     0.1       0.1      0.1     8        0.1        1       1      0.7       4      0.2     0.8    0.5     0.1       0.1       0.1    0.1     0.01    0.05];
 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
@@ -27,7 +28,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=2000;
+numstartpoints=3000;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -54,11 +55,6 @@ d=x(18);
 e=x(19);
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
-
-
-
-%syms alpha(t)
-%alpha(t)=piecewise(t<3,pars(1)*t+pars(16),t>=3,pars(17)*t+pars(18));
 
 
 % Print optimal parameter solution and objective function value in command
@@ -105,7 +101,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
  
- %%% For testing purposes: states and corresponding simulated data 
  %%% For testing purposes: states and corresponding simulated data 
  State1=y(:,1);
  State_data_1=[0.815027000000000;0.820092606374491;0.823083462782946;0.824953101284708;0.826266867578232;0.827295589605025;0.828151064299051;0.828888056709765;0.829550987768877;0.830160968116141;0.830731476779983;0.831267853739846;0.831775277792388;0.832369337439226;0.833320273070873;0.834935193709164;0.837008222792739;0.839430514198263;0.841948852372022;0.844480533456716;0.846969875070211;0.849438372705049;0.851927568637527;0.854422077354162;0.856929766092053];
@@ -399,7 +394,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
                    
                    
 % Yearly simulation of individuals overdosing from A class during the year for years
-% 2013-2017 (anyone in A class throughout the year times mu_A)
+% 2013-2016 (anyone in A class throughout the year times mu_A)
  
  Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];
      
@@ -425,7 +420,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})                   
                    
  
- % Yearly simulation of individuals overdosing from H class during the year for years
+% Yearly simulation of individuals overdosing from H class during the year for years
 % 2013-2017 (anyone in H class throughout the year times mu_H)
  
  Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...

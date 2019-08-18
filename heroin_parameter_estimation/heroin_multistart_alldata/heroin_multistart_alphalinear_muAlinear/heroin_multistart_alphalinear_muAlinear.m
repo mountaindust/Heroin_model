@@ -4,10 +4,11 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0       d      e ]
-LowerBounds=[-0.1  0.00001  0.000001  0.00001   0.8    0.001    0.0001  0.0001    0.0001  0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001  0.001  0.001];
-UpperBounds=[ 0.1    0.01     0.01    0.001      8       0.1       2       1        1     4         0.1   0.8    0.5      0.1      0.1      0.1      0.5    0.5 ];
-  
+%           [m       betaA    betaP   theta1   epsilon   gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0       d        e ]
+LowerBounds=[-0.1  0.00001   0.000001 0.0001    0.8    0.001    0.0001    0.001   0.0001   0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001   0.0001   0.001];
+UpperBounds=[ 0.1    0.01      0.01     0.1       8      0.1       2       2        1       4        1     0.8    0.5       0.1     0.1       0.1      0.01     0.1 ];
+
+    
 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
@@ -27,7 +28,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=50;
+numstartpoints=2000;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
