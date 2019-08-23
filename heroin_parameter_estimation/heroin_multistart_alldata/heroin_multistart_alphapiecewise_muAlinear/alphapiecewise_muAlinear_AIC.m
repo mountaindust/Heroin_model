@@ -54,10 +54,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   M=y(:,8);
   J=y(:,9);
   K=y(:,10);
-  %alpha=-pars(1)*t+pars(16);
- alpha=m*t+b;
- 
- 
+
  
   % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
