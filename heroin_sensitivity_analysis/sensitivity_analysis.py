@@ -66,8 +66,8 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
-                   theta_2,zeta,theta_3,nu,omega,b,c,P_0,A_0,H_0,R_0):
+def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,
+                   theta_2,zeta,theta_3,nu,omega,b,c,d,e,P_0,A_0,H_0,R_0):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
     tstart = 0
@@ -83,7 +83,6 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_A,mu_H,
     params['gamma'] = gamma
     params['sigma'] = sigma
     params['mu'] = mu
-    params['mu_A'] = mu_A
     params['mu_H'] = mu_H
     params['theta_2'] = theta_2
     params['zeta'] = zeta
@@ -138,7 +137,7 @@ def main(N, filename, reduced, pool=None, no_plot=False):
             'bounds': [[-0.00896,-0.00299], [0.00240,0.00719], [0.000695,0.00209], [0.0343,0.103], [1.26,3.78], 
                        [0.00119,0.00357], [0.0139,0.0417], [0.00434,0.0130], [0.0254,0.0761], [0.178,0.534],
                        [0.237,0.711],  [0.935,2.81], [0.000231,0.000693], [0.00000000005,0.00000000015], 
-                       [0.148,0.443], [-0.0398,-0.0149], [0.00153,0.00458], [0.00476,0.0143], [0.0469,0.141], [0.00272,0.00815], [0.00204,0.00612], [0.0431,0.129]]  
+                       [0.148,0.443], [-0.0447,-0.0149], [0.00153,0.00458], [0.00476,0.0143], [0.04685,0.1406], [0.00272,0.00815], [0.000204,0.000612], [0.0431,0.129]]  
         }   # for alpha piecewise linear above
 
     ### Create an N by num_var matrix of parameter values ###
