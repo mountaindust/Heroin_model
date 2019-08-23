@@ -52,7 +52,7 @@ omega=0.0000000001;
 b=x(12);
 
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,muA,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 
 
@@ -455,15 +455,6 @@ disp(a(4,pars))
 disp(a(5,pars))
 disp(a(6,pars))
 
-fprintf('muA values')
-
-disp(muA(0,pars))
-disp(muA(1,pars))
-disp(muA(2,pars))
-disp(muA(3,pars))
-disp(muA(4,pars))
-disp(muA(5,pars))
-disp(muA(6,pars))
 
 
 function value = HeroinModel_ODE15s(z)

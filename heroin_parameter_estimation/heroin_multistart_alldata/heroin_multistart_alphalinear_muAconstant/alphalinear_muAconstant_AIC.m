@@ -1,22 +1,22 @@
-m=-0.016315043366142;
-beta_A=0.004576784574296;
-beta_P=0.001961100711192;
-theta_1=5.087528802931296e-04;
-epsilon=2.500714817046142;
+m=-0.0165;%-0.016460991623336;
+beta_A=0.000184;%1.841262189751567e-04;
+beta_P=0.0000132;%1.323375110619788e-05;
+theta_1=0.0988;%0.098757030097384;
+epsilon=2.51;%2.514037529084618;
 mu=0.00868;
 mu_A=0.0109;
 mu_H=0.0507;
-gamma=0.003630552621414;
-theta_2=0.893900278857187;
-sigma=0.889702060900079;
-zeta=0.518669681971285;
-theta_3=1.221956397540627;
-nu=4.699736045487307e-04;
+gamma=0.00101;%0.001011120740797;
+theta_2=1.99;%1.985698552620856;
+sigma=1.969;%1.968600249322354;
+zeta=0.207;%0.206726227464038;
+theta_3=3.91;%3.912353259494871;
+nu=0.000296;%2.956677498933851e-04;
 omega=0.0000000001;
-b=0.288729997909935;
+b=0.290;%0.289664534096324;
 
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,muA,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
@@ -26,10 +26,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial conditions
-P0=0.083700671037689;
-A0=0.005902511929057;
-H0=4.583608179759002e-04;
-R0=0.001305505480884;
+P0=0.0836;%0.083575527492668;
+A0=0.00458;%0.004580063611380;
+H0=0.000295;%2.945982487212141e-04;
+R0=0.00296;%0.002955497539851;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -52,8 +52,6 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   M=y(:,8);
   J=y(:,9);
   K=y(:,10);
-
- alpha=m*t+b;
  
  
  
@@ -103,10 +101,11 @@ value=norm(Diff1,2)^2+norm(Diff2,2)^2+norm(Diff3,2)^2+norm(Diff4,2)^2+norm(Diff5
 value2=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
 
 fprintf('AIC score')
-% sum of squares value, 48 data points, 16 parameters estimating+1 for sum
+% sum of squares value, 48 data points, 17 parameters estimating+1 for sum
 % of squares value 
-disp(AIC(value,48,17))
+disp(AIC(value,48,18))
       
+       
 function alpha = a(t,pars)
 alpha = pars(1)*t+pars(16);
 end
@@ -144,11 +143,15 @@ end
 
 
 
+
+
+
+
 % "Corrected AIC value": W is number of data points, K is number of parameters fitting +1 (since 
 % least squares regression is also estimating the objective function value
 % fval)
 function aic=AIC(value,W,K); 
-    aic = W.*log(value./W)+2.*K+2*K*(K+1)./(W-K-1);
+    aic = W.*log(value./W)+2.*K+2.*K*(K+1)./(W-K-1);
 end
 
 

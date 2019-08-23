@@ -1,23 +1,23 @@
-m=-0.016315043366142;
-beta_A=0.004576784574296;
-beta_P=0.001961100711192;
-theta_1=5.087528802931296e-04;
-epsilon=2.500714817046142;
+m=-0.0165;%-0.016460991623336;
+beta_A=0.000184;%1.841262189751567e-04;
+beta_P=0.0000132;%1.323375110619788e-05;
+theta_1=0.0988;%0.098757030097384;
+epsilon=2.51;%2.514037529084618;
 mu=0.00868;
 mu_A=0.0109;
 mu_H=0.0507;
-gamma=0.003630552621414;
-theta_2=0.893900278857187;
-sigma=0.889702060900079;
-zeta=0.518669681971285;
-theta_3=1.221956397540627;
-nu=4.699736045487307e-04;
+gamma=0.00101;%0.001011120740797;
+theta_2=1.99;%1.985698552620856;
+sigma=1.969;%1.968600249322354;
+zeta=0.207;%0.206726227464038;
+theta_3=3.91;%3.912353259494871;
+nu=0.000296;%2.956677498933851e-04;
 omega=0.0000000001;
-b=0.288729997909935;
+b=0.290;%0.289664534096324;
 
 
 
-pars=[m,beta_A,beta_P,theta_1,epsilon,mu,muA,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
+pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
 
 
 
@@ -25,13 +25,15 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,muA,mu_H,gamma,theta_2,sigma,zeta,theta
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
 tspan=linspace(0,N,25);
+% For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
+%tspan=linspace(0,N,3000);
 
 
 % Initial conditions
-P0=0.083700671037689;
-A0=0.005902511929057;
-H0=4.583608179759002e-04;
-R0=0.001305505480884;
+P0=0.0836;%0.083575527492668;
+A0=0.00458;%0.004580063611380;
+H0=0.000295;%2.945982487212141e-04;
+R0=0.00296;%0.002955497539851;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -54,8 +56,9 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   M=y(:,8);
   J=y(:,9);
   K=y(:,10);
+
  
- 
+  
   % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
  
@@ -128,16 +131,14 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  
 figure(1)
-         
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',3)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
-           set(gca, 'fontsize',10)
-           xtickangle(90)
+           set(gca, 'fontsize',10)  
            set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018','2019'})
- 
+           set(gca,'box','off')
  
           
            
@@ -146,46 +147,39 @@ figure(1)
            subplot(2,2,2);ylabel('Opioid Addicts')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
-           xtickangle(90)
            set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
- 
+           set(gca,'box','off')
            
            subplot(2,2,3);plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
            subplot(2,2,3);xlabel('Year')
            subplot(2,2,3);ylabel('Heroin/Fentanyl Addicts')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
-           xtickangle(90)
            set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})
- 
+           set(gca,'box','off')
           
-           subplot(2,2,4);plot(t,y(:,5) , 'Color', [0.7,0,0.7],'LineWidth',3)
+           subplot(2,2,4);plot(t,y(:,5),'Color',[0.7,0,0.7],'LineWidth',3)
            subplot(2,2,4);xlabel('Year')
            subplot(2,2,4);ylabel('Stably Recovered Individuals')
            set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
            set(gca, 'fontsize',10)
-           xtickangle(90)
-           set(gca,'XLim',[0 N])
            set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018', '2019'})  
-               
+           set(gca,'box','off')
                  
- % ODE Solutions for P, A, H plotted all together
+                   
  figure(2)
-           plot(t,y(:,3),'r-','LineWidth',3);
-           hold all
-           plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);
-           xlabel('Year')
-           ylabel('Size of Addicted Populations');
-           set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
-           set(gca, 'fontsize',10)
-           xtickangle(90)
-           legend({'A','H'}, 'FontSize', 14)
-           set(gca,'XLim',[0 N])
-           set(gca,'xticklabel',{'2013', '2014', '2015', '2016',...
-                       '2017', '2018', '2019'})
- 
+ hold all
+ plot(t,y(:,3),'r-','LineWidth',3);
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);       
+ xlabel('Year')
+ ylabel('Size of Addicted Populations')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
+ legend({'A','H'}, 'FontSize', 14)                
+                   
 
  
  figure(3)
@@ -275,7 +269,7 @@ figure(1)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
- legend({'OModel simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
@@ -294,7 +288,7 @@ figure(1)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
- legend({'Model simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
@@ -334,8 +328,8 @@ figure(1)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
- legend({'Model simulation', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 ])
+ legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
+ set(gca, 'xtick', [ 0 1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
@@ -351,58 +345,35 @@ figure(1)
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
- legend({'Model simulation', 'Data'},'FontSize', 14)
+ legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
  
  
  figure(14)
- set(gcf, 'Position',  [1, 1, 1700, 800])
+ set(gcf, 'Position',  [1, 1, 700, 300])
 
  z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
- subplot(3,2,1);scatter(z1, Estim1, 80, 'o');
+ subplot(1,2,1);scatter(z1, Estim1, 80, 'o');
  hold on
- subplot(3,2,1);scatter(z1, Data1, 80, 'x');
+ subplot(1,2,1);scatter(z1, Data1, 80, 'x');
  set(gca, 'fontsize',10)
- subplot(3,2,1);xlabel('Year')
- subplot(3,2,1);ylabel('Proportion in P')
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
- z2 = linspace(0,5,6);
- subplot(3,2,2);scatter(z2, Estim2, 80, 'o');
- hold on
- subplot(3,2,2);scatter(z2, Data2, 80, 'x');
- set(gca, 'fontsize',10)
- subplot(3,2,2);xlabel('Year')
- subplot(3,2,2);ylabel('Proportion in A')
- legend({'Model simulation', 'Data'},'FontSize', 10)
- set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
- 
- z3 = linspace(0,2,3);
- subplot(3,2,3);scatter(z3, Estim3, 80,'o');
- hold on
- subplot(3,2,3);scatter(z3, Data3, 80,'x');
- set(gca, 'fontsize',10)
- subplot(3,2,3);xlabel('Year')
- subplot(3,2,3);ylabel('Proportion in H')
- legend({'Model simulation', 'Data'},'FontSize', 10)
- set(gca, 'xtick', [ 0 1 2 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2014', '2015', '2016'})
  
  z4 = linspace(0,23,24);
- subplot(3,2,4);scatter(z4, Estim4, 80, 'o');
+ subplot(1,2,2);scatter(z4, Estim4, 80, 'o');
  hold on
- subplot(3,2,4);scatter(z4, Data4, 80,'x');
+ subplot(1,2,2);scatter(z4, Data4, 80,'x');
  set(gca, 'fontsize',10)
- subplot(3,2,4);xlabel('Quarter')
- subplot(3,2,4);ylabel('Proportion in P')
+ subplot(1,2,2);xlabel('Quarter')
+ subplot(1,2,2);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
  set(gca, 'fontsize',10)
@@ -415,34 +386,179 @@ figure(1)
                        'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
  
+                   
+ figure(15)
+ set(gcf, 'Position',  [1, 1, 700, 300])  
+ z2 = linspace(0,5,6);
+ subplot(1,2,1);scatter(z2, Estim2, 80, 'o');
+ hold on
+ subplot(1,2,1);scatter(z2, Data2, 80, 'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in A')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
  
  
  z5 = linspace(0,3,4); %defines mesh where going to plot Estim5, Data5 values
- subplot(3,2,5);scatter(z5, Estim5, 80,'o');
+ subplot(1,2,2);scatter(z5, Estim5, 80,'o');
  hold on
- subplot(3,2,5);scatter(z5, Data5, 80,'x');
+ subplot(1,2,2);scatter(z5, Data5, 80,'x');
  set(gca, 'fontsize',10)
- subplot(3,2,5);xlabel('Year')
- subplot(3,2,5);ylabel('Proportion overdose from A') % at some point during the year
- legend({'Model simulation', 'Data'},'FontSize', 10)
+ subplot(1,2,2);xlabel('Year')
+ subplot(1,2,2);ylabel('Proportion overdose from A') % at some point during the year
+ legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
+ 
+
+ 
+ 
+ 
+ figure(16)
+ set(gcf, 'Position',  [1, 1, 700, 300])
+ 
+ z3 = linspace(0,2,3);
+ subplot(1,2,1);scatter(z3, Estim3, 80,'o');
+ hold on
+ subplot(1,2,1);scatter(z3, Data3, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in H')
+ legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
+ set(gca, 'xtick', [ 0 1 2 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
                    
                    
                    
  z6 = linspace(0,4,5);
- subplot(3,2,6);scatter(z6, Estim6, 80,'o');
+ subplot(1,2,2);scatter(z6, Estim6, 80,'o');
  hold on 
- subplot(3,2,6);scatter(z6, Data6, 80,'x');
- subplot(3,2,6);xlabel('Year')
- subplot(3,2,6);ylabel('Proportion overdose from H')
- legend({'Model simulation', 'Data'},'FontSize', 10)
+ subplot(1,2,2);scatter(z6, Data6, 80,'x');
+ subplot(1,2,2);xlabel('Year')
+ subplot(1,2,2);ylabel('Proportion overdose from H')
+ legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3 4 ])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
  
  
+ 
+ 
+ 
+ 
+ figure(17)
+ set(gcf, 'Position',  [1, 1, 700, 300])
+
+ z1 = linspace(0,5,6); %defines mesh where going to plot Estim1, Data1 values 
+ z7 = linspace(0,5,21);
+ subplot(1,2,1); plot(z7,continuous1,'k-');
+ hold on
+ subplot(1,2,1);scatter(z1, Data1, 80, 'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in P')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
+ set(gca,'box','off')
+ 
+ 
+ z4 = linspace(0,23,24);
+ z10 = linspace(0,23,24);
+ subplot(1,2,2);plot(z10,continuous4,'k-');
+ hold on
+ subplot(1,2,2);scatter(z4, Data4, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,2);xlabel('Quarter')
+ subplot(1,2,2);ylabel('Proportion in P')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
+ set(gca, 'fontsize',10)
+ xtickangle(90)
+ set(gca,'XLim',[0 23])
+ set(gca,'box','off')
+ set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
+                       'Q1 2014', 'Q2 2014', 'Q3 2014', 'Q4 2014',...
+                       'Q1 2015', 'Q2 2015', 'Q3 2015', 'Q4 2015',...
+                       'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
+                       'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
+                       'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
+ 
+ 
+ 
+ figure(18)
+ set(gcf, 'Position',  [1, 1, 700, 300])
+ 
+ z2 = linspace(0,5,6);
+ z8 = linspace(0,5,21);
+ subplot(1,2,1);plot(z8,continuous2,'k-');
+ hold on
+ subplot(1,2,1);scatter(z2, Data2, 80, 'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in A')
+ legend({'Model simulation', 'Data'},'FontSize', 10)
+ set(gca, 'xtick', [ 0 1 2 3 4 5])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
+ set(gca,'box','off')
+ 
+
+ z5 = linspace(0,3,4); %defines mesh where going to plot Estim5, Data5 values
+ z11 = linspace(0,3,13);
+ subplot(1,2,2); plot(z11,continuous5,'k-');
+ hold on
+ subplot(1,2,2);scatter(z5, Data5, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,2);xlabel('Year')
+ subplot(1,2,2);ylabel('Proportion overdose from A') % at some point during the year
+ legend({'Model simulation', 'Data'},'FontSize', 10,'Location','northwest')
+ set(gca, 'xtick', [ 0 1 2 3 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
+ set(gca,'box','off')  
+ 
+ 
+ 
+ figure(19)
+ set(gcf, 'Position',  [1, 1, 700, 300])
+                
+ z3 = linspace(0,2,3);
+ z9 = linspace(0,2,9);
+ subplot(1,2,1); plot(z9,continuous3,'k-');
+ hold on
+ subplot(1,2,1);scatter(z3, Data3, 80,'x');
+ set(gca, 'fontsize',10)
+ subplot(1,2,1);xlabel('Year')
+ subplot(1,2,1);ylabel('Proportion in H')
+ legend({'Model simulation', 'Data'},'FontSize', 10,'Location','northwest')
+ set(gca, 'xtick', [ 0 1 2 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+ set(gca,'box','off')
+                 
+                   
+ z6 = linspace(0,4,5);
+ z12 = linspace(0,4,17);
+ subplot(1,2,2);plot(z12,continuous6,'k-');
+ hold on 
+ subplot(1,2,2);scatter(z6, Data6, 80,'x');
+ subplot(1,2,2);xlabel('Year')
+ subplot(1,2,2);ylabel('Proportion overdose from H')
+ legend({'Model simulation', 'Data'},'FontSize', 10,'Location','northwest')
+ set(gca, 'xtick', [ 0 1 2 3 4 ])
+ set(gca, 'fontsize',10)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
+ set(gca,'box','off')
+  
+ 
+  
          
 function alpha = a(t,pars)
 alpha = pars(1)*t+pars(16);
