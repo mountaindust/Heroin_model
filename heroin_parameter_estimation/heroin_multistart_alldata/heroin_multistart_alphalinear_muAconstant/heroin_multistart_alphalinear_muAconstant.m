@@ -4,9 +4,9 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu     b     P0        A0       H0       R0     ]
-LowerBounds=[-0.1  0.00001   0.000001 0.0001    0.8    0.001    0.0001    0.001   0.0001   0.001   0.0001  0.1   0.0001   0.00001  0.00001  0.00001 ];
-UpperBounds=[ 0.1    0.01      0.01     0.1       8      0.1       2       2        1       4        1     0.8    0.5       0.1     0.1       0.1   ];
+%           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu        b     P0        A0       H0       R0   ]
+LowerBounds=[-0.1  0.00001   0.00001   0.03      1      0.005    0.05     0.1    0.0001     0.5    0.0001   0.1   0.001   0.0001   0.00001  0.00001 ];
+UpperBounds=[-0.001  0.01     0.01     0.15      5       0.1       1       2       0.2      1.85    0.2     0.5   0.35      0.01    0.002     0.1   ];
   
 
 
@@ -39,9 +39,9 @@ beta_A=x(2);
 beta_P=x(3);
 theta_1=x(4);
 epsilon=x(5);
-mu=0.00868;
-mu_A=0.0109;
-mu_H=0.0507;
+mu=0.00710;  
+mu_A=0.00884;
+mu_H=0.0466;
 gamma=x(6);   
 theta_2=x(7);
 sigma=x(8);
@@ -399,7 +399,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];
      
  % Actual Data for years 2013-2017
- Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259];
+ Data5=[351./5519417; 360./5559702; 377./5602187; 381./5648259];
  
  %Testing Data
  %Data5=[0.00273396572744100;0.00134233652473906;0.000722119380374654;0.000420829269814784];
@@ -414,7 +414,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14)
- set(gca, 'xtick', [ 0 1 2 3 ])
+ set(gca, 'xtick', [ 0 1 2 3])
  set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})                   
                    
@@ -426,7 +426,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
         y(17,10)-y(13,10); y(21,10)-y(17,10)];
     
  % Actual Data for years 2013-2017
- Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
+ Data6=[112./5519417; 201./5559702; 344./5602187; 488./5648259; 702./5702475];
  
  %Testing Data
  %Data6=[2.28461758994058e-05;3.00078413462584e-05;4.18501186608887e-05;6.01335239281354e-05;8.50883774581830e-05];
@@ -465,9 +465,9 @@ beta_A=z(2);
 beta_P=z(3);
 theta_1=z(4);
 epsilon=z(5);
-mu=0.00868;
-mu_A=0.0109;
-mu_H=0.0507;
+mu=0.00710;  
+mu_A=0.00884;
+mu_H=0.0466;
 gamma=z(6);
 theta_2=z(7);
 sigma=z(8);
@@ -730,7 +730,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % Actual proportion of addicted prescription opioid users that overdose
  % each year 2013-2017
  
- Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259];
+ Data5=[351./5519417; 360./5559702; 377./5602187; 381./5648259];
  
  %Testing Data
  %Data5=[0.00273396572744100;0.00134233652473906;0.000722119380374654;0.000420829269814784];
@@ -746,7 +746,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10); y(17,10)-y(13,10); y(21,10)-y(17,10)];
     
  % Actual proportion of heroin addicts that overdose each year 2013-2017
- Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
+ Data6=[112./5519417; 201./5559702; 344./5602187; 488./5648259; 702./5702475];
  
  %Testing Data
  %Data6=[2.28461758994058e-05;3.00078413462584e-05;4.18501186608887e-05;6.01335239281354e-05;8.50883774581830e-05];
@@ -863,7 +863,7 @@ end
 
 
 function f = HeroinModel(t,y,pars)
-f=zeros(8,1);
+f=zeros(10,1);
 f(1)=-a(t,pars)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
 f(2)=a(t,pars)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);

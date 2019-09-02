@@ -9,9 +9,9 @@ beta_A=0.000193;%1.930175705280936e-04;
 beta_P=0.0000138;%1.384502658907106e-05;
 theta_1=0.0984;%0.098435408827406;
 epsilon=2.50;%2.504612413630720;
-mu=0.00868; 
-mu_A=0.0109;      
-mu_H=0.0507;
+mu=0.00710; 
+mu_A=0.00884;
+mu_H=0.0466;  
 gamma=0.00101;%0.001011666203238;
 theta_2=1.98;%1.978770080727071;
 sigma=1.14;%1.135299696713380;
@@ -90,9 +90,8 @@ Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
 Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
-Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9);...
-        y(17,9)-y(13,9)];
-    
+Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];
+
 Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
         y(17,10)-y(13,10); y(21,10)-y(17,10)];
 
@@ -110,9 +109,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
         775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
         688451./5754509; 683498./5754509; 641894./5754509; 625054./5754509];
  Diff4=Estim4-Data4;
- Data5=[348./5519417; 381./5559702; 463./5602187; 551./5648259];
+ Data5=[351./5519417; 360./5559702; 377./5602187; 381./5648259];
  Diff5=Estim5-Data5;
- Data6=[116./5519417; 216./5559702; 374./5602187; 554./5648259; 811./5702475];
+ Data6=[112./5519417; 201./5559702; 344./5602187; 488./5648259; 702./5702475];
  Diff6=Estim6-Data6;
  
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
@@ -144,14 +143,13 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  
  
 
- 
  figure(1)
  hold all
  z1 = linspace(0,60,6); %defines mesh where going to plot Estim1, Data1 values 
  z7 = linspace(0,60,61);
- plot(z7,continuous1,'k-');
+ plot(z7,continuous1,'k-','LineWidth',1.3);
  %scatter(z1, Estim1, 100, 'o');
- scatter(z1, Data1, 100, 'x');
+ scatter(z1, Data1, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in P')
@@ -168,9 +166,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z2 = linspace(0,60,6);
  z8 = linspace(0,60,61);
- plot(z8,continuous2,'k-');
+ plot(z8,continuous2,'k-','LineWidth',1.3);
  %scatter(z2, Estim2, 100, 'o');
- scatter(z2, Data2, 100, 'x');
+ scatter(z2, Data2, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in A')
@@ -188,9 +186,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z3 = linspace(0,24,3);
  z9 = linspace(0,24,25);
- plot(z9,continuous3,'k-');
+ plot(z9,continuous3,'k-','LineWidth',1.3);
  %scatter(z3, Estim3, 100,'o');
- scatter(z3, Data3, 100,'x');
+ scatter(z3, Data3, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion in H')
@@ -206,9 +204,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z4 = linspace(0,69,24);
  z10 = linspace(0,69,70);
- plot(z10,continuous4,'k-');
+ plot(z10,continuous4,'k-','LineWidth',1.3);
  %scatter(z4, Estim4, 100, 'o');
- scatter(z4, Data4, 100,'x');
+ scatter(z4, Data4, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Quarter')
  ylabel('Proportion in P')
@@ -229,9 +227,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z5 = linspace(0,36,4); %defines mesh where going to plot Estim5, Data5 values
  z11 = linspace(0,36,37);
- plot(z11,continuous5,'k-');
+ plot(z11,continuous5,'k-','LineWidth',1.3);
  %scatter(z5, Estim5, 100,'o');
- scatter(z5, Data5, 100,'x');
+ scatter(z5, Data5, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
@@ -246,9 +244,9 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  hold all
  z6 = linspace(0,48,5);
  z12 = linspace(0,48,49);
- plot(z12,continuous6,'k-');
+ plot(z12,continuous6,'k-','LineWidth',1.3);
  %scatter(z6, Estim6, 100,'o');
- scatter(z6, Data6, 100,'x');
+ scatter(z6, Data6, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
  set(gca, 'fontsize',10)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
@@ -257,6 +255,8 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  set(gca, 'fontsize',10)
  set(gca,'XLim',[0 48])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
+ 
+
  
 
  
@@ -272,7 +272,7 @@ end
 
 
 function f = HeroinModel(t,y,pars)
-f=zeros(8,1);
+f=zeros(10,1);
 f(1)=-a(t,pars)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+pars(7))*y(3)+(pars(6)+pars(8))*y(4);
 f(2)=a(t,pars)*y(1)-pars(5)*y(2)-pars(9)*y(2)-pars(10)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(9)*y(2)+(pars(11)*y(5)*y(3))/(y(3)+y(4)+pars(15))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(12)*y(3)-pars(13)*y(3)*y(4)-pars(6)*y(3)-pars(7)*y(3);
