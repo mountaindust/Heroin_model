@@ -4,24 +4,24 @@ clear all;
 
 %Parameters
 %slope of alpha 
-m=-0.00541;%-0.005409326501609;
-beta_A=0.000193;%1.930175705280936e-04;
-beta_P=0.0000138;%1.384502658907106e-05;
-theta_1=0.0984;%0.098435408827406;
-epsilon=2.50;%2.504612413630720;
+m=-0.005885298827295;
+beta_A=2.928459237447347e-04;
+beta_P=3.031594496251287e-05;
+theta_1=0.149588835714450;
+epsilon=2.497686906039834;
 mu=0.00710; 
 mu_A=0.00884;
-mu_H=0.0466;  
-gamma=0.00101;%0.001011666203238;
-theta_2=1.98;%1.978770080727071;
-sigma=1.14;%1.135299696713380;
-zeta=0.199;%0.199301800072793;
-theta_3=3.77;%3.768399690381143;
-nu=0.000309;%3.093615674408855e-04;
+mu_H=0.0466;      
+gamma=0.005018446561243;
+theta_2=0.995846977898647;
+sigma=0.100824905478476;
+zeta=0.173579520334630;
+theta_3=1.801581240297609;
+nu=3.194810546447885e-04;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.267;%0.267480236492065;
-c=-0.0266;%-0.026557383866394;
+b=0.269343669604923;
+c=-0.026374597945385;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
@@ -29,19 +29,19 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
 N = 6;
-%tspan=linspace(0,N,25);
+tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
 %tspan=linspace(0,N,3000);
 % For smooth data plots; 73 marks to represent 72 months in 6 years 
-tspan=linspace(0,N,73);
+%tspan=linspace(0,N,73);
 
 
 
 % Initial Conditions
-P0=0.0918;%0.091834662699484;
-A0=0.00557;%0.005567898246322;
-H0=0.000366;%3.656645591596343e-04;
-R0=0.00240;%0.002395348106474;
+P0=0.092661491071360;
+A0=0.007594784328536;
+H0=7.052316770178626e-04;
+R0=0.002883057248950;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
