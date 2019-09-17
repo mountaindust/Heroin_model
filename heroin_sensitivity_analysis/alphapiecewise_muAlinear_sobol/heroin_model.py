@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
 #initial population values, should add to 1
-P_0 = 0.0937
-A_0 = 0.00543
-H_0 = 0.000408
-R_0 = 0.0861
+P_0 = 0.0954
+A_0 = 0.00723
+H_0 = 0.000469
+R_0 = 0.000288
 S_0 = 1-P_0-A_0-H_0-R_0
 
 #temporal info, assigning default values
@@ -17,24 +17,24 @@ tstop =  6
 
 #parameters
 params = {}
-params['m'] = -0.00597                    #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
-params['b'] = 0.295                        #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
-params['beta_A'] = 0.00479                  #S->A total probability of becoming addicted to opioids other than by prescription 
-params['beta_P'] =  0.00139                # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
-params['theta_1'] = 0.0686                #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
-params['mu'] = 0.00868                      #P,A,H,R->S natural death rate  
-params['mu_H'] = 0.0507                     #H->S overdose death rate for heroin addicts 
-params['gamma'] = 0.00238         # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE)  
-params['epsilon'] = 2.520                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
-params['theta_2'] = 0.356                  #P->H rate at which opioid prescribed user population becomes addicted to heroin 
-params['sigma'] = 0.0278                   #R->A rate at which people relapse from treatment into the opioid addicted class 
-params['zeta'] = 0.474                    #A->R rate at which addicted opioid users enter treatment/rehabilitation 
-params['theta_3'] = 1.87                   #A->H rate at which the opioid addicted population becomes addicted to heroin 
-params['nu'] = 0.000462                    #H->R rate at which heroin users enter treatment/rehabilitation 
+params['m'] = -0.00500                   #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
+params['b'] = 0.269                        #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
+params['beta_A'] = 0.00308                  #S->A total probability of becoming addicted to opioids other than by prescription 
+params['beta_P'] =  0.000309                # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
+params['theta_1'] = 0.215                #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
+params['mu'] = 0.00710                   #P,A,H,R->S natural death rate  
+params['mu_H'] = 0.0466                    #H->S overdose death rate for heroin addicts 
+params['gamma'] = 0.00528         # P->A rate at which prescribed opioid users become addicted (Note: MUST BE ZERO FOR AFE)  
+params['epsilon'] = 2.54                    #P->S rate at which people come back to the susceptible class after being prescribed opioids (i.e. not addicted)
+params['theta_2'] = 0.665                  #P->H rate at which opioid prescribed user population becomes addicted to heroin 
+params['sigma'] = 0.110                   #R->A rate at which people relapse from treatment into the opioid addicted class 
+params['zeta'] = 0.189                    #A->R rate at which addicted opioid users enter treatment/rehabilitation 
+params['theta_3'] = 17.900                  #A->H rate at which the opioid addicted population becomes addicted to heroin 
+params['nu'] = 0.00228                    #H->R rate at which heroin users enter treatment/rehabilitation 
 params['omega'] = 0.0000000001              #perturbation term for relapse rates
-params['c']= -0.0298                       #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
-params['d']= 0.00305                         #only for linear muA, slope of time-dependent muA for 2013-2018
-params['e']= 0.00952                          #only for linear muA, y-intercept of time-dependent muA for 2013-2018
+params['c']= -0.0272                       #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
+params['d']= 0.000998                         #only for linear muA, slope of time-dependent muA for 2013-2018
+params['e']= 0.00871                          #only for linear muA, y-intercept of time-dependent muA for 2013-2018
 
 
 def alpha(t, params):

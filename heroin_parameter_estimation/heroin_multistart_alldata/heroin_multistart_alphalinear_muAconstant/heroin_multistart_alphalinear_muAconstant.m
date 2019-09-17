@@ -5,9 +5,9 @@ clear all;
 
 % Realistic parameter bounds
 %           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta   theta3    nu        b     P0        A0       H0       R0   ]
-LowerBounds=[-0.1  0.00001   0.00001   0.03      1      0.005    0.05     0.1    0.0001     0.5    0.0001   0.1   0.001   0.0001   0.00001  0.00001 ];
-UpperBounds=[-0.001  0.01     0.01     0.15      5       0.1       1       2       0.2      1.85    0.2     0.5   0.35      0.01    0.002     0.1   ];
-  
+LowerBounds=[-0.1  0.00001   0.00001   0.1      1       0.005    0.1     0.1    0.0001     10      0.0001   0.1   0.001   0.0001   0.00001  0.00001  ];
+UpperBounds=[-0.001  0.01     0.01     4.5      5       0.1       9       2       0.2      19       0.2     0.5   0.35      0.01    0.002     0.1    ];
+
 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges

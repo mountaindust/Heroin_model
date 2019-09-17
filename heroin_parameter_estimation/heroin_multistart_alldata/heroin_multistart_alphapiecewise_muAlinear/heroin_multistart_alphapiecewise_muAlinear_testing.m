@@ -2,24 +2,26 @@
 clf;
 clear all;
 
-m=-0.005655130734302;
-beta_A=2.835401770939003e-04;
-beta_P=2.822862228291210e-05;
-theta_1=0.149541821844337;
-epsilon=2.531821292175718;
+m=-0.004995197428455;%-0.004995197428455;
+beta_A=0.003075241841496;%0.003075241841496;
+beta_P=3.088422784921360e-04;%3.088422784921360e-04;
+theta_1=0.214850659242197;%0.214850659242197;
+epsilon=2.543540776849738;%2.543540776849738;
 mu=0.00710; 
 mu_H=0.0466; 
-gamma=0.005016519987829;
-theta_2=0.995172202575198;
-sigma=0.100871984335913;
-zeta=0.199667901832378;
-theta_3=1.488084795574761;
-nu=3.271160590479448e-04;
+gamma=0.005281682020894;%0.005281682020894;
+theta_2=0.665253867081153;%0.665253867081153;
+sigma=0.109745817098382;%0.109745817098382;
+zeta=0.188896020171160;%0.188896020171160;
+theta_3=17.900486383845042;%17.900486383845042;
+nu=0.002278030004504;%0.002278030004504;
 omega=0.0000000001;
-b=0.270391402403032;
-c=-0.027334712306362;
-d=9.085876633590474e-04;
-e=0.008940995153049;
+b=0.268584385064102;%0.268584385064102;
+c=-0.027158918855258;%-0.027158918855258;
+d=9.984897519858505e-04;%9.984897519858505e-04;
+e=0.008708050841388;%0.008708050841388;
+
+
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
@@ -33,10 +35,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.097199031413874;
-A0=0.007085511844406;
-H0=6.693465779399986e-04;
-R0=0.004328163952819;
+P0=0.095416167677016;%0.095416167677016;
+A0=0.007233998280094;%0.007233998280094;
+H0=4.687664094772614e-04;%4.687664094772614e-04;
+R0=0.002880151501971;%0.002880151501971;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -62,7 +64,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
 
-
+format short
 fprintf('alpha values')
 disp(a(0,pars))
 disp(a(1,pars))
@@ -203,13 +205,11 @@ figure(1)
  figure(3)
  hold all
  plot(t,y(:,1),'k-','LineWidth',3)
- set(gca, 'fontsize',10)
+ set(gca, 'FontSize',10)
  xlabel('Year')
- ylabel('Susceptibles')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- 
+ legend({'Susceptibles'}, 'FontSize', 14) 
            
  figure(4)
  hold all
@@ -218,7 +218,6 @@ figure(1)
  xlabel('Year')
  ylabel('Prescription Users')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
            
@@ -230,7 +229,6 @@ figure(1)
  xlabel('Year')
  ylabel('Opioid addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
           
                    
@@ -241,7 +239,6 @@ figure(1)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
  
       
@@ -252,7 +249,6 @@ figure(1)
  xlabel('Year')
  ylabel('Stably recovered addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
  %Comment out if don't need fitting plots 
@@ -271,7 +267,6 @@ figure(1)
  ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
 
@@ -289,7 +284,6 @@ figure(1)
  ylabel('Proportion in A')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
 
 
@@ -308,7 +302,6 @@ figure(1)
  ylabel('Proportion in H')
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
 
@@ -348,7 +341,6 @@ figure(1)
  ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
  
@@ -365,7 +357,6 @@ figure(1)
  ylabel('Proportion overdose from H') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3 4 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
  
  
@@ -381,7 +372,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
  
@@ -394,7 +384,6 @@ figure(1)
  subplot(1,2,2);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
- set(gca, 'fontsize',10)
  xtickangle(90)
  set(gca,'XLim',[0 23])
  set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
@@ -416,7 +405,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in A')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
  
  
@@ -429,7 +417,6 @@ figure(1)
  subplot(1,2,2);ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
 
@@ -448,7 +435,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in H')
  legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
                    
                    
@@ -482,7 +468,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  set(gca,'box','off')
  
@@ -497,7 +482,6 @@ figure(1)
  subplot(1,2,2);ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23])
- set(gca, 'fontsize',10)
  xtickangle(90)
  set(gca,'XLim',[0 23])
  set(gca,'box','off')
@@ -523,7 +507,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in A')
  legend({'Model simulation', 'Data'},'FontSize', 10)
  set(gca, 'xtick', [ 0 1 2 3 4 5])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
  set(gca,'box','off')
  
@@ -538,7 +521,6 @@ figure(1)
  subplot(1,2,2);ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 10,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 3 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  set(gca,'box','off')  
  
@@ -557,7 +539,6 @@ figure(1)
  subplot(1,2,1);ylabel('Proportion in H')
  legend({'Model simulation', 'Data'},'FontSize', 10,'Location','northwest')
  set(gca, 'xtick', [ 0 1 2 ])
- set(gca, 'fontsize',10)
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  set(gca,'box','off')
                  

@@ -1,19 +1,19 @@
-m=-0.016133916390110;
-beta_A=7.075383411642912e-05;
-beta_P=1.440646205512015e-05;
-theta_1=0.149924482751896;
-epsilon=2.491659088421573;
+m=-0.016168770430769;
+beta_A=6.028626431922449e-05;
+beta_P=1.377512810861206e-05;
+theta_1=0.140625525950935;
+epsilon=2.526649250596874;
 mu=0.00710;  
 mu_A=0.00884;
 mu_H=0.0466;
-gamma=0.005004015195362;
-theta_2=0.999212507994821;
-sigma=0.100398097431387;
-zeta=0.162217796813499;
-theta_3=1.840438094241144;
-nu=1.424921026938716e-04;
+gamma=0.005003442118174;
+theta_2=1.823588391956158;
+sigma=0.100187240737003;
+zeta=0.099396517965999;
+theta_3=18.957642027116236;
+nu=1.792181772640938e-04;
 omega=0.0000000001;
-b=0.288349996217087;
+b=0.289029299448868;
 
 
 
@@ -24,16 +24,16 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
-tspan=linspace(0,N,25);
+%tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
+tspan=linspace(0,N,3000);
 
 
 % Initial conditions
-P0=0.083099104698058;
-A0=0.007653397386957;
-H0=7.275389558497368e-04;
-R0=0.002045837633022;
+P0=0.083311348758638;
+A0=0.007621840599152;
+H0=4.551016351747697e-04;
+R0=1.696410024717003e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -58,7 +58,16 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   K=y(:,10);
 
  
-  
+  format short
+disp(a(0,pars))
+disp(a(1,pars))
+disp(a(2,pars))
+disp(a(3,pars))
+disp(a(3.25,pars))
+disp(a(4,pars))
+disp(a(5,pars))
+disp(a(6,pars))
+
   % Making sure S+P+A+H+R=1
  total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
  
@@ -402,7 +411,7 @@ figure(1)
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
  
  
- z5 = linspace(0,4,5); %defines mesh where going to plot Estim5, Data5 values
+ z5 = linspace(0,3,4); %defines mesh where going to plot Estim5, Data5 values
  subplot(1,2,2);scatter(z5, Estim5, 80,'o');
  hold on
  subplot(1,2,2);scatter(z5, Data5, 80,'x');
@@ -410,9 +419,9 @@ figure(1)
  subplot(1,2,2);xlabel('Year')
  subplot(1,2,2);ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 10, 'Location','northwest')
- set(gca, 'xtick', [ 0 1 2 3 4 ])
+ set(gca, 'xtick', [ 0 1 2 3 ])
  set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
 
  
