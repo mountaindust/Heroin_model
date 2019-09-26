@@ -170,7 +170,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  ylabel('Proportion of Population')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Precription Opioid Users'}, 'FontSize', 16) 
+ legend({'Prescription Opioid Users'}, 'FontSize', 16) 
            
            
  figure(3)
@@ -181,7 +181,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  ylabel('Proportion of Population')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Precription Opioid Addicts'}, 'FontSize', 16)
+ legend({'Prescription Opioid Addicts'}, 'FontSize', 16)
           
                    
  figure(4)
