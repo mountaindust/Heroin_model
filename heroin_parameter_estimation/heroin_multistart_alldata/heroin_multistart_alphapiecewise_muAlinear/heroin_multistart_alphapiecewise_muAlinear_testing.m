@@ -27,7 +27,7 @@ e=0.008708050841388;%0.008708050841388;
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
  
 
-% Final time and last entry of tspan is # of equally spaced points from 0 to N 
+% Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 6;
 tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)

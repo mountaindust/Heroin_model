@@ -30,7 +30,8 @@ N = 6;
 %tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
 %tspan=linspace(0,N,3000);
-% For smooth data plots; 73 marks to represent 72 months in 6 years 
+% For smooth data plots; 73 marks to represent 72 months in 6 years
+% (monthly linspace)
 tspan=linspace(0,N,73);
 
 % Initial Conditions
@@ -146,6 +147,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  for i=1:49;
      continuous6(i)=y(i+12,10)-y(i,10);
  end 
+ 
  
  
 
@@ -299,7 +301,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
                        'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
                        'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
                        'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
- 
+                   
+                   
+                   
+                   
+            
 
  
 function alpha = a(t,pars)

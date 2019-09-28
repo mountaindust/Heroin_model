@@ -28,10 +28,11 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,n
  
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
-N = 6;
+%N = 6;
+N=11; %predict trajectory
 %tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-tspan=linspace(0,N,3000);
+tspan=linspace(0,N,133);
 
 
 % Initial Conditions
@@ -149,8 +150,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  end 
  
  
-
-
+ 
  
  figure(1)
  hold all
@@ -205,7 +205,40 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  legend({'Stably Recovered Addicts'}, 'FontSize', 16)
  
 
+% Totaling the proportion of addicts
+ figure(6)
+ hold all
+ plot(t(1:73),y(1:73,3)+y(1:73,4),'Color',[0.4, 0, 0.8],'LineWidth',3);
+ plot(t(74:133),y(74:133,3)+y(74:133,4),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3);
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Proportion')
+ legend({'Total Addicts'},'FontSize',14)
+ xlim([0 11])
+ xtickangle(90)
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 ]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022', '2023', '2024'})
+ 
+ 
 
+ % Totaling the proportion of addicts
+ figure(7)
+ hold all
+ plot(t(1:73),y(1:73,3),'Color', [0, 0, 0.5],'LineWidth',3)
+ plot(t(1:73),y(1:73,4),'Color', [0,0.9,0.7],'LineWidth',3)
+ plot(t(74:133),y(74:133,3),'Color', [0,0,0.5],'LineStyle', '--','LineWidth',3)
+ plot(t(74:133),y(74:133,4),'Color', [0,0.9,0.7],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xtickangle(90)
+ xlabel('Year')
+ ylabel('Proportion')
+ legend({'Prescription Opioid Addicts', 'Heroin and Fentanyl Addicts'},'FontSize',14)
+ xlim([0 11])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022', '2023', '2024'})
+ 
+ 
+ 
  
 function alpha = a(t,pars)
 if  t<=3.25 
