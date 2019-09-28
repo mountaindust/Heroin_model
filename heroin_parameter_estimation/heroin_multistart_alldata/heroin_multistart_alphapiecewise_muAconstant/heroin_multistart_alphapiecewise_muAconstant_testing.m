@@ -138,7 +138,60 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  end 
  
  
-figure(1)
+ figure(1)
+ hold all
+ plot(t,y(:,1),'k-','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Susceptibles')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+           
+ figure(2)
+ hold all
+ plot(t,y(:,2),'b-','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Prescription Users')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+           
+           
+ figure(3)
+ hold all
+ plot(t,y(:,3),'r-','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Opioid addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+          
+                   
+ figure(4)
+ hold all
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Heroin/fentanyl addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
+ 
+      
+ figure(5)
+ hold all
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Stably recovered addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+
+%{
+       
+ figure(1)
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',3)
            subplot(2,2,1);xlabel('Year')
            subplot(2,2,1);ylabel('Prescription Users')
@@ -190,64 +243,8 @@ figure(1)
                    
 
  
- figure(3)
- hold all
- plot(t,y(:,1),'k-','LineWidth',3)
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Susceptibles')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
-           
- figure(4)
- hold all
- plot(t,y(:,2),'b-','LineWidth',3)
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Prescription Users')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
-           
-           
- figure(5)
- hold all
- plot(t,y(:,3),'r-','LineWidth',3)
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Opioid addicts')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
-          
-                   
- figure(6)
- hold all
- plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Heroin/fentanyl addicts')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
- 
-      
- figure(7)
- hold all
- plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
- set(gca, 'fontsize',10)
- xlabel('Year')
- ylabel('Stably recovered addicts')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
- set(gca, 'fontsize',10)
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- 
- %Comment out if don't need fitting plots 
-
-              
  % Data points from proportion that is in P at some point in the year and corresponding ODE solution points 
  figure(8)
  hold all
@@ -565,7 +562,9 @@ figure(1)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'}) 
  set(gca,'box','off')
   
-
+%}
+ 
+ 
  
 function alpha = a(t,pars)
 if  t<=3.25 
