@@ -1,19 +1,19 @@
 %heroin_alphaconstant_muAconstant_testing.m
 
-alpha=0.232095065531563;
-beta_A=1.002043983790143e-05;
-beta_P=1.001211468967921e-06;
-theta_1=9.999309711129865e-04;
-epsilon=2.382813760559818;
+alpha=0.2;%0.232095065531563;
+beta_A=0.00015;%1.002043983790143e-05;
+beta_P=0.00005;%1.001211468967921e-06;
+theta_1=0.0003;%9.999309711129865e-04;
+epsilon=2.45;%2.382813760559818;
 mu=0.00710;  
 mu_A=0.00884;
 mu_H=0.0466;
-gamma=0.001000001094313;   
-theta_2=1.999999301028945;
-sigma=0.999998467560158;
-zeta=0.293324367600741;
-theta_3=3.999992645508699;
-nu=1.000165370013356e-04;
+gamma=0.001;%0.001000001094313;   
+theta_2=2;%1.999999301028945;
+sigma=1;%0.999998467560158;
+zeta=0.3;%0.293324367600741;
+theta_3=3;%3.999992645508699;
+nu=0.0001;%1.000165370013356e-04;
 omega=0.0000000001;
 
 pars=[alpha,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega];
@@ -26,10 +26,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial conditions
-P0=0.117227918455699;
-A0=0.005471647817487;
-H0=3.812118956457632e-04;
-R0=0.002881191697633;
+P0=0.1;%0.117227918455699;
+A0=0.0055;%0.005471647817487;
+H0=0.0003;%3.812118956457632e-04;
+R0=0.00025;%0.002881191697633;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -160,7 +160,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  figure(4)
  hold all
  plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
@@ -170,7 +170,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  figure(5)
  hold all
  plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Stably recovered addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
