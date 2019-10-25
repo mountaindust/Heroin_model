@@ -1,21 +1,22 @@
-m=-0.006855858882892;
-beta_A=0.001099368905239;
-beta_P=1.008014716770411e-04;
-theta_1=0.275654930954471;
-epsilon=2.565642991533180;
+
+m=-0.007598299010194;
+beta_A=6.011269099268551e-05;
+beta_P=1.373122112917561e-05;
+theta_1=0.284401807266879;
+epsilon=2.562736770410973;
 mu=0.00710; 
 mu_A=0.00884;
-mu_H=0.0466;      
-gamma=0.005083286772416;
-theta_2=0.314526183714686;
-sigma=0.104510611242569;
-zeta=0.105194084099072;
-theta_3=19.251488556708410;
-nu=0.001956385509156;
+mu_H=0.0466; 
+gamma=0.005003396647209;
+theta_2=0.355814628540795;
+sigma=0.100184804571766;
+zeta=0.100402513311739;
+theta_3=18.063560973469574;
+nu=1.813322112549034e-04;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.273390928877524;
-c=-0.026505924490598;
+b=0.275305858322444;
+c=-0.026494342250003;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
  
@@ -28,10 +29,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.091047839465289;
-A0=0.007605975413603;
-H0=4.745541099480023e-04;
-R0=1.951449698715505e-04;
+P0=0.092229302510562;
+A0=0.007636346648776;
+H0=4.707319110970364e-04;
+R0=1.859171325095883e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -54,21 +55,20 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
   J=y(:,9);
   K=y(:,10);
   
-  Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
+Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
          y(13,2)+y(17,6)-y(13,6); y(17,2)+y(21,6)-y(17,6); y(21,2)+y(25,6)-y(21,6)];
  
 Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
-        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];      
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];     
 
 Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
- 
+
 Estim4=y(1:24,2)+y(2:25,6)-y(1:24,6);
 
-Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];
+Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];    
     
+Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10); y(17,10)-y(13,10); y(21,10)-y(17,10)];
     
-Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
-        y(17,10)-y(13,10); y(21,10)-y(17,10)];
 
 
  Data1=[1825910./5519417; 1805325./5559702; 1800614./5602187; 1744766./5648259; 1620955./5702475; 1455093./5754509];
@@ -92,18 +92,29 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  
  value=norm(Diff1,2)^2+norm(Diff2,2)^2+norm(Diff3,2)^2+norm(Diff4,2)^2+norm(Diff5,2)^2+norm(Diff6,2)^2;
  value2=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ 
+ %P_yearly_error=norm(Diff1,2)^2;
+ %A_error=norm(Diff2,2)^2;
+ %H_error=norm(Diff3,2)^2;
+ %P_quarterly_error=norm(Diff4,2)^2;
+ %A_overdose_error=norm(Diff5,2)^2;
+ %H_overdose_error=norm(Diff6,2)^2;
 
+ %Errors=[P_yearly_error, A_error, H_error, P_quarterly_error, A_overdose_error, H_overdose_error];
+ 
+ 
+ 
  format short
  fprintf('AIC score')
  % sum of squares value, 48 data points, 18 parameters estimating+1 for sum
  % of squares value 
- disp(AIC(value,48,19))
+ disp(AIC(value2,48,19))
  
  
 function alpha = a(t,pars)
 if  t<=3.25 
     alpha = pars(1)*t+pars(16);
-else
+else 
     alpha = pars(1)*3.25+pars(16)-pars(17)*3.25+pars(17)*t;
     %alpha = pars(17)*t+pars(18);
     %alpha = pars(1)*t+pars(16);
@@ -138,8 +149,8 @@ f(9) = pars(7)*y(3);
 %K' ODE to calculate number of heroin/fentanayl addict overdoses over
 %time; i.e. individuals who overdose at any time (used in Estim6)
 f(10) = pars(8)*y(4);
-
 end
+
 
 
  

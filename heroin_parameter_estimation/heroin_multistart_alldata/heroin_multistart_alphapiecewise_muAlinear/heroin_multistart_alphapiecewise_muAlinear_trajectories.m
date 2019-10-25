@@ -2,44 +2,40 @@
 clf;
 clear all;
 
-m=-0.004995197428455;%-0.004995197428455;
-beta_A=0.003075241841496;%0.003075241841496;
-beta_P=3.088422784921360e-04;%3.088422784921360e-04;
-theta_1=0.214850659242197;%0.214850659242197;
-epsilon=2.543540776849738;%2.543540776849738;
+m=-0.00559565027929907;
+beta_A=0.000878431642350708;
+beta_P=6.54313717400116e-05;
+theta_1=0.222457489109919;
+epsilon=2.52786996559537;
 mu=0.00710; 
 mu_H=0.0466; 
-gamma=0.005281682020894;%0.005281682020894;
-theta_2=0.665253867081153;%0.665253867081153;
-sigma=0.109745817098382;%0.109745817098382;
-zeta=0.188896020171160;%0.188896020171160;
-theta_3=17.900486383845042;%17.900486383845042;
-nu=0.002278030004504;%0.002278030004504;
+gamma=0.00505079477762453;
+theta_2=0.236479520411597;
+sigma=0.101518004918260;
+zeta=0.198182427387906;
+theta_3=19.7264083013258;
+nu=0.000531263148928530;
 omega=0.0000000001;
-b=0.268584385064102;%0.268584385064102;
-c=-0.027158918855258;%-0.027158918855258;
-d=9.984897519858505e-04;%9.984897519858505e-04;
-e=0.008708050841388;%0.008708050841388;
-
-
-
+b=0.270110337915851;
+c=-0.0269690987063522;
+d=0.000977482526657751;
+e=0.00883138792481281;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
  
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
-%N = 6;
-N=11; %predict trajectory
+N=9; %predict trajectory
+tspan=linspace(0,N,12*N+1); %number of months
+%N=6; %to check fval 
 %tspan=linspace(0,N,25);
-% For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-tspan=linspace(0,N,133);
 
 
 % Initial Conditions
-P0=0.095416167677016;%0.095416167677016;
-A0=0.007233998280094;%0.007233998280094;
-H0=4.687664094772614e-04;%4.687664094772614e-04;
-R0=0.002880151501971;%0.002880151501971;
+P0=0.0949727450989279;
+A0=0.00709742287302280;
+H0=0.000464895055434927;
+R0=0.00507229016950725;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -152,90 +148,37 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  
  
+% Totaling the proportion of addicts
  figure(1)
  hold all
- plot(t,y(:,1),'k-','LineWidth',3)
- set(gca, 'FontSize',16)
- xlabel('Year')
- ylabel('Proportion of Population')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Susceptibles'}, 'FontSize', 16) 
-           
- figure(2)
- hold all
- plot(t,y(:,2),'b-','LineWidth',3)
- set(gca, 'fontsize',16)
- xlabel('Year')
- ylabel('Proportion of Population')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Prescription Opioid Users'}, 'FontSize', 16) 
-           
-           
- figure(3)
- hold all
- plot(t,y(:,3),'r-','LineWidth',3)
- set(gca, 'fontsize',16)
- xlabel('Year')
- ylabel('Proportion of Population')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Prescription Opioid Addicts'}, 'FontSize', 16)
-          
-                   
- figure(4)
- hold all
- plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
- set(gca, 'fontsize',16)
- xlabel('Year')
- ylabel('Proportion of Population')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
- legend({'Heroin and Fentanyl Addicts'}, 'FontSize', 16)
-      
- figure(5)
- hold all
- plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
- set(gca, 'fontsize',16)
- xlabel('Year')
- ylabel('Proportion of Population')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
- legend({'Stably Recovered Addicts'}, 'FontSize', 16)
- 
-
-% Totaling the proportion of addicts
- figure(6)
- hold all
  plot(t(1:73),y(1:73,3)+y(1:73,4),'Color',[0.4, 0, 0.8],'LineWidth',3);
- plot(t(74:133),y(74:133,3)+y(74:133,4),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3);
+ plot(t(74:12*N+1),y(74:12*N+1,3)+y(74:12*N+1,4),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3);
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
- legend({'Total Addicts'},'FontSize',14)
- xlim([0 11])
+ legend({'Total Addicts'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
  xtickangle(90)
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11 ]) 
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022', '2023', '2024'})
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
 
  % Totaling the proportion of addicts
- figure(7)
+ figure(2)
  hold all
  plot(t(1:73),y(1:73,3),'Color', [0, 0, 0.5],'LineWidth',3)
  plot(t(1:73),y(1:73,4),'Color', [0,0.9,0.7],'LineWidth',3)
- plot(t(74:133),y(74:133,3),'Color', [0,0,0.5],'LineStyle', '--','LineWidth',3)
- plot(t(74:133),y(74:133,4),'Color', [0,0.9,0.7],'LineStyle', '--','LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,3),'Color', [0,0,0.5],'LineStyle', '--','LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,4),'Color', [0,0.9,0.7],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
  xtickangle(90)
  xlabel('Year')
  ylabel('Proportion')
- legend({'Prescription Opioid Addicts', 'Heroin and Fentanyl Addicts'},'FontSize',14)
- xlim([0 11])
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10 11]) 
- set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022', '2023', '2024'})
+ legend({'Prescription Opioid Addicts', 'Heroin and Fentanyl Addicts'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
  

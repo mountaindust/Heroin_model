@@ -5,15 +5,8 @@ clear all;
 
 % Realistic parameter bounds
 %           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta    theta3    nu       b     P0        A0       H0       R0       c      d         e ]
-LowerBounds=[-0.1  0.00001   0.00001   0.05      1       0.005     0.2     0.1    0.0001    10      0.0001   0.1   0.001   0.0001   0.00001  0.00001   -0.1   0.0001   0.001];
-UpperBounds=[-0.001  0.01     0.01      0.3      5       0.1       0.4     2       0.2      19       0.2     0.5   0.35      0.01    0.002     0.1    -0.001  0.008     0.1 ];
-%LowerBounds=[-0.1  0.00001   0.00001   0.0001    1      0.005   0.0001     0.1    0.0001   0.01   0.0001   0.1   0.001   0.0001   0.00001  0.00001   -0.1   0.0001   0.001];
-%UpperBounds=[-0.001  0.01     0.01     0.01      5       0.1     0.05      2       0.2      0.5    0.2     0.5   0.35      0.01    0.002     0.1    -0.001  0.008     0.1 ];
-%LowerBounds=[-0.1  0.00001   0.00001   0.001      1      0.005   0.02     0.1    0.0001     0.5    0.0001   0.1   0.001   0.0001   0.00001  0.00001   -0.1   0.0001   0.001];
-%UpperBounds=[-0.001  0.01     0.01     0.075      5       0.1     0.5      2       0.2     0.93    0.2     0.5   0.35      0.01    0.002     0.1    -0.001  0.008     0.1 ];
-%LowerBounds=[-0.1  0.00001   0.00001   0.03      1      0.005    0.05     0.1    0.0001     0.5    0.0001   0.1   0.001   0.0001   0.00001  0.00001   -0.1   0.0001   0.001];
-%UpperBounds=[-0.001  0.01     0.01     0.15      5       0.1       1       2       0.2      1.85    0.2     0.5   0.35      0.01    0.002     0.1    -0.001  0.008     0.1 ];
-
+LowerBounds=[-0.1  0.00001   0.00001   0.05      1       0.005     0.1     0.1    0.0001    10      0.0001   0.1   0.001   0.0001   0.00001  0.00001   -0.1   0.0001   0.001];
+UpperBounds=[-0.001  0.01     0.01      0.3      5       0.1       0.4     2       0.2      20       0.2     0.5   0.35      0.01    0.002     0.1    -0.001  0.008     0.1 ];
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
 xstart=0.5*(LowerBounds + UpperBounds); 
@@ -32,7 +25,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=200;
+numstartpoints=100;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
@@ -855,6 +848,11 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  % Objective function value we wish to minimize; want value=fval(x) to be small  when run MultiStart
  
  value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ %TRYING WEIGHTING SCHEME
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+0.5*norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+0.1*norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ %value=0.5*norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+0.1*norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ 
  
  %%%%
  %value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4);

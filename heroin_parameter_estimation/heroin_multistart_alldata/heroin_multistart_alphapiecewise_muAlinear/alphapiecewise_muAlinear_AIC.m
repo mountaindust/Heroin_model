@@ -1,21 +1,24 @@
-m=-0.003809616984220;
-beta_A=0.001882117954237;
-beta_P=1.547024449925261e-04;
-theta_1=0.230200482903136;
-epsilon=2.490183622710504;
+%File name: alphapiecewise_muAlinear_AIC
+
+%parameters
+m=-0.00559565027929907;
+beta_A=0.000878431642350708;
+beta_P=6.54313717400116e-05;
+theta_1=0.222457489109919;
+epsilon=2.52786996559537;
 mu=0.00710; 
 mu_H=0.0466; 
-gamma=0.005132611182032;
-theta_2=0.295011684247306;
-sigma=0.103273758074671;
-zeta=0.196780924951988;
-theta_3=18.177388630797562;
-nu=0.002195460201203;
+gamma=0.00505079477762453;
+theta_2=0.236479520411597;
+sigma=0.101518004918260;
+zeta=0.198182427387906;
+theta_3=19.7264083013258;
+nu=0.000531263148928530;
 omega=0.0000000001;
-b=0.264674441743521;
-c=-0.028262450559125;
-d=9.087707184893593e-04;
-e=0.009011766509451;
+b=0.270110337915851;
+c=-0.0269690987063522;
+d=0.000977482526657751;
+e=0.00883138792481281;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
@@ -29,10 +32,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.086650700772954;
-A0=0.006983652004046;
-H0=4.671306881322558e-04;
-R0=0.004946711175863;
+P0=0.0949727450989279;
+A0=0.00709742287302280;
+H0=0.000464895055434927;
+R0=0.00507229016950725;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -102,12 +105,20 @@ Diff6=Estim6-Data6;
 
 value=norm(Diff1,2)^2+norm(Diff2,2)^2+norm(Diff3,2)^2+norm(Diff4,2)^2+norm(Diff5,2)^2+norm(Diff6,2)^2;
 value2=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ 
+P_yearly_error=norm(Diff1,2)^2;
+A_error=norm(Diff2,2)^2;
+H_error=norm(Diff3,2)^2;
+P_quarterly_error=norm(Diff4,2)^2;
+A_overdose_error=norm(Diff5,2)^2;
+H_overdose_error=norm(Diff6,2)^2;
 
+Errors=[P_yearly_error, A_error, H_error, P_quarterly_error, A_overdose_error, H_overdose_error];
 
 fprintf('AIC score')
 % sum of squares value, 48 data points, 20 parameters estimating+1 for sum
 % of squares value 
-disp(AIC(value,48,21))
+disp(AIC(value2,48,21))
 
       
 function alpha = a(t,pars)

@@ -1,28 +1,25 @@
-%File name: heroin_multistart_alphapiecewise_muAlinear_testing.m
-clf;
-clear all;
+%File name: heroin_multistart_alphapiecewise_muAlinear_check_proportions.m
+%NOTE: "value" may be a bit off, but that's okay because using 2 extra ODEs
+%here to get ideas of proportions so not exact same system
 
-m=-0.004995197428455;%-0.004995197428455;
-beta_A=0.003075241841496;%0.003075241841496;
-beta_P=3.088422784921360e-04;%3.088422784921360e-04;
-theta_1=0.214850659242197;%0.214850659242197;
-epsilon=2.543540776849738;%2.543540776849738;
+m=-0.00559565027929907;
+beta_A=0.000878431642350708;
+beta_P=6.54313717400116e-05;
+theta_1=0.222457489109919;
+epsilon=2.52786996559537;
 mu=0.00710; 
 mu_H=0.0466; 
-gamma=0.005281682020894;%0.005281682020894;
-theta_2=0.665253867081153;%0.665253867081153;
-sigma=0.109745817098382;%0.109745817098382;
-zeta=0.188896020171160;%0.188896020171160;
-theta_3=17.900486383845042;%17.900486383845042;
-nu=0.002278030004504;%0.002278030004504;
+gamma=0.00505079477762453;
+theta_2=0.236479520411597;
+sigma=0.101518004918260;
+zeta=0.198182427387906;
+theta_3=19.7264083013258;
+nu=0.000531263148928530;
 omega=0.0000000001;
-b=0.268584385064102;%0.268584385064102;
-c=-0.027158918855258;%-0.027158918855258;
-d=9.984897519858505e-04;%9.984897519858505e-04;
-e=0.008708050841388;%0.008708050841388;
-
-
-
+b=0.270110337915851;
+c=-0.0269690987063522;
+d=0.000977482526657751;
+e=0.00883138792481281;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
  
@@ -35,10 +32,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial Conditions
-P0=0.095416167677016;%0.095416167677016;
-A0=0.007233998280094;%0.007233998280094;
-H0=4.687664094772614e-04;%4.687664094772614e-04;
-R0=0.002880151501971;%0.002880151501971;
+P0=0.0949727450989279;
+A0=0.00709742287302280;
+H0=0.000464895055434927;
+R0=0.00507229016950725;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -95,8 +92,8 @@ Estim1=[y(1,2)+y(5,6)-y(1,6); y(5,2)+y(9,6)-y(5,6); y(9,2)+y(13,6)-y(9,6);...
 
 %Simulated in A class each year 
 Estim2=[y(1,3)+y(5,7)-y(1,7); y(5,3)+y(9,7)-y(5,7); y(9,3)+y(13,7)-y(9,7);...
-        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];      
-
+        y(13,3)+y(17,7)-y(13,7); y(17,3)+y(21,7)-y(17,7); y(21,3)+y(25,7)-y(21,7)];
+    
 %Simulated in H class each year 
 Estim3=[y(5,4)+y(9,8)-y(5,8); y(9,4)+y(13,8)-y(9,8); y(13,4)+y(17,8)-y(13,8)];
  
@@ -126,11 +123,11 @@ Estim8=[y(1,5)+y(5,12)-y(1,12); y(5,5)+y(9,12)-y(5,12); y(9,5)+y(13,12)-y(9,12);
  Data3=[7560./5559702; 7560./5602187; 10260./5648259];
  Diff3=Estim3-Data3;
  Data4=[847077./5519417; 860931./5519417; 864889./5519417; 847077./5519417;...
-       833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
-       827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
-       832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
-       775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
-       688451./5754509; 683498./5754509; 641894./5754509; 625054./5754509];
+        833223./5559702; 851035./5559702; 861921./5559702; 841140./5559702;...
+        827285./5602187; 852025./5602187; 855983./5602187; 845098./5602187;...
+        832085./5648259; 821189./5648259; 793453./5648259; 775622./5648259;...
+        775622./5702475; 764726./5702475; 739961./5702475; 706282./5702475;...
+        688451./5754509; 683498./5754509; 641894./5754509; 625054./5754509];
  Diff4=Estim4-Data4;
  Data5=[351./5519417; 360./5559702; 377./5602187; 381./5648259];
  Diff5=Estim5-Data5;
@@ -596,8 +593,9 @@ function mu_A = muA(t,pars)
 end
 
 
+
 function f = HeroinModel(t,y,pars)
-f=zeros(12,1);
+f=zeros(10,1);
 f(1)=-a(t,pars)*y(1)-pars(2)*y(1)*y(3)-pars(3)*y(1)*y(2)-pars(4)*y(1)*y(4)+pars(5)*y(2)+pars(6)*(y(2)+y(5))+(pars(6)+muA(t,pars))*y(3)+(pars(6)+pars(7))*y(4);
 f(2)=a(t,pars)*y(1)-pars(5)*y(2)-pars(8)*y(2)-pars(9)*y(2)*y(4)-pars(6)*y(2);
 f(3)=pars(8)*y(2)+(pars(10)*y(5)*y(3))/(y(3)+y(4)+pars(14))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2)-pars(11)*y(3)-pars(12)*y(3)*y(4)-pars(6)*y(3)-muA(t,pars)*y(3);
@@ -606,14 +604,14 @@ f(5)=pars(11)*y(3)+pars(13)*y(4)-(pars(10)*y(5)*y(3))/(y(3)+y(4)+pars(14))-(pars
 
 % X' ODE to calculate the number of new cases of prescription opioid use over time;
 % i.e. individuals who enter the P class at any time from S (used in
-% Estim1, Estim4) 
+                                                             % Estim1, Estim4)
 f(6) = a(t,pars)*y(1);
 
 % L' ODE to calculate the number of new cases of opioid addiction over time;
 % i.e. individuals who enter the A class at any time (used in Estim2)
 f(7) = pars(8)*y(2)+(pars(10)*y(5)*y(3))/(y(3)+y(4)+pars(14))+pars(2)*y(1)*y(3)+pars(3)*y(1)*y(2);
 
-% M' ODE to calculate the number of new cases of heroin/fentanyl addiction over time; 
+% M' ODE to calculate the number of new cases of heroin/fentanyl addiction over time;
 % i.e. individuals who enter the H class at any time (used in Estim3)
 f(8) = pars(4)*y(1)*y(4)+pars(9)*y(2)*y(4)+pars(12)*y(3)*y(4)+(pars(10)*y(5)*y(4))/(y(3)+y(4)+pars(14));
 
@@ -624,6 +622,7 @@ f(9) = muA(t,pars)*y(3);
 %K' ODE to calculate number of heroin/fentanayl addict overdoses over
 %time; i.e. individuals who overdose at any time (used in Estim6)
 f(10) = pars(7)*y(4);
+
 
 %W' ODE to calculate the number of new susceptibles over time; i.e.
 %individuals who enter the S class at any time 

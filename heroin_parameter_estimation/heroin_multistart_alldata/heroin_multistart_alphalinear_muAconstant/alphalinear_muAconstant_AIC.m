@@ -1,19 +1,19 @@
-m=-0.016168770430769;
-beta_A=6.028626431922449e-05;
-beta_P=1.377512810861206e-05;
-theta_1=0.140625525950935;
-epsilon=2.526649250596874;
+m=-0.016072418167367;
+beta_A=2.556314027998701e-04;
+beta_P=2.870714387786820e-05;
+theta_1=0.277109977635175;
+epsilon=2.518818996982068;
 mu=0.00710;  
 mu_A=0.00884;
 mu_H=0.0466;
-gamma=0.005003442118174;
-theta_2=1.823588391956158;
-sigma=0.100187240737003;
-zeta=0.099396517965999;
-theta_3=18.957642027116236;
-nu=1.792181772640938e-04;
+gamma=0.005017072730917;
+theta_2=0.308895984473693;
+sigma=0.100935604549461;
+zeta=0.099385120736980;
+theta_3=19.806162936192887;
+nu=5.005765346156529e-04;
 omega=0.0000000001;
-b=0.289029299448868;
+b=0.288379703516890;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b];
@@ -26,10 +26,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial conditions
-P0=0.083311348758638;
-A0=0.007621840599152;
-H0=4.551016351747697e-04;
-R0=1.696410024717003e-05;
+P0=0.081561880716041;
+A0=0.007615890659796;
+H0=4.694963719370283e-04;
+R0=4.268525234644736e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -103,7 +103,7 @@ value2=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm
 fprintf('AIC score')
 % sum of squares value, 48 data points, 17 parameters estimating+1 for sum
 % of squares value 
-disp(AIC(value,48,18))
+disp(AIC(value2,48,18))
       
        
 function alpha = a(t,pars)
