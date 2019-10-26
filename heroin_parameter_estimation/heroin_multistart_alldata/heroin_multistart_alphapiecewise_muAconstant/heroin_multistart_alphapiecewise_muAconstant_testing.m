@@ -4,40 +4,40 @@ clear all;
 
 %Parameters
 %slope of alpha 
-m=-0.006822802072377;
-beta_A=0.001127309866674;
-beta_P=1.032001037554092e-04;
-theta_1=0.281034752576591;
-epsilon=2.565832617791696;
+m=-0.00759829901019442;
+beta_A=6.01126909926855e-05;
+beta_P=1.37312211291756e-05;
+theta_1=0.284401807266879;
+epsilon=2.56273677041097;
 mu=0.00710; 
 mu_A=0.00884;
-mu_H=0.0466;      
-gamma=0.005085532939781;
-theta_2=0.290539557073724;
-sigma=0.104508667982758;
-zeta=0.105226717280365;
-theta_3=18.620712895716796;
-nu=0.001949235754943;
+mu_H=0.0466; 
+gamma=0.00500339664720886;
+theta_2=0.355814628540795;
+sigma=0.100184804571766;
+zeta=0.100402513311739;
+theta_3=18.0635609734696;
+nu=0.000181332211254903;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.273443898081090;
-c=-0.026565715101110;
+b=0.275305858322444;
+c=-0.0264943422500030;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
  
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N 
 N = 6;
-tspan=linspace(0,N,25);
+%tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
+tspan=linspace(0,N,3000);
 
 
 % Initial Conditions
-P0=0.084139226548956;
-A0=0.007614830776238;
-H0=4.770209452079636e-04;
-R0=1.589157616919731e-04;
+P0=0.0922293025105621;
+A0=0.00763634664877567;
+H0=0.000470731911097036;
+R0=1.85917132509588e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;

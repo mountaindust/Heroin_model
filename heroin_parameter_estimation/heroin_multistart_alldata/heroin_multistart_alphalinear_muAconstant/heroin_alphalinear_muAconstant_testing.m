@@ -1,19 +1,19 @@
-m=-0.02;%-0.016168770430769;
-beta_A=0.00006;%6.028626431922449e-05;
-beta_P=0.000038;%1.377512810861206e-05;
-theta_1=0.15;%0.140625525950935;
-epsilon=2.52;%2.526649250596874;
+m=-0.0166568947289087;
+beta_A=2.01339039713503e-05;
+beta_P=1.07613488853937e-05;
+theta_1=0.271953012780878;
+epsilon=2.55879092337285;
 mu=0.00710;  
 mu_A=0.00884;
 mu_H=0.0466;
-gamma=0.006;%0.005003442118174;
-theta_2=1.8;%1.823588391956158;
-sigma=0.2;%0.100187240737003;
-zeta=0.15;%0.099396517965999;
-theta_3=18;%18.957642027116236;
-nu=0.0002;%1.792181772640938e-04;
+gamma=0.00500069447307207;
+theta_2=0.361860571741226;
+sigma=0.100038203446277;
+zeta=0.0974935199219447;
+theta_3=19.9918788391698;
+nu=0.000116349238936298;
 omega=0.0000000001;
-b=0.28;%0.289029299448868;
+b=0.291928600613385;
 
 
 
@@ -24,16 +24,16 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,thet
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
-tspan=linspace(0,N,25);
+%tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
+tspan=linspace(0,N,3000);
 
 
 % Initial conditions
-P0=0.09;%0.083311348758638;
-A0=0.0076;%0.007621840599152;
-H0=0.000455;%4.551016351747697e-04;
-R0=0.000018;%1.696410024717003e-05;
+P0=0.0815718347996123;
+A0=0.00762380594619159;
+H0=0.000467529598012306;
+R0=1.14233803732730e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;

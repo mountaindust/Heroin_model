@@ -4,27 +4,24 @@ clear all;
 
 %Parameters
 %slope of alpha 
-m=-0.006822802072377;
-beta_A=0.001127309866674;
-beta_P=1.032001037554092e-04;
-theta_1=0.281034752576591;
-epsilon=2.565832617791696;
+m=-0.00759829901019442;
+beta_A=6.01126909926855e-05;
+beta_P=1.37312211291756e-05;
+theta_1=0.284401807266879;
+epsilon=2.56273677041097;
 mu=0.00710; 
 mu_A=0.00884;
-mu_H=0.0466;      
-gamma=0.005085532939781;
-theta_2=0.290539557073724;
-sigma=0.104508667982758;
-zeta=0.105226717280365;
-theta_3=18.620712895716796;
-nu=0.001949235754943;
+mu_H=0.0466; 
+gamma=0.00500339664720886;
+theta_2=0.355814628540795;
+sigma=0.100184804571766;
+zeta=0.100402513311739;
+theta_3=18.0635609734696;
+nu=0.000181332211254903;
 omega=0.0000000001;
 %y-intercept of alpha 
-b=0.273443898081090;
-c=-0.026565715101110;
-
-
-
+b=0.275305858322444;
+c=-0.0264943422500030;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c];
@@ -41,10 +38,10 @@ tspan=linspace(0,N,73);
 
 
 % Initial Conditions
-P0=0.084139226548956;
-A0=0.007614830776238;
-H0=4.770209452079636e-04;
-R0=1.589157616919731e-04;
+P0=0.0922293025105621;
+A0=0.00763634664877567;
+H0=0.000470731911097036;
+R0=1.85917132509588e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -153,12 +150,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z7,continuous1,'k-','LineWidth',1.3);
  %scatter(z1, Estim1, 100, 'o');
  scatter(z1, Data1, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 12 24 36 48 60])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 60])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
@@ -172,12 +168,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z8,continuous2,'k-','LineWidth',1.3);
  %scatter(z2, Estim2, 100, 'o');
  scatter(z2, Data2, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in A')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 12 24 36 48 60])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 60])
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
 
@@ -192,12 +187,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z9,continuous3,'k-','LineWidth',1.3);
  %scatter(z3, Estim3, 100,'o');
  scatter(z3, Data3, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in H')
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 24])
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
@@ -210,12 +204,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z10,continuous4,'k-','LineWidth',1.3);
  %scatter(z4, Estim4, 100, 'o');
  scatter(z4, Data4, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Quarter')
  ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 3 6 9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60 63 66 69])
- set(gca, 'fontsize',10)
  xtickangle(90)
  set(gca,'XLim',[0 69])
  set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
@@ -233,12 +226,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z11,continuous5,'k-','LineWidth',1.3);
  %scatter(z5, Estim5, 100,'o');
  scatter(z5, Data5, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24 36])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 36])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
@@ -250,12 +242,11 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  plot(z12,continuous6,'k-','LineWidth',1.3);
  %scatter(z6, Estim6, 100,'o');
  scatter(z6, Data6, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24 36 48])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 48])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
  

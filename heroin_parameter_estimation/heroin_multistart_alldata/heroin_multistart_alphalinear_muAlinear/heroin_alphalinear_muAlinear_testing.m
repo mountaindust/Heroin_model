@@ -1,21 +1,23 @@
-m=-0.02;%-0.016610684158853;
-beta_A=0.0003;%3.108166119233472e-04;
-beta_P=0.00002;%2.863267524770975e-05;
-theta_1=0.15;%0.134054178129354;
-epsilon=2.52;%2.516116423223269;
+%File name: heroin_alphalinear_muAlinear_testing.m
+
+%parameters
+m=-0.0164970013158777;
+beta_A=0.000312260648438820;
+beta_P=2.86178282404627e-05;
+theta_1=0.214394987134601;
+epsilon=2.50720313733225;
 mu=0.00710;  
 mu_H=0.0466;
-gamma=0.006;%0.005017354086434;
-theta_2=1.2;%1.213919319691605;
-sigma=0.2;%0.100559890277115;
-zeta=0.1;%0.199272279337711;
-theta_3=18;%18.930964146672185;
-nu=0.00019;%1.850814972141132e-04;
+gamma=0.00501732222443756;
+theta_2=0.295333738938771;
+sigma=0.100579453529813;
+zeta=0.199274251272404;
+theta_3=19.9308760066432;
+nu=0.000186697442506029;
 omega=0.0000000001;
-b=0.29;%0.291605484916520;
-d=0.0009;%9.800311890269993e-04;
-e=0.0088;%0.008822311421686;
-
+b=0.290873369602954;
+d=0.000977826984696063;
+e=0.00883431966171437;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,d,e];
 
@@ -24,15 +26,15 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,n
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
 N = 6; 
-tspan=linspace(0,N,25);
+%tspan=linspace(0,N,25);
 %For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
+tspan=linspace(0,N,3000);
 
 % Initial conditions
-P0=0.08;%0.082256394330787;
-A0=0.0071;%0.007107676425393;
-H0=0.000457;%4.570105765421901e-04;
-R0=0.006;%0.005193800789750;
+P0=0.0827339797161824;
+A0=0.00709515077973649;
+H0=0.000464432347451338;
+R0=0.00529431788628591;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;

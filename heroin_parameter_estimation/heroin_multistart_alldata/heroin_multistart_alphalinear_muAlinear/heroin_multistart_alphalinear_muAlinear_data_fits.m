@@ -1,25 +1,26 @@
-m=-0.016610684158853;
-beta_A=3.108166119233472e-04;
-beta_P=2.863267524770975e-05;
-theta_1=0.134054178129354;
-epsilon=2.516116423223269;
+%File name: heroin_multistart_alphalinear_muAlinear_data_fits.m
+
+%parameters
+m=-0.0164970013158777;
+beta_A=0.000312260648438820;
+beta_P=2.86178282404627e-05;
+theta_1=0.214394987134601;
+epsilon=2.50720313733225;
 mu=0.00710;  
 mu_H=0.0466;
-gamma=0.005017354086434;
-theta_2=1.213919319691605;
-sigma=0.100559890277115;
-zeta=0.199272279337711;
-theta_3=18.930964146672185;
-nu=1.850814972141132e-04;
+gamma=0.00501732222443756;
+theta_2=0.295333738938771;
+sigma=0.100579453529813;
+zeta=0.199274251272404;
+theta_3=19.9308760066432;
+nu=0.000186697442506029;
 omega=0.0000000001;
-b=0.291605484916520;
-d=9.800311890269993e-04;
-e=0.008822311421686;
-
+b=0.290873369602954;
+d=0.000977826984696063;
+e=0.00883431966171437;
 
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,d,e];
-
 
 
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
@@ -32,10 +33,10 @@ N = 6;
 tspan=linspace(0,N,73);
 
 % Initial conditions
-P0=0.082256394330787;
-A0=0.007107676425393;
-H0=4.570105765421901e-04;
-R0=0.005193800789750;
+P0=0.0827339797161824;
+A0=0.00709515077973649;
+H0=0.000464432347451338;
+R0=0.00529431788628591;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -158,12 +159,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z7,continuous1,'k-','LineWidth',1.3);
  %scatter(z1, Estim1, 100, 'o');
  scatter(z1, Data1, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 12 24 36 48 60])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 60])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
  
@@ -177,12 +177,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z8,continuous2,'k-','LineWidth',1.3);
  %scatter(z2, Estim2, 100, 'o');
  scatter(z2, Data2, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in A')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 12 24 36 48 60])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 60])
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
 
@@ -197,12 +196,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z9,continuous3,'k-','LineWidth',1.3);
  %scatter(z3, Estim3, 100,'o');
  scatter(z3, Data3, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion in H')
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 24])
  set(gca,'xticklabel',{'2014', '2015', '2016'})
  
@@ -215,12 +213,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z10,continuous4,'k-','LineWidth',1.3);
  %scatter(z4, Estim4, 100, 'o');
  scatter(z4, Data4, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Quarter')
  ylabel('Proportion in P')
  legend({'Model simulation', 'Data'},'FontSize', 14)
  set(gca, 'xtick', [ 0 3 6 9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60 63 66 69])
- set(gca, 'fontsize',10)
  xtickangle(90)
  set(gca,'XLim',[0 69])
  set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
@@ -238,12 +235,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z11,continuous5,'k-','LineWidth',1.3);
  %scatter(z5, Estim5, 100,'o');
  scatter(z5, Data5, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion overdose from A') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24 36])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 36])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
  
@@ -255,18 +251,13 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(z12,continuous6,'k-','LineWidth',1.3);
  %scatter(z6, Estim6, 100,'o');
  scatter(z6, Data6, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
- set(gca, 'fontsize',10)
+ set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion overdose from H') % at some point during the year
  legend({'Model simulation', 'Data'},'FontSize', 14,'Location','northwest')
  set(gca, 'xtick', [ 0 12 24 36 48])
- set(gca, 'fontsize',10)
  set(gca,'XLim',[0 48])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
- 
-
- 
-  
  
          
 function alpha = a(t,pars)

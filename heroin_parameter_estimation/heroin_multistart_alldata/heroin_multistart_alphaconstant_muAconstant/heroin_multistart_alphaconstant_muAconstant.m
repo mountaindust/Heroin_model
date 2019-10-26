@@ -4,15 +4,9 @@ clf;
 clear all;
 
 % Realistic parameter bounds
-%           [alpha  betaA     betaP  theta1  epsilon  gamma   theta2   sigma    zeta   theta3       nu        P0        A0        H0       R0   ]
-LowerBounds=[0.1  0.00001   0.00001   0.1      1       0.005    0.1     0.1    0.0001     10      0.0001     0.001   0.0001   0.00001  0.00001  ];
-UpperBounds=[0.5  0.01     0.01       4.5      5       0.1       9       2       0.2      19       0.2       0.35      0.01    0.002     0.1    ];
- 
-%LowerBounds=[ 0.1      0.00001  0.000001  0.00001   0.8    0.001    0.0001  0.0001    0.0001  0.001   0.0001   0.0001   0.00001  0.00001  0.00001  ];
-%UpperBounds=[ 0.8        0.01     0.01    0.001      8       0.1       2       1        0.5     4      0.1       0.5      0.1       0.1      0.1   ];
-%LowerBounds=[ 0.1     0.0000001 0.00000001  0.00001    0.8    0.001    0.0001  0.0001   0.00001  0.001   0.000001   0.0001   0.00001  0.00001  0.00001  ];
-%UpperBounds=[ 0.8        0.001     0.001     0.1        8      0.1       5       5       0.5     10      0.1       0.5      0.1       0.1      0.1   ];
-  
+%           [alpha  betaA    betaP    theta1  epsilon  gamma   theta2   sigma    zeta   theta3       nu        P0        A0        H0      R0   ]
+LowerBounds=[0.1  0.00001   0.00001     0.05     1      0.005    0.1     0.1    0.0001     10      0.0001     0.001   0.0001   0.00001  0.00001  ];
+UpperBounds=[0.5  0.01       0.01       0.3      5       0.1     0.4      2       0.2      20       0.2       0.35      0.01    0.002     0.1    ];
 
 
 % Initial starting points for parameters, starting in the middle of each of the ranges
@@ -32,7 +26,7 @@ problem.options=optimoptions(problem.options, 'MaxFunEvals',99999,'MaxIter',9999
 ms=MultiStart('Display', 'iter'); 
 
 % Number of times I want to run optimization scheme
-numstartpoints=50;
+numstartpoints=2000;
 
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run

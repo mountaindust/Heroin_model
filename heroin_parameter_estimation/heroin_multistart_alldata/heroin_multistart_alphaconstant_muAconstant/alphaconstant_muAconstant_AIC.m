@@ -1,17 +1,20 @@
-alpha=0.232095065531563;
-beta_A=1.002043983790143e-05;
-beta_P=1.001211468967921e-06;
-theta_1=9.999309711129865e-04;
-epsilon=2.382813760559818;
+%File name: alphaconstant_muAconstant_AIC.m
+
+%parameters
+alpha=0.239012408730750;
+beta_A=1.00211624557198e-05;
+beta_P=1.00014829348465e-05;
+theta_1=0.269686049016368;
+epsilon=2.60050639713302;
 mu=0.00710;  
 mu_A=0.00884;
 mu_H=0.0466;
-gamma=0.001000001094313;   
-theta_2=1.999999301028945;
-sigma=0.999998467560158;
-zeta=0.293324367600741;
-theta_3=3.999992645508699;
-nu=1.000165370013356e-04;
+gamma=0.00500000134404461;
+theta_2=0.399977128222722;
+sigma=0.100000080600305;
+zeta=0.0922846280605474;
+theta_3=19.9999830110769;
+nu=0.000100032943487802;
 omega=0.0000000001;
 
 pars=[alpha,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega];
@@ -24,10 +27,10 @@ tspan=linspace(0,N,25);
 
 
 % Initial conditions
-P0=0.117227918455699;
-A0=0.005471647817487;
-H0=3.812118956457632e-04;
-R0=0.002881191697633;
+P0=0.113789602625462;
+A0=0.00763353673014641;
+H0=0.000466506737855446;
+R0=1.00028641616231e-05;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -96,14 +99,14 @@ Diff4=Estim4-Data4;
 Diff5=Estim5-Data5;
 Diff6=Estim6-Data6; 
 
-value=norm(Diff1,2)^2+norm(Diff2,2)^2+norm(Diff3,2)^2+norm(Diff4,2)^2+norm(Diff5,2)^2+norm(Diff6,2)^2;
+%value=norm(Diff1,2)^2+norm(Diff2,2)^2+norm(Diff3,2)^2+norm(Diff4,2)^2+norm(Diff5,2)^2+norm(Diff6,2)^2;
 value2=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
 
  
 fprintf('AIC score')
 % sum of squares value, 48 data points, 16 parameters estimating+1 for sum
 % of squares value 
-disp(AIC(value,48,17))
+disp(AIC(value2,48,17))
 
 
 function f = HeroinModel(t,y,pars)
