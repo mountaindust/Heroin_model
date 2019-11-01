@@ -26,9 +26,9 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,n
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 6;
-%tspan=linspace(0,N,25);
+tspan=linspace(0,N,25);
 % For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-tspan=linspace(0,N,3000);
+%tspan=linspace(0,N,3000);
 
 
 % Initial Conditions
@@ -72,6 +72,7 @@ disp(a(4,pars))
 disp(a(5,pars))
 disp(a(6,pars))
 
+format long
 fprintf('muA values')
 disp(muA(0,pars))
 disp(muA(1,pars))

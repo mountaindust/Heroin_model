@@ -69,6 +69,7 @@ disp(a(4,pars))
 disp(a(5,pars))
 disp(a(6,pars))
 
+format long 
 fprintf('muA values')
 disp(muA(0,pars))
 disp(muA(1,pars))
