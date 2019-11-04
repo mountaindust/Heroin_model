@@ -151,14 +151,13 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
 % Totaling the proportion of addicts
  figure(1)
  hold all
- plot(t(1:73),y(1:73,3)+y(1:73,4),'Color',[0.4, 0, 0.8],'LineWidth',3);
- plot(t(74:12*N+1),y(74:12*N+1,3)+y(74:12*N+1,4),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3);
+ plot(t(1:73),y(1:73,3)+y(1:73,4),'Color',[0.1 0.4 1],'LineWidth',3);
+ plot(t(74:12*N+1),y(74:12*N+1,3)+y(74:12*N+1,4),'Color',[0.1 0.4 1],'LineStyle', '--','LineWidth',3);
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
  legend({'Total Addicts'},'FontSize',14, 'Location', 'northwest')
  xlim([0 N])
- xtickangle(90)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
@@ -172,7 +171,6 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t(74:12*N+1),y(74:12*N+1,3),'Color', [0,0,0.5],'LineStyle', '--','LineWidth',3)
  plot(t(74:12*N+1),y(74:12*N+1,4),'Color', [0,0.9,0.7],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
- xtickangle(90)
  xlabel('Year')
  ylabel('Proportion')
  legend({'Prescription Opioid Addicts', 'Heroin and Fentanyl Addicts'},'FontSize',14, 'Location', 'northwest')
@@ -180,6 +178,33 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
+ 
+ figure(3)
+ hold all
+ plot(t(1:73),y(1:73,9),'Color', 'm','LineWidth',3)
+ plot(t(1:73),y(1:73,10),'Color', [.5 0 .5],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,9),'Color', 'm','LineStyle', '--','LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,10),'Color', [.5 0 .5],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Proportion')
+ legend({'Prescription Opioid Addict Overdose Deaths', 'Heroin and Fentanyl Overdose Deaths'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
+ 
+ 
+ figure(4)
+ hold all
+ plot(t(1:73),y(1:73,9)+y(1:73,10),'Color',[0.4, 0, 0.8],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,9)+y(74:12*N+1,10),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Proportion')
+ legend({'Total Addict Overdose Deaths'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
  
