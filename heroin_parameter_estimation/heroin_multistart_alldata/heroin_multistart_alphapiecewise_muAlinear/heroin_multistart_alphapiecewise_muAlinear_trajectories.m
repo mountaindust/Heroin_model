@@ -145,8 +145,10 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
      continuous6(i)=y(i+4,10)-y(i,10);
  end 
  
- Z=muA(t,pars).*y(:,9);
- W=mu_H.*y(:,10);
+ %number of prescription opioid addict overdoses at any time point
+ W=muA(t,pars).*y(:,3);
+ %number of heroin/fentanyl overdoses at any time point
+ Z=mu_H.*y(:,4);
  
  
 % Totaling the proportion of addicts
@@ -183,10 +185,10 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  figure(3)
  hold all
- plot(t(1:73),Z(1:73),'Color', 'm','LineWidth',3)
- plot(t(1:73),W(1:73),'Color', [.5 0 .5],'LineWidth',3)
- plot(t(74:12*N+1),Z(74:12*N+1),'Color', 'm','LineStyle', '--','LineWidth',3)
- plot(t(74:12*N+1),W(74:12*N+1),'Color', [.5 0 .5],'LineStyle', '--','LineWidth',3)
+ plot(t(1:73),W(1:73),'Color', 'm','LineWidth',3)
+ plot(t(1:73),Z(1:73),'Color', [.5 0 .5],'LineWidth',3)
+ plot(t(74:12*N+1),W(74:12*N+1),'Color', 'm','LineStyle', '--','LineWidth',3)
+ plot(t(74:12*N+1),Z(74:12*N+1),'Color', [.5 0 .5],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
@@ -198,8 +200,8 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  figure(4)
  hold all
- plot(t(1:73),Z(1:73)+W(1:73),'Color',[0.4, 0, 0.8],'LineWidth',3)
- plot(t(74:12*N+1),Z(74:12*N+1)+W(74:12*N+1),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3)
+ plot(t(1:73),W(1:73)+Z(1:73),'Color',[0.4, 0, 0.8],'LineWidth',3)
+ plot(t(74:12*N+1),W(74:12*N+1)+Z(74:12*N+1),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
@@ -209,7 +211,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
- 
+ %{
  figure(5)
  hold all
  plot(t(1:73),y(1:73,9),'Color', 'm','LineWidth',3)
@@ -236,7 +238,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  xlim([0 N])
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
- 
+ %}
  
  
 function alpha = a(t,pars)
