@@ -11,20 +11,19 @@ epsilon= vec_matrix(x,5);
 gamma= vec_matrix(x,6);
 sigma= vec_matrix(x,7);
 mu= vec_matrix(x,8);
-mu_A= vec_matrix(x,9);
-mu_H= vec_matrix(x,10);
-theta_2= vec_matrix(x,11);
-zeta= vec_matrix(x,12);
-theta_3= vec_matrix(x,13);
-nu= vec_matrix(x,14);
-omega= vec_matrix(x,15);
-b= vec_matrix(x,16);
-c=vec_matrix(x,17);
+mu_H= vec_matrix(x,9);
+theta_2= vec_matrix(x,10);
+zeta= vec_matrix(x,11);
+theta_3= vec_matrix(x,12);
+nu= vec_matrix(x,13);
+omega= vec_matrix(x,14);
+b= vec_matrix(x,15);
+c=vec_matrix(x,16);
 
-P0=0.095;
-A0=0.00647;
-H0=0.000843;
-R0=0.0584;
+P0=0.0949727450989279;
+A0=0.00709742287302280;
+H0=0.000464895055434927;
+R0=0.00507229016950725;
 S0=1-P0-A0-H0-R0;
      
 %% Distemper model for shelter
@@ -39,13 +38,12 @@ S0=1-P0-A0-H0-R0;
 
     
     
-    dydt=[-a(t,m,b,c)*y(1)-beta_A*y(1)*y(3)-beta_P*y(1)*y(2)-theta_1*y(1)*y(4)+epsilon*y(2)+mu*(y(2)+y(5))+(mu+mu_A)*y(3)+(mu+mu_H)*y(4)
+   dydt=[-a(t,m,b,c)*y(1)-beta_A*y(1)*y(3)-beta_P*y(1)*y(2)-theta_1*y(1)*y(4)+epsilon*y(2)+mu*(y(2)+y(5))+(mu+muA(t,d,e))*y(3)+(mu+mu_H)*y(4)
          a(t,m,b,c)*y(1)-epsilon*y(2)-gamma*y(2)-theta_2*y(2)*y(4)-mu*y(2)
-         gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1)*y(2)-zeta*y(3)-theta_3*y(3)*y(4)-(mu+mu_A)*y(3)
+         gamma*y(2)+sigma*y(5)*y(3)/(y(3)+y(4)+omega)+beta_A*y(1)*y(3)+beta_P*y(1)*y(2)-zeta*y(3)-theta_3*y(3)*y(4)-(mu+muA(t,d,e))*y(3)
          theta_1*y(1)*y(4)+theta_2*y(2)*y(4)+theta_3*y(3)*y(4)+sigma*y(5)*y(4)/(y(3)+y(4)+omega)-nu*y(4)-(mu+mu_H)*y(4)
          zeta*y(3)+nu*y(4)-sigma*y(5)*y(3)/(y(3)+y(4)+omega)-sigma*y(5)*y(4)/(y(3)+y(4)+omega)-mu*y(5)];
     
-     
      
 end
 
@@ -57,6 +55,12 @@ else
     alpha = m*3.25+b-c*3.25+c*t;
 end
 end
+
+
+function mu_A = muA(t,d,e)
+    mu_A = d*t+e;
+end
+
 
 %LEAVING OUT %% FOR NOW from Christina's Code 
 
