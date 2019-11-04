@@ -73,7 +73,7 @@ end
  xlim([0 0.102])
 
  figure(3);
- plot(vec_matrix(:,7),H_lhs(1,:),'LineWidth',2)
+ plot(vec_matrix(:,7),H_lhs(1,:),'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('H')
