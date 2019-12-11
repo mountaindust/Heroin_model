@@ -1,7 +1,7 @@
 %File name: heroin_multistart_MLE_parameter_estimation.m 
 
-clf;
-clear all;
+%clf;
+%clear all;
 
 % Realistic parameter bounds
 %           [m      betaA     betaP   theta1   epsilon  gamma   theta2   sigma    zeta    theta3    nu       b     P0        A0       H0       R0       c      d         e       p     var_1    p2]   
@@ -30,7 +30,7 @@ ms=MultiStart('Display', 'iter');
 % Number of times I want to run optimization scheme
 numstartpoints=20000;
 
-%Set up parallel processing for hermione. If doing parallel processing on
+%Set up parallel processing for hermione, parpool(32). If doing parallel processing on
 %local computer, do parpool. 
 parpool(32)
 
