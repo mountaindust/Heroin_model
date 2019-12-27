@@ -27,8 +27,13 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,n
 % Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 6;
 tspan=linspace(0,N,25);
-% For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
+%To know values each year
+%tspan=linspace(0,N,7);
+%For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
 %tspan=linspace(0,N,3000);
+%To run to 2020 and know values each year
+%tspan=linspace(0,7,8);
+%tspan=linspace(0,7,3000);
 
 
 % Initial Conditions
