@@ -118,7 +118,7 @@ Estim5=[y(5,9)-y(1,9); y(9,9)-y(5,9); y(13,9)-y(9,9); y(17,9)-y(13,9)];
  Data6=[112./5519417; 201./5559702; 344./5602187; 488./5648259; 702./5702475];
  Diff6=Estim6-Data6;
  
-value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+2*norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+2.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
 
  
  for i=1:21;

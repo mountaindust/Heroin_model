@@ -27,6 +27,8 @@ ms=MultiStart('Display', 'iter');
 % Number of times I want to run optimization scheme
 numstartpoints=2000;
 
+parpool(4);
+
 % Runs MultiStart with numstartpoints to find a solution or multiple local solutions to problem; 
 % solutions contains the distinct local minima found during the run
 [x,fval,exitflag,output,solutions]=run(ms,problem,numstartpoints);
@@ -851,7 +853,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
  
  %Put more weight on heroin data to see if it STILL gives such as drastic
  %projected increase in heroin use in future 
- value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(Data3)+2*norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6);
+ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+2.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+2.*norm(Diff6,2)./norm(Data6);
  
 
  
