@@ -62,29 +62,3 @@ function mu_A = muA(t,d,e)
 end
 
 
-%LEAVING OUT %% FOR NOW from Christina's Code 
-
-%%function val = gamma(epi1b,epi2b,hospitalizations)
-
-% function for controlling the rate at which people seek medical attention
-%In theory, as more incidents are noticed, media/health officials get
-%involved and start informing the general public which in turn makes people
-%more aware of an outbreak and makes them more likely to seek medical
-%attention.
-
-%I beleive this is a function of detected infections (ie, hospiutalized)
-%rather than a function of dead indiviudals.
-% maxval = 1;
-% minval = .25;
-%exponential
-%val = .75*exp(-epi*hospitalizations);
-%first sigmoidal try
-%val = maxval/(1+((maxval-minval)/minval)*exp(-epi*hospitalizations));
-%second sigmoidal try
-%%val =(1-exp(-hospitalizations/epi1b))/(1+epi2b*exp(-hospitalizations/epi1b));
-
-%%val = max(val,0);
-
-%%end
-    
-   

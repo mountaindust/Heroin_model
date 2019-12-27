@@ -34,7 +34,7 @@ for x=1:N;
     f=@ODE_vec_Heroin;
 
 
-    [t,y] = ode15s(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
+    [t,y] = ode45(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
 
     W = [t y];
     
@@ -56,9 +56,8 @@ end
  hold on
  plot((0.101518004918260-vec_matrix(:,7))*100/0.101518004918260,(0.004298941991162-H_lhs(1,:))*100/0.004298941991162,'LineWidth',2)
  xlabel('Percent reduction in \sigma')
- ylabel('Percent reduction in A or H')
- legend({'Percent reduction in A', 'Percent reduction in H'},'FontSize', 16)
- %legend({'Percent reduction in A'},'FontSize', 10)
+ ylabel('Percent change in A or H at final time')
+ legend({'Percent reduction in A at final time', 'Percent reduction in H at final time'},'FontSize', 16)
  set(gca,'XTick',0:10:100);
  set(gca,'FontSize',16)
  xlim([0 100])
@@ -68,7 +67,7 @@ end
  plot(vec_matrix(:,7),A_lhs(1,:),'LineWidth',2) 
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
- ylabel('A')
+ ylabel('A at final time')
  set(gca,'FontSize',16)
  xlim([0 0.102])
 
@@ -76,7 +75,7 @@ end
  plot(vec_matrix(:,7),H_lhs(1,:),'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
- ylabel('H')
+ ylabel('H at final time')
  set(gca,'FontSize',16)
  xlim([0 0.102])
  
