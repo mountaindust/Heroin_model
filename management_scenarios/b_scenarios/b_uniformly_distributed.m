@@ -33,7 +33,8 @@ vec_matrix  = [m_vec;beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sig
 for x=1:N;
     f=@ODE_vec_Heroin;
 
-
+    %using ode45 because issues with ode15s (so doesn't match but okay
+    %because close enough) per 12/17/2019 meeting
     [t,y] = ode45(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
 
     W = [t y];
