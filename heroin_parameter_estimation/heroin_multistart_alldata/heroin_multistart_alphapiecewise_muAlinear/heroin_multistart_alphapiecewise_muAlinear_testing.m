@@ -26,11 +26,11 @@ pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,n
 
 % Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 6;
-tspan=linspace(0,N,25);
+%tspan=linspace(0,N,25);
 %To know values each year
 %tspan=linspace(0,N,7);
 %For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
-%tspan=linspace(0,N,3000);
+tspan=linspace(0,N,3000);
 %To run to 2020 and know values each year
 %tspan=linspace(0,7,8);
 %tspan=linspace(0,7,3000);
@@ -158,6 +158,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'FontSize',16)
  xlabel('Year')
  ylabel('Susceptibles')
+ set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
            
@@ -167,6 +168,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Prescription Users')
+ set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
  
@@ -178,6 +180,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Opioid addicts')
+ set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
           
@@ -188,6 +191,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Heroin/fentanyl addicts')
+ set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
  
@@ -198,8 +202,33 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Stably recovered addicts')
+ set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+ 
+ figure(6)
+ hold all
+ plot(t,y(:,3),'r-','LineWidth',3);
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);   
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3);
+ xlabel('Year')
+ ylabel('Addicted Individuals and Recovered Addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',16)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
+ legend({'A','H','R'}, 'FontSize', 14)     
+ 
+ figure(7)
+ hold all
+ plot(t,y(:,1),'k-','LineWidth',3);
+ plot(t,y(:,2),'b-','LineWidth',3);
+ xlabel('Year')
+ ylabel('Non-addicted Individuals')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',16)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
+ legend({'S','P'}, 'FontSize', 14)  
  
   
 %{
