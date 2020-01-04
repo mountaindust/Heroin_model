@@ -19,6 +19,8 @@ nu= vec_matrix(x,13);
 omega= vec_matrix(x,14);
 b= vec_matrix(x,15);
 c=vec_matrix(x,16);
+d=vec_matrix(x,17);
+e=vec_matrix(x,18);
 
 P0=0.0949727450989279;
 A0=0.00709742287302280;
