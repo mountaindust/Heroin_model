@@ -70,8 +70,8 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,
                    theta_2,zeta,theta_3,nu,omega,b,c,d,e):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
-    tstart = 0
-    tstop = 3
+    tstart = 7
+    tstop = 10
     # Copy default parameter dict
     params = dict(heroin_model.params)
     # Replace other parameter values
@@ -137,8 +137,8 @@ def main(N, filename, reduced, pool=None, no_plot=False):
             'bounds': [[-0.0084,-0.0028], [0.000439,0.001317], [0.0000327,0.0000981], [0.111,0.333], [1.265,3.795], 
                        [0.002525,0.007575], [0.051,0.153], [0.00355,0.01065], [0.0233,0.0699], [0.118,0.354],
                        [0.099,0.297],  [9.85,29.55], [0.0002655,0.0007965], [0.00000000005,0.00000000015], 
-                       [0.135,0.405], [-0.0405,-0.0135], [0.0004885,0.0014655], [0.004415,0.013245]]  
-        }   # for alpha piecewise linear above
+                       [0.21,0.405], [-0.0405,-0.0135], [0.0004885,0.0014655], [0.004415,0.013245]]  
+        }   # for alpha piecewise linear above; note: different lower bound on b 
 
     ### Create an N by num_var matrix of parameter values ###
     param_values = saltelli.sample(problem, N, calc_second_order=True)

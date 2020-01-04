@@ -9,9 +9,9 @@ H_0 = 0.00597
 R_0 = 0.00751
 S_0 = 1-P_0-A_0-H_0-R_0
 
-#temporal info, assigning default values
-tstart = 0
-tstop =  3
+#temporal info, assigning default values, have to do 7 to 10 for 2020-2023 because of time-dependent parameters alpha, muA
+tstart = 7
+tstop =  10
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
