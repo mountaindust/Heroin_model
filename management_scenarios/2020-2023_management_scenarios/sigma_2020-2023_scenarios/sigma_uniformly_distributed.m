@@ -80,4 +80,16 @@ end
  set(gca,'FontSize',16)
  xlim([0 0.102])
  
+%Let sigma range from 0 to baseline value: sigma_vec=linspace(0,sigma,N)
+%To get -30% info in dissertation, for example:
+%1. (0.101518004918260-vec_matrix(700,7))*100/0.101518004918260=30.03 so know decreasing sigma by 30%
+%2. sigma_vec(1,700)=0.0710 to get sigma value 
+%3. A_lhs(1,700)=0.00164
+%4. H_lhs(1,700)=0.0131
+%5. (0.001681923193256-A_lhs(1,700))*100/0.001681923193256=2.33 (know A is decreasing based on A vs. sigma plot)
+%6. (0.013796340958938-H_lhs(1,:))*100/0.013796340958938=4.98 (know H is decreasing based on H vs. sigma plot) 
+%7. Add together percentages to get total addict percentage effect 
+
+
+ 
  
