@@ -30,7 +30,9 @@ Parameter_settings_LHS_Heroin;
 % 
 
 %Choosing the points from the +/-50% baseline parameter intervals using a uniform
-%distribution (min, mean, max, std dev, number samples, distribution used)
+%distribution (min, mean, max, std dev, number samples, distribution used);
+%EXCEPT b: cut off at 0.21 below so alpha does not go negative in this time period
+%2020-2023
 m_LHS=LHS_Call_Heroin(m-(m/2),0,m+(m/2),0,nsample,'unif');
 beta_A_LHS=LHS_Call_Heroin(beta_A-(beta_A/2),0,beta_A+(beta_A/2),0,nsample,'unif');
 beta_P_LHS=LHS_Call_Heroin(beta_P-(beta_P/2),0,beta_P+(beta_P/2),0,nsample,'unif');
@@ -45,7 +47,7 @@ zeta_LHS=LHS_Call_Heroin(zeta-(zeta/2),0,zeta+(zeta/2),0,nsample,'unif');
 theta_3_LHS=LHS_Call_Heroin(theta_3-(theta_3/2),0,theta_3+(theta_3/2),0,nsample,'unif');
 nu_LHS=LHS_Call_Heroin(nu-(nu/2),0,nu+(nu/2),0,nsample,'unif');
 omega_LHS=LHS_Call_Heroin(omega-(omega/2),0,omega+(omega/2),0,nsample,'unif');
-b_LHS=LHS_Call_Heroin(b-(b/2),0,b+(b/2),0,nsample,'unif');
+b_LHS=LHS_Call_Heroin(0.21,0,b+(b/2),0,nsample,'unif');
 c_LHS=LHS_Call_Heroin(c-(c/2),0,c+(c/2),0,nsample,'unif');
 d_LHS=LHS_Call_Heroin(d-(d/2),0,d+(d/2),0,nsample,'unif');
 e_LHS=LHS_Call_Heroin(e-(e/2),0,e+(e/2),0,nsample,'unif');
@@ -101,9 +103,6 @@ save LV_Model_LHS_Heroin.mat;
 %% Scatter plots
 
   PRCC_PLOT_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,'Total Opioid Addicts');
-  
-  
-  
   
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -424,8 +423,8 @@ e_LHS14=LHS_Call_Heroin(e-0,0,e+0,0,nsample,'unif');
 
 
 
-%b
-
+%b, cut off at 0.21 below so alpha does not go negative in this time period
+%2020-2023
 m_LHS15=LHS_Call_Heroin(m-0,0,m+0,0,nsample,'unif');
 beta_A_LHS15=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
 beta_P_LHS15=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
@@ -440,7 +439,7 @@ zeta_LHS15=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
 theta_3_LHS15=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS15=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS15=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
-b_LHS15=LHS_Call_Heroin(b-(b/2),0,b+(b/2),0,nsample,'unif');
+b_LHS15=LHS_Call_Heroin(0.21,0,b+(b/2),0,nsample,'unif');
 c_LHS15=LHS_Call_Heroin(c-0,0,c+0,0,nsample,'unif');
 d_LHS15=LHS_Call_Heroin(d-0,0,d+0,0,nsample,'unif');
 e_LHS15=LHS_Call_Heroin(e-0,0,e+0,0,nsample,'unif');
