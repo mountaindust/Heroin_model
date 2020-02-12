@@ -85,3 +85,42 @@ end
  xlim([0.2 0.4])
  
  
+ %number of prescription opioid addict overdoses at the final time
+ W=0.018606213191390.*A_lhs(1,:);
+ %number of heroin/fentanyl overdoses at the final time
+ Z=mu_H.*H_lhs(1,:);
+ 
+ 
+ 
+ figure(4);
+ plot((vec_matrix(:,11)-0.198182427387906)*100/0.198182427387906,(3.129422150525879e-05-W)*100/3.129422150525879e-05,'LineWidth',2) 
+ hold on
+ plot((vec_matrix(:,11)-0.198182427387906)*100/0.198182427387906,(6.429094886864968e-04-Z)*100/6.429094886864968e-04,'LineWidth',2)
+ xlabel('Percent increase in \zeta and \nu')
+ ylabel('Percent change in A or H overdoses at final time')
+ legend({'Percent reduction in A overdoses at final time', 'Percent reduction in H overdoses at final time'},'FontSize', 16)
+ set(gca,'XTick',-10:10:110);
+ set(gca,'FontSize',16)
+ xlim([0 100])
+ ylim([-5 110])
+ 
+ 
+ %Would need to edit to include change in nu, as well
+ figure(5);
+ plot(vec_matrix(:,11),W,'LineWidth',2) 
+ %set ( gca, 'xdir', 'reverse' )
+ xlabel('\zeta')
+ ylabel('A overdoses at final time')
+ set(gca,'FontSize',16)
+ xlim([0.2 0.4])
+
+ %Would need to edit to include change in nu, as well
+ figure(6);
+ plot(vec_matrix(:,11),Z,'-r','LineWidth',2)
+ %set ( gca, 'xdir', 'reverse' )
+ xlabel('\zeta')
+ ylabel('H overdoses at final time')
+ set(gca,'FontSize',16)
+ xlim([0.2 0.4])
+ 
+ 

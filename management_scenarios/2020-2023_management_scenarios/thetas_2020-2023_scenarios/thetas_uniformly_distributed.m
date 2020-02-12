@@ -45,9 +45,9 @@ for x=1:N;
     H_lhs(:,x)=W(time_points+1,5);
     R_lhs(:,x)=W(time_points+1,6);
     
-    
-end  
-    
+end
+
+ %Z=muA(t,d,e).*y(:,3);
  
  %Percent change in theta_1: taking baseline theta_1 and subtracting new
  %theta_1
@@ -86,23 +86,25 @@ end
  xlim([0 0.3])
  
  
- %Would need to edit to include theta_2 and theta_3
- figure(4);
- plot(vec_matrix(:,4),mu_H.*H_lhs(1,:),'-r','LineWidth',2)
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\theta_1')
- ylabel('Overdoses from H at final time')
- set(gca,'FontSize',16)
- xlim([0 0.3])
+%  %Would need to edit to include theta_2 and theta_3
+%  figure(4);
+%  plot(vec_matrix(:,4),mu_H.*H_lhs(1,:),'-r','LineWidth',2)
+%  %set ( gca, 'xdir', 'reverse' )
+%  xlabel('\theta_1')
+%  ylabel('Overdoses from H at final time')
+%  set(gca,'FontSize',16)
+%  xlim([0 0.3])
+
+%  %Would need to edit to include theta_2 and theta_3
+%  figure(5);
+%  plot(vec_matrix(:,4),mu_H.*A_lhs(1,:),'-r','LineWidth',2)
+%  %set ( gca, 'xdir', 'reverse' )
+%  xlabel('\theta_1')
+%  ylabel('Overdoses from H at final time')
+%  set(gca,'FontSize',16)
+%  xlim([0 0.3])
+%  
  
- %Would need to edit to include theta_2 and theta_3
- figure(5);
- plot(vec_matrix(:,4),muA(t,d,e).*A_lhs(1,:),'-r','LineWidth',2)
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\theta_1')
- ylabel('Overdoses from H at final time')
- set(gca,'FontSize',16)
- xlim([0 0.3])
  
  
  
