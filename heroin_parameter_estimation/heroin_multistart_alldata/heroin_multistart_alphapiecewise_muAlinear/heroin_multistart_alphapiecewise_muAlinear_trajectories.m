@@ -166,7 +166,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  
 
- % Totaling the proportion of addicts
+ % Plotting proportion of each type of addict
  figure(2)
  hold all
  plot(t(1:73),y(1:73,3),'Color', [0, 0, 0.5],'LineWidth',3)
@@ -182,7 +182,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
- 
+ % Plotting proportion of each type of addict
  figure(3)
  hold all
  plot(t(1:73),W(1:73),'Color', 'm','LineWidth',3)
@@ -197,7 +197,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
- 
+ % Totaling the number of overdoses from A and H
  figure(4)
  hold all
  plot(t(1:73),W(1:73)+Z(1:73),'Color',[0.4, 0, 0.8],'LineWidth',3)
