@@ -94,6 +94,10 @@ disp(muA(8,pars))
 disp(muA(9,pars))
 disp(muA(10,pars))
  
+ %number of prescription opioid addict overdoses at any time point
+ W=muA(t,pars).*y(:,3);
+ %number of heroin/fentanyl overdoses at any time point
+ Z=mu_H.*y(:,4);
  
  
  figure(1)
@@ -144,6 +148,24 @@ disp(muA(10,pars))
  ylabel('Stably recovered addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+ figure(6)
+ hold all
+ plot(t,W,'Color', 'm','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Overdoses from A')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ 
+ figure(7)
+ plot(t,Z,'Color', [.5 0 .5],'LineWidth',3)
+ set(gca, 'fontsize',16)
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
+ xlabel('Year')
+ ylabel('Overdoses from H')
+ 
  
   
 %{
