@@ -10,6 +10,7 @@ from SALib.analyze import sobol
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib import gridspec
 import heroin_model
 
 default_N = os.cpu_count() - 4
@@ -250,6 +251,14 @@ def plot_S1_ST_from_store(store, show=True):
 
 
 
+def plot_S1_ST_tbl_from_store(store, show=True, ext='pdf'):
+    '''Extract and plot S1 and ST sensitivity data directly from a store object'''
+
+    plot_S1_ST_tbl(store['S_sens'], store['P_sens'], store['A_sens'],
+               store['H_sens'], store['R_sens'], show, ext)
+
+
+
 def print_max_conf(store):
     '''Print off the max confidence interval for each variable in the store,
     for both first-order and total-order indices'''
@@ -282,6 +291,96 @@ def plot_S1_ST(S_sens, P_sens, A_sens, H_sens, R_sens, show=True):
         plt.show()
     else:
         fig.savefig("param_sens_{}.pdf".format(time.strftime("%m_%d_%H%M")))
+    return (fig, axes)
+
+
+
+def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='pdf'):
+    '''This is going to be hard coded for the moment because the saved data
+    is not as robust as in the locust Run_Sobol. Thus:
+    MAKE SURE THE HARD CODED PARAMETER NAMES/INTERVALS MATCH WHAT IS IN MAIN()!'''
+
+    names = ['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
+             'gamma', 'sigma', 'mu', 'mu_H', 'theta_2',
+             'zeta','theta_3', 'nu', 'omega', 
+             'b','c', 'd', 'e', 'P_0', 'A_0', 'H_0', 'R_0']
+
+    bounds = [[-0.00896,-0.00299], [0.00240,0.00719], [0.000695,0.00209], [0.0343,0.103], [1.26,3.78], 
+              [0.00119,0.00357], [0.0139,0.0417], [0.00434,0.0130], [0.0254,0.0761], [0.178,0.534],
+              [0.237,0.711],  [0.935,2.81], [0.000231,0.000693], [0.00000000005,0.00000000015], 
+              [0.148,0.443], [-0.0447,-0.0149], [0.00153,0.00458], [0.00476,0.0143], [0.04685,0.1406], [0.00272,0.00815], [0.000204,0.000612], [0.0431,0.129]]
+
+    # Gather the S1 and ST results
+    S1 = pd.concat([S_sens['S1'], P_sens['S1'], A_sens['S1'], H_sens['S1'],
+                   R_sens['S1']], keys=['S','P','A','H','R'], axis=1)
+    ST = pd.concat([S_sens['ST'], P_sens['ST'], A_sens['ST'], H_sens['ST'],
+                   R_sens['ST']], keys=['S','P','A','H','R'], axis=1)
+
+    ###### Change to greek, LaTeX #####
+    for id in S1.index:
+        # handle greek ratios
+        if id not in ['m', 'b', 'c', 'd', 'e', 'P_0', 'A_0', 'H_0', 'R_0']:
+            S1.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+        
+    for id in ST.index:
+        if id not in ['m', 'b', 'c', 'd', 'e', 'P_0', 'A_0', 'H_0', 'R_0']:
+            ST.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
+
+    # setup for table
+    fig = plt.figure(figsize=(15, 6))
+    gs = gridspec.GridSpec(1, 3, width_ratios=[1,1,.35], wspace=.15, left=0.04,
+                            right=0.975, bottom=0.15, top=0.915)
+    axes = []
+    for ii in range(2):
+        axes.append(plt.subplot(gs[ii]))
+
+    s1bars = S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
+    s2bars = ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8, legend=False)
+    for ax in axes:
+        ax.tick_params(axis='x', labelsize=18, rotation=0)
+        ax.tick_params(axis='y', labelsize=14)
+        #ax.get_yaxis().set_visible(False)
+        ax.set_ylim(bottom=0)
+    axes[0].set_title('First-order indices', fontsize=26)
+    axes[1].set_title('Total-order indices', fontsize=26)
+    handles, labels = s1bars.get_legend_handles_labels()
+    s1bars.legend(reversed(handles), reversed(labels), loc='upper left', fontsize=16)
+
+    # Create table
+    columns = ('Value Range',)
+    rows = list(S1.index)
+    # turn bounds into strings of ranges
+    cell_text = []
+    for bnd in bounds:
+        low = str(bnd[0])
+        high = str(bnd[1])
+        # concatenate, remove leading zeros
+        if low != "0" and low != "0.0":
+            low = low.lstrip("0")
+        if high != "0" and high != "0.0":
+            high = high.lstrip("0")
+        # raise any minus signs
+        if '-' in low:
+            low = "\u00AF"+low[1:]
+        if '-' in high:
+            high = "\u00AF"+high[1:]
+        cell_text.append([low+"-"+high])
+    tbl_ax = plt.subplot(gs[2])
+    the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
+                loc='center')
+    the_table.set_fontsize(18)
+    the_table.scale(1,2.3)
+    the_table.auto_set_column_width(0)
+    tbl_ax.axis('off')
+
+    # reposition table
+    pos = tbl_ax.get_position()
+    newpos = [pos.x0 + 0.02, pos.y0, pos.width, pos.height]
+    tbl_ax.set_position(newpos)
+    if show:
+        plt.show()
+    else:
+        fig.savefig("param_sens_{}.{}".format(time.strftime("%m_%d_%H%M"), ext))
     return (fig, axes)
 
 
