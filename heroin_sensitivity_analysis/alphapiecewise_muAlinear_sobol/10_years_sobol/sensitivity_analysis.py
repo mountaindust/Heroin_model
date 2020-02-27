@@ -138,7 +138,7 @@ def main(N, filename, reduced, pool=None, no_plot=False):
                        [0.002525,0.007575], [0.051,0.153], [0.00355,0.01065], [0.0233,0.0699], [0.118,0.354],
                        [0.099,0.297],  [9.85,29.55], [0.0002655,0.0007965], [0.00000000005,0.00000000015], 
                        [0.21,0.405], [-0.0405,-0.0135], [0.0004885,0.0014655], [0.004415,0.013245], [0.0475,0.1425], [0.00355,0.01065], [0.0002325,0.0006975], [0.002535,0.007605]]  
-        }   # for alpha piecewise linear above
+        }   # for alpha piecewise linear above; note: different lower bound on b so alpha does not go negative in this time span
 
     ### Create an N by num_var matrix of parameter values ###
     param_values = saltelli.sample(problem, N, calc_second_order=True)
