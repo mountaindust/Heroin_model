@@ -2,24 +2,24 @@
 clf;
 clear all;
 
-m=-0.00959081904910168;
-beta_A=0.000547665937526567;
-beta_P=3.54815882817162e-05;
-theta_1=0.0768026069493661;
-epsilon=2.57359174497727;
+m=-0.008222258505438;
+beta_A=3.759182102599875e-04;
+beta_P=2.889364470578546e-05;
+theta_1=0.285385612130485;
+epsilon=2.559698984529351;
 mu=0.00710; 
 mu_H=0.0466; 
-gamma=0.00502442423818114;
-theta_2=0.102162927238600;
-sigma=0.218107878500014;
-zeta=0.199831940842269;
-theta_3=10.0287953455473;
-nu=0.000485210862964808;
+gamma=0.005017083121265;
+theta_2=0.189979273975311;
+sigma=0.100440120658503;
+zeta=0.138352135714271;
+theta_3=19.357867584681800;
+nu=1.456360047291281e-04;
 omega=0.0000000001;
-b=0.280632334424353;
-c=-0.0255287384270066;
-d=0.00121423487972979;
-e=0.00834122202941407;
+b=0.277058195720883;
+c=-0.026138867574552;
+d=9.893970493979934e-04;
+e=0.008246147484998;
 
 pars=[m,beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,b,c,d,e];
  
@@ -32,10 +32,10 @@ tspan=linspace(0,N,12*N+1); %number of months
 
 
 % Initial Conditions
-P0=0.0872022972867530;
-A0=0.00771457681712701;
-H0=0.000937746008611740;
-R0=1.40671155678552e-05;
+P0=0.088583757585353;
+A0=0.007600069687621;
+H0=4.708419833175072e-04;
+R0=5.413270403462795e-04;
 S0=1-P0-A0-H0-R0;
 X0=0;
 L0=0;
@@ -118,7 +118,17 @@ Estim6=[y(5,10)-y(1,10); y(9,10)-y(5,10); y(13,10)-y(9,10);...
  Data6=[112./5519417; 201./5559702; 344./5602187; 488./5648259; 702./5702475];
  Diff6=Estim6-Data6;
  
-value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+20.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+%Weight of 2 on heroin data 
+%value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+2.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+
+%Weight of 5 on heroin data 
+%value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+5.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+
+%Weight of 20 on heroin data 
+%value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+20.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+norm(Diff6,2)./norm(Data6)
+
+%Weight of 2 on both heroin data and heroin overdose data
+value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+2.*norm(Diff3,2)./norm(Data3)+norm(Diff4,2)./norm(Data4)+norm(Diff5,2)./norm(Data5)+2.*norm(Diff6,2)./norm(Data6)
 
  
  for i=1:21;
