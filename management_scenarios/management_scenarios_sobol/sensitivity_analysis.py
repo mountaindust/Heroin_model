@@ -66,16 +66,15 @@ def run_reduced_model(alpha,beta_A,delta,epsilon,zeta,nu,mu,mu_star,sigma):
 
 
 
-def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,
-                   theta_2,zeta,theta_3,nu,omega,b,c,d,e):
+def run_full_model(beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,
+                   theta_2,zeta,theta_3,nu,omega,g,h):
     '''Defines a model wrapper based on the parameter space in main()'''
     # Length to run each model
-    tstart = 7
-    tstop = 10
+    tstart = 0
+    tstop = 3
     # Copy default parameter dict
     params = dict(heroin_model.params)
-    # Replace other parameter values
-    params['m'] = m                   
+    # Replace other parameter values              
     params['beta_A'] = beta_A
     params['beta_P'] = beta_P
     params['theta_1'] = theta_1
@@ -89,10 +88,8 @@ def run_full_model(m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,
     params['theta_3'] = theta_3
     params['nu'] = nu
     params['omega'] = omega 
-    params['b'] = b
-    params['c'] = c
-    params['d'] = d
-    params['e'] = e
+    params['g'] = g
+    params['h'] = h
 
     # Get initial conditions
     P_0 = 0.0585
@@ -129,15 +126,15 @@ def main(N, filename, reduced, pool=None, no_plot=False):
         }
     else:
         problem = {
-            'num_vars': 18, #number of parameters/initial conditions with bounds +/-50%, alpha=m*t+b for first set of bounds and alpha=piecewise linear for second set of bounds
-            'names': ['m', 'beta_A', 'beta_P', 'theta_1', 'epsilon', 
+            'num_vars': 15, #number of parameters/initial conditions with bounds +/-50%, alpha=m*t+b for first set of bounds and alpha=piecewise linear for second set of bounds
+            'names': ['beta_A', 'beta_P', 'theta_1', 'epsilon', 
                       'gamma', 'sigma', 'mu', 'mu_H', 'theta_2',
                       'zeta','theta_3', 'nu', 'omega', 
-                      'b','c', 'd', 'e'],
-            'bounds': [[-0.0084,-0.0028], [0.000439,0.001317], [0.0000327,0.0000981], [0.111,0.333], [1.265,3.795], 
+                      'g','h'],
+            'bounds': [[0.000439,0.001317], [0.0000327,0.0000981], [0.111,0.333], [1.265,3.795], 
                        [0.002525,0.007575], [0.051,0.153], [0.00355,0.01065], [0.0233,0.0699], [0.118,0.354],
                        [0.099,0.297],  [9.85,29.55], [0.0002655,0.0007965], [0.00000000005,0.00000000015], 
-                       [0.21,0.405], [-0.0405,-0.0135], [0.0004885,0.0014655], [0.004415,0.013245]]  
+                       [-0.0405,-0.0135], [0.004415,0.013245]]  
         }   # for alpha piecewise linear above; note: different lower bound on b so alpha does not go negative in this time span
 
     ### Create an N by num_var matrix of parameter values ###

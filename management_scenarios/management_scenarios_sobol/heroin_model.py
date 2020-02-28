@@ -2,23 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import ode
 
-#initial population values, should add to 1
+#initial population values in 2020, should add to 1
 P_0 = 0.0585
 A_0 = 0.0037
 H_0 = 0.00597
 R_0 = 0.00751
 S_0 = 1-P_0-A_0-H_0-R_0
 
-#temporal info, assigning default values, have to do 7 to 10 for 2020-2023 because of time-dependent parameters alpha, muA
-tstart = 7
-tstop =  10
+#temporal info, assigning default values, making 2020 represent t=0 and adjust time-dependent parameters below 
+tstart = 0
+tstop =  3
 #If change tstop and get error, sometimes have to add +1 to part of t linspace like this:
 #10*(tstart+tstop+.1)+1
 
 #parameters
 params = {}
-params['m'] = -0.00560                 #slope of time-dependent alpha: S->P the rate at which people are prescribed opioids 
-params['b'] = 0.270                       #y-intercept of time-dependent alpha: S->P the rate at which people are prescribed opioids
 params['beta_A'] = 0.000878                 #S->A total probability of becoming addicted to opioids other than by prescription 
 params['beta_P'] = 0.0000654              # S->A proportion of susceptibles that obtain extra prescription opioids OR black market drugs and becomes addicted (Note: MUST BE ZERO FOR AFE)
 params['theta_1'] = 0.222              #S->H rate susceptible population becomes addicted to heroin by black market drugs and other addicts 
@@ -32,19 +30,17 @@ params['zeta'] = 0.198                    #A->R rate at which addicted opioid us
 params['theta_3'] = 19.7                 #A->H rate at which the opioid addicted population becomes addicted to heroin 
 params['nu'] = 0.000531                   #H->R rate at which heroin users enter treatment/rehabilitation 
 params['omega'] = 0.0000000001             #perturbation term for relapse rates
-params['c']= -0.0270                    #only for piecewise linear alpha, slope of alpha after Quarter 2 2016 
-params['d']= 0.000977                       #only for linear muA, slope of time-dependent muA for 2013-2018
-params['e']= 0.00883                          #only for linear muA, y-intercept of time-dependent muA for 2013-2018
-
+params['g']= -0.0270                       #new slope for alpha past 2020 point; initially is value of c but will be varied with sobol 
+params['h']= 0.00883                        #new slope for muA past 2020 point; initially is value of e but will be varied with sobol
 
 def alpha(t, params):
-    if t <= 3.25:
-       return params['m']*t+params['b']
-    else:
-       return params['m']*3.25+params['b']-params['c']*3.25+params['c']*t
-
+       return -0.00560*3.25+0.270+0.0270*3.25-0.0270*7+params['g']*t
+            #m*3.25+b-c*3.25+c*7+gt
+    #want alpha to be continuous at 2020 from previous part of piecewise function, so introduce new slope 
 def muA(t, params):
-       return params['d']*t+params['e']
+       return 0.000977*7+0.00883+params['h']*t
+            #d*7+e+ht
+    #want muA to be continuous at 2020 from previous part of linear function, so introduce new slope
       
 
 def update_params(new_params):
