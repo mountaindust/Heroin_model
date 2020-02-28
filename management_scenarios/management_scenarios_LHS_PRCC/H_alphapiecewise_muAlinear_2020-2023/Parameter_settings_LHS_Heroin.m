@@ -2,7 +2,6 @@
 
 % PARAMETER BASELINE VALUES
 
-m=-0.00559565027929907;
 beta_A=0.000878431642350708;
 beta_P=6.54313717400116e-05;
 theta_1=0.222457489109919;
@@ -16,15 +15,13 @@ zeta=0.198182427387906;
 theta_3=19.7264083013258;
 nu=0.000531263148928530;
 omega=0.0000000001;
-b=0.270110337915851;
-c=-0.0269690987063522;
-d=0.000977482526657751;
-e=0.00883138792481281;
+g=-0.0269690987063522;
+h=0.00883138792481281;
 
 
 % %
 
-params=[m,beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,theta_2,zeta,theta_3,nu,omega,b,c,d,e];
+params=[beta_A,beta_P,theta_1,epsilon,gamma,sigma,mu,mu_H,theta_2,zeta,theta_3,nu,omega,g,h];
 
 
 %% TIME SPAN OF THE SIMULATION
@@ -47,6 +44,6 @@ y0 = [S0,P0,A0,H0,R0];
 % Variables Labels
 y_var_label={'S0','P0','A0','H0','R0'};
 
-PRCC_var={'m','beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_H','theta_2','zeta','theta_3','nu','omega','b','c','d','e'};
+PRCC_var={'beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_H','theta_2','zeta','theta_3','nu','omega','g','h'};
 
 

@@ -38,7 +38,7 @@ AA(1,:)={'Variable'          'PRCC'              'p-value'};
 figure(16);
 set(gcf, 'Position',  [1, 1, 1700, 800])
 
-for i=1:18
+for i=1:15
     c4=['r',num2str(i)];
     c5=['rx',num2str(i)];
     [r p]=corr(eval(c4),eval(c5));
