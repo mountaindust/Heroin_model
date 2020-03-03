@@ -831,7 +831,7 @@ for x=1:nsample %Run solution x times choosing different values, represents each
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %store final value of each class (time_points+1 is final time since first
-  %column is IC's), start with 2nd column because 1st just for time values 
+  %row is IC's), start with 2nd column because 1st just for time values 
      S_lhs1(:,x)=W1(time_points+1,2);
      P_lhs1(:,x)=W1(time_points+1,3);
      A_lhs1(:,x)=W1(time_points+1,4);
