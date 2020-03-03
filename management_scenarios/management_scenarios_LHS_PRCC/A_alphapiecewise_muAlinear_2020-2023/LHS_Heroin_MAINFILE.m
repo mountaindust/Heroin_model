@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test, one from each parameter interval (i.e. number of uniform intervals)
-nsample = 900; 
+nsample = 700; 
 
 %% LHS MATRIX  %%
 
@@ -44,8 +44,8 @@ zeta_LHS=LHS_Call_Heroin(zeta-(zeta/2),0,zeta+(zeta/2),0,nsample,'unif');
 theta_3_LHS=LHS_Call_Heroin(theta_3-(theta_3/2),0,theta_3+(theta_3/2),0,nsample,'unif');
 nu_LHS=LHS_Call_Heroin(nu-(nu/2),0,nu+(nu/2),0,nsample,'unif');
 omega_LHS=LHS_Call_Heroin(omega-(omega/2),0,omega+(omega/2),0,nsample,'unif');
-g_LHS=LHS_Call_Heroin(g-(g/2),0,g+(g/2),0,nsample,'unif');
-h_LHS=LHS_Call_Heroin(h-(h/2),0,h+(h/2),0,nsample,'unif');
+g_LHS=LHS_Call_Heroin(-0.038616505394549,0,-0.015322152647799,0,nsample,'unif');
+h_LHS=LHS_Call_Heroin(-0.002123553005241,0,0.004078518058556,0,nsample,'unif');
 
  
 
@@ -369,7 +369,7 @@ zeta_LHS14=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
 theta_3_LHS14=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS14=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS14=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
-g_LHS14=LHS_Call_Heroin(g-(g/2),0,g+(g/2),0,nsample,'unif');
+g_LHS14=LHS_Call_Heroin(-0.038616505394549,0,-0.015322152647799,0,nsample,'unif');
 h_LHS14=LHS_Call_Heroin(h-0,0,h+0,0,nsample,'unif');
 
 
@@ -389,7 +389,7 @@ theta_3_LHS15=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS15=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS15=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 g_LHS15=LHS_Call_Heroin(g-0,0,g+0,0,nsample,'unif');
-h_LHS15=LHS_Call_Heroin(h-(h/2),0,h+(h/2),0,nsample,'unif');
+h_LHS15=LHS_Call_Heroin(-0.002123553005241,0,0.004078518058556,0,nsample,'unif');
 
 
 

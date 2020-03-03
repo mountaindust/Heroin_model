@@ -1,4 +1,4 @@
-%A_alphapiecewise_muAlinear
+%H_alphapiecewise_muAlinear
 clear all;
 close all;
 
@@ -7,7 +7,7 @@ close all;
 %% Sample size N
  
 %Total # of parameters values to test, one from each parameter interval (i.e. number of uniform intervals)
-nsample = 900; 
+nsample = 700; 
 
 %% LHS MATRIX  %%
 
@@ -44,8 +44,9 @@ zeta_LHS=LHS_Call_Heroin(zeta-(zeta/2),0,zeta+(zeta/2),0,nsample,'unif');
 theta_3_LHS=LHS_Call_Heroin(theta_3-(theta_3/2),0,theta_3+(theta_3/2),0,nsample,'unif');
 nu_LHS=LHS_Call_Heroin(nu-(nu/2),0,nu+(nu/2),0,nsample,'unif');
 omega_LHS=LHS_Call_Heroin(omega-(omega/2),0,omega+(omega/2),0,nsample,'unif');
-g_LHS=LHS_Call_Heroin(g-(g/2),0,g+(g/2),0,nsample,'unif');
-h_LHS=LHS_Call_Heroin(h-(h/2),0,h+(h/2),0,nsample,'unif');
+g_LHS=LHS_Call_Heroin(-0.038616505394549,0,-0.015322152647799,0,nsample,'unif');
+h_LHS=LHS_Call_Heroin(-0.002123553005241,0,0.004078518058556,0,nsample,'unif');
+
 
  
 
@@ -91,12 +92,12 @@ save LV_Model_LHS_Heroin.mat;
   alpha = 1e-3;
   %this uses total exposures as the metric. Change second input argument if want
   %to test something else
- [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
+ [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
 
 
 %% Scatter plots
 
-  PRCC_PLOT_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,'Total Opioid Addicts');
+  PRCC_PLOT_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,'Total Opioid Addicts');
   
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -355,6 +356,7 @@ h_LHS13=LHS_Call_Heroin(h-0,0,h+0,0,nsample,'unif');
 
 
 
+
 %g
 beta_A_LHS14=LHS_Call_Heroin(beta_A-0,0,beta_A+0,0,nsample,'unif');
 beta_P_LHS14=LHS_Call_Heroin(beta_P-0,0,beta_P+0,0,nsample,'unif');
@@ -369,7 +371,7 @@ zeta_LHS14=LHS_Call_Heroin(zeta-0,0,zeta+0,0,nsample,'unif');
 theta_3_LHS14=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS14=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS14=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
-g_LHS14=LHS_Call_Heroin(g-(g/2),0,g+(g/2),0,nsample,'unif');
+g_LHS14=LHS_Call_Heroin(-0.038616505394549,0,-0.015322152647799,0,nsample,'unif');
 h_LHS14=LHS_Call_Heroin(h-0,0,h+0,0,nsample,'unif');
 
 
@@ -389,7 +391,7 @@ theta_3_LHS15=LHS_Call_Heroin(theta_3-0,0,theta_3+0,0,nsample,'unif');
 nu_LHS15=LHS_Call_Heroin(nu-0,0,nu+0,0,nsample,'unif');
 omega_LHS15=LHS_Call_Heroin(omega-0,0,omega+0,0,nsample,'unif');
 g_LHS15=LHS_Call_Heroin(g-0,0,g+0,0,nsample,'unif');
-h_LHS15=LHS_Call_Heroin(h-(h/2),0,h+(h/2),0,nsample,'unif');
+h_LHS15=LHS_Call_Heroin(-0.002123553005241,0,0.004078518058556,0,nsample,'unif');
 
 
 
@@ -601,21 +603,21 @@ end
 %  %% CALCULATE PRCC 
 
 %only stored last time point so 1:length(time_points)=1 makes sense
-[prcc1 sign1 sign_label1] = PRCC_Heroin(LHSmatrix1,A_lhs1,1:length(time_points),PRCC_var,alpha);
-[prcc2 sign2 sign_label2] = PRCC_Heroin(LHSmatrix2,A_lhs2,1:length(time_points),PRCC_var,alpha);
-[prcc3 sign3 sign_label3] = PRCC_Heroin(LHSmatrix3,A_lhs3,1:length(time_points),PRCC_var,alpha);
-[prcc4 sign4 sign_label4] = PRCC_Heroin(LHSmatrix4,A_lhs4,1:length(time_points),PRCC_var,alpha);
-[prcc5 sign5 sign_label5] = PRCC_Heroin(LHSmatrix5,A_lhs5,1:length(time_points),PRCC_var,alpha);
-[prcc6 sign6 sign_label6] = PRCC_Heroin(LHSmatrix6,A_lhs6,1:length(time_points),PRCC_var,alpha);
-[prcc7 sign7 sign_label7] = PRCC_Heroin(LHSmatrix7,A_lhs7,1:length(time_points),PRCC_var,alpha);
-[prcc8 sign8 sign_label8] = PRCC_Heroin(LHSmatrix8,A_lhs8,1:length(time_points),PRCC_var,alpha);
-[prcc9 sign9 sign_label9] = PRCC_Heroin(LHSmatrix9,A_lhs9,1:length(time_points),PRCC_var,alpha);
-[prcc10 sign10 sign_label10] = PRCC_Heroin(LHSmatrix10,A_lhs10,1:length(time_points),PRCC_var,alpha);
-[prcc11 sign11 sign_label11] = PRCC_Heroin(LHSmatrix11,A_lhs11,1:length(time_points),PRCC_var,alpha);
-[prcc12 sign12 sign_label12] = PRCC_Heroin(LHSmatrix12,A_lhs12,1:length(time_points),PRCC_var,alpha);
-[prcc13 sign13 sign_label13] = PRCC_Heroin(LHSmatrix13,A_lhs13,1:length(time_points),PRCC_var,alpha);
-[prcc14 sign14 sign_label14] = PRCC_Heroin(LHSmatrix14,A_lhs14,1:length(time_points),PRCC_var,alpha);
-[prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,A_lhs15,1:length(time_points),PRCC_var,alpha);
+[prcc1 sign1 sign_label1] = PRCC_Heroin(LHSmatrix1,H_lhs1,1:length(time_points),PRCC_var,alpha);
+[prcc2 sign2 sign_label2] = PRCC_Heroin(LHSmatrix2,H_lhs2,1:length(time_points),PRCC_var,alpha);
+[prcc3 sign3 sign_label3] = PRCC_Heroin(LHSmatrix3,H_lhs3,1:length(time_points),PRCC_var,alpha);
+[prcc4 sign4 sign_label4] = PRCC_Heroin(LHSmatrix4,H_lhs4,1:length(time_points),PRCC_var,alpha);
+[prcc5 sign5 sign_label5] = PRCC_Heroin(LHSmatrix5,H_lhs5,1:length(time_points),PRCC_var,alpha);
+[prcc6 sign6 sign_label6] = PRCC_Heroin(LHSmatrix6,H_lhs6,1:length(time_points),PRCC_var,alpha);
+[prcc7 sign7 sign_label7] = PRCC_Heroin(LHSmatrix7,H_lhs7,1:length(time_points),PRCC_var,alpha);
+[prcc8 sign8 sign_label8] = PRCC_Heroin(LHSmatrix8,H_lhs8,1:length(time_points),PRCC_var,alpha);
+[prcc9 sign9 sign_label9] = PRCC_Heroin(LHSmatrix9,H_lhs9,1:length(time_points),PRCC_var,alpha);
+[prcc10 sign10 sign_label10] = PRCC_Heroin(LHSmatrix10,H_lhs10,1:length(time_points),PRCC_var,alpha);
+[prcc11 sign11 sign_label11] = PRCC_Heroin(LHSmatrix11,H_lhs11,1:length(time_points),PRCC_var,alpha);
+[prcc12 sign12 sign_label12] = PRCC_Heroin(LHSmatrix12,H_lhs12,1:length(time_points),PRCC_var,alpha);
+[prcc13 sign13 sign_label13] = PRCC_Heroin(LHSmatrix13,H_lhs13,1:length(time_points),PRCC_var,alpha);
+[prcc14 sign14 sign_label14] = PRCC_Heroin(LHSmatrix14,H_lhs14,1:length(time_points),PRCC_var,alpha);
+[prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,H_lhs15,1:length(time_points),PRCC_var,alpha);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -637,7 +639,7 @@ end
  ylabel('S')
 subplot(424)
 plot(LHSmatrix4(:,4),S_lhs4,'o')
-xlabel('\varepsilon')
+xlabel('\epsilon')
 ylabel('S')
 subplot(425)
 plot(LHSmatrix5(:,5),S_lhs5,'o')
@@ -706,7 +708,7 @@ subplot(422)
  ylabel('P')
 subplot(424)
 plot(LHSmatrix4(:,4),P_lhs4,'o')
-xlabel('\varepsilon')
+xlabel('\epsilon')
 ylabel('P')
 subplot(425)
 plot(LHSmatrix5(:,5),P_lhs5,'o')
@@ -777,7 +779,7 @@ subplot(422)
  ylabel('A')
 subplot(424)
 plot(LHSmatrix4(:,4),A_lhs4,'o')
-xlabel('\varepsilon')
+xlabel('\epsilon')
 ylabel('A')
 subplot(425)
 plot(LHSmatrix5(:,5),A_lhs5,'o')
@@ -846,7 +848,7 @@ subplot(422)
  ylabel('H')
 subplot(424)
 plot(LHSmatrix4(:,4),H_lhs4,'o')
-xlabel('\varepsilon')
+xlabel('\epsilon')
 ylabel('H')
 subplot(425)
 plot(LHSmatrix5(:,5),H_lhs5,'o')
@@ -915,7 +917,7 @@ subplot(422)
  ylabel('R')
 subplot(424)
 plot(LHSmatrix4(:,4),R_lhs4,'o')
-xlabel('\varepsilon')
+xlabel('\epsilon')
 ylabel('R')
 subplot(425)
 plot(LHSmatrix5(:,5),R_lhs5,'o')
