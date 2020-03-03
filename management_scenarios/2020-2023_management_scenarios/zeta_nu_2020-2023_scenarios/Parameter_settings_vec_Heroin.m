@@ -17,7 +17,7 @@ theta_3=19.7264083013258;
 nu=0.000531263148928530;
 omega=0.0000000001;
 g=-0.0269690987063522;
-h=0.00883138792481281;
+h=0.000977482526657751;
 %b=0.270110337915851;
 %c=-0.0269690987063522;
 %d=0.000977482526657751;
@@ -50,6 +50,6 @@ y0 = [S0,P0,A0,H0,R0];
 y_var_label={'S0','P0','A0','H0','R0'};
 
 %PRCC_var={'m','beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_H','theta_2','zeta','theta_3','nu','omega','b','c','d','e','P0','A0','H0','R0'};
-PRCC_var={'beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_H','theta_2','zeta','theta_3','nu','omega','g','h','P0','A0','H0','R0'};
+PRCC_var={'beta_A','beta_P','theta_1','epsilon','gamma','sigma','mu','mu_H','theta_2','zeta','theta_3','nu','omega','g','h'};
 
 
