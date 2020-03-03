@@ -134,7 +134,7 @@ def main(N, filename, reduced, pool=None, no_plot=False):
             'bounds': [[0.000439,0.001317], [0.0000327,0.0000981], [0.111,0.333], [1.265,3.795], 
                        [0.002525,0.007575], [0.051,0.153], [0.00355,0.01065], [0.0233,0.0699], [0.118,0.354],
                        [0.099,0.297],  [9.85,29.55], [0.0002655,0.0007965], [0.00000000005,0.00000000015], 
-                       [-0.0405,-0.0135], [0.004415,0.013245]]  
+                       [-0.0386,-0.0153], [-0.00212,0.00408]]  
         }   # for alpha piecewise linear above; note: different lower bound on b so alpha does not go negative in this time span
 
     ### Create an N by num_var matrix of parameter values ###

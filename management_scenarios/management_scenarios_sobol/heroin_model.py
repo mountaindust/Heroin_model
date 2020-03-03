@@ -31,7 +31,7 @@ params['theta_3'] = 19.7                 #A->H rate at which the opioid addicted
 params['nu'] = 0.000531                   #H->R rate at which heroin users enter treatment/rehabilitation 
 params['omega'] = 0.0000000001             #perturbation term for relapse rates
 params['g']= -0.0270                       #new slope for alpha past 2020 point; initially is value of c but will be varied with sobol 
-params['h']= 0.00883                        #new slope for muA past 2020 point; initially is value of e but will be varied with sobol
+params['h']= 0.000977                              #new slope for muA past 2020 point; initially is value of d but will be varied with sobol
 
 def alpha(t, params):
        return -0.00560*3.25+0.270+0.0270*3.25-0.0270*7+params['g']*t
