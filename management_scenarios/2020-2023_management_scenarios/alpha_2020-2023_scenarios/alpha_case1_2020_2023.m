@@ -60,7 +60,7 @@ initials = [S0;P0;A0;H0;R0;X0;L0;M0;J0;K0];
 % Making sure S+P+A+H+R=1
   total=y(:,1)+y(:,2)+y(:,3)+y(:,4)+y(:,5);
 
-format short
+format long
 fprintf('alpha values')
 disp(a(0,pars))
 disp(a(1,pars))

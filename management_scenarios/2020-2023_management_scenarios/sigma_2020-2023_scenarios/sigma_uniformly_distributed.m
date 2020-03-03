@@ -5,11 +5,10 @@ Parameter_settings_vec_Heroin;
 N=1000;
 
 %Create vectors of parameters (with sigma varying) to run model with
-m_vec=linspace(m,m,N);
 beta_A_vec=linspace(beta_A,beta_A,N);
 beta_P_vec=linspace(beta_P,beta_P,N);
 theta_1_vec=linspace(theta_1,theta_1,N);
-epsilon_vec=linspace(epsilon, epsilon,N);
+epsilon_vec=linspace(epsilon,epsilon,N);
 gamma_vec=linspace(gamma,gamma,N);
 sigma_vec=linspace(0,sigma,N);
 mu_vec=linspace(mu,mu,N);
@@ -19,15 +18,17 @@ zeta_vec=linspace(zeta,zeta,N);
 theta_3_vec=linspace(theta_3,theta_3,N);
 nu_vec=linspace(nu,nu,N);
 omega_vec=linspace(omega,omega,N);
-b_vec=linspace(b,b,N);
-c_vec=linspace(c,c,N);
-d_vec=linspace(d,d,N);
-e_vec=linspace(e,e,N);
+g_vec=linspace(g,g,N);
+h_vec=linspace(h,h,N);
+%b_vec=linspace(b,b,N);
+%c_vec=linspace(c,c,N);
+%d_vec=linspace(d,d,N);
+%e_vec=linspace(e,e,N);
 
 %Matrix of parameter sets
 %vec_matrix  = [m_vec,beta_A_vec,beta_P_vec,theta_1_vec,epsilon_vec,gamma_vec,sigma_vec,mu_vec,mu_A_vec,mu_H_vec,theta_2_vec,zeta_vec,theta_3_vec,nu_vec,omega_vec,b_vec,c_vec];
-vec_matrix  = [m_vec;beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sigma_vec;mu_vec;mu_H_vec;theta_2_vec;zeta_vec;theta_3_vec;nu_vec;omega_vec;b_vec;c_vec;d_vec;e_vec]';
-
+%vec_matrix  = [m_vec;beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sigma_vec;mu_vec;mu_H_vec;theta_2_vec;zeta_vec;theta_3_vec;nu_vec;omega_vec;b_vec;c_vec;d_vec;e_vec]';
+vec_matrix  = [beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sigma_vec;mu_vec;mu_H_vec;theta_2_vec;zeta_vec;theta_3_vec;nu_vec;omega_vec;g_vec;h_vec]';
 
 %Run ODE with rows of vec_matrix 
 for x=1:N;
@@ -53,9 +54,9 @@ end
  %sigma-final time output of A from new sigma value divided by baseline final time output. Same
  %for H. 
  figure(1);
- plot((0.101518004918260-vec_matrix(:,7))*100/0.101518004918260,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
  hold on
- plot((0.101518004918260-vec_matrix(:,7))*100/0.101518004918260,(0.013796340958938-H_lhs(1,:))*100/0.013796340958938,'LineWidth',2)
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.013796340958938-H_lhs(1,:))*100/0.013796340958938,'LineWidth',2)
  xlabel('Percent reduction in \sigma')
  ylabel('Percent change in A or H at final time')
  legend({'Percent reduction in A at final time', 'Percent reduction in H at final time'},'FontSize', 16)
@@ -65,7 +66,7 @@ end
  ylim([0 85])
  
  figure(2);
- plot(vec_matrix(:,7),A_lhs(1,:),'LineWidth',2) 
+ plot(vec_matrix(:,6),A_lhs(1,:),'LineWidth',2) 
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('A at final time')
@@ -73,7 +74,7 @@ end
  xlim([0 0.102])
 
  figure(3);
- plot(vec_matrix(:,7),H_lhs(1,:),'-r','LineWidth',2)
+ plot(vec_matrix(:,6),H_lhs(1,:),'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('H at final time')
@@ -98,9 +99,9 @@ end
  
  
  figure(4);
- plot((0.101518004918260-vec_matrix(:,7))*100/0.101518004918260,(3.129422150525879e-05-W)*100/3.129422150525879e-05,'LineWidth',2) 
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(3.129422150525879e-05-W)*100/3.129422150525879e-05,'LineWidth',2) 
  hold on
- plot((0.101518004918260-vec_matrix(:,7))*100/0.101518004918260,(6.429094886864968e-04-Z)*100/6.429094886864968e-04,'LineWidth',2)
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(6.429094886864968e-04-Z)*100/6.429094886864968e-04,'LineWidth',2)
  xlabel('Percent reduction in \sigma')
  ylabel('Percent change in A or H overdoses at final time')
  legend({'Percent reduction in A overdoses at final time', 'Percent reduction in H overdoses at final time'},'FontSize', 16)
@@ -110,7 +111,7 @@ end
  ylim([0 85])
  
  figure(5);
- plot(vec_matrix(:,7),W,'LineWidth',2) 
+ plot(vec_matrix(:,6),W,'LineWidth',2) 
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('A overdoses at final time')
@@ -118,7 +119,7 @@ end
  xlim([0 0.102])
 
  figure(6);
- plot(vec_matrix(:,7),Z,'-r','LineWidth',2)
+ plot(vec_matrix(:,6),Z,'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('H overdoses at final time')
