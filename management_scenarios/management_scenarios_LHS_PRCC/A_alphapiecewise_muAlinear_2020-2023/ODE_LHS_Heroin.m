@@ -35,7 +35,7 @@ function alpha = a(t,g)
     alpha = -0.00559565027929907*3.25+0.270110337915851+0.0269690987063522*3.25-0.0269690987063522*7+g*t;
 end
 
-%shift time by 7 because forced to start at 0
+
 function mu_A = muA(t,h)
     mu_A = 0.000977482526657751*7+0.00883138792481281+h*t;
 end
