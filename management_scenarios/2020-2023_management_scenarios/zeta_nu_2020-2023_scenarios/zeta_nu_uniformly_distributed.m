@@ -52,15 +52,28 @@ for x=1:N;
     
 end  
     
+
+ 
+ %number of prescription opioid addict overdoses at the beginning of 2023
+ C=0.018606213191390.*A_lhs(1,:);
+ %number of heroin/fentanyl overdoses at the beginning of 2023
+ D=mu_H.*H_lhs(1,:);
+ 
+ %number of prescription opioid addict overdoses at any time point
+ Aoverdoses=muA(t,h).*A_lhs(1,:);
+ %number of heroin/fentanyl overdoses at any time point
+ Hoverdoses=mu_H.*H_lhs(1,:);
+ 
+ 
  %Percent change in zeta: taking new zeta and subtracting baseline zeta
  %value and dividing by baseline. Then plotting final time output of A from baseline
  %zeta-final time output of A from new zeta value divided by baseline final time output. Same
  %for H. 
  
  figure(1);
- plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
+ plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(0.001681716135399-A_lhs(1,:))*100/0.001681716135399,'LineWidth',2) 
  hold on
- plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(0.013796340958938-H_lhs(1,:))*100/0.013796340958938,'LineWidth',2)
+ plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(0.013798429999561-H_lhs(1,:))*100/0.013798429999561,'LineWidth',2)
  xlabel('Percent increase in \zeta and \nu')
  ylabel('Percent change in A or H at final time')
  legend({'Percent reduction in A at final time', 'Percent reduction in H at final time'},'FontSize', 16)
@@ -89,17 +102,11 @@ end
  xlim([0.2 0.4])
  
  
- %number of prescription opioid addict overdoses at the final time
- W=0.018606213191390.*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at the final time
- Z=mu_H.*H_lhs(1,:);
- 
- 
  
  figure(4);
- plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(3.129422150525879e-05-W)*100/3.129422150525879e-05,'LineWidth',2) 
+ plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(3.129036894264230e-05-C(1,:))*100/3.129036894264230e-05,'LineWidth',2) 
  hold on
- plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(6.429094886864968e-04-Z)*100/6.429094886864968e-04,'LineWidth',2)
+ plot((vec_matrix(:,10)-0.198182427387906)*100/0.198182427387906,(6.430068379795345e-04-D(1,:))*100/6.430068379795345e-04,'LineWidth',2)
  xlabel('Percent increase in \zeta and \nu')
  ylabel('Percent change in A or H overdoses at final time')
  legend({'Percent reduction in A overdoses at final time', 'Percent reduction in H overdoses at final time'},'FontSize', 16)
@@ -111,7 +118,7 @@ end
  
  %Would need to edit to include change in nu, as well
  figure(5);
- plot(vec_matrix(:,10),W,'LineWidth',2) 
+ plot(vec_matrix(:,10),C,'LineWidth',2) 
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\zeta')
  ylabel('A overdoses at final time')
@@ -120,31 +127,46 @@ end
 
  %Would need to edit to include change in nu, as well
  figure(6);
- plot(vec_matrix(:,10),Z,'-r','LineWidth',2)
+ plot(vec_matrix(:,10),D,'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\zeta')
  ylabel('H overdoses at final time')
  set(gca,'FontSize',16)
  xlim([0.2 0.4])
  
+ %whatever entry of each vector I am interested in (anywhere from 1 to
+ %1000) 
+ entry=100
  
- %percent increase of zeta 
- (vec_matrix(100,10)-0.198182427387906)*100/0.198182427387906
- %value of zeta 
- zeta_vec(1,100)
+ disp('percent increase of zeta')
+ (vec_matrix(entry,10)-0.198182427387906)*100/0.198182427387906
+ disp('value of zeta')
+ zeta_vec(1,entry)
  
- %percent increase of nu
- (vec_matrix(100,12)-0.000531263148928530)*100/0.000531263148928530
- %value of nu
- nu_vec(1,100)
+ disp('percent increase of nu')
+ (vec_matrix(entry,12)-0.000531263148928530)*100/0.000531263148928530
+ disp('value of nu')
+ nu_vec(1,entry)
  
- %value of A with these zeta and nu values
- A_lhs(1,100)
- %percent decrease of A from baseline 2023 value with these new zeta and nu values 
- (0.001681923193256-A_lhs(1,100))*100/0.001681923193256
+ disp('value of A with these zeta and nu values')
+ A_lhs(1,entry)
+ disp('percent decrease of A from baseline 2023 value with these new zeta and nu values')
+ (0.001681716135399-A_lhs(1,entry))*100/0.001681716135399
  
- %value of H with these zeta and nu values 
- H_lhs(1,100)
- %percent decrease of H from baseline 2023 value with these new zeta and nu values 
- (0.013796340958938-H_lhs(1,100))*100/0.013796340958938
+ disp('value of H with these zeta and nu values')
+ H_lhs(1,entry)
+ disp('percent decrease of H from baseline 2023 value with these new zeta and nu values')
+ (0.013798429999561-H_lhs(1,entry))*100/0.013798429999561
+ 
+ disp('value of A overdoses at 2023 with these zeta and nu values')
+ C(1,entry)
+ disp('percent decrease of A overdoses at 2023 with these zeta and nu values')
+ (3.129036894264230e-05-C(1,entry))*100/3.129036894264230e-05
+ 
+ disp('value of H overdoses at 2023 with these zeta and nu values')
+ D(1,entry)
+ disp('percent decrease of H overdoses at 2023 with these zeta and nu values')
+ (6.430068379795345e-04-D(1,entry))*100/6.430068379795345e-04
+ 
+
  
