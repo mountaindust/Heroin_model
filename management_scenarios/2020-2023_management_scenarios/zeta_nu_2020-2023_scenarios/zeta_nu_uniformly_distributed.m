@@ -37,9 +37,9 @@ vec_matrix  = [beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sigma_vec
 for x=1:N;
     f=@ODE_vec_Heroin;
 
-    %using ode45 because issues with ode15s (so doesn't match but okay
+    %could use ode45 if issues with ode15s (so doesn't match but okay
     %because close enough) per 12/17/2019 meeting
-    [t,y] = ode45(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
+    [t,y] = ode15s(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
 
     W = [t y];
     
@@ -60,9 +60,9 @@ end
  D=mu_H.*H_lhs(1,:);
  
  %number of prescription opioid addict overdoses at any time point
- Aoverdoses=muA(t,h).*A_lhs(1,:);
+ %Aoverdoses=muA(t,h).*A_lhs(1,:);
  %number of heroin/fentanyl overdoses at any time point
- Hoverdoses=mu_H.*H_lhs(1,:);
+ %Hoverdoses=mu_H.*H_lhs(1,:);
  
  
  %Percent change in zeta: taking new zeta and subtracting baseline zeta
@@ -136,7 +136,7 @@ end
  
  %whatever entry of each vector I am interested in (anywhere from 1 to
  %1000) 
- entry=100
+ entry=501
  
  disp('percent increase of zeta')
  (vec_matrix(entry,10)-0.198182427387906)*100/0.198182427387906

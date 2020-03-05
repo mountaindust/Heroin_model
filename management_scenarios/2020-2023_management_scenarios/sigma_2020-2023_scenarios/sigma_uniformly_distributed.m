@@ -10,7 +10,7 @@ beta_P_vec=linspace(beta_P,beta_P,N);
 theta_1_vec=linspace(theta_1,theta_1,N);
 epsilon_vec=linspace(epsilon,epsilon,N);
 gamma_vec=linspace(gamma,gamma,N);
-sigma_vec=linspace(0.5*sigma,sigma,N);
+sigma_vec=linspace(0,sigma,N);
 mu_vec=linspace(mu,mu,N);
 mu_H_vec=linspace(mu_H,mu_H,N);
 theta_2_vec=linspace(theta_2,theta_2,N);
@@ -36,7 +36,7 @@ for x=1:N;
 
     %using ode45 because issues with ode15s (so doesn't match but okay
     %because close enough) per 12/17/2019 meeting
-    [t,y] = ode45(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
+    [t,y] = ode15s(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
 
     W = [t y];
     
@@ -47,16 +47,28 @@ for x=1:N;
     R_lhs(:,x)=W(time_points+1,6);
     
     
-end  
-    
+end
+
+
+ %number of prescription opioid addict overdoses at the beginning of 2023
+ C=0.018606213191390.*A_lhs(1,:);
+ %number of heroin/fentanyl overdoses at the beginning of 2023
+ D=mu_H.*H_lhs(1,:);
+ 
+ %number of prescription opioid addict overdoses at any time point
+ %Aoverdoses=muA(t,h).*A_lhs(1,:);
+ %number of heroin/fentanyl overdoses at any time point
+ %Hoverdoses=mu_H.*H_lhs(1,:);
+ 
+ 
  %Percent change in sigma: taking baseline sigma and subtracting new sigma
  %value and dividing by baseline. Then plotting final time output of A from baseline
  %sigma-final time output of A from new sigma value divided by baseline final time output. Same
  %for H. 
  figure(1);
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.001681716135399-A_lhs(1,:))*100/0.001681716135399,'LineWidth',2) 
  hold on
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.013796340958938-H_lhs(1,:))*100/0.013796340958938,'LineWidth',2)
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(0.013798429999561-H_lhs(1,:))*100/0.013798429999561,'LineWidth',2)
  xlabel('Percent reduction in \sigma')
  ylabel('Percent change in A or H at final time')
  legend({'Percent reduction in A at final time', 'Percent reduction in H at final time'},'FontSize', 16)
@@ -92,16 +104,11 @@ end
 %7. Add together percentages to get total addict percentage effect 
 
 
- %number of prescription opioid addict overdoses at the final time
- W=0.018606213191390.*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at the final time
- Z=mu_H.*H_lhs(1,:);
- 
  
  figure(4);
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(3.129422150525879e-05-W)*100/3.129422150525879e-05,'LineWidth',2) 
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(3.129036894264230e-05-C(1,:))*100/3.129036894264230e-05,'LineWidth',2) 
  hold on
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(6.429094886864968e-04-Z)*100/6.429094886864968e-04,'LineWidth',2)
+ plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(6.430068379795345e-04-D(1,:))*100/6.430068379795345e-04,'LineWidth',2)
  xlabel('Percent reduction in \sigma')
  ylabel('Percent change in A or H overdoses at final time')
  legend({'Percent reduction in A overdoses at final time', 'Percent reduction in H overdoses at final time'},'FontSize', 16)
@@ -111,7 +118,7 @@ end
  ylim([0 85])
  
  figure(5);
- plot(vec_matrix(:,6),W,'LineWidth',2) 
+ plot(vec_matrix(:,6),C,'LineWidth',2) 
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('A overdoses at final time')
@@ -119,11 +126,45 @@ end
  xlim([0 0.102])
 
  figure(6);
- plot(vec_matrix(:,6),Z,'-r','LineWidth',2)
+ plot(vec_matrix(:,6),D,'-r','LineWidth',2)
  %set ( gca, 'xdir', 'reverse' )
  xlabel('\sigma')
  ylabel('H overdoses at final time')
  set(gca,'FontSize',16)
  xlim([0 0.102])
+ 
+ 
+ 
+ %whatever entry of each vector I am interested in (anywhere from 1 to
+ %1000) 
+ entry=500
+ 
+ disp('percent decrease of sigma')
+ (0.101518004918260-vec_matrix(entry,6))*100/0.101518004918260
+ disp('value of sigma')
+ sigma_vec(1,entry)
+ 
+ disp('value of A with this sigma value')
+ A_lhs(1,entry)
+ disp('percent decrease of A from baseline 2023 value with this new sigma value')
+ (0.001681716135399-A_lhs(1,entry))*100/0.001681716135399
+ 
+ disp('value of H with this new sigma value')
+ H_lhs(1,entry)
+ disp('percent decrease of H from baseline 2023 value with this new sigma value')
+ (0.013798429999561-H_lhs(1,entry))*100/0.013798429999561
+ 
+ disp('value of A overdoses at 2023 with this new sigma value')
+ C(1,entry)
+ disp('percent decrease of A overdoses at 2023 with this new sigma value')
+ (3.129036894264230e-05-C(1,entry))*100/3.129036894264230e-05
+ 
+ disp('value of H overdoses at 2023 with this new sigma value')
+ D(1,entry)
+ disp('percent decrease of H overdoses at 2023 with this new sigma value')
+ (6.430068379795345e-04-D(1,entry))*100/6.430068379795345e-04
+ 
+
+ 
  
  
