@@ -24,8 +24,8 @@ pars=[beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,
 % Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 3;
 %To know values each year
-%tspan=linspace(0,N,4);
-tspan=linspace(0,N,3000);
+tspan=linspace(0,N,4);
+%tspan=linspace(0,N,3000);
 
 
 
@@ -73,6 +73,11 @@ disp(muA(0,pars))
 disp(muA(1,pars))
 disp(muA(2,pars))
 disp(muA(3,pars))
+
+%number of prescription opioid addict overdoses at any time point
+W=muA(t,pars).*y(:,3);
+%number of heroin/fentanyl overdoses at any time point
+Z=mu_H.*y(:,4);
 
  
  figure(1)
