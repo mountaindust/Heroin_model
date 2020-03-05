@@ -1,4 +1,8 @@
-% Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
+%THIS CODE HAS NOT BEEN UPDATED TO REFLECT THE CHANGES WITH ALPHA AND MUA
+%FROM 2020-2023 WITH SLOPES g AND h AND THEIR CORRESPONDING RESULTS ON THE
+%A AND H CLASS SIZES
+
+%Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 t=[1:0.25:4];
 %For smooth plots (ONLY GOOD FOR ODE SOLUTIONS, NOT DATA/ESTIM PLOTS)
 %tspan=linspace(0,N,3000);
