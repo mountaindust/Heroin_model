@@ -1,4 +1,6 @@
 %File name: heroin_multistart_alphapiecewise_muAlinear_testing.m
+%this is old: this is when we had m,b,c,d,e as a part of alpha and muA
+%before switching to slopes g and h
 clf;
 clear all;
 
