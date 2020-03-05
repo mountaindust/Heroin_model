@@ -15,9 +15,9 @@ sigma_vec=linspace(sigma,sigma,N);
 mu_vec=linspace(mu,mu,N);
 mu_H_vec=linspace(mu_H,mu_H,N);
 theta_2_vec=linspace(theta_2,theta_2,N);
-zeta_vec=linspace(zeta,1.5*zeta,N);
+zeta_vec=linspace(zeta,2*zeta,N);
 theta_3_vec=linspace(theta_3,theta_3,N);
-nu_vec=linspace(nu,1.5*nu,N);
+nu_vec=linspace(nu,2*nu,N);
 omega_vec=linspace(omega,omega,N);
 g_vec=linspace(g,g,N);
 h_vec=linspace(h,h,N);
@@ -127,4 +127,24 @@ end
  set(gca,'FontSize',16)
  xlim([0.2 0.4])
  
+ 
+ %percent increase of zeta 
+ (vec_matrix(100,10)-0.198182427387906)*100/0.198182427387906
+ %value of zeta 
+ zeta_vec(1,100)
+ 
+ %percent increase of nu
+ (vec_matrix(100,12)-0.000531263148928530)*100/0.000531263148928530
+ %value of nu
+ nu_vec(1,100)
+ 
+ %value of A with these zeta and nu values
+ A_lhs(1,100)
+ %percent decrease of A from baseline 2023 value with these new zeta and nu values 
+ (0.001681923193256-A_lhs(1,100))*100/0.001681923193256
+ 
+ %value of H with these zeta and nu values 
+ H_lhs(1,100)
+ %percent decrease of H from baseline 2023 value with these new zeta and nu values 
+ (0.013796340958938-H_lhs(1,100))*100/0.013796340958938
  
