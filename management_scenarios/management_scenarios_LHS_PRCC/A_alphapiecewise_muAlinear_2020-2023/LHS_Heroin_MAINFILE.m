@@ -91,12 +91,12 @@ save LV_Model_LHS_Heroin.mat;
   alpha = 1e-3;
   %this uses total exposures as the metric. Change second input argument if want
   %to test something else
- [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
+ [prcc sign sign_label]=PRCC_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,alpha); %PRCC_var and time_points set in parameter file
 
 
 %% Scatter plots
 
-  PRCC_PLOT_Heroin(LHSmatrix,H_lhs,time_points,PRCC_var,'Total Opioid Addicts');
+  PRCC_PLOT_Heroin(LHSmatrix,A_lhs,time_points,PRCC_var,'Total Opioid Addicts');
   
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -601,21 +601,21 @@ end
 %  %% CALCULATE PRCC 
 
 %only stored last time point so 1:length(time_points)=1 makes sense
-[prcc1 sign1 sign_label1] = PRCC_Heroin(LHSmatrix1,H_lhs1,1:length(time_points),PRCC_var,alpha);
-[prcc2 sign2 sign_label2] = PRCC_Heroin(LHSmatrix2,H_lhs2,1:length(time_points),PRCC_var,alpha);
-[prcc3 sign3 sign_label3] = PRCC_Heroin(LHSmatrix3,H_lhs3,1:length(time_points),PRCC_var,alpha);
-[prcc4 sign4 sign_label4] = PRCC_Heroin(LHSmatrix4,H_lhs4,1:length(time_points),PRCC_var,alpha);
-[prcc5 sign5 sign_label5] = PRCC_Heroin(LHSmatrix5,H_lhs5,1:length(time_points),PRCC_var,alpha);
-[prcc6 sign6 sign_label6] = PRCC_Heroin(LHSmatrix6,H_lhs6,1:length(time_points),PRCC_var,alpha);
-[prcc7 sign7 sign_label7] = PRCC_Heroin(LHSmatrix7,H_lhs7,1:length(time_points),PRCC_var,alpha);
-[prcc8 sign8 sign_label8] = PRCC_Heroin(LHSmatrix8,H_lhs8,1:length(time_points),PRCC_var,alpha);
-[prcc9 sign9 sign_label9] = PRCC_Heroin(LHSmatrix9,H_lhs9,1:length(time_points),PRCC_var,alpha);
-[prcc10 sign10 sign_label10] = PRCC_Heroin(LHSmatrix10,H_lhs10,1:length(time_points),PRCC_var,alpha);
-[prcc11 sign11 sign_label11] = PRCC_Heroin(LHSmatrix11,H_lhs11,1:length(time_points),PRCC_var,alpha);
-[prcc12 sign12 sign_label12] = PRCC_Heroin(LHSmatrix12,H_lhs12,1:length(time_points),PRCC_var,alpha);
-[prcc13 sign13 sign_label13] = PRCC_Heroin(LHSmatrix13,H_lhs13,1:length(time_points),PRCC_var,alpha);
-[prcc14 sign14 sign_label14] = PRCC_Heroin(LHSmatrix14,H_lhs14,1:length(time_points),PRCC_var,alpha);
-[prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,H_lhs15,1:length(time_points),PRCC_var,alpha);
+[prcc1 sign1 sign_label1] = PRCC_Heroin(LHSmatrix1,A_lhs1,1:length(time_points),PRCC_var,alpha);
+[prcc2 sign2 sign_label2] = PRCC_Heroin(LHSmatrix2,A_lhs2,1:length(time_points),PRCC_var,alpha);
+[prcc3 sign3 sign_label3] = PRCC_Heroin(LHSmatrix3,A_lhs3,1:length(time_points),PRCC_var,alpha);
+[prcc4 sign4 sign_label4] = PRCC_Heroin(LHSmatrix4,A_lhs4,1:length(time_points),PRCC_var,alpha);
+[prcc5 sign5 sign_label5] = PRCC_Heroin(LHSmatrix5,A_lhs5,1:length(time_points),PRCC_var,alpha);
+[prcc6 sign6 sign_label6] = PRCC_Heroin(LHSmatrix6,A_lhs6,1:length(time_points),PRCC_var,alpha);
+[prcc7 sign7 sign_label7] = PRCC_Heroin(LHSmatrix7,A_lhs7,1:length(time_points),PRCC_var,alpha);
+[prcc8 sign8 sign_label8] = PRCC_Heroin(LHSmatrix8,A_lhs8,1:length(time_points),PRCC_var,alpha);
+[prcc9 sign9 sign_label9] = PRCC_Heroin(LHSmatrix9,A_lhs9,1:length(time_points),PRCC_var,alpha);
+[prcc10 sign10 sign_label10] = PRCC_Heroin(LHSmatrix10,A_lhs10,1:length(time_points),PRCC_var,alpha);
+[prcc11 sign11 sign_label11] = PRCC_Heroin(LHSmatrix11,A_lhs11,1:length(time_points),PRCC_var,alpha);
+[prcc12 sign12 sign_label12] = PRCC_Heroin(LHSmatrix12,A_lhs12,1:length(time_points),PRCC_var,alpha);
+[prcc13 sign13 sign_label13] = PRCC_Heroin(LHSmatrix13,A_lhs13,1:length(time_points),PRCC_var,alpha);
+[prcc14 sign14 sign_label14] = PRCC_Heroin(LHSmatrix14,A_lhs14,1:length(time_points),PRCC_var,alpha);
+[prcc15 sign15 sign_label15] = PRCC_Heroin(LHSmatrix15,A_lhs15,1:length(time_points),PRCC_var,alpha);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
