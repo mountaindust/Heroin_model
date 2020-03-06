@@ -50,36 +50,26 @@ for x=1:N;
     
 end  
     
- %Percent change in b: taking baseline b and subtracting new b
- %value and dividing by baseline. Then plotting final time output of A in 2023 from baseline
- %b-final time output of A from new b value in 2023 divided by baseline final time output in 2023. Same
- %for H. 
- figure(1);
- plot((0.270110337915851-vec_matrix(:,15))*100/0.270110337915851,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
- hold on
- plot((0.270110337915851-vec_matrix(:,15))*100/0.270110337915851,(0.013796340958938-H_lhs(1,:))*100/0.013796340958938,'LineWidth',2)
- xlabel('Percent reduction in b')
- ylabel('Percent change in A or H at final time')
- legend({'Percent reduction in A at final time', 'Percent reduction in H at final time'},'FontSize', 16)
- set(gca,'XTick',0:10:100);
- set(gca,'FontSize',16)
- xlim([0 30])
- ylim([0 40])
  
- figure(2);
- plot(vec_matrix(:,15),A_lhs(1,:),'LineWidth',2) 
- %set ( gca, 'xdir', 'reverse' )
- xlabel('b')
- ylabel('A at final time')
- set(gca,'FontSize',16)
- xlim([0.2 0.28])
+%whatever entry of each vector I am interested in (anywhere from 1 to
+ %1000) 
+ entry=500
+ 
+ disp('percent decrease of sigma')
+ (0.101518004918260-vec_matrix(entry,6))*100/0.101518004918260
+ disp('value of sigma')
+ sigma_vec(1,entry)
+ 
+ disp('value of A with this sigma value')
+ A_lhs(1,entry)
+ disp('percent decrease of A from baseline 2023 value with this new sigma value')
+ (0.001681716135399-A_lhs(1,entry))*100/0.001681716135399
+ 
+ disp('value of H with this new sigma value')
+ H_lhs(1,entry)
+ disp('percent decrease of H from baseline 2023 value with this new sigma value')
+ (0.013798429999561-H_lhs(1,entry))*100/0.013798429999561
+ 
 
- figure(3);
- plot(vec_matrix(:,15),H_lhs(1,:),'-r','LineWidth',2)
- %set ( gca, 'xdir', 'reverse' )
- xlabel('b')
- ylabel('H at final time')
- set(gca,'FontSize',16)
- xlim([0.2 0.28])
  
  
