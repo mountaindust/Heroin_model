@@ -50,23 +50,7 @@ for x=1:N;
 end
 
 
- %number of prescription opioid addict overdoses at the beginning of 2023
- C=0.018606213191390.*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at the beginning of 2023
- D=mu_H.*H_lhs(1,:);
- 
- %number of prescription opioid addict overdoses at any time point
- %Aoverdoses=muA(t,h).*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at any time point
- %Hoverdoses=mu_H.*H_lhs(1,:);
- 
- %Z=muA(t,d,e).*y(:,3);
- 
- %Percent change in theta_1: taking baseline theta_1 and subtracting new
- %theta_1
- %value and dividing by baseline. Then plotting final time output of A from baseline
- %theta_1-final time output of A from new theta_1 value divided by baseline final time output. Same
- %for H. 
+
  
  figure(1);
  plot((0.222457489109919-vec_matrix(:,3))*100/0.222457489109919,(A_lhs(1,:)-0.001681716135399)*100/0.001681716135399,'LineWidth',2) 
@@ -99,25 +83,6 @@ end
  xlim([0 0.3])
  
  
-%  %Would need to edit to include theta_2 and theta_3
-%  figure(4);
-%  plot(vec_matrix(:,4),mu_H.*H_lhs(1,:),'-r','LineWidth',2)
-%  %set ( gca, 'xdir', 'reverse' )
-%  xlabel('\theta_1')
-%  ylabel('Overdoses from H at final time')
-%  set(gca,'FontSize',16)
-%  xlim([0 0.3])
-
-%  %Would need to edit to include theta_2 and theta_3
-%  figure(5);
-%  plot(vec_matrix(:,4),mu_H.*A_lhs(1,:),'-r','LineWidth',2)
-%  %set ( gca, 'xdir', 'reverse' )
-%  xlabel('\theta_1')
-%  ylabel('Overdoses from H at final time')
-%  set(gca,'FontSize',16)
-%  xlim([0 0.3])
-%  
- 
 
 %whatever entry of each vector I am interested in (anywhere from 1 to
  %1000) 
@@ -148,15 +113,6 @@ end
  disp('percent decrease of H from baseline 2023 value with these new theta values')
  (0.013798429999561-H_lhs(1,entry))*100/0.013798429999561
  
- disp('value of A overdoses at 2023 with these theta values')
- C(1,entry)
- disp('percent increase of A overdoses at 2023 with these theta values')
- (C(1,entry)-3.129036894264230e-05)*100/3.129036894264230e-05
- 
- disp('value of H overdoses at 2023 with these theta values')
- D(1,entry)
- disp('percent decrease of H overdoses at 2023 with these theta values')
- (6.430068379795345e-04-D(1,entry))*100/6.430068379795345e-04
  
 
  

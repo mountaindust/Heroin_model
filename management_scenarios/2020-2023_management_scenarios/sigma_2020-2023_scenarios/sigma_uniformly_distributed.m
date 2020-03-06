@@ -50,15 +50,6 @@ for x=1:N;
 end
 
 
- %number of prescription opioid addict overdoses at the beginning of 2023
- C=0.018606213191390.*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at the beginning of 2023
- D=mu_H.*H_lhs(1,:);
- 
- %number of prescription opioid addict overdoses at any time point
- %Aoverdoses=muA(t,h).*A_lhs(1,:);
- %number of heroin/fentanyl overdoses at any time point
- %Hoverdoses=mu_H.*H_lhs(1,:);
  
  
  %Percent change in sigma: taking baseline sigma and subtracting new sigma
@@ -105,35 +96,6 @@ end
 
 
  
- figure(4);
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(3.129036894264230e-05-C(1,:))*100/3.129036894264230e-05,'LineWidth',2) 
- hold on
- plot((0.101518004918260-vec_matrix(:,6))*100/0.101518004918260,(6.430068379795345e-04-D(1,:))*100/6.430068379795345e-04,'LineWidth',2)
- xlabel('Percent reduction in \sigma')
- ylabel('Percent change in A or H overdoses at final time')
- legend({'Percent reduction in A overdoses at final time', 'Percent reduction in H overdoses at final time'},'FontSize', 16)
- set(gca,'XTick',0:10:100);
- set(gca,'FontSize',16)
- xlim([0 100])
- ylim([0 85])
- 
- figure(5);
- plot(vec_matrix(:,6),C,'LineWidth',2) 
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\sigma')
- ylabel('A overdoses at final time')
- set(gca,'FontSize',16)
- xlim([0 0.102])
-
- figure(6);
- plot(vec_matrix(:,6),D,'-r','LineWidth',2)
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\sigma')
- ylabel('H overdoses at final time')
- set(gca,'FontSize',16)
- xlim([0 0.102])
- 
- 
  
  %whatever entry of each vector I am interested in (anywhere from 1 to
  %1000) 
@@ -154,17 +116,6 @@ end
  disp('percent decrease of H from baseline 2023 value with this new sigma value')
  (0.013798429999561-H_lhs(1,entry))*100/0.013798429999561
  
- disp('value of A overdoses at 2023 with this new sigma value')
- C(1,entry)
- disp('percent decrease of A overdoses at 2023 with this new sigma value')
- (3.129036894264230e-05-C(1,entry))*100/3.129036894264230e-05
- 
- disp('value of H overdoses at 2023 with this new sigma value')
- D(1,entry)
- disp('percent decrease of H overdoses at 2023 with this new sigma value')
- (6.430068379795345e-04-D(1,entry))*100/6.430068379795345e-04
- 
 
- 
  
  
