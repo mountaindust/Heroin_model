@@ -144,13 +144,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  for i=1:17;
      continuous6(i)=y(i+4,10)-y(i,10);
  end 
- 
- %number of prescription opioid addict overdoses at any time point
- W=muA(t,pars).*y(:,3);
- %number of heroin/fentanyl overdoses at any time point
- Z=mu_H.*y(:,4);
- 
- 
+
 % Totaling the proportion of addicts
  figure(1)
  hold all
@@ -185,14 +179,14 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  % Plotting proportion of each type of addict
  figure(3)
  hold all
- plot(t(1:73),W(1:73),'Color', 'm','LineWidth',3)
- plot(t(1:73),Z(1:73),'Color', [.5 0 .5],'LineWidth',3)
- plot(t(74:12*N+1),W(74:12*N+1),'Color', 'm','LineStyle', '--','LineWidth',3)
- plot(t(74:12*N+1),Z(74:12*N+1),'Color', [.5 0 .5],'LineStyle', '--','LineWidth',3)
+ plot(t(1:73),y(1:73,9),'Color', 'm','LineWidth',3)
+ plot(t(1:73),y(1:73,10),'Color',[.5 0 .5],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,9),'Color', 'm','LineStyle', '--','LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,10),'Color', [.5 0 .5],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
- legend({'Prescription Opioid Addict Overdose Deaths', 'Heroin and Fentanyl Overdose Deaths'},'FontSize',14, 'Location', 'northwest')
+ legend({'Total Prescription Opioid Addict Overdose Deaths from 2013', 'Total Heroin and Fentanyl Overdose Deaths from 2013'},'FontSize',13, 'Location', 'northwest')
  xlim([0 N])
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
@@ -200,12 +194,12 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  % Totaling the number of overdoses from A and H
  figure(4)
  hold all
- plot(t(1:73),W(1:73)+Z(1:73),'Color',[0.4, 0, 0.8],'LineWidth',3)
- plot(t(74:12*N+1),W(74:12*N+1)+Z(74:12*N+1),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3)
+ plot(t(1:73),y(1:73,9)+y(1:73,10),'Color',[0.4, 0, 0.8],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,9)+y(74:12*N+1,10),'Color',[0.4, 0, 0.8],'LineStyle', '--','LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
  ylabel('Proportion')
- legend({'Total Addict Overdose Deaths'},'FontSize',14, 'Location', 'northwest')
+ legend({'Total Addict Overdose Deaths from 2013'},'FontSize',13, 'Location', 'northwest')
  xlim([0 N])
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
