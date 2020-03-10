@@ -20,7 +20,6 @@ h=0.000977482526657751;
 
 pars=[beta_A,beta_P,theta_1,epsilon,mu,mu_H,gamma,theta_2,sigma,zeta,theta_3,nu,omega,g,h];
 
-
 % Final time and last entry of tspan is # of equally spaced points from 0 to N (quarterly linspace)
 N = 3;
 %To know values each year

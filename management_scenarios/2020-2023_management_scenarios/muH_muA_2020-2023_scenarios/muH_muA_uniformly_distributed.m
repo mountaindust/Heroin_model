@@ -12,14 +12,14 @@ epsilon_vec=linspace(epsilon,epsilon,N);
 gamma_vec=linspace(gamma,gamma,N);
 sigma_vec=linspace(sigma,sigma,N);
 mu_vec=linspace(mu,mu,N);
-mu_H_vec=linspace(0.5*mu_H,mu_H,N);
+mu_H_vec=linspace(0*mu_H,mu_H,N);
 theta_2_vec=linspace(theta_2,theta_2,N);
 zeta_vec=linspace(zeta,zeta,N);
 theta_3_vec=linspace(theta_3,theta_3,N);
 nu_vec=linspace(nu,nu,N);
 omega_vec=linspace(omega,omega,N);
 g_vec=linspace(g,g,N);
-h_vec=linspace(-0.002123553005241,h,N); %to make muA decrease and go toward 0.5*muA the baseline value in 2023
+h_vec=linspace(h,h,N); %to make muA decrease, do manually in Parameter_settings file for each case
 %b_vec=linspace(b,b,N);
 %c_vec=linspace(c,c,N);
 %d_vec=linspace(d,d,N);
@@ -35,9 +35,9 @@ vec_matrix  = [beta_A_vec;beta_P_vec;theta_1_vec;epsilon_vec;gamma_vec;sigma_vec
 for x=1:N;
     f=@ODE_vec_Heroin;
 
-    %using ode45 because issues with ode15s (so doesn't match but okay
+    %can use ode45 if gives me issues with ode15s (so doesn't match but okay
     %because close enough) per 12/17/2019 meeting
-    [t,y] = ode45(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
+    [t,y] = ode15s(@(t,y)f(t,y,vec_matrix,x),tspan,y0,[]); 
 
     W = [t y];
     
@@ -46,44 +46,43 @@ for x=1:N;
     A_lhs(:,x)=W(time_points+1,4);
     H_lhs(:,x)=W(time_points+1,5);
     R_lhs(:,x)=W(time_points+1,6);
+    J_lhs(:,x)=W(time_points+1,7);
+    K_lhs(:,x)=W(time_points+1,8);
     
     
 end  
     
- %Percent change in theta_1: taking baseline theta_1 and subtracting new
- %theta_1
- %value and dividing by baseline. Then plotting final time output of A from baseline
- %theta_1-final time output of A from new theta_1 value divided by baseline final time output. Same
- %for H. 
+ %whatever entry of each vector I am interested in (anywhere from 1 to
+ %1000) 
+ entry=500
  
- figure(1);
- plot((0.0466-vec_matrix(:,9))*100/0.0466,(0.001681923193256-A_lhs(1,:))*100/0.001681923193256,'LineWidth',2) 
- hold on
- plot((0.0466-vec_matrix(:,9))*100/0.0466,(H_lhs(1,:)-0.013796340958938)*100/0.013796340958938,'LineWidth',2)
- xlabel('Percent decrease in \mu_H')
- ylabel('Percent change in A or H at final time')
- legend({'Percent decrease in A at final time', 'Percent increase in H at final time'},'FontSize', 16)
- set(gca,'XTick',-10:10:110);
- set(gca,'FontSize',16)
- xlim([0 100])
- ylim([-5 110])
+ disp('percent decrease of muH')
+ (0.0466-vec_matrix(entry,8))*100/0.0466
+ disp('value of muH')
+ mu_H_vec(1,entry)
  
- %Would need to edit to include theta_2 and theta_3
- figure(2);
- plot(vec_matrix(:,9),A_lhs(1,:),'LineWidth',2) 
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\mu_H')
- ylabel('A at final time')
- set(gca,'FontSize',16)
- xlim([0 0.05])
-
- %Would need to edit to include theta_2 and theta_3
- figure(3);
- plot(vec_matrix(:,9),H_lhs(1,:),'-r','LineWidth',2)
- %set ( gca, 'xdir', 'reverse' )
- xlabel('\mu_H')
- ylabel('H at final time')
- set(gca,'FontSize',16)
- xlim([0 0.05])
+ disp('percent decrease of muA')
+ (0.000977482526657751*7+0.00883138792481281+0.000977482526657751*3-(0.000977482526657751*7+0.00883138792481281+vec_matrix(entry,15)*3))*100/(0.000977482526657751*7+0.00883138792481281+0.000977482526657751*3)
+ disp('value of muA')
+ 0.000977482526657751*7+0.00883138792481281+vec_matrix(entry,15)*3
  
+ disp('value of A with these muA and muH values')
+ A_lhs(1,entry)
+ disp('percent increase of A from baseline 2023 value with these muA and muH values')
+ (A_lhs(1,entry)-0.001681923193256)*100/0.001681923193256
+ 
+ disp('value of H with these muA and muH values')
+ H_lhs(1,entry)
+ disp('percent increase of H from baseline 2023 value with these muA and muH values')
+ (H_lhs(1,entry)-0.013796340958938)*100/0.013796340958938
+ 
+ disp('value of total A overdoses from 2020-2023 with these muA and muH values')
+ J_lhs(1,entry)
+ disp('percent decrease of total A overdoses from 2020-2023 with these muA and muH values')
+ (1.359799130226335e-04-J_lhs(1,entry))*100/1.359799130226335e-04
+ 
+ disp('value of total H overdoses from 2020-2023 with these muA and muH values')
+ K_lhs(1,entry)
+ disp('percent decrease of total H overdoses from 2020-2023 with these muA and muH values')
+ (0.001334252863060-K_lhs(1,entry))*100/0.001334252863060
  
