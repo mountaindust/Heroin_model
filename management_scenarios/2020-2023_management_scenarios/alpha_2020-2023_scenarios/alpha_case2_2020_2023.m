@@ -68,12 +68,12 @@ initials = [S0;P0;A0;H0;R0];
  
  disp('value of A with this alpha value')
  A(4,1)
- disp('percent decrease of A from baseline 2023 value with this new sigma value')
+ disp('percent decrease of A from baseline 2023 value with this new alpha value')
  (0.001681716135399-A(4,1))*100/0.001681716135399
  
- disp('value of H with this new sigma value')
+ disp('value of H with this new alpha value')
  H(4,1)
- disp('percent decrease of H from baseline 2023 value with this new sigma value')
+ disp('percent decrease of H from baseline 2023 value with this new alpha value')
  (0.013798429999561-H(4,1))*100/0.013798429999561
  
 
