@@ -54,7 +54,7 @@ end
     
  %whatever entry of each vector I am interested in (anywhere from 1 to
  %1000) 
- entry=500
+ entry=1000
  
  disp('percent decrease of muH')
  (0.0466-vec_matrix(entry,8))*100/0.0466
