@@ -322,13 +322,13 @@ def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='pdf')
         if id not in ['m', 'b', 'c', 'd', 'e', 'P_0', 'A_0', 'H_0', 'R_0']:
             S1.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
         if id in ['m', 'b', 'c', 'd', 'e']:
-            S1.rename(index={id: r'$\widetilde{}$'.format(id)}, inplace=True)
+            S1.rename(index={id: r'$\widetilde{{{}}}$'.format(id)}, inplace=True)
         
     for id in ST.index:
         if id not in ['m', 'b', 'c', 'd', 'e', 'P_0', 'A_0', 'H_0', 'R_0']:
             ST.rename(index={id: r'$\{}$'.format(id)}, inplace=True)
         if id in ['m', 'b', 'c', 'd', 'e']:
-            ST.rename(index={id: r'$\widetilde{}$'.format(id)}, inplace=True)
+            ST.rename(index={id: r'$\widetilde{{{}}}$'.format(id)}, inplace=True)
 
     # setup for table
     fig = plt.figure(figsize=(15, 6))
