@@ -327,9 +327,9 @@ def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='eps')
             ST.rename(index={id: r'$\widetilde{{{}}}$'.format(id)}, inplace=True)
 
     # setup for table
-    fig = plt.figure(figsize=(15, 6))
-    gs = gridspec.GridSpec(1, 3, width_ratios=[1,1,.35], wspace=.15, left=0.04,
-                            right=0.975, bottom=0.15, top=0.915)
+    fig = plt.figure(figsize=(13, 6))
+    gs = gridspec.GridSpec(1, 3, width_ratios=[3,3,1], wspace=.15, left=0.04,
+                            right=0.995, bottom=0.15, top=0.915)
 
     axes = []
     for ii in range(2):
@@ -338,14 +338,14 @@ def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='eps')
     s1bars = S1.plot.bar(stacked=True, ax=axes[0], rot=0, width=0.8)
     s2bars = ST.plot.bar(stacked=True, ax=axes[1], rot=0, width=0.8, legend=False)
     for ax in axes:
-        ax.tick_params(axis='x', labelsize=18, rotation=0)
+        ax.tick_params(axis='x', labelsize=14, rotation=0)
         ax.tick_params(axis='y', labelsize=14)
         #ax.get_yaxis().set_visible(False)
         ax.set_ylim(bottom=0)
     axes[0].set_title('First-order indices', fontsize=26)
     axes[1].set_title('Total-order indices', fontsize=26)
     handles, labels = s1bars.get_legend_handles_labels()
-    s1bars.legend(reversed(handles), reversed(labels), loc='upper left', fontsize=16)
+    s1bars.legend(reversed(handles), reversed(labels), loc='upper right', fontsize=16)
 
     # Create table
     columns = ('Value Range',)
@@ -361,22 +361,20 @@ def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='eps')
         if high != "0" and high != "0.0":
             high = high.lstrip("0")
         # raise any minus signs
-        if '-' in low:
-            low = "\u00AF"+low[1:]
-        if '-' in high:
-            high = "\u00AF"+high[1:]
+        low = low.replace('-','\u00AF')
+        high = high.replace('-','\u00AF')
         cell_text.append([low+"-"+high])
     tbl_ax = plt.subplot(gs[2])
     the_table = tbl_ax.table(cellText=cell_text, rowLabels=rows, colLabels=columns,
-                loc='center')
-    the_table.set_fontsize(18)
-    the_table.scale(1,2.3)
+                loc='left')
+    the_table.set_fontsize(10)
+    the_table.scale(3.1,1.3)
     the_table.auto_set_column_width(0)
     tbl_ax.axis('off')
 
     # reposition table
     pos = tbl_ax.get_position()
-    newpos = [pos.x0 + 0.02, pos.y0, pos.width, pos.height]
+    newpos = [pos.x0 +0.11, pos.y0, pos.width, pos.height]
     tbl_ax.set_position(newpos)
     if show:
         plt.show()
