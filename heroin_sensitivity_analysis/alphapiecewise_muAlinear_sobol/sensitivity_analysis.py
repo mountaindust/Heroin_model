@@ -349,7 +349,7 @@ def plot_S1_ST_tbl(S_sens, P_sens, A_sens, H_sens, R_sens, show=True, ext='eps')
     axes[0].set_title('First-order indices', fontsize=26)
     axes[1].set_title('Total-order indices', fontsize=26)
     handles, labels = s1bars.get_legend_handles_labels()
-    s1bars.legend(reversed(handles), reversed(labels), loc='upper left', fontsize=16)
+    s1bars.legend(reversed(handles), reversed(labels), loc='upper right', fontsize=16)
 
     # Create table
     columns = ('Value Range',)
