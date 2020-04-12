@@ -205,6 +205,44 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
  
  
+ figure(5)
+ hold all
+ plot(t(1:73),y(1:73,1),'Color', [0.2, 0,0.3],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,1),'Color', [0.2, 0, 0.3],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Susceptibles')
+ %legend({'Prescription Opioids Users'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
+ 
+  % Plotting proportion of each type of addict
+ figure(6)
+ hold all
+ plot(t(1:73),y(1:73,2),'Color', [0.7, 0, 0.5],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,2),'Color', [0.7, 0, 0.5],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Prescription users')
+ %legend({'Prescription Opioids Users'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
+ 
+ figure(7)
+ hold all
+ plot(t(1:73),y(1:73,5),'Color', [0.2, 0.8, 0.8],'LineWidth',3)
+ plot(t(74:12*N+1),y(74:12*N+1,5),'Color', [0.2, 0.8, 0.8],'LineStyle', '--','LineWidth',3)
+ set(gca, 'fontsize',16)
+ xlabel('Year')
+ ylabel('Stably recovered addicts')
+ %legend({'Prescription Opioids Users'},'FontSize',14, 'Location', 'northwest')
+ xlim([0 N])
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
+
+ 
  %{
  figure(5)
  hold all
