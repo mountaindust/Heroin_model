@@ -21,8 +21,8 @@ pars=[alpha,beta_A,beta_P,theta_1,epsilon,mu,mu_A,mu_H,gamma,theta_2,sigma,zeta,
 
 % Final time N; will run from beginning of 2013 to beginning of 2019 where t=0 represents 2013
 % and t=6 represents 2019, with spacing (N-0)/(25-1)=0.25 between the points to represent quarters of a year:
-N = 6; 
-tspan=linspace(0,N,25);
+N = 600; 
+tspan=linspace(0,N,2500);
 
 
 % Initial conditions
