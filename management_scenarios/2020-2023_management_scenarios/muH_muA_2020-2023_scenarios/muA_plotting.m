@@ -86,7 +86,7 @@ muA_vec_50percentcase=[muA50percent(0),muA50percent(0.25),muA25percent(0.5),muA2
  set(gca, 'FontSize',16)
  xlabel('Year')
  ylabel('\mu_A')
- legend({'Baseline \muA', '\muA reduced 25%','\muA reduced 50%'},'FontSize',14, 'Location', 'northeast')
+ legend({'Baseline \mu_A', '\mu_A reduced 25%','\mu_A reduced 50%'},'FontSize',14, 'Location', 'northeast')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019','2020','2021','2022','2023'})
 
