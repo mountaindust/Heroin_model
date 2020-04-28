@@ -150,10 +150,10 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  hold all
  plot(t(1:73),y(1:73,3)+y(1:73,4),'Color',[0.1 0.4 1],'LineWidth',3);
  plot(t(74:12*N+1),y(74:12*N+1,3)+y(74:12*N+1,4),'Color',[0.1 0.4 1],'LineStyle', '--','LineWidth',3);
- set(gca, 'fontsize',16)
+ set(gca, 'fontsize',18)
  xlabel('Year')
  ylabel('Proportion')
- legend({'Total Addicts'},'FontSize',14, 'Location', 'northwest')
+ legend({'Total Addicts'},'FontSize',16, 'Location', 'northwest')
  xlim([0 N])
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9]) 
  set(gca,'xticklabel',{'2013','2014','2015','2016','2017', '2018','2019', '2020', '2021', '2022'})
