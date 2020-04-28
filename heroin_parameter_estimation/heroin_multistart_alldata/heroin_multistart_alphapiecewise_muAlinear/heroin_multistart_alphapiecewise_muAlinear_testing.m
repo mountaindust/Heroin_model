@@ -221,15 +221,25 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  
  figure(7)
  hold all
+ yyaxis left
  plot(t,y(:,1),'k-','LineWidth',3);
+ xlabel('Year')
+ ylabel('Susceptible Individuals','Color','k')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',16)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
+ 
+ yyaxis right
  plot(t,y(:,2),'b-','LineWidth',3);
  xlabel('Year')
- ylabel('Non-addicted Individuals')
+ ylabel('Prescribed Users','Color','b')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',16)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
- legend({'S','P'}, 'FontSize', 14)  
- 
+ legend({'S','P'}, 'FontSize', 14) 
+ ax = gca;
+ ax.YAxis(1).Color = 'k';
+ ax.YAxis(2).Color = 'b';
   
 %{
 figure(1)
