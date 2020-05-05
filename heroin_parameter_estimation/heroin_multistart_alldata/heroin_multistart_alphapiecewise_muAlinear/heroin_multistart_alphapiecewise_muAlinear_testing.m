@@ -215,9 +215,9 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  xlabel('Year')
  ylabel('Addicted Individuals and Recovered Addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',16)
+ set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
- legend({'A','H','R'}, 'FontSize', 14)     
+ legend({'A','H','R'}, 'FontSize', 18)     
  
  figure(7)
  hold all
@@ -226,7 +226,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  xlabel('Year')
  ylabel('Susceptible Individuals','Color','k')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',16)
+ set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
  
  yyaxis right
@@ -234,9 +234,9 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  xlabel('Year')
  ylabel('Prescribed Users','Color','b')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',16)
+ set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
- legend({'S','P'}, 'FontSize', 14) 
+ legend({'S','P'}, 'FontSize', 18) 
  ax = gca;
  ax.YAxis(1).Color = 'k';
  ax.YAxis(2).Color = 'b';

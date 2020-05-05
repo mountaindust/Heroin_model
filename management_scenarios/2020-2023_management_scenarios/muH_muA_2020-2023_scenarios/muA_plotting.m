@@ -83,12 +83,14 @@ muA_vec_50percentcase=[muA50percent(0),muA50percent(0.25),muA25percent(0.5),muA2
  plot(t2,connect2,'g-','LineWidth',3)
  connect3=interp1(t,muA_vec_50percentcase,t2);
  plot(t2,connect3,'r-','LineWidth',3)
- set(gca, 'FontSize',16)
+ set(gca, 'FontSize',18)
  xlabel('Year')
  ylabel('\mu_A')
- legend({'Baseline \mu_A', '\mu_A reduced 25%','\mu_A reduced 50%'},'FontSize',14, 'Location', 'northeast')
- set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10])
- set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019','2020','2021','2022','2023'})
+ legend({'Baseline \mu_A', '\mu_A reduced 25%','\mu_A reduced 50%'},'FontSize',18, 'Location', 'northeast')
+ %set(gca, 'xtick', [ 0 1 2 3 4 5 6 7 8 9 10])
+ %set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019','2020','2021','2022','2023'})
+ set(gca, 'xtick', [ 0 2 4 6 8 10])
+ set(gca,'xticklabel',{'2013', '2015', '2017', '2019','2021','2023'})
 
 
 %baseline alpha in 2023, must shift t since function is formulated for t=0
