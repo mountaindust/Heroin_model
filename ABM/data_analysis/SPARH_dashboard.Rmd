@@ -10,7 +10,8 @@ library(tidyverse)
 library(xtable)
 library(knitr)
 
-#setwd("Desktop/opioid_research/SPARH_model/data_analysis") # Set to wd
+#setwd("Desktop/opioid_research/Heroin_model/data_analysis") # Set to wd
+
 source(file = "individual_functions/helpers.R") # Must source before running plotters
 source(file = "individual_functions/plot_A.R")  # Source all plotting fn's
 source(file = "individual_functions/plot_P.R")
@@ -18,23 +19,22 @@ source(file = "individual_functions/plot_R.R")
 source(file = "individual_functions/plot_S.R")
 source(file = "individual_functions/plot_H.R")
 
-abm_data = "SPARH_data/SPARH_ABM_SU2020_5_19_afternoon heroin_run-table.csv"
-ode_data = "SPARH_data/HeroinODE.csv"
+abm_data = "data/SPARH_ABM_SU2020_5_20_afternoon heroin_run-table.csv"
+ode_data = "data/HeroinODE.csv"
 
 options(scipen = 999) # Disables scientific notation in R
 
 ab = read.csv(abm_data) # Read in our data
 nm = colnames(ab)
-nm = subset(nm, !(nm %in% c("X.run.number.", "X.step.", "count.turtles.with..class....S.....turtle.count", "count.turtles.with..class....P.....turtle.count", "count.turtles.with..class....A.....turtle.count", "count.turtles.with..class....R.....turtle.count", "count.turtles.with..class....H.....turtle.count")))
+
 # Makes vector of names of every parameter to record
+nm = subset(nm, !(nm %in% c("X.run.number.", "X.step.", "count.turtles.with..class....S.....turtle.count", "count.turtles.with..class....P.....turtle.count", "count.turtles.with..class....A.....turtle.count", "count.turtles.with..class....R.....turtle.count", "count.turtles.with..class....H.....turtle.count")))
 
-vals = ab[1,nm]
+vals = ab[1,nm]       # Values for Initial Conditions
+nv = as.numeric(vals) # Convert to numeric
 
-nv = as.numeric(vals)
-# nv = trunc(nv * 10^4)/ 10^4
-#icdf = data.frame(Variable = nm, Initial_Value = nv)
 icdf = data.frame(Initial_Value = nv) # Stands for initial condition dataframe
-row.names(icdf) = nm
+row.names(icdf) = nm                  # Assign row names
 
 max_ticks = max(ab$X.step.)       # Get max number of ticks
 runs      = max(ab$X.run.number.) # Get max number of runs
@@ -57,15 +57,16 @@ row_s  = c("initial_S", "beta_A", "beta_P", "theta_1")
 icdf_s = icdf[row_s,]
 icdf_s = data.frame(Initial_Value = icdf_s)
 
-if (const_a == 1){ #If alpha is constant, add on alpha_c
+if (const_a == 1){ # If alpha is constant, add on alpha_c
 
   alpha_c = icdf["alpha_c",1]
   icdf_s = rbind(icdf_s, c(alpha_c))
   row_s  = c(row_s, "alpha")
+  
 } else { # If alpha piecewise linear, get tilde values
   
-  m_tilde = icdf["m_tilde", 1]
-  icdf_s  = rbind(icdf_s, c(m_tilde))
+  m_tilde = icdf["m_tilde", 1]        # Gets value
+  icdf_s  = rbind(icdf_s, c(m_tilde)) # Adds on value to dataframe
   
   b_tilde = icdf["b_tilde", 1]
   icdf_s  = rbind(icdf_s, c(m_tilde))
@@ -75,6 +76,7 @@ if (const_a == 1){ #If alpha is constant, add on alpha_c
   
   row_s   = c(row_s, "m_tilde", "b_tilde", "c_tilde")
 }
+
 row.names(icdf_s) = row_s # Set new row names
 
 # P parameters:
@@ -88,12 +90,12 @@ row_a  = c("initial_A", "zeta", "theta_3")
 icdf_a = icdf[row_a, ]
 icdf_a = data.frame(Initial_Value = icdf_a)
 
-
 if (const_mu_a == 1){ # If mu_a constant, add on mu_a_c
   
   mu_a_c = icdf["mu_a_c", 1]
   icdf_a = rbind(icdf_a, c(mu_a_c))
   row_a  = c(row_a, "mu_a")
+  
 } else { # If mu_a linear, add on the d_tilde, e_tilde terms
   
   d_tilde = icdf["d_tilde", 1]
@@ -104,6 +106,7 @@ if (const_mu_a == 1){ # If mu_a constant, add on mu_a_c
   
   row_a   = c(row_a, "d_tilde", "e_tilde")
 }
+
 row.names(icdf_a) = row_a # Assign row names
 
 # R parameters:
@@ -116,7 +119,6 @@ row.names(icdf_r) = row_r
 row_h  = c("initial_H", "mu_h", "v_nu")
 icdf_h = icdf[row_h,]
 icdf_h = data.frame(Initial_Value = icdf_h)
-
 row.names(icdf_h) = row_h
 ```
 
@@ -126,11 +128,7 @@ Basic Stats {.sidebar}
 ### Basic Statistics
 
 ```{r, echo = FALSE, results = 'asis'}
-#kable(icdf[which(nm %in% c("turtle.count", "initial_S", "initial_P")),])
-#xtable(icdf[which(nm %in% c("turtle.count", "initial_S", "initial_P")),])
-#icdf["initial_P",]
-#icdf["initial_S",]
-kable(icdf_overall)
+kable(icdf_overall) # Overall statistics displayed on Sidebar
 ```
 
 S
@@ -138,12 +136,14 @@ S
 
 ```{r splot, fig.height=5.5, fig.align="center"}
 plotS(abm = abm_data, ode = ode_data)
+# Display the plot
 ```
 
 ### S Values
 
 ```{r svals, echo = FALSE, results = 'asis', fig.height = 2}
 kable(icdf_s)
+# Display initial values below the plot
 ```
 
 P
