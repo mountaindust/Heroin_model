@@ -28,10 +28,10 @@ plotH <- function(abm, ode){
     H_counts = abm_data$H[abm_data$run == i] # Get counts for each run
     
     if (i == 1){ # Initial plot
-      plot(num_vec, H_counts, type = "l", col = "orange", ylim = c(r_vec[2], r_vec[1]), main = "H Proportions", xlab = "Ticks", ylab = "Proportion")
+      plot(num_vec, H_counts, type = "l", col = "violet", ylim = c(r_vec[2], r_vec[1]), main = "H Proportions", xlab = "Ticks", ylab = "Proportion")
     }
     else { # Adding lines thereafter
-      lines(num_vec, H_counts, type = "l", col = "orange")
+      lines(num_vec, H_counts, type = "l", col = "violet")
       
     }
   }
@@ -46,7 +46,7 @@ plotH <- function(abm, ode){
   lines(num_vec, ode_data$H, type = "l", col = "blue") # Plot the ODE data
   
   # Gives legend to plot
-  legend("topright", cex = 0.8, title = "Legend",legend = c("ABM", "ABM Mean", "ODE"), col = c("orange", "black", "blue"), lty = c(1,1,1),ncol = 1)
+  legend("topright", cex = 0.8, title = "Legend",legend = c("ABM", "ABM Mean", "ODE"), col = c("violet", "black", "blue"), lty = c(1,1,1),ncol = 1)
   
   
   end_mean = tail(mean_H, n = 1)     # Gets the ending mean value of the ABM
