@@ -9,3 +9,8 @@ This is the repository containing all of the code and data analysis tools for th
 - I have not included a link for this header because this model is constantly changing as we update the code
 - The model will always contain the suffix ".nlogo"
 - This file is written in [NetLogo](https://ccl.northwestern.edu/netlogo/), and to be able to run the GUI on your local machine, you will have to [download NetLogo](https://ccl.northwestern.edu/netlogo/download.shtml). 
+
+## Running the Model
+
+![Network Picture](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/network_picture.png)
+Here is an example picture of the network. Here you can see that there are 20 turtles (individuals/nodes). 14 of them are Susceptible (blue), 2 are Prescribed (yellow), 2 are Addicted (red), 1 is Recovered (green), and 1 is Heroin (purple). 
