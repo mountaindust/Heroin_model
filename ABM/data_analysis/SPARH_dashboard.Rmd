@@ -7,10 +7,9 @@ output:
 
 ```{r, echo = FALSE}
 library(tidyverse)
-library(xtable)
 library(knitr)
 
-#setwd("Desktop/opioid_research/Heroin_model/data_analysis") # Set to wd
+#setwd("Desktop/opioid_research/Heroin_model/ABM/data_analysis") # Set to wd
 
 source(file = "individual_functions/helpers.R") # Must source before running plotters
 source(file = "individual_functions/plot_A.R")  # Source all plotting fn's
@@ -19,7 +18,7 @@ source(file = "individual_functions/plot_R.R")
 source(file = "individual_functions/plot_S.R")
 source(file = "individual_functions/plot_H.R")
 
-abm_data = "data/SPARH_ABM_SU2020_5_20_afternoon heroin_run-table.csv"
+abm_data = "data/difflnew_SPARH_ABM_SU2020_5_23_morning heroin_run-table.csv"
 ode_data = "data/HeroinODE.csv"
 
 options(scipen = 999) # Disables scientific notation in R
