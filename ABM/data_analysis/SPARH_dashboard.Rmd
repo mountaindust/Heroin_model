@@ -15,8 +15,8 @@ source(file = "individual_functions/helpers.R") # Must source before running plo
 source(file = "individual_functions/plot_A.R")  # Source all plotting fn's
 source(file = "individual_functions/plot_P.R")
 source(file = "individual_functions/plot_R.R")
-source(file = "individual_functions/plot_S.R")
 source(file = "individual_functions/plot_H.R")
+source(file = "individual_functions/plot_S.R")
 
 abm_data = "data/difflnew_SPARH_ABM_SU2020_5_23_morning heroin_run-table.csv"
 ode_data = "data/HeroinODE.csv"
@@ -171,6 +171,18 @@ plotA(abm = abm_data, ode = ode_data)
 kable(icdf_a)
 ```
 
+H
+=====================================
+
+```{r hplot, fig.height = 5.5, fig.align="center"}
+plotH(abm = abm_data, ode = ode_data)
+```
+
+### H Values
+```{r hvals, echo = FALSE, results = 'asis', fig.height = 2}
+kable(icdf_h)
+```
+
 R
 =====================================
 
@@ -182,17 +194,5 @@ plotR(abm = abm_data, ode = ode_data)
 
 ```{r rvals, echo = FALSE, results = 'asis', fig.height = 2}
 kable(icdf_r)
-```
-
-H
-=====================================
-
-```{r hplot, fig.height = 5.5, fig.align="center"}
-plotH(abm = abm_data, ode = ode_data)
-```
-
-### H Values
-```{r hvals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_h)
 ```
 
