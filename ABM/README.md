@@ -1,4 +1,4 @@
-# Agent-Based SPARH Model
+# Agent-Based SPAHR Model
 
 This is the repository containing all of the code and data analysis tools for the SPARH agent-based model. SPARH is an abbreviation named after the classes considered in our model: Susceptible, Prescribed, Addicted, Recovered, and Heroin. 
 
