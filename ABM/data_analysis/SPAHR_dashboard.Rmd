@@ -18,8 +18,8 @@ source(file = "individual_functions/plot_R.R")
 source(file = "individual_functions/plot_H.R")
 source(file = "individual_functions/plot_S.R")
 
-abm_data = "data/difflnew_SPARH_ABM_SU2020_5_23_morning heroin_run-table.csv"
-ode_data = "data/HeroinODE.csv"
+abm_data = "data/with_input_box_SPAHR.csv"
+ode_data = "data/ODE_comparison1.csv"
 
 options(scipen = 999) # Disables scientific notation in R
 
