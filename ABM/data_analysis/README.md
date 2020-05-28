@@ -4,7 +4,7 @@ This directory contains all the tools needed to analyze the data outputted by Be
 ### Contents
 #### 1. [individual_functions](https://github.com/mountaindust/Heroin_model/tree/master/ABM/data_analysis/individual_functions)
 - This folder contains the plotting functions for each class of the model (S, P, A, H, R) as well as a helpers.R file
-- These files are all sourced in SPARH_dashboard.Rmd, so they must remain in this folder unaltered
+- These files are all sourced in SPAHR_dashboard.Rmd, so they must remain in this folder unaltered
 #### 2. [SPAHR_dashboard.Rmd](https://github.com/mountaindust/Heroin_model/blob/master/ABM/data_analysis/SPAHR_dashboard.Rmd)
 - This is the Rmarkdown file used to output a dashboard that allows us to visualize our data
 - A detailed guide on how to use this file is located below
@@ -45,7 +45,7 @@ install.packages("knitr")
 ### 4. Set working directory
 In order to ensure that your program is reading data and function files from the correct location, you must set your working directory in Rstudio as so:
 ```
-setwd(<directory containing SPARH_dashboard.Rmd>)
+setwd(<directory containing SPAHR_dashboard.Rmd>)
 ```
 I have included a line (line 12) in the RMD file that does this step for you. Your only job is to ensure that you replace the contents of the setwd function with your own working directory. This line of code is shown below. </br>
 ![Setwd line](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/setwd_pic.png)
