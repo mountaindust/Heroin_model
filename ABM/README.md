@@ -12,5 +12,7 @@ This is the repository containing all of the code and data analysis tools for th
 
 ## Running the Model
 
-![Network Picture](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/network_picture.png)
-Here is an example picture of the network. Here you can see that there are 20 turtles (individuals/nodes). 14 of them are Susceptible (blue), 2 are Prescribed (yellow), 2 are Addicted (red), 1 is Recovered (green), and 1 is Heroin (purple). 
+![Network Picture](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/network_picture.png) </br>
+Here is an example picture of the network. Here you can see that there are 20 turtles (individuals/nodes). 14 of them are Susceptible (blue), 2 are Prescribed (yellow), 2 are Addicted (red), 1 is Recovered (green), and 1 is Heroin (purple). </br>
+
+You can see under the "Info" tab in the model for a detailed explanantion of how to run it.
