@@ -4,13 +4,13 @@ This directory contains all the tools needed to analyze the data outputted by Be
 ### Contents
 #### 1. [individual_functions](https://github.com/mountaindust/Heroin_model/tree/master/ABM/data_analysis/individual_functions)
 - This folder contains the plotting functions for each class of the model (S, P, A, H, R) as well as a helpers.R file
-- These files are all sourced in SPARH_dashboard.Rmd, so they must remain in this folder unaltered
-#### 2. [SPARH_dashboard.Rmd](https://github.com/mountaindust/Heroin_model/blob/master/ABM/data_analysis/SPARH_dashboard.Rmd)
+- These files are all sourced in SPAHR_dashboard.Rmd, so they must remain in this folder unaltered
+#### 2. [SPAHR_dashboard.Rmd](https://github.com/mountaindust/Heroin_model/blob/master/ABM/data_analysis/SPAHR_dashboard.Rmd)
 - This is the Rmarkdown file used to output a dashboard that allows us to visualize our data
 - A detailed guide on how to use this file is located below
 
 ## Using the Analysis Tools
-As stated above, the main tool for analysis in this directory is located in [SPARH_dashboard.Rmd](https://github.com/mountaindust/Heroin_model/blob/master/ABM/data_analysis/SPARH_dashboard.Rmd).</br> </br>
+As stated above, the main tool for analysis in this directory is located in [SPAHR_dashboard.Rmd](https://github.com/mountaindust/Heroin_model/blob/master/ABM/data_analysis/SPAHR_dashboard.Rmd).</br> </br>
 
 Before trying to run the dashboard code, I would highly recommend downloading [Rstudio](https://rstudio.com), a free IDE that makes editing and knitting RMD files very simple. This tutorial will show the user how to use Rstudio as an IDE for creating the dashboard.
 
@@ -45,7 +45,7 @@ install.packages("knitr")
 ### 4. Set working directory
 In order to ensure that your program is reading data and function files from the correct location, you must set your working directory in Rstudio as so:
 ```
-setwd(<directory containing SPARH_dashboard.Rmd>)
+setwd(<directory containing SPAHR_dashboard.Rmd>)
 ```
 I have included a line (line 12) in the RMD file that does this step for you. Your only job is to ensure that you replace the contents of the setwd function with your own working directory. This line of code is shown below. </br>
 ![Setwd line](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/setwd_pic.png)
@@ -55,7 +55,7 @@ You must also change the names of the input files inside of the RMD code. The na
 
 ![Names of files](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/name_of_files.png)
 
-Remember that the names of these files must be directory-dependent. For example, if SPARH_dashboard.Rmd was contained in the "Desktop" directory (your working directory), and your BehaviorSpace output data  (named "data_abm.csv") was located in "ABM" directory, where "ABM" is inside of your "Desktop" directory, then you would enter the following on line 21:
+Remember that the names of these files must be directory-dependent. For example, if SPAHR_dashboard.Rmd was contained in the "Desktop" directory (your working directory), and your BehaviorSpace output data  (named "data_abm.csv") was located in "ABM" directory, where "ABM" is inside of your "Desktop" directory, then you would enter the following on line 21:
 ```
 abm_data = "ABM/data_abm.csv"
 ```
