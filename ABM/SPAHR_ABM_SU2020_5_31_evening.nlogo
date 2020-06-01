@@ -3,8 +3,6 @@ extensions [nw]
 
 globals
 [ lambda
-  constant_mu_a
-  constant_alpha
   change
   mu_a   ; To be set in linear function mu_a_t
   alpha  ; To be set in piecewise linear function alpha_t
@@ -72,15 +70,18 @@ to change?
   let total_A count turtles with [class = "A"]
   let total_H count turtles with [class = "H"]
 
-  alpha_t ; Updates piecewise linear value of alpha
-  mu_a_t  ; Updates linear value of mu_a
+  alpha_t ; Updates piecewise linear or constant value of alpha
+  mu_a_t  ; Updates linear or constant value of mu_a
 
   ;;gets lambda
   ; Changes here.........
   ask turtles [
 
     if (current-class = "S") [ ;;P and A are the link neighbors with class P and A, so beta_A * A is beta_A * link neigh. with class A.
-      set lambda (alpha + beta_A * (A_neighbor_count / turtle-count) + beta_P * (P_neighbor_count / turtle-count) + theta_1 * (H_neighbor_count / turtle-count) + mu) ;; NOTE - alpha must be changed to alpha(t).
+      ;set lambda ((alpha + beta_A * (A_neighbor_count / turtle-count) + beta_P * (P_neighbor_count / turtle-count) + theta_1 * (H_neighbor_count / turtle-count) + mu) / turtle-count)  ;; NOTE - alpha must be changed to alpha(t).
+
+      set lambda (alpha + beta_A * (A_neighbor_count / turtle-count) + beta_P * (P_neighbor_count / turtle-count) + theta_1 * (H_neighbor_count / turtle-count) + mu)
+
 
       let prob (1 - exp (- lambda * delta_t))
       let rf random-float 1
@@ -95,21 +96,35 @@ to change?
       if rf < prob [
 
         ;;changes S -> P
-        if s_to_p > rf2 [ Prescribed ]
+        if s_to_p > rf2 [
+          Prescribed
+          ;set s-p (s-p + 1)
+        ]
 
         ;;changes S -> A
-        if s_to_a + s_to_p > rf2 and rf2 >= s_to_p [ Addicted ]
+        if s_to_a + s_to_p > rf2 and rf2 >= s_to_p [
+          Addicted
+          ;set s-a (s-a + 1)
+        ]
 
-        if (s_to_h + s_to_a + s_to_p) > rf2 and rf2 >= (s_to_a + s_to_p) [ Heroin ]
+        if (s_to_h + s_to_a + s_to_p) > rf2 and rf2 >= (s_to_a + s_to_p) [
+          Heroin
+          ;set s-h (s-h + 1)
+        ]
 
         ;;Deads them
-        if (s_to_h + s_to_a + s_to_p + d) > rf2 and rf2 >= (s_to_h + s_to_a + s_to_p) [ Dead ]
+        if (s_to_h + s_to_a + s_to_p + d) > rf2 and rf2 >= (s_to_h + s_to_a + s_to_p) [
+          Dead
+        ]
 
       ]
     ]
 
     if (current-class = "P") [
+      ;set lambda ((epsilon + gamma + theta_2 * (H_neighbor_count / turtle-count) + mu) / turtle-count)
+
       set lambda (epsilon + gamma + theta_2 * (H_neighbor_count / turtle-count) + mu)
+
       let prob (1 - exp (- lambda * delta_t))
 
       let rf random-float 1
@@ -123,7 +138,10 @@ to change?
 
       if rf < prob [
         ;;changes P -> S
-        if p_to_s > rf2 [ Susceptible ]
+        if p_to_s > rf2 [
+          Susceptible
+          ;set p-s (p-s + 1)
+        ]
 
         ;;changes P -> A
         if p_to_a + p_to_s > rf2 and rf2 >= p_to_s [ Addicted ]
@@ -138,7 +156,10 @@ to change?
     ]
 
     if (current-class = "A") [
-      set lambda (zeta + theta_3 * (H_neighbor_count / turtle-count) + (mu + mu_a) ) ;;NOTE - mu_a needs to become mu_a(t).
+      ;set lambda ((zeta + theta_3 * (H_neighbor_count / turtle-count) + (mu + mu_a) ) / turtle-count) ;;NOTE - mu_a needs to become mu_a(t).
+
+      set lambda (zeta + theta_3 * (H_neighbor_count / turtle-count) + (mu + mu_a) );;NOTE - mu_a needs to become mu_a(t).
+
       let prob (1 - exp (- lambda * delta_t))
 
       let rf random-float 1
@@ -164,7 +185,10 @@ to change?
 
     ; Recovered case
     if current-class = "R" [ ;; keep global not neighbors...
+      ;set lambda  (( ( (sigma * total_A) / (total_A + total_H + 0.0001) ) + ( (sigma * total_H) / (total_A + total_H + 0.001) ) + mu ) / turtle-count ) ;; note the 0.0001 is meant to garuntee a non zero denom.
+
       set lambda  ( ( (sigma * total_A) / (total_A + total_H + 0.0001) ) + ( (sigma * total_H) / (total_A + total_H + 0.001) ) + mu ) ;; note the 0.0001 is meant to garuntee a non zero denom.
+
       let prob (1 - exp (- lambda * delta_t))
       let rf random-float 1
 
@@ -203,7 +227,10 @@ to change?
     ]
 
     if current-class = "H" [
+      ;set lambda (( v_nu + mu + mu_h ) / turtle-count)
+
       set lambda ( v_nu + mu + mu_h )
+
       let prob (1 - exp (- lambda * delta_t))
       let rf random-float 1
 
@@ -329,7 +356,7 @@ INPUTBOX
 180
 92
 turtle-count
-200.0
+500.0
 1
 0
 Number
@@ -386,23 +413,23 @@ NIL
 1
 
 INPUTBOX
-51
-276
-161
-336
+447
+501
+557
+561
 initial_P
-0.095
+0.1
 1
 0
 Number
 
 INPUTBOX
-51
-346
-160
-406
+651
+500
+760
+560
 initial_A
-0.0071
+0.016
 1
 0
 Number
@@ -423,28 +450,28 @@ true
 true
 "" ""
 PENS
-"Perscribed" 1.0 0 -1184463 true "" "plot ( count turtles with [ class = \"P\" ] / turtle-count )"
 "Suseptible" 1.0 0 -10649926 true "" "plot ( count turtles with [ class = \"S\" ] / turtle-count )"
-"Recovered" 1.0 0 -11085214 true "" "plot ( count turtles with [ class = \"R\" ] / turtle-count )"
+"Prescribed" 1.0 0 -1184463 true "" "plot ( count turtles with [ class = \"P\" ] / turtle-count )"
 "Addicted" 1.0 0 -2139308 true "" "plot ( count turtles with [ class = \"A\" ] / turtle-count )"
 "Heroin" 1.0 0 -6917194 true "" "plot ( count turtles with [ class = \"H\" ] / turtle-count )"
+"Recovered" 1.0 0 -13840069 true "" "plot ( count turtles with [ class = \"R\" ] / turtle-count )"
 
 INPUTBOX
-50
-416
-160
-476
+1250
+511
+1360
+571
 initial_R
-0.00507
+0.014
 1
 0
 Number
 
 SLIDER
-661
-329
-833
-362
+415
+605
+587
+638
 epsilon
 epsilon
 0
@@ -456,25 +483,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-833
-329
-1005
-362
+415
+573
+587
+606
 gamma
 gamma
 0
 100
-0.00505
+0.4
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-833
-362
-1005
-395
+616
+573
+788
+606
 zeta
 zeta
 0
@@ -486,25 +513,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-662
-296
-834
-329
-delta
-delta
-0
-100
-0.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-661
-363
-833
-396
+1219
+580
+1391
+613
 sigma
 sigma
 0
@@ -516,10 +528,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-833
-296
-1005
-329
+19
+229
+191
+262
 mu
 mu
 0
@@ -531,25 +543,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-661
-396
-833
-429
+20
+603
+192
+636
 beta_P
 beta_P
 0
 100
-6.54E-5
+0.00654
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-833
-395
-1005
-428
+20
+570
+192
+603
 beta_A
 beta_A
 0
@@ -560,21 +572,11 @@ beta_A
 NIL
 HORIZONTAL
 
-TEXTBOX
-1017
-120
-1212
-428
-alpha = prescriptionrate per person per year\n\nepsilon = end prescription w/o addiction\n\nbeta_P = illicit addiction\n\nbeta_A = illicit addiction \n\ngamma = prescription-induced addiction\n\nzeta = rate of A entry into rehab\n\ndelta = successful treatment\n\nsigma = natural relapse\n\nmu = natural death\n\nmu_star = death rate for addicts\n\ndelta_t = time step\n
-11
-0.0
-1
-
 SLIDER
-754
-432
-926
-465
+19
+262
+191
+295
 delta_t
 delta_t
 0.01
@@ -586,10 +588,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-216
-503
-273
-548
+673
+299
+730
+344
 S
 count turtles with [class = \"S\"]
 17
@@ -597,10 +599,10 @@ count turtles with [class = \"S\"]
 11
 
 MONITOR
-282
-503
-339
-548
+739
+299
+796
+344
 P
 count turtles with [class = \"P\"]
 17
@@ -608,10 +610,10 @@ count turtles with [class = \"P\"]
 11
 
 MONITOR
-347
-503
-404
-548
+804
+299
+861
+344
 A
 count turtles with [class = \"A\"]
 17
@@ -619,10 +621,10 @@ count turtles with [class = \"A\"]
 11
 
 MONITOR
-412
-503
-469
-548
+939
+299
+996
+344
 R
 count turtles with [class = \"R\"]
 17
@@ -631,20 +633,20 @@ count turtles with [class = \"R\"]
 
 INPUTBOX
 51
-206
+498
 160
-266
+558
 initial_S
-0.892365
+0.85
 1
 0
 Number
 
 SLIDER
-665
-504
-837
-537
+20
+636
+192
+669
 theta_1
 theta_1
 0
@@ -656,10 +658,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-665
-537
-837
-570
+415
+638
+587
+671
 theta_2
 theta_2
 0
@@ -671,25 +673,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-837
-505
-1009
-538
+616
+606
+788
+639
 theta_3
 theta_3
 0
 100
-19.7
+5.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-837
-537
-1009
-570
+1021
+579
+1193
+612
 v_nu
 v_nu
 0
@@ -701,10 +703,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-758
-570
-930
-603
+1021
+612
+1193
+645
 mu_h
 mu_h
 0
@@ -716,31 +718,31 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-785
-483
-935
-501
+1060
+472
+1164
+490
 Heroin Parameters
 11
 0.0
 1
 
 INPUTBOX
-50
-490
-160
-550
+1052
+510
+1162
+570
 initial_H
-4.65E-4
+0.02
 1
 0
 Number
 
 MONITOR
-481
-505
-538
-550
+871
+299
+928
+344
 H
 count turtles with [class = \"H\"]
 17
@@ -748,10 +750,10 @@ count turtles with [class = \"H\"]
 11
 
 SLIDER
-1026
-543
-1198
-576
+216
+571
+388
+604
 m_tilde
 m_tilde
 0
@@ -763,10 +765,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1026
-576
-1198
-609
+216
+604
+388
+637
 b_tilde
 b_tilde
 0
@@ -778,10 +780,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1026
-609
-1198
-642
+216
+637
+388
+670
 c_tilde
 c_tilde
 0
@@ -793,10 +795,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1214
-543
-1386
-576
+816
+573
+988
+606
 d_tilde
 d_tilde
 0
@@ -808,94 +810,60 @@ NIL
 HORIZONTAL
 
 SLIDER
-1214
-576
-1386
-609
+816
+606
+988
+639
 e_tilde
 e_tilde
 0
 100
-0.0
+1.0
 1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-1059
-472
-1209
-490
-alpha(t) Parameters\n
+221
+497
+390
+525
+alpha(t) = prescription rate per person per year\n
 11
 0.0
 1
 
 TEXTBOX
-1246
-472
-1396
-490
-mu_a(t) Parameters
+819
+494
+983
+521
+mu_a(t) = overdose death rate of addicted users
 11
 0.0
 1
 
-BUTTON
-1060
-650
-1169
-683
-alpha constant?
-set constant_alpha 1
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 SLIDER
-1027
-692
-1199
-725
+217
+716
+389
+749
 alpha_c
 alpha_c
 0
 100
-0.27
+0.4
 1
 1
 NIL
 HORIZONTAL
 
-BUTTON
-1248
-617
-1357
-650
-mu_a constant?
-set constant_mu_a 1
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 SLIDER
-1217
-659
-1389
-692
+817
+689
+989
+722
 mu_a_c
 mu_a_c
 0
@@ -906,38 +874,204 @@ mu_a_c
 NIL
 HORIZONTAL
 
-BUTTON
-1039
-500
-1185
-533
-alpha piecewise linear?
-set constant_alpha 0 
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
+TEXTBOX
+141
+470
+291
+488
+Susceptible Parameters
+11
+0.0
 1
 
-BUTTON
-1244
-501
-1353
-534
-mu_a linear?
-set constant_mu_a 0
-T
+SLIDER
+243
+676
+359
+709
+constant_alpha
+constant_alpha
+0
 1
-T
-OBSERVER
+1.0
+1
+1
 NIL
+HORIZONTAL
+
+SLIDER
+843
+647
+960
+680
+constant_mu_a
+constant_mu_a
+0
+1
+1.0
+1
+1
 NIL
-NIL
-NIL
+HORIZONTAL
+
+TEXTBOX
+444
+474
+567
+492
+Prescribed Parameters
+11
+0.0
+1
+
+TEXTBOX
+747
+468
+897
+486
+Addicted Parameters
+11
+0.0
+1
+
+TEXTBOX
+1245
+474
+1395
+492
+Recovered Parameters
+11
+0.0
+1
+
+TEXTBOX
+1224
+631
+1374
+649
+sigma = natural relapse
+11
+0.0
+1
+
+TEXTBOX
+53
+205
+203
+223
+Overall Parameters
+11
+0.0
+1
+
+TEXTBOX
+418
+679
+590
+721
+gamma = prescription-induced addiction
+11
+0.0
+1
+
+TEXTBOX
+418
+718
+593
+746
+epsilon = end prescription w/o addiction
+11
+0.0
+1
+
+TEXTBOX
+622
+647
+790
+675
+zeta = rate of A entry into rehab
+11
+0.0
+1
+
+TEXTBOX
+1028
+652
+1178
+680
+v_nu = rate of H entry into rehab
+11
+0.0
+1
+
+TEXTBOX
+28
+680
+178
+698
+beta_A = illicit addiction
+11
+0.0
+1
+
+TEXTBOX
+28
+706
+178
+724
+beta_P = illicit addiction
+11
+0.0
+1
+
+TEXTBOX
+1027
+687
+1193
+729
+mu_h = overdose death rate for heroin/fentanyl users
+11
+0.0
+1
+
+TEXTBOX
+29
+731
+179
+759
+theta_1 = illicit heroin addiction
+11
+0.0
+1
+
+TEXTBOX
+622
+686
+781
+714
+theta_3 = rate of A addiction to heroin
+11
+0.0
+1
+
+TEXTBOX
+209
+533
+413
+575
+m_tilde, b_tilde, c_tilde := parameters in piecewise linear alpha(t)
+11
+0.0
+1
+
+TEXTBOX
+819
+529
+991
+571
+d_tilde, e_tilde := parameters in linear mu_a(t)
+11
+0.0
 1
 
 @#$#@#$#@
@@ -1287,211 +1421,53 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="strickland run" repetitions="100" runMetricsEveryStep="true">
+  <experiment name="heroin_run" repetitions="300" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
-    <timeLimit steps="101"/>
+    <timeLimit steps="100"/>
+    <metric>turtle-count</metric>
+    <metric>mu</metric>
+    <metric>delta_t</metric>
+    <metric>initial_S</metric>
+    <metric>beta_A</metric>
+    <metric>beta_P</metric>
+    <metric>theta_1</metric>
+    <metric>constant_alpha</metric>
+    <metric>alpha_c</metric>
+    <metric>m_tilde</metric>
+    <metric>b_tilde</metric>
+    <metric>c_tilde</metric>
+    <metric>initial_P</metric>
+    <metric>gamma</metric>
+    <metric>epsilon</metric>
+    <metric>theta_2</metric>
+    <metric>initial_A</metric>
+    <metric>zeta</metric>
+    <metric>theta_3</metric>
+    <metric>constant_mu_a</metric>
+    <metric>mu_a_c</metric>
+    <metric>d_tilde</metric>
+    <metric>e_tilde</metric>
+    <metric>initial_H</metric>
+    <metric>v_nu</metric>
+    <metric>mu_h</metric>
+    <metric>initial_R</metric>
+    <metric>sigma</metric>
     <metric>count turtles with [class = "S"] / turtle-count</metric>
     <metric>count turtles with [class = "P"] / turtle-count</metric>
     <metric>count turtles with [class = "A"] / turtle-count</metric>
     <metric>count turtles with [class = "R"] / turtle-count</metric>
+    <metric>count turtles with [class = "H"] / turtle-count</metric>
   </experiment>
-  <experiment name="1000 run strickland" repetitions="2000" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="101"/>
-    <metric>count turtles with [class = "P"] / turtle-count</metric>
-    <metric>count turtles with [class = "S"] / turtle-count</metric>
-    <metric>count turtles with [class = "R"] / turtle-count</metric>
-    <metric>count turtles with [class = "A"] / turtle-count</metric>
-  </experiment>
-  <experiment name="heroin_run" repetitions="500" runMetricsEveryStep="true">
+  <experiment name="heroin_run_test" repetitions="300" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="100"/>
     <metric>count turtles with [class = "S"] / turtle-count</metric>
     <metric>count turtles with [class = "P"] / turtle-count</metric>
     <metric>count turtles with [class = "A"] / turtle-count</metric>
-    <metric>count turtles with [class = "R"] / turtle-count</metric>
     <metric>count turtles with [class = "H"] / turtle-count</metric>
-    <enumeratedValueSet variable="turtle-count">
-      <value value="2000"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_S">
-      <value value="0.892365"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_P">
-      <value value="0.095"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_A">
-      <value value="0.0071"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_R">
-      <value value="0.00507"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_H">
-      <value value="4.65E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu">
-      <value value="0.0071"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="epsilon">
-      <value value="2.53"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="gamma">
-      <value value="0.00505"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="sigma">
-      <value value="0.102"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="zeta">
-      <value value="0.198"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="beta_P">
-      <value value="6.54E-5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="beta_A">
-      <value value="8.78E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="delta_t">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_1">
-      <value value="0.222"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_2">
-      <value value="0.236"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_3">
-      <value value="19.7"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="v_nu">
-      <value value="5.31E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu_h">
-      <value value="0.0466"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="constant_alpha">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="alpha_c">
-      <value value="0.27"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="m_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="b_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="c_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="constant_mu_a">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu_a_c">
-      <value value="0.00883"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="d_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="e_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="test" repetitions="10" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="100"/>
-    <metric>count turtles with [class = "S"] / turtle-count</metric>
-    <metric>count turtles with [class = "P"] / turtle-count</metric>
-    <metric>count turtles with [class = "A"] / turtle-count</metric>
     <metric>count turtles with [class = "R"] / turtle-count</metric>
-    <metric>count turtles with [class = "H"] / turtle-count</metric>
-    <enumeratedValueSet variable="turtle-count">
-      <value value="200"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_S">
-      <value value="0.892365"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_P">
-      <value value="0.095"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_A">
-      <value value="0.0071"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_R">
-      <value value="0.00507"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="initial_H">
-      <value value="4.65E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu">
-      <value value="0.0071"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="epsilon">
-      <value value="2.53"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="gamma">
-      <value value="0.00505"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="sigma">
-      <value value="0.102"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="zeta">
-      <value value="0.198"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="beta_P">
-      <value value="6.54E-5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="beta_A">
-      <value value="8.78E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="delta_t">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_1">
-      <value value="0.222"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_2">
-      <value value="0.236"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="theta_3">
-      <value value="19.7"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="v_nu">
-      <value value="5.31E-4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu_h">
-      <value value="0.0466"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="constant_alpha">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="alpha_c">
-      <value value="0.27"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="m_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="b_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="c_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="constant_mu_a">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="mu_a_c">
-      <value value="0.00883"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="d_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="e_tilde">
-      <value value="0"/>
-    </enumeratedValueSet>
   </experiment>
 </experiments>
 @#$#@#$#@
