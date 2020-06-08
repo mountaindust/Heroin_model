@@ -55,16 +55,24 @@ Then your file will be presented as a normal CSV file. If you do not have access
 ![Deleting rows from a text file](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/text_delete_rows.png)
 
 ### 3. Change name of file variables
-You must also change the names of the input files inside of the RMD code. The names of the ABM data file and the ODE data file are found on lines 21-22, respectively. They are shown below: </br>
+You must also change the names of the input files inside of the RMD code. The names of the ABM data file and the ODE data file are named "abm_data" and "ode_data", respectively. They are shown below: </br>
 
-![Names of files](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/name_of_files.png)
+![Names of files](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/name_of_files.png) </br>
+Note: This screenshot is from an older version of this code, so the line numbers are displayed differently in this image than they will be in your downloaded RMD file.</br>
 
 Remember that the names of these files must be directory-dependent. For example, if SPAHR_dashboard.Rmd was contained in the "Desktop" directory (your working directory), and your BehaviorSpace output data  (named "data_abm.csv") was located in "ABM" directory, where "ABM" is inside of your "Desktop" directory, then you would enter the following on line 21:
 ```
 abm_data = "ABM/data_abm.csv"
 ```
-Note: This screenshot is from an older version of this code, so the line numbers are displayed differently in this image than they will be in your downloaded RMD file.
 
 ### 4. Knit the RMD file
-If you have completed all of these steps, you should be ready to knit the RMD file without any issues. The code will output a .html file that is the intercative dashboard built by the code.
+If you have completed all of these steps, you should be ready to knit the RMD file without any issues. The code will output a .html file that is the intercative dashboard built by the code. </br>
+
+In the toolbar at the top of the Rstudio editor, you will see an icon labeled knit, as seen below in the orange oval:
+![Knit](https://github.com/mountaindust/Heroin_model/blob/master/ABM/supporting_docs/knit_pic.png) </br>
+
+After selecting this button, you should see a dashboard immediately output to your computer's display. This code creates a dashboard called "SPAHR_dashboard.html" (same as file name, just with an .html suffix) in the same directory location as SPAHR_dashboard.Rmd on your local machine. You can view this output via a web browser. </br>
+
+Note: You may experience some errors when Knitting this code. These will be displayed below the editor under the title "R Markdown". These errors may be associated to issues involving the steps above.
+
 
