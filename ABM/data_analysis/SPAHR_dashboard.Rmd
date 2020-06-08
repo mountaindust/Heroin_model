@@ -8,117 +8,24 @@ output:
 ```{r, echo = FALSE}
 library(tidyverse)
 library(knitr)
+library(kableExtra)
 
 #setwd("Desktop/opioid_research/Heroin_model/ABM/data_analysis") # Set to wd
 
-source(file = "individual_functions/helpers.R") # Must source before running plotters
-source(file = "individual_functions/plot_A.R")  # Source all plotting fn's
-source(file = "individual_functions/plot_P.R")
-source(file = "individual_functions/plot_R.R")
-source(file = "individual_functions/plot_H.R")
-source(file = "individual_functions/plot_S.R")
+source(file = "individual_functions/ic.R")
+source(file = "individual_functions/plot_SPAHR.R")
 
-abm_data = "data/with_input_box_SPAHR.csv"
-ode_data = "data/ODE_comparison1.csv"
+abm_data = "data/SPAHR_data/smaller_num_analysis/SPAHR_ABM_SU2020_06-01_debug heroin_run-table.csv"
+ode_data = "data/SPAHR_data/smaller_num_analysis/ODE_comparison4.csv"
 
 options(scipen = 999) # Disables scientific notation in R
 
-ab = read.csv(abm_data) # Read in our data
-nm = colnames(ab)
-
-# Makes vector of names of every parameter to record
-nm = subset(nm, !(nm %in% c("X.run.number.", "X.step.", "count.turtles.with..class....S.....turtle.count", "count.turtles.with..class....P.....turtle.count", "count.turtles.with..class....A.....turtle.count", "count.turtles.with..class....R.....turtle.count", "count.turtles.with..class....H.....turtle.count")))
-
-vals = ab[1,nm]       # Values for Initial Conditions
-nv = as.numeric(vals) # Convert to numeric
-
-icdf = data.frame(Initial_Value = nv) # Stands for initial condition dataframe
-row.names(icdf) = nm                  # Assign row names
-
-max_ticks = max(ab$X.step.)       # Get max number of ticks
-runs      = max(ab$X.run.number.) # Get max number of runs
-
-const_a    = icdf["constant_alpha", 1] # 1 if alpha is constant
-const_mu_a = icdf["constant_mu_a", 1]  # 1 if mu_a is constant
-
-# Overall statstics/parameters:
-row_o        = c("turtle.count", "mu", "delta_t", "constant_alpha", "constant_mu_a")
-
-icdf_overall = icdf[row_o, ]
-icdf_overall = data.frame(Initial_Value = icdf_overall)
-icdf_overall = rbind(icdf_overall, c(max_ticks))
-icdf_overall = rbind(icdf_overall, c(runs))
-
-row.names(icdf_overall) = c(row_o, "Max Ticks", "Runs")
-
-# S parameters:
-row_s  = c("initial_S", "beta_A", "beta_P", "theta_1")
-icdf_s = icdf[row_s,]
-icdf_s = data.frame(Initial_Value = icdf_s)
-
-if (const_a == 1){ # If alpha is constant, add on alpha_c
-
-  alpha_c = icdf["alpha_c",1]
-  icdf_s = rbind(icdf_s, c(alpha_c))
-  row_s  = c(row_s, "alpha")
-  
-} else { # If alpha piecewise linear, get tilde values
-  
-  m_tilde = icdf["m_tilde", 1]        # Gets value
-  icdf_s  = rbind(icdf_s, c(m_tilde)) # Adds on value to dataframe
-  
-  b_tilde = icdf["b_tilde", 1]
-  icdf_s  = rbind(icdf_s, c(m_tilde))
-  
-  c_tilde = icdf["c_tilde", 1]
-  icdf_s  = rbind(icdf_s, c(m_tilde))
-  
-  row_s   = c(row_s, "m_tilde", "b_tilde", "c_tilde")
-}
-
-row.names(icdf_s) = row_s # Set new row names
-
-# P parameters:
-row_p  = c("initial_P", "gamma", "theta_2", "epsilon")
-icdf_p = icdf[row_p,]
-icdf_p = data.frame(Initial_Value = icdf_p)
-row.names(icdf_p) = row_p
-
-# A parameters:
-row_a  = c("initial_A", "zeta", "theta_3")
-icdf_a = icdf[row_a, ]
-icdf_a = data.frame(Initial_Value = icdf_a)
-
-if (const_mu_a == 1){ # If mu_a constant, add on mu_a_c
-  
-  mu_a_c = icdf["mu_a_c", 1]
-  icdf_a = rbind(icdf_a, c(mu_a_c))
-  row_a  = c(row_a, "mu_a")
-  
-} else { # If mu_a linear, add on the d_tilde, e_tilde terms
-  
-  d_tilde = icdf["d_tilde", 1]
-  icdf_a  = rbind(icdf_a, c(d_tilde))
-  
-  e_tilde = icdf["e_tilde", 1]
-  icdf_a  = rbind(icdf_a, c(e_tilde))
-  
-  row_a   = c(row_a, "d_tilde", "e_tilde")
-}
-
-row.names(icdf_a) = row_a # Assign row names
-
-# R parameters:
-row_r  = c("initial_R", "sigma")
-icdf_r = icdf[row_r,]
-icdf_r = data.frame(Initial_Value = icdf_r)
-row.names(icdf_r) = row_r
-
-# H parameters:
-row_h  = c("initial_H", "mu_h", "v_nu")
-icdf_h = icdf[row_h,]
-icdf_h = data.frame(Initial_Value = icdf_h)
-row.names(icdf_h) = row_h
+icdf_overall = generate_ic(abm_data, option = "overall")
+icdf_s = generate_ic(abm_data, option = "S")
+icdf_p = generate_ic(abm_data, option = "P")
+icdf_a = generate_ic(abm_data, option = "A")
+icdf_h = generate_ic(abm_data, option = "H")
+icdf_r = generate_ic(abm_data, option = "R")
 ```
 
 Basic Stats {.sidebar}
@@ -127,21 +34,24 @@ Basic Stats {.sidebar}
 ### Basic Statistics
 
 ```{r, echo = FALSE, results = 'asis'}
-kable(icdf_overall) # Overall statistics displayed on Sidebar
+kable(icdf_overall) %>% kable_styling() # Overall statistics displayed on Sidebar
 ```
 
 S
 =====================================
 
 ```{r splot, fig.height=5.5, fig.align="center"}
-plotS(abm = abm_data, ode = ode_data)
+#plotS(abm = abm_data, ode = ode_data)
+plotSPAHR(abm = abm_data, ode = ode_data, plot_class = "S")
 # Display the plot
 ```
 
 ### S Values
 
 ```{r svals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_s)
+#icdf_s %>% kable() %>% kable_styling()
+#kable(icdf_s, align = 'c')
+kable(icdf_s) %>% kable_styling()
 # Display initial values below the plot
 ```
 
@@ -149,50 +59,56 @@ P
 =====================================
 
 ```{r pplot, fig.height = 5.5, fig.align="center"}
-plotP(abm = abm_data, ode = ode_data)
+#plotP(abm = abm_data, ode = ode_data)
+plotSPAHR(abm = abm_data, ode = ode_data, plot_class = "P")
 ```
 
 ### P Values
 
 ```{r pvals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_p)
+#kable(icdf_p)
+kable(icdf_p) %>% kable_styling()
 ```
 
 A
 =====================================
 
 ```{r aplot, fig.height = 5.5, fig.align="center"}
-plotA(abm = abm_data, ode = ode_data)
+#plotA(abm = abm_data, ode = ode_data)
+plotSPAHR(abm = abm_data, ode = ode_data, plot_class = "A")
 ```
 
 ### A Values
 
 ```{r avals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_a)
+kable(icdf_a) %>% kable_styling()
 ```
 
 H
 =====================================
 
 ```{r hplot, fig.height = 5.5, fig.align="center"}
-plotH(abm = abm_data, ode = ode_data)
+#plotH(abm = abm_data, ode = ode_data)
+plotSPAHR(abm = abm_data, ode = ode_data, plot_class = "H")
+
 ```
 
 ### H Values
 ```{r hvals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_h)
+kable(icdf_h) %>% kable_styling()
 ```
 
 R
 =====================================
 
 ```{r rplot, fig.height = 5.5, fig.align="center"}
-plotR(abm = abm_data, ode = ode_data)
+#plotR(abm = abm_data, ode = ode_data)
+plotSPAHR(abm = abm_data, ode = ode_data, plot_class = "R")
 ```
 
 ### R Values
 
 ```{r rvals, echo = FALSE, results = 'asis', fig.height = 2}
-kable(icdf_r)
+kable(icdf_r) %>% kable_styling()
 ```
 
