@@ -467,6 +467,144 @@ figure(9)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
  
          
+ 
+ 
+ 
+ 
+
+ figure(15)
+subplot(3,2,1)
+ hold all
+ z1 = linspace(0,60,6); %defines mesh where going to plot Estim1, Data1 values 
+ z7 = linspace(0,60,61);
+ %plot(z7,continuous1,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z7,linearlinear1,'k-','LineWidth',1.3);
+ %plot(z7,piecewiseconstant1,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z7,piecewiselinear1,'r','LineWidth',1.3);
+ %scatter(z1, Estim1, 100, 'o');
+ scatter(z1, Data1, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Year')
+ ylabel('Proportion in P')
+ legend({ '\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12)
+ set(gca, 'xtick', [ 0 12 24 36 48 60])
+ set(gca,'XLim',[0 60])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
+ 
+
+ 
+ % Data points from proportion that is in A at some point in the year and corresponding ODE solution points 
+ subplot(3,2,2)
+ hold all
+ z2 = linspace(0,60,6);
+ z8 = linspace(0,60,61);
+ %plot(z8,continuous2,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z8,linearlinear2,'k-','LineWidth',1.3);
+ %plot(z8,piecewiseconstant2,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z8,piecewiselinear2,'r-','LineWidth',1.3);
+ %scatter(z2, Estim2, 100, 'o');
+ scatter(z2, Data2, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Year')
+ ylabel('Proportion in A')
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12)
+ set(gca, 'xtick', [ 0 12 24 36 48 60])
+ set(gca,'XLim',[0 60])
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
+
+
+
+
+ % Data points from proportion that is in H at some point in the year and corresponding ODE solution points 
+ subplot(3,2,3) 
+ hold all
+ z3 = linspace(0,24,3);
+ z9 = linspace(0,24,25);
+ %plot(z9,continuous3,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z9,linearlinear3,'k-','LineWidth',1.3);
+ %plot(z9,piecewiseconstant3,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z9,piecewiselinear3,'r-','LineWidth',1.3);
+ %scatter(z3, Estim3, 100,'o');
+ scatter(z3, Data3, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Year')
+ ylabel('Proportion in H')
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12, 'Location','northwest')
+ set(gca, 'xtick', [ 0 12 24])
+ set(gca,'XLim',[0 24])
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+ 
+
+ % Data points from proportion that is in P at some point in the quarter of a year and corresponding ODE solution points 
+ subplot(3,2,4)
+ hold all
+ z4 = linspace(0,69,24);
+ z10 = linspace(0,69,70);
+ %plot(z10,continuous4,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z10,linearlinear4,'k-','LineWidth',1.3);
+ %plot(z10,piecewiseconstant4,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z10,piecewiselinear4,'r-','LineWidth',1.3);
+ %scatter(z4, Estim4, 100, 'o');
+ scatter(z4, Data4, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Quarter')
+ ylabel('Proportion in P')
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12, 'Location','southwest')
+ %legend({'\alpha linear, \mu_A constant', '\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A constant' '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14)
+ set(gca, 'xtick', [ 0 3 6 9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60 63 66 69])
+ xtickangle(90)
+ set(gca,'XLim',[0 69])
+ set(gca,'xticklabel',{'Q1 2013', 'Q2 2013', 'Q3 2013', 'Q4 2013',...
+                       'Q1 2014', 'Q2 2014', 'Q3 2014', 'Q4 2014',...
+                       'Q1 2015', 'Q2 2015', 'Q3 2015', 'Q4 2015',...
+                       'Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016',...
+                       'Q1 2017', 'Q2 2017', 'Q3 2017', 'Q4 2017',...
+                       'Q1 2018', 'Q2 2018', 'Q3 2018', 'Q4 2018'})
+ 
+  
+ subplot(3,2,5)
+ hold all
+ z5 = linspace(0,36,4); %defines mesh where going to plot Estim5, Data5 values
+ z11 = linspace(0,36,37);
+ %plot(z11,continuous5,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z11,linearlinear5,'k-','LineWidth',1.3);
+ %plot(z11,piecewiseconstant5,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z11,piecewiselinear5,'r-','LineWidth',1.3);
+ %scatter(z5, Estim5, 100,'o');
+ scatter(z5, Data5, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Year')
+ ylabel('Proportion overdose from A') % at some point during the year
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12, 'Location','southwest')
+ set(gca, 'xtick', [ 0 12 24 36])
+ set(gca,'XLim',[0 36])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
+ 
+ 
+ subplot(3,2,6)
+ hold all
+ z6 = linspace(0,48,5);
+ z12 = linspace(0,48,49);
+ %plot(z12,continuous6,'color',[0.138,1,0.226],'LineWidth',1.3);
+ plot(z12,linearlinear6,'k-','LineWidth',1.3);
+ %plot(z12,piecewiseconstant6,'color',[.7, 0, 0.5],'LineWidth',1.3);
+ plot(z12,piecewiselinear6,'r-','LineWidth',1.3);
+ %scatter(z6, Estim6, 100,'o');
+ scatter(z6, Data6, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+ set(gca, 'fontsize',12)
+ xlabel('Year')
+ ylabel('Proportion overdose from H') % at some point during the year
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 12, 'Location','northwest')
+ set(gca, 'xtick', [ 0 12 24 36 48])
+ set(gca,'XLim',[0 48])
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})  
+ 
+  %printpreview('Fig2.eps','-depsc') 
+ 
+ 
+ 
+ 
+ 
 function alpha = a(t,pars)
 alpha = pars(1)*t+pars(16);
 end
