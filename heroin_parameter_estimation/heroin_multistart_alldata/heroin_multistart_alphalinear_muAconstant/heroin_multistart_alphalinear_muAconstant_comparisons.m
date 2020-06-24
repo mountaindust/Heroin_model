@@ -603,10 +603,258 @@ figure(9)
  
   %printpreview('Fig2.eps','-depsc') 
  
+  
+  
+figure(16)
+
+t = tiledlayout(3,2,'TileSpacing','Compact','Padding','Compact');
+
+nexttile
+
+ hold all
+
+ z1 = linspace(0,60,6); %defines mesh where going to plot Estim1, Data1 values
+
+ z7 = linspace(0,60,61);
+
+ %plot(z7,continuous1,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z7,linearlinear1,'k-','LineWidth',1.3);
+
+ %plot(z7,piecewiseconstant1,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z7,piecewiselinear1,'r','LineWidth',1.3);
+
+ %scatter(z1, Estim1, 100, 'o');
+
+ scatter(z1, Data1, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Year')
+
+ ylabel('P (prop.)')
+
+ legend({ '\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14)
+
+ set(gca, 'xtick', [ 0 12 24 36 48 60])
+
+ set(gca,'XLim',[0 60])
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017', '2018'})
+
+ 
+
+nexttile
+
+  hold all
+ 
+ 
+  z4 = linspace(0,69,24);
+
+ z10 = linspace(0,69,70);
+
+ %plot(z10,continuous4,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z10,linearlinear4,'k-','LineWidth',1.3);
+
+ %plot(z10,piecewiseconstant4,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z10,piecewiselinear4,'r-','LineWidth',1.3);
+
+ %scatter(z4, Estim4, 100, 'o');
+
+ scatter(z4, Data4, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Quarter')
+
+ ylabel('P (prop.)')
+
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14, 'Location','southwest')
+
+ %legend({'\alpha linear, \mu_A constant', '\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A constant' '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14)
+
+ set(gca, 'xtick', [ 0 3 6 9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 60 63 66 69])
+
+ xtickangle(90)
+
+ set(gca,'XLim',[0 69])
+
+ set(gca,'YLim',[0.1 0.17])
+
+ set(gca,'xticklabel',{'Q1 `13', 'Q2 `13', 'Q3 `13', 'Q4 `13',...
+
+                       'Q1 `14', 'Q2 `14', 'Q3 `14', 'Q4 `14',...
+
+                       'Q1 `15', 'Q2 `15', 'Q3 `15', 'Q4 `15',...
+
+                       'Q1 `16', 'Q2 `16', 'Q3 `16', 'Q4 `16',...
+
+                       'Q1 `17', 'Q2 `17', 'Q3 `17', 'Q4 `17',...
+
+                       'Q1 `18', 'Q2 `18', 'Q3 `18', 'Q4 `18'})
+
+ 
+
+ 
+ 
+ nexttile
+ hold all
+
+ z2 = linspace(0,60,6);
+
+ z8 = linspace(0,60,61);
+
+ %plot(z8,continuous2,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z8,linearlinear2,'k-','LineWidth',1.3);
+
+ %plot(z8,piecewiseconstant2,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z8,piecewiselinear2,'r-','LineWidth',1.3);
+
+ %scatter(z2, Estim2, 100, 'o');
+
+ scatter(z2, Data2, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Year')
+
+ ylabel('A (prop.)')
+
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14)
+
+ set(gca, 'xtick', [ 0 12 24 36 48 60])
+
+ set(gca,'XLim',[0 60])
+
+ set(gca,'xticklabel',{'2013','2014','2015','2016','2017','2018'})
+
+ 
+
+nexttile
+
+ hold all
+
+ z5 = linspace(0,36,4); %defines mesh where going to plot Estim5, Data5 values
+
+ z11 = linspace(0,36,37);
+
+ %plot(z11,continuous5,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z11,linearlinear5,'k-','LineWidth',1.3);
+
+ %plot(z11,piecewiseconstant5,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z11,piecewiselinear5,'r-','LineWidth',1.3);
+
+ %scatter(z5, Estim5, 100,'o');
+
+ scatter(z5, Data5, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Year')
+
+ ylabel('A overdoses (prop.)') % at some point during the year
+
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14, 'Location','southwest')
+
+ set(gca, 'xtick', [ 0 12 24 36])
+
+ set(gca,'XLim',[0 36])
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016'})
+
+ 
+
+ 
+
+ 
+
+nexttile
+
+ hold all
+
+ z3 = linspace(0,24,3);
+
+ z9 = linspace(0,24,25);
+
+ %plot(z9,continuous3,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z9,linearlinear3,'k-','LineWidth',1.3);
+
+ %plot(z9,piecewiseconstant3,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z9,piecewiselinear3,'r-','LineWidth',1.3);
+
+ %scatter(z3, Estim3, 100,'o');
+
+ scatter(z3, Data3, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Year')
+
+ ylabel('H (prop.)')
+
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14, 'Location','northwest')
+
+ set(gca, 'xtick', [ 0 12 24])
+
+ set(gca,'XLim',[0 24])
+
+ set(gca,'xticklabel',{'2014', '2015', '2016'})
+
+ 
+ 
+
+ 
+
+nexttile
+
+hold all
+ 
+
+z6 = linspace(0,48,5);
+
+ z12 = linspace(0,48,49);
+
+ %plot(z12,continuous6,'color',[0.138,1,0.226],'LineWidth',1.3);
+
+ plot(z12,linearlinear6,'k-','LineWidth',1.3);
+
+ %plot(z12,piecewiseconstant6,'color',[.7, 0, 0.5],'LineWidth',1.3);
+
+ plot(z12,piecewiselinear6,'r-','LineWidth',1.3);
+
+ %scatter(z6, Estim6, 100,'o');
+
+ scatter(z6, Data6, 90,'o','MarkerFaceColor',[0.01 0.28 1], 'MarkerEdgeColor',[0.01 0.28 1]);
+
+ set(gca, 'fontsize',18)
+
+ xlabel('Year')
+
+ ylabel('H overdoses (prop.)') % at some point during the year
+
+ legend({'\alpha linear, \mu_A linear', '\alpha pw linear, \mu_A linear','Data'},'FontSize', 14, 'Location','northwest')
+
+ set(gca, 'xtick', [ 0 12 24 36 48])
+
+ set(gca,'XLim',[0 48])
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017'})
+
+  
  
  
  
- 
+
+
 function alpha = a(t,pars)
 alpha = pars(1)*t+pars(16);
 end
