@@ -240,7 +240,121 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  ax = gca;
  ax.YAxis(1).Color = 'k';
  ax.YAxis(2).Color = 'b';
+ 
+ 
+ 
+ figure(8)
+ subplot(1,2,1)
+ hold all
+ yyaxis left
+ plot(t,y(:,1),'k-','LineWidth',3);
+ xlabel('Year')
+ ylabel('Susceptible Individuals','Color','k')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',18)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
+ 
+ yyaxis right
+ plot(t,y(:,2),'b-','LineWidth',3);
+ xlabel('Year')
+ ylabel('Prescribed Users','Color','b')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',18)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
+ legend({'S','P'}, 'FontSize', 18) 
+ ax = gca;
+ ax.YAxis(1).Color = 'k';
+ ax.YAxis(2).Color = 'b';
+ 
+ subplot(1,2,2)
+ hold all
+ plot(t,y(:,3),'r-','LineWidth',3);
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);   
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3);
+ xlabel('Year')
+ ylabel('Addicted Individuals and Recovered Addicts')
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+ set(gca, 'fontsize',18)
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
+ legend({'A','H','R'}, 'FontSize', 18)     
+ 
+ 
   
+ 
+ figure(9)
+
+t = tiledlayout(2,1,'TileSpacing','Compact','Padding','Compact');
+
+nexttile
+
+  hold all
+
+ yyaxis left
+
+ plot(t,y(:,1),'k-','LineWidth',3);
+
+ xlabel('Year')
+
+ ylabel('Susceptible Individuals','Color','k')
+
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+
+ set(gca, 'fontsize',18)
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
+
+ 
+
+ yyaxis right
+
+ plot(t,y(:,2),'b-','LineWidth',3);
+
+ xlabel('Year')
+
+ ylabel('Prescribed Users','Color','b')
+
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+
+ set(gca, 'fontsize',18)
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                  
+
+ legend({'S','P'}, 'FontSize', 18)
+
+ ax = gca;
+
+ ax.YAxis(1).Color = 'k';
+
+ ax.YAxis(2).Color = 'b';
+
+ 
+
+ nexttile
+
+ 
+
+  hold all
+
+ plot(t,y(:,3),'r-','LineWidth',3);
+
+ plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);  
+
+ plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3);
+
+ xlabel('Year')
+
+ ylabel('Addicted Individuals and Recovered Addicts')
+
+ set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
+
+ set(gca, 'fontsize',18)
+
+ set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                  
+
+ legend({'A','H','R'}, 'FontSize', 18)    
+
+ 
+ 
 %{
 figure(1)
            subplot(2,2,1);plot(t,y(:,2),'b-','LineWidth',3)
