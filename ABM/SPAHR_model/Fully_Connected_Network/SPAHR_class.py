@@ -110,7 +110,7 @@ class SPAHR_ABM:
         self.model_data["initial_A"]      = [self.A0] * rcount
         self.model_data["zeta"]           = [self.zeta] * rcount
         self.model_data["theta_3"]        = [self.theta_3] * rcount
-        self.model_data["constant_mu_a"]  = [self.mu_a_const] * rcount
+        self.model_data["constant_mu_a"]  = [int(self.mu_a_const)] * rcount
         self.model_data["mu_a_c"]         = [self.mu_a] * rcount
         self.model_data["d_tilde"]        = [self.d_tilde] * rcount
         self.model_data["e_tilde"]        = [self.e_tilde] * rcount
@@ -121,9 +121,9 @@ class SPAHR_ABM:
         self.model_data["sigma"]          = [self.sigma] * rcount
 
     # Function for internal use only
-    # Runs the full model once
+    # Runs the full model once and writes to model_data pandas df
     # Main implementation of ABM
-    def __run_model(self, alpha_constant = True, mu_a_constant = True, relapse_mem = False):
+    def __run_model(self, run_num, relapse_mem = False):
 
         # Initialize the number of turtles
 
@@ -144,16 +144,26 @@ class SPAHR_ABM:
 
         self.turtle_hist = []
 
+        data = []                # Set data empty
+        data.append(run_num)
+        data.append(0)
+        data.append( S0 / self.n_turtles )
+        data.append( P0 / self.n_turtles )
+        data.append( A0 / self.n_turtles )
+        data.append( H0 / self.n_turtles )
+        data.append( R0 / self.n_turtles )
+        self.model_data.loc[ (self.n_ticks + 1) * run_num ] = data
+
         # running loop
 
         for tick in range(self.n_ticks):
-            self.turtle_hist.append(list(turtles))      # Add new list of turtles to back
-            cnt_turtles = Counter(self.turtle_hist[-1]) # Get count of list in back
+            self.turtle_hist = list(turtles)        # Copy list of old turtle counts
+            cnt_turtles = Counter(self.turtle_hist) # Get count of list in back
 
             self.__alpha_t(tick)
             self.__mu_a_t(tick)
 
-            for n, turtle in enumerate(self.turtle_hist[-1]):
+            for n, turtle in enumerate(self.turtle_hist):
 
                 # S case
                 if turtle == 'S':
@@ -277,9 +287,17 @@ class SPAHR_ABM:
                             else: # Death
                                 turtles[n] = 'S'
 
-        # include last result and return
-        self.turtle_hist.append(list(turtles)) # Append final list
-        # This value is now store in the class as turtle_hist
+            # This version writes to self.model_data as we go
+            cnt_turtles = Counter(turtles)
+            data = []                # Set data empty
+            data.append(run_num)
+            data.append(tick + 1)
+            data.append( cnt_turtles['S'] / self.n_turtles )
+            data.append( cnt_turtles['P'] / self.n_turtles )
+            data.append( cnt_turtles['A'] / self.n_turtles )
+            data.append( cnt_turtles['H'] / self.n_turtles )
+            data.append( cnt_turtles['R'] / self.n_turtles )
+            self.model_data.loc[ (self.n_ticks + 1) * run_num + (tick + 1)] = data
 
 
     # Creates dataframe from running the model for a given number of runs
@@ -297,25 +315,8 @@ class SPAHR_ABM:
 
         print("Running SPAHR ABM: " + str(n_runs) + " runs")
 
-        row_counter = 0
-
         for run in range(n_runs + 1):
-            self.__run_model()
-            data = []
-            for j, i in enumerate(self.turtle_hist):
-                cnt_turtles = Counter(i)
-                data.append(run)
-                data.append(j)
-                        
-                data.append( cnt_turtles['S'] / self.n_turtles )
-                data.append( cnt_turtles['P'] / self.n_turtles )
-                data.append( cnt_turtles['A'] / self.n_turtles )
-                data.append( cnt_turtles['H'] / self.n_turtles )
-                data.append( cnt_turtles['R'] / self.n_turtles )
-                self.model_data.loc[row_counter] = data
-                row_counter += 1
-                data = []
-
+            self.__run_model(run_num = run, relapse_mem = relapse_mem)
             # Progress bar established here
             if ((( run / n_runs * 100) % 10 == 0) and progress_bar):
                 bar = ""
