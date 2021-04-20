@@ -155,9 +155,9 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  figure(1)
  hold all
  plot(t,y(:,1),'k-','LineWidth',3)
- set(gca, 'FontSize',16)
+ set(gca, 'FontSize',14)
  xlabel('Year')
- ylabel('Susceptibles')
+ ylabel('Proportion of Susceptibles')
  set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -165,9 +165,9 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  figure(2)
  hold all
  plot(t,y(:,2),'b-','LineWidth',3)
- set(gca, 'fontsize',16)
+ set(gca, 'fontsize',14)
  xlabel('Year')
- ylabel('Prescription Users')
+ ylabel('Proportion of Prescription Users')
  set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -179,7 +179,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t,y(:,3),'r-','LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
- ylabel('Opioid addicts')
+ ylabel('Proportion of Opioid addicts')
  set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -190,7 +190,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
- ylabel('Heroin/fentanyl addicts')
+ ylabel('Proportion of Heroin/fentanyl addicts')
  set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})         
@@ -201,7 +201,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3)
  set(gca, 'fontsize',16)
  xlabel('Year')
- ylabel('Stably recovered addicts')
+ ylabel('Proportion of Stably recovered addicts')
  set(gca, 'fontsize',16)
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ]) 
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})
@@ -213,7 +213,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);   
  plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3);
  xlabel('Year')
- ylabel('Addicted Individuals and Recovered Addicts')
+ ylabel('Proportion of Addicted Individuals and Recovered Addicts')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
@@ -224,7 +224,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  yyaxis left
  plot(t,y(:,1),'k-','LineWidth',3);
  xlabel('Year')
- ylabel('Susceptible Individuals','Color','k')
+ ylabel('Proportion S','Color','k')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
@@ -232,7 +232,7 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  yyaxis right
  plot(t,y(:,2),'b-','LineWidth',3);
  xlabel('Year')
- ylabel('Prescribed Users','Color','b')
+ ylabel('Proportion P','Color','b')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
  set(gca, 'fontsize',18)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
@@ -249,19 +249,19 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  yyaxis left
  plot(t,y(:,1),'k-','LineWidth',3);
  xlabel('Year')
- ylabel('Susceptible Individuals','Color','k')
+ ylabel('Proportion Susceptible','Color','k')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',18)
+ set(gca, 'fontsize',16)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})  
  
  yyaxis right
  plot(t,y(:,2),'b-','LineWidth',3);
  xlabel('Year')
- ylabel('Prescribed Users','Color','b')
+ ylabel('Proportion Prescribed Users','Color','b')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',18)
+ set(gca, 'fontsize',16)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
- legend({'S','P'}, 'FontSize', 18) 
+ legend({'S','P'}, 'FontSize', 16) 
  ax = gca;
  ax.YAxis(1).Color = 'k';
  ax.YAxis(2).Color = 'b';
@@ -272,11 +272,11 @@ value=norm(Diff1,2)./norm(Data1)+norm(Diff2,2)./norm(Data2)+norm(Diff3,2)./norm(
  plot(t,y(:,4),'Color', [0,0.9,0],'LineWidth',3);   
  plot(t,y(:,5),'Color', [0.7,0,0.7],'LineWidth',3);
  xlabel('Year')
- ylabel('Addicted Individuals and Recovered Addicts')
+ ylabel('Proportion Addicted or Proportion Recovered')
  set(gca, 'xtick', [ 0 1 2 3 4 5 6 ])
- set(gca, 'fontsize',18)
+ set(gca, 'fontsize',16)
  set(gca,'xticklabel',{'2013', '2014', '2015', '2016', '2017','2018', '2019'})                   
- legend({'A','H','R'}, 'FontSize', 18)     
+ legend({'A','H','R'}, 'FontSize', 16)     
  
  
   
